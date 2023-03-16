@@ -1,0 +1,64 @@
+@import 'https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body{
+  font-family: 'Fredoka', sans-serif;
+
+}
+
+
+*::selection{
+  background-color: rgba(0, 45, 181, 0.241);
+  color: white;
+}
+
+img{
+  user-select: none;
+}
+
+[x-cloak] {
+  display: none;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+
+.sidebar {
+  @apply p-4 shadow-md shadow-black border-t border-black border-opacity-50 rounded-lg mb-2 mt-3 bg-gray-900 w-[230px] !important;
+}
+
+.nav-link {
+  @apply rounded-lg my-1 !important;
+}
+
+.page-link {
+  color: rgb(42, 42, 42) !important;
+}
+
+.reverted{
+  all: revert;
+}
