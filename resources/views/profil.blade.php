@@ -17,7 +17,7 @@
 
             <label for="age" class="block mb-2 text-base font-medium text-white">Age:</label>
             <select id="age" name="age"
-                class="block w-1/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                class="block w-2/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                 <option selected>
                     < 12 years</option>
                 <option value="US">13-18 years</option>
@@ -29,7 +29,7 @@
 
             <label for="gender" class="block pt-4 mb-2 text-base font-medium text-white">Gender:</label>
             <select id="gender" name="gender"
-                class="block w-1/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                class="block w-2/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                 <option selected>Male</option>
                 <option value="US">Female</option>
                 <option value="CA">Other</option>
@@ -37,7 +37,7 @@
 
             <label for="job" class="block pt-4 mb-2 text-base font-medium text-white">Professional/Education:</label>
             <select id="job" name="profession"
-                class="block w-1/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                class="block w-2/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                 <option value="Student">Student</option>
                 <option value="Teacher/Professor">Teacher/Professor &nbsp;</option>
                 <option value="Public Administrator">Public Administrator &nbsp;</option>
@@ -52,7 +52,7 @@
 
     <label for="relation" class="block pt-4 mb-2 text-base font-medium text-white">Relation:</label>
             <select id="relation" name="relation"
-                class="block w-1/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                class="block w-2/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                 <option selected>Relation</option>
                 <option value="US">dummy</option>
                 <option value="CA">dummy</option>
@@ -61,7 +61,7 @@
 
     <label for="preferences" class="block pt-4 mb-2 text-base font-medium text-white">Preferences:</label>
             <select id="preferences" name="preferences"
-                class="block w-1/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                class="block w-2/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                 <option selected>preferences</option>
                 <option value="US">dummy</option>
                 <option value="CA">dummy</option>
