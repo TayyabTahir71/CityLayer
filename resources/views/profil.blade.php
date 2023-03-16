@@ -6,7 +6,7 @@
 
         </div>
         <form action="save_profile" class="flex flex-col items-center justify-center p-8 mx-auto" method="POST">
-        @csrf
+           {!! csrf_field() !!}
             <label for="dropzone-file"
                 class="flex flex-col items-center justify-center w-1/3 mb-8 border-2 border-dashed rounded-lg">
                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -15,7 +15,6 @@
                 <input id="dropzone-file" type="file" class="hidden" />
             </label>
 
-            @csrf
             <label for="age" class="block mb-2 text-base font-medium text-white">Age:</label>
             <select id="age" name="age"
                 class="block w-1/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
@@ -74,7 +73,5 @@
         </form>
 
     </div>
-  <a href="admin/logout"
-            class="block px-4 py-3 text-sm font-bold text-gray-300 capitalize transition-colors duration-300 transform hover:bg-gray-700 hover:text-white prevent">
-            Déconnexion </a>
+
 @endsection
