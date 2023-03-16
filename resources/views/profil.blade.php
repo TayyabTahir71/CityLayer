@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
 @section('main')
-    <div data-barba="container" class="relative h-screen">
-        <div class="absolute inset-0 bg-gray-900 -z-10">
-
-        </div>
+    <div data-barba="container" class="relative h-screen bg-gray-900">
         <form action="save_profile" class="flex flex-col items-center justify-center p-8 mx-auto" method="POST">
            {!! csrf_field() !!}
             <label for="dropzone-file"
