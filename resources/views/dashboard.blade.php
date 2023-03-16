@@ -4,7 +4,7 @@
     <div data-barba="container">
         <div class="flex flex-col h-screen mx-auto bg-gray-900">
                 <nav class="fixed top-0 z-20 w-full px-2 pt-4 mx-2 bg-gray-900 md:pt-8">
-                    <div class="flex flex-wrap items-center justify-between pb-4 pr-4 mx-auto border-b border-gray-700 lg:mx-16">
+                    <div class="flex flex-wrap items-center justify-between pb-4 mx-2 mr-2 border-b border-gray-700 lg:mx-16">
                         <a href="#" class="flex items-center">
                            <i class="mr-3 fa-regular fa-map"></i>
                             <span class="self-center text-xl font-semibold text-white whitespace-nowrap">City Layer</span>
@@ -55,7 +55,7 @@
 
 
 
-            <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 lg:pt-20">
+            <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-20">
                 <h4 class="pt-4 mt-2 font-semibold">Start Mapping</h4>
                 <div class="flex items-center justify-between space-x-3 overflow-y-scroll">
                     <div
