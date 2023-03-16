@@ -54,8 +54,8 @@
             <select id="relation" name="relation"
                 class="block w-1/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                 <option selected>Relation</option>
-                <option value="US">Female</option>
-                <option value="CA">Other</option>
+                <option value="US">dummy</option>
+                <option value="CA">dummy</option>
             </select>
 
 
@@ -63,8 +63,8 @@
             <select id="preferences" name="preferences"
                 class="block w-1/3 px-4 py-3 text-base text-white placeholder-gray-400 bg-gray-700 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                 <option selected>preferences</option>
-                <option value="US">Female</option>
-                <option value="CA">Other</option>
+                <option value="US">dummy</option>
+                <option value="CA">dummy</option>
             </select>
 
             <button type="submit"
