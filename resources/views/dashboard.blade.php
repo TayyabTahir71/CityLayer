@@ -3,8 +3,8 @@
 @section('main')
     <div data-barba="container">
         <div class="flex flex-col h-screen mx-auto bg-gray-900">
-                <nav class="fixed top-0 z-20 w-full px-2 pt-4 mx-2 bg-gray-900 border-gray-700 md:pt-8">
-                    <div class="flex flex-wrap items-center justify-between pr-4 mx-auto lg:mx-16">
+                <nav class="fixed top-0 z-20 w-full px-2 pt-4 mx-2 bg-gray-900 md:pt-8">
+                    <div class="flex flex-wrap items-center justify-between pb-4 pr-4 mx-auto border-b border-gray-700 lg:mx-16">
                         <a href="#" class="flex items-center">
                            <i class="mr-3 fa-regular fa-map"></i>
                             <span class="self-center text-xl font-semibold text-white whitespace-nowrap">City Layer</span>
@@ -56,7 +56,7 @@
 
 
             <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 lg:pt-20">
-                <h4 class="pt-4 mt-2 font-semibold border-t border-gray-600">Start Mapping</h4>
+                <h4 class="pt-4 mt-2 font-semibold">Start Mapping</h4>
                 <div class="flex items-center justify-between space-x-3 overflow-y-scroll">
                     <div
                         class="flex flex-col items-center justify-center w-20 h-20 p-1 mb-2 text-gray-800 transition duration-300 ease-in bg-green-200 shadow cursor-pointer hover:bg-green-300 active:bg-green-400 rounded-2xl hover:shadow-md">
