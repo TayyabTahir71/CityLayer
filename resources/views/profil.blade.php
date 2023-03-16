@@ -8,7 +8,7 @@
         <form action="save_profile" class="flex flex-col items-center justify-center p-8 mx-auto" method="POST">
            {!! csrf_field() !!}
             <label for="dropzone-file"
-                class="flex flex-col items-center justify-center w-1/3 mb-8 border-2 border-dashed rounded-lg">
+                class="flex flex-col items-center justify-center w-2/3 mb-8 border-2 border-dashed rounded-lg">
                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
                     <h1 class="text-base font-medium text-gray-100">Welcome to the<br> City Layer App</h1>
                 </div>
