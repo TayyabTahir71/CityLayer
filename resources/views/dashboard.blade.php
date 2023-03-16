@@ -3,7 +3,7 @@
 @section('main')
     <div data-barba="container">
         <div class="flex flex-col h-screen mx-auto bg-gray-900">
-                <nav class="fixed top-0 z-20 w-full px-2 pt-4 mx-2 border-gray-700 md:pt-8">
+                <nav class="fixed top-0 z-20 w-full px-2 pt-4 mx-2 bg-gray-900 border-gray-700 md:pt-8">
                     <div class="flex flex-wrap items-center justify-between pr-4 mx-auto lg:mx-16">
                         <a href="#" class="flex items-center">
                            <i class="mr-3 fa-regular fa-map"></i>
