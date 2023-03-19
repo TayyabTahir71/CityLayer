@@ -2,10 +2,11 @@
 
 @section('main')
     <div data-barba="container">
+             @include('parts.navbar')
         <div class="flex flex-col h-screen mx-auto">
      
             <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-20">
-                <h4 class="pt-4 mt-2 font-semibold select-none">Start Mapping</h4>
+                <h4 class="pt-4 mt-2 font-semibold text-gray-900 select-none">Start New Mapping:</h4>
                 <div class="flex items-center justify-between space-x-3 overflow-y-scroll">
                     <a href="street" class="prevent">
                         <div
@@ -30,15 +31,10 @@
                     </a>
                 </div>
 
-                <div class="">
-                    <div id="map" class="mt-4 rounded h-[260px] lg:h-[400px] w-auto">
-                    </div>
-                </div>
-
-                <h4 class="font-semibold select-none">Your data</h4>
+                <h4 class="font-semibold text-gray-900 select-none">Your data:</h4>
                 <div class="grid grid-cols-1">
                     <div class="">
-                        <div class="flex p-2 mb-2 bg-white rounded shadow-md">
+                        <div class="flex p-2 mb-2 bg-white border rounded shadow-md">
                             <img src="https://images.unsplash.com/photo-1439130490301-25e322d88054?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80"
                                 alt="Just a flower" class="object-cover w-16 h-16 rounded">
                             <div class="flex flex-col justify-center w-full px-2 py-1">
@@ -70,7 +66,7 @@
                             </div>
                         </div>
 
-                        <div class="flex p-2 mb-2 bg-white rounded shadow-md">
+                        <div class="flex p-2 mb-2 bg-white border rounded shadow-md">
                             <img src="https://images.unsplash.com/photo-1439130490301-25e322d88054?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80"
                                 alt="Just a flower" class="object-cover w-16 h-16 rounded">
                             <div class="flex flex-col justify-center w-full px-2 py-1">

@@ -2,6 +2,7 @@
 
 @section('main')
     <div data-barba="container">
+             @include('parts.navbar')
         <div class="flex flex-col h-screen mx-auto">
             <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-20">
                 <div id="map" class="mt-4 rounded h-[80vh] lg:h-[400px] w-auto"></div>

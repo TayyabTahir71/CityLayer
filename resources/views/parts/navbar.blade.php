@@ -1,8 +1,7 @@
- <nav class="fixed top-0 z-20 w-full px-2 pt-4 mx-2 bg-gray-900 md:pt-8">
-     <div class="flex flex-wrap items-center justify-between pb-4 mx-2 mr-2 border-b border-gray-700 lg:mx-16">
+ <nav class="fixed top-0 z-20 w-full px-2 pt-4 mx-2 md:pt-8">
+     <div class="flex flex-wrap items-center justify-between pb-4 mx-2 mr-2 lg:mx-16">
          <a href="#" class="flex items-center">
-             <i class="mr-3 fa-regular fa-map"></i>
-             <span class="self-center text-xl font-semibold text-white select-none whitespace-nowrap">City
+             <span class="self-center text-xl font-semibold text-gray-800 select-none whitespace-nowrap">City
                  Layer</span>
          </a>
          <button data-collapse-toggle="navbar-multi-level" type="button"

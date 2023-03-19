@@ -6,8 +6,8 @@
     @livewireStyles
 </head>
 
-<body class="overflow-x-hidden bg-gray-900 pattern" data-barba="wrapper">
-         @include('parts.navbar')
+<body class="overflow-x-hidden bg-white pattern" data-barba="wrapper">
+
     <main>
         @yield('main')
     </main>
