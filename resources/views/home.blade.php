@@ -9,6 +9,8 @@
             </div>
         </div>
     </div>
+
+    
     <script>
         markers = {};
 
@@ -45,5 +47,6 @@
                 marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
             });
         }
-    </script>
+
+</script>
 @endsection
