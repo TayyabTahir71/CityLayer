@@ -47,6 +47,10 @@ class GlobalController extends Controller
         return view('home');
     }
 
+    public function profile()
+    {
+        return view('profile');
+    }
 
     public function saveprofile(Request $request)
     {

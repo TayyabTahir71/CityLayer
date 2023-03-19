@@ -30,15 +30,6 @@
                          class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Profile</a>
                  </li>
                  <li>
-                     <a href="#"
-                         class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">My
-                         data</a>
-                 </li>
-                 <li>
-                     <a href="#"
-                         class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Settings</a>
-                 </li>
-                 <li>
                      <a href="admin/logout"
                          class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Log-out</a>
                  </li>
@@ -54,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const menuLength = menuItem.length;
   for (let i = 0; i < menuLength; i++) {
     if (menuItem[i].href === currentLocation) {
-      menuItem[i].className = 'block py-2 pl-3 pr-4  rounded bg-gray-700 text-blue-500 prevent';
+      menuItem[i].className = 'block py-2 pl-3 pr-4 rounded border border-gray-600 bg-gray-700 text-blue-500 prevent';
     }
   }
 });
