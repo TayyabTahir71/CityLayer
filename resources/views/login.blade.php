@@ -2,7 +2,7 @@
 
 @section('main')
     <div data-barba="container" class="relative h-screen">
-        <div class="flex flex-col items-center justify-center h-screen p-8 mx-auto bg-gray-900">
+        <div class="flex flex-col items-center justify-center h-screen p-8 mx-auto">
             <a href="#" class="flex items-center pb-8">
                 <i class="mr-3 fa-regular fa-map"></i>
                 <span class="self-center text-xl font-semibold text-white whitespace-nowrap">City Layer</span>

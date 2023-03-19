@@ -5,8 +5,7 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Infosperso extends Model
+class Openspace extends Model
 {
     use CrudTrait;
 
@@ -16,19 +15,15 @@ class Infosperso extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'infosperso';
+    protected $table = 'openspace';
     // protected $primaryKey = 'id';
      public $timestamps = false;
     protected $guarded = ['id'];
      protected $fillable = [
         'user_id',
-        'age',
-        'gender',
-        'profession',
-        'relation',
-        'preferences',
-        'score',
-        'telephone',
+        'name',
+        'latitude',
+        'longitude',
      ];
     // protected $hidden = [];
     // protected $dates = [];

@@ -2,7 +2,7 @@
 
 @section('main')
     <div data-barba="container">
-        <div class="flex flex-col items-center justify-center h-screen p-8 mx-auto bg-gray-900">
+        <div class="flex flex-col items-center justify-center h-screen p-8 mx-auto">
             <label for="dropzone-file"
                 class="flex flex-col items-center justify-center w-2/3 mb-8 border-2 border-dashed rounded-lg">
                 <div class="flex flex-col items-center justify-center pt-5 pb-6">

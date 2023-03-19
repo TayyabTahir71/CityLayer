@@ -30,19 +30,19 @@
   <meta name="title" content="CityLayer">
   <meta name="description" content="" />
   <meta name="keywords" content="" />
-  <link rel="shortcut icon" href="https:/url.com/favicon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="">
   <meta property="og:title" content="CityLayer">
   <meta property="og:description" content="">
-  <meta property="og:image" content="https:/url.com/logo-sm.png">
+  <meta property="og:image" content="./img/logo-sm.png">
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="#">
   <meta property="twitter:title" content="CityLayer">
   <meta property="twitter:description" content="">
-  <meta property="twitter:image" content="https:/url.com/logo-sm.png">
+  <meta property="twitter:image" content="./img/logo-sm.png">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
   <script src="https://kit.fontawesome.com/59ecaaffaa.js" crossorigin="anonymous"></script>

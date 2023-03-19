@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('infosperso', function (Blueprint $table) {
+        Schema::create('buildings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('age')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('profession')->nullable();
-            $table->string('relation')->nullable();
-            $table->string('preferences')->nullable();
-            $table->integer('score')->nullable();
+            $table->string('name')->nullable();
+            $table->decimal('latitude', 8, 6)->nullable();
+            $table->decimal('longitude', 9, 6)->nullable();
+            $table->timestamps();
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('infosperso');
+        Schema::dropIfExists('buildings');
     }
 };

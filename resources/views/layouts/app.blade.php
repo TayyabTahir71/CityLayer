@@ -7,7 +7,7 @@
 </head>
 
 <body class="overflow-x-hidden bg-gray-900 pattern" data-barba="wrapper">
-    
+         @include('parts.navbar')
     <main>
         @yield('main')
     </main>
@@ -17,7 +17,21 @@
     
     @vite('resources/js/app.js')
     @livewireScripts
-    <script src="./node_modules/flowbite/dist/flowbite.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
+            <style>
+            ::-webkit-scrollbar {
+                width: 0;
+            }
+
+            ::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 0px rgba(0, 0, 0, 0.3);
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background-color: transparent;
+                outline: 1px solid transparent;
+            }
+        </style>
 </body>
 
 </html>

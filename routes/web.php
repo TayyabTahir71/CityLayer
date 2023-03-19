@@ -25,6 +25,19 @@ Route::get('logout', 'logout');
 
 });
 
+Route::get('street', function () {
+    return view('street_mapping');
+});
+
+Route::get('building', function () {
+    return view('building_mapping');
+});
+
+Route::get('openspace', function () {
+    return view('openspace_mapping');
+});
+
+
 Route::get('profil', function () {
     return view('profil');
 });

@@ -13,3 +13,6 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('pages') }}"><i class="nav-icon la la-file"></i>Pages</a></li>
     </ul>
 </li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('street') }}"><i class="nav-icon la la-th-list"></i> Streets</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('openspace') }}"><i class="nav-icon la la-th-list"></i> Openspaces</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('building') }}"><i class="nav-icon la la-th-list"></i> Buildings</a></li>
