@@ -18,28 +18,28 @@
              <ul class="flex flex-col p-4 mt-4 bg-gray-800 border border-gray-700 rounded-lg">
                  <li>
                      <a href="/"
-                         class="block py-2 pl-3 pr-4 text-gray-400 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Home</a>
+                         class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Home</a>
                  </li>
                  <li>
                      <a href="dashboard"
-                         class="block py-2 pl-3 pr-4 text-gray-400 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Dashboard</a>
+                         class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Dashboard</a>
                  </li>
                  <li>
                      <a href="profile"
-                         class="block py-2 pl-3 pr-4 text-gray-400 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Profile</a>
+                         class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Profile</a>
                  </li>
                  <li>
                      <a href="#"
-                         class="block py-2 pl-3 pr-4 text-gray-400 rounded hover:bg-gray-700 hover:text-blue-500 prevent">My
+                         class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">My
                          data</a>
                  </li>
                  <li>
                      <a href="#"
-                         class="block py-2 pl-3 pr-4 text-gray-400 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Settings</a>
+                         class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Settings</a>
                  </li>
                  <li>
                      <a href="admin/logout"
-                         class="block py-2 pl-3 pr-4 text-gray-400 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Log-out</a>
+                         class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Log-out</a>
                  </li>
              </ul>
          </div>
