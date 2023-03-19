@@ -6,7 +6,10 @@
         <div class="flex flex-col h-screen mx-auto">
      
             <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-20">
+               <div class="flex flex-row justify-between">
                 <h4 class="pt-4 mt-2 font-semibold text-gray-900 select-none">Start New Mapping:</h4>
+                 <h4 class="pt-4 mt-2 font-semibold text-gray-900 select-none">Points: 25</h4>
+                </div>
                 <div class="flex items-center justify-between space-x-3 overflow-y-scroll">
                     <a href="street" class="prevent">
                         <div

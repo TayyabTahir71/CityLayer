@@ -21,6 +21,7 @@ Route::controller(GlobalController::class)->group(function(){
 Route::get('/', 'getAll');
 Route::get('profile', 'profile')->name('profile');
 Route::post('save_profile', 'saveprofile')->name('saveprofile');
+Route::get('save_profile', 'profil')->name('profil');
 Route::get('logout', 'logout');
 
 });

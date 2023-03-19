@@ -42,6 +42,12 @@ class GlobalController extends Controller
     }
     }
 
+    public function profil()
+    {
+        return view('home');
+    }
+
+
     public function saveprofile(Request $request)
     {
        
@@ -65,7 +71,7 @@ class GlobalController extends Controller
                 $infos->relation = $request->relation;
                 $infos->preferences = $request->preferences;
                 $infos->save();
-                return view('dashboard');
+                return view('home');
             }
         } else {
             return redirect('/');
