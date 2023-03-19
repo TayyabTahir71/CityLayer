@@ -16,7 +16,7 @@
              </svg>
          </button>
          <div class="relative hidden w-full" id="navbar-multi-level">
-             <ul class="flex flex-col p-4 mt-4 bg-gray-800 border border-gray-700 rounded-lg">
+             <ul class="flex flex-col p-4 mt-4 bg-gray-800 border border-gray-700 rounded-lg mynav">
                  <li>
                      <a href="/"
                          class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Home</a>
@@ -46,3 +46,16 @@
          </div>
      </div>
  </nav>
+ <script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  const currentLocation = location.href;
+  const menuItem = document.querySelectorAll('.mynav a');
+  const menuLength = menuItem.length;
+  for (let i = 0; i < menuLength; i++) {
+    if (menuItem[i].href === currentLocation) {
+      menuItem[i].className = 'block py-2 pl-3 pr-4  rounded bg-gray-700 text-blue-500 prevent';
+    }
+  }
+});
+</script>
