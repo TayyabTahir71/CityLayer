@@ -5,7 +5,7 @@
          <div class="flex flex-col h-screen mx-auto">
              <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-20">
                  <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-white fas fa-arrow-left"></i></a>
-                 <div id="map0" class="rounded h-[500px] lg:h-[400px] w-auto"></div>
+                 <div id="map0" class="rounded h-[200px] lg:h-[400px] w-auto"></div>
                  <input class="text-black" type="text" name="latitude" id="latitude" value="">
                  <input class="pt-2 text-black" type="text" name="longitude" id="longitude" value="">
 
@@ -49,9 +49,9 @@
              if (marker) {
                  mymap.removeLayer(marker);
              }
-             marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
-             document.getElementById('latitude').value = e.latlng.lat.toFixed(6);
-             document.getElementById('longitude').value = e.latlng.lng.toFixed(6);
+           //  marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
+           //  document.getElementById('latitude').value = e.latlng.lat.toFixed(6);
+           //  document.getElementById('longitude').value = e.latlng.lng.toFixed(6);
          });
      </script>
  @endsection
