@@ -1,9 +1,10 @@
  <nav class="fixed top-0 z-20 w-full px-2 pt-4 mx-2 md:pt-8">
      <div class="flex flex-wrap items-center justify-between pb-4 mx-2 mr-2 lg:mx-16">
          <a href="#" class="flex items-center">
-             <span class="self-center text-xl font-semibold text-gray-800 select-none whitespace-nowrap">City
-                 Layer</span>
+            
          </a>
+          <span class="self-center pl-8 text-3xl font-bold text-center text-gray-800 select-none whitespace-nowrap">City
+                 Layers</span>
          <button data-collapse-toggle="navbar-multi-level" type="button"
              class="inline-flex items-center p-2 ml-3 text-sm text-gray-400 rounded-lg focus:outline-none focus:ring-2 hover:bg-gray-700 focus:ring-gray-600"
              aria-controls="navbar-multi-level" aria-expanded="false">
