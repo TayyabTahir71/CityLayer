@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('relation')->nullable();
             $table->string('preferences')->nullable();
             $table->integer('score')->nullable();
+            $table->string('location')->default('40.50, 8.00')->nullable();
+
         });
     }
 

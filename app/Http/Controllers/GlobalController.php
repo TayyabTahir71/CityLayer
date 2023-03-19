@@ -32,7 +32,7 @@ class GlobalController extends Controller
         if (backpack_auth()->check()) {
                 //if profile exist return dashboard
                 if (Infosperso::where('user_id', backpack_auth()->user()->id)->exists()) {
-                    return view('dashboard');
+                    return view('home');
                 } else {
                     return view('profil');
                 }

@@ -135,6 +135,13 @@
                     mymap0.setView([position.coords.latitude, position.coords.longitude], 17);
                     L.marker([position.coords.latitude, position.coords.longitude], { icon: icon }).addTo(mymap0);
                 });
-            }
+            } else {
+             mymap.on('click', function(e) {
+                 if (marker) {
+                     mymap.removeLayer(marker);
+                 }
+                 marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
+             });
+         }
         </script>
     @endsection

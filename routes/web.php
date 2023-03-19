@@ -37,6 +37,11 @@ Route::get('openspace', function () {
     return view('openspace_mapping');
 });
 
+Route::get('dashboard', function () {
+    return view('dashboard');
+});
+
+
 
 Route::get('profil', function () {
     return view('profil');
