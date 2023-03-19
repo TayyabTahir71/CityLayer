@@ -1,5 +1,5 @@
  <nav class="fixed top-0 z-20 w-full px-2 pt-4 mx-2 md:pt-8">
-     <div class="flex flex-wrap items-center justify-between pb-4 mx-2 mr-2 lg:mx-16">
+     <div class="flex flex-wrap items-center justify-between pb-4 mx-2 mr-2 border-b border-gray-400 lg:mx-16">
          <a href="#" class="flex items-center">
             
          </a>
@@ -16,7 +16,7 @@
              </svg>
          </button>
          <div class="relative hidden w-full" id="navbar-multi-level">
-             <ul class="flex flex-col p-4 mt-4 bg-gray-800 border border-gray-700 rounded-lg mynav">
+             <ul class="flex flex-col p-4 mt-4 font-bold bg-gray-800 border border-gray-700 rounded-lg mynav">
                  <li>
                      <a href="/"
                          class="block py-2 pl-3 pr-4 text-gray-100 rounded hover:bg-gray-700 hover:text-blue-500 prevent">Home</a>

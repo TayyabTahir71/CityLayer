@@ -5,7 +5,10 @@
               @include('parts.navbar')
          <div class="flex flex-col h-screen mx-auto">
              <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-20">
+                         <div class="flex flex-row items-center pt-2">
                  <a href="dashboard" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-arrow-left"></i></a>
+                 <h1 class="mx-auto mt-4 text-2xl font-bold text-gray-900">New Open Space Mapping  &nbsp;  &nbsp; </h1>
+                 </div>
                  <div id="map0" class="rounded h-[70vh] lg:h-[400px] w-auto"></div>
                  <input class="text-black" type="text" name="latitude" id="latitude" value="">
                  <input class="pt-2 text-black" type="text" name="longitude" id="longitude" value="">
