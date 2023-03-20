@@ -52,7 +52,7 @@
             });
             
         } else {
-             L.map('map').setView([48.6890, 11.14086], 5);
+            L.map('map').setView([48.6890, 11.14086], 5);
         }
 
             mymap0.on('click', function(e) {
