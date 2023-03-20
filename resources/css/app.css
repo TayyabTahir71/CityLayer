@@ -4,18 +4,6 @@
 @tailwind utilities;
 
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  html {
-    color-scheme: dark;
-  }
-}
-
 *{
     margin: 0;
     padding: 0;

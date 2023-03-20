@@ -47,7 +47,7 @@
                  document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
                  document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
              });
-         } else {
+         }
              mymap.on('click', function(e) {
                  if (marker) {
                      mymap.removeLayer(marker);
@@ -56,6 +56,6 @@
                  document.getElementById('latitude').value = e.latlng.lat.toFixed(6);
                  document.getElementById('longitude').value = e.latlng.lng.toFixed(6);
              });
-         }
+         
      </script>
  @endsection

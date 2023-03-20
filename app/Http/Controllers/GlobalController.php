@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cadeaux;
-use App\Models\Commandes;
-use App\Models\Concours;
 use App\Models\Infosperso;
 use App\Models\User;
-use App\Models\Games;
-use App\Models\Pages;
-use App\Models\Packs;
+use App\Models\Street;
+use App\Models\Building;
+use App\Models\Openspace;
 use Carbon\Carbon;
-use App\Models\Paiements;
-use App\Models\Scores;
 use Pestopancake\LaravelBackpackNotifications\Notifications\DatabaseNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,9 +30,18 @@ class GlobalController extends Controller
                 $infos = Infosperso::where('user_id', $userid)->get();
                 $infos = $infos[0];
 
+                $street = Street::all();
+                $building = Building::all();
+                $openspace = Openspace::all();
+        
+                $all_data = array_merge(
+                    $street->toArray(),
+                    $building->toArray(),
+                    $openspace->toArray()
+                );
 
 
-                return view('home', compact('infos'));
+                return view('home', compact('infos', 'all_data'));
             } else {
                 return view('profil');
             }

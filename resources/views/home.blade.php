@@ -6,8 +6,8 @@
         <div class="flex flex-col h-screen mx-auto">
             <div class="z-0 p-3 pt-16 lg:mx-16 md:pt-20">
                 <div id="map" class="mt-4 rounded h-[75vh] lg:h-[70vh] w-auto"></div>
-             @if ($infos->mapping == 1)
-             <button class="w-full px-4 py-6 font-bold text-black bg-[#B8E7EB] hover:bg-blue-500">Start Mapping</button>
+             @if ($infos->score > 6)
+             <button class="w-full px-4 py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-500">Start Playing</button>
              @else
              <div class="w-full px-4 py-3 text-2xl font-bold text-center text-black bg-[#B8E7EB]">Tap on posts and<br> react to earn points!</div>
                 @endif
@@ -26,6 +26,8 @@
 </div>
     
     <script>
+           data = {!! json_encode($all_data) !!};
+           markers = {};
         let marker = null;
         let modal = document.getElementById("myModal");
         modal.style.display = "none";
@@ -46,6 +48,12 @@
             iconAnchor: [40, 40],
             popupAnchor: [0, -40]
         });
+         icon2 = L.icon({
+            iconUrl: '/img/search-icon.png',
+            iconSize: [40, 40],
+            iconAnchor: [40, 40],
+            popupAnchor: [0, -40]
+        });
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -59,19 +67,21 @@
             L.map('map').setView([48.6890, 11.14086], 5);
         }
 
-           // mymap0.on('click', function(e) {
-            //    if (marker) {
-            //        mymap0.removeLayer(marker);
-             //   }
-           //     marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap0);
-          //  });
+ let count = 0;
+    for (let i = 0; i < data.length; i++) {
+        count = count + 1;
+        place = data[i];
+        placeid = place.id;
+        placename = place.name;
+        placelatitude = place.latitude;
+        placelongitude = place.longitude;
+        markerx = L.marker([placelatitude, placelongitude], { icon: icon2 }).addTo(mymap0);
+        markers[place.id] = markerx;
+
+    }
         
         
-  window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+
 </script>
   <style>
         .modal {

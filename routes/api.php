@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\ScoresController;
-use App\Http\Controllers\API\PartiesController;
+use App\Http\Controllers\API\PlaceController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::apiResource("place", PlaceController::class);
 

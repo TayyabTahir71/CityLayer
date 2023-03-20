@@ -15,7 +15,7 @@ class Openspace extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'openspace';
+    protected $table = 'openspaces';
     // protected $primaryKey = 'id';
      public $timestamps = false;
     protected $guarded = ['id'];

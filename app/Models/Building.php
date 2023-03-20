@@ -15,7 +15,7 @@ class Building extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'building';
+    protected $table = 'buildings';
     // protected $primaryKey = 'id';
      public $timestamps = false;
     protected $guarded = ['id'];

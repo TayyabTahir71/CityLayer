@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->decimal('latitude', 8, 6)->nullable();
             $table->decimal('longitude', 9, 6)->nullable();
+            $table->string('type')->default('street');
             $table->timestamps();
         });
     }
