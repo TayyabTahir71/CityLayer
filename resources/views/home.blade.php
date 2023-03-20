@@ -25,7 +25,7 @@
         let marker = null;
         let modal = document.getElementById("myModal");
         modal.style.display = "none";
-        let mymap0 = L.map('map').setView([38.6890, 11.14086], 2);
+        let mymap0 = L.map('map').setView([48.6890, 7.14086], 5);
         osmLayer0 = L.tileLayer(
             'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
@@ -51,7 +51,9 @@
                 }).addTo(mymap0);
             });
             
-        } 
+        } else {
+             L.map('map').setView([48.6890, 11.14086], 5);
+        }
 
             mymap0.on('click', function(e) {
                 if (marker) {
