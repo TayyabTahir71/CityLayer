@@ -18,115 +18,110 @@
 
     </div>
 
+    <script>
+        data = {!! json_encode($all_data) !!};
+        markers = {};
+        let marker = null;
+        let mymap0 = L.map('map').setView([48.6890, 7.14086], 5);
+        osmLayer0 = L.tileLayer(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                apikey: 'choisirgeoportail',
+                format: 'image/jpeg',
+                style: 'normal'
+            }).addTo(mymap0);
+        mymap0.addLayer(osmLayer0);
+        mymap0.touchZoom.enable();
+        mymap0.scrollWheelZoom.disable();
+        icon = L.icon({
+            iconUrl: '/img/marker.png',
+            iconSize: [40, 40],
+            iconAnchor: [40, 40],
+            popupAnchor: [0, -40]
+        });
+        icon2 = L.icon({
+            iconUrl: '/img/search-icon.png',
+            iconSize: [40, 40],
+            iconAnchor: [40, 40],
+            popupAnchor: [0, -40]
+        });
 
-    <div id="myModal" class="z-50 transition-all duration-300 modal">
-        <div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl modal-content">
-            <p class="pb-4">
-                react to this place to earn points!
-            </p>
-            <div class="flex flex-row justify-center">
-
-                <img src="/img/1.png" class="w-8 h-8 mx-1">
-
-                <img src="/img/2.png" class="w-8 h-8 mx-1">
-
-                <img src="/img/3.png" class="block w-8 h-8 mx-1">
-
-                <img src="/img/4.png" class="w-8 h-8 mx-1">
-
-                <img src="/img/5.png" class="w-8 h-8 mx-1">
-
-                <img src="/img/6.png" class="w-8 h-8 mx-1">
-
-                <img src="/img/7.png" class="w-8 h-8 mx-1">
-
-
-            </div>
-        </div>
-
-        <script>
-            data = {!! json_encode($all_data) !!};
-            markers = {};
-            let marker = null;
-            let modal = document.getElementById("myModal");
-            modal.style.display = "none";
-            let mymap0 = L.map('map').setView([48.6890, 7.14086], 5);
-            osmLayer0 = L.tileLayer(
-                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    apikey: 'choisirgeoportail',
-                    format: 'image/jpeg',
-                    style: 'normal'
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                mymap0.setView([position.coords.latitude, position.coords.longitude], 19);
+                L.marker([position.coords.latitude, position.coords.longitude], {
+                    icon: icon
                 }).addTo(mymap0);
-            mymap0.addLayer(osmLayer0);
-            mymap0.touchZoom.enable();
-            mymap0.scrollWheelZoom.disable();
-            icon = L.icon({
-                iconUrl: '/img/marker.png',
-                iconSize: [40, 40],
-                iconAnchor: [40, 40],
-                popupAnchor: [0, -40]
-            });
-            icon2 = L.icon({
-                iconUrl: '/img/search-icon.png',
-                iconSize: [40, 40],
-                iconAnchor: [40, 40],
-                popupAnchor: [0, -40]
             });
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    mymap0.setView([position.coords.latitude, position.coords.longitude], 19);
-                    L.marker([position.coords.latitude, position.coords.longitude], {
-                        icon: icon
-                    }).addTo(mymap0);
-                });
+        } else {
+            L.map('map').setView([48.6890, 11.14086], 5);
+        }
 
-            } else {
-                L.map('map').setView([48.6890, 11.14086], 5);
-            }
+        let count = 0;
+        for (let i = 0; i < data.length; i++) {
+            count = count + 1;
+            place = data[i];
+            placeid = place.id;
+            placetype = place.type;
+            placename = place.name;
+            placelatitude = place.latitude;
+            placelongitude = place.longitude;
+            markerx = L.marker([placelatitude, placelongitude], {
+                icon: icon2
+            }).addTo(mymap0).bindPopup(
+                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="">React to this place to earn points!</p><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' + placeid + '\', \'' + placetype + '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' + placeid + '\', \'' + placetype + '\', \'dislike\')"><img src="/img/3.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' + placeid + '\', \'' + placetype + '\', \'stars\')"><img src="/img/4.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' + placeid + '\', \'' + placetype + '\', \'bof\')"><img src="/img/5.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' + placeid + '\', \'' + placetype + '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' + placeid + '\', \'' + placetype + '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' + placeid + '\', \'' + placetype + '\', \'wtf\')"></div></div>'
+                );
+            markers[place.id] = markerx;
+        }
 
-            let count = 0;
-            for (let i = 0; i < data.length; i++) {
-                count = count + 1;
-                place = data[i];
-                placeid = place.id;
-                placename = place.name;
-                placelatitude = place.latitude;
-                placelongitude = place.longitude;
-                markerx = L.marker([placelatitude, placelongitude], {
-                    icon: icon2
-                }).addTo(mymap0);
-                markerx.on('click', function(e) {
-                    modal.style.display = "block";
-                    modal.onclick = function() {
-                        modal.style.display = "none";
-                    }
-                });
-                markers[place.id] = markerx;
-            }
-        </script>
-        <style>
-            .modal {
-                display: none;
-                position: fixed;
-                z-index: 1;
-                padding-top: 100px;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                overflow: auto;
-                background-color: rgb(0, 0, 0, 0.4);
-            }
 
-            .modal-content {
-                background-color: #fefefe;
-                margin: auto;
-                padding: 20px;
-                border: 1px solid #888;
-                width: 80%;
-                max-width: 600px;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        </style>
-    @endsection
+        });
+
+
+       function mapAction(id, type, action) {
+  console.log(id);
+  var url;
+  switch(action) {
+    case 'like':
+      url = "/place/like";
+      break;
+    case 'dislike':
+      url = "/place/dislike";
+      break;
+    case 'stars':
+      url = "/place/stars";
+      break;
+    case 'bof':
+      url = "/place/bof";
+      break;
+    case 'weird':
+      url = "/place/weird";
+      break;
+    case 'ohh':
+      url = "/place/ohh";
+      break;
+    case 'wtf':
+      url = "/place/wtf";
+      break;
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: url,
+    data: {
+      id: id,
+      type: type
+    },
+    success: function(data) {
+      alert(data.success);
+    }
+  });
+  mymap0.closePopup();
+}
+    </script>
+@endsection

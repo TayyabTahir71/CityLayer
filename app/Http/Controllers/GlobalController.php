@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class GlobalController extends Controller
 {
@@ -49,6 +50,61 @@ class GlobalController extends Controller
             return view('login');
         }
     }
+
+
+    public function like(Request $request)
+    {
+        $userid = backpack_auth()->user()->id;
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
+        $out->writeln($request->type);
+    }
+
+   public function dislike(Request $request)
+    {
+        $userid = backpack_auth()->user()->id;
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
+        $out->writeln($request->all());
+    }
+
+    public function stars(Request $request)
+    {
+        $userid = backpack_auth()->user()->id;
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
+        $out->writeln($request->all());
+    }
+
+    public function bof(Request $request)
+    {
+        $userid = backpack_auth()->user()->id;
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
+        $out->writeln($request->all());
+    }
+
+    public function weird(Request $request)
+    {
+        $userid = backpack_auth()->user()->id;
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
+        $out->writeln($request->all());
+    }
+
+    public function ohh(Request $request)
+    {
+        $userid = backpack_auth()->user()->id;
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
+        $out->writeln($request->all());
+    }
+
+    public function wtf(Request $request)
+    {
+        $userid = backpack_auth()->user()->id;
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
+        $out->writeln($request->all());
+    }
+
+
+
+
+
 
     public function profil()
     {

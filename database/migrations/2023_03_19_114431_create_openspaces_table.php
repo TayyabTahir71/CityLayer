@@ -21,6 +21,13 @@ return new class extends Migration
             $table->decimal('latitude', 8, 6)->nullable();
             $table->decimal('longitude', 9, 6)->nullable();
             $table->string('type')->default('openspace');
+            $table->integer('likes')->default(0);
+            $table->integer('dislikes')->default(0);
+            $table->integer('stars')->default(0);
+            $table->integer('bof')->default(0);
+            $table->integer('weird')->default(0);
+            $table->integer('ohh')->default(0);
+            $table->integer('wtf')->default(0);
             $table->timestamps();
         });
     }

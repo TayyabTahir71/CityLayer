@@ -25,6 +25,13 @@ class Openspace extends Model
         'latitude',
         'longitude',
         'type',
+        'likes',
+        'dislikes',
+        'stars',
+        'bof',
+        'weird',
+        'ohh',
+        'wtf',
      ];
     // protected $hidden = [];
     // protected $dates = [];

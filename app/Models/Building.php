@@ -25,6 +25,13 @@ class Building extends Model
         'latitude',
         'longitude',
         'type',
+        'likes',
+        'dislikes',
+        'stars',
+        'bof',
+        'weird',
+        'ohh',
+        'wtf',
      ];
     // protected $hidden = [];
     // protected $dates = [];
@@ -34,5 +41,6 @@ class Building extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 
 }

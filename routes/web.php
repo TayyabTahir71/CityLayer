@@ -23,6 +23,16 @@ Route::get('profile', 'profile')->name('profile');
 Route::post('save_profile', 'saveprofile')->name('saveprofile');
 Route::get('save_profile', 'profil')->name('profil');
 Route::get('dashboard', 'dashboard')->name('dashboard');
+Route::post('/place/like', 'like')->name('like');
+Route::post('/place/dislike', 'dislike')->name('dislike');
+Route::post('/place/stars', 'stars')->name('stars');
+Route::post('/place/bof', 'bof')->name('bof');
+Route::post('/place/weird', 'weird')->name('weird');
+Route::post('/place/ohh', 'ohh')->name('ohh');
+Route::post('/place/wtf', 'wtf')->name('wtf');
+
+
+
 
 
 Route::get('logout', 'logout');
