@@ -6,7 +6,7 @@
         <div class="flex flex-col h-screen mx-auto">
             <div class="z-0 p-3 pt-16 lg:mx-16 md:pt-20">
                 <div id="map" class="mt-4 rounded h-[75vh] lg:h-[70vh] w-auto"></div>
-                @if ($infos->score > 7)
+                @if ($infos->score > 6)
                     <button class="w-full px-4 py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-500">Start
                         Playing!</button>
                 @else

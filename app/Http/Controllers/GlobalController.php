@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Street;
 use App\Models\Building;
 use App\Models\Openspace;
+use App\Models\Stats;
 use Carbon\Carbon;
 use Pestopancake\LaravelBackpackNotifications\Notifications\DatabaseNotification;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class GlobalController extends Controller
             $userid = backpack_auth()->user()->id;
             if (Infosperso::where('user_id', $userid)->exists()) {
                 $infos = Infosperso::where('user_id', $userid)->get();
-                $infos = $infos[0];
+                $infos = $infos->where('user_id', $userid)->first();
 
                 $street = Street::all();
                 $building = Building::all();
@@ -55,50 +56,212 @@ class GlobalController extends Controller
     public function like(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
-        $out->writeln($request->type);
+        if (Infosperso::where('user_id', $userid)->exists()) {
+            $infos = Infosperso::where('user_id', $userid)->get();
+            $infos = $infos->where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+        } else {
+            $infos = new Infosperso();
+            $infos->user_id = $userid;
+            $infos->score = 1;
+            $infos->save();
+        }
+        //$request->type;
+        //$request->id;
+        if ($request->type == 'street') {
+            $street = Street::find($request->id);
+            $street->likes = $street->likes + 1;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->id);
+            $building->likes = $building->likes + 1;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->id);
+            $openspace->likes = $openspace->likes + 1;
+            $openspace->save();
+        }
     }
 
    public function dislike(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
-        $out->writeln($request->all());
+        if (Infosperso::where('user_id', $userid)->exists()) {
+            $infos = Infosperso::where('user_id', $userid)->get();
+            $infos = $infos->where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+        } else {
+            $infos = new Infosperso();
+            $infos->user_id = $userid;
+            $infos->score = 1;
+            $infos->save();
+        }
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->id);
+            $street->dislikes = $street->dislikes + 1;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->id);
+            $building->dislikes = $building->dislikes + 1;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->id);
+            $openspace->dislikes = $openspace->dislikes + 1;
+            $openspace->save();
+        }
     }
 
     public function stars(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
-        $out->writeln($request->all());
+        if (Infosperso::where('user_id', $userid)->exists()) {
+            $infos = Infosperso::where('user_id', $userid)->get();
+            $infos = $infos->where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+        } else {
+            $infos = new Infosperso();
+            $infos->user_id = $userid;
+            $infos->score = 1;
+            $infos->save();
+        }
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->id);
+            $street->stars = $street->stars + 1;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->id);
+            $building->stars = $building->stars + 1;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->id);
+            $openspace->stars = $openspace->stars + 1;
+            $openspace->save();
+        }
     }
 
     public function bof(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
-        $out->writeln($request->all());
+        if (Infosperso::where('user_id', $userid)->exists()) {
+            $infos = Infosperso::where('user_id', $userid)->get();
+            $infos = $infos->where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+        } else {
+            $infos = new Infosperso();
+            $infos->user_id = $userid;
+            $infos->score = 1;
+            $infos->save();
+        }
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->id);
+            $street->bof = $street->bof + 1;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->id);
+            $building->bof = $building->bof + 1;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->id);
+            $openspace->bof = $openspace->bof + 1;
+            $openspace->save();
+        }
     }
 
     public function weird(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
-        $out->writeln($request->all());
+        if (Infosperso::where('user_id', $userid)->exists()) {
+            $infos = Infosperso::where('user_id', $userid)->get();
+            $infos = $infos->where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+        } else {
+            $infos = new Infosperso();
+            $infos->user_id = $userid;
+            $infos->score = 1;
+            $infos->save();
+        }
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->id);
+            $street->weird = $street->weird + 1;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->id);
+            $building->weird = $building->weird + 1;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->id);
+            $openspace->weird = $openspace->weird + 1;
+            $openspace->save();
+        }
     }
 
     public function ohh(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
-        $out->writeln($request->all());
+        if (Infosperso::where('user_id', $userid)->exists()) {
+            $infos = Infosperso::where('user_id', $userid)->get();
+            $infos = $infos->where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+        } else {
+            $infos = new Infosperso();
+            $infos->user_id = $userid;
+            $infos->score = 1;
+            $infos->save();
+        }
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->id);
+            $street->ohh = $street->ohh + 1;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->id);
+            $building->ohh = $building->ohh + 1;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->id);
+            $openspace->ohh = $openspace->ohh + 1;
+            $openspace->save();
+        }
     }
 
     public function wtf(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput(); 
-        $out->writeln($request->all());
+        if (Infosperso::where('user_id', $userid)->exists()) {
+            $infos = Infosperso::where('user_id', $userid)->get();
+            $infos = $infos->where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+        } else {
+            $infos = new Infosperso();
+            $infos->user_id = $userid;
+            $infos->score = 1;
+            $infos->save();
+        }
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->id);
+            $street->wtf = $street->wtf + 1;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->id);
+            $building->wtf = $building->wtf + 1;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->id);
+            $openspace->wtf = $openspace->wtf + 1;
+            $openspace->save();
+        }
     }
 
 
@@ -116,7 +279,8 @@ class GlobalController extends Controller
         $userid = backpack_auth()->user()->id;
         if (Infosperso::where('user_id', $userid)->exists()) {
             $infos = Infosperso::where('user_id', $userid)->get();
-            $score = $infos[0]->score;
+            $infos = $infos->where('user_id', $userid)->first();
+            $score = $infos->score;
         } else {
             $score = 1;
         }
@@ -147,7 +311,7 @@ class GlobalController extends Controller
                 $infos->user_id = $userid;
                 $infos->age = $request->age;
                 if ($request->age != null) {
-                    $infos->score = +1;
+                   $infos->score = $infos->score + 1;
                 }
                 $infos->gender = $request->gender;
                 if ($request->gender != null) {
