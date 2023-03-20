@@ -49,6 +49,9 @@
            
             <div class="pt-8 text-sm text-center text-gray-800">Already an account!</div>
             <div class="text-sm text-center text-gray-800 hover:text-gray-600"><a href="login">Login</a></div>
+             <div class="fixed bottom-0 right-0 m-4">
+          <a href="about"> <i class="text-gray-900 fa-solid fa-circle-info fa-2x"></i></a>
+           </div>
         </div>
     </div>
 @endsection

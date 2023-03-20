@@ -24,6 +24,7 @@ class Street extends Model
         'name',
         'latitude',
         'longitude',
+        'type',
      ];
         
      

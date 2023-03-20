@@ -24,6 +24,7 @@ class Building extends Model
         'name',
         'latitude',
         'longitude',
+        'type',
      ];
     // protected $hidden = [];
     // protected $dates = [];

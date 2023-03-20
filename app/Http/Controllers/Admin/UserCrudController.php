@@ -45,8 +45,8 @@ class UserCrudController extends CrudController
         CRUD::column('name');
         CRUD::column('email');
         CRUD::column('role')->type('select_from_array')->options([
-            'admin' => 'Administrator',
-            'user' => 'User',
+            'admin' => 'admin',
+            'user' => 'user',
         ]);
         $this->crud->enableExportButtons();
        
@@ -68,7 +68,6 @@ class UserCrudController extends CrudController
     {
         $this->crud->setValidation([
             'name' => 'required|min:2',
-            'email' => 'required',
         ]);
         CRUD::field('name');
         CRUD::field('email');
@@ -78,16 +77,10 @@ class UserCrudController extends CrudController
             'label'       => "role",
             'type'        => 'select_from_array',
             'options'     => [
-                'admin' => 'administrateur',
-                'user' => 'utilisateur',
+                'admin' => 'admin',
+                'user' => 'user',
             ]]);
-                CRUD::field('email')->on('saving', function ($entry) {
-                    $mailcontent = array(
-                        'email' => env('MAIL_USERNAME'),
-                        'message' => "Votre Compte à été crée avec succés",
-                    );
-                    Mail::to($entry)->queue(new AboMail($mailcontent));
-                });
+              
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
@@ -108,7 +101,6 @@ class UserCrudController extends CrudController
     {
         $this->crud->setValidation([
             'name' => 'required|min:2',
-            'email' => 'required',
         ]);
         CRUD::field('name');
         CRUD::field('email');
@@ -117,8 +109,8 @@ class UserCrudController extends CrudController
             'label'       => "role",
             'type'        => 'select_from_array',
             'options'     => [
-                'admin' => 'administrateur',
-                'user' => 'utilisateur',
+                'admin' => 'admin',
+                'user' => 'user',
             ]]);
     }
 }
