@@ -5,8 +5,12 @@
              @include('parts.navbar')
         <div class="flex flex-col h-screen mx-auto">
             <div class="z-0 p-3 pt-16 lg:mx-16 md:pt-20">
-                <div id="map" class="mt-4 rounded h-[80vh] lg:h-[70vh] w-auto"></div>
-             <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" onclick="modal.style.display = 'block'">Start Mapping</button>
+                <div id="map" class="mt-4 rounded h-[75vh] lg:h-[70vh] w-auto"></div>
+             @if ($infos->mapping == 1)
+             <button class="w-full px-4 py-6 font-bold text-black bg-[#B8E7EB] hover:bg-blue-500">Start Mapping</button>
+             @else
+             <div class="w-full px-4 py-3 text-2xl font-bold text-center text-black bg-[#B8E7EB]">Tap on posts and<br> react to earn points!</div>
+                @endif
             </div>
         </div>
        
@@ -38,9 +42,9 @@
         mymap0.scrollWheelZoom.disable();
         icon = L.icon({
             iconUrl: '/img/marker.png',
-            iconSize: [20, 20],
-            iconAnchor: [20, 20],
-            popupAnchor: [0, -20]
+            iconSize: [40, 40],
+            iconAnchor: [40, 40],
+            popupAnchor: [0, -40]
         });
 
         if (navigator.geolocation) {
@@ -55,12 +59,12 @@
             L.map('map').setView([48.6890, 11.14086], 5);
         }
 
-            mymap0.on('click', function(e) {
-                if (marker) {
-                    mymap0.removeLayer(marker);
-                }
-                marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap0);
-            });
+           // mymap0.on('click', function(e) {
+            //    if (marker) {
+            //        mymap0.removeLayer(marker);
+             //   }
+           //     marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap0);
+          //  });
         
         
   window.onclick = function(event) {

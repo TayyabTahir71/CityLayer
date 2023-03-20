@@ -22,6 +22,9 @@ Route::get('/', 'getAll');
 Route::get('profile', 'profile')->name('profile');
 Route::post('save_profile', 'saveprofile')->name('saveprofile');
 Route::get('save_profile', 'profil')->name('profil');
+Route::get('dashboard', 'dashboard')->name('dashboard');
+
+
 Route::get('logout', 'logout');
 
 });
@@ -38,9 +41,6 @@ Route::get('openspace', function () {
     return view('openspace_mapping');
 });
 
-Route::get('dashboard', function () {
-    return view('dashboard');
-});
 
 Route::get('about', function () {
     return view('about');

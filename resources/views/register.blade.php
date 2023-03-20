@@ -6,7 +6,7 @@
 
                  <label for="dropzone-file" class="flex flex-col justify-center w-5/6 pt-8">
                 <div class="flex flex-col items-center justify-center pt-4">
-                <h1 class="pb-8 text-3xl font-bold text-center text-gray-900">welcome to<br> CITY LAYERS!</h1>
+                <h1 class="pb-8 text-3xl font-extrabold text-center text-gray-900">welcome to<br> CITY LAYERS!</h1>
                     <h1 class="pb-8 text-3xl font-bold text-center text-gray-900">Registration</h1>
                 </div>
             </label>
@@ -20,12 +20,12 @@
                       required>
                 </div>
 
-                <div class="mb-6">
+                {{-- <div class="mb-6">
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-800">Email</label>
                     <input type="email" name="email" id="email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800 dark:focus:ring-gray-500 dark:focus:border-gray-500"
-                        placeholder="name@mail.com" required>
-                </div>
+                        placeholder="name@mail.com">
+                </div> --}}
                 <div class="mb-3">
                     <label for="password" class="block mb-1 text-sm font-medium text-gray-800">Password</label>
                     <input type="password" name="password" id="password"

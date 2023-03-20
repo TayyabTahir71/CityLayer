@@ -6,7 +6,7 @@
             <label for="dropzone-file"
                 class="flex flex-col justify-center w-5/6 mb-4">
                 <div class="flex flex-col items-center justify-center pt-16 pb-4">
-                    <h1 class="text-3xl font-bold text-center text-gray-900">welcome to<br> CITY LAYERS!</h1>
+                    <h1 class="text-3xl font-extrabold text-center text-gray-900">welcome to<br> CITY LAYERS!</h1>
                     <p class="mt-8 text-base text-center text-gray-600">A network for people who care about their environment! </p>
                     <p class="mt-8 text-base font-extrabold text-center text-gray-900">Earn points by exploring your surroundings and share your experiences with others!</p>
                 </div>
@@ -15,10 +15,10 @@
                 {!! csrf_field() !!}
 
                 <div class="mb-6">
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-                    <input type="email" name="email" id="email"
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+                    <input type="name" name="name" id="name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
-                        placeholder="name@mail.com" required>
+                        placeholder="Username" required>
                 </div>
                 <div class="mb-6">
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
@@ -39,9 +39,9 @@
                     class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Submit</button>
            </div>
             </form>
-            <div class="pt-8 text-sm text-center text-gray-400 hover:text-gray-600"><a
-                    href="{{ route('backpack.auth.password.reset') }}"
-                    class="prevent">{{ trans('backpack::base.forgot_your_password') }}</a>
+            <div class="pt-8 text-sm text-center text-gray-400 hover:text-gray-600">
+            {{-- <a href="{{ route('backpack.auth.password.reset') }}"
+                    class="prevent">{{ trans('backpack::base.forgot_your_password') }}</a> --}}
             </div>
             <div class="text-sm text-center text-gray-400 hover:text-gray-600"><a href="register">register</a></div>
         </div>

@@ -22,7 +22,9 @@ return new class extends Migration
             $table->string('profession')->nullable();
             $table->string('relation')->nullable();
             $table->string('preferences')->nullable();
-            $table->integer('score')->nullable();
+            $table->integer('newuser')->default('1')->nullable();
+            $table->integer('mapping')->default('0')->nullable();
+            $table->integer('score')->default('1')->nullable();
             $table->string('location')->default('40.50, 8.00')->nullable();
 
         });
