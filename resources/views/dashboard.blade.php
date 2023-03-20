@@ -34,7 +34,7 @@
                     </a>
                 </div>
 
-                <h4 class="font-semibold text-gray-900 select-none">Your data:</h4>
+                <h4 class="font-semibold text-gray-900 select-none">Your Mapping data:</h4>
                 <div class="grid grid-cols-1">
                     <div class="">
                         <div class="flex p-2 mb-2 bg-white border rounded shadow-md">
@@ -63,7 +63,7 @@
                                         <p class="font-normal"></p>
                                     </div>
                                     <div class="flex items-center font-medium text-gray-900 select-none">
-                                        Paris
+                                        Building
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                                         <p class="font-normal"></p>
                                     </div>
                                     <div class="flex items-center font-medium text-gray-900 select-none">
-                                        Paris
+                                        Street
                                     </div>
                                 </div>
 

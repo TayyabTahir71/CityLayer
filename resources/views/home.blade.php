@@ -4,13 +4,16 @@
     <div data-barba="container">
              @include('parts.navbar')
         <div class="flex flex-col h-screen mx-auto">
-            <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-20">
+            <div class="z-0 p-3 pt-16 lg:mx-16 md:pt-20">
                 <div id="map" class="mt-4 rounded h-[80vh] lg:h-[70vh] w-auto"></div>
+             <button class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" onclick="modal.style.display = 'block'">Start Mapping</button>
             </div>
         </div>
+       
     </div>
-    <div id="myModal" class="z-50 transition-all duration-300 modal">
 
+
+    <div id="myModal" class="z-50 transition-all duration-300 modal">
   <div class="text-black modal-content">
       <p>
     what do you want to map?
@@ -19,7 +22,7 @@
 </div>
     
     <script>
-        markers = {};
+        let marker = null;
         let modal = document.getElementById("myModal");
         modal.style.display = "none";
         let mymap0 = L.map('map').setView([38.6890, 11.14086], 2);
@@ -47,17 +50,17 @@
                     icon: icon
                 }).addTo(mymap0);
             });
-              mymap0.on('click', function(e) {
-              modal.style.display = "block";
-              });
-        } else {
+            
+        } 
+
             mymap0.on('click', function(e) {
                 if (marker) {
                     mymap0.removeLayer(marker);
                 }
                 marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap0);
             });
-        }
+        
+        
   window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
