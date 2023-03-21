@@ -29,8 +29,8 @@ class GlobalController extends Controller
         if (backpack_auth()->check()) {
             $userid = backpack_auth()->user()->id;
             if (Infosperso::where('user_id', $userid)->exists()) {
-                $infos = Infosperso::where('user_id', $userid)->get();
-                $infos = $infos->where('user_id', $userid)->first();
+                $infos = Infosperso::where('user_id', $userid)->first();
+
 
                 $street = Street::all();
                 $building = Building::all();
@@ -57,8 +57,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->get();
-            $infos = $infos->where('user_id', $userid)->first();
+            $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
             $infos->save();
         } else {
@@ -88,8 +87,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->get();
-            $infos = $infos->where('user_id', $userid)->first();
+            $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
             $infos->save();
         } else {
@@ -118,8 +116,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->get();
-            $infos = $infos->where('user_id', $userid)->first();
+            $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
             $infos->save();
         } else {
@@ -148,8 +145,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->get();
-            $infos = $infos->where('user_id', $userid)->first();
+            $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
             $infos->save();
         } else {
@@ -178,8 +174,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->get();
-            $infos = $infos->where('user_id', $userid)->first();
+            $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
             $infos->save();
         } else {
@@ -208,8 +203,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->get();
-            $infos = $infos->where('user_id', $userid)->first();
+            $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
             $infos->save();
         } else {
@@ -238,8 +232,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->get();
-            $infos = $infos->where('user_id', $userid)->first();
+            $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
             $infos->save();
         } else {
@@ -278,8 +271,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->get();
-            $infos = $infos->where('user_id', $userid)->first();
+            $infos = Infosperso::where('user_id', $userid)->first();
             $score = $infos->score;
         } else {
             $score = 1;
@@ -290,7 +282,11 @@ class GlobalController extends Controller
 
     public function profile()
     {
-        return view('profile');
+        $userid = backpack_auth()->user()->id;
+        $name = backpack_auth()->user()->name;
+        $infos = Infosperso::where('user_id', $userid)->first();
+        $score = $infos->score;
+        return view('profile', compact('name', 'infos', 'score'));
     }
 
     public function saveprofile(Request $request)

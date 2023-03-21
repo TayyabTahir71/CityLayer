@@ -17,11 +17,16 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('avatar')->nullable();
             $table->string('age')->nullable();
             $table->string('gender')->nullable();
             $table->string('profession')->nullable();
             $table->string('relation')->nullable();
             $table->string('preferences')->nullable();
+            $table->string('badge1')->nullable();
+            $table->string('badge2')->nullable();
+            $table->string('badge3')->nullable();
+            $table->string('badge4')->nullable();
             $table->integer('newuser')->default('1')->nullable();
             $table->integer('mapping')->default('0')->nullable();
             $table->integer('score')->default('1')->nullable();

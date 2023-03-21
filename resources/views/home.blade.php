@@ -212,6 +212,11 @@
                 },
                 success: function(data) {
                     document.getElementById('point').click();
+                    //close popup after 3 seconds
+                    setTimeout(function() {
+                    document.getElementById('point').click();
+                    }, 2000);
+                   
                 }
             });
             mymap0.closePopup();
