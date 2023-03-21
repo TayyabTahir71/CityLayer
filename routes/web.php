@@ -34,6 +34,7 @@ Route::get('street', 'street')->name('street');
 Route::get('building', 'building')->name('building');
 Route::get('openspace', 'openspace')->name('openspace');
 Route::post('newtag', 'newtag')->name('newtag');
+Route::post('new_place', 'newplace')->name('newplace');
 
 
 

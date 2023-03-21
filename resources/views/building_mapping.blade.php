@@ -17,7 +17,8 @@
                      <div class="w-48 pt-4">
                          @foreach ($tags as $tag)
                              <label>
-                                 <input type="checkbox" name="form-project-manager[]" value="1" class="peer sr-only">
+                                 <input type="checkbox" name="form-project-manager[]" value="{{ $tag->name }}"
+                                     class="peer sr-only">
                                  <div
                                      class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
 
@@ -73,52 +74,73 @@
                                  </div>
                              </div>
                          </div>
-
-
-
-
+                         <input class="hidden" type="text" name="latitude" id="latitude" value="">
+                         <input class="hidden" type="text" name="longitude" id="longitude" value="">
                      </div>
-                     <button type="submit"
+                     <button onclick="savePlace()"
                          class="px-4 text-2xl py-2 text-gray-800 bg-[#55C5CF] hover:bg-blue-300 active:bg-blue-400 border focus:outline-none rounded-xl font-bold mt-4">
                          Next challenge!
                      </button>
                  </div>
-
-
              </div>
          </div>
          <script>
              if (navigator.geolocation) {
                  navigator.geolocation.getCurrentPosition(function(position) {
 
-                    // document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
-                   //  document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
+                      document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
+                      document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
                  });
              }
 
- $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+             $.ajaxSetup({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 }
+             });
 
-        function newTag() {
-              name = document.getElementById('tagname').value;
-        
-            $.ajax({
-                type: 'POST',
-                url: "/newtag",
-                data: {
-                    name: name,
-                    category: "Building"
-                },
-                success: function(data) {
-                   // refresh the webpage
-                     location.reload();
-                }
-            });
-    
-        }
+             function newTag() {
+                 name = document.getElementById('tagname').value;
 
+                 $.ajax({
+                     type: 'POST',
+                     url: "/newtag",
+                     data: {
+                         name: name,
+                         category: "Building"
+                     },
+                     success: function(data) {
+                         // refresh the webpage
+                         location.reload();
+                     }
+                 });
+
+             }
+
+             function savePlace() {
+                 tags = [];
+                 var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                 for (var i = 0; i < checkboxes.length; i++) {
+                     tags.push(checkboxes[i].value);
+                 }
+                 latitude = document.getElementById('latitude').value;
+                 longitude = document.getElementById('longitude').value;
+                 $.ajax({
+                     type: 'POST',
+                     url: "/new_place",
+                     data: {
+                         name: "test placeaaaaaaaaaaaefv",
+                         type: "Building",
+                         latitude: latitude,
+                         longitude: longitude,
+                         tags: tags
+                     },
+                     success: function(data) {
+                         // refresh the webpage
+                         alert("Place saved");
+                     }
+                 });
+
+             }
          </script>
      @endsection

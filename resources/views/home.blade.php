@@ -5,7 +5,7 @@
         @include('parts.navbar')
         <div class="flex flex-col h-screen mx-auto">
             <div class="p-3 pt-16 lg:mx-16 md:pt-20">
-                <div id="map" class="mt-4 rounded h-[75vh] lg:h-[70vh] w-auto z-10"></div>
+                <div id="map" class="mt-4 rounded h-[78vh] lg:h-[70vh] w-auto z-10"></div>
                 @if ($infos->score > 6)
                     <div x-data="{ modelOpen: false }">
                         <div @click="modelOpen =!modelOpen"

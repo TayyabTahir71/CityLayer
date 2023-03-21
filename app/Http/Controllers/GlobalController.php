@@ -363,4 +363,34 @@ class GlobalController extends Controller
         return back();
     }
 
+    public function newplace(Request $request){
+        $userid = backpack_auth()->user()->id;
+        if ($request->type == "Street"){
+            $street = new Street();
+            $street->name = $request->name;
+            $street->user_id = $userid;
+            $street->type = $request->type;
+            $street->latitude = $request->latitude;
+            $street->longitude = $request->longitude;
+            $street->save();
+        } elseif ($request->type == "Building"){
+            $building = new Building();
+            $building->name = $request->name;
+            $building->user_id = $userid;
+            $building->type = $request->type;
+            $building->latitude = $request->latitude;
+            $building->longitude = $request->longitude;
+            $building->save();
+        } elseif ($request->type == "Openspace"){
+            $openspace = new Openspace();
+            $openspace->name = $request->name;
+            $openspace->user_id = $userid;
+            $openspace->type = $request->type;
+            $openspace->latitude = $request->latitude;
+            $openspace->longitude = $request->longitude;
+            $openspace->save();
+
+        }
+    }
+
 }
