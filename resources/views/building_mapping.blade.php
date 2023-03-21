@@ -66,7 +66,7 @@
                                                          class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#55C5CF] focus:border-transparent"
                                                          placeholder="Enter tag name">
                                                  </div>
-                                                 <button onclick="newTag()"
+                                                 <button id="newtag" 
                                                      class="px-4 text-2xl py-2 bg-[#55C5CF] text-gray-800 hover:bg-blue-300 active:bg-blue-400 focus:outline-none font-bold mt-4">Save</button>
                                              </div>
                                          </div>
@@ -77,7 +77,7 @@
                          <input class="hidden" type="text" name="latitude" id="latitude" value="">
                          <input class="hidden" type="text" name="longitude" id="longitude" value="">
                      </div>
-                     <button onclick="savePlace()"
+                     <button id="saveplace"
                          class="px-4 text-2xl py-2 text-gray-800 bg-[#55C5CF] hover:bg-blue-300 active:bg-blue-400 border focus:outline-none rounded-xl font-bold mt-4">
                          Next challenge!
                      </button>
@@ -85,13 +85,14 @@
              </div>
          </div>
          <script>
+         window.addEventListener("DOMContentLoaded", (event) => {
              if (navigator.geolocation) {
                  navigator.geolocation.getCurrentPosition(function(position) {
 
                       document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
                       document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
                  });
-             }
+             };
 
              $.ajaxSetup({
                  headers: {
@@ -99,7 +100,7 @@
                  }
              });
 
-             function newTag() {
+             $('#newtag').click(function() {
                  name = document.getElementById('tagname').value;
 
                  $.ajax({
@@ -115,9 +116,9 @@
                      }
                  });
 
-             }
+             });
 
-             function savePlace() {
+             $('#saveplace').click(function() {
                  tags = [];
                  var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
                  for (var i = 0; i < checkboxes.length; i++) {
@@ -129,7 +130,7 @@
                      type: 'POST',
                      url: "/new_place",
                      data: {
-                         name: "test placeaaaaaaaaaaaefv",
+                         name: "new building",
                          type: "Building",
                          latitude: latitude,
                          longitude: longitude,
@@ -141,6 +142,7 @@
                      }
                  });
 
-             }
+             });
+         });
          </script>
      @endsection

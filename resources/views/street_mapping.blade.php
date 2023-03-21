@@ -67,7 +67,7 @@
                                                          class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#55C5CF] focus:border-transparent"
                                                          placeholder="Enter tag name">
                                                  </div>
-                                                 <button onclick="newTag()"
+                                                 <button  id="newtag" 
                                                      class="px-4 text-2xl py-2 bg-[#55C5CF] text-gray-800 hover:bg-blue-300 active:bg-blue-400 focus:outline-none font-bold mt-4">Save</button>
                                              </div>
                                          </div>
@@ -78,7 +78,7 @@
                          <input class="hidden" type="text" name="latitude" id="latitude" value="">
                          <input class="hidden" type="text" name="longitude" id="longitude" value="">
                      </div>
-                     <button onclick="savePlace()"
+                     <button  id="saveplace"
                          class="px-4 text-2xl py-2 text-gray-800 bg-[#55C5CF] hover:bg-blue-300 active:bg-blue-400 border focus:outline-none rounded-xl font-bold mt-4">
                          Next challenge!
                      </button>
@@ -86,63 +86,65 @@
                  </div>
              </div>
              <script>
-                 if (navigator.geolocation) {
-                     navigator.geolocation.getCurrentPosition(function(position) {
+                             window.addEventListener("DOMContentLoaded", (event) => {
+             if (navigator.geolocation) {
+                 navigator.geolocation.getCurrentPosition(function(position) {
 
-                         document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
-                         document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
-                     });
+                      document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
+                      document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
+                 });
+             };
+
+             $.ajaxSetup({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                  }
+             });
 
+             $('#newtag').click(function() {
+                 name = document.getElementById('tagname').value;
 
-                 $.ajaxSetup({
-                     headers: {
-                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 $.ajax({
+                     type: 'POST',
+                     url: "/newtag",
+                     data: {
+                         name: name,
+                         category: "Street"
+                     },
+                     success: function(data) {
+                         // refresh the webpage
+                         location.reload();
                      }
                  });
 
-                 function newTag() {
-                     name = document.getElementById('tagname').value;
+             });
 
-                     $.ajax({
-                         type: 'POST',
-                         url: "/newtag",
-                         data: {
-                             name: name,
-                             category: "Street"
-                         },
-                         success: function(data) {
-                             // refresh the webpage
-                             location.reload();
-                         }
-                     });
-
+             $('#saveplace').click(function() {
+                 tags = [];
+                 var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                 for (var i = 0; i < checkboxes.length; i++) {
+                     tags.push(checkboxes[i].value);
                  }
-
-                 function savePlace() {
-                     tags = [];
-                     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                     for (var i = 0; i < checkboxes.length; i++) {
-                         tags.push(checkboxes[i].value);
+                 latitude = document.getElementById('latitude').value;
+                 longitude = document.getElementById('longitude').value;
+                 $.ajax({
+                     type: 'POST',
+                     url: "/new_place",
+                     data: {
+                         name: "newstreet",
+                         type: "Street",
+                         latitude: latitude,
+                         longitude: longitude,
+                         tags: tags
+                     },
+                     success: function(data) {
+                         // refresh the webpage
+                         alert("Place saved");
                      }
-                     latitude = document.getElementById('latitude').value;
-                     longitude = document.getElementById('longitude').value;
-                     $.ajax({
-                         type: 'POST',
-                         url: "/new_place",
-                         data: {
-                             name: "test placeaaa",
-                             type: "Street",
-                             latitude: latitude,
-                             longitude: longitude,
-                             tags: tags
-                         },
-                         success: function(data) {
-                             // refresh the webpage
-                             alert("Place saved");
-                         }
-                     });
+                 });
 
-                 }
+             });
+         });
+
              </script>
          @endsection

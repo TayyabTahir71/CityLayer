@@ -7,7 +7,7 @@
              <div class="flex flex-col items-center gap-x-6 pt-24 lg:pt-32">
                         <input type="file" name="image" id="image" class="hidden" accept="image/*">
                         <label for="image" class="cursor-pointer">
-                            <img class="object-cover w-32 h-32 rounded-full ring ring-gray-300 dark:ring-gray-600" src="/img/avatar.png"
+                            <img class="object-cover w-32 h-32 rounded-full ring ring-gray-300 dark:ring-gray-600" src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}"
                                 alt="">
                         </label>
              </div>
