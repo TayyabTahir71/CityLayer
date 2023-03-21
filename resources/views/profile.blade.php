@@ -5,8 +5,11 @@
          @include('parts.navbar')
          <div class="flex flex-col h-screen mx-auto">
              <div class="flex flex-col items-center gap-x-6 pt-24 lg:pt-32">
-                 <img class="object-cover w-32 h-32 rounded-full ring ring-gray-300 dark:ring-gray-600" src="/img/avatar.png"
-                     alt="">
+                        <input type="file" name="image" id="image" class="hidden" accept="image/*">
+                        <label for="image" class="cursor-pointer">
+                            <img class="object-cover w-32 h-32 rounded-full ring ring-gray-300 dark:ring-gray-600" src="/img/avatar.png"
+                                alt="">
+                        </label>
              </div>
              <h1 class="text-2xl text-center text-gray-800  pt-4">{{ $name }}</h1>
              <h2 class="text-2xl font-bold text-center text-yellow-300 pt-2">{{ $infos->score }}</h2>

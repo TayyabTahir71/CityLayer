@@ -22,6 +22,7 @@ class Infosperso extends Model
     protected $guarded = ['id'];
      protected $fillable = [
         'user_id',
+        'image',
         'age',
         'gender',
         'profession',

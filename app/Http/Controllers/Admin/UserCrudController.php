@@ -34,6 +34,18 @@ class UserCrudController extends CrudController
         CRUD::setEntityNameStrings('user', 'users');
     }
 
+    function getFieldsData()
+    {
+        $this->crud->addColumn([
+            'name' => 'avatar',
+            'label' => 'Image',
+            'type' => 'image',
+            'prefix' => 'storage/uploads/avatar/',
+            'height' => '80px',
+            'width' => 'auto',
+
+        ]);
+    }
     /**
      * Define what happens when the List operation is loaded.
      * 
@@ -42,6 +54,7 @@ class UserCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->getFieldsData();
         CRUD::column('name');
         CRUD::column('email');
         CRUD::column('role')->type('select_from_array')->options([
@@ -69,6 +82,7 @@ class UserCrudController extends CrudController
         $this->crud->setValidation([
             'name' => 'required|min:2',
         ]);
+        CRUD::field('image')->label('avatar');
         CRUD::field('name');
         CRUD::field('email');
         CRUD::field('password');
@@ -102,6 +116,7 @@ class UserCrudController extends CrudController
         $this->crud->setValidation([
             'name' => 'required|min:2',
         ]);
+        CRUD::field('image')->label('avatar');
         CRUD::field('name');
         CRUD::field('email');
         $this->crud->addField([   // select_from_array

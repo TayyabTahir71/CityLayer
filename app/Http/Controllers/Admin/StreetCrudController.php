@@ -18,6 +18,7 @@ class StreetCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
   //  use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+  use \App\Http\Controllers\Admin\Operations\ExportOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -31,6 +32,18 @@ class StreetCrudController extends CrudController
         CRUD::setEntityNameStrings('street', 'streets');
     }
 
+    function getFieldsData()
+    {
+        $this->crud->addColumn([
+            'name' => 'image',
+            'label' => 'Image',
+            'type' => 'image',
+            'prefix' => 'storage/uploads/street/',
+            'height' => '80px',
+            'width' => 'auto',
+
+        ]);
+    }
     /**
      * Define what happens when the List operation is loaded.
      * 
@@ -39,10 +52,11 @@ class StreetCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('user_id');
+        $this->getFieldsData();
         CRUD::column('name');
         CRUD::column('latitude');
         CRUD::column('longitude');
+        CRUD::column('user_id');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -60,7 +74,7 @@ class StreetCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(StreetRequest::class);
-
+        CRUD::field('image');
         CRUD::field('user_id');
         CRUD::field('name');
         CRUD::field('latitude');
