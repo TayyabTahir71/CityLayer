@@ -39,22 +39,22 @@
 
                          <div class="w-full">
                              <ul
-                                 class="flex flex-col p-4 mt-4 font-bold bg-gray-800 border border-gray-700 rounded-lg mynav">
+                                 class="flex flex-col p-4 mt-4 font-bold bg-[#B8E7EB] shadow rounded-lg mynav">
                                  <li>
                                      <a href="/"
-                                         class="block py-2 pl-3 pr-4 text-gray-100 rounded  hover:text-blue-500 prevent">Home</a>
+                                         class="block py-2 pl-3 pr-4 text-gray-500 rounded  hover:text-blue-500 prevent">Home</a>
                                  </li>
                                  <li>
                                      <a href="dashboard"
-                                         class="block py-2 pl-3 pr-4 text-gray-100 rounded  hover:text-blue-500 prevent">Dashboard</a>
+                                         class="block py-2 pl-3 pr-4 text-gray-500 rounded  hover:text-blue-500 prevent">Dashboard</a>
                                  </li>
                                  <li>
                                      <a href="profile"
-                                         class="block py-2 pl-3 pr-4 text-gray-100 rounded  hover:text-blue-500 prevent">Profile</a>
+                                         class="block py-2 pl-3 pr-4 text-gray-500 rounded  hover:text-blue-500 prevent">Profile</a>
                                  </li>
                                  <li>
                                      <a href="admin/logout"
-                                         class="block py-2 pl-3 pr-4 text-gray-100 rounded  hover:text-blue-500 prevent">Log-out</a>
+                                         class="block py-2 pl-3 pr-4 text-gray-500 rounded  hover:text-blue-500 prevent">Log-out</a>
                                  </li>
                              </ul>
                          </div>
@@ -73,7 +73,7 @@
          for (let i = 0; i < menuLength; i++) {
              if (menuItem[i].href === currentLocation) {
                  menuItem[i].className =
-                     'block py-2 pl-3 pr-4 rounded border border-gray-600 bg-gray-700 text-blue-500 prevent';
+                     'block py-2 pl-3 pr-4 rounded border border-gray-600 bg-gray-500 text-white prevent';
              }
          }
      });

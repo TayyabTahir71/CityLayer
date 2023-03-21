@@ -9,16 +9,17 @@
                 @if ($infos->score > 6)
                     <div x-data="{ modelOpen: false }">
                         <div @click="modelOpen =!modelOpen"
-                            class="relative w-full px-4 py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-500 text-center">
+                            class="relative w-full px-4 py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center">
                             Start Playing!
                             <div class="absolute bottom-0 right-0 m-2">
-                                <a href="about"> <i class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info"></i></a>
+                                <a href="about"> <i
+                                        class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info"></i></a>
                             </div>
                         </div>
 
                         <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                             aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                            <div class="flex justify-center min-h-screen px-4 text-center items-center sm:block sm:p-0">
+                            <div class="flex justify-center min-h-screen px-4 text-center items-end sm:block sm:p-0">
                                 <div x-cloak @click="modelOpen = false" x-show="modelOpen"
                                     x-transition:enter="transition ease-out duration-300 transform"
                                     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -34,25 +35,31 @@
                                     x-transition:leave="transition ease-in duration-200 transform"
                                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                    class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl z-50">
+                                    class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-[#B8E7EB] shadow-xl 2xl:max-w-2xl z-50">
 
                                     <div class="items-center space-x-4 bloc">
 
-                                        <div class="flex pt-6 justify-evenly">
-                                            <button
-                                                class="px-6 mx-4 py-6 text-gray-100 bg-blue-700 hover:bg-blue-800  focus:outline-none hover:text-gray-200 rounded-full">
-                                                Street
-                                            </button>
+                                        <h1 class="text-3xl font-bold text-center text-black">This space is...</h1>
+                                        <div class="flex flex-col pt-6">
+                                            <div class="flex justify-center">
+                                            
+                                               <a href="street"> <button
+                                                    class="w-32 h-32 mx-4 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400  focus:outline-none hover:text-gray-200 rounded-full">
+                                                   <i class="fa-solid fa-road"></i><br>  a street
+                                                </button>
+                                                </a>
+                                            </div>
+                                            <div class="flex justify-center space-x-6">
+                                                <button
+                                                    class="w-32 h-32 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
+                                                 <i class="fa-solid fa-building"></i><br>    a building
+                                                </button>
 
-                                            <button
-                                                class="px-6 mx-4 py-6 text-gray-100 bg-blue-700 hover:bg-blue-800 rounded-full focus:outline-none hover:text-gray-200">
-                                                Building
-                                            </button>
-
-                                               <button
-                                                class="px-6 mx-4 py-6 text-gray-100 bg-blue-700 hover:bg-blue-800 rounded-full focus:outline-none hover:text-gray-200">
-                                                Open Space
-                                            </button>
+                                                <button
+                                                    class="w-32 h-32  py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
+                                                   <i class="fa-solid fa-street-view"></i><br>   an open<br> space
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -214,9 +221,9 @@
                     document.getElementById('point').click();
                     //close popup after 3 seconds
                     setTimeout(function() {
-                    document.getElementById('point').click();
+                        document.getElementById('point').click();
                     }, 2000);
-                   
+
                 }
             });
             mymap0.closePopup();

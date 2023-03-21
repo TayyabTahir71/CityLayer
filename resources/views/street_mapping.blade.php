@@ -2,60 +2,95 @@
 
  @section('main')
      <div data-barba="container">
-              @include('parts.navbar')
+         @include('parts.navbar')
          <div class="flex flex-col h-screen mx-auto">
-             <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-20">
+             <div class="z-0 p-3 pt-16 lg:mx-16 md:pt-20">
                  <div class="flex flex-row items-center pt-2">
-                 <a href="dashboard" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-arrow-left"></i></a>
-                 <h1 class="mx-auto mt-4 text-2xl font-bold text-gray-900">New Street Mapping  &nbsp;  &nbsp; </h1>
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-arrow-left"></i></a>
                  </div>
-                 <div id="map0" class="rounded h-[70vh] lg:h-[400px] w-auto"></div>
-                 <input class="text-black" type="text" name="latitude" id="latitude" value="">
-                 <input class="pt-2 text-black" type="text" name="longitude" id="longitude" value="">
+                 <div class="flex flex-col justify-center items-center">
+                     <button class="w-32 h-32 mx-4 text-gray-100 bg-[#55C5CF] focus:outline-none rounded-full" disabled>
+                         <i class="fa-solid fa-road"></i><br>street
+                     </button>
+                     <h1 class="pt-2 text-xl font-bold text-gray-900 text-center">Add #tags to describe the space and earn
+                         points!</h1>
+                     <div class="w-48 pt-4">
+                         <label>
+                             <input type="checkbox" name="form-project-manager[]" value="1" class="peer sr-only">
+                             <div
+                                 class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+                                
+                                 <div class="flex justify-center">
+                                         <div class="font-semibold">sidewalk</div>
+                                 </div>
+                             </div>
+                         </label>
+                        <label>
+                             <input type="checkbox" name="form-project-manager[]" value="1" class="peer sr-only">
+                             <div
+                                 class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+                                
+                                 <div class="flex justify-center">
+                                         <div class="font-semibold">path</div>
+                                 </div>
+                             </div>
+                         </label>
+                         <label>
+                             <input type="checkbox" name="form-project-manager[]" value="1" class="peer sr-only">
+                             <div
+                                 class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+                                
+                                 <div class="flex justify-center">
+                                         <div class="font-semibold">walking street</div>
+                                 </div>
+                             </div>
+                         </label>
+                         <label>
+                             <input type="checkbox" name="form-project-manager[]" value="1" class="peer sr-only">
+                             <div
+                                 class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+                                
+                                 <div class="flex justify-center">
+                                         <div class="font-semibold">road</div>
+                                 </div>
+                             </div>
+                         </label>
+                         <label>
+                             <input type="checkbox" name="form-project-manager[]" value="1" class="peer sr-only">
+                             <div
+                                 class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+                                
+                                 <div class="flex justify-center">
+                                         <div class="font-semibold">intersection</div>
+                                 </div>
+                             </div>
+                         </label>
+                         <label>
+                             <input type="checkbox" name="form-project-manager[]" value="1" class="peer sr-only">
+                             <div
+                                 class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+                                
+                                 <div class="flex justify-center">
+                                         <div class="font-semibold">passage</div>
+                                 </div>
+                             </div>
+                         </label>
+                     </div>
+                     <button class="px-4 text-2xl py-2 text-gray-800 border focus:outline-none rounded-xl font-bold mt-4">
+                        Next challenge!
+                        </button>
+                 </div>
+
 
              </div>
          </div>
-     </div>
-     <script>
-         let marker = null;
+         <script>
+             if (navigator.geolocation) {
+                 navigator.geolocation.getCurrentPosition(function(position) {
 
-         let mymap = L.map('map0').setView([38.6890, 11.14086], 2);
-         osmLayer = L.tileLayer(
-             'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                 maxZoom: 19,
-                 apikey: 'choisirgeoportail',
-                 format: 'image/jpeg',
-                 style: 'normal',
-                 enableHighAccuracy: true
-             }).addTo(mymap);
-         mymap.addLayer(osmLayer);
-         mymap.touchZoom.enable();
-         mymap.scrollWheelZoom.disable();
-         icon = L.icon({
-             iconUrl: '/img/marker.png',
-             iconSize: [20, 20],
-             iconAnchor: [20, 20],
-             popupAnchor: [0, -20]
-         });
-
-         if (navigator.geolocation) {
-             navigator.geolocation.getCurrentPosition(function(position) {
-                 mymap.setView([position.coords.latitude, position.coords.longitude], 17);
-                 L.marker([position.coords.latitude, position.coords.longitude], {
-                     icon: icon
-                 }).addTo(mymap);
-                 document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
-                 document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
-             });
-         }
-             mymap.on('click', function(e) {
-                 if (marker) {
-                     mymap.removeLayer(marker);
-                 }
-                 marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
-                 document.getElementById('latitude').value = e.latlng.lat.toFixed(6);
-                 document.getElementById('longitude').value = e.latlng.lng.toFixed(6);
-             });
-         
-     </script>
- @endsection
+                     document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
+                     document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
+                 });
+             }
+         </script>
+     @endsection
