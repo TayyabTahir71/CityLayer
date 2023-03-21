@@ -8,6 +8,7 @@ use App\Models\Street;
 use App\Models\Building;
 use App\Models\Openspace;
 use App\Models\Stats;
+use App\Models\Tag;
 use Carbon\Carbon;
 use Pestopancake\LaravelBackpackNotifications\Notifications\DatabaseNotification;
 use Illuminate\Http\Request;
@@ -333,4 +334,33 @@ class GlobalController extends Controller
             return redirect('/');
         }
     }
+
+
+    public function street(){
+        $tags = Tag::where('category', 'street')->get();
+
+
+        return view('street_mapping', compact('tags'));
+    }
+
+    public function building(){
+        $tags = Tag::where('category', 'building')->get();
+
+        return view('building_mapping', compact('tags'));
+    }
+
+    public function openspace(){
+        $tags = Tag::where('category', 'openspace')->get();
+
+        return view('openspace_mapping', compact('tags'));
+    }
+
+    public function newtag(Request $request){
+        $tag = new Tag();
+        $tag->name = $request->name;
+        $tag->category = $request->category;
+        $tag->save();
+        return back();
+    }
+
 }

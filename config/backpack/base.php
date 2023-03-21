@@ -85,7 +85,7 @@ return [
      // ------
  
      // Menu logo. You can replace this with an <img> tag if you have a logo.
-     'project_logo'    => '<h2 class="pt-2">CityLayer</h2>',
+     'project_logo'    => '<h2 class="pt-2 text-white">CityLayer</h2>',
  
      // Show / hide breadcrumbs on admin panel pages.
      'breadcrumbs' => false,

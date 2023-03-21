@@ -24,4 +24,5 @@ Route::group([
     Route::crud('openspace', 'OpenspaceCrudController');
     Route::crud('building', 'BuildingCrudController');
  
+    Route::crud('tag', 'TagCrudController');
 }); // this should be the absolute last line of this file

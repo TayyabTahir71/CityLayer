@@ -50,15 +50,18 @@
                                                 </a>
                                             </div>
                                             <div class="flex justify-center space-x-6">
+                                             <a href="building">
                                                 <button
                                                     class="w-32 h-32 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
                                                  <i class="fa-solid fa-building"></i><br>    a building
                                                 </button>
-
+                                              </a>
+                                               <a href="openspace">
                                                 <button
                                                     class="w-32 h-32  py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
                                                    <i class="fa-solid fa-street-view"></i><br>   an open<br> space
                                                 </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

@@ -30,6 +30,10 @@ Route::post('/place/bof', 'bof')->name('bof');
 Route::post('/place/weird', 'weird')->name('weird');
 Route::post('/place/ohh', 'ohh')->name('ohh');
 Route::post('/place/wtf', 'wtf')->name('wtf');
+Route::get('street', 'street')->name('street');
+Route::get('building', 'building')->name('building');
+Route::get('openspace', 'openspace')->name('openspace');
+Route::post('newtag', 'newtag')->name('newtag');
 
 
 
@@ -39,17 +43,6 @@ Route::get('logout', 'logout');
 
 });
 
-Route::get('street', function () {
-    return view('street_mapping');
-});
-
-Route::get('building', function () {
-    return view('building_mapping');
-});
-
-Route::get('openspace', function () {
-    return view('openspace_mapping');
-});
 
 
 Route::get('about', function () {
