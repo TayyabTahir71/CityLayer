@@ -37,18 +37,14 @@
                                     <div class="items-center space-x-4 bloc">
 
                                         <div class="flex pt-6 justify-evenly">
-                                            <button @click="modelOpen = false"
+                                            <button
                                                 class="px-6 my-4 py-6 text-gray-100 bg-blue-700 hover:bg-blue-800 rounded-lg focus:outline-none hover:text-gray-200">
                                                 Current location mapping
                                             </button>
-                                            <form class="mx-3" action="/deleteuser/{{ backpack_auth()->user()->id }}"
-                                                method="post">
-                                                @csrf
-                                                <button type="submit"
-                                                    class="px-6 my-4 py-6 text-gray-100 bg-blue-700 hover:bg-blue-800 rounded-lg focus:outline-none hover:text-gray-200">
+                            
+                                                <button class="px-6 my-4 py-6 text-gray-100 bg-blue-700 hover:bg-blue-800 rounded-lg focus:outline-none hover:text-gray-200">
                                                 Select a location
                                                 </button>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +58,39 @@
                 @endif
             </div>
         </div>
+        <div x-data="{ modelOpen: false }">
+                        <button id="point" @click="modelOpen =!modelOpen" class="hidden"></button>
 
+                        <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
+                            aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                            <div
+                                class="flex justify-center min-h-screen px-4 text-center items-center sm:block sm:p-0">
+                                <div x-cloak @click="modelOpen = false" x-show="modelOpen"
+                                    x-transition:enter="transition ease-out duration-300 transform"
+                                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                    x-transition:leave="transition ease-in duration-200 transform"
+                                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                                    class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true">
+                                </div>
+
+                                <div x-cloak x-show="modelOpen"
+                                    x-transition:enter="transition ease-out duration-300 transform"
+                                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                    x-transition:leave="transition ease-in duration-200 transform"
+                                    x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                    x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                    class="inline-block w-full max-w-xl overflow-hidden transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl z-50 mt-60">
+
+                                    <div class="items-center space-x-4 bloc pt-3">
+                                        <div class="flex justify-center font-bold">
+                                          You have earned <img src="/img/plus1.png" class="w-8 h-8 pb-2">point!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
     </div>
 
     <script>
@@ -117,19 +145,19 @@
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
             }).addTo(mymap0).bindPopup(
-                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="">React to this place to earn points!</p><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' +
+                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="">React to this place to earn points!</p><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
-                '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' +
+                '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
-                '\', \'dislike\')"><img src="/img/3.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' +
+                '\', \'dislike\')"><img src="/img/3.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
-                '\', \'stars\')"><img src="/img/4.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' +
+                '\', \'stars\')"><img src="/img/4.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
-                '\', \'bof\')"><img src="/img/5.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' +
+                '\', \'bof\')"><img src="/img/5.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
-                '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' +
+                '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
-                '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 active:scale-110" onclick="mapAction(\'' +
+                '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype + '\', \'wtf\')"></div></div>'
             );
             markers[place.id] = markerx;
@@ -178,7 +206,7 @@
                     type: type
                 },
                 success: function(data) {
-                    alert("thanks for your feedback! you earned 1 points!");
+                   document.getElementById('point').click();
                 }
             });
             mymap0.closePopup();
