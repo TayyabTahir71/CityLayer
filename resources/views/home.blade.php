@@ -5,7 +5,7 @@
         @include('parts.navbar')
         <div class="flex flex-col mx-auto">
             <div class="pt-16 lg:mx-16 md:pt-20">
-                <div id="map" class="mt-4 h-[78vh] lg:h-[70vh] w-auto z-10"></div>
+                <div id="map" class="mt-4 h-[80vh] lg:h-[70vh] w-auto z-10"></div>
                 <div x-data="{ modelOpen: false }">
                     <div @click="modelOpen =!modelOpen"
                         class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center">
@@ -16,7 +16,7 @@
                         </div>
                     </div>
 
-                    <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
+                    <div x-cloak x-show="modelOpen" class="fixed bottom-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
                         role="dialog" aria-modal="true">
                         <div class="flex justify-center text-center items-end">
                             <div x-cloak @click="modelOpen = false" x-show="modelOpen"

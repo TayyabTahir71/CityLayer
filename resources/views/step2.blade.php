@@ -4,12 +4,12 @@
     <div data-barba="container">
         @include('parts.navbar')
         <div class="flex flex-col mx-auto">
-            <div class="p-3 pt-16 lg:mx-16 md:pt-20">
+            <div class="pt-16 lg:mx-16 md:pt-20">
                 <div id="map" class="mt-4 h-[50vh] lg:h-[70vh] w-auto z-0"></div>
                 <div x-data="{ modelOpen: true }">
-                    <div x-cloak x-show="modelOpen" class="fixed inset-0 overflow-y-auto" aria-labelledby="modal-title"
+                    <div x-cloak x-show="modelOpen" class="fixed bottom-0 overflow-y-auto w-full" aria-labelledby="modal-title"
                         role="dialog" aria-modal="true">
-                        <div class="flex justify-center min-h-screen text-center items-end">
+                        <div class="flex justify-center text-center items-end">
                             <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
                                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
