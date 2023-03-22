@@ -36,11 +36,17 @@ Route::get('openspace', 'openspace')->name('openspace');
 Route::post('newtag', 'newtag')->name('newtag');
 Route::post('new_place', 'newplace')->name('newplace');
 Route::post('place_step2', 'placestep2')->name('placestep2');
+Route::post('feeling', 'feeling')->name('feeling');
+
+
+
 Route::get('step2', function () {
     return view('step2');
 });
 
-
+Route::get('step3', function () {
+    return view('step3');
+});
 
 
 

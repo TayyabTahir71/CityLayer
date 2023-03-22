@@ -2,10 +2,9 @@
 
 @section('main')
     <div data-barba="container">
-        @include('parts.navbar')
         <div class="flex flex-col mx-auto">
-            <div class="pt-16 md:pt-20">
-                <div id="map" class="mt-4 h-[50vh] lg:h-[70vh] w-auto z-0"></div>
+            <div class="">
+                <div id="map" class="h-[60vh] lg:h-[70vh] w-auto z-0"></div>
                 <div x-data="{ modelOpen: true }">
                     <div x-cloak x-show="modelOpen" class="fixed bottom-0 overflow-y-auto w-screen"
                         aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -57,27 +56,28 @@
                         </div>
                     </div>
                 </div>
-                <div
-                    class="main-modal">
+                <div class="main-modal">
                     <div class="modal-container">
                         <div class="modal-content">
                             <div class="fixed bottom-0 overflow-y-auto w-screen">
-                                    <div
-                                        class="flex justify-center w-screen p-8 overflow-hidden text-left transition-all transform bg-[#CDB8EB] shadow-xl z-50">
-                                        <div class="items-center space-x-4 max-w-2xl">
-                                            <h1 class="text-3xl text-center text-black pb-8">Share what makes you feel that way!
-                                            </h1>
-                                            <div class="flex flex-col pt-4 space-y-6">
-                                                <div class="flex justify-center w-full">
-                                           <button class="" onclick="closeModal('main-modal')">
-                                                <h1 class="text-3xl text-center font-bold bg-white rounded-xl py-8">Describe and share a photo!</h1>
-                                            </button>
-                                                </div>
+                                <div
+                                    class="flex justify-center w-screen p-8 overflow-hidden text-left transition-all transform bg-[#CDB8EB] shadow-xl z-50">
+                                    <div class="items-center space-x-4 max-w-2xl">
+                                        <h1 class="text-3xl text-center text-black pb-8">Share what makes you feel that way!
+                                        </h1>
+                                        <div class="flex flex-col pt-4 space-y-6">
+                                            <div class="flex justify-center w-full">
+                                                <button class="" onclick="step3()">
+                                                    <h1
+                                                        class="text-3xl text-center font-bold bg-white rounded-xl py-8 px-4">
+                                                        Describe and share a photo!</h1>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                           
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -176,6 +176,39 @@
                     }
                 }
             });
+
+        }
+
+  $.ajaxSetup({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 }
+             });
+
+        function step3() {
+            //get url
+            const url = new URL(window.location.href);
+            // get the query parameters as an instance of URLSearchParams
+            const searchParams = url.searchParams;
+
+            // get the values of the "id" and "type" parameters
+            const id = searchParams.get("id");
+            const type = searchParams.get("type");
+            console.log(id);
+            console.log(type);
+             $.ajax({
+                     type: 'POST',
+                     url: "/feeling",
+                     data: {
+                         id: id,
+                         type: type,
+
+                     },
+                     success: function(data) {
+                        alert(data);
+                       open("/step3?id=" + data, "_self");
+                     }
+                 });
 
         }
 

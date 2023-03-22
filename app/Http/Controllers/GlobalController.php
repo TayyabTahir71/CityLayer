@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Street;
 use App\Models\Building;
 use App\Models\Openspace;
+use App\Models\Opinion;
 use App\Models\Tag;
 use App\Models\Stat;
 use Carbon\Carbon;
@@ -595,8 +596,34 @@ class GlobalController extends Controller
         } elseif ($request->type == "Openspace"){
           
         }
-
-        
-       
     }
+
+    public function feeling(Request $request){
+        $userid = backpack_auth()->user()->id;
+        $placeid = $request->id;
+        return $placeid;
+        // if ($request->type == "Street"){
+        //     $street = Street::find($request->id);
+        //     $street->feeling = $request->feeling;
+        //     $street->save();
+        // } elseif ($request->type == "Building"){
+        //     $building = Building::find($request->id);
+        //     $building->feeling = $request->feeling;
+        //     $building->save();
+        // } elseif ($request->type == "Openspace"){
+        //     $openspace = Openspace::find($request->id);
+        //     $openspace->feeling = $request->feeling;
+        //     $openspace->save();
+        // }
+    }
+
+
+
+      static function opinions(){
+
+        $opinions = Opinion::all();
+        return $opinions;
+      }
+
+
 }
