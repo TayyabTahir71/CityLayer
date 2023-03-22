@@ -18,9 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name')->nullable();
-            $table->string('image')->nullable();
+            $table->longText('image')->nullable();
             $table->decimal('latitude', 8, 6)->nullable();
             $table->decimal('longitude', 9, 6)->nullable();
+            $table->text('tags')->nullable();
             $table->string('type')->default('openspace');
             $table->integer('likes')->default(0);
             $table->integer('dislikes')->default(0);

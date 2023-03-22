@@ -126,11 +126,12 @@
                  }
                  latitude = document.getElementById('latitude').value;
                  longitude = document.getElementById('longitude').value;
+                thename = Math.random().toString(8).substring(7);
                  $.ajax({
                      type: 'POST',
                      url: "/new_place",
                      data: {
-                         name: "new openspace",
+                         name: thename,
                          type: "Openspace",
                          latitude: latitude,
                          longitude: longitude,

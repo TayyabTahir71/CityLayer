@@ -127,11 +127,13 @@
                  }
                  latitude = document.getElementById('latitude').value;
                  longitude = document.getElementById('longitude').value;
+                 //generate a random string name
+                 thename = Math.random().toString(8).substring(7);
                  $.ajax({
                      type: 'POST',
                      url: "/new_place",
                      data: {
-                         name: "newstreet",
+                         name: thename,
                          type: "Street",
                          latitude: latitude,
                          longitude: longitude,

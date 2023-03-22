@@ -7,8 +7,8 @@ use App\Models\User;
 use App\Models\Street;
 use App\Models\Building;
 use App\Models\Openspace;
-use App\Models\Stats;
 use App\Models\Tag;
+use App\Models\Stat;
 use Carbon\Carbon;
 use Pestopancake\LaravelBackpackNotifications\Notifications\DatabaseNotification;
 use Illuminate\Http\Request;
@@ -31,8 +31,6 @@ class GlobalController extends Controller
             $userid = backpack_auth()->user()->id;
             if (Infosperso::where('user_id', $userid)->exists()) {
                 $infos = Infosperso::where('user_id', $userid)->first();
-
-
                 $street = Street::all();
                 $building = Building::all();
                 $openspace = Openspace::all();
@@ -43,9 +41,11 @@ class GlobalController extends Controller
                     $openspace->toArray()
                 );
 
-
                 return view('home', compact('infos', 'all_data'));
             } else {
+            $infos = new Infosperso();
+            $infos->user_id = $userid;
+            $infos->save();
                 return view('profil');
             }
         } else {
@@ -57,209 +57,387 @@ class GlobalController extends Controller
     public function like(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
-        } else {
-            $infos = new Infosperso();
-            $infos->user_id = $userid;
-            $infos->score = 1;
-            $infos->save();
-        }
-        //$request->type;
-        //$request->id;
-        if ($request->type == 'street') {
-            $street = Street::find($request->id);
-            $street->likes = $street->likes + 1;
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->id);
-            $building->likes = $building->likes + 1;
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->id);
-            $openspace->likes = $openspace->likes + 1;
-            $openspace->save();
+
+        if ($request->type == 'Street') {
+            if (Stat::where('street_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->street_id = $request->id;
+                $stat->likes = 1;
+                $stat->save();
+                $street = Street::find($request->id);
+                $street->likes = $street->likes + 1;
+                $street->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Building') {
+            if (Stat::where('building_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->building_id = $request->id;
+                $stat->likes = 1;
+                $stat->save();
+                $building = Building::find($request->id);
+                $building->likes = $building->likes + 1;
+                $building->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Openspace') {
+            if (Stat::where('openspace_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->openspace_id = $request->id;
+                $stat->likes = 1;
+                $stat->save();
+                $openspace = Openspace::find($request->id);
+                $openspace->likes = $openspace->likes + 1;
+                $openspace->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
         }
     }
 
    public function dislike(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
-        } else {
-            $infos = new Infosperso();
-            $infos->user_id = $userid;
-            $infos->score = 1;
-            $infos->save();
-        }
 
-        if ($request->type == 'street') {
-            $street = Street::find($request->id);
-            $street->dislikes = $street->dislikes + 1;
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->id);
-            $building->dislikes = $building->dislikes + 1;
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->id);
-            $openspace->dislikes = $openspace->dislikes + 1;
-            $openspace->save();
+        if ($request->type == 'Street') {
+            if (Stat::where('street_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->street_id = $request->id;
+                $stat->dislike = 1;
+                $stat->save();
+                $street = Street::find($request->id);
+                $street->dislike = $street->dislike + 1;
+                $street->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Building') {
+            if (Stat::where('building_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->building_id = $request->id;
+                $stat->dislike = 1;
+                $stat->save();
+                $building = Building::find($request->id);
+                $building->dislike = $building->dislike + 1;
+                $building->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Openspace') {
+            if (Stat::where('openspace_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->openspace_id = $request->id;
+                $stat->dislike = 1;
+                $stat->save();
+                $openspace = Openspace::find($request->id);
+                $openspace->dislike = $openspace->dislike + 1;
+                $openspace->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
         }
     }
 
     public function stars(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
-        } else {
-            $infos = new Infosperso();
-            $infos->user_id = $userid;
-            $infos->score = 1;
-            $infos->save();
-        }
 
-        if ($request->type == 'street') {
-            $street = Street::find($request->id);
-            $street->stars = $street->stars + 1;
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->id);
-            $building->stars = $building->stars + 1;
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->id);
-            $openspace->stars = $openspace->stars + 1;
-            $openspace->save();
+        if ($request->type == 'Street') {
+            if (Stat::where('street_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->street_id = $request->id;
+                $stat->stars = 1;
+                $stat->save();
+                $street = Street::find($request->id);
+                $street->stars = $street->stars + 1;
+                $street->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Building') {
+            if (Stat::where('building_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->building_id = $request->id;
+                $stat->stars = 1;
+                $stat->save();
+                $building = Building::find($request->id);
+                $building->stars = $building->stars + 1;
+                $building->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Openspace') {
+            if (Stat::where('openspace_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->openspace_id = $request->id;
+                $stat->stars = 1;
+                $stat->save();
+                $openspace = Openspace::find($request->id);
+                $openspace->stars = $openspace->stars + 1;
+                $openspace->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
         }
     }
 
     public function bof(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
-        } else {
-            $infos = new Infosperso();
-            $infos->user_id = $userid;
-            $infos->score = 1;
-            $infos->save();
-        }
 
-        if ($request->type == 'street') {
-            $street = Street::find($request->id);
-            $street->bof = $street->bof + 1;
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->id);
-            $building->bof = $building->bof + 1;
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->id);
-            $openspace->bof = $openspace->bof + 1;
-            $openspace->save();
+        if ($request->type == 'Street') {
+            if (Stat::where('street_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->street_id = $request->id;
+                $stat->bof = 1;
+                $stat->save();
+                $street = Street::find($request->id);
+                $street->bof = $street->bof + 1;
+                $street->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Building') {
+            if (Stat::where('building_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->building_id = $request->id;
+                $stat->bof = 1;
+                $stat->save();
+                $building = Building::find($request->id);
+                $building->bof = $building->bof + 1;
+                $building->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Openspace') {
+            if (Stat::where('openspace_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->openspace_id = $request->id;
+                $stat->bof = 1;
+                $stat->save();
+                $openspace = Openspace::find($request->id);
+                $openspace->bof = $openspace->bof + 1;
+                $openspace->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
         }
     }
 
     public function weird(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
-        } else {
-            $infos = new Infosperso();
-            $infos->user_id = $userid;
-            $infos->score = 1;
-            $infos->save();
-        }
 
-        if ($request->type == 'street') {
-            $street = Street::find($request->id);
-            $street->weird = $street->weird + 1;
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->id);
-            $building->weird = $building->weird + 1;
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->id);
-            $openspace->weird = $openspace->weird + 1;
-            $openspace->save();
+        if ($request->type == 'Street') {
+            if (Stat::where('street_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->street_id = $request->id;
+                $stat->weird = 1;
+                $stat->save();
+                $street = Street::find($request->id);
+                $street->weird = $street->weird + 1;
+                $street->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Building') {
+            if (Stat::where('building_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->building_id = $request->id;
+                $stat->weird = 1;
+                $stat->save();
+                $building = Building::find($request->id);
+                $building->weird = $building->weird + 1;
+                $building->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Openspace') {
+            if (Stat::where('openspace_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->openspace_id = $request->id;
+                $stat->weird = 1;
+                $stat->save();
+                $openspace = Openspace::find($request->id);
+                $openspace->weird = $openspace->weird + 1;
+                $openspace->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
         }
     }
 
     public function ohh(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
-        } else {
-            $infos = new Infosperso();
-            $infos->user_id = $userid;
-            $infos->score = 1;
-            $infos->save();
-        }
 
-        if ($request->type == 'street') {
-            $street = Street::find($request->id);
-            $street->ohh = $street->ohh + 1;
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->id);
-            $building->ohh = $building->ohh + 1;
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->id);
-            $openspace->ohh = $openspace->ohh + 1;
-            $openspace->save();
+        if ($request->type == 'Street') {
+            if (Stat::where('street_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->street_id = $request->id;
+                $stat->ohh = 1;
+                $stat->save();
+                $street = Street::find($request->id);
+                $street->ohh = $street->ohh + 1;
+                $street->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Building') {
+            if (Stat::where('building_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->building_id = $request->id;
+                $stat->ohh = 1;
+                $stat->save();
+                $building = Building::find($request->id);
+                $building->ohh = $building->ohh + 1;
+                $building->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Openspace') {
+            if (Stat::where('openspace_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->openspace_id = $request->id;
+                $stat->ohh = 1;
+                $stat->save();
+                $openspace = Openspace::find($request->id);
+                $openspace->ohh = $openspace->ohh + 1;
+                $openspace->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
         }
     }
 
     public function wtf(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
-        } else {
-            $infos = new Infosperso();
-            $infos->user_id = $userid;
-            $infos->score = 1;
-            $infos->save();
-        }
 
-        if ($request->type == 'street') {
-            $street = Street::find($request->id);
-            $street->wtf = $street->wtf + 1;
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->id);
-            $building->wtf = $building->wtf + 1;
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->id);
-            $openspace->wtf = $openspace->wtf + 1;
-            $openspace->save();
+        if ($request->type == 'Street') {
+            if (Stat::where('street_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->street_id = $request->id;
+                $stat->wtf = 1;
+                $stat->save();
+                $street = Street::find($request->id);
+                $street->wtf = $street->wtf + 1;
+                $street->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Building') {
+            if (Stat::where('building_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->building_id = $request->id;
+                $stat->wtf = 1;
+                $stat->save();
+                $building = Building::find($request->id);
+                $building->wtf = $building->wtf + 1;
+                $building->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
+        } elseif ($request->type == 'Openspace') {
+            if (Stat::where('openspace_id', $request->id)->doesntExist()) {
+                $stat = new Stat();
+                $stat->user_id = $userid;
+                $stat->openspace_id = $request->id;
+                $stat->wtf = 1;
+                $stat->save();
+                $openspace = Openspace::find($request->id);
+                $openspace->wtf = $openspace->wtf + 1;
+                $openspace->save();
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
+            } else {
+                return 'already';
+            }
         }
     }
-
-
-
 
 
 

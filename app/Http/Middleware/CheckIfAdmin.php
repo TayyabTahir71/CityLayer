@@ -33,35 +33,6 @@ class CheckIfAdmin
         if ($user->role == 'admin') {
             //   dd('admin');
             return true;
-        } elseif ($user->role == 'user0') {
-            // if just registered user send welcome mail
-
-            $mailcontent = [
-                'email' => env('MAIL_USERNAME'),
-                'message' =>
-                    'welcome ' .
-                    $user->name .
-                    ' account successfully created, you can now login to your account',
-            ];
-            Mail::to($user->email)->queue(new AboMail($mailcontent));
-            $user->role = 'user';
-            $user->save();
-
-            //create notification
-            $admin = backpack_user()->find(1);
-            $admin->notify(
-                new DatabaseNotification(
-                    ($type = 'info'), // info / success / warning / error
-                    ($message = 'New user registered'),
-                    ($messageLong = 'New user registered: ' . $user->email)
-                       // rand(1, 99999)), // optional
-                    // ($href = '/some-custom-url'), // optional, e.g. backpack_url('/example')
-                   // ($hrefText = 'Go to custom URL') // optional
-                )
-            );
-
-            
-            return true;
         } elseif ($user->role == 'user') {
             //   dd('user');
             return true;

@@ -6,69 +6,68 @@
         <div class="flex flex-col h-screen mx-auto">
             <div class="p-3 pt-16 lg:mx-16 md:pt-20">
                 <div id="map" class="mt-4 rounded h-[78vh] lg:h-[70vh] w-auto z-10"></div>
-              
-                    <div x-data="{ modelOpen: false }">
-                        <div @click="modelOpen =!modelOpen"
-                            class="relative w-full px-4 py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center">
-                            Start Playing!
-                            <div class="absolute bottom-0 right-0 m-2">
-                                <a href="about"> <i
-                                        class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info"></i></a>
-                            </div>
+
+                <div x-data="{ modelOpen: false }">
+                    <div @click="modelOpen =!modelOpen"
+                        class="relative w-full px-4 py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center">
+                        Start Playing!
+                        <div class="absolute bottom-0 right-0 m-2">
+                            <a href="about"> <i
+                                    class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info"></i></a>
                         </div>
+                    </div>
 
-                        <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
-                            aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                            <div class="flex justify-center min-h-screen px-4 text-center items-end sm:block sm:p-0">
-                                <div x-cloak @click="modelOpen = false" x-show="modelOpen"
-                                    x-transition:enter="transition ease-out duration-300 transform"
-                                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                                    x-transition:leave="transition ease-in duration-200 transform"
-                                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                                    class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true">
-                                </div>
+                    <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
+                        role="dialog" aria-modal="true">
+                        <div class="flex justify-center min-h-screen px-4 text-center items-end sm:block sm:p-0">
+                            <div x-cloak @click="modelOpen = false" x-show="modelOpen"
+                                x-transition:enter="transition ease-out duration-300 transform"
+                                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                x-transition:leave="transition ease-in duration-200 transform"
+                                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                                class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true">
+                            </div>
 
-                                <div x-cloak x-show="modelOpen"
-                                    x-transition:enter="transition ease-out duration-300 transform"
-                                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                                    x-transition:leave="transition ease-in duration-200 transform"
-                                    x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                                    x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                    class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-[#B8E7EB] shadow-xl 2xl:max-w-2xl z-50">
+                            <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
+                                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                x-transition:leave="transition ease-in duration-200 transform"
+                                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-[#B8E7EB] shadow-xl 2xl:max-w-2xl z-50">
 
-                                    <div class="items-center space-x-4 bloc">
+                                <div class="items-center space-x-4 bloc">
 
-                                        <h1 class="text-3xl font-bold text-center text-black">This space is...</h1>
-                                        <div class="flex flex-col pt-6">
-                                            <div class="flex justify-center">
-                                            
-                                               <a href="street"> <button
+                                    <h1 class="text-3xl font-bold text-center text-black">This space is...</h1>
+                                    <div class="flex flex-col pt-6">
+                                        <div class="flex justify-center">
+
+                                            <a href="street"> <button
                                                     class="w-32 h-32 mx-4 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400  focus:outline-none hover:text-gray-200 rounded-full">
-                                                   <i class="fa-solid fa-road"></i><br>  a street
+                                                    <i class="fa-solid fa-road"></i><br> a street
                                                 </button>
-                                                </a>
-                                            </div>
-                                            <div class="flex justify-center space-x-6">
-                                             <a href="building">
+                                            </a>
+                                        </div>
+                                        <div class="flex justify-center space-x-6">
+                                            <a href="building">
                                                 <button
                                                     class="w-32 h-32 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
-                                                 <i class="fa-solid fa-building"></i><br>    a building
+                                                    <i class="fa-solid fa-building"></i><br> a building
                                                 </button>
-                                              </a>
-                                               <a href="openspace">
+                                            </a>
+                                            <a href="openspace">
                                                 <button
                                                     class="w-32 h-32  py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
-                                                   <i class="fa-solid fa-street-view"></i><br>   an open<br> space
+                                                    <i class="fa-solid fa-street-view"></i><br> an open<br> space
                                                 </button>
-                                                </a>
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
             </div>
         </div>
@@ -102,6 +101,36 @@
                 </div>
             </div>
         </div>
+        <div x-data="{ modelOpen: false }">
+            <button id="already" @click="modelOpen =!modelOpen" class="hidden"></button>
+
+            <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
+                role="dialog" aria-modal="true">
+                <div class="flex justify-center min-h-screen px-4 text-center items-center sm:block sm:p-0">
+                    <div x-cloak @click="modelOpen = false" x-show="modelOpen"
+                        x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0"
+                        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200 transform"
+                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                        class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true">
+                    </div>
+
+                    <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
+                        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                        x-transition:leave="transition ease-in duration-200 transform"
+                        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        class="inline-block w-full max-w-xl overflow-hidden transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl z-50 lg:mt-60">
+
+                        <div class="items-center space-x-4 bloc py-3">
+                            <div class="flex justify-center font-bold">
+                                You have already react to this place!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -118,7 +147,7 @@
             }).addTo(mymap0);
         mymap0.addLayer(osmLayer0);
         mymap0.touchZoom.enable();
-        mymap0.scrollWheelZoom.disable();
+        mymap0.scrollWheelZoom.enable();
         icon = L.icon({
             iconUrl: '/img/marker.png',
             iconSize: [40, 40],
@@ -217,12 +246,19 @@
                     type: type
                 },
                 success: function(data) {
-                    document.getElementById('point').click();
-                    //close popup after 3 seconds
-                    setTimeout(function() {
+                    if (data == 'already') {
+                        document.getElementById('already').click();
+                        //close popup after 3 seconds
+                        setTimeout(function() {
+                            document.getElementById('already').click();
+                        }, 1000);
+                    } else {
                         document.getElementById('point').click();
-                    }, 2000);
-
+                        //close popup after 3 seconds
+                        setTimeout(function() {
+                            document.getElementById('point').click();
+                        }, 1000);
+                    }
                 }
             });
             mymap0.closePopup();
@@ -230,5 +266,5 @@
     </script>
     <style>
 
-</style>
+    </style>
 @endsection

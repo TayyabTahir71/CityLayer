@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('buildings', function (Blueprint $table) {
+        Schema::create('stats', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('name')->nullable();
-            $table->longText('image')->nullable();
-            $table->decimal('latitude', 8, 6)->nullable();
-            $table->decimal('longitude', 9, 6)->nullable();
-            $table->string('type')->default('building');
-            $table->text('tags')->nullable();
+            $table->unsignedBigInteger('street_id')->nullable();
+            $table->foreign('street_id')->references('id')->on('street')->onDelete('cascade');
+            $table->unsignedBigInteger('openspace_id')->nullable();
+            $table->foreign('openspace_id')->references('id')->on('openspaces')->onDelete('cascade');
+            $table->unsignedBigInteger('building_id')->nullable();
+            $table->foreign('building_id')->references('id')->on('buildings')->onDelete('cascade');
             $table->integer('likes')->default(0);
             $table->integer('dislikes')->default(0);
             $table->integer('stars')->default(0);
@@ -30,7 +30,6 @@ return new class extends Migration
             $table->integer('weird')->default(0);
             $table->integer('ohh')->default(0);
             $table->integer('wtf')->default(0);
-            $table->timestamps();
         });
     }
 
@@ -41,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buildings');
+        Schema::dropIfExists('stats');
     }
 };
