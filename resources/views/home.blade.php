@@ -83,7 +83,7 @@
                         x-transition:leave="transition ease-in duration-200 transform"
                         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        class="inline-block overflow-hidden transition-all transform bg-white rounded-lg shadow-xl  z-50 lg:mt-60">
+                        class="inline-block overflow-hidden transition-all transform bg-white rounded-lg shadow-xl  z-50 mt-60">
 
                         <div class="items-center space-x-4 bloc pt-3 px-2">
                             <div class="flex justify-center font-bold">
@@ -106,7 +106,7 @@
                         x-transition:leave="transition ease-in duration-200 transform"
                         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        class="inline-block  overflow-hidden transition-all transform bg-white rounded-lg shadow-xl z-50 lg:mt-60">
+                        class="inline-block  overflow-hidden transition-all transform bg-white rounded-lg shadow-xl z-50 mt-60">
 
                         <div class="items-center space-x-4 bloc py-3 px-2">
                             <div class="flex justify-center font-bold">
