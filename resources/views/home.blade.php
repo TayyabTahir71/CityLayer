@@ -13,8 +13,7 @@
                     @click="modelOpen =!modelOpen" class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center z-50">
                         Start Playing!
                         <div class="fixed bottom-0 right-0 m-2">
-                            <a href="about"> <i
-                                    class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info"></i></a>
+                            <a href="about"> <i class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info z-60"></i></a>
                         </div>
                     </div>
 

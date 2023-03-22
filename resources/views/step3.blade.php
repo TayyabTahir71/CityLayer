@@ -13,15 +13,14 @@ $opinions = GlobalController::opinions();
                      <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-arrow-left"></i></a>
                  </div>
                  <div class="flex flex-col justify-center items-center">
-                     <h1 class="pt-2 text-xl font-bold text-gray-900 text-center">Add #tags to describe the space and earn
-                         points!</h1>
-                     <div class="w-48 pt-4">
+                     <h1 class="pt-2 text-xl font-bold text-gray-900 text-center mx-8">Add #opinions to describe the space and earn points!</h1>
+                     <div class="w-48 pt-8">
                          @foreach ($opinions as $opinion)
                              <label>
                                  <input type="checkbox" name="form-project-manager[]" value="{{ $opinion->name }}"
                                      class="peer sr-only">
                                  <div
-                                     class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+                                     class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
 
                                      <div class="flex justify-center">
                                          <div class="font-semibold">{{ $opinion->name }}</div>
@@ -32,9 +31,9 @@ $opinions = GlobalController::opinions();
 
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
-                                 class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+                                 class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
                                  <div class="flex justify-center">
-                                     <div class="font-semibold">Add a new tag</div>
+                                     <div class="font-semibold">Add a new opinion</div>
                                  </div>
                              </button>
 
@@ -62,14 +61,14 @@ $opinions = GlobalController::opinions();
 
                                          <div class="items-center space-x-4 bloc pt-3">
                                              <div class="flex flex-col justify-center">
-                                                 <h1 class="text-2xl pb-4 font-bold">Add a new tag</h1>
+                                                 <h1 class="text-2xl pb-4 font-bold">Add a new opinion</h1>
                                                  <div>
-                                                     <input type="text" name="tagname" id="tagname"
-                                                         class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#55C5CF] focus:border-transparent"
+                                                     <input type="text" name="opinionname" id="opinionname"
+                                                         class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                          placeholder="Enter tag name">
                                                  </div>
-                                                 <button id="newtag"
-                                                     class="px-4 text-2xl py-2 bg-[#55C5CF] text-gray-800 hover:bg-blue-300 active:bg-blue-400 focus:outline-none font-bold mt-4">Save</button>
+                                                 <button id="newopinion"
+                                                     class="px-4 text-2xl py-2 bg-[#CDB8EB] text-gray-800 hover:bg-purple-300 active:bg-purple-400 focus:outline-none font-bold mt-4">Save</button>
                                              </div>
                                          </div>
                                      </div>
@@ -77,8 +76,8 @@ $opinions = GlobalController::opinions();
                              </div>
                          </div>
                      </div>
-                     <button id="saveplace"
-                         class="px-4 text-2xl py-2 text-gray-800 bg-[#55C5CF] hover:bg-blue-300 active:bg-blue-400 border focus:outline-none rounded-xl font-bold mt-4">
+                     <button id="saveopinion"
+                         class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purpla-400 border focus:outline-none rounded-xl font-bold mt-4">
                          Next challenge!
                      </button>
                  </div>
@@ -95,7 +94,7 @@ $opinions = GlobalController::opinions();
              });
 
              $('#newopinion').click(function() {
-                 name = document.getElementById('tagname').value;
+                 name = document.getElementById('opinionname').value;
 
                  $.ajax({
                      type: 'POST',
@@ -118,7 +117,6 @@ $opinions = GlobalController::opinions();
                      url: "/opinions",
                      data: {
                          name: "test",
-
                      },
                      success: function(data) {
                       alert('success');

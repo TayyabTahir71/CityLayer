@@ -545,6 +545,14 @@ class GlobalController extends Controller
         return back();
     }
 
+    public function newopinion(Request $request){
+        $opinion = new Opinion();
+        $opinion->name = $request->name;
+        $opinion->save();
+        return back();
+    }
+
+
     public function newplace(Request $request){
         $userid = backpack_auth()->user()->id;
         if ($request->type == "Street"){
