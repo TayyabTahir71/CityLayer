@@ -34,6 +34,9 @@ class GlobalController extends Controller
                 $street = Street::all();
                 $building = Building::all();
                 $openspace = Openspace::all();
+                $tagstreet = Tag::where('Category', 'Street')->get();
+                $tagbuilding = Tag::where('Category', 'Building')->get();
+                $tagopenspace = Tag::where('Category', 'Openspace')->get();
         
                 $all_data = array_merge(
                     $street->toArray(),
@@ -41,7 +44,7 @@ class GlobalController extends Controller
                     $openspace->toArray()
                 );
 
-                return view('home', compact('infos', 'all_data'));
+                return view('home', compact('infos', 'all_data', 'tagstreet', 'tagbuilding', 'tagopenspace'));
             } else {
             $infos = new Infosperso();
             $infos->user_id = $userid;
@@ -551,6 +554,9 @@ class GlobalController extends Controller
             $street->latitude = $request->latitude;
             $street->longitude = $request->longitude;
             $street->save();
+            //return the id after saving
+            $streetid = $street->id;
+            return $streetid.'&type=street';
         } elseif ($request->type == "Building"){
             $building = new Building();
             $building->name = $request->name;
@@ -559,6 +565,9 @@ class GlobalController extends Controller
             $building->latitude = $request->latitude;
             $building->longitude = $request->longitude;
             $building->save();
+            //return the id after saving
+            $buildingid = $building->id;
+            return $buildingid.'&type=building';
         } elseif ($request->type == "Openspace"){
             $openspace = new Openspace();
             $openspace->name = $request->name;
@@ -567,8 +576,27 @@ class GlobalController extends Controller
             $openspace->latitude = $request->latitude;
             $openspace->longitude = $request->longitude;
             $openspace->save();
-
+            //return the id after saving
+            $openspaceid = $openspace->id;
+            return $openspaceid.'&type=openspace';
+        }
+        else {
+            return 'error';
         }
     }
 
+    public function placestep2(Request $request){
+
+        $userid = backpack_auth()->user()->id;
+        if ($request->type == "Street"){
+           
+        } elseif ($request->type == "Building"){
+        
+        } elseif ($request->type == "Openspace"){
+          
+        }
+
+        
+       
+    }
 }

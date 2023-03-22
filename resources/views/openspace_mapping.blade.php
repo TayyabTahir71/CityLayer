@@ -85,7 +85,7 @@
                  </div>
              </div>
          </div>
-     </div>
+  
      <script>
          window.addEventListener("DOMContentLoaded", (event) => {
              if (navigator.geolocation) {
@@ -140,8 +140,7 @@
                          tags: tags
                      },
                      success: function(data) {
-                         // refresh the webpage
-                         alert("Place saved");
+                         open("/step2?id=" + data, "_self");
                      }
                  });
 

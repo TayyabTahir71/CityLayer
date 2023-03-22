@@ -1,4 +1,4 @@
- <nav class="fixed top-0 z-20 w-full px-2 mx-2">
+ <nav class="fixed top-0 z-20 w-full">
      <div class="flex flex-wrap items-center justify-between pb-4 mx-2 mr-2 border-b border-gray-400 lg:mx-16 bg-white pt-4 md:pt-8">
          <a href="#" class="flex items-center">
 

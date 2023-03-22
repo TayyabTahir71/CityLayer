@@ -141,8 +141,7 @@
                          tags: tags
                      },
                      success: function(data) {
-                         // refresh the webpage
-                         alert("Place saved");
+                       open("/step2?id=" + data, "_self");
                      }
                  });
 

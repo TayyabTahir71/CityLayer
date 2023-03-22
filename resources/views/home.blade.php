@@ -4,12 +4,11 @@
     <div data-barba="container">
         @include('parts.navbar')
         <div class="flex flex-col h-screen mx-auto">
-            <div class="p-3 pt-16 lg:mx-16 md:pt-20">
-                <div id="map" class="mt-4 rounded h-[78vh] lg:h-[70vh] w-auto z-10"></div>
-
+            <div class="pt-16 lg:mx-16 md:pt-20">
+                <div id="map" class="mt-4 h-[78vh] lg:h-[70vh] w-auto z-10"></div>
                 <div x-data="{ modelOpen: false }">
                     <div @click="modelOpen =!modelOpen"
-                        class="relative w-full px-4 py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center">
+                        class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center">
                         Start Playing!
                         <div class="absolute bottom-0 right-0 m-2">
                             <a href="about"> <i
@@ -19,7 +18,7 @@
 
                     <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
                         role="dialog" aria-modal="true">
-                        <div class="flex justify-center min-h-screen px-4 text-center items-end sm:block sm:p-0">
+                        <div class="flex justify-center min-h-screen text-center items-end">
                             <div x-cloak @click="modelOpen = false" x-show="modelOpen"
                                 x-transition:enter="transition ease-out duration-300 transform"
                                 x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -34,7 +33,7 @@
                                 x-transition:leave="transition ease-in duration-200 transform"
                                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-[#B8E7EB] shadow-xl 2xl:max-w-2xl z-50">
+                                class="inline-block w-full p-8 mt-60 overflow-hidden text-left transition-all transform bg-[#B8E7EB] shadow-xl 2xl:max-w-2xl z-50">
 
                                 <div class="items-center space-x-4 bloc">
 
