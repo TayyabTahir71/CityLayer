@@ -3,21 +3,23 @@
 @section('main')
     <div data-barba="container">
         @include('parts.navbar')
-        <div class="flex flex-col mx-auto">
-            <div class="pt-16 lg:mx-16 md:pt-20">
-                <div id="map" class="mt-4 h-[80vh] lg:h-[70vh] w-auto z-10"></div>
+        <div class="flex flex-col mx-auto h-full">
+            <div class="pt-16 md:pt-20">
+                <div class="relative">
+                    <div id="map" class="absolute mt-4 w-[100vw] z-10 h-screen"></div>
+                </div>
                 <div x-data="{ modelOpen: false }">
-                    <div @click="modelOpen =!modelOpen"
-                        class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center">
+                    <div 
+                    @click="modelOpen =!modelOpen" class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center z-50">
                         Start Playing!
-                        <div class="absolute bottom-0 right-0 m-2">
+                        <div class="fixed bottom-0 right-0 m-2">
                             <a href="about"> <i
                                     class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info"></i></a>
                         </div>
                     </div>
 
-                    <div x-cloak x-show="modelOpen" class="fixed bottom-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
-                        role="dialog" aria-modal="true">
+                    <div x-cloak x-show="modelOpen" class="fixed bottom-0 z-50 overflow-y-auto"
+                        aria-labelledby="modal-title" role="dialog" aria-modal="true">
                         <div class="flex justify-center text-center items-end">
                             <div x-cloak @click="modelOpen = false" x-show="modelOpen"
                                 x-transition:enter="transition ease-out duration-300 transform"
@@ -33,7 +35,7 @@
                                 x-transition:leave="transition ease-in duration-200 transform"
                                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                class="inline-block w-full p-8 mt-60 overflow-hidden text-left transition-all transform bg-[#B8E7EB] shadow-xl 2xl:max-w-2xl z-50">
+                                class="inline-block w-screen p-8 mt-60 overflow-hidden text-left transition-all transform bg-[#B8E7EB] shadow-xl z-50">
 
                                 <div class="items-center space-x-4 bloc">
 
@@ -75,7 +77,7 @@
 
             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
                 role="dialog" aria-modal="true">
-                 <div class="flex justify-center px-4 text-center items-center">
+                <div class="flex justify-center px-4 text-center items-center">
                     <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
                         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -148,16 +150,15 @@
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                mymap0.setView([position.coords.latitude, position.coords.longitude], 19);
-                L.marker([position.coords.latitude, position.coords.longitude], {
-                    icon: icon
-                }).addTo(mymap0);
-            },
-            function(e) {
-        }, {
-            enableHighAccuracy: true
-        });
-        } 
+                    mymap0.setView([position.coords.latitude, position.coords.longitude], 19);
+                    L.marker([position.coords.latitude, position.coords.longitude], {
+                        icon: icon
+                    }).addTo(mymap0);
+                },
+                function(e) {}, {
+                    enableHighAccuracy: true
+                });
+        }
 
         let count = 0;
         for (let i = 0; i < data.length; i++) {
