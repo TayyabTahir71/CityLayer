@@ -24,30 +24,30 @@
                                     <div class="flex flex-col pt-6 space-y-6">
                                         <div class="flex justify-between w-full">
                                                 <button class="">
-                                                    <img src="/img/happy.png" alt="happy" class="w-16 h-16 mb-2">happy
+                                                    <img src="/img/happy.png" alt="happy" class="w-16 h-16 mb-2"><h1 class=" font-bold">happy</h1>
                                                 </button>
                                         
                                                 <button class="">
-                                                    <img src="/img/sad.png" alt="sad" class="w-16 h-16 mb-2">sad
+                                                    <img src="/img/sad.png" alt="sad" class="w-16 h-16 mb-2"><h1 class=" font-bold">sad</h1>
                                                 </button>
 
                                                 <button class="">
-                                                    <img src="/img/stressed.png" alt="stressed" class="w-16 h-16 mb-2">stressed
+                                                    <img src="/img/stressed.png" alt="stressed" class="w-16 h-16 mb-2"><h1 class=" font-bold">stressed</h1>
                                                 </button>
                                          
                                         </div>
                                          <div class="flex justify-between w-full">
                                          
                                                 <button class="">
-                                                    <img src="/img/angry.png" alt="angry" class="w-16 h-16 mb-2">angry
+                                                    <img src="/img/angry.png" alt="angry" class="w-16 h-16 mb-2"><h1 class=" font-bold">angry</h1>
                                                 </button>
                                         
                                                 <button class="">
-                                                    <img src="/img/worried.png" alt="worried" class="w-16 h-16 mb-2">worried
+                                                    <img src="/img/worried.png" alt="worried" class="w-16 h-16 mb-2"><h1 class=" font-bold">worried</h1>
                                                 </button>
 
-                                                <button class="">
-                                                    <h1>/choose<br>other</h1>
+                                                <button class="mr-2">
+                                                    <h1 class="pt-4 font-bold">/choose<br>other</h1>
                                                 </button>
                                          
                                         </div>
