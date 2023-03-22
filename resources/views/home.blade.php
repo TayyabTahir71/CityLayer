@@ -171,6 +171,14 @@
 
         } else {
             L.map('map').setView([48.6890, 11.14086], 5);
+             mymap.on('click', function(e) {
+                if (marker) {
+                    mymap.removeLayer(marker);
+                }
+                marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
+                document.getElementById('latitude').value = e.latlng.lat;
+                document.getElementById('longitude').value = e.latlng.lng;
+            });
         }
 
         let count = 0;
