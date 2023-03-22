@@ -547,7 +547,7 @@ class GlobalController extends Controller
             $street = new Street();
             $street->name = $request->name;
             $street->user_id = $userid;
-            $street->type = $request->type;
+            $street->type = "Street";
             $street->latitude = $request->latitude;
             $street->longitude = $request->longitude;
             $street->save();
@@ -555,7 +555,7 @@ class GlobalController extends Controller
             $building = new Building();
             $building->name = $request->name;
             $building->user_id = $userid;
-            $building->type = $request->type;
+            $building->type = "Building";
             $building->latitude = $request->latitude;
             $building->longitude = $request->longitude;
             $building->save();
@@ -563,7 +563,7 @@ class GlobalController extends Controller
             $openspace = new Openspace();
             $openspace->name = $request->name;
             $openspace->user_id = $userid;
-            $openspace->type = $request->type;
+            $openspace->type = "Openspace";
             $openspace->latitude = $request->latitude;
             $openspace->longitude = $request->longitude;
             $openspace->save();
