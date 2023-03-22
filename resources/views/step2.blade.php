@@ -4,10 +4,10 @@
     <div data-barba="container">
         @include('parts.navbar')
         <div class="flex flex-col mx-auto">
-            <div class="pt-16 lg:mx-16 md:pt-20">
+            <div class="pt-16 md:pt-20">
                 <div id="map" class="mt-4 h-[50vh] lg:h-[70vh] w-auto z-0"></div>
                 <div x-data="{ modelOpen: true }">
-                    <div x-cloak x-show="modelOpen" class="fixed bottom-0 overflow-y-auto w-full" aria-labelledby="modal-title"
+                    <div x-cloak x-show="modelOpen" class="fixed bottom-0 overflow-y-auto w-screen" aria-labelledby="modal-title"
                         role="dialog" aria-modal="true">
                         <div class="flex justify-center text-center items-end">
                             <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
@@ -16,12 +16,11 @@
                                 x-transition:leave="transition ease-in duration-200 transform"
                                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                class="inline-block w-full  p-8 mt-60 overflow-hidden text-left transition-all transform bg-[#CDB8EB] shadow-xl 2xl:max-w-2xl z-50">
+                                class="flex justify-center w-screen p-8 overflow-hidden text-left transition-all transform bg-[#CDB8EB] shadow-xl z-50">
 
-                                <div class="items-center space-x-4">
-
-                                    <h1 class="text-3xl font-bold text-center text-black">How do you feel in this space?</h1>
-                                    <div class="flex flex-col pt-6 space-y-6">
+                                <div class="items-center space-x-4 max-w-2xl">
+                                    <h1 class="text-2xl font-bold text-center text-black">How do you feel in this space?</h1>
+                                    <div class="flex flex-col pt-4 space-y-6">
                                         <div class="flex justify-between w-full">
                                                 <button class="">
                                                     <img src="/img/happy.png" alt="happy" class="w-16 h-16 mb-2"><h1 class=" font-bold">happy</h1>
