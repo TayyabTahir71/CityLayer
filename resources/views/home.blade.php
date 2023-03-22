@@ -6,7 +6,7 @@
         <div class="flex flex-col h-screen mx-auto">
             <div class="p-3 pt-16 lg:mx-16 md:pt-20">
                 <div id="map" class="mt-4 rounded h-[78vh] lg:h-[70vh] w-auto z-10"></div>
-                @if ($infos->score > 6)
+              
                     <div x-data="{ modelOpen: false }">
                         <div @click="modelOpen =!modelOpen"
                             class="relative w-full px-4 py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center">
@@ -69,11 +69,7 @@
                             </div>
                         </div>
                     </div>
-                @else
-                    <div class="w-full px-4 py-3 text-2xl font-bold text-center text-black bg-[#B8E7EB]">Tap on posts
-                        and<br>
-                        react to earn points!</div>
-                @endif
+
             </div>
         </div>
         <div x-data="{ modelOpen: false }">
@@ -232,4 +228,7 @@
             mymap0.closePopup();
         }
     </script>
+    <style>
+
+</style>
 @endsection
