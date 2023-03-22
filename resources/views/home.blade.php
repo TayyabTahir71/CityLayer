@@ -171,11 +171,11 @@
 
         } else {
             L.map('map').setView([48.6890, 11.14086], 5);
-             mymap.on('click', function(e) {
+             mymap0.on('click', function(e) {
                 if (marker) {
-                    mymap.removeLayer(marker);
+                    mymap0.removeLayer(marker);
                 }
-                marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap);
+                marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap0);
                 document.getElementById('latitude').value = e.latlng.lat;
                 document.getElementById('longitude').value = e.latlng.lng;
             });
