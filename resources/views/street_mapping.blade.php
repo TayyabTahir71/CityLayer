@@ -6,7 +6,7 @@
          <div class="flex flex-col h-screen mx-auto">
              <div class="p-3">
                  <div class="flex flex-row items-center pt-2">
-                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-arrow-left"></i></a>
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
                  </div>
                  <div class="flex flex-col justify-center items-center">
                      <button class="w-32 h-32 mx-4 text-gray-100 bg-[#55C5CF] focus:outline-none rounded-full" disabled>
