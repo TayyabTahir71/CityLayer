@@ -18,7 +18,7 @@
 
                     <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
                         role="dialog" aria-modal="true">
-                        <div class="flex justify-center min-h-screen text-center items-end">
+                        <div class="flex justify-center text-center items-end">
                             <div x-cloak @click="modelOpen = false" x-show="modelOpen"
                                 x-transition:enter="transition ease-out duration-300 transform"
                                 x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
