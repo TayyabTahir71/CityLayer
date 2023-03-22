@@ -74,8 +74,8 @@
                                  </div>
                              </div>
                          </div>
-                         <input class="" type="text" name="latitude" id="latitude" value="">
-                         <input class="" type="text" name="longitude" id="longitude" value="">
+                         <input class="hidden" type="text" name="latitude" id="latitude" value="">
+                         <input class="hidden" type="text" name="longitude" id="longitude" value="">
                      </div>
                      <button id="saveplace"
                          class="px-4 text-2xl py-2 text-gray-800 bg-[#55C5CF] hover:bg-blue-300 active:bg-blue-400 border focus:outline-none rounded-xl font-bold mt-4">
