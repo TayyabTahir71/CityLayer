@@ -21,7 +21,7 @@ return new class extends Migration
             $table->longText('image')->nullable();
             $table->decimal('latitude', 8, 6)->default(0.00)->nullable();
             $table->decimal('longitude', 9, 6)->default(0.00)->nullable();
-            $table->text('tags')->nullable();
+            $table->longText('tags')->nullable();
             $table->string('type')->default('street');
             $table->integer('likes')->default(0);
             $table->integer('dislikes')->default(0);

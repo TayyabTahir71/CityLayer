@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('latitude', 8, 6)->default(0.00)->nullable();
             $table->decimal('longitude', 9, 6)->default(0.00)->nullable();
             $table->string('type')->default('building');
-            $table->text('tags')->nullable();
+            $table->longText('tags')->nullable();
             $table->integer('likes')->default(0);
             $table->integer('dislikes')->default(0);
             $table->integer('stars')->default(0);
