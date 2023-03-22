@@ -67,7 +67,7 @@
                                                          class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#55C5CF] focus:border-transparent"
                                                          placeholder="Enter tag name">
                                                  </div>
-                                                 <button id="newtag" 
+                                                 <button id="newtag"
                                                      class="px-4 text-2xl py-2 bg-[#55C5CF] text-gray-800 hover:bg-blue-300 active:bg-blue-400 focus:outline-none font-bold mt-4">Save</button>
                                              </div>
                                          </div>
@@ -78,19 +78,21 @@
                          <input class="hidden" type="text" name="latitude" id="latitude" value="">
                          <input class="hidden" type="text" name="longitude" id="longitude" value="">
                      </div>
-                     <button  id="saveplace"
+                     <button id="saveplace"
                          class="px-4 text-2xl py-2 text-gray-800 bg-[#55C5CF] hover:bg-blue-300 active:bg-blue-400 border focus:outline-none rounded-xl font-bold mt-4">
                          Next challenge!
                      </button>
                  </div>
              </div>
-             <script>
-                 window.addEventListener("DOMContentLoaded", (event) => {
+         </div>
+     </div>
+     <script>
+         window.addEventListener("DOMContentLoaded", (event) => {
              if (navigator.geolocation) {
                  navigator.geolocation.getCurrentPosition(function(position) {
 
-                      document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
-                      document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
+                     document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
+                     document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
                  });
              };
 
@@ -126,7 +128,7 @@
                  }
                  latitude = document.getElementById('latitude').value;
                  longitude = document.getElementById('longitude').value;
-                thename = Math.random().toString(8).substring(7);
+                 thename = Math.random().toString(8).substring(7);
                  $.ajax({
                      type: 'POST',
                      url: "/new_place",
@@ -145,6 +147,5 @@
 
              });
          });
-
-             </script>
-         @endsection
+     </script>
+ @endsection

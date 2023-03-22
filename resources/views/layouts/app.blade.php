@@ -6,7 +6,7 @@
     @livewireStyles
 </head>
 
-<body class="overflow-x-hidden bg-white pattern" data-barba="wrapper">
+<body class="overflow-x-hidden bg-white pattern">
 
     <main>
         @yield('main')
