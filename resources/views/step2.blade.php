@@ -3,7 +3,7 @@
 @section('main')
     <div data-barba="container">
         @include('parts.navbar')
-        <div class="flex flex-col h-screen mx-auto">
+        <div class="flex flex-col mx-auto">
             <div class="p-3 pt-16 lg:mx-16 md:pt-20">
                 <div id="map" class="mt-4 h-[50vh] lg:h-[70vh] w-auto z-0"></div>
                 <div x-data="{ modelOpen: true }">
