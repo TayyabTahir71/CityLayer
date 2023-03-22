@@ -167,19 +167,12 @@
                 L.marker([position.coords.latitude, position.coords.longitude], {
                     icon: icon
                 }).addTo(mymap0);
-            });
-
-        } else {
-            L.map('map').setView([48.6890, 11.14086], 5);
-             mymap0.on('click', function(e) {
-                if (marker) {
-                    mymap0.removeLayer(marker);
-                }
-                marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap0);
-                document.getElementById('latitude').value = e.latlng.lat;
-                document.getElementById('longitude').value = e.latlng.lng;
-            });
-        }
+            },
+            function(e) {
+        }, {
+            enableHighAccuracy: true
+        });
+        } 
 
         let count = 0;
         for (let i = 0; i < data.length; i++) {
