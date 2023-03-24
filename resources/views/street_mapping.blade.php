@@ -2,7 +2,6 @@
 
  @section('main')
      <div data-barba="container">
-
          <div class="flex flex-col h-screen mx-auto">
              <div class="p-3">
                  <div class="flex flex-row items-center pt-2">
