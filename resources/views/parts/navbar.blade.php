@@ -1,5 +1,5 @@
  <nav class="fixed top-0 z-20 w-full">
-     <div class="flex flex-wrap items-center justify-between pb-4 mx-2 mr-2 border-b border-gray-400 lg:mx-16 bg-white pt-4 md:pt-8">
+     <div class="flex flex-wrap items-center justify-between pt-4 pb-4 mx-2 mr-2 bg-white border-b border-gray-400 lg:mx-16">
          <a href="#" class="flex items-center">
 
          </a>
@@ -20,7 +20,7 @@
              <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
                  role="dialog" aria-modal="true">
                  <div
-                     class="flex justify-center min-h-screen px-4 text-center items-center sm:block sm:p-0">
+                     class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
                      <div x-cloak @click="modelOpen = false" x-show="modelOpen"
                          x-transition:enter="transition ease-out duration-300 transform"
                          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -35,22 +35,26 @@
                          x-transition:leave="transition ease-in duration-200 transform"
                          x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                          x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                         class="inline-block w-full max-w-xl p-8 overflow-hidden transition-all transform z-50">
+                         class="z-50 inline-block w-full max-w-xl p-8 overflow-hidden transition-all transform">
 
                          <div class="w-full">
                              <ul
                                  class="flex flex-col p-4 mt-4 font-bold bg-[#B8E7EB] shadow rounded-lg mynav">
                                  <li>
                                      <a href="/"
-                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded  hover:text-blue-500 prevent">Home</a>
+                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">Home</a>
+                                 </li>
+                                   <li>
+                                     <a href="dashboard"
+                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">Dashboard</a>
                                  </li>
                                  <li>
                                      <a href="profile"
-                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded  hover:text-blue-500 prevent">Profile</a>
+                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">Profile</a>
                                  </li>
                                  <li>
                                      <a href="admin/logout"
-                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded  hover:text-blue-500 prevent">Log-out</a>
+                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">Log-out</a>
                                  </li>
                              </ul>
                          </div>

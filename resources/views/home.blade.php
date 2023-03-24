@@ -3,23 +3,24 @@
 @section('main')
     <div data-barba="container">
         @include('parts.navbar')
-        <div class="flex flex-col mx-auto h-full">
-            <div class="pt-16 md:pt-20">
+        <div class="flex flex-col h-full mx-auto">
+            <div class="pt-16">
                 <div class="relative">
                     <div id="map" class="absolute mt-4 w-[100vw] z-10 h-screen"></div>
                 </div>
                 <div x-data="{ modelOpen: false }">
-                    <div 
-                    @click="modelOpen =!modelOpen" class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center z-50">
+                    <div @click="modelOpen =!modelOpen"
+                        class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center z-50">
                         Start Playing!
                         <div class="fixed bottom-0 right-0 m-2">
-                            <a href="about"> <i class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info z-60"></i></a>
+                            <a href="about"> <i
+                                    class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info z-60"></i></a>
                         </div>
                     </div>
 
                     <div x-cloak x-show="modelOpen" class="fixed bottom-0 z-50 overflow-y-auto"
                         aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                        <div class="flex justify-center text-center items-end">
+                        <div class="flex items-end justify-center text-center">
                             <div x-cloak @click="modelOpen = false" x-show="modelOpen"
                                 x-transition:enter="transition ease-out duration-300 transform"
                                 x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -76,16 +77,16 @@
 
             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
                 role="dialog" aria-modal="true">
-                <div class="flex justify-center px-4 text-center items-center">
+                <div class="flex items-center justify-center px-4 text-center">
                     <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
                         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                         x-transition:leave="transition ease-in duration-200 transform"
                         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        class="inline-block overflow-hidden transition-all transform bg-white rounded-lg shadow-xl  z-50 mt-60">
+                        class="z-50 inline-block overflow-hidden transition-all transform bg-white rounded-lg shadow-xl mt-60">
 
-                        <div class="items-center space-x-4 bloc pt-3 px-2">
+                        <div class="items-center px-2 pt-3 space-x-4 bloc">
                             <div class="flex justify-center font-bold">
                                 You have earned <img src="/img/plus1.png" class="w-8 h-8 pb-2">point!
                             </div>
@@ -99,16 +100,16 @@
 
             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
                 role="dialog" aria-modal="true">
-                <div class="flex justify-center px-4 text-center items-center">
+                <div class="flex items-center justify-center px-4 text-center">
                     <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
                         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                         x-transition:leave="transition ease-in duration-200 transform"
                         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        class="inline-block  overflow-hidden transition-all transform bg-white rounded-lg shadow-xl z-50 mt-60">
+                        class="z-50 inline-block overflow-hidden transition-all transform bg-white rounded-lg shadow-xl mt-60">
 
-                        <div class="items-center space-x-4 bloc py-3 px-2">
+                        <div class="items-center px-2 py-3 space-x-4 bloc">
                             <div class="flex justify-center font-bold">
                                 You have already react to this place!
                             </div>
@@ -120,6 +121,8 @@
     </div>
 
     <script>
+      
+
         data = {!! json_encode($all_data) !!};
         markers = {};
         let marker = null;
@@ -146,6 +149,7 @@
             iconAnchor: [40, 40],
             popupAnchor: [0, -40]
         });
+
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -190,13 +194,6 @@
         }
 
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-
         function mapAction(id, type, action) {
             console.log(id);
             var url;
@@ -223,6 +220,11 @@
                     url = "/place/wtf";
                     break;
             }
+                   $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
             $.ajax({
                 type: 'POST',

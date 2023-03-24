@@ -88,7 +88,7 @@ return [
      'project_logo'    => '<h2 class="pt-2 text-white">CityLayer</h2>',
  
      // Show / hide breadcrumbs on admin panel pages.
-     'breadcrumbs' => false,
+     'breadcrumbs' => true,
  
      // Horizontal navbar classes. Helps make the admin panel look similar to your project's design.
      'header_class' => 'app-header bg-dark border-0 navbar navbar-dark',

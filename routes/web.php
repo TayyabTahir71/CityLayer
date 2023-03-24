@@ -35,9 +35,10 @@ Route::get('building', 'building')->name('building');
 Route::get('openspace', 'openspace')->name('openspace');
 Route::post('newtag', 'newtag')->name('newtag');
 Route::post('newopinion', 'newopinion')->name('newopinion');
+Route::post('opinions', 'opinions')->name('opinions');
 Route::post('new_place', 'newplace')->name('newplace');
-Route::post('place_step2', 'placestep2')->name('placestep2');
 Route::post('feeling', 'feeling')->name('feeling');
+Route::post('upload-image', 'store')->name('uploadimage');
 
 
 
@@ -45,13 +46,11 @@ Route::get('step2', function () {
     return view('step2');
 });
 
-Route::get('step3', function () {
-    return view('step3');
-});
-
-
-
+Route::get('step3', function () {return view('step3');});
+Route::get('step4', function () {return view('step4');});
+Route::get('step5', function () {return view('step5');});
 Route::get('logout', 'logout');
+
 
 });
 
@@ -61,6 +60,9 @@ Route::get('about', function () {
     return view('about');
 });
 
+Route::get('edit_profile', function () {
+    return view('edit_profile');
+});
 
 Route::get('profil', function () {
     return view('profil');

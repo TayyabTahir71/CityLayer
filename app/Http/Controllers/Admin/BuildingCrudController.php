@@ -37,7 +37,7 @@ class BuildingCrudController extends CrudController
             'name' => 'image',
             'label' => 'Image',
             'type' => 'image',
-            'prefix' => 'storage/uploads/building/',
+            'prefix' => 'storage/',
             'height' => '80px',
             'width' => 'auto',
 

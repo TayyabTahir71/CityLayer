@@ -7,17 +7,17 @@
                  <div class="flex flex-row items-center pt-2">
                      <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
                  </div>
-                 <div class="flex flex-col justify-center items-center">
+                 <div class="flex flex-col items-center justify-center">
                      <button class="w-32 h-32 mx-4 text-gray-100 bg-[#55C5CF] focus:outline-none rounded-full" disabled>
                          <i class="fa-solid fa-building"></i><br>building
                      </button>
-                     <h1 class="pt-2 text-xl font-bold text-gray-900 text-center">Add #tags to describe the space and earn
+                     <h1 class="pt-2 text-xl font-bold text-center text-gray-900">Add #tags to describe the space and earn
                          points!</h1>
                      <div class="w-48 pt-4">
                          @foreach ($tags as $tag)
                              <label>
                                  <input type="checkbox" name="form-project-manager[]" value="{{ $tag->name }}"
-                                     class="peer sr-only">
+                                     class="sr-only peer">
                                  <div
                                      class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
 
@@ -35,10 +35,10 @@
                                  </div>
                              </button>
 
-                             <div x-cloak x-show="modelOpen" class="fixed inset-0 overflow-y-auto z-20"
+                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-20 overflow-y-auto"
                                  aria-labelledby="modal-title" role="dialog" aria-modal="true">
                                  <div
-                                     class="flex justify-center min-h-screen px-4 text-center items-center sm:block sm:p-0">
+                                     class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
                                      <div x-cloak @click="modelOpen = false" x-show="modelOpen"
                                          x-transition:enter="transition ease-out duration-300 transform"
                                          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -57,9 +57,9 @@
                                          x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                                          class="inline-block w-full max-w-xl overflow-hidden transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl z-60 lg:mt-60">
 
-                                         <div class="items-center space-x-4 bloc pt-3">
+                                         <div class="items-center pt-3 space-x-4 bloc">
                                              <div class="flex flex-col justify-center">
-                                                 <h1 class="text-2xl pb-4 font-bold">Add a new tag</h1>
+                                                 <h1 class="pb-4 text-2xl font-bold">Add a new tag</h1>
                                                  <div>
                                                      <input type="text" name="tagname" id="tagname"
                                                          class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#55C5CF] focus:border-transparent"
@@ -86,13 +86,16 @@
      </div>
      <script>
          window.addEventListener("DOMContentLoaded", (event) => {
-             if (navigator.geolocation) {
+               if (navigator.geolocation) {
                  navigator.geolocation.getCurrentPosition(function(position) {
 
-                     document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
-                     document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
-                 });
-             };
+                         document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
+                         document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
+                     },
+                     function(e) {}, {
+                         enableHighAccuracy: true
+                     });
+             }
 
              $.ajaxSetup({
                  headers: {

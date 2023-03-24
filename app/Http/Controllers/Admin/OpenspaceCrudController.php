@@ -38,7 +38,7 @@ class OpenspaceCrudController extends CrudController
             'name' => 'image',
             'label' => 'Image',
             'type' => 'image',
-            'prefix' => 'storage/uploads/openspace/',
+            'prefix' => 'storage/',
             'height' => '80px',
             'width' => 'auto',
 

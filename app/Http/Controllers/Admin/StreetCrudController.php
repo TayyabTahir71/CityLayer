@@ -38,7 +38,7 @@ class StreetCrudController extends CrudController
             'name' => 'image',
             'label' => 'Image',
             'type' => 'image',
-            'prefix' => 'storage/uploads/street/',
+            'prefix' => 'storage/',
             'height' => '80px',
             'width' => 'auto',
 

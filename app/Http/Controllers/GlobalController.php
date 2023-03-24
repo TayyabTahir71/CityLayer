@@ -38,25 +38,33 @@ class GlobalController extends Controller
                 $tagstreet = Tag::where('Category', 'Street')->get();
                 $tagbuilding = Tag::where('Category', 'Building')->get();
                 $tagopenspace = Tag::where('Category', 'Openspace')->get();
-        
+
                 $all_data = array_merge(
                     $street->toArray(),
                     $building->toArray(),
                     $openspace->toArray()
                 );
 
-                return view('home', compact('infos', 'all_data', 'tagstreet', 'tagbuilding', 'tagopenspace'));
+                return view(
+                    'home',
+                    compact(
+                        'infos',
+                        'all_data',
+                        'tagstreet',
+                        'tagbuilding',
+                        'tagopenspace'
+                    )
+                );
             } else {
-            $infos = new Infosperso();
-            $infos->user_id = $userid;
-            $infos->save();
+                $infos = new Infosperso();
+                $infos->user_id = $userid;
+                $infos->save();
                 return view('profil');
             }
         } else {
             return view('login');
         }
     }
-
 
     public function like(Request $request)
     {
@@ -113,7 +121,7 @@ class GlobalController extends Controller
         }
     }
 
-   public function dislike(Request $request)
+    public function dislike(Request $request)
     {
         $userid = backpack_auth()->user()->id;
 
@@ -443,8 +451,6 @@ class GlobalController extends Controller
         }
     }
 
-
-
     public function profil()
     {
         return view('home');
@@ -484,13 +490,13 @@ class GlobalController extends Controller
                     'relation' => $request->relation,
                     'preferences' => $request->preferences,
                 ]);
-                return back();
+                return redirect('/profile');
             } else {
                 $infos = new Infosperso();
                 $infos->user_id = $userid;
                 $infos->age = $request->age;
                 if ($request->age != null) {
-                   $infos->score = $infos->score + 1;
+                    $infos->score = $infos->score + 1;
                 }
                 $infos->gender = $request->gender;
                 if ($request->gender != null) {
@@ -510,34 +516,36 @@ class GlobalController extends Controller
                 }
                 $infos->newuser = 0;
                 $infos->save();
-                return back();
+                return redirect('/profile');
             }
         } else {
             return redirect('/');
         }
     }
 
-
-    public function street(){
+    public function street()
+    {
         $tags = Tag::where('category', 'street')->get();
-
 
         return view('street_mapping', compact('tags'));
     }
 
-    public function building(){
+    public function building()
+    {
         $tags = Tag::where('category', 'building')->get();
 
         return view('building_mapping', compact('tags'));
     }
 
-    public function openspace(){
+    public function openspace()
+    {
         $tags = Tag::where('category', 'openspace')->get();
 
         return view('openspace_mapping', compact('tags'));
     }
 
-    public function newtag(Request $request){
+    public function newtag(Request $request)
+    {
         $tag = new Tag();
         $tag->name = $request->name;
         $tag->category = $request->category;
@@ -545,93 +553,139 @@ class GlobalController extends Controller
         return back();
     }
 
-    public function newopinion(Request $request){
+    public function newopinion(Request $request)
+    {
         $opinion = new Opinion();
         $opinion->name = $request->name;
         $opinion->save();
         return back();
     }
 
-
-    public function newplace(Request $request){
+    public function newplace(Request $request)
+    {
         $userid = backpack_auth()->user()->id;
-        if ($request->type == "Street"){
+        if ($request->type == 'Street') {
             $street = new Street();
             $street->name = $request->name;
             $street->user_id = $userid;
-            $street->type = "Street";
+            $street->type = 'Street';
             $street->latitude = $request->latitude;
             $street->longitude = $request->longitude;
+            //convert array tags to string
+            $tags = $request->tags;
+            $street->tags = implode(',', $tags);
             $street->save();
             //return the id after saving
             $streetid = $street->id;
-            return $streetid.'&type=street';
-        } elseif ($request->type == "Building"){
+            return $streetid . '&type=street';
+        } elseif ($request->type == 'Building') {
             $building = new Building();
             $building->name = $request->name;
             $building->user_id = $userid;
-            $building->type = "Building";
+            $building->type = 'Building';
             $building->latitude = $request->latitude;
             $building->longitude = $request->longitude;
+            $tags = $request->tags;
+            $building->tags = implode(',', $tags);
             $building->save();
             //return the id after saving
             $buildingid = $building->id;
-            return $buildingid.'&type=building';
-        } elseif ($request->type == "Openspace"){
+            return $buildingid . '&type=building';
+        } elseif ($request->type == 'Openspace') {
             $openspace = new Openspace();
             $openspace->name = $request->name;
             $openspace->user_id = $userid;
-            $openspace->type = "Openspace";
+            $openspace->type = 'Openspace';
             $openspace->latitude = $request->latitude;
             $openspace->longitude = $request->longitude;
+            $tags = $request->tags;
+            $openspace->tags = implode(',', $tags);
             $openspace->save();
             //return the id after saving
             $openspaceid = $openspace->id;
-            return $openspaceid.'&type=openspace';
-        }
-        else {
+            return $openspaceid . '&type=openspace';
+        } else {
             return 'error';
         }
     }
 
-    public function placestep2(Request $request){
-
+    public function opinions(Request $request)
+    {
         $userid = backpack_auth()->user()->id;
-        if ($request->type == "Street"){
-           
-        } elseif ($request->type == "Building"){
-        
-        } elseif ($request->type == "Openspace"){
-          
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            $opinions = $request->opinions;
+            $street->opinions = implode(',', $opinions);
+            $street->save();
+            return $request->placeid . '&type=street';
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            $opinions = $request->opinions;
+            $building->opinions = implode(',', $opinions);
+            $building->save();
+            return $request->placeid . '&type=building';
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            $opinions = $request->opinions;
+            $openspace->opinions = implode(',', $opinions);
+            $openspace->save();
+            return $request->placeid . '&type=openspace';
         }
     }
 
-    public function feeling(Request $request){
+    public function feeling(Request $request)
+    {
         $userid = backpack_auth()->user()->id;
         $placeid = $request->id;
+        if ($request->type == 'street') {
+            $street = Street::find($request->id);
+            $street->feeling = $request->feeling;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->id);
+            $building->feeling = $request->feeling;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->id);
+            $openspace->feeling = $request->feeling;
+            $openspace->save();
+        }
         return $placeid;
-        // if ($request->type == "Street"){
-        //     $street = Street::find($request->id);
-        //     $street->feeling = $request->feeling;
-        //     $street->save();
-        // } elseif ($request->type == "Building"){
-        //     $building = Building::find($request->id);
-        //     $building->feeling = $request->feeling;
-        //     $building->save();
-        // } elseif ($request->type == "Openspace"){
-        //     $openspace = Openspace::find($request->id);
-        //     $openspace->feeling = $request->feeling;
-        //     $openspace->save();
-        // }
     }
 
-
-
-      static function opinions(){
-
+    static function allopinions()
+    {
         $opinions = Opinion::all();
         return $opinions;
-      }
+    }
 
+    public function store(Request $request)
+    {
+        //dd($request->all());
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg',
+        ]);
 
+        $imageName = time() . '.' . $request->image->extension();
+
+        $request->image->storeAs(
+            'public/uploads/' . $request->type,
+            $imageName
+        );
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            $street->image = "/uploads/street/" .  $imageName;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            $building->image = "/uploads/building/" . $imageName;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            $openspace->image = "/uploads/openspace/" . $imageName;
+            $openspace->save();
+        }
+
+        return view('step5');
+    }
 }
