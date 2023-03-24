@@ -42,7 +42,7 @@
                         <a href="">
                             <div class="flex p-2 mb-2 bg-white border rounded shadow-md">
                                @php $img = $data['image'] ?? null; @endphp
-                                <img src="{{ asset($img) }}" alt="Just a flower" class="object-cover w-16 h-16 rounded" onerror="this.src='/img/empty.png'">
+                                <img src="{{ asset('storage' . $img) }}" alt="Just a flower" class="object-cover w-16 h-16 rounded" onerror="this.src='/img/empty.png'">
                                 <div class="flex flex-col justify-center w-full px-2 py-1">
 
                                     <div class="flex items-center justify-between ">
