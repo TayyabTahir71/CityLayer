@@ -34,7 +34,7 @@
                              </div>
                              <input id="range"
                                  class="w-80 block h-3 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg"
-                                 type="range" x-model="total_value" min="0" max="100" step="10">
+                                 type="range" x-model="total_value" min="0" max="100" step="5">
 
                         
                          </div>
