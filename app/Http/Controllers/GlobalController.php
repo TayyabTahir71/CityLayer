@@ -456,19 +456,6 @@ class GlobalController extends Controller
         return view('home');
     }
 
-    public function dashboard()
-    {
-        $userid = backpack_auth()->user()->id;
-        if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $score = $infos->score;
-        } else {
-            $score = 1;
-        }
-
-        return view('dashboard', compact('score'));
-    }
-
     public function profile()
     {
         $userid = backpack_auth()->user()->id;
@@ -715,6 +702,29 @@ class GlobalController extends Controller
       
         return back();
         
+    }
+
+    public function dashboard()
+    {
+        $userid = backpack_auth()->user()->id;
+        $street = Street::where('user_id', $userid)->get();
+        $building = Building::where('user_id', $userid)->get();
+        $openspace = Openspace::where('user_id', $userid)->get();
+        if (Infosperso::where('user_id', $userid)->exists()) {
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $score = $infos->score;
+        } else {
+            $score = 1;
+        }
+
+        $all_data = array_merge(
+            $street->toArray(),
+            $building->toArray(),
+            $openspace->toArray()
+        );
+
+        return view('dashboard', compact('all_data', 'score'));
+       
     }
 
 }
