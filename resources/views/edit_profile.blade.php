@@ -2,6 +2,9 @@
 
 @section('main')
     <div data-barba="container" class="relative h-screen">
+                 <div class="flex flex-row items-center pt-2">
+                 <a href="profile" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
+             </div>
         <form action="save_profile" class="flex flex-col items-center justify-center p-8 mx-auto" method="POST">
             {!! csrf_field() !!}
             <label for="dropzone-file" class="flex flex-col items-center justify-center w-2/3 mb-8">

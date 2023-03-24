@@ -687,5 +687,34 @@ class GlobalController extends Controller
         }
 
         return view('step5');
+        
     }
+
+    public function avatar(Request $request)
+    {
+        $userid = backpack_auth()->user()->id;
+        //dd($request->all());
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg',
+        ]);
+
+        $imageName = time() . '.' . $request->image->extension();
+
+        $request->image->storeAs(
+            'public/uploads/avatar/' , $imageName
+        );
+
+        $user = User::find($userid);
+
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+        
+        $user->avatar = $imageName;
+        $user->save();
+      
+        return back();
+        
+    }
+
 }

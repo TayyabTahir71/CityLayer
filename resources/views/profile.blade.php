@@ -5,11 +5,14 @@
          @include('parts.navbar')
          <div class="flex flex-col h-screen mx-auto">
              <div class="flex flex-col items-center pt-24 gap-x-6 lg:pt-32">
-                        <input type="file" name="image" id="image" class="hidden" accept="image/*">
+             <form action="avatar" method="POST" enctype="multipart/form-data">
+             @csrf
+                        <input type="file" name="image" id="image" class="hidden" accept="image/*" onchange="javascript:this.form.submit();">
                         <label for="image" class="cursor-pointer">
                             <img class="object-cover w-32 h-32 rounded-full ring ring-gray-300 dark:ring-gray-600" src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}"
                                 alt="">
                         </label>
+             </form>
              </div>
              <h1 class="pt-4 text-2xl text-center text-gray-800">{{ $name }}</h1>
              <h2 class="pt-2 text-2xl font-bold text-center text-yellow-300">{{ $infos->score }}</h2>
