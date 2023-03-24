@@ -490,7 +490,7 @@ class GlobalController extends Controller
                     'relation' => $request->relation,
                     'preferences' => $request->preferences,
                 ]);
-                return redirect('/profile');
+                return redirect('/');
             } else {
                 $infos = new Infosperso();
                 $infos->user_id = $userid;
@@ -516,7 +516,7 @@ class GlobalController extends Controller
                 }
                 $infos->newuser = 0;
                 $infos->save();
-                return redirect('/profile');
+                return redirect('/');
             }
         } else {
             return redirect('/');
