@@ -10,15 +10,15 @@
              <div class="flex flex-row items-center pt-2">
                  <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
              </div>
-             <form action="upload-image" method="POST" enctype="multipart/form-data">
+             <form action="" method="POST" enctype="multipart/form-data">
                  @csrf
                  <div class="flex flex-col items-center justify-center">
-                     <h1 class="pt-16 text-4xl font-bold text-center text-gray-900 mx-8">Let others know how comfortable the
+                     <h1 class="pt-4 text-4xl font-bold text-center text-gray-900 mx-8">Let others know how comfortable the
                          space is!
                      </h1>
-                     <div class="pt-4 pb-8">
-                         <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pt-16 pb-16">
-                             <input name="change" id="change" class="hidden" type="input" x-model="total_value" />
+                     <div class="pb-8">
+                         <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pt-4 pb-16">
+                             <input name="change" id="change" class="hidden" type="input" x-model="total_value"/>
                              <div class="flex justify-between">
                                  <label for="default-range"
                                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">uncomfortable</label>
@@ -26,22 +26,17 @@
                                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">very
                                      comfortable</label>
                              </div>
+                                <div class="w-full flex justify-between text-xs px-2">
+                                 <span>|</span>
+                                 <span>|</span>
+                                 <span>|</span>
+                              
+                             </div>
                              <input id="range"
-                                 class="w-96 block h-3 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg "
+                                 class="w-80 block h-3 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg "
                                  type="range" x-model="total_value" min="0" max="100" step="10">
 
-                             <div class="w-full flex justify-between text-xs px-2">
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                             </div>
+                          
                          </div>
                      </div>
                      <div class="relative flex items-center justify-center h-64 w-64">

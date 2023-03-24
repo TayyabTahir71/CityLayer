@@ -27,22 +27,16 @@
                                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">many
                                      things</label>
                              </div>
-                             <input id="range"
-                                 class="w-96 block h-3 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg "
-                                 type="range" x-model="total_value" min="0" max="100" step="10">
-
-                             <div class="w-full flex justify-between text-xs px-2">
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
-                                 <span>|</span>
+                                  <div class="w-full flex justify-between text-xs px-2">
                                  <span>|</span>
                                  <span>|</span>
                                  <span>|</span>
                              </div>
+                             <input id="range"
+                                 class="w-80 block h-3 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg"
+                                 type="range" x-model="total_value" min="0" max="100" step="10">
+
+                        
                          </div>
                      </div>
                      <div class="flex flex-col py-8 space-y-6 bg-[#CDB8EB] w-full">
