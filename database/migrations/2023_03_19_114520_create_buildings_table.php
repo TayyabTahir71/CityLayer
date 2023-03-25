@@ -25,6 +25,8 @@ return new class extends Migration
             $table->longText('opinions')->nullable();
             $table->string('type')->default('building');
             $table->string('feeling')->nullable();
+            $table->integer('change')->default(0)->nullable();
+            $table->integer('confort')->default(0)->nullable();
 
             $table->integer('rest')->default(0)->nullable();
             $table->longText('rest_text')->nullable();
@@ -60,7 +62,7 @@ return new class extends Migration
             $table->longText('polluants_text')->nullable();
             $table->integer('night')->default(0)->nullable();
             $table->longText('night_text')->nullable();
-            $table->text('hazards')->default(0)->nullable();
+            $table->text('hazards')->nullable();
             $table->integer('dangerous')->default(0)->nullable();
             $table->longText('dangerous_text')->nullable();
             $table->integer('protection_harm')->default(0)->nullable();

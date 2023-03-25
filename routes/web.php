@@ -40,7 +40,10 @@ Route::post('new_place', 'newplace')->name('newplace');
 Route::post('feeling', 'feeling')->name('feeling');
 Route::post('upload-image', 'store')->name('uploadimage');
 Route::post('avatar', 'avatar')->name('avatar');
-
+Route::post('confortlevel', 'confortlevel')->name('confortlevel');
+Route::post('enjoy', 'enjoy')->name('enjoy');
+Route::post('enjoyable', 'enjoyable')->name('enjoyable');
+Route::post('enjoydetail', 'enjoydetail')->name('enjoydetail');
 
 
 Route::get('step2', function () {

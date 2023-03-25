@@ -8,21 +8,19 @@
             <div class="flex flex-row items-center pt-2">
                 <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
             </div>
-            <form action="confortlevel" method="POST" enctype="multipart/form-data">
+            <form action="enjoyable" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
-                    <h1 class="pt-4 text-4xl font-bold text-center text-gray-900 mx-8">Let others know how comfortable the
-                        space is!
+                    <h1 class="pt-4 text-4xl font-bold text-center text-gray-900 mx-8">Let others know how enjoyable the space is!
                     </h1>
                     <div class="pb-8">
                         <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pt-4 pb-16">
                             <input name="level" id="level" class="hidden" type="input" x-model="total_value" />
                             <div class="flex justify-between">
                                 <label for="default-range"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">uncomfortable</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">unpleasant</label>
                                 <label for="default-range"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">very
-                                    comfortable</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">very pleasant</label>
                             </div>
                             <div class="w-full flex justify-between text-xs px-2">
                                 <span>|</span>
@@ -43,8 +41,7 @@
                         {{-- play exercices --}}
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
-                                class="rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold">play, exercise,
-                                activities</button>
+                                class="rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold">talking & listening</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -69,7 +66,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Play, exercise, activities</h1>
+                                                <h1 class="py-4 text-3xl font-bold">Talking & listening</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="activities" id="activities" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -85,11 +82,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">no
-                                                            activities!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">very difficult</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">many
-                                                            great,<br> activities!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">simple & effortless</label>
                                                     </div>
 
                                                 </div>
@@ -110,7 +105,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="bottom: 100%; right: 50%; transform: translate(50%, 50%)">place to rest</button>
+                                style="bottom: 100%; right: 50%; transform: translate(50%, 50%)">seasonality</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -136,7 +131,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Place to rest</h1>
+                                                <h1 class="py-4 text-3xl font-bold">Seasonality</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="rest" id="rest" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -152,11 +147,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">no
-                                                            benches<br> or other!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">poor in some seasons</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">great
-                                                            places<br> to rest!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">great year round</label>
                                                     </div>
 
                                                 </div>
@@ -177,8 +170,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 25%; right: 0; transform: translate(50%, -50%)">walk, roll & <br>bike
-                                comfort</button>
+                                style="top: 25%; right: 0; transform: translate(50%, -50%)">plants & trees</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -204,7 +196,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Walk, roll, bike comfort</h1>
+                                                <h1 class="py-4 text-3xl font-bold">Plants & trees</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="movement" id="movement" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -220,11 +212,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">difficult<br>
-                                                            movement</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">none</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">simple,
-                                                            intuitive<br> movement</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">many</label>
                                                     </div>
 
                                                 </div>
@@ -245,8 +235,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 75%; right: 0; transform: translate(50%, -50%)">visibility &
-                                orientation</button>
+                                style="top: 75%; right: 0; transform: translate(50%, -50%)">sunlight</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -272,7 +261,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">visibility & orientation</h1>
+                                                <h1 class="py-4 text-3xl font-bold">Sunlight</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="orientation" id="orientation" class="hidden"
                                                         type="input" x-model="total_value" />
@@ -288,11 +277,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">poor,
-                                                            difficult!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">no direct sunlight</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">great,
-                                                            intuitive!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">a lot of sunlight</label>
                                                     </div>
 
                                                 </div>
@@ -314,8 +301,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="bottom: 0; left: 50%; transform: translate(-50%, 50%)">rain & wind
-                                protection</button>
+                                style="bottom: 0; left: 50%; transform: translate(-50%, 50%)">shade</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -341,7 +327,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Rain & wind protection</h1>
+                                                <h1 class="py-4 text-3xl font-bold">Shade</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="weather" id="weather" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -357,9 +343,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">poor!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">none</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">great</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">plenty shade</label>
                                                     </div>
 
                                                 </div>
@@ -380,7 +366,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 75%; left: 0; transform: translate(-50%, -50%)">facilities</button>
+                                style="top: 75%; left: 0; transform: translate(-50%, -50%)">interesting<br>sights</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -406,7 +392,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Facilities</h1>
+                                                <h1 class="py-4 text-3xl font-bold">Interesting<br>sights</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="facilities" id="facilities" class="hidden"
                                                         type="input" x-model="total_value" />
@@ -448,7 +434,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 25%; left: 0; transform: translate(-50%, -50%)">noise</button>
+                                style="top: 25%; left: 0; transform: translate(-50%, -50%)">beauty</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -474,7 +460,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Noise</h1>
+                                                <h1 class="py-4 text-3xl font-bold">Beauty</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="noise" id="noise" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -490,11 +476,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">quiet
-                                                            and<br> comfortable!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ugly</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">loud
-                                                            and<br> iritating!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">beautiful</label>
                                                     </div>
 
                                                 </div>
@@ -526,7 +510,7 @@
 
         function newAction(action) {
             console.log(action);
-            url = "/enjoy"
+            url = "/enjoydetail"
             var thisaction;
             switch (action) {
                 case 'activities':

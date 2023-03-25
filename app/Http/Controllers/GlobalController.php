@@ -646,37 +646,6 @@ class GlobalController extends Controller
         return $opinions;
     }
 
-    public function store(Request $request)
-    {
-        //dd($request->all());
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg',
-        ]);
-
-        $imageName = time() . '.' . $request->image->extension();
-
-        $request->image->storeAs(
-            'public/uploads/' . $request->type,
-            $imageName
-        );
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            $street->image = "/uploads/street/" .  $imageName;
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            $building->image = "/uploads/building/" . $imageName;
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            $openspace->image = "/uploads/openspace/" . $imageName;
-            $openspace->save();
-        }
-
-        return view('step5');
-        
-    }
-
     public function avatar(Request $request)
     {
         $userid = backpack_auth()->user()->id;
@@ -687,21 +656,18 @@ class GlobalController extends Controller
 
         $imageName = time() . '.' . $request->image->extension();
 
-        $request->image->storeAs(
-            'public/uploads/avatar/' , $imageName
-        );
+        $request->image->storeAs('public/uploads/avatar/', $imageName);
 
         $user = User::find($userid);
 
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
-        
+        $infos = Infosperso::where('user_id', $userid)->first();
+        $infos->score = $infos->score + 1;
+        $infos->save();
+
         $user->avatar = $imageName;
         $user->save();
-      
+
         return back();
-        
     }
 
     public function dashboard()
@@ -724,7 +690,195 @@ class GlobalController extends Controller
         );
 
         return view('dashboard', compact('all_data', 'score'));
-       
     }
 
+    public function store(Request $request)
+    {
+        //dd($request->all());
+
+        if ($request->image != null) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->storeAs(
+                'public/uploads/' . $request->type,
+                $imageName
+            );
+        } else {
+            $imageName = 'null';
+        }
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            $street->image = '/uploads/street/' . $imageName;
+            $street->change = $request->change;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            $building->image = '/uploads/building/' . $imageName;
+            $building->change = $request->change;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            $openspace->image = '/uploads/openspace/' . $imageName;
+            $openspace->change = $request->change;
+            $openspace->save();
+        }
+
+        $placeid = $request->placeid;
+        $type = $request->type;
+
+        return view('step5', compact('placeid', 'type'));
+    }
+
+    public function confortlevel(Request $request)
+    {
+        $userid = backpack_auth()->user()->id;
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            $street->confort = $request->level;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            $building->confort = $request->level;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            $openspace->confort = $request->level;
+            $openspace->save();
+        }
+
+        $placeid = $request->placeid;
+        $type = $request->type;
+
+        return view('step6', compact('placeid', 'type'));
+    }
+
+    public function enjoy(Request $request)
+    {
+       // dd($request->all());
+        $userid = backpack_auth()->user()->id;
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            if ($request->action == 'rest') {
+                $street->rest = $request->value;
+                $street->rest_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'movement') {
+                $street->movement = $request->value;
+                $street->movement_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'activities') {
+                $street->activities = $request->value;
+                $street->activities_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'orientation') {
+                $street->orientation = $request->value;
+                $street->orientation_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'weather') {
+                $street->weather = $request->value;
+                $street->weather_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'facilities') {
+                $street->facilities = $request->value;
+                $street->facilities_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'noise') {
+                $street->noise = $request->value;
+                $street->noise_text = $request->text;
+                $street->save();
+            }
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            if ($request->action == 'rest') {
+                $building->rest = $request->value;
+                $building->rest_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'movement') {
+                $building->movement = $request->value;
+                $building->movement_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'activities') {
+                $building->activities = $request->value;
+                $building->activities_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'orientation') {
+                $building->orientation = $request->value;
+                $building->orientation_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'weather') {
+                $building->weather = $request->value;
+                $building->weather_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'facilities') {
+                $building->facilities = $request->value;
+                $building->facilities_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'noise') {
+                $building->noise = $request->value;
+                $building->noise_text = $request->text;
+                $building->save();
+            }
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            if ($request->action == 'rest') {
+                $openspace->rest = $request->value;
+                $openspace->rest_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'movement') {
+                $openspace->movement = $request->value;
+                $openspace->movement_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'activities') {
+                $openspace->activities = $request->value;
+                $openspace->activities_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'orientation') {
+                $openspace->orientation = $request->value;
+                $openspace->orientation_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'weather') {
+                $openspace->weather = $request->value;
+                $openspace->weather_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'noise') {
+                $openspace->noise = $request->value;
+                $openspace->noise_text = $request->text;
+                $openspace->save();
+            }
+        }
+
+        return 'ok';
+    }
+
+    public function enjoyable(Request $request){
+        $placeid = $request->placeid;
+        $type = $request->type;
+
+        return view('step7', compact('placeid', 'type'));
+    }
+
+    public function enjoydetail(Request $request){
+        $placeid = $request->placeid;
+        $type = $request->type;
+
+
+
+    }
 }
