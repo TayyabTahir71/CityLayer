@@ -58,6 +58,7 @@ class GlobalController extends Controller
             } else {
                 $infos = new Infosperso();
                 $infos->user_id = $userid;
+                $infos->score = 0;
                 $infos->save();
                 return view('profil');
             }
@@ -467,9 +468,9 @@ class GlobalController extends Controller
 
     public function saveprofile(Request $request)
     {
-        if (backpack_auth()->check()) {
             $userid = backpack_auth()->user()->id;
-            if (Infosperso::where('user_id', $userid)->exists()) {
+            $info = Infosperso::where('user_id', $userid)->first();
+            if ($info->score > 0) {
                 Infosperso::where('user_id', $userid)->update([
                     'age' => $request->age,
                     'gender' => $request->gender,
@@ -479,7 +480,7 @@ class GlobalController extends Controller
                 ]);
                 return redirect('/');
             } else {
-                $infos = new Infosperso();
+                $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->user_id = $userid;
                 $infos->age = $request->age;
                 if ($request->age != null) {
@@ -505,9 +506,6 @@ class GlobalController extends Controller
                 $infos->save();
                 return redirect('/');
             }
-        } else {
-            return redirect('/');
-        }
     }
 
     public function street()
