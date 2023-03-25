@@ -8,7 +8,7 @@
             <div class="flex flex-row items-center pt-2">
                 <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
             </div>
-            <form action="enjoyable" method="POST" enctype="multipart/form-data">
+            <form  enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
                     <h1 class="pt-4 text-4xl font-bold text-center text-gray-900 mx-8">Let others know how protected the space is!
