@@ -72,6 +72,19 @@ return new class extends Migration
             $table->integer('protection_harm')->default(0)->nullable();
             $table->longText('protection_harm_text')->nullable();
 
+            $table->integer('spaceusage')->nullable();
+            $table->text('time_spending')->nullable();
+            $table->integer('spend_time')->default(0)->nullable();
+            $table->longText('spend_time_text')->nullable();
+            $table->integer('meeting')->default(0)->nullable();
+            $table->longText('meeting_text')->nullable();
+            $table->integer('events')->default(0)->nullable();
+            $table->longText('events_text')->nullable();
+            $table->integer('multifunctional')->default(0)->nullable();
+            $table->longText('multifunctional_text')->nullable();
+
+            $table->longText('usagedetail')->nullable();
+
             $table->integer('likes')->default(0);
             $table->integer('dislikes')->default(0);
             $table->integer('stars')->default(0);
@@ -79,7 +92,6 @@ return new class extends Migration
             $table->integer('weird')->default(0);
             $table->integer('ohh')->default(0);
             $table->integer('wtf')->default(0);
-            $table->timestamps();
         });
     }
 

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Tag;
 use App\Models\Opinion;
+use App\Models\Space_tag;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -324,10 +325,69 @@ class GlobalSeeder extends Seeder
                 ] );
                 
                 
-                            
-                Opinion::create( [
-                'id'=>19,
-                'name'=>'test'
-                ] );
+                     Space_tag::create( [
+                    'id'=>3,
+                    'name'=>'residents'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>4,
+                    'name'=>'workers'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>5,
+                    'name'=>'tourists'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>6,
+                    'name'=>'pet owners'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>7,
+                    'name'=>'parent(s) with children'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>8,
+                    'name'=>'children'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>9,
+                    'name'=>'students'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>10,
+                    'name'=>'LGBTQ+ group'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>11,
+                    'name'=>'athletes'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>12,
+                    'name'=>'teenagers'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>13,
+                    'name'=>'elderly'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>14,
+                    'name'=>'homeless'
+                    ] );
+                                
+                    Space_tag::create( [
+                    'id'=>15,
+                    'name'=>'nobody'
+                    ] );
     }
 }

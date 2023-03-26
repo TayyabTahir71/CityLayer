@@ -170,12 +170,13 @@
             placeid = place.id;
             placetype = place.type;
             placename = place.name;
+            pics = place.image;
             placelatitude = place.latitude;
             placelongitude = place.longitude;
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
             }).addTo(mymap0).bindPopup(
-                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="">React to this place to earn points!</p><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="">React to this place to earn points!</p><img class="pb-4"  src="/storage/' + pics +'" onerror="/img/empty.png"/></img><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
                 '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +

@@ -46,6 +46,12 @@ Route::post('enjoyable', 'enjoyable')->name('enjoyable');
 Route::post('enjoydetail', 'enjoydetail')->name('enjoydetail');
 Route::post('protected', 'protected')->name('protected');
 Route::post('protectedetail', 'protectedetail')->name('protectedetail');
+Route::post('timespending', 'timespending')->name('timespending');
+Route::post('timespendingdetail', 'timespendingdetail')->name('timespendingdetail');
+Route::post('spaceusage', 'spaceusage')->name('spaceusage');
+
+Route::post('spaceusagedetail', 'spaceusagedetail')->name('spaceusagedetail');
+Route::post('newspacetag', 'newspacetag')->name('newspacetag');
 
 
 Route::get('step2', function () {
@@ -56,6 +62,8 @@ Route::get('step3', function () {return view('step3');});
 Route::get('step4', function () {return view('step4');});
 Route::get('step5', function () {return view('step5');});
 Route::get('step8', function () {return view('step8');});
+Route::get('step9', function () {return view('step9');});
+Route::get('step10', function () {return view('step10');});
 Route::get('logout', 'logout');
 
 

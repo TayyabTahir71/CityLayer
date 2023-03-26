@@ -9,6 +9,7 @@ use App\Models\Building;
 use App\Models\Openspace;
 use App\Models\Opinion;
 use App\Models\Tag;
+use App\Models\Space_tag;
 use App\Models\Stat;
 use Carbon\Carbon;
 use Pestopancake\LaravelBackpackNotifications\Notifications\DatabaseNotification;
@@ -1139,4 +1140,191 @@ class GlobalController extends Controller
 
         return 'ok';
     }
+
+
+    public function timespending(Request $request)
+    {
+
+       
+        $placeid = $request->placeid;
+        $type = $request->type;
+        $userid = backpack_auth()->user()->id;
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            $street->time_spending = $request->step8;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            $building->time_spending = $request->step8;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            $openspace->time_spending = $request->step8;
+            $openspace->save();
+        }
+
+        $placeid = $request->placeid;
+        $type = $request->type;
+
+        return view('step9', compact('placeid', 'type'));
+    }
+
+    public function timespendingdetail(Request $request)
+    {
+        $placeid = $request->placeid;
+        $type = $request->type;
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            if ($request->action == 'spend_time') {
+                $street->spend_time = $request->value;
+                $street->spend_time_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'meeting') {
+                $street->meeting = $request->value;
+                $street->meeting_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'events') {
+                $street->events = $request->value;
+                $street->events_text = $request->text;
+                $street->save();
+            }
+
+            if ($request->action == 'multifunctional') {
+                $street->multifunctional = $request->value;
+                $street->multifunctional_text = $request->text;
+                $street->save();
+            }
+         
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            if ($request->action == 'spend_time') {
+                $building->spend_time = $request->value;
+                $building->spend_time_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'meeting') {
+                $building->meeting = $request->value;
+                $building->meeting_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'events') {
+                $building->events = $request->value;
+                $building->events_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'multifunctional') {
+                $building->multifunctional = $request->value;
+                $building->multifunctional_text = $request->text;
+                $building->save();
+            }
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            if ($request->action == 'spend_time') {
+                $openspace->spend_time = $request->value;
+                $openspace->spend_time_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'meeting') {
+                $openspace->meeting = $request->value;
+                $openspace->meeting_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'events') {
+                $openspace->events = $request->value;
+                $openspace->events_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'multifunctional') {
+                $openspace->multifunctional = $request->value;
+                $openspace->multifunctional_text = $request->text;
+                $openspace->save();
+            }
+        }
+           
+        return 'ok';
+        // return view('step10', compact('placeid', 'type'));
+    }
+
+
+    public function spaceusage(Request $request)
+    {
+
+       
+        $placeid = $request->placeid;
+        $type = $request->type;
+        $userid = backpack_auth()->user()->id;
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            $street->spaceusage = $request->know_space;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            $building->spaceusage = $request->know_space;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            $openspace->spaceusage = $request->know_space;
+            $openspace->save();
+        }
+
+        $placeid = $request->placeid;
+        $type = $request->type;
+
+        return view('step10', compact('placeid', 'type'));
+    }
+
+
+
+    public function spaceusagedetail(Request $request)
+    {
+
+        $userid = backpack_auth()->user()->id;
+        $infos = Infosperso::where('user_id', $userid)->first();
+ 
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            $spacetag = $request->spacetag;
+            $street->usagedetail = implode(',', $spacetag);
+            $street->save();
+           
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            $spacetag = $request->spacetag;
+            $building->usagedetail = implode(',', $spacetag);
+            $building->save();
+           
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            $spacetag = $request->spacetag;
+            $openspace->usagedetail = implode(',', $spacetag);
+            $openspace->save();
+           
+        }
+
+       return "ok";
+    }
+
+    
+
+    static function allspacetag()
+    {
+        $spacetags = Space_tag::all();
+        return $spacetags;
+    }
+
+
+    public function newspacetag(Request $request)
+    {
+        $spacetag = new Space_tag();
+        $spacetag->name = $request->name;
+        $spacetag->save();
+        return 'ok';
+    }
+
+
 }

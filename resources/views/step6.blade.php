@@ -570,7 +570,6 @@
 
 
                 success: function(data) {
-                 alert(data);
                 var myElement = document.querySelector(".myclass");
                 var myElement1 = document.querySelector(".myclass1");
                 var myElement2 = document.querySelector(".myclass2");
