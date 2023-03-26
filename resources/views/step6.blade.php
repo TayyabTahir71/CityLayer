@@ -15,7 +15,7 @@
                     </h1>
                     <div class="pb-8">
                         <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pt-4 pb-16">
-                            <input name="level" id="level" class="hidden" type="input" x-model="total_value" />
+                            <input name="enjoyable" id="enjoyable" class="hidden" type="input" x-model="total_value" />
                             <div class="flex justify-between">
                                 <label for="default-range"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">unpleasant</label>
@@ -68,7 +68,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Talking & listening</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="activities" id="activities" class="hidden" type="input"
+                                                    <input name="talking" id="talking" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
@@ -89,11 +89,11 @@
 
                                                 </div>
                                                 <div>
-                                                    <p type="text" name="activities_text" id="activities_text"
+                                                    <p type="text" name="talking_text" id="talking_text"
                                                         class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent mx-auto">
                                                         Show us!</p>
                                                 </div>
-                                                <button type="button" id="activitiesbtn" onclick="newAction('activities')"
+                                                <button type="button" id="activitiesbtn" onclick="newAction('talking')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -133,7 +133,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Seasonality</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="rest" id="rest" class="hidden" type="input"
+                                                    <input name="seasonality" id="seasonality" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
@@ -154,11 +154,11 @@
 
                                                 </div>
                                                 <div>
-                                                    <input type="text" name="rest_text" id="rest_text"
+                                                    <input type="text" name="seasonality_text" id="seasonality_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="Tell us more!">
                                                 </div>
-                                                <button type="button" id="restbtn" onclick="newAction('rest')"
+                                                <button type="button" id="restbtn" onclick="newAction('seasonality')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -198,7 +198,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Plants & trees</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="movement" id="movement" class="hidden" type="input"
+                                                    <input name="plants" id="plants" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
@@ -219,11 +219,11 @@
 
                                                 </div>
                                                 <div>
-                                                    <input type="text" name="movement_text" id="movement_text"
+                                                    <input type="text" name="plants_text" id="plants_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="Tell us more!">
                                                 </div>
-                                                <button type="button" id="movementbtn" onclick="newAction('movement')"
+                                                <button type="button" id="movementbtn" onclick="newAction('plants')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -263,7 +263,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Sunlight</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="orientation" id="orientation" class="hidden"
+                                                    <input name="sunlight" id="sunlight" class="hidden"
                                                         type="input" x-model="total_value" />
 
                                                     <input id="range2"
@@ -284,12 +284,12 @@
 
                                                 </div>
                                                 <div>
-                                                    <input type="text" name="orientation_text" id="orientation_text"
+                                                    <input type="text" name="sunlight_text" id="sunlight_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="Tell us more!">
                                                 </div>
                                                 <button type="button" id="orientationbtn"
-                                                    onclick="newAction('orientation')"
+                                                    onclick="newAction('sunlight')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -329,7 +329,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Shade</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="weather" id="weather" class="hidden" type="input"
+                                                    <input name="shade" id="shade" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
@@ -350,11 +350,11 @@
 
                                                 </div>
                                                 <div>
-                                                    <input type="text" name="weather_text" id="weather_text"
+                                                    <input type="text" name="shade_text" id="shade_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="Describe!">
                                                 </div>
-                                                <button type="button" id="weatherbtn" onclick="newAction('weather')"
+                                                <button type="button" id="weatherbtn" onclick="newAction('shade')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -394,7 +394,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Interesting<br>sights</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="facilities" id="facilities" class="hidden"
+                                                    <input name="interesting" id="interesting" class="hidden"
                                                         type="input" x-model="total_value" />
 
                                                     <input id="range2"
@@ -417,12 +417,12 @@
 
                                                 </div>
                                                 <div>
-                                                    <input type="text" name="facilities_text" id="facilities_text"
+                                                    <input type="text" name="interesting_text" id="interesting_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="Tell us more!">
                                                 </div>
                                                 <button type="button" id="facilitiesbtn"
-                                                    onclick="newAction('facilities')"
+                                                    onclick="newAction('interesting')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -462,7 +462,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Beauty</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="noise" id="noise" class="hidden" type="input"
+                                                    <input name="beauty" id="beauty" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
@@ -483,10 +483,10 @@
 
                                                 </div>
                                                 <div>
-                                                    <button type="button" name="noise_text" id="noise_text"
+                                                    <button type="button" name="beauty_text" id="beauty_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent">Record!</button>
                                                 </div>
-                                                <button type="button" id="noisebtn" onclick="newAction('noise')"
+                                                <button type="button" id="noisebtn" onclick="newAction('beauty')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -513,40 +513,40 @@
             url = "/enjoydetail"
             var thisaction;
             switch (action) {
-                case 'activities':
-                    thisaction = "activities";
-                    thisvalue = document.getElementById('activities').value;
-                    thistext = document.getElementById('activities_text').value;
+                case 'talking':
+                    thisaction = "talking";
+                    thisvalue = document.getElementById('talking').value;
+                    thistext = document.getElementById('talking_text').value;
                     break;
-                case 'rest':
-                    thisaction = "rest";
-                    thisvalue = document.getElementById('rest').value;
-                    thistext = document.getElementById('rest_text').value;
+                case 'seasonality':
+                    thisaction = "seasonality";
+                    thisvalue = document.getElementById('seasonality').value;
+                    thistext = document.getElementById('seasonality_text').value;
                     break;
-                case 'movement':
-                    thisaction = "movement";
-                    thisvalue = document.getElementById('movement').value;
-                    thistext = document.getElementById('movement_text').value;
+                case 'plants':
+                    thisaction = "plants";
+                    thisvalue = document.getElementById('plants').value;
+                    thistext = document.getElementById('plants_text').value;
                     break;
-                case 'orientation':
-                    thisaction = "orientation";
-                    thisvalue = document.getElementById('orientation').value;
-                    thistext = document.getElementById('orientation_text').value;
+                case 'sunlight':
+                    thisaction = "sunlight";
+                    thisvalue = document.getElementById('sunlight').value;
+                    thistext = document.getElementById('sunlight_text').value;
                     break;
-                case 'weather':
-                    thisaction = "weather";
-                    thisvalue = document.getElementById('weather').value;
-                    thistext = document.getElementById('weather_text').value;
+                case 'shade':
+                    thisaction = "shade";
+                    thisvalue = document.getElementById('shade').value;
+                    thistext = document.getElementById('shade_text').value;
                     break;
-                case 'facilities':
-                    thisaction = "facilities";
-                    thisvalue = document.getElementById('facilities').value;
-                    thistext = document.getElementById('facilities_text').value;
+                case 'interesting':
+                    thisaction = "interesting";
+                    thisvalue = document.getElementById('interesting').value;
+                    thistext = document.getElementById('interesting_text').value;
                     break;
-                case 'noise':
-                    thisaction = "noise";
-                    thisvalue = document.getElementById('noise').value;
-                    thistext = document.getElementById('noise_text').value;
+                case 'beauty':
+                    thisaction = "beauty";
+                    thisvalue = document.getElementById('beauty').value;
+                    thistext = document.getElementById('beauty_text').value;
                     break;
             }
 
@@ -570,6 +570,7 @@
 
 
                 success: function(data) {
+                 alert(data);
                 var myElement = document.querySelector(".myclass");
                 var myElement1 = document.querySelector(".myclass1");
                 var myElement2 = document.querySelector(".myclass2");

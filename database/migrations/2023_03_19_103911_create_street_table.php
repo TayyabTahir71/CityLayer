@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('feeling')->nullable();
             $table->integer('change')->default(0)->nullable();
             $table->integer('confort')->default(0)->nullable();
+            $table->integer('enjoyable')->default(0)->nullable();
+            $table->integer('protected')->default(0)->nullable();
 
             $table->integer('rest')->default(0)->nullable();
             $table->longText('rest_text')->nullable();
@@ -57,6 +59,7 @@ return new class extends Migration
             $table->longText('shade_text')->nullable();
             $table->integer('interesting')->default(0)->nullable();
             $table->longText('interesting_text')->nullable();
+
             $table->integer('protection')->default(0)->nullable();
             $table->longText('protection_text')->nullable();
             $table->integer('polluants')->default(0)->nullable();

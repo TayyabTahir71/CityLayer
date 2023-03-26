@@ -44,6 +44,8 @@ Route::post('confortlevel', 'confortlevel')->name('confortlevel');
 Route::post('enjoy', 'enjoy')->name('enjoy');
 Route::post('enjoyable', 'enjoyable')->name('enjoyable');
 Route::post('enjoydetail', 'enjoydetail')->name('enjoydetail');
+Route::post('protected', 'protected')->name('protected');
+Route::post('protectedetail', 'protectedetail')->name('protectedetail');
 
 
 Route::get('step2', function () {
@@ -53,6 +55,7 @@ Route::get('step2', function () {
 Route::get('step3', function () {return view('step3');});
 Route::get('step4', function () {return view('step4');});
 Route::get('step5', function () {return view('step5');});
+Route::get('step8', function () {return view('step8');});
 Route::get('logout', 'logout');
 
 

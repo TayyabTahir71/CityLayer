@@ -8,14 +8,14 @@
             <div class="flex flex-row items-center pt-2">
                 <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
             </div>
-            <form  enctype="multipart/form-data">
+            <form action="protected" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
                     <h1 class="pt-4 text-4xl font-bold text-center text-gray-900 mx-8">Let others know how protected the space is!
                     </h1>
                     <div class="pb-8">
                         <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pt-4 pb-16">
-                            <input name="level" id="level" class="hidden" type="input" x-model="total_value" />
+                            <input name="protected" id="protected" class="hidden" type="input" x-model="total_value" />
                             <div class="flex justify-between">
                                 <label for="default-range"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">very unsafe</label>
@@ -69,7 +69,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Protection from traffic</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="activities" id="activities" class="hidden" type="input"
+                                                    <input name="protection" id="protection" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
@@ -90,11 +90,11 @@
 
                                                 </div>
                                                 <div>
-                                                    <p type="text" name="activities_text" id="activities_text"
+                                                    <p type="text" name="protection_text" id="protection_text"
                                                         class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent mx-auto">
                                                         Show us!</p>
                                                 </div>
-                                                <button type="button" id="activitiesbtn" onclick="newAction('activities')"
+                                                <button type="button" id="activitiesbtn" onclick="newAction('protection')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -134,7 +134,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Pollutants</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="rest" id="rest" class="hidden" type="input"
+                                                    <input name="polluants" id="polluants" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
@@ -155,11 +155,11 @@
 
                                                 </div>
                                                 <div>
-                                                    <input type="text" name="rest_text" id="rest_text"
+                                                    <input type="text" name="polluants_text" id="polluants_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="Tell us more!">
                                                 </div>
-                                                <button type="button" id="restbtn" onclick="newAction('rest')"
+                                                <button type="button" id="restbtn" onclick="newAction('polluants')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -199,7 +199,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Night lighting</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="movement" id="movement" class="hidden" type="input"
+                                                    <input name="night" id="night" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
@@ -220,11 +220,11 @@
 
                                                 </div>
                                                 <div>
-                                                    <input type="text" name="movement_text" id="movement_text"
+                                                    <input type="text" name="night_text" id="night_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="Tell us more!">
                                                 </div>
-                                                <button type="button" id="movementbtn" onclick="newAction('movement')"
+                                                <button type="button" id="movementbtn" onclick="newAction('night')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -264,12 +264,12 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold mx-2">Let others know about other hazards!</h1>
                                                 <div>
-                                                    <input type="text" name="orientation_text" id="orientation_text"
+                                                    <input type="text" name="hazards_text" id="hazards_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="Tell us more!">
                                                 </div>
                                                 <button type="button" id="orientationbtn"
-                                                    onclick="newAction('orientation')"
+                                                    onclick="newAction('hazards')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -309,7 +309,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Dangerous objects</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="weather" id="weather" class="hidden" type="input"
+                                                    <input name="dangerous" id="dangerous" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
@@ -330,11 +330,11 @@
 
                                                 </div>
                                                 <div>
-                                                    <input type="text" name="weather_text" id="weather_text"
+                                                    <input type="text" name="dangerous_text" id="dangerous_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="Describe!">
                                                 </div>
-                                                <button type="button" id="weatherbtn" onclick="newAction('weather')"
+                                                <button type="button" id="weatherbtn" onclick="newAction('dangerous')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -374,7 +374,7 @@
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">Protection from harm</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="facilities" id="facilities" class="hidden"
+                                                    <input name="protection_harm" id="protection_harm" class="hidden"
                                                         type="input" x-model="total_value" />
 
                                                     <input id="range2"
@@ -395,12 +395,12 @@
 
                                                 </div>
                                                 <div>
-                                                    <input type="text" name="facilities_text" id="facilities_text"
+                                                    <input type="text" name="protection_harm_text" id="protection_harm_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="Describe!">
                                                 </div>
                                                 <button type="button" id="facilitiesbtn"
-                                                    onclick="newAction('facilities')"
+                                                    onclick="newAction('protection_harm')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>
                                         </div>
@@ -425,38 +425,38 @@
 
         function newAction(action) {
             console.log(action);
-            url = "/enjoy"
+            url = "/protectedetail"
             var thisaction;
             switch (action) {
-                case 'activities':
-                    thisaction = "activities";
-                    thisvalue = document.getElementById('activities').value;
-                    thistext = document.getElementById('activities_text').value;
+                case 'protection':
+                    thisaction = "protection";
+                    thisvalue = document.getElementById('protection').value;
+                    thistext = document.getElementById('protection_text').value;
                     break;
-                case 'rest':
-                    thisaction = "rest";
-                    thisvalue = document.getElementById('rest').value;
-                    thistext = document.getElementById('rest_text').value;
+                case 'polluants':
+                    thisaction = "polluants";
+                    thisvalue = document.getElementById('polluants').value;
+                    thistext = document.getElementById('polluants_text').value;
                     break;
-                case 'movement':
-                    thisaction = "movement";
-                    thisvalue = document.getElementById('movement').value;
-                    thistext = document.getElementById('movement_text').value;
+                case 'night':
+                    thisaction = "night";
+                    thisvalue = document.getElementById('night').value;
+                    thistext = document.getElementById('night_text').value;
                     break;
-                case 'orientation':
-                    thisaction = "orientation";
-                    thisvalue = document.getElementById('orientation').value;
-                    thistext = document.getElementById('orientation_text').value;
+                case 'hazards':
+                    thisaction = "hazards";
+                    thisvalue = "null";
+                    thistext = document.getElementById('hazards_text').value;
                     break;
-                case 'weather':
-                    thisaction = "weather";
-                    thisvalue = document.getElementById('weather').value;
-                    thistext = document.getElementById('weather_text').value;
+                case 'dangerous':
+                    thisaction = "dangerous";
+                    thisvalue = document.getElementById('dangerous').value;
+                    thistext = document.getElementById('dangerous_text').value;
                     break;
-                case 'facilities':
-                    thisaction = "facilities";
-                    thisvalue = document.getElementById('facilities').value;
-                    thistext = document.getElementById('facilities_text').value;
+                case 'protection_harm':
+                    thisaction = "protection_harm";
+                    thisvalue = document.getElementById('protection_harm').value;
+                    thistext = document.getElementById('protection_harm_text').value;
                     break;
             }
 

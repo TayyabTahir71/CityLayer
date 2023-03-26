@@ -468,44 +468,44 @@ class GlobalController extends Controller
 
     public function saveprofile(Request $request)
     {
-            $userid = backpack_auth()->user()->id;
-            $info = Infosperso::where('user_id', $userid)->first();
-            if ($info->score > 0) {
-                Infosperso::where('user_id', $userid)->update([
-                    'age' => $request->age,
-                    'gender' => $request->gender,
-                    'profession' => $request->profession,
-                    'relation' => $request->relation,
-                    'preferences' => $request->preferences,
-                ]);
-                return redirect('/');
-            } else {
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->user_id = $userid;
-                $infos->age = $request->age;
-                if ($request->age != null) {
-                    $infos->score = $infos->score + 1;
-                }
-                $infos->gender = $request->gender;
-                if ($request->gender != null) {
-                    $infos->score = $infos->score + 1;
-                }
-                $infos->profession = $request->profession;
-                if ($request->profession != null) {
-                    $infos->score = $infos->score + 1;
-                }
-                $infos->relation = $request->relation;
-                if ($request->relation != null) {
-                    $infos->score = $infos->score + 1;
-                }
-                $infos->preferences = $request->preferences;
-                if ($request->preferences != null) {
-                    $infos->score = $infos->score + 2;
-                }
-                $infos->newuser = 0;
-                $infos->save();
-                return redirect('/');
+        $userid = backpack_auth()->user()->id;
+        $info = Infosperso::where('user_id', $userid)->first();
+        if ($info->score > 0) {
+            Infosperso::where('user_id', $userid)->update([
+                'age' => $request->age,
+                'gender' => $request->gender,
+                'profession' => $request->profession,
+                'relation' => $request->relation,
+                'preferences' => $request->preferences,
+            ]);
+            return redirect('/');
+        } else {
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->user_id = $userid;
+            $infos->age = $request->age;
+            if ($request->age != null) {
+                $infos->score = $infos->score + 1;
             }
+            $infos->gender = $request->gender;
+            if ($request->gender != null) {
+                $infos->score = $infos->score + 1;
+            }
+            $infos->profession = $request->profession;
+            if ($request->profession != null) {
+                $infos->score = $infos->score + 1;
+            }
+            $infos->relation = $request->relation;
+            if ($request->relation != null) {
+                $infos->score = $infos->score + 1;
+            }
+            $infos->preferences = $request->preferences;
+            if ($request->preferences != null) {
+                $infos->score = $infos->score + 2;
+            }
+            $infos->newuser = 0;
+            $infos->save();
+            return redirect('/');
+        }
     }
 
     public function street()
@@ -752,7 +752,7 @@ class GlobalController extends Controller
 
     public function enjoy(Request $request)
     {
-       // dd($request->all());
+        // dd($request->all());
         $userid = backpack_auth()->user()->id;
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
@@ -865,18 +865,278 @@ class GlobalController extends Controller
         return 'ok';
     }
 
-    public function enjoyable(Request $request){
+    public function enjoyable(Request $request)
+    {
+        $placeid = $request->placeid;
+        $type = $request->type;
+        $userid = backpack_auth()->user()->id;
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            $street->enjoyable = $request->enjoyable;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            $building->enjoyable = $request->enjoyable;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            $openspace->enjoyable = $request->enjoyable;
+            $openspace->save();
+        }
+
         $placeid = $request->placeid;
         $type = $request->type;
 
         return view('step7', compact('placeid', 'type'));
     }
 
-    public function enjoydetail(Request $request){
+    public function enjoydetail(Request $request)
+    {
+        $placeid = $request->placeid;
+        $type = $request->type;
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            if ($request->action == 'talking') {
+                $street->talking = $request->value;
+                $street->talking_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'seasonality') {
+                $street->seasonality = $request->value;
+                $street->seasonality_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'plants') {
+                $street->plants = $request->value;
+                $street->plants_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'sunlight') {
+                $street->sunlight = $request->value;
+                $street->sunlight_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'interesting') {
+                $street->interesting = $request->value;
+                $street->interesting_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'shade') {
+                $street->shade = $request->value;
+                $street->shade_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'beauty') {
+                $street->beauty = $request->value;
+                $street->beauty_text = $request->text;
+                $street->save();
+            }
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            if ($request->action == 'talking') {
+                $building->talking = $request->value;
+                $building->talking_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'seasonality') {
+                $building->seasonality = $request->value;
+                $building->seasonality_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'plants') {
+                $building->plants = $request->value;
+                $building->plants_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'sunlight') {
+                $building->sunlight = $request->value;
+                $building->sunlight_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'interesting') {
+                $building->interesting = $request->value;
+                $building->interesting_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'shade') {
+                $building->shade = $request->value;
+                $building->shade_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'beauty') {
+                $building->beauty = $request->value;
+                $building->beauty_text = $request->text;
+                $building->save();
+            }
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            if ($request->action == 'talking') {
+                $openspace->talking = $request->value;
+                $openspace->talking_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'seasonality') {
+                $openspace->seasonality = $request->value;
+                $openspace->seasonality_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'plants') {
+                $openspace->plants = $request->value;
+                $openspace->plants_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'sunlight') {
+                $openspace->sunlight = $request->value;
+                $openspace->sunlight_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'interesting') {
+                $openspace->interesting = $request->value;
+                $openspace->interesting_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'shade') {
+                $openspace->shade = $request->value;
+                $openspace->shade_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'beauty') {
+                $openspace->beauty = $request->value;
+                $openspace->beauty_text = $request->text;
+                $openspace->save();
+            }
+        }
+
+        return 'ok';
+    }
+
+    public function protected(Request $request)
+    {
+        $placeid = $request->placeid;
+        $type = $request->type;
+        $userid = backpack_auth()->user()->id;
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            $street->protected = $request->protected;
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            $building->protected = $request->protected;
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            $openspace->protected = $request->protected;
+            $openspace->save();
+        }
+
         $placeid = $request->placeid;
         $type = $request->type;
 
+        return view('step8', compact('placeid', 'type'));
+    }
 
+    public function protectedetail(Request $request)
+    {
+        $placeid = $request->placeid;
+        $type = $request->type;
 
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            if ($request->action == 'protection') {
+                $street->protection = $request->value;
+                $street->protection_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'polluants') {
+                $street->polluants = $request->value;
+                $street->polluants_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'night') {
+                $street->night = $request->value;
+                $street->night_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'hazards') {
+                $street->hazards = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'dangerous') {
+                $street->dangerous = $request->value;
+                $street->dangerous_text = $request->text;
+                $street->save();
+            }
+            if ($request->action == 'protection_harm') {
+                $street->protection_harm = $request->value;
+                $street->protection_harm_text = $request->text;
+                $street->save();
+            }
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            if ($request->action == 'protection') {
+                $building->protection = $request->value;
+                $building->protection_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'polluants') {
+                $building->polluants = $request->value;
+                $building->polluants_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'night') {
+                $building->night = $request->value;
+                $building->night_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'hazards') {
+                $building->hazards = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'dangerous') {
+                $building->dangerous = $request->value;
+                $building->dangerous_text = $request->text;
+                $building->save();
+            }
+            if ($request->action == 'protection_harm') {
+                $building->protection_harm = $request->value;
+                $building->protection_harm_text = $request->text;
+                $building->save();
+            }
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            if ($request->action == 'protection') {
+                $openspace->protection = $request->value;
+                $openspace->protection_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'polluants') {
+                $openspace->polluants = $request->value;
+                $openspace->polluants_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'night') {
+                $openspace->night = $request->value;
+                $openspace->night_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'hazards') {
+                $openspace->hazards = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'dangerous') {
+                $openspace->dangerous = $request->value;
+                $openspace->dangerous_text = $request->text;
+                $openspace->save();
+            }
+            if ($request->action == 'protection_harm') {
+                $openspace->protection_harm = $request->value;
+                $openspace->protection_harm_text = $request->text;
+                $openspace->save();
+            }
+        }
+
+        return 'ok';
     }
 }
