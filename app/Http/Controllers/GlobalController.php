@@ -560,6 +560,12 @@ class GlobalController extends Controller
             //convert array tags to string
             $tags = $request->tags;
             $street->tags = implode(',', $tags);
+            //count tags
+            $count = count($tags);
+            //add 1 point for each tag
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + $count;
+            $infos->save();
             $street->save();
             //return the id after saving
             $streetid = $street->id;
@@ -573,6 +579,12 @@ class GlobalController extends Controller
             $building->longitude = $request->longitude;
             $tags = $request->tags;
             $building->tags = implode(',', $tags);
+            //count tags
+            $count = count($tags);
+            //add 1 point for each tag
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + $count;
+            $infos->save();
             $building->save();
             //return the id after saving
             $buildingid = $building->id;
@@ -586,6 +598,12 @@ class GlobalController extends Controller
             $openspace->longitude = $request->longitude;
             $tags = $request->tags;
             $openspace->tags = implode(',', $tags);
+            //count tags
+            $count = count($tags);
+            //add 1 point for each tag
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + $count;
+            $infos->save();
             $openspace->save();
             //return the id after saving
             $openspaceid = $openspace->id;
@@ -602,18 +620,31 @@ class GlobalController extends Controller
             $street = Street::find($request->placeid);
             $opinions = $request->opinions;
             $street->opinions = implode(',', $opinions);
+            //count opinions
+            $count = count($opinions);
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + $count * 2;
+            $infos->save();
             $street->save();
             return $request->placeid . '&type=street';
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $opinions = $request->opinions;
             $building->opinions = implode(',', $opinions);
+            $count = count($opinions);
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + $count * 2;
+            $infos->save();
             $building->save();
             return $request->placeid . '&type=building';
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $opinions = $request->opinions;
             $openspace->opinions = implode(',', $opinions);
+            $count = count($opinions);
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + $count *2;
+            $infos->save();
             $openspace->save();
             return $request->placeid . '&type=openspace';
         }
@@ -626,14 +657,23 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             $street = Street::find($request->id);
             $street->feeling = $request->feeling;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->id);
             $building->feeling = $request->feeling;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->id);
             $openspace->feeling = $request->feeling;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $openspace->save();
         }
         return $placeid;
@@ -694,6 +734,7 @@ class GlobalController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+        $userid = backpack_auth()->user()->id;
 
         if ($request->image != null) {
             $imageName = time() . '.' . $request->image->extension();
@@ -701,6 +742,9 @@ class GlobalController extends Controller
                 'public/uploads/' . $request->type,
                 $imageName
             );
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 5;
+            $infos->save();
         } else {
             $imageName = 'null';
         }
@@ -709,16 +753,25 @@ class GlobalController extends Controller
             $street = Street::find($request->placeid);
             $street->image = '/uploads/street/' . $imageName;
             $street->change = $request->change;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $building->image = '/uploads/building/' . $imageName;
             $building->change = $request->change;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $openspace->image = '/uploads/openspace/' . $imageName;
             $openspace->change = $request->change;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $openspace->save();
         }
 
@@ -734,14 +787,23 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
             $street->confort = $request->level;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $building->confort = $request->level;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $openspace->confort = $request->level;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $openspace->save();
         }
 
@@ -759,36 +821,57 @@ class GlobalController extends Controller
             $street = Street::find($request->placeid);
             if ($request->action == 'rest') {
                 $street->rest = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->rest_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'movement') {
                 $street->movement = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->movement_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'activities') {
                 $street->activities = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->activities_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'orientation') {
                 $street->orientation = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->orientation_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'weather') {
                 $street->weather = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->weather_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'facilities') {
                 $street->facilities = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->facilities_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'noise') {
                 $street->noise = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->noise_text = $request->text;
                 $street->save();
             }
@@ -796,36 +879,57 @@ class GlobalController extends Controller
             $building = Building::find($request->placeid);
             if ($request->action == 'rest') {
                 $building->rest = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->rest_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'movement') {
                 $building->movement = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->movement_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'activities') {
                 $building->activities = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->activities_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'orientation') {
                 $building->orientation = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->orientation_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'weather') {
                 $building->weather = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->weather_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'facilities') {
                 $building->facilities = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->facilities_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'noise') {
                 $building->noise = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->noise_text = $request->text;
                 $building->save();
             }
@@ -833,31 +937,49 @@ class GlobalController extends Controller
             $openspace = Openspace::find($request->placeid);
             if ($request->action == 'rest') {
                 $openspace->rest = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->rest_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'movement') {
                 $openspace->movement = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->movement_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'activities') {
                 $openspace->activities = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->activities_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'orientation') {
                 $openspace->orientation = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->orientation_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'weather') {
                 $openspace->weather = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->weather_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'noise') {
                 $openspace->noise = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->noise_text = $request->text;
                 $openspace->save();
             }
@@ -875,14 +997,23 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
             $street->enjoyable = $request->enjoyable;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $building->enjoyable = $request->enjoyable;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $openspace->enjoyable = $request->enjoyable;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $openspace->save();
         }
 
@@ -896,40 +1027,62 @@ class GlobalController extends Controller
     {
         $placeid = $request->placeid;
         $type = $request->type;
+        $userid = backpack_auth()->user()->id;
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
             if ($request->action == 'talking') {
                 $street->talking = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->talking_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'seasonality') {
                 $street->seasonality = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->seasonality_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'plants') {
                 $street->plants = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->plants_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'sunlight') {
                 $street->sunlight = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->sunlight_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'interesting') {
                 $street->interesting = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->interesting_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'shade') {
                 $street->shade = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->shade_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'beauty') {
                 $street->beauty = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->beauty_text = $request->text;
                 $street->save();
             }
@@ -937,36 +1090,57 @@ class GlobalController extends Controller
             $building = Building::find($request->placeid);
             if ($request->action == 'talking') {
                 $building->talking = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->talking_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'seasonality') {
                 $building->seasonality = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->seasonality_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'plants') {
                 $building->plants = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->plants_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'sunlight') {
                 $building->sunlight = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->sunlight_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'interesting') {
                 $building->interesting = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->interesting_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'shade') {
                 $building->shade = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->shade_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'beauty') {
                 $building->beauty = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->beauty_text = $request->text;
                 $building->save();
             }
@@ -974,36 +1148,57 @@ class GlobalController extends Controller
             $openspace = Openspace::find($request->placeid);
             if ($request->action == 'talking') {
                 $openspace->talking = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->talking_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'seasonality') {
                 $openspace->seasonality = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->seasonality_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'plants') {
                 $openspace->plants = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->plants_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'sunlight') {
                 $openspace->sunlight = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->sunlight_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'interesting') {
                 $openspace->interesting = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->interesting_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'shade') {
                 $openspace->shade = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->shade_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'beauty') {
                 $openspace->beauty = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->beauty_text = $request->text;
                 $openspace->save();
             }
@@ -1021,14 +1216,23 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
             $street->protected = $request->protected;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $building->protected = $request->protected;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $openspace->protected = $request->protected;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
             $openspace->save();
         }
 
@@ -1042,21 +1246,30 @@ class GlobalController extends Controller
     {
         $placeid = $request->placeid;
         $type = $request->type;
-
+        $userid = backpack_auth()->user()->id;
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
             if ($request->action == 'protection') {
                 $street->protection = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->protection_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'polluants') {
                 $street->polluants = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->polluants_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'night') {
                 $street->night = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->night_text = $request->text;
                 $street->save();
             }
@@ -1066,11 +1279,17 @@ class GlobalController extends Controller
             }
             if ($request->action == 'dangerous') {
                 $street->dangerous = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->dangerous_text = $request->text;
                 $street->save();
             }
             if ($request->action == 'protection_harm') {
                 $street->protection_harm = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $street->protection_harm_text = $request->text;
                 $street->save();
             }
@@ -1078,16 +1297,25 @@ class GlobalController extends Controller
             $building = Building::find($request->placeid);
             if ($request->action == 'protection') {
                 $building->protection = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->protection_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'polluants') {
                 $building->polluants = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->polluants_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'night') {
                 $building->night = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->night_text = $request->text;
                 $building->save();
             }
@@ -1097,11 +1325,17 @@ class GlobalController extends Controller
             }
             if ($request->action == 'dangerous') {
                 $building->dangerous = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->dangerous_text = $request->text;
                 $building->save();
             }
             if ($request->action == 'protection_harm') {
                 $building->protection_harm = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $building->protection_harm_text = $request->text;
                 $building->save();
             }
@@ -1109,16 +1343,25 @@ class GlobalController extends Controller
             $openspace = Openspace::find($request->placeid);
             if ($request->action == 'protection') {
                 $openspace->protection = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->protection_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'polluants') {
                 $openspace->polluants = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->polluants_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'night') {
                 $openspace->night = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->night_text = $request->text;
                 $openspace->save();
             }
@@ -1128,11 +1371,17 @@ class GlobalController extends Controller
             }
             if ($request->action == 'dangerous') {
                 $openspace->dangerous = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->dangerous_text = $request->text;
                 $openspace->save();
             }
             if ($request->action == 'protection_harm') {
                 $openspace->protection_harm = $request->value;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
                 $openspace->protection_harm_text = $request->text;
                 $openspace->save();
             }
@@ -1141,11 +1390,8 @@ class GlobalController extends Controller
         return 'ok';
     }
 
-
     public function timespending(Request $request)
     {
-
-       
         $placeid = $request->placeid;
         $type = $request->type;
         $userid = backpack_auth()->user()->id;
@@ -1198,7 +1444,6 @@ class GlobalController extends Controller
                 $street->multifunctional_text = $request->text;
                 $street->save();
             }
-         
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             if ($request->action == 'spend_time') {
@@ -1244,16 +1489,13 @@ class GlobalController extends Controller
                 $openspace->save();
             }
         }
-           
+
         return 'ok';
         // return view('step10', compact('placeid', 'type'));
     }
 
-
     public function spaceusage(Request $request)
     {
-
-       
         $placeid = $request->placeid;
         $type = $request->type;
         $userid = backpack_auth()->user()->id;
@@ -1278,45 +1520,36 @@ class GlobalController extends Controller
         return view('step10', compact('placeid', 'type'));
     }
 
-
-
     public function spaceusagedetail(Request $request)
     {
-
         $userid = backpack_auth()->user()->id;
         $infos = Infosperso::where('user_id', $userid)->first();
- 
+
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
             $spacetag = $request->spacetag;
             $street->usagedetail = implode(',', $spacetag);
             $street->save();
-           
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $spacetag = $request->spacetag;
             $building->usagedetail = implode(',', $spacetag);
             $building->save();
-           
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $spacetag = $request->spacetag;
             $openspace->usagedetail = implode(',', $spacetag);
             $openspace->save();
-           
         }
 
-       return "ok";
+        return 'ok';
     }
-
-    
 
     static function allspacetag()
     {
         $spacetags = Space_tag::all();
         return $spacetags;
     }
-
 
     public function newspacetag(Request $request)
     {
@@ -1325,6 +1558,4 @@ class GlobalController extends Controller
         $spacetag->save();
         return 'ok';
     }
-
-
 }
