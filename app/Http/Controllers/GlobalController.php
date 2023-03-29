@@ -743,7 +743,7 @@ class GlobalController extends Controller
             if ($request->imagefirst != null) {
                 $imageName = $street->name . '.' . $request->imagefirst->extension();
                 $request->imagefirst->storeAs(
-                    'public/uploads/' . $request->type,
+                    'public/uploads/street/feeling/',
                     $imageName
                 );
                 $street->image0 = '/uploads/street/feeling/' . $imageName;
@@ -764,7 +764,7 @@ class GlobalController extends Controller
             if ($request->imagefirst != null) {
                 $imageName = $building->name . '.' . $request->imagefirst->extension();
                 $request->imagefirst->storeAs(
-                    'public/uploads/' . $request->type,
+                    'public/uploads/building/feeling/',
                     $imageName
                 );
                 $building->image0 = '/uploads/building/feeling/' . $imageName;
@@ -785,7 +785,7 @@ class GlobalController extends Controller
             if ($request->imagefirst != null) {
                 $imageName = $openspace->name . '.' . $request->imagefirst->extension();
                 $request->imagefirst->storeAs(
-                    'public/uploads/' . $request->type,
+                    'public/uploads/openspace/feeling/',
                     $imageName
                 );
                 $openspace->image0 = '/uploads/openspace/feeling/' . $imageName;
@@ -820,7 +820,7 @@ class GlobalController extends Controller
             if ($request->image != null) {
                 $imageName = $street->name . '.' . $request->image->extension();
                 $request->image->storeAs(
-                    'public/uploads/' . $request->type,
+                    'public/uploads/street/tochange/',
                     $imageName
                 );
                 $street->image = '/uploads/street/tochange/' . $imageName;
@@ -839,7 +839,7 @@ class GlobalController extends Controller
             if ($request->image != null) {
                 $imageName = $building->name . '.' . $request->image->extension();
                 $request->image->storeAs(
-                    'public/uploads/' . $request->type,
+                    'public/uploads/building/tochange/',
                     $imageName
                 );
                 $building->image = '/uploads/building/tochange' . $imageName;
@@ -858,7 +858,7 @@ class GlobalController extends Controller
             if ($request->image != null) {
                 $imageName = $openspace->name . '.' . $request->image->extension();
                 $request->image->storeAs(
-                    'public/uploads/' . $request->type,
+                    'public/uploads/openspace/tochange/',
                     $imageName
                 );
                 $openspace->image = '/uploads/openspace/tochange/' . $imageName;
