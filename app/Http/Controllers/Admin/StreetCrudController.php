@@ -35,14 +35,26 @@ class StreetCrudController extends CrudController
     function getFieldsData()
     {
         $this->crud->addColumn([
-            'name' => 'image',
-            'label' => 'Image',
+            'name' => 'image0',
+            'label' => 'Image Feeling',
             'type' => 'image',
             'prefix' => 'storage/',
             'height' => '80px',
             'width' => 'auto',
 
         ]);
+
+        $this->crud->addColumn([
+            'name' => 'image',
+            'label' => 'To change',
+            'type' => 'image',
+            'prefix' => 'storage/',
+            'height' => '80px',
+            'width' => 'auto',
+
+        ]);
+
+
     }
     /**
      * Define what happens when the List operation is loaded.
@@ -57,6 +69,7 @@ class StreetCrudController extends CrudController
         CRUD::column('latitude');
         CRUD::column('longitude');
         CRUD::column('user_id');
+        $this->crud->enableExportButtons();
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -74,7 +87,8 @@ class StreetCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(StreetRequest::class);
-        CRUD::field('image');
+        CRUD::field('image0')->type('text')->label('Image Feeling');
+        CRUD::field('image')->type('text')->label('to change');
         CRUD::field('user_id');
         CRUD::field('name');
         CRUD::field('latitude');

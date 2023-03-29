@@ -38,6 +38,7 @@ Route::post('newopinion', 'newopinion')->name('newopinion');
 Route::post('opinions', 'opinions')->name('opinions');
 Route::post('new_place', 'newplace')->name('newplace');
 Route::post('feeling', 'feeling')->name('feeling');
+Route::post('upload-image0', 'store0')->name('uploadimage0');
 Route::post('upload-image', 'store')->name('uploadimage');
 Route::post('avatar', 'avatar')->name('avatar');
 Route::post('confortlevel', 'confortlevel')->name('confortlevel');

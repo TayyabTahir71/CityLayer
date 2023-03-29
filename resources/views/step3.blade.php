@@ -81,6 +81,8 @@
                          class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-4">
                          Next challenge!
                      </button>
+                     <input type="hidden" id="type" value="{{ $type }}">
+                     <input type="hidden" id="placeid" value="{{ $placeid }}">
                  </div>
              </div>
          </div>
@@ -112,20 +114,17 @@
              });
 
              $('#saveopinion').click(function() {
-            const url = new URL(window.location.href);
-            const searchParams = url.searchParams;
-
-            const placeid = searchParams.get("id");
-            const type = searchParams.get("type");
-            console.log(placeid);
-            console.log(type);
+                 const placeid = document.getElementById('placeid').value;
+                 const type = document.getElementById('type').value;
+                 console.log(placeid);
+                 console.log(type);
 
                  opinions = [];
                  var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
                  for (var i = 0; i < checkboxes.length; i++) {
                      opinions.push(checkboxes[i].value);
                  }
-           
+
 
                  thename = Math.random().toString(8).substring(7);
                  $.ajax({
@@ -138,7 +137,7 @@
                          type: type,
                      },
                      success: function(data) {
-                        open("/step4?id=" + data, "_self");
+                         open("/step4?id=" + data, "_self");
                      }
                  });
 

@@ -57,7 +57,7 @@ trait ExportOperation
 
         fclose($handle);
 
-        return response()->download('users.csv');
+        return response()->download('data.csv');
         return redirect()->back();
     }
 }

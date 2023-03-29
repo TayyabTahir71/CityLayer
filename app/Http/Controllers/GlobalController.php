@@ -731,27 +731,104 @@ class GlobalController extends Controller
         return view('dashboard', compact('all_data', 'score'));
     }
 
-    public function store(Request $request)
+
+    public function store0(Request $request)
     {
         //dd($request->all());
         $userid = backpack_auth()->user()->id;
-
-        if ($request->image != null) {
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->storeAs(
-                'public/uploads/' . $request->type,
-                $imageName
-            );
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 5;
-            $infos->save();
-        } else {
-            $imageName = 'null';
-        }
-
+      // dd($request->all());
+      
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
-            $street->image = '/uploads/street/' . $imageName;
+            if ($request->imagefirst != null) {
+                $imageName = $street->name . '.' . $request->imagefirst->extension();
+                $request->imagefirst->storeAs(
+                    'public/uploads/' . $request->type,
+                    $imageName
+                );
+                $street->image0 = '/uploads/street/feeling/' . $imageName;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 5;
+                $infos->save();
+                $street->save();
+            } 
+            if ($request->description != null) {
+                $street->description = $request->description;
+            } 
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            if ($request->imagefirst != null) {
+                $imageName = $building->name . '.' . $request->imagefirst->extension();
+                $request->imagefirst->storeAs(
+                    'public/uploads/' . $request->type,
+                    $imageName
+                );
+                $building->image0 = '/uploads/building/feeling/' . $imageName;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 5;
+                $infos->save();
+                $building->save();
+            } 
+            if ($request->description != null) {
+                $building->description = $request->description;
+            } 
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            if ($request->imagefirst != null) {
+                $imageName = $openspace->name . '.' . $request->imagefirst->extension();
+                $request->imagefirst->storeAs(
+                    'public/uploads/' . $request->type,
+                    $imageName
+                );
+                $openspace->image0 = '/uploads/openspace/feeling/' . $imageName;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 5;
+                $infos->save();
+                $openspace->save();
+            } 
+            if ($request->description != null) {
+                $openspace->description = $request->description;
+            } 
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->score = $infos->score + 1;
+            $infos->save();
+            $openspace->save();
+        }
+
+        $placeid = $request->placeid;
+        $type = $request->type;
+
+        return view('step3', compact('placeid', 'type'));
+    }
+
+    public function store(Request $request)
+    {
+       // dd($request->all());
+        $userid = backpack_auth()->user()->id;
+
+        
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            if ($request->image != null) {
+                $imageName = $street->name . '.' . $request->image->extension();
+                $request->image->storeAs(
+                    'public/uploads/' . $request->type,
+                    $imageName
+                );
+                $street->image = '/uploads/street/tochange/' . $imageName;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 5;
+                $infos->save();
+                $street->save();
+            } 
             $street->change = $request->change;
             $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
@@ -759,7 +836,18 @@ class GlobalController extends Controller
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
-            $building->image = '/uploads/building/' . $imageName;
+            if ($request->image != null) {
+                $imageName = $building->name . '.' . $request->image->extension();
+                $request->image->storeAs(
+                    'public/uploads/' . $request->type,
+                    $imageName
+                );
+                $building->image = '/uploads/building/tochange' . $imageName;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 5;
+                $infos->save();
+                $building->save();
+            } 
             $building->change = $request->change;
             $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
@@ -767,7 +855,18 @@ class GlobalController extends Controller
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
-            $openspace->image = '/uploads/openspace/' . $imageName;
+            if ($request->image != null) {
+                $imageName = $openspace->name . '.' . $request->image->extension();
+                $request->image->storeAs(
+                    'public/uploads/' . $request->type,
+                    $imageName
+                );
+                $openspace->image = '/uploads/openspace/tochange/' . $imageName;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 5;
+                $infos->save();
+                $openspace->save();
+            } 
             $openspace->change = $request->change;
             $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
