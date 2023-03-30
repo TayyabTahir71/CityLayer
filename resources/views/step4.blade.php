@@ -40,11 +40,12 @@
                          </div>
                      </div>
                      <div x-data="{ modelOpen: false }" class="bg-[#CDB8EB] w-full p-4">
+                         <div class="flex justify-center">
                          <button type="button" id="modalform" @click="modelOpen =!modelOpen"
                              class="px-2 py-8 text-3xl font-bold text-center bg-white rounded-xl">
                              Describe and share a photo!
                          </button>
-
+</div>
 
                          <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                              aria-labelledby="modal-title" role="dialog" aria-modal="true">

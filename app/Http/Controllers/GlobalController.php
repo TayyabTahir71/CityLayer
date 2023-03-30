@@ -847,7 +847,7 @@ class GlobalController extends Controller
                     'public/uploads/building/tochange/',
                     $imageName
                 );
-                $building->image = '/uploads/building/tochange' . $imageName;
+                $building->image = '/uploads/building/tochange/' . $imageName;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 5;
                 $infos->save();
