@@ -50,10 +50,11 @@
 
                                             </form>
                                             <form action="/timespending" method="POST">
+                                            @csrf
                                                 <button type="submit">
                                                     <img src="/img/worried.png" alt="stressed" class="w-16 h-16 mb-2">
                                                     <h1 class="font-bold ">i don't know</h1>
-                                                    <input type="hidden" name="step8" value="dontknow">
+                                                    <input type="hidden" name="step8" value="i d'ont know">
                                                 </button>
                                                 <input type="hidden" name="type" id="type2"
                                                     value="{{ $type }}">
