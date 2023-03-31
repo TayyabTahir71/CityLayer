@@ -470,8 +470,8 @@ class GlobalController extends Controller
     public function saveprofile(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        $info = Infosperso::where('user_id', $userid)->first();
-        if ($info->score > 0) {
+        $infos = Infosperso::where('user_id', $userid)->first();
+        if ($infos->score > 0) {
             Infosperso::where('user_id', $userid)->update([
                 'age' => $request->age,
                 'gender' => $request->gender,
