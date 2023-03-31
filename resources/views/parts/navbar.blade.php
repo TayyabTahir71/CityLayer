@@ -45,15 +45,15 @@
                                          class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">Home</a>
                                  </li>
                                    <li>
-                                     <a href="dashboard"
+                                     <a href="/dashboard"
                                          class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">Dashboard</a>
                                  </li>
                                  <li>
-                                     <a href="profile"
+                                     <a href="/profile"
                                          class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">Profile</a>
                                  </li>
                                  <li>
-                                     <a href="admin/logout"
+                                     <a href="/admin/logout"
                                          class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">Log-out</a>
                                  </li>
                              </ul>

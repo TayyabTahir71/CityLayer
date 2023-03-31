@@ -408,11 +408,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">none
-                                                            / poor<br>facilities!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">none!</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">many
-                                                            / great<br> facilities!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">many!</label>
                                                     </div>
 
                                                 </div>
@@ -482,10 +480,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div>
-                                                    <button type="button" name="beauty_text" id="beauty_text"
-                                                        class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent">Record!</button>
-                                                </div>
+                               
                                                 <button type="button" id="noisebtn" onclick="newAction('beauty')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
                                             </div>

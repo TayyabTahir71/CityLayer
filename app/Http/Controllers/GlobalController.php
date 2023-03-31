@@ -1669,4 +1669,40 @@ class GlobalController extends Controller
         $spacetag->save();
         return 'ok';
     }
+
+
+    public function place(Request $request){
+        $type = $request->type;
+        $placeid = $request->id;
+        if ($request->type == 'Street'){
+            $data = Street::find($request->id);
+            return view('place', compact('data', 'type', 'placeid'));
+        }
+        if ($request->type == 'Building'){
+            $data = Building::find($request->id);
+            return view('place', compact('data', 'type', 'placeid'));
+        }
+        if ($request->type == 'Openspace'){
+            $data = Openspace::find($request->id);
+            return view('place', compact('data', 'type', 'placeid'));
+        }
+    }
+
+    public function delete(Request $request){
+        if ($request->type == 'Street'){
+            $data = Street::find($request->id);
+            $data->delete();
+            return redirect("/dashboard");
+        }
+        if ($request->type == 'Building'){
+            $data = Building::find($request->id);
+            $data->delete();
+            return redirect("/dashboard");
+        }
+        if ($request->type == 'Openspace'){
+            $data = Openspace::find($request->id);
+            $data->delete();
+            return redirect("/dashboard");
+        }
+    }
 }

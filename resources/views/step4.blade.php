@@ -73,7 +73,7 @@
                                                      <div class="flex flex-col space-y-2">
                                                          <label for="description"
                                                              class="text-sm font-bold text-gray-700">Describe what
-                                                             makes you feel that way!</label>
+                                                             you would change!</label>
                                                          <textarea name="description" id="description" cols="10" rows="10"
                                                              class="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-purple-300" placeholder=""></textarea>
                                                      </div>

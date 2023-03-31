@@ -33,13 +33,17 @@
                         </div>
                     </a>
                 </div>
+                 <div class="flex flex-row justify-between">
+                    <h4 class="font-semibold text-gray-900 ">Current Location:</h4>
+                     <h4 class="text-sm text-gray-900 " id="mylocation"></h4>
+                </div>
 
-                <h4 class="font-semibold text-gray-900 ">Your Mapping data:</h4>
+                                    <h4 class="font-semibold text-gray-900 text-center text-xl">My Mapping data:</h4>
                 <div class="grid grid-cols-1">
                     <div class="">
 
                         @forelse ($all_data as $data)
-                        <a href="">
+                        <a href="place/{{ $data['id'] }}/{{ $data['type'] }}">
                             <div class="flex p-2 mb-2 bg-white border rounded shadow-md">
                                @php $img = $data['image'] ?? null; @endphp
                                 <img src="{{ asset('storage' . $img) }}" alt="Just a flower" class="object-cover w-16 h-16 rounded" onerror="this.src='/img/empty.png'">
@@ -47,10 +51,16 @@
 
                                     <div class="flex items-center justify-between ">
                                         <div class="flex flex-col">
-                                            <h2 class="text-sm font-medium text-gray-800 ">{{ $data['type'] }}</h2>
+                                            <h2 class="text-sm font-medium text-gray-800 pl-4">{{ $data['type'] }}</h2>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="flex items-center justify-between ">
+                                        <div class="flex flex-col pr-4">
+                                            <h2 class="text-sm font-medium text-gray-800 pl-4">{{ $data['latitude'] }}</h2>
+                                             <h2 class="text-sm font-medium text-gray-800 pl-4">{{ $data['longitude'] }}</h2>
+                                        </div>
+                                    </div>
                             </div>
                             </a>
                         @empty
@@ -61,4 +71,19 @@
             </div>
         </div>
     </div>
+    <script>
+
+  if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    document.getElementById("mylocation").innerHTML = pos.lat + " " + pos.lng;
+                },
+                function(e) {}, {
+                    enableHighAccuracy: true
+                });
+        }
+        </script>
 @endsection
