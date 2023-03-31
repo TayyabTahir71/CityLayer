@@ -718,10 +718,10 @@ class GlobalController extends Controller
         if (Infosperso::where('user_id', $userid)->exists()) {
             $infos = Infosperso::where('user_id', $userid)->first();
             $score = $infos->score;
-            $info->save();
+            $infos->save();
         } else {
             $score = 1;
-            $info->save();
+            $infos->save();
         }
 
         $all_data = array_merge(
