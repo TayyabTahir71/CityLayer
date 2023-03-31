@@ -112,12 +112,13 @@
                                          </div>
                                          <div class="flex flex-col space-y-2">
                                              <input type="file" name="imagefirst" id="imagefirst" class="hidden"
-                                                 accept="image/*">
+                                                 accept="image/*;capture=camera">
                                              <label for="imagefirst" class="cursor-pointer">
                                                  <div
                                                      class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">
                                                      Upload a photo</div>
                                              </label>
+                                              <div id="success-message" class="hidden text-green-500 font-bold">File selected successfully!</div>
                                          </div>
                                          <button type="submit"
                                              class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">Save</button>
@@ -135,6 +136,12 @@
 
 
      <script>
+      const fileInput = document.getElementById('imagefirst');
+  const successMessage = document.getElementById('success-message');
+
+  fileInput.addEventListener('change', () => {
+    successMessage.classList.remove('hidden');
+  });
          feeling = "";
 
 

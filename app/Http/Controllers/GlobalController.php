@@ -751,10 +751,7 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $street->save();
-            } else {
-                $street->image0 = '/uploads/img/empty.png';
-                $street->save();
-            }
+            } 
             if ($request->description != null) {
                 $street->description = $request->description;
                 $infos = Infosperso::where('user_id', $userid)->first();
@@ -779,10 +776,7 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $building->save();
-            } else {
-                $building->image0 = '/uploads/img/empty.png';
-                $building->save();
-            }
+            } 
             if ($request->description != null) {
                 $building->description = $request->description;
                 $infos = Infosperso::where('user_id', $userid)->first();
@@ -807,10 +801,7 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $openspace->save();
-            } else {
-                $openspace->image0 = '/uploads/img/empty.png';
-                $openspace->save();
-            }
+            } 
             if ($request->description != null) {
                 $openspace->description = $request->description;
                 $infos = Infosperso::where('user_id', $userid)->first();
@@ -847,9 +838,6 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $street->save();
-            } else {
-                $street->image = '/uploads/img/empty.png';
-                $street->save();
             }
             if ($request->description != null) {
                 $street->description2 = $request->description;
@@ -875,9 +863,6 @@ class GlobalController extends Controller
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 5;
                 $infos->save();
-                $building->save();
-            } else {
-                $building->image = '/uploads/img/empty.png';
                 $building->save();
             }
 
@@ -905,9 +890,6 @@ class GlobalController extends Controller
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 5;
                 $infos->save();
-                $openspace->save();
-            } else {
-                $openspace->image = '/uploads/img/empty.png';
                 $openspace->save();
             }
             if ($request->description != null) {

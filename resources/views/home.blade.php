@@ -176,7 +176,7 @@
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
             }).addTo(mymap0).bindPopup(
-                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="">React to this place to earn points!</p><img class="pb-4 w-auto max-h-96"  src="/storage' + pics +'" onerror=this.src="/img/empty.png"/></img><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="text-sm px-4">React to this place to earn points!</p><img id="img" class="pb-4 w-auto max-h-96 text-sm"  src="/storage' + pics +'"  onerror="missing()"/><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
                 '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
@@ -192,6 +192,10 @@
                 placeid + '\', \'' + placetype + '\', \'wtf\')"></div></div>'
             );
             markers[place.id] = markerx;
+        }
+
+        function missing() {
+            document.getElementById("img").src = "/img/empty.png";
         }
 
 

@@ -41,11 +41,11 @@
                      </div>
                      <div x-data="{ modelOpen: false }" class="bg-[#CDB8EB] w-full p-4">
                          <div class="flex justify-center">
-                         <button type="button" id="modalform" @click="modelOpen =!modelOpen"
-                             class="px-2 py-8 text-3xl font-bold text-center bg-white rounded-xl">
-                             Describe and share a photo!
-                         </button>
-</div>
+                             <button type="button" id="modalform" @click="modelOpen =!modelOpen"
+                                 class="px-2 py-8 text-3xl font-bold text-center bg-white rounded-xl">
+                                 Describe and share a photo!
+                             </button>
+                         </div>
 
                          <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                              aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -69,29 +69,30 @@
 
                                      <div class="w-full">
                                          <div class="flex flex-col p-4 mt-4 font-bold bg-[#CDB8EB] shadow rounded-lg mynav">
-                                                 <div class="flex flex-col space-y-4">
-                                                     <div class="flex flex-col space-y-2">
-                                                         <label for="description"
-                                                             class="text-sm font-bold text-gray-700">Describe what
-                                                             you would change!</label>
-                                                         <textarea name="description" id="description" cols="10" rows="10"
-                                                             class="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-purple-300" placeholder=""></textarea>
-                                                     </div>
-                                                     <div class="flex flex-col space-y-2">
-                                                         <input type="file" name="image" id="image"
-                                                             class="hidden" accept="image/*">
-                                                         <label for="image" class="cursor-pointer">
-                                                             <div
-                                                                 class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                                                 Upload a photo</div>
-                                                         </label>
-                                                     </div>
-                                                     <button type="submit"
-                                                         class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">Save</button>
-                                                     <input type="hidden" name="type" value="{{ $type }}">
-                                                     <input type="hidden" name="placeid" value="{{ $placeid }}">
+                                             <div class="flex flex-col space-y-4">
+                                                 <div class="flex flex-col space-y-2">
+                                                     <label for="description"
+                                                         class="text-sm font-bold text-gray-700">Describe what
+                                                         you would change!</label>
+                                                     <textarea name="description" id="description" cols="10" rows="10"
+                                                         class="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-purple-300" placeholder=""></textarea>
                                                  </div>
-                                 
+                                                 <div class="flex flex-col space-y-2">
+                                                     <input type="file" name="image" id="image" class="hidden"
+                                                        accept="image/*;capture=camera">
+                                                     <label for="image" class="cursor-pointer">
+                                                         <div
+                                                             class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">
+                                                             Upload a photo</div>
+                                                     </label>
+                                                      <div id="success-message" class="hidden text-green-500 font-bold">File selected successfully!</div>
+                                                 </div>
+                                                 <button type="submit"
+                                                     class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">Save</button>
+                                                 <input type="hidden" name="type" value="{{ $type }}">
+                                                 <input type="hidden" name="placeid" value="{{ $placeid }}">
+                                             </div>
+
                                          </div>
                                      </div>
                                  </div>
@@ -106,7 +107,14 @@
              </form>
          </div>
      </div>
-     <script></script>
+     <script>
+         const fileInput = document.getElementById('image');
+         const successMessage = document.getElementById('success-message');
+
+         fileInput.addEventListener('change', () => {
+             successMessage.classList.remove('hidden');
+         });
+     </script>
      <style>
          input[type="range"]::-webkit-slider-thumb {
              -webkit-appearance: none;
