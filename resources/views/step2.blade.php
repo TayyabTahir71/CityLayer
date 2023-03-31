@@ -6,12 +6,12 @@
      <div data-barba="container">
          <div class="flex flex-col mx-auto">
              <div id="map" class="h-[65vh] lg:h-[70vh] w-auto z-0"></div>
-
+             <div id="message" class="fixed top-5 right-5 p-2 border rounded bg-green-500 text-white font-bold"></div>
              <div class="fixed bottom-0 w-screen overflow-y-auto">
                  <div class="flex items-end justify-center text-center">
                      <div
                          class="flex justify-center w-screen p-8 overflow-hidden text-left transition-all transform bg-[#CDB8EB] shadow-xl z-50">
-                         <div class="items-center max-w-2xl space-x-4">
+                         <div id="myfeel" class="items-center max-w-2xl space-x-4">
                              <h1 class="text-2xl font-bold text-center text-black">How do you feel in this space?
                              </h1>
                              <div class="flex flex-col pt-4 space-y-6">
@@ -108,7 +108,8 @@
                                              <label for="description" class="text-sm font-bold text-gray-700">Describe what
                                                  makes you feel that way!</label>
                                              <textarea name="description" id="description" cols="10" rows="10"
-                                                 class="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-purple-300" placeholder=""></textarea>
+                                                 class="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-purple-300"
+                                                 placeholder=""></textarea>
                                          </div>
                                          <div class="flex flex-col space-y-2">
                                              <input type="file" name="imagefirst" id="imagefirst" class="hidden"
@@ -118,7 +119,8 @@
                                                      class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">
                                                      Upload a photo</div>
                                              </label>
-                                              <div id="success-message" class="hidden text-green-500 font-bold">File selected successfully!</div>
+                                             <div id="success-message" class="hidden text-green-500 font-bold">File
+                                                 selected successfully!</div>
                                          </div>
                                          <button type="submit"
                                              class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">Save</button>
@@ -136,12 +138,12 @@
 
 
      <script>
-      const fileInput = document.getElementById('imagefirst');
-  const successMessage = document.getElementById('success-message');
+         const fileInput = document.getElementById('imagefirst');
+         const successMessage = document.getElementById('success-message');
 
-  fileInput.addEventListener('change', () => {
-    successMessage.classList.remove('hidden');
-  });
+         fileInput.addEventListener('change', () => {
+             successMessage.classList.remove('hidden');
+         });
          feeling = "";
 
 
@@ -180,6 +182,8 @@
          function feel(action) {
              feeling = action;
              openModal('main-modal');
+             showMessage("New points");
+             document.getElementById("myfeel").style.display = "none";
 
              $.ajaxSetup({
                  headers: {
@@ -211,6 +215,21 @@
 
          }
 
+         function showMessage(message) {
+             var messageBox = document.getElementById("message");
+             messageBox.innerHTML = message;
+             messageBox.style.display = "block"; // set display to block to show the message
+             setTimeout(function() {
+                 messageBox.style.display = "none"; // hide the message after 3 seconds
+             }, 2000);
+         }
+
+         window.onload = function() {
+             showMessage("New points");
+         };
+
+
+
          all_modals = ['main-modal']
          all_modals.forEach((modal) => {
              const modalSelected = document.querySelector('.' + modal);
@@ -235,6 +254,8 @@
          }
      </script>
      <style>
-
+         #message {
+             display: none;
+         }
      </style>
  @endsection

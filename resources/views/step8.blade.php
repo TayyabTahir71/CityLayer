@@ -3,6 +3,7 @@
 @section('main')
     <div data-barba="container">
         <div class="flex flex-col mx-auto">
+          <div id="message" class="fixed top-5 right-5 p-2 border rounded bg-green-500 text-white font-bold"></div>
             <div class="">
                 <div id="map" class="h-[75vh] lg:h-[75vh] w-auto z-0"></div>
                 <div x-data="{ modelOpen: true }">
@@ -106,8 +107,26 @@
                     enableHighAccuracy: true
                 });
         }
-    </script>
-    <style>
 
-    </style>
+         function showMessage(message) {
+             var messageBox = document.getElementById("message");
+             messageBox.innerHTML = message;
+             messageBox.style.display = "block"; // set display to block to show the message
+             setTimeout(function() {
+                 messageBox.style.display = "none"; // hide the message after 3 seconds
+             }, 2000);
+         }
+
+         window.onload = function() {
+             showMessage("New points");
+         };
+
+
+
+    </script>
+     <style>
+         #message {
+             display: none;
+         }
+     </style>
 @endsection

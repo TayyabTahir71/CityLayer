@@ -1915,8 +1915,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $street->spend_time_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+               
 
                 $street->save();
             }
@@ -1926,8 +1927,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $street->meeting_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+              
 
                 $street->save();
             }
@@ -1937,8 +1939,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $street->events_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+         
 
                 $street->save();
             }
@@ -1949,8 +1952,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $street->multifunctional_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+            
 
                 $street->save();
             }
@@ -1962,8 +1966,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $building->spend_time_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+          
 
                 $building->save();
             }
@@ -1973,8 +1978,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $building->meeting_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+   
 
                 $building->save();
             }
@@ -1984,8 +1990,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $building->events_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+            
 
                 $building->save();
             }
@@ -1995,8 +2002,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $building->multifunctional_text = $request->text;
+                    $infos->save();
+
                 }
-                $infos->save();
 
                 $building->save();
             }
@@ -2008,8 +2016,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $openspace->spend_time_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+       
 
                 $openspace->save();
             }
@@ -2019,8 +2028,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $openspace->meeting_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+           
 
                 $openspace->save();
             }
@@ -2030,8 +2040,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $openspace->meeting_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+     
 
                 $openspace->save();
             }
@@ -2041,8 +2052,9 @@ class GlobalController extends Controller
                     $infos = Infosperso::where('user_id', $userid)->first();
                     $infos->score = $infos->score + 1;
                     $openspace->multifunctional_text = $request->text;
+                    $infos->save();
                 }
-                $infos->save();
+  
 
                 $openspace->save();
             }

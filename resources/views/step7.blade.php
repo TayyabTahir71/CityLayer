@@ -4,7 +4,7 @@
     <div data-barba="container">
 
         <div class="flex flex-col h-screen mx-auto">
-
+  <div id="message" class="fixed top-5 right-5 p-2 border rounded bg-green-500 text-white font-bold"></div>
             <div class="flex flex-row items-center pt-2">
                 <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
             </div>
@@ -488,7 +488,7 @@
                 var myElement5 = document.querySelector(".myclass5");
                 var myElement6 = document.querySelector(".myclass6");
 
-
+  showMessage("New points");
                 myElement.click();
                 myElement1.click();
                 myElement2.click();
@@ -499,6 +499,21 @@
                 }
             });
         }
+
+
+                 function showMessage(message) {
+             var messageBox = document.getElementById("message");
+             messageBox.innerHTML = message;
+             messageBox.style.display = "block"; // set display to block to show the message
+             setTimeout(function() {
+                 messageBox.style.display = "none"; // hide the message after 3 seconds
+             }, 2000);
+         }
+
+         window.onload = function() {
+             showMessage("New points");
+         };
+
     </script>
     <style>
         input[type="range"]::-webkit-slider-thumb {
@@ -512,5 +527,10 @@
             appearance: none;
             background: black;
         }
+
+   
+         #message {
+             display: none;
+         }
     </style>
 @endsection
