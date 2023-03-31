@@ -751,9 +751,15 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $street->save();
+            } else {
+                $street->image0 = '/uploads/img/empty.png';
+                $street->save();
             }
             if ($request->description != null) {
                 $street->description = $request->description;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
             }
             $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
@@ -773,9 +779,15 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $building->save();
+            } else {
+                $building->image0 = '/uploads/img/empty.png';
+                $building->save();
             }
             if ($request->description != null) {
                 $building->description = $request->description;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
             }
             $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
@@ -795,9 +807,15 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $openspace->save();
+            } else {
+                $openspace->image0 = '/uploads/img/empty.png';
+                $openspace->save();
             }
             if ($request->description != null) {
                 $openspace->description = $request->description;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
             }
             $infos = Infosperso::where('user_id', $userid)->first();
             $infos->score = $infos->score + 1;
@@ -829,9 +847,15 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $street->save();
+            } else {
+                $street->image = '/uploads/img/empty.png';
+                $street->save();
             }
             if ($request->description != null) {
                 $street->description2 = $request->description;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
             }
             $street->change = $request->change;
             $infos = Infosperso::where('user_id', $userid)->first();
@@ -852,9 +876,16 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $building->save();
+            } else {
+                $building->image = '/uploads/img/empty.png';
+                $building->save();
             }
+
             if ($request->description != null) {
                 $building->description2 = $request->description;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
             }
             $building->change = $request->change;
             $infos = Infosperso::where('user_id', $userid)->first();
@@ -875,9 +906,15 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $openspace->save();
+            } else {
+                $openspace->image = '/uploads/img/empty.png';
+                $openspace->save();
             }
             if ($request->description != null) {
                 $openspace->description2 = $request->description;
+                $infos = Infosperso::where('user_id', $userid)->first();
+                $infos->score = $infos->score + 1;
+                $infos->save();
             }
             $openspace->change = $request->change;
             $infos = Infosperso::where('user_id', $userid)->first();
@@ -934,56 +971,98 @@ class GlobalController extends Controller
                 $street->rest = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->rest_text = $request->text;
+                }
                 $infos->save();
-                $street->rest_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'movement') {
                 $street->movement = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->movement_text = $request->text;
+                }
                 $infos->save();
-                $street->movement_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'activities') {
                 $street->activities = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->activities_text = $request->text;
+                }
                 $infos->save();
-                $street->activities_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'orientation') {
                 $street->orientation = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->orientation_text = $request->text;
+                }
                 $infos->save();
-                $street->orientation_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'weather') {
                 $street->weather = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->weather_text = $request->text;
+                }
                 $infos->save();
-                $street->weather_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'facilities') {
                 $street->facilities = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->facilities_text = $request->text;
+                }
                 $infos->save();
-                $street->facilities_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'noise') {
                 $street->noise = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->noise_text = $request->text;
+                }
                 $infos->save();
-                $street->noise_text = $request->text;
+
                 $street->save();
             }
         } elseif ($request->type == 'building') {
@@ -992,56 +1071,98 @@ class GlobalController extends Controller
                 $building->rest = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->rest_text = $request->text;
+                }
                 $infos->save();
-                $building->rest_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'movement') {
                 $building->movement = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->movement_text = $request->text;
+                }
                 $infos->save();
-                $building->movement_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'activities') {
                 $building->activities = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->activities_text = $request->text;
+                }
                 $infos->save();
-                $building->activities_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'orientation') {
                 $building->orientation = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->orientation_text = $request->text;
+                }
                 $infos->save();
-                $building->orientation_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'weather') {
                 $building->weather = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->weather_text = $request->text;
+                }
                 $infos->save();
-                $building->weather_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'facilities') {
                 $building->facilities = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->facilities_text = $request->text;
+                }
                 $infos->save();
-                $building->facilities_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'noise') {
                 $building->noise = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->noise_text = $request->text;
+                }
                 $infos->save();
-                $building->noise_text = $request->text;
+
                 $building->save();
             }
         } elseif ($request->type == 'openspace') {
@@ -1050,48 +1171,85 @@ class GlobalController extends Controller
                 $openspace->rest = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->rest_text = $request->text;
+                }
                 $infos->save();
-                $openspace->rest_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'movement') {
                 $openspace->movement = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->movement_text = $request->text;
+                }
                 $infos->save();
-                $openspace->movement_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'activities') {
                 $openspace->activities = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->activities_text = $request->text;
+                }
                 $infos->save();
-                $openspace->activities_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'orientation') {
                 $openspace->orientation = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
-                $infos->save();
-                $openspace->orientation_text = $request->text;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->orientation_text = $request->text;
+
+                    $infos->save();
+                }
+
                 $openspace->save();
             }
             if ($request->action == 'weather') {
                 $openspace->weather = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->weather_text = $request->text;
+                }
                 $infos->save();
-                $openspace->weather_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'noise') {
                 $openspace->noise = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->noise_text = $request->text;
+                }
                 $infos->save();
-                $openspace->noise_text = $request->text;
+
                 $openspace->save();
             }
         }
@@ -1145,56 +1303,98 @@ class GlobalController extends Controller
                 $street->talking = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->talking_text = $request->text;
+                }
                 $infos->save();
-                $street->talking_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'seasonality') {
                 $street->seasonality = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->seasonality_text = $request->text;
+                }
                 $infos->save();
-                $street->seasonality_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'plants') {
                 $street->plants = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->plants_text = $request->text;
+                }
                 $infos->save();
-                $street->plants_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'sunlight') {
                 $street->sunlight = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->sunlight_text = $request->text;
+                }
                 $infos->save();
-                $street->sunlight_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'interesting') {
                 $street->interesting = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->interesting_text = $request->text;
+                }
                 $infos->save();
-                $street->interesting_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'shade') {
                 $street->shade = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->shade_text = $request->text;
+                }
                 $infos->save();
-                $street->shade_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'beauty') {
                 $street->beauty = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->beauty_text = $request->text;
+                }
                 $infos->save();
-                $street->beauty_text = $request->text;
+
                 $street->save();
             }
         } elseif ($request->type == 'building') {
@@ -1203,56 +1403,98 @@ class GlobalController extends Controller
                 $building->talking = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->talking_text = $request->text;
+                }
                 $infos->save();
-                $building->talking_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'seasonality') {
                 $building->seasonality = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->seasonality_text = $request->text;
+                }
                 $infos->save();
-                $building->seasonality_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'plants') {
                 $building->plants = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->plants_text = $request->text;
+                }
                 $infos->save();
-                $building->plants_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'sunlight') {
                 $building->sunlight = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->sunlight_text = $request->text;
+                }
                 $infos->save();
-                $building->sunlight_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'interesting') {
                 $building->interesting = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->interesting_text = $request->text;
+                }
                 $infos->save();
-                $building->interesting_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'shade') {
                 $building->shade = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->shade_text = $request->text;
+                }
                 $infos->save();
-                $building->shade_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'beauty') {
                 $building->beauty = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->beauty_text = $request->text;
+                }
                 $infos->save();
-                $building->beauty_text = $request->text;
+
                 $building->save();
             }
         } elseif ($request->type == 'openspace') {
@@ -1261,56 +1503,98 @@ class GlobalController extends Controller
                 $openspace->talking = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->talking_text = $request->text;
+                }
                 $infos->save();
-                $openspace->talking_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'seasonality') {
                 $openspace->seasonality = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->seasonality_text = $request->text;
+                }
                 $infos->save();
-                $openspace->seasonality_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'plants') {
                 $openspace->plants = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->plants_text = $request->text;
+                }
                 $infos->save();
-                $openspace->plants_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'sunlight') {
                 $openspace->sunlight = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->sunlight_text = $request->text;
+                }
                 $infos->save();
-                $openspace->sunlight_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'interesting') {
                 $openspace->interesting = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->interesting_text = $request->text;
+                }
                 $infos->save();
-                $openspace->interesting_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'shade') {
                 $openspace->shade = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->shade_text = $request->text;
+                }
                 $infos->save();
-                $openspace->shade_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'beauty') {
                 $openspace->beauty = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->beauty_text = $request->text;
+                }
                 $infos->save();
-                $openspace->beauty_text = $request->text;
+
                 $openspace->save();
             }
         }
@@ -1364,44 +1648,80 @@ class GlobalController extends Controller
                 $street->protection = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->protection_text = $request->text;
+                }
                 $infos->save();
-                $street->protection_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'polluants') {
                 $street->polluants = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->polluants_text = $request->text;
+                }
                 $infos->save();
-                $street->polluants_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'night') {
                 $street->night = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->night_text = $request->text;
+                }
                 $infos->save();
-                $street->night_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'hazards') {
-                $street->hazards = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->hazards = $request->text;
+                }
+                $infos->save();
+
                 $street->save();
             }
             if ($request->action == 'dangerous') {
                 $street->dangerous = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->dangerous_text = $request->text;
+                }
                 $infos->save();
-                $street->dangerous_text = $request->text;
+
                 $street->save();
             }
             if ($request->action == 'protection_harm') {
                 $street->protection_harm = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->protection_harm_text = $request->text;
+                }
                 $infos->save();
-                $street->protection_harm_text = $request->text;
+
                 $street->save();
             }
         } elseif ($request->type == 'building') {
@@ -1410,44 +1730,80 @@ class GlobalController extends Controller
                 $building->protection = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->protection_text = $request->text;
+                }
                 $infos->save();
-                $building->protection_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'polluants') {
                 $building->polluants = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->polluants_text = $request->text;
+                }
                 $infos->save();
-                $building->polluants_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'night') {
                 $building->night = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->night_text = $request->text;
+                }
                 $infos->save();
-                $building->night_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'hazards') {
-                $building->hazards = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->hazards = $request->text;
+                }
+                $infos->save();
+
                 $building->save();
             }
             if ($request->action == 'dangerous') {
                 $building->dangerous = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->dangerous_text = $request->text;
+                }
                 $infos->save();
-                $building->dangerous_text = $request->text;
+
                 $building->save();
             }
             if ($request->action == 'protection_harm') {
                 $building->protection_harm = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->protection_harm_text = $request->text;
+                }
                 $infos->save();
-                $building->protection_harm_text = $request->text;
+
                 $building->save();
             }
         } elseif ($request->type == 'openspace') {
@@ -1456,44 +1812,80 @@ class GlobalController extends Controller
                 $openspace->protection = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->protection_text = $request->text;
+                }
                 $infos->save();
-                $openspace->protection_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'polluants') {
                 $openspace->polluants = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->polluants_text = $request->text;
+                }
                 $infos->save();
-                $openspace->polluants_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'night') {
                 $openspace->night = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->night_text = $request->text;
+                }
                 $infos->save();
-                $openspace->night_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'hazards') {
-                $openspace->hazards = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->hazards = $request->text;
+                }
+                $infos->save();
+
                 $openspace->save();
             }
             if ($request->action == 'dangerous') {
                 $openspace->dangerous = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->dangerous_text = $request->text;
+                }
                 $infos->save();
-                $openspace->dangerous_text = $request->text;
+
                 $openspace->save();
             }
             if ($request->action == 'protection_harm') {
                 $openspace->protection_harm = $request->value;
                 $infos = Infosperso::where('user_id', $userid)->first();
                 $infos->score = $infos->score + 1;
+
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->protection_harm_text = $request->text;
+                }
                 $infos->save();
-                $openspace->protection_harm_text = $request->text;
+
                 $openspace->save();
             }
         }
@@ -1531,72 +1923,145 @@ class GlobalController extends Controller
     {
         $placeid = $request->placeid;
         $type = $request->type;
+        $userid = backpack_auth()->user()->id;
 
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
             if ($request->action == 'spend_time') {
                 $street->spend_time = $request->value;
-                $street->spend_time_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->spend_time_text = $request->text;
+                }
+                $infos->save();
+
                 $street->save();
             }
             if ($request->action == 'meeting') {
                 $street->meeting = $request->value;
-                $street->meeting_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->meeting_text = $request->text;
+                }
+                $infos->save();
+
                 $street->save();
             }
             if ($request->action == 'events') {
                 $street->events = $request->value;
-                $street->events_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->events_text = $request->text;
+                }
+                $infos->save();
+
                 $street->save();
             }
 
             if ($request->action == 'multifunctional') {
                 $street->multifunctional = $request->value;
-                $street->multifunctional_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $street->multifunctional_text = $request->text;
+                }
+                $infos->save();
+
                 $street->save();
             }
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             if ($request->action == 'spend_time') {
                 $building->spend_time = $request->value;
-                $building->spend_time_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->spend_time_text = $request->text;
+                }
+                $infos->save();
+
                 $building->save();
             }
             if ($request->action == 'meeting') {
                 $building->meeting = $request->value;
-                $building->meeting_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->meeting_text = $request->text;
+                }
+                $infos->save();
+
                 $building->save();
             }
             if ($request->action == 'events') {
                 $building->events = $request->value;
-                $building->events_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->events_text = $request->text;
+                }
+                $infos->save();
+
                 $building->save();
             }
             if ($request->action == 'multifunctional') {
                 $building->multifunctional = $request->value;
-                $building->multifunctional_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $building->multifunctional_text = $request->text;
+                }
+                $infos->save();
+
                 $building->save();
             }
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             if ($request->action == 'spend_time') {
                 $openspace->spend_time = $request->value;
-                $openspace->spend_time_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->spend_time_text = $request->text;
+                }
+                $infos->save();
+
                 $openspace->save();
             }
             if ($request->action == 'meeting') {
                 $openspace->meeting = $request->value;
-                $openspace->meeting_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->meeting_text = $request->text;
+                }
+                $infos->save();
+
                 $openspace->save();
             }
             if ($request->action == 'events') {
                 $openspace->events = $request->value;
-                $openspace->events_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->meeting_text = $request->text;
+                }
+                $infos->save();
+
                 $openspace->save();
             }
             if ($request->action == 'multifunctional') {
                 $openspace->multifunctional = $request->value;
-                $openspace->multifunctional_text = $request->text;
+                if ($request->text != null) {
+                    $infos = Infosperso::where('user_id', $userid)->first();
+                    $infos->score = $infos->score + 1;
+                    $openspace->multifunctional_text = $request->text;
+                }
+                $infos->save();
+
                 $openspace->save();
             }
         }
@@ -1670,39 +2135,40 @@ class GlobalController extends Controller
         return 'ok';
     }
 
-
-    public function place(Request $request){
+    public function place(Request $request)
+    {
         $type = $request->type;
         $placeid = $request->id;
-        if ($request->type == 'Street'){
+        if ($request->type == 'Street') {
             $data = Street::find($request->id);
             return view('place', compact('data', 'type', 'placeid'));
         }
-        if ($request->type == 'Building'){
+        if ($request->type == 'Building') {
             $data = Building::find($request->id);
             return view('place', compact('data', 'type', 'placeid'));
         }
-        if ($request->type == 'Openspace'){
+        if ($request->type == 'Openspace') {
             $data = Openspace::find($request->id);
             return view('place', compact('data', 'type', 'placeid'));
         }
     }
 
-    public function delete(Request $request){
-        if ($request->type == 'Street'){
+    public function delete(Request $request)
+    {
+        if ($request->type == 'Street') {
             $data = Street::find($request->id);
             $data->delete();
-            return redirect("/dashboard");
+            return redirect('/dashboard');
         }
-        if ($request->type == 'Building'){
+        if ($request->type == 'Building') {
             $data = Building::find($request->id);
             $data->delete();
-            return redirect("/dashboard");
+            return redirect('/dashboard');
         }
-        if ($request->type == 'Openspace'){
+        if ($request->type == 'Openspace') {
             $data = Openspace::find($request->id);
             $data->delete();
-            return redirect("/dashboard");
+            return redirect('/dashboard');
         }
     }
 }

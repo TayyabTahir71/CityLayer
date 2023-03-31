@@ -100,7 +100,7 @@
                     </div>
 
                     @php $image0 =  $data->image0 ?? null; @endphp
-                    <img src="{{ asset('storage' . $image0) }}" alt="" class="mx-auto md:w-2/3"
+                    <img src="{{ asset('storage' . $image0) }}" alt="" class="mx-auto w-auto max-h-96"
                         onerror="this.src='/img/empty.png'">
 
                     <legend class="pt-4 mb-1 font-medium text-center border-t text-xl">Opinions:</legend>
@@ -144,7 +144,7 @@
                     </div>
 
                     @php $image0 =  $data->image ?? null; @endphp
-                    <img src="{{ asset('storage' . $image0) }}" alt="" class="mx-auto md:w-2/3 pb-8"
+                    <img src="{{ asset('storage' . $image0) }}" alt="" class="mx-auto  w-auto max-h-96 pb-8"
                         onerror="this.src='/img/empty.png'">
 
                     <legend class="pt-8 mb-1 font-medium text-center border-t-2 border-gray-900 text-3xl">How confortable
@@ -866,6 +866,8 @@
                         @endforeach
                     </div>
 
+                    
+                    @if (backpack_user()->id == $data->user_id)
                     <legend class="pt-4 mb-1 font-medium text-center border-t text-xl">modify:</legend>
                     <div class="flex flex-row justify-between w-96 mx-auto pb-8">
                         <a href="/step2?id={{ $placeid }}&type={{ $type }}" class="w-1/2 mx-1"> <button
@@ -874,7 +876,7 @@
                         <a href="/delete?id={{ $placeid }}&type={{ $type }}" class="w-1/2 mx-1"> <button
                                 class="w-full h-12 px-4 py-2 mx-1 text-sm font-medium text-white bg-red-800 rounded">Delete</button></a>
                     </div>
-
+                   @endif
 
                 </div>
             </div>

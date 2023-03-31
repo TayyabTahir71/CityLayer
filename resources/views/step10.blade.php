@@ -137,7 +137,7 @@
                          type: type,
                      },
                      success: function(data) {
-                        open("/");
+                        open("/", "_self");
                      }
                  });
 
