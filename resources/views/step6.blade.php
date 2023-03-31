@@ -541,7 +541,7 @@
                 case 'beauty':
                     thisaction = "beauty";
                     thisvalue = document.getElementById('beauty').value;
-                    thistext = document.getElementById('beauty_text').value;
+                    thistext = "null";
                     break;
             }
 
