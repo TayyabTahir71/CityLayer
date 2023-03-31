@@ -43,7 +43,7 @@
                     <div class="">
 
                         @forelse ($all_data as $data)
-                        <a href="place/{{ $data['id'] }}/{{ $data['type'] }}">
+                        <a href="place/{{ $data['id'] }}/{{ strtolower($data['type']) }}">
                             <div class="flex p-2 mb-2 bg-white border rounded shadow-md">
                                @php $img = $data['image'] ?? null; @endphp
                                 <img src="{{ asset('storage' . $img) }}" alt="Just a flower" class="object-cover w-16 h-16 rounded" onerror="this.src='/img/empty.png'">

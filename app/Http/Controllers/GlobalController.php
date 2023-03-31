@@ -2119,17 +2119,17 @@ class GlobalController extends Controller
 
     public function place(Request $request)
     {
-        $type = $request->type;
+        $type = strtolower($request->type);
         $placeid = $request->id;
-        if ($request->type == 'Street') {
+        if ($request->type == 'street') {
             $data = Street::find($request->id);
             return view('place', compact('data', 'type', 'placeid'));
         }
-        if ($request->type == 'Building') {
+        if ($request->type == 'building') {
             $data = Building::find($request->id);
             return view('place', compact('data', 'type', 'placeid'));
         }
-        if ($request->type == 'Openspace') {
+        if ($request->type == 'openspace') {
             $data = Openspace::find($request->id);
             return view('place', compact('data', 'type', 'placeid'));
         }

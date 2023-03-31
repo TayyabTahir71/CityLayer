@@ -5,6 +5,9 @@
         @include('parts.navbar')
         <div class="flex flex-col mx-auto">
             <div class="pt-16">
+                <div class="flex flex-row items-center pt-2">
+                     <a href="/dashboard" class="prevent"> <i class="mt-4 ml-4  lg:ml-16 text-2xl text-gray-900 fas fa-close"></i></a>
+                 </div>
                 <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-16">
                     <h1 class="text-4xl font-semibold text-center text-gray-900">{{ $data->type }}</h1>
 
