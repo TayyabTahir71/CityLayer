@@ -51,7 +51,7 @@ trait ExportOperation
     {
         $data = User::all()->toArray();
 
-        $handle = fopen('users.csv', 'w');
+        $handle = fopen('data.csv', 'w');
 
         collect($data)->each(fn($row) => fputcsv($handle, $row));
 

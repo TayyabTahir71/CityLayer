@@ -2,13 +2,13 @@
 
 @section('main')
     <div data-barba="container" class="relative h-screen">
-            <div class="flex flex-col items-center h-screen p-8 mx-auto">
-            <label for="dropzone-file"
-                class="flex flex-col justify-center w-5/6 mb-4">
+        <div class="flex flex-col items-center h-screen p-8 mx-auto">
+            <label for="dropzone-file" class="flex flex-col justify-center w-5/6 mb-4">
                 <div class="flex flex-col items-center justify-center pt-16 pb-4">
-                    <h1 class="text-3xl font-extrabold text-center text-gray-900">welcome to<br> CITY LAYERS!</h1>
-                    <p class="mt-8 text-base text-center text-gray-600">A network for people who care about their environment! </p>
-                    <p class="mt-8 text-base font-extrabold text-center text-gray-900">Earn points by exploring your surroundings and share your experiences with others!</p>
+                    <h1 class="text-3xl font-extrabold text-center text-gray-900"> {{ __('messages.welcome to') }}<br> CITY LAYERS!</h1>
+                    <p class="mt-8 text-base text-center text-gray-600">{{ __('messages.A network for people who care about their environment!') }}</p>
+                    <p class="mt-8 text-base font-extrabold text-center text-gray-900">Earn points by exploring your
+                        surroundings and share your experiences with others!</p>
                 </div>
             </label>
             <form class="w-1/2 md:w-1/3 lg:w-1/4" role="form" method="POST" action="{{ route('backpack.auth.login') }}">
@@ -34,19 +34,24 @@
                     <label for="remember" class="ml-2 text-sm font-medium text-gray-400">Remember
                         me</label>
                 </div>
-                        <div class="flex justify-center">
-                <button type="submit"
-                    class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Submit</button>
-           </div>
+                <div class="flex justify-center">
+                    <button type="submit"
+                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Submit</button>
+                </div>
             </form>
-            <div class="pt-8 text-sm text-center text-gray-400 hover:text-gray-600">
-            {{-- <a href="{{ route('backpack.auth.password.reset') }}"
-                    class="prevent">{{ trans('backpack::base.forgot_your_password') }}</a> --}}
-            </div>
-            <div class="text-sm text-center text-gray-400 hover:text-gray-600"><a href="register">register</a></div>
+            <div class="text-sm text-center text-gray-400 hover:text-gray-600 pt-2"><a href="register">register</a></div>
+                       @php $locale = session()->get('locale'); @endphp
+  
+        <div class="flex justify-center pt-4">
+            <a class="mx-2" href="lang/en"><img src="{{ asset('img/flag/England.png') }}" width="25px"></a>
+            <a class="mx-2" href="lang/de"><img src="{{ asset('img/flag/Germany.png') }}" width="25px"></a>
         </div>
-              <div class="fixed bottom-0 right-0 m-4">
-          <a href="about"> <i class="text-gray-900 fa-solid fa-circle-info fa-2x"></i></a>
-           </div>
+        </div>
+        <div class="fixed bottom-0 right-0 m-4">
+            <a href="about"> <i class="text-gray-900 fa-solid fa-circle-info fa-2x"></i></a>
+        </div>
+ 
+
     </div>
+
 @endsection

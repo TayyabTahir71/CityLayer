@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GlobalController;
 use App\Http\Controllers\MailController;
-
+use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Middleware\Cors;
 /*
@@ -16,6 +16,8 @@ use App\Http\Middleware\Cors;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);
+
 Route::controller(GlobalController::class)->group(function(){
     // Route::get('/', 'getAll')->name('getAll')->middleware('App\Http\Middleware\MyMiddleware');
 Route::get('/', 'getAll');
