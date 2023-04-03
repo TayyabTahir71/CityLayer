@@ -39,6 +39,7 @@ class OpinionCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::setOperationSetting('lineButtonsAsDropdown', true);
         CRUD::column('name');
 
         /**

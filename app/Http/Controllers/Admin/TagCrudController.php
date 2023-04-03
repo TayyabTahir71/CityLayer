@@ -40,7 +40,7 @@ class TagCrudController extends CrudController
     protected function setupListOperation()
     {
         
-
+        CRUD::setOperationSetting('lineButtonsAsDropdown', true);
         $this->crud->addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Name']);
         $this->crud->addColumn(['name' => 'category', 'type' => 'text', 'label' => 'Category']);
       

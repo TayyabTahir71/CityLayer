@@ -65,6 +65,7 @@ class BuildingCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::setOperationSetting('lineButtonsAsDropdown', true);
         $this->getFieldsData();
         CRUD::column('name');
         CRUD::column('latitude');
