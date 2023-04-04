@@ -3,7 +3,7 @@
 @section('main')
     <div data-barba="container" class="">
         <div class="flex flex-col items-center p-8 mx-auto h-screen">
-            <label for="dropzone-file" class="flex flex-col justify-center w-5/6 mb-4">
+            <label for="dropzone-file" class="flex flex-col justify-center w-5/6 mb-2">
                 <div class="flex flex-col items-center justify-center pb-6">
                     <h1 class="text-3xl font-bold text-center text-gray-900">{{ __('messages.welcome to') }}<br> CITY LAYERS!
                     </h1>
@@ -38,7 +38,7 @@
 
             </section>
 
-         <div class="flex justify-between mx-4 font-bold pt-8 text-center underline">
+         <div class="flex justify-between mx-4 font-bold pt-4 text-center underline">
           <a href="award">
             Citizen Science Award 2023<br>participate and win!
             </a>
