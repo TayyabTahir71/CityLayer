@@ -6,13 +6,13 @@
 <!-- Add to homescreen for Chrome on Android -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="CityLayer">
-<link rel="icon" sizes="512x512" href="/images/icons/icon-512x512.png">
+<link rel="icon" sizes="96x96" href="/images/icons/icon-96x96.png">
 
 <!-- Add to homescreen for Safari on iOS -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="CityLayer">
-<link rel="apple-touch-icon" href="/images/icons/icon-512x512.png">
+<link rel="apple-touch-icon" href="/images/icons/icon-96x96.png">
 
 <link href="/images/icons/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 <link href="/images/icons/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />

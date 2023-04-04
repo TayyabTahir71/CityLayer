@@ -68,7 +68,7 @@ class GlobalController extends Controller
                 return view('profil');
             }
         } else {
-            return view('login');
+            return view('index');
         }
     }
 

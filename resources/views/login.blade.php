@@ -37,19 +37,35 @@
                         class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">{{ __('messages.Submit') }}</button>
                 </div>
             </form>
-            <div class="text-sm text-center text-gray-400 hover:text-gray-600 pt-2"><a href="register">{{ __('messages.register') }}</a></div>
+            <div class="font-bold text-center text-gray-800 hover:text-gray-600 pt-4"><a href="register">{{ __('messages.register') }}</a></div>
                        @php $locale = session()->get('locale'); @endphp
   
         <div class="flex justify-center pt-4">
             <a class="mx-2" href="lang/en"><img src="{{ asset('img/flag/England.png') }}" width="25px"></a>
             <a class="mx-2" href="lang/de"><img src="{{ asset('img/flag/Germany.png') }}" width="25px"></a>
         </div>
+        <div class="flex justify-between mx-4 font-bold pt-8 text-center underline">
+          <a href="award">
+            Citizen Science Award 2023<br>participate and win!
+            </a>
+            </div>
         </div>
-        <div class="fixed bottom-0 right-0 m-4">
-            <a href="about"> <i class="text-gray-900 fa-solid fa-circle-info fa-2x"></i></a>
+        
+   <div class="fixed bottom-0 right-0 left-0 bg-black text-white">
+            <div class="flex justify-between mx-4 text-sm font-bold pt-4 pb-4 text-center">
+            <a href="mapping">
+            Mapping<br>tool
+            </a>
+             <a href="research">
+            research<br>overview 
+            </a>
+             <a href="team">
+            Project team<br> & partners
+            </a>
+             <a href="contact">
+            Contact<br>us
+            </a>
+            </div>
         </div>
- 
-
     </div>
-
 @endsection
