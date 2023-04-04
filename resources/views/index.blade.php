@@ -3,13 +3,13 @@
 @section('main')
     <div data-barba="container" class="">
         <div class="flex flex-col items-center p-8 mx-auto h-screen">
-            <label for="dropzone-file" class="flex flex-col justify-center w-5/6 mb-2">
+            <label for="dropzone-file" class="flex flex-col justify-center w-5/6">
                 <div class="flex flex-col items-center justify-center pb-6">
                     <h1 class="text-3xl font-bold text-center text-gray-900">{{ __('messages.welcome to') }}<br> CITY LAYERS!
                     </h1>
                     <p class="mt-8 text-base text-center text-gray-600">
                         {{ __('messages.A network for people who care about their environment!') }} </p>
-                    <p class="mt-8 text-base font-extrabold text-center text-gray-900">
+                    <p class="mt-4 text-base font-extrabold text-center text-gray-900">
                         {{ __('messages.Earn points by exploring your surroundings and share your experiences with others!') }}
                     </p>
                 </div>
