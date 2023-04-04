@@ -2,8 +2,8 @@
 
 @section('main')
     <div data-barba="container" class="relative h-screen">
-        <div class="flex flex-col items-center h-screen p-8 mx-auto">
-            <label for="dropzone-file" class="flex flex-col justify-center w-5/6 mb-4">
+        <div class="flex flex-col items-center h-screen p-4 mx-auto">
+            <label for="dropzone-file" class="flex flex-col justify-center w-5/6 mb-2">
                 <div class="flex flex-col items-center justify-center pb-4">
                     <h1 class="text-3xl font-extrabold text-center text-gray-900"> {{ __('messages.welcome to') }}<br> CITY LAYERS!</h1>
                     <p class="mt-4 text-base text-center text-gray-600">{{ __('messages.A network for people who care about their environment!') }}</p>
