@@ -2,13 +2,13 @@
 
 @section('main')
     <div data-barba="container" class="relative h-screen">
-        <div class="flex flex-col items-center h-screen p-8 mx-auto">
+        <div class="flex flex-col items-center h-screen p-4 mx-auto">
 
             <label for="dropzone-file" class="flex flex-col justify-center w-5/6">
-                <div class="flex flex-col items-center justify-center pt-4">
-                    <h1 class="pb-8 text-3xl font-extrabold text-center text-gray-900">{{ __('messages.welcome to') }}<br>
+                <div class="flex flex-col items-center justify-center">
+                    <h1 class="pb-4 text-3xl font-extrabold text-center text-gray-900">{{ __('messages.welcome to') }}<br>
                         CITY LAYERS!</h1>
-                    <h1 class="pb-8 text-3xl font-bold text-center text-gray-900">{{ __('messages.Registration') }}</h1>
+                    <h1 class="pb-4 text-3xl font-bold text-center text-gray-900">{{ __('messages.Registration') }}</h1>
                 </div>
             </label>
 
@@ -19,7 +19,7 @@
                     <label for="name"
                         class="block mb-2 text-sm font-medium text-gray-800">{{ __('messages.Username') }}</label>
                     <input type="text" name="name" id="name" placeholder="Username"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800 dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800 dark:focus:ring-gray-500 dark:focus:border-gray-500"
                         required>
                 </div>
 
@@ -33,7 +33,7 @@
                     <label for="password"
                         class="block mb-1 text-sm font-medium text-gray-800">{{ __('messages.Password') }}</label>
                     <input type="password" name="password" id="password"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800 dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800 dark:focus:ring-gray-500 dark:focus:border-gray-500"
                         required>
                 </div>
 
@@ -41,23 +41,23 @@
                     <label for="password_confirmation"
                         class="block mb-2 text-sm font-medium text-gray-800">{{ __('messages.Confirm password') }}</label>
                     <input type="password" name="password_confirmation" id="password_confirmation"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800 dark:focus:ring-gray-500 dark:focus:border-gray-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800 dark:focus:ring-gray-500 dark:focus:border-gray-500"
                         required>
                 </div>
 
                 <div class="flex justify-center">
                     <button type="submit"
-                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">{{ __('messages.register') }}</button>
+                        class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">{{ __('messages.register') }}</button>
                 </div>
             </form>
 
-            <div class="pt-8 text-sm text-center text-gray-800">{{ __('messages.Already an account!') }}</div>
-            <div class="text-center text-gray-800 hover:text-gray-600 pt-4 font-bold"><a
+            <div class="pt-2 text-sm text-center text-gray-800">{{ __('messages.Already an account!') }}</div>
+            <div class="text-center text-gray-800 hover:text-gray-600 pt-2 font-bold"><a
                     href="login">{{ __('messages.login') }}</a></div>
 
                        @php $locale = session()->get('locale'); @endphp
   
-        <div class="flex justify-center pt-8">
+        <div class="flex justify-center pt-4">
             <a class="mx-2" href="lang/en"><img src="{{ asset('img/flag/England.png') }}" width="25px"></a>
             <a class="mx-2" href="lang/de"><img src="{{ asset('img/flag/Germany.png') }}" width="25px"></a>
         </div>
