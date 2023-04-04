@@ -6,8 +6,8 @@
             <label for="dropzone-file" class="flex flex-col justify-center w-5/6 mb-4">
                 <div class="flex flex-col items-center justify-center pb-4">
                     <h1 class="text-3xl font-extrabold text-center text-gray-900"> {{ __('messages.welcome to') }}<br> CITY LAYERS!</h1>
-                    <p class="mt-8 text-base text-center text-gray-600">{{ __('messages.A network for people who care about their environment!') }}</p>
-                    <p class="mt-8 text-base font-extrabold text-center text-gray-900">{{ __('messages.Earn points by exploring your surroundings and share your experiences with others!') }}</p>
+                    <p class="mt-4 text-base text-center text-gray-600">{{ __('messages.A network for people who care about their environment!') }}</p>
+                    <p class="mt-2 text-base font-extrabold text-center text-gray-900">{{ __('messages.Earn points by exploring your surroundings and share your experiences with others!') }}</p>
                 </div>
             </label>
             <form class="w-1/2 md:w-1/3 lg:w-1/4" role="form" method="POST" action="{{ route('backpack.auth.login') }}">
