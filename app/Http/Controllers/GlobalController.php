@@ -8,7 +8,11 @@ use App\Models\Street;
 use App\Models\Building;
 use App\Models\Openspace;
 use App\Models\Opinion;
+use App\Models\Opinion_de;
+use App\Models\Pages;
 use App\Models\Tag;
+use App\Models\Tag_de;
+use App\Models\Space_tag_de;
 use App\Models\Space_tag;
 use App\Models\Stat;
 use Carbon\Carbon;
@@ -512,27 +516,37 @@ class GlobalController extends Controller
     public function street()
     {
         $tags = Tag::where('category', 'street')->get();
+        $tags_de = Tag_de::where('category', 'street')->get();
 
-        return view('street_mapping', compact('tags'));
+        return view('street_mapping', compact('tags', 'tags_de'));
     }
 
     public function building()
     {
         $tags = Tag::where('category', 'building')->get();
+        $tags_de = Tag_de::where('category', 'building')->get();
 
-        return view('building_mapping', compact('tags'));
+        return view('building_mapping', compact('tags', 'tags_de'));
     }
 
     public function openspace()
     {
         $tags = Tag::where('category', 'openspace')->get();
+        $tags_de = Tag_de::where('category', 'openspace')->get();
 
-        return view('openspace_mapping', compact('tags'));
+        return view('openspace_mapping', compact('tags', 'tags_de'));
     }
 
     public function newtag(Request $request)
     {
-        $tag = new Tag();
+        $locale = session()->get('locale');
+        if ($locale == 'en') {
+            $tag = new Tag();
+        } elseif ($locale == 'de') {
+            $tag = new Tag_de();
+        } else {
+            $tag = new Tag();
+        }
         $tag->name = $request->name;
         $tag->category = $request->category;
         $tag->save();
@@ -541,7 +555,14 @@ class GlobalController extends Controller
 
     public function newopinion(Request $request)
     {
-        $opinion = new Opinion();
+        $locale = session()->get('locale');
+        if ($locale == 'en') {
+            $opinion = new Opinion();
+        } elseif ($locale == 'de') {
+            $opinion = new Opinion_de();
+        } else {
+            $opinion = new Opinion();
+        }
         $opinion->name = $request->name;
         $opinion->save();
         return back();
@@ -681,7 +702,15 @@ class GlobalController extends Controller
 
     static function allopinions()
     {
-        $opinions = Opinion::all();
+        $locale = session()->get('locale');
+        if ($locale == 'en') {
+            $opinions = Opinion::all();
+        } elseif ($locale == 'de') {
+            $opinions = Opinion_de::all();
+        } else {
+            $opinions = Opinion::all();
+        }
+
         return $opinions;
     }
 
@@ -753,7 +782,7 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $street->save();
-            } 
+            }
             if ($request->description != null) {
                 $street->description = $request->description;
                 $infos = Infosperso::where('user_id', $userid)->first();
@@ -778,7 +807,7 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $building->save();
-            } 
+            }
             if ($request->description != null) {
                 $building->description = $request->description;
                 $infos = Infosperso::where('user_id', $userid)->first();
@@ -803,7 +832,7 @@ class GlobalController extends Controller
                 $infos->score = $infos->score + 5;
                 $infos->save();
                 $openspace->save();
-            } 
+            }
             if ($request->description != null) {
                 $openspace->description = $request->description;
                 $infos = Infosperso::where('user_id', $userid)->first();
@@ -1919,7 +1948,6 @@ class GlobalController extends Controller
                     $street->spend_time_text = $request->text;
                     $infos->save();
                 }
-               
 
                 $street->save();
             }
@@ -1931,7 +1959,6 @@ class GlobalController extends Controller
                     $street->meeting_text = $request->text;
                     $infos->save();
                 }
-              
 
                 $street->save();
             }
@@ -1943,7 +1970,6 @@ class GlobalController extends Controller
                     $street->events_text = $request->text;
                     $infos->save();
                 }
-         
 
                 $street->save();
             }
@@ -1956,7 +1982,6 @@ class GlobalController extends Controller
                     $street->multifunctional_text = $request->text;
                     $infos->save();
                 }
-            
 
                 $street->save();
             }
@@ -1970,7 +1995,6 @@ class GlobalController extends Controller
                     $building->spend_time_text = $request->text;
                     $infos->save();
                 }
-          
 
                 $building->save();
             }
@@ -1982,7 +2006,6 @@ class GlobalController extends Controller
                     $building->meeting_text = $request->text;
                     $infos->save();
                 }
-   
 
                 $building->save();
             }
@@ -1994,7 +2017,6 @@ class GlobalController extends Controller
                     $building->events_text = $request->text;
                     $infos->save();
                 }
-            
 
                 $building->save();
             }
@@ -2005,7 +2027,6 @@ class GlobalController extends Controller
                     $infos->score = $infos->score + 1;
                     $building->multifunctional_text = $request->text;
                     $infos->save();
-
                 }
 
                 $building->save();
@@ -2020,7 +2041,6 @@ class GlobalController extends Controller
                     $openspace->spend_time_text = $request->text;
                     $infos->save();
                 }
-       
 
                 $openspace->save();
             }
@@ -2032,7 +2052,6 @@ class GlobalController extends Controller
                     $openspace->meeting_text = $request->text;
                     $infos->save();
                 }
-           
 
                 $openspace->save();
             }
@@ -2044,7 +2063,6 @@ class GlobalController extends Controller
                     $openspace->meeting_text = $request->text;
                     $infos->save();
                 }
-     
 
                 $openspace->save();
             }
@@ -2056,7 +2074,6 @@ class GlobalController extends Controller
                     $openspace->multifunctional_text = $request->text;
                     $infos->save();
                 }
-  
 
                 $openspace->save();
             }
@@ -2119,13 +2136,28 @@ class GlobalController extends Controller
 
     static function allspacetag()
     {
-        $spacetags = Space_tag::all();
+        $locale = session()->get('locale');
+        if ($locale == 'en') {
+            $spacetags = Space_tag::all();
+        } elseif ($locale == 'de') {
+            $spacetags = Space_tag_de::all();
+        } else {
+            $spacetags = Space_tag::all();
+        }
         return $spacetags;
     }
 
     public function newspacetag(Request $request)
     {
-        $spacetag = new Space_tag();
+        $locale = session()->get('locale');
+        if ($locale == 'en') {
+            $spacetag = new Space_tag();
+        } elseif ($locale == 'de') {
+            $spacetag = new Space_tag_de();
+        } else {
+            $spacetag = new Space_tag();
+        }
+
         $spacetag->name = $request->name;
         $spacetag->save();
         return 'ok';
@@ -2166,5 +2198,23 @@ class GlobalController extends Controller
             $data->delete();
             return redirect('/dashboard');
         }
+    }
+
+    static function pages()
+    {
+        $pages = Pages::where('id', 1)->first();
+        return $pages;
+    }
+
+    static function allusers()
+    {
+        $users = User::all();
+        return $users;
+    }
+
+    static function infosperso()
+    {
+        $infos = Infosperso::all();
+        return $infos;
     }
 }

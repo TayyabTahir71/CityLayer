@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\PagesRequest;
+use App\Http\Requests\TagDeRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class PagesCrudController
+ * Class TagDeCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class PagesCrudController extends CrudController
+class TagDeCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    // use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    //use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -26,9 +26,9 @@ class PagesCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Pages::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/pages');
-        CRUD::setEntityNameStrings('pages', 'pages');
+        CRUD::setModel(\App\Models\Tag_de::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/tag-de');
+        CRUD::setEntityNameStrings('tag de', 'tags de');
     }
 
     /**
@@ -40,14 +40,12 @@ class PagesCrudController extends CrudController
     protected function setupListOperation()
     {
         
-        CRUD::column('title');
-        // CRUD::column('content');
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
+        CRUD::setOperationSetting('lineButtonsAsDropdown', true);
+        $this->crud->addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Name']);
+        $this->crud->addColumn(['name' => 'category', 'type' => 'text', 'label' => 'Category']);
+      
     }
+
     /**
      * Define what happens when the Create operation is loaded.
      * 
@@ -56,24 +54,21 @@ class PagesCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-
-        CRUD::setValidation(PagesRequest::class);
-        CRUD::addField([
-            'name'       => 'title',
-            'label'      => 'Title',
-            'type'       => 'text',
+        CRUD::setValidation(TagDeRequest::class);
+        $this->crud->addField(['name' => 'name', 'type' => 'text', 'label' => 'Name']);
+        $this->crud->addField([   // select_from_array
+            'name'        => 'category',
+            'label'       => "Category",
+            'type'        => 'select_from_array',
+            'options'     => [
+                'Street' => 'Street',
+                'Building' => 'Building',
+                'Openspace' => 'Openspace',
+            ],
+            'default'     => 'Openspace',
+            'allows_null' => false,
+             'allows_multiple' => false, // OPTIONAL; needs you to cast this to array in your model;
         ]);
-        $this->crud->addField([
-            'name' => 'content',
-            'label' => 'Content',
-            'type' => 'summernote',
-            'placeholder' => 'Your text text here',
-        ]);
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
     }
 
     /**

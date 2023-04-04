@@ -18,7 +18,7 @@ class StreetCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
   //  use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
-  use \App\Http\Controllers\Admin\Operations\ExportOperation;
+    use \App\Http\Controllers\Admin\Operations\ExportStreetOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -44,17 +44,6 @@ class StreetCrudController extends CrudController
 
         ]);
 
-        $this->crud->addColumn([
-            'name' => 'image',
-            'label' => 'To change',
-            'type' => 'image',
-            'prefix' => 'storage/',
-            'height' => '80px',
-            'width' => 'auto',
-
-        ]);
-
-
     }
     /**
      * Define what happens when the List operation is loaded.
@@ -66,7 +55,7 @@ class StreetCrudController extends CrudController
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
         $this->getFieldsData();
-        CRUD::column('name');
+        // CRUD::column('name')->label('uuid');
         CRUD::column('latitude');
         CRUD::column('longitude');
         CRUD::column('user_id');

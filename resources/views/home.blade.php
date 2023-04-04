@@ -11,7 +11,7 @@
                 <div x-data="{ modelOpen: false }">
                     <div @click="modelOpen =!modelOpen"
                         class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center z-50">
-                        Start Playing!
+                        {{ __('messages.Start Playing!') }}
                         <div class="fixed bottom-0 right-0 m-2">
                             <a href="about"> <i
                                     class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info z-60"></i></a>
@@ -39,28 +39,25 @@
 
                                 <div class="items-center space-x-4 bloc">
 
-                                    <h1 class="text-3xl font-bold text-center text-black">This space is...</h1>
+                                    <h1 class="text-3xl font-bold text-center text-black">{{ __('messages.This space is...') }}</h1>
                                     <div class="flex flex-col pt-6">
                                         <div class="flex justify-center">
 
                                             <a href="street"> <button
                                                     class="w-32 h-32 mx-4 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400  focus:outline-none hover:text-gray-200 rounded-full">
-                                                    <i class="fa-solid fa-road"></i><br> a street
-                                                </button>
+                                                    <i class="fa-solid fa-road"></i><br>{{ __('messages.a street') }}</button>
                                             </a>
                                         </div>
                                         <div class="flex justify-center space-x-6">
                                             <a href="building">
                                                 <button
                                                     class="w-32 h-32 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
-                                                    <i class="fa-solid fa-building"></i><br> a building
-                                                </button>
+                                                    <i class="fa-solid fa-building"></i><br>{{ __('messages.a building') }}</button>
                                             </a>
                                             <a href="openspace">
                                                 <button
                                                     class="w-32 h-32  py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
-                                                    <i class="fa-solid fa-street-view"></i><br> an open<br> space
-                                                </button>
+                                                    <i class="fa-solid fa-street-view"></i><br>{{ __('messages.an open space') }}</button>
                                             </a>
                                         </div>
                                     </div>
@@ -88,7 +85,7 @@
 
                         <div class="items-center px-2 pt-3 space-x-4 bloc">
                             <div class="flex justify-center font-bold">
-                                You have earned <img src="/img/plus1.png" class="w-8 h-8 pb-2">point!
+                                {{ __('messages.You have earned') }} <img src="/img/plus1.png" class="w-8 h-8 pb-2">{{ __('messages.point!') }}
                             </div>
                         </div>
                     </div>
@@ -111,7 +108,7 @@
 
                         <div class="items-center px-2 py-3 space-x-4 bloc">
                             <div class="flex justify-center font-bold">
-                                You have already react to this place!
+                                 {{ __('messages.You have already react to this place!') }}
                             </div>
                         </div>
                     </div>
@@ -173,10 +170,11 @@
             pics = place.image0;
             placelatitude = place.latitude;
             placelongitude = place.longitude;
+            var message = '{{ __('messages.React to this place to earn points!') }}';
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
             }).addTo(mymap0).bindPopup(
-                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="text-sm px-4">React to this place to earn points!</p><img id="img" class="pb-4 w-auto max-h-96 text-sm"  src="/storage' + pics +'"  onerror="missing()"/><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="text-sm px-4">' + message +'</p><img id="img" class="pb-4 w-auto max-h-96 text-sm"  src="/storage' + pics +'"  onerror="missing()"/><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
                 '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +

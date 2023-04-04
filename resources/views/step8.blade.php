@@ -19,8 +19,7 @@
                                 class="flex justify-center w-screen p-8 overflow-hidden text-left transition-all transform bg-[#FAC710] shadow-xl z-50">
 
                                 <div class="items-center max-w-2xl space-x-4">
-                                    <h1 class="text-2xl font-bold text-center text-black">Do you like spending time or
-                                        passing through here?
+                                    <h1 class="text-2xl font-bold text-center text-black">{{ __('messages.Do you like spending time or passing through here?') }}
                                     </h1>
                                     <div class="flex flex-col pt-4 space-y-6">
                                         <div class="flex justify-between w-full">
@@ -28,7 +27,7 @@
                                                 @csrf
                                                 <button type="submit">
                                                     <img src="/img/happy.png" alt="happy" class="w-16 h-16 mb-2">
-                                                    <h1 class="font-bold ">yes</h1>
+                                                    <h1 class="font-bold ">{{ __('messages.yes') }}</h1>
                                                     <input type="hidden" name="step8" value="yes">
                                                 </button>
                                                 <input type="hidden" name="type" id="type0"
@@ -41,7 +40,7 @@
                                                 @csrf
                                                 <button type="submit">
                                                     <img src="/img/sad.png" alt="sad" class="w-16 h-16 mb-2">
-                                                    <h1 class="font-bold ">no</h1>
+                                                    <h1 class="font-bold ">{{ __('messages.no') }}</h1>
                                                     <input type="hidden" name="step8" value="no">
                                                 </button>
                                                 <input type="hidden" name="type" id="type1"
@@ -54,8 +53,8 @@
                                             @csrf
                                                 <button type="submit">
                                                     <img src="/img/worried.png" alt="stressed" class="w-16 h-16 mb-2">
-                                                    <h1 class="font-bold ">i don't know</h1>
-                                                    <input type="hidden" name="step8" value="i d'ont know">
+                                                    <h1 class="font-bold ">{{ __('messages.i dont know') }}</h1>
+                                                    <input type="hidden" name="step8" value="i don't know">
                                                 </button>
                                                 <input type="hidden" name="type" id="type2"
                                                     value="{{ $type }}">

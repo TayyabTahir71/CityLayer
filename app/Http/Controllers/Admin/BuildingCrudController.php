@@ -17,14 +17,11 @@ class BuildingCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
- //  use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
-
-
- 
- use \App\Http\Controllers\Admin\Operations\ExportOperation;
+    //  use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use \App\Http\Controllers\Admin\Operations\ExportBuildingOperation;
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -43,7 +40,6 @@ class BuildingCrudController extends CrudController
             'prefix' => 'storage/',
             'height' => '80px',
             'width' => 'auto',
-
         ]);
 
         $this->crud->addColumn([
@@ -53,13 +49,11 @@ class BuildingCrudController extends CrudController
             'prefix' => 'storage/',
             'height' => '80px',
             'width' => 'auto',
-
         ]);
-
     }
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -67,7 +61,7 @@ class BuildingCrudController extends CrudController
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
         $this->getFieldsData();
-        CRUD::column('name');
+        CRUD::column('name')->label('uuid');
         CRUD::column('latitude');
         CRUD::column('longitude');
         CRUD::column('user_id');
@@ -75,21 +69,25 @@ class BuildingCrudController extends CrudController
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
     protected function setupCreateOperation()
     {
         CRUD::setValidation(BuildingRequest::class);
-        CRUD::field('image0')->type('text')->label('Image Feeling');
-        CRUD::field('image')->type('text')->label('to change');
+        CRUD::field('image0')
+            ->type('text')
+            ->label('Image Feeling');
+        CRUD::field('image')
+            ->type('text')
+            ->label('to change');
         CRUD::field('user_id');
         CRUD::field('name');
         CRUD::field('latitude');
@@ -98,13 +96,13 @@ class BuildingCrudController extends CrudController
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

@@ -12,35 +12,34 @@
                      <div
                          class="flex justify-center w-screen p-8 overflow-hidden text-left transition-all transform bg-[#CDB8EB] shadow-xl z-50">
                          <div id="myfeel" class="items-center max-w-2xl space-x-4">
-                             <h1 class="text-2xl font-bold text-center text-black">How do you feel in this space?
-                             </h1>
+                             <h1 class="text-2xl font-bold text-center text-black">{{ __('messages.How do you feel in this space?') }}</h1>
                              <div class="flex flex-col pt-4 space-y-6">
                                  <div class="flex justify-between w-full">
                                      <button class="" onclick="feel('happy')">
                                          <img src="/img/happy.png" alt="happy" class="w-16 h-16 mb-2">
-                                         <h1 class="font-bold ">happy</h1>
+                                         <h1 class="font-bold ">{{ __('messages.happy') }}</h1>
                                      </button>
                                      <button class="" onclick="feel('sad')">
                                          <img src="/img/sad.png" alt="sad" class="w-16 h-16 mb-2">
-                                         <h1 class="font-bold ">sad</h1>
+                                         <h1 class="font-bold ">{{ __('messages.sad') }}</h1>
                                      </button>
                                      <button class="" onclick="feel('stressed')">
                                          <img src="/img/stressed.png" alt="stressed" class="w-16 h-16 mb-2">
-                                         <h1 class="font-bold ">stressed</h1>
+                                         <h1 class="font-bold ">{{ __('messages.stressed') }}</h1>
                                      </button>
 
                                  </div>
                                  <div class="flex justify-between w-full">
                                      <button class="" onclick="feel('angry')">
                                          <img src="/img/angry.png" alt="angry" class="w-16 h-16 mb-2">
-                                         <h1 class="font-bold ">angry</h1>
+                                         <h1 class="font-bold ">{{ __('messages.angry') }}</h1>
                                      </button>
                                      <button class="" onclick="feel('worried')">
                                          <img src="/img/worried.png" alt="worried" class="w-16 h-16 mb-2">
-                                         <h1 class="font-bold ">worried</h1>
+                                         <h1 class="font-bold ">{{ __('messages.worried') }}</h1>
                                      </button>
                                      <button class="mr-2" onclick="feel('other')">
-                                         <h1 class="pt-4 font-bold">/choose<br>other</h1>
+                                         <h1 class="pt-4 font-bold">{{ __('messages.other') }}</h1>
                                      </button>
                                  </div>
                              </div>
@@ -56,13 +55,13 @@
                              <div
                                  class="flex justify-center w-screen p-8 overflow-hidden text-left transition-all transform bg-[#CDB8EB] shadow-xl z-50">
                                  <div class="items-center max-w-2xl space-x-4">
-                                     <h1 class="pb-8 text-3xl text-center text-black">Share what makes you feel that way!
+                                     <h1 class="pb-8 text-3xl text-center text-black">{{ __('messages.Share what makes you feel that way!') }}
                                      </h1>
                                      <div class="flex flex-col pt-4 space-y-6">
                                          <div class="flex justify-center w-full">
                                              <button class="" onclick="document.getElementById('modalform').click()">
                                                  <h1 class="px-4 py-8 text-3xl font-bold text-center bg-white rounded-xl">
-                                                     Describe and share a photo!</h1>
+                                                     {{ __('messages.Describe and share a photo!') }}</h1>
                                              </button>
 
                                          </div>
@@ -105,8 +104,7 @@
                                      @csrf
                                      <div class="flex flex-col space-y-4">
                                          <div class="flex flex-col space-y-2">
-                                             <label for="description" class="text-sm font-bold text-gray-700">Describe what
-                                                 makes you feel that way!</label>
+                                             <label for="description" class="text-sm font-bold text-gray-700">{{ __('messages.Describe what makes you feel that way!') }}</label>
                                              <textarea name="description" id="description" cols="10" rows="10"
                                                  class="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-purple-300"
                                                  placeholder=""></textarea>
@@ -117,13 +115,12 @@
                                              <label for="imagefirst" class="cursor-pointer">
                                                  <div
                                                      class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                                     Upload a photo</div>
+                                                    {{ __('messages.Upload a photo') }}</div>
                                              </label>
-                                             <div id="success-message" class="hidden text-green-500 font-bold">File
-                                                 selected successfully!</div>
+                                             <div id="success-message" class="hidden text-green-500 font-bold">{{ __('messages.File selected successfully!') }}</div>
                                          </div>
                                          <button type="submit"
-                                             class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">Save</button>
+                                             class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">{{ __('messages.Save') }}</button>
                                          <input type="hidden" name="type" value="{{ $type }}">
                                          <input type="hidden" name="placeid" value="{{ $placeid }}">
                                      </div>

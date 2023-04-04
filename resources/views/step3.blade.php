@@ -1,6 +1,8 @@
  @php use \App\Http\Controllers\GlobalController; @endphp
  @php
      $opinions = GlobalController::allopinions();
+    $type = request()->query('type');
+    $placeid = request()->query('id');
  @endphp
 
  @extends('layouts.app')
@@ -14,8 +16,7 @@
                      <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
                  </div>
                  <div class="flex flex-col items-center justify-center">
-                     <h1 class="pt-2 mx-8 text-xl font-bold text-center text-gray-900">Add #opinions to describe the space
-                         and earn points!</h1>
+                     <h1 class="pt-2 mx-8 text-xl font-bold text-center text-gray-900">{{ __('messages.Add #opinions to describe the space and earn points!') }}</h1>
                      <div class="w-48 pt-8">
                          @foreach ($opinions as $opinion)
                              <label>
@@ -35,7 +36,7 @@
                              <button id="point" @click="modelOpen =!modelOpen"
                                  class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
                                  <div class="flex justify-center">
-                                     <div class="font-semibold">Add a new opinion</div>
+                                     <div class="font-semibold">{{ __('messages.Add a new opinion') }}</div>
                                  </div>
                              </button>
 
@@ -63,14 +64,14 @@
 
                                          <div class="items-center pt-3 space-x-4 bloc">
                                              <div class="flex flex-col justify-center">
-                                                 <h1 class="pb-4 text-2xl font-bold">Add a new opinion</h1>
+                                                 <h1 class="pb-4 text-2xl font-bold">{{ __('messages.Add a new opinion') }}</h1>
                                                  <div>
                                                      <input type="text" name="opinionname" id="opinionname"
                                                          class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                          placeholder="Enter tag name">
                                                  </div>
                                                  <button id="newopinion"
-                                                     class="px-4 text-2xl py-2 bg-[#CDB8EB] text-gray-800 hover:bg-purple-300 active:bg-purple-400 focus:outline-none font-bold mt-4">Save</button>
+                                                     class="px-4 text-2xl py-2 bg-[#CDB8EB] text-gray-800 hover:bg-purple-300 active:bg-purple-400 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                              </div>
                                          </div>
                                      </div>
@@ -80,7 +81,7 @@
                      </div>
                      <button id="saveopinion"
                          class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-4">
-                         Next challenge!
+                        {{ __('messages.Next challenge!') }}
                      </button>
                      <input type="hidden" id="type" value="{{ $type }}">
                      <input type="hidden" id="placeid" value="{{ $placeid }}">
@@ -99,6 +100,10 @@
 
              $('#newopinion').click(function() {
                  name = document.getElementById('opinionname').value;
+                 thedata = document.getElementById('placeid').value;
+                 thetype = document.getElementById('type').value;
+                 var url = window.location.toString();
+                 window.location = url.replace('upload-image0', 'step3?id=' + thedata + '&type=' + thetype);
 
                  $.ajax({
                      type: 'POST',

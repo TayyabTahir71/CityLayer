@@ -16,7 +16,7 @@
                   <input type="hidden" name="type" id="type" value="{{ $type }}">
                  <input type="hidden" name="placeid" id="placeid" value="{{ $placeid }}">
                  <div class="flex flex-col items-center justify-center">
-                     <h1 class="pt-2 mx-8 text-xl font-bold text-center text-gray-900">Who uses the space the most? Add #tags!</h1>
+                     <h1 class="pt-2 mx-8 text-xl font-bold text-center text-gray-900">{{ __('messages.Who uses the space the most? Add #tags!') }}</h1>
                      <div class="w-48 pt-8">
                          @foreach ($spacetags as $spacetag)
                              <label>
@@ -36,7 +36,7 @@
                              <button id="point" @click="modelOpen =!modelOpen"
                                  class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#FAC710]  bg-yellow-200 peer-focus:ring-2">
                                  <div class="flex justify-center">
-                                     <div class="font-semibold">Add a new tag</div>
+                                     <div class="font-semibold">{{ __('messages.Add a new tag') }}</div>
                                  </div>
                              </button>
 
@@ -64,14 +64,14 @@
 
                                          <div class="items-center pt-3 space-x-4 bloc">
                                              <div class="flex flex-col justify-center">
-                                                 <h1 class="pb-4 text-2xl font-bold">Add a new tag</h1>
+                                                 <h1 class="pb-4 text-2xl font-bold">{{ __('messages.Add a new tag') }}</h1>
                                                  <div>
                                                      <input type="text" name="spacetagname" id="spacetagname"
                                                          class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#FAC710] focus:border-transparent"
                                                          placeholder="Enter tag name">
                                                  </div>
                                                  <button id="newspacetag"
-                                                     class="px-4 text-2xl py-2 bg-[#FAC710] text-gray-800 hover:bg-yellow-300 active:bg-yellow-400 focus:outline-none font-bold mt-4">Save</button>
+                                                     class="px-4 text-2xl py-2 bg-[#FAC710] text-gray-800 hover:bg-yellow-300 active:bg-yellow-400 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                              </div>
                                          </div>
                                      </div>
@@ -81,7 +81,7 @@
                      </div>
                      <button id="savespacetags"
                          class="px-4 text-2xl py-2 text-gray-800 bg-[#FAC710] hover:bg-yellow-300 active:bg-yellow-400 border focus:outline-none rounded-xl font-bold mt-4">
-                         Done!
+                         {{ __('messages.Done!') }}
                      </button>
                  </div>
              </div>

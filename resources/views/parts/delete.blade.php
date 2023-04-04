@@ -20,7 +20,7 @@
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
 
-                <h1 class="text-xl font-medium text-center text-gray-800" >Confirmer la suppression?</h1>
+                <h1 class="text-xl font-medium text-center text-gray-800" >Confirm delete?</h1>
                 <div class="items-center space-x-4 bloc">
           
                     <div class="flex pt-6 justify-evenly">

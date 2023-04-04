@@ -2,59 +2,35 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\OpenspaceRequest;
+use App\Http\Requests\SpaceTagDeRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class OpenspaceCrudController
+ * Class SpaceTagDeCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class OpenspaceCrudController extends CrudController
+class SpaceTagDeCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-   // use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
-   use \App\Http\Controllers\Admin\Operations\ExportOpenspaceOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
      * 
      * @return void
-     */
+     * */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Openspace::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/openspace');
-        CRUD::setEntityNameStrings('openspace', 'openspaces');
+        CRUD::setModel(\App\Models\Space_tag_de::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/space-tag-de');
+        CRUD::setEntityNameStrings('space usage de', 'space usages de');
     }
 
-    function getFieldsData()
-    {
-        $this->crud->addColumn([
-            'name' => 'image0',
-            'label' => 'Image Feeling',
-            'type' => 'image',
-            'prefix' => 'storage/',
-            'height' => '80px',
-            'width' => 'auto',
-
-        ]);
-
-        $this->crud->addColumn([
-            'name' => 'image',
-            'label' => 'To change',
-            'type' => 'image',
-            'prefix' => 'storage/',
-            'height' => '80px',
-            'width' => 'auto',
-
-        ]);
-
-    }
     /**
      * Define what happens when the List operation is loaded.
      * 
@@ -64,13 +40,7 @@ class OpenspaceCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
-        $this->getFieldsData();
-        CRUD::column('name')->label('uuid');
-        CRUD::column('latitude');
-        CRUD::column('longitude');
-        CRUD::column('user_id');
-        $this->crud->enableExportButtons();
-        
+        $this->crud->addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Name']);
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
@@ -86,13 +56,9 @@ class OpenspaceCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(OpenspaceRequest::class);
-        CRUD::field('image0')->type('text')->label('Image Feeling');
-        CRUD::field('image')->type('text')->label('to change');
-        CRUD::field('user_id');
-        CRUD::field('name');
-        CRUD::field('latitude');
-        CRUD::field('longitude');
+        CRUD::setValidation(SpaceTagDeRequest::class);
+        $this->crud->addField(['name' => 'name', 'type' => 'text', 'label' => 'Name']);
+        
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

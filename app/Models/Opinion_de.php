@@ -5,8 +5,7 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Infosperso extends Model
+class Opinion_de extends Model
 {
     use CrudTrait;
 
@@ -16,29 +15,14 @@ class Infosperso extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'infosperso';
+    protected $table = 'opinions_de';
     // protected $primaryKey = 'id';
      public $timestamps = false;
     protected $guarded = ['id'];
      protected $fillable = [
-        'user_id',
-        'image',
-        'age',
-        'gender',
-        'profession',
-        'relation',
-        'preferences',
-        'score',
-        'telephone',
+        'name',
      ];
     // protected $hidden = [];
     // protected $dates = [];
-   
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    
 }

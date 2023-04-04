@@ -89,7 +89,7 @@
              </div>
              <button
                  class="px-4 py-2 mx-auto mt-8 text-xl font-bold text-center text-white bg-green-400 rounded-full hover:bg-green-300 active:bg-green-800">
-                 <a href="/edit_profile">Edit Profile</a>
+                 <a href="/edit_profile">{{ __('messages.Edit Profile') }}</a>
              </button>
          </div>
      </div>

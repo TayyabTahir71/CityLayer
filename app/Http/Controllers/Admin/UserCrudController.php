@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\UserRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Mail\AboMail;
+use App\Models\Infosperso;
 use Illuminate\Support\Facades\Mail;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -58,10 +59,9 @@ class UserCrudController extends CrudController
         $this->getFieldsData();
         CRUD::column('name');
         CRUD::column('email');
-        CRUD::column('role')->type('select_from_array')->options([
-            'admin' => 'admin',
-            'user' => 'user',
-        ]);
+        //get score from infosperso class where user_id = id
+
+ 
         $this->crud->enableExportButtons();
        
 

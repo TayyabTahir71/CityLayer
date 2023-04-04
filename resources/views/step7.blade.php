@@ -11,16 +11,16 @@
             <form action="protected" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
-                    <h1 class="pt-4 text-4xl font-bold text-center text-gray-900 mx-8">Let others know how protected the space is!
+                    <h1 class="pt-4 text-4xl font-bold text-center text-gray-900 mx-8">{{ __('messages.Let others know how protected the space is!') }}
                     </h1>
                     <div class="pb-8">
                         <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pt-4 pb-16">
                             <input name="protected" id="protected" class="hidden" type="input" x-model="total_value" />
                             <div class="flex justify-between">
                                 <label for="default-range"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">very unsafe</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.very unsafe') }}</label>
                                 <label for="default-range"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">very safe</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.very safe') }}</label>
                             </div>
                             <div class="w-full flex justify-between text-xs px-2">
                                 <span>|</span>
@@ -42,7 +42,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="bottom: 100%; right: 90%; transform: translate(50%, 50%)">traffic safety</button>
+                                style="bottom: 100%; right: 90%; transform: translate(50%, 50%)">{{ __('messages.traffic safety') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -67,7 +67,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Protection from traffic</h1>
+                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Protection from traffic') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="protection" id="protection" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -83,9 +83,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">poor</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.poor') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">great!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.great!') }}</label>
                                                     </div>
 
                                                 </div>
@@ -95,7 +95,7 @@
                                                         Show us!</p>
                                                 </div>
                                                 <button type="button" id="activitiesbtn" onclick="newAction('protection')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
+                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="bottom: 100%; right: 10%; transform: translate(50%, 50%)">Pollutants<br> (dust, smells)</button>
+                                style="bottom: 100%; right: 10%; transform: translate(50%, 50%)">{{ __('messages.Pollutants') }}<br> ({{ __('messages.dust, smells') }})</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -132,7 +132,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Pollutants</h1>
+                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Pollutants') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="polluants" id="polluants" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -148,19 +148,19 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">poor</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.poor') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">great!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.great!') }}</label>
                                                     </div>
 
                                                 </div>
                                                 <div>
                                                     <input type="text" name="polluants_text" id="polluants_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
-                                                        placeholder="Tell us more!">
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                 <button type="button" id="restbtn" onclick="newAction('polluants')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
+                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -171,7 +171,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 50%; right: 10%; transform: translate(50%, -50%)">night lighting</button>
+                                style="top: 50%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.night lighting') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -197,7 +197,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Night lighting</h1>
+                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Night lighting') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="night" id="night" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -213,19 +213,19 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">poor</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.poor') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">great!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.great!') }}</label>
                                                     </div>
 
                                                 </div>
                                                 <div>
                                                     <input type="text" name="night_text" id="night_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
-                                                        placeholder="Tell us more!">
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                 <button type="button" id="movementbtn" onclick="newAction('night')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
+                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -236,7 +236,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 100%; right: 10%; transform: translate(50%, -50%)">other hazards</button>
+                                style="top: 100%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.other hazards') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -262,15 +262,15 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold mx-2">Let others know about other hazards!</h1>
+                                                <h1 class="py-4 text-3xl font-bold mx-2">{{ __('messages.Let others know about other hazards!') }}</h1>
                                                 <div>
                                                     <input type="text" name="hazards_text" id="hazards_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
-                                                        placeholder="Tell us more!">
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                 <button type="button" id="orientationbtn"
                                                     onclick="newAction('hazards')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
+                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -281,7 +281,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="bottom: 0; left: 10%; transform: translate(-50%, 50%)">dangerous objects</button>
+                                style="bottom: 0; left: 10%; transform: translate(-50%, 50%)">{{ __('messages.dangerous objects') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -307,7 +307,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Dangerous objects</h1>
+                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Dangerous objects') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="dangerous" id="dangerous" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -323,9 +323,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">none</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.none') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">many</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.many') }}</label>
                                                     </div>
 
                                                 </div>
@@ -335,7 +335,7 @@
                                                         placeholder="Describe!">
                                                 </div>
                                                 <button type="button" id="weatherbtn" onclick="newAction('dangerous')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
+                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -346,7 +346,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 50%; left: 10%;  transform: translate(-50%, -50%)">safety from harm</button>
+                                style="top: 50%; left: 10%;  transform: translate(-50%, -50%)">{{ __('messages.safety from harm') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -372,7 +372,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Protection from harm</h1>
+                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Protection from harm') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="protection_harm" id="protection_harm" class="hidden"
                                                         type="input" x-model="total_value" />
@@ -388,9 +388,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">very unsafe</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.very unsafe') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">very safe</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.very safe') }}</label>
                                                     </div>
 
                                                 </div>
@@ -401,7 +401,7 @@
                                                 </div>
                                                 <button type="button" id="facilitiesbtn"
                                                     onclick="newAction('protection_harm')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
+                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -413,7 +413,7 @@
                     </div>
                     <button id="saveplace" type="submit"
                         class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-24">
-                        Next challenge!
+                         {{ __('messages.Next challenge!') }} 
                     </button>
                 </div>
             </form>

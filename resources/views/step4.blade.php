@@ -13,19 +13,16 @@
              <form action="upload-image" method="POST" enctype="multipart/form-data">
                  @csrf
                  <div class="flex flex-col items-center justify-center">
-                     <h1 class="pt-16 mx-8 text-4xl font-bold text-center text-gray-900">Would you change something in this
-                         space?
+                     <h1 class="pt-16 mx-8 text-4xl font-bold text-center text-gray-900">{{ __('messages.Would you change something in this space?') }}
                      </h1>
                      <div class="pt-4">
                          <div x-data="{ total_value: 50 }" class="max-w-screen-md pt-16 pb-16 mx-auto">
                              <input name="change" id="change" class="hidden" type="input" x-model="total_value" />
                              <div class="flex justify-between">
                                  <label for="default-range"
-                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">nothing at
-                                     all</label>
+                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.nothing at all') }}</label>
                                  <label for="default-range"
-                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">many
-                                     things</label>
+                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.many things') }}</label>
                              </div>
                              <div class="flex justify-between w-full px-2 text-xs">
                                  <span>|</span>
@@ -43,7 +40,7 @@
                          <div class="flex justify-center">
                              <button type="button" id="modalform" @click="modelOpen =!modelOpen"
                                  class="px-2 py-8 text-3xl font-bold text-center bg-white rounded-xl">
-                                 Describe and share a photo!
+                                 {{ __('messages.Describe and share a photo!') }}
                              </button>
                          </div>
 
@@ -72,8 +69,7 @@
                                              <div class="flex flex-col space-y-4">
                                                  <div class="flex flex-col space-y-2">
                                                      <label for="description"
-                                                         class="text-sm font-bold text-gray-700">Describe what
-                                                         you would change!</label>
+                                                         class="text-sm font-bold text-gray-700">{{ __('messages.Describe what you would change!') }}</label>
                                                      <textarea name="description" id="description" cols="10" rows="10"
                                                          class="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-purple-300" placeholder=""></textarea>
                                                  </div>
@@ -83,12 +79,12 @@
                                                      <label for="image" class="cursor-pointer">
                                                          <div
                                                              class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">
-                                                             Upload a photo</div>
+                                                             {{ __('messages.Upload a photo') }}</div>
                                                      </label>
-                                                      <div id="success-message" class="hidden text-green-500 font-bold">File selected successfully!</div>
+                                                      <div id="success-message" class="hidden text-green-500 font-bold">{{ __('messages.File selected successfully!') }}</div>
                                                  </div>
                                                  <button type="submit"
-                                                     class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">Save</button>
+                                                     class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">{{ __('messages.Save') }}</button>
                                                  <input type="hidden" name="type" value="{{ $type }}">
                                                  <input type="hidden" name="placeid" value="{{ $placeid }}">
                                              </div>
@@ -101,7 +97,7 @@
                      </div>
                      <button id="saveplace" type="submit"
                          class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-16">
-                         Next challenge!
+                         {{ __('messages.Next challenge!') }}
                      </button>
                  </div>
              </form>

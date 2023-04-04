@@ -11,7 +11,7 @@
             <form action="spaceusage" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
-                    <h1 class="pt-4 text-4xl font-bold text-center text-gray-900 mx-8">Let others know how well the space is used!
+                    <h1 class="pt-4 text-4xl font-bold text-center text-gray-900 mx-8">{{ __('messages.Let others know how well the space is used!') }}
                     </h1>
                     <div class="pb-8">
 
@@ -19,9 +19,9 @@
                             <input name="know_space" id="know_space" class="hidden" type="input" x-model="total_value" />
                             <div class="flex justify-between">
                                 <label for="default-range"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">unfit or wrong!</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.unfit or wrong!') }}</label>
                                 <label for="default-range"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">great!</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.great!') }}</label>
                             </div>
                             <div class="w-full flex justify-between text-xs px-2">
                                 <span>|</span>
@@ -43,7 +43,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                class="absolute rounded-full bg-[#FAC710] w-28 h-28 text-white font-bold"
-                                style="bottom: 100%; right: 50%; transform: translate(50%, 50%)">fun to<br> spend time</button>
+                                style="bottom: 100%; right: 50%; transform: translate(50%, 50%)">{{ __('messages.fun to') }}<br>{{ __('messages.spend time') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -68,7 +68,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Fun to spend time</h1>
+                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Fun to spend time') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="spend_time" id="spend_time" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -84,9 +84,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">not at all!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.not at all!') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">very fun!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.very fun!') }}</label>
                                                     </div>
 
                                                 </div>
@@ -96,7 +96,7 @@
                                                         placeholder="Tell us more!">
                                                 </div>
                                                 <button type="button" id="activitiesbtn" onclick="newAction('spend_time')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
+                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#FAC710] w-28 h-28 text-white font-bold"
-                                style="bottom: 50%; right: 50%; transform: translate(50%, 50%)">meeting friends</button>
+                                style="bottom: 50%; right: 50%; transform: translate(50%, 50%)">{{ __('messages.meeting friends') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -133,7 +133,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">Meeting friends</h1>
+                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Meeting friends') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="meeting" id="meeting" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -149,19 +149,19 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">bad meeting spot!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.bad meeting spot!') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">great meeting spot!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.great meeting spot!') }}</label>
                                                     </div>
 
                                                 </div>
                                                 <div>
                                                     <input type="text" name="meeting_text" id="meeting_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#FAC710] focus:border-transparent"
-                                                        placeholder="Tell us more!">
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                 <button type="button" id="restbtn" onclick="newAction('meeting')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
+                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#FAC710] w-28 h-28 text-white font-bold"
-                                style="top: 100%; right: 90%; transform: translate(50%, -50%)">events<br> in space</button>
+                                style="top: 100%; right: 90%; transform: translate(50%, -50%)">{{ __('messages.events') }}<br>{{ __('messages.in space') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -198,7 +198,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">events in space</h1>
+                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.events in space') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="events" id="events" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -214,19 +214,19 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">never</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.never') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">often!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.often!') }}</label>
                                                     </div>
 
                                                 </div>
                                                 <div>
                                                     <input type="text" name="events_text" id="events_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#FAC710] focus:border-transparent"
-                                                        placeholder="Tell us more!">
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                 <button type="button" id="movementbtn" onclick="newAction('events')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
+                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -237,7 +237,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#FAC710] w-28 h-28 text-white font-bold"
-                                style="top: 100%; right: 10%; transform: translate(50%, -50%)">multifunctional</button>
+                                style="top: 100%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.multifunctional') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -263,7 +263,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold mx-2">Multifunctional!</h1>
+                                                <h1 class="py-4 text-3xl font-bold mx-2">{{ __('messages.Multifunctional!') }}</h1>
                                                    <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="multifunctional" id="multifunctional" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -279,9 +279,9 @@
                                                     </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">can't be used<br> for anything else!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.cant be used') }}<br>{{ __('messages.for anything else!') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">can be used<br> for many things!</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.can be used') }}<br>{{ __('messages.for many things!') }}</label>
                                                     </div>
 
                                                 </div>
@@ -292,7 +292,7 @@
                                                 </div>
                                                 <button type="button" id="orientationbtn"
                                                     onclick="newAction('multifunctional')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">Save</button>
+                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -304,7 +304,7 @@
                     </div>
                     <button id="saveplace" type="submit"
                         class="px-4 text-2xl py-2 text-gray-800 bg-[#FAC710] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-24">
-                        Next challenge!
+                        {{ __('messages.Next challenge!') }} 
                     </button>
                 </div>
             </form>
