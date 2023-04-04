@@ -4,7 +4,7 @@
     <div data-barba="container" class="relative h-screen">
         <div class="flex flex-col items-center h-screen p-8 mx-auto">
 
-            <label for="dropzone-file" class="flex flex-col justify-center w-5/6 pt-8">
+            <label for="dropzone-file" class="flex flex-col justify-center w-5/6">
                 <div class="flex flex-col items-center justify-center pt-4">
                     <h1 class="pb-8 text-3xl font-extrabold text-center text-gray-900">{{ __('messages.welcome to') }}<br>
                         CITY LAYERS!</h1>
