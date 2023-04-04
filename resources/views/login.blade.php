@@ -25,7 +25,7 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"
                         required>
                 </div>
-                <div class="flex items-start">
+                <div class="flex items-start pb-2">
                     <div class="flex items-center h-5">
                         <input id="remember" type="checkbox" value=""
                             class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800">
@@ -37,10 +37,10 @@
                         class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">{{ __('messages.Submit') }}</button>
                 </div>
             </form>
-            <div class="font-bold text-center text-gray-800 hover:text-gray-600 pt-4"><a href="register">{{ __('messages.register') }}</a></div>
+            <div class="font-bold text-center text-gray-800 hover:text-gray-600 pt-2"><a href="register">{{ __('messages.register') }}</a></div>
                        @php $locale = session()->get('locale'); @endphp
   
-        <div class="flex justify-center pt-4">
+        <div class="flex justify-center pt-2">
             <a class="mx-2" href="lang/en"><img src="{{ asset('img/flag/England.png') }}" width="25px"></a>
             <a class="mx-2" href="lang/de"><img src="{{ asset('img/flag/Germany.png') }}" width="25px"></a>
         </div>
