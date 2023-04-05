@@ -74,8 +74,6 @@ Route::get('logout', 'logout');
 
 });
 
-
-
 Route::get('about', function () {
     return view('about');
 });
