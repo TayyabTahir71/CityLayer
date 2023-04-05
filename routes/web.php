@@ -74,20 +74,20 @@ Route::get('logout', 'logout');
 
 });
 
-Route::get('.well-known/assetlinks.json' , function () {
-    return response()->json([
-        [
-            'relation' => ['delegate_permission/common.handle_all_urls'],
-            'target' => [
-                'namespace' => 'android_app',
-                'package_name' => 'fr.xbmod.citylayer.twa',
-                'sha256_cert_fingerprints' => [
-                    'B1:C3:03:CB:95:94:A3:07:B9:F9:98:B2:E4:78:05:00:4C:64:C9:C6:54:0B:5F:09:DD:6A:16:D7:41:9D:0A:A9'
-                ]
-            ]
-        ]
-    ]);
-});
+// Route::get('.well-known/assetlinks.json' , function () {
+//     return response()->json([
+//         [
+//             'relation' => ['delegate_permission/common.handle_all_urls'],
+//             'target' => [
+//                 'namespace' => 'android_app',
+//                 'package_name' => 'fr.xbmod.citylayer.twa',
+//                 'sha256_cert_fingerprints' => [
+//                     'B1:C3:03:CB:95:94:A3:07:B9:F9:98:B2:E4:78:05:00:4C:64:C9:C6:54:0B:5F:09:DD:6A:16:D7:41:9D:0A:A9'
+//                 ]
+//             ]
+//         ]
+//     ]);
+// });
 
 Route::get('about', function () {
     return view('about');
