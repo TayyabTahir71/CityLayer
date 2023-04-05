@@ -19,7 +19,7 @@
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^\.well-known/ - [L]
+    RewriteRule ^.well-known/assetlinks\.json$ - [L]
     RewriteRule ^ index.php [L]
     
 </IfModule>
