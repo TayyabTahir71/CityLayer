@@ -75,7 +75,6 @@ Route::get('logout', 'logout');
 });
 
 Route::get('/.well-known/assetlinks.json' , function () {
-   
     return response()->json([
         [
             'relation' => ['delegate_permission/common.handle_all_urls'],
