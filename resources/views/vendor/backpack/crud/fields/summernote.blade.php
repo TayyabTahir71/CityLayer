@@ -39,7 +39,7 @@
                 
         }
         .note-editable{
-            background-color: rgb(170, 170, 170);
+            color: #000;
         }
     </style>
     @endLoadOnce

@@ -305,5 +305,13 @@ return [
     'other' => 'andere',
     '-relations' => '-Beziehungen',
     '-personal preference' => '-persönliche Vorliebe',
+    'Mapping' => 'Karten',
+    'tool' => 'Werkzeug',
+    'research' => 'Forschung',
+    'overview' => 'Übersicht',
+    'Project team' => 'Projektteam',
+    '& partners' => '& Partner',
+    'Contact' => 'Kontakt',
+    'us' => 'uns',
 
 ];

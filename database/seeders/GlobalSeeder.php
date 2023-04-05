@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Tag;
+use App\Models\Tag_de;
 use App\Models\Opinion;
+use App\Models\Opinion_de;
 use App\Models\Space_tag;
+use App\Models\Space_tag_de;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -389,5 +392,411 @@ class GlobalSeeder extends Seeder
                     'id'=>15,
                     'name'=>'nobody'
                     ] );
+
+
+
+                    Opinionsde::create( [
+                        'id'=>1,
+                        'name'=>'gefährlich'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>2,
+                        'name'=>'leicht zu gehen'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>3,
+                        'name'=>'zu laut'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>4,
+                        'name'=>'schlecht konzipiert'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>5,
+                        'name'=>'angenehm'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>6,
+                        'name'=>'gut um Zeit zu verbringen'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>7,
+                        'name'=>'unbequem'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>8,
+                        'name'=>'schön'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>9,
+                        'name'=>'Unvergesslich'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>10,
+                        'name'=>'schwierig für Menschen mit Behinderungen'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>11,
+                        'name'=>'unbenut'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>12,
+                        'name'=>'keine Aktivitäten'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>13,
+                        'name'=>'sehr ruhig'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>14,
+                        'name'=>'Verkehrssicher'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>15,
+                        'name'=>'schwer beweglich'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>16,
+                        'name'=>'sicher in der Nacht'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>17,
+                        'name'=>'vor Sonne, Regen und Wind geschützt'
+                        ] );
+                                    
+                        Opinionsde::create( [
+                        'id'=>18,
+                        'name'=>'sehr ruhig'
+                        ] );
+
+                        Tagsde::create( [
+                            'id'=>1,
+                            'name'=>'Gehsteig',
+                            'category'=>'Street'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>2,
+                            'name'=>'Weg',
+                            'category'=>'Street'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>3,
+                            'name'=>'Straße',
+                            'category'=>'Street'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>4,
+                            'name'=>'Kreuzung',
+                            'category'=>'Street'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>5,
+                            'name'=>'Durchgang',
+                            'category'=>'Street'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>6,
+                            'name'=>'Gallerie',
+                            'category'=>'Street'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>7,
+                            'name'=>'Fahrradweg',
+                            'category'=>'Street'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>8,
+                            'name'=>'Haltestelle',
+                            'category'=>'Street'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>9,
+                            'name'=>'Parkplatz',
+                            'category'=>'Street'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>12,
+                            'name'=>'Fassade',
+                            'category'=>'Building'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>13,
+                            'name'=>'Eingang',
+                            'category'=>'Building'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>14,
+                            'name'=>'Innenbereich',
+                            'category'=>'Building'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>15,
+                            'name'=>'Schule',
+                            'category'=>'Building'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>16,
+                            'name'=>'Museum',
+                            'category'=>'Building'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>17,
+                            'name'=>'Kirche',
+                            'category'=>'Building'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>18,
+                            'name'=>'Universität',
+                            'category'=>'Building'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>19,
+                            'name'=>'Bibliothek',
+                            'category'=>'Building'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>21,
+                            'name'=>'Denkmal',
+                            'category'=>'Building'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>22,
+                            'name'=>'Park',
+                            'category'=>'Openspace'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>23,
+                            'name'=>'öffentlicher Platz',
+                            'category'=>'Openspace'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>24,
+                            'name'=>'Weg',
+                            'category'=>'Openspace'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>25,
+                            'name'=>'Erholungsraum',
+                            'category'=>'Openspace'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>26,
+                            'name'=>'Spielplatz',
+                            'category'=>'Openspace'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>27,
+                            'name'=>'Hundepark',
+                            'category'=>'Openspace'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>28,
+                            'name'=>'leere Fläche',
+                            'category'=>'Openspace'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>29,
+                            'name'=>'Gemeinschaftsgarten',
+                            'category'=>'Openspace'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>30,
+                            'name'=>'Baustelle',
+                            'category'=>'Openspace'
+                            ] );
+                            
+                            
+                                        
+                            Tagsde::create( [
+                            'id'=>31,
+                            'name'=>'Brunnen',
+                            'category'=>'Openspace'
+                            ] );
+
+
+                            Spacetagsde::create( [
+                                'id'=>3,
+                                'name'=>'Einwohner/-in'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>4,
+                                'name'=>'Arbeitnehmer/-in'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>5,
+                                'name'=>'Tourist/-in'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>6,
+                                'name'=>'Haustierbesitzer'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>7,
+                                'name'=>'Elternteil(e) mit Kindern'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>8,
+                                'name'=>'Kinder'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>9,
+                                'name'=>'Student/-in'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>10,
+                                'name'=>'LGBTQ+ group'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>11,
+                                'name'=>'Sportler/-in'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>12,
+                                'name'=>'Jugendliche'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>13,
+                                'name'=>'Senioren'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>14,
+                                'name'=>'Obdachlos'
+                                ] );
+                                
+                                
+                                            
+                                Spacetagsde::create( [
+                                'id'=>15,
+                                'name'=>'niemand'
+                                ] );
+                                
+                            
     }
 }

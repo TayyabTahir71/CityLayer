@@ -48,16 +48,16 @@
    <div class="fixed bottom-0 right-0 left-0 bg-black text-white">
             <div class="flex justify-between mx-4 text-sm font-bold pt-4 pb-4 text-center">
             <a href="about">
-            Mapping<br>tool
+            {{ __('messages.Mapping') }}<br>{{ __('messages.tool') }}
             </a>
              <a href="research">
-            research<br>overview 
+            {{ __('messages.research') }}<br>{{ __('messages.overview') }} 
             </a>
              <a href="team">
-            Project team<br> & partners
+            {{ __('messages.Project team') }}<br>{{ __('messages.& partners') }}
             </a>
              <a href="contact">
-            Contact<br>us
+            {{ __('messages.Contact') }}<br>{{ __('messages.us') }}
             </a>
             </div>
         </div>

@@ -305,6 +305,13 @@ return [
     'other' => 'other',
     '-relations' => '-relations',
     '-personal preference' => '-personal preference',
-
+    'Mapping' => 'Mapping',
+    'tool' => 'tool',
+    'research' => 'research',
+    'overview' => 'overview',
+    'Project team' => 'Project team',
+    '& partners' => '& partners',
+    'Contact' => 'Contact',
+    'us' => 'us',
 
 ];
