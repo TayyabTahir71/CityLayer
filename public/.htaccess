@@ -20,7 +20,7 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_URI} !^/\.well-known/[0-9a-zA-Z_-]+$
-    RewriteRule ^(.*)$ [L]
+    RewriteRule ^(.*)$ public/ [L]
     RewriteRule ^ index.php [L]
     
 </IfModule>
