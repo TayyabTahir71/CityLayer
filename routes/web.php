@@ -75,7 +75,8 @@ Route::get('logout', 'logout');
 });
 
 Route::get('.well-known/assetlinks.json' , function () {
-    return File::get(public_path() . 'assetlinks.json');
+    //return File::get(public_path() . 'assetlinks.json');
+    return 'okokok';
 });
 
 Route::get('about', function () {
