@@ -74,7 +74,7 @@ Route::get('logout', 'logout');
 
 });
 
-Route::get('/.well-known/assetlinks.json' , function () {
+Route::get('.well-known/assetlinks.json' , function () {
     return 'yes';
 });
 
