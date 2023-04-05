@@ -8,12 +8,13 @@
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-    RewriteRule ^\.well-known/assetlinks\.json$ - [L]
+   # RewriteRule ^\.well-known/assetlinks\.json$ - [L]
+    RewriteRule ^\.well-known/ - [L]
+
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
-    #RewriteCond %{REQUEST_URI} !^/.well-known/
     RewriteRule ^ %1 [L,R=301]
 
     # Send Requests To Front Controller...
