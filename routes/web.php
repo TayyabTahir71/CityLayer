@@ -74,6 +74,10 @@ Route::get('logout', 'logout');
 
 });
 
+Route::get('/.well-known/assetlinks.json' , function () {
+    return Redirect::to('assetlinks.json');
+   
+});
 
 Route::get('about', function () {
     return view('about');
