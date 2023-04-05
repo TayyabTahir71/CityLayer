@@ -80,6 +80,22 @@ Route::get('about', function () {
     return view('about');
 });
 
+Route::get('team', function () {
+    return view('team');
+});
+
+Route::get('award', function () {
+    return view('award');
+});
+
+Route::get('contact', function () {
+    return view('contact');
+});
+
+Route::get('research', function () {
+    return view('research');
+});
+
 Route::get('edit_profile', function () {
     return view('edit_profile');
 });

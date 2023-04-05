@@ -4,7 +4,7 @@
     <div data-barba="container" class="relative h-screen">
         <div class="flex flex-col items-center h-screen p-4 mx-auto">
 
-            <label for="dropzone-file" class="flex flex-col justify-center w-5/6">
+            <label for="dropzone-file" class="flex flex-col justify-center w-5/6 pt-[10%]">
                 <div class="flex flex-col items-center justify-center">
                     <h1 class="pb-4 text-3xl font-extrabold text-center text-gray-900">{{ __('messages.welcome to') }}<br>
                         CITY LAYERS!</h1>
@@ -70,7 +70,7 @@
         
    <div class="fixed bottom-0 right-0 left-0 bg-black text-white">
             <div class="flex justify-between mx-4 text-sm font-bold pt-4 pb-4 text-center">
-            <a href="mapping">
+            <a href="about">
             Mapping<br>tool
             </a>
              <a href="research">

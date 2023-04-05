@@ -2202,7 +2202,7 @@ class GlobalController extends Controller
 
     static function pages()
     {
-        $pages = Pages::where('id', 1)->first();
+        $pages = Pages::all();
         return $pages;
     }
 

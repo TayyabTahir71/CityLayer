@@ -12,7 +12,7 @@
                          </div>
                          <div class="mx-8 page all-initial">
                              @php
-                                 echo $pages[0]->content;
+                                 echo $pages[3]->content;
                              @endphp
                          </div>
                      </div>
