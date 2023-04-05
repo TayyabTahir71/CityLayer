@@ -11,12 +11,11 @@
                                      class="ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
                          </div>
                          <div class="mx-8 page all-initial">
-                                       @php $locale = session()->get('locale'); 
-                             if ($locale == 'en'){
-                                echo $pages[0]->content;
-                             }
-                           elseif ($locale == 'de'){
+                         @php $locale = session()->get('locale'); 
+                          if ($locale == 'de'){
                                 echo $pages[5]->content;
+                           } else {
+                                echo $pages[0]->content;
                            }
                           @endphp
                          </div>

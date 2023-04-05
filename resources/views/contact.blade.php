@@ -12,12 +12,11 @@
                          </div>
                          <div class="mx-8 page all-initial">
                                         @php $locale = session()->get('locale'); 
-                             if ($locale == 'en'){
-                                echo $pages[4]->content;
-                             }
-                           elseif ($locale == 'de'){
+                           if ($locale == 'de'){
                                 echo $pages[8]->content;
-                           }
+                           } else {
+                                     echo $pages[4]->content;
+                             }
                           @endphp
                          </div>
                      </div>
