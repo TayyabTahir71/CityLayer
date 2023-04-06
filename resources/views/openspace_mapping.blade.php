@@ -11,38 +11,41 @@
                      <button class="w-32 h-32 mx-4 text-gray-100 bg-[#55C5CF] focus:outline-none rounded-full" disabled>
                          <i class="fa-solid fa-street-view"></i><br>openspace
                      </button>
-                     <h1 class="pt-2 text-xl font-bold text-center text-gray-900">{{ __('messages.Add #tags to describe the space and earn points!') }}
+                     <h1 class="pt-2 text-xl font-bold text-center text-gray-900">
+                         {{ __('messages.Add #tags to describe the space and earn points!') }}
                          points!</h1>
                      <div class="w-48 pt-4">
-                      @php $locale = session()->get('locale'); @endphp
-                       @if ($locale == 'en')
-                         @foreach ($tags as $tag)
-                             <label>
-                                 <input type="checkbox" name="form-project-manager[]" value="{{ $tag->name }}"
-                                     class="sr-only peer">
-                                 <div
-                                     class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+                         @php $locale = session()->get('locale'); @endphp
 
-                                     <div class="flex justify-center">
-                                         <div class="font-semibold">{{ $tag->name }}</div>
-                                     </div>
-                                 </div>
-                             </label>
-                         @endforeach
-  @elseif ($locale == 'de')
-                            @foreach ($tags_de as $tag)
-                             <label>
-                                 <input type="checkbox" name="form-project-manager[]" value="{{ $tag->name }}"
-                                     class="sr-only peer">
-                                 <div
-                                     class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
 
-                                     <div class="flex justify-center">
-                                         <div class="font-semibold">{{ $tag->name }}</div>
+                         @if ($locale == 'de')
+                             @foreach ($tags_de as $tag)
+                                 <label>
+                                     <input type="checkbox" name="form-project-manager[]" value="{{ $tag->name }}"
+                                         class="sr-only peer">
+                                     <div
+                                         class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+
+                                         <div class="flex justify-center">
+                                             <div class="font-semibold">{{ $tag->name }}</div>
+                                         </div>
                                      </div>
-                                 </div>
-                             </label>
-                         @endforeach
+                                 </label>
+                             @endforeach
+                         @else
+                             @foreach ($tags as $tag)
+                                 <label>
+                                     <input type="checkbox" name="form-project-manager[]" value="{{ $tag->name }}"
+                                         class="sr-only peer">
+                                     <div
+                                         class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+
+                                         <div class="flex justify-center">
+                                             <div class="font-semibold">{{ $tag->name }}</div>
+                                         </div>
+                                     </div>
+                                 </label>
+                             @endforeach
                          @endif
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
@@ -100,69 +103,69 @@
                  </div>
              </div>
          </div>
-  
-     <script>
-         window.addEventListener("DOMContentLoaded", (event) => {
-              if (navigator.geolocation) {
-                 navigator.geolocation.getCurrentPosition(function(position) {
 
-                         document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
-                         document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
-                     },
-                     function(e) {}, {
-                         enableHighAccuracy: true
+         <script>
+             window.addEventListener("DOMContentLoaded", (event) => {
+                 if (navigator.geolocation) {
+                     navigator.geolocation.getCurrentPosition(function(position) {
+
+                             document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
+                             document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
+                         },
+                         function(e) {}, {
+                             enableHighAccuracy: true
+                         });
+                 }
+
+                 $.ajaxSetup({
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
+                 });
+
+                 $('#newtag').click(function() {
+                     name = document.getElementById('tagname').value;
+
+                     $.ajax({
+                         type: 'POST',
+                         url: "/newtag",
+                         data: {
+                             name: name,
+                             category: "Openspace"
+                         },
+                         success: function(data) {
+                             // refresh the webpage
+                             location.reload();
+                         }
                      });
-             }
 
-             $.ajaxSetup({
-                 headers: {
-                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                 }
-             });
-
-             $('#newtag').click(function() {
-                 name = document.getElementById('tagname').value;
-
-                 $.ajax({
-                     type: 'POST',
-                     url: "/newtag",
-                     data: {
-                         name: name,
-                         category: "Openspace"
-                     },
-                     success: function(data) {
-                         // refresh the webpage
-                         location.reload();
-                     }
                  });
 
-             });
-
-             $('#saveplace').click(function() {
-                 tags = [];
-                 var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                 for (var i = 0; i < checkboxes.length; i++) {
-                     tags.push(checkboxes[i].value);
-                 }
-                 latitude = document.getElementById('latitude').value;
-                 longitude = document.getElementById('longitude').value;
-                 thename = Math.random().toString(8).substring(7);
-                 $.ajax({
-                     type: 'POST',
-                     url: "/new_place",
-                     data: {
-                         name: thename,
-                         type: "Openspace",
-                         latitude: latitude,
-                         longitude: longitude,
-                         tags: tags
-                     },
-                     success: function(data) {
-                         open("/step2?id=" + data, "_self");
+                 $('#saveplace').click(function() {
+                     tags = [];
+                     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                     for (var i = 0; i < checkboxes.length; i++) {
+                         tags.push(checkboxes[i].value);
                      }
-                 });
+                     latitude = document.getElementById('latitude').value;
+                     longitude = document.getElementById('longitude').value;
+                     thename = Math.random().toString(8).substring(7);
+                     $.ajax({
+                         type: 'POST',
+                         url: "/new_place",
+                         data: {
+                             name: thename,
+                             type: "Openspace",
+                             latitude: latitude,
+                             longitude: longitude,
+                             tags: tags
+                         },
+                         success: function(data) {
+                             open("/step2?id=" + data, "_self");
+                         }
+                     });
 
+                 });
              });
-         });
-     </script>
- @endsection
+         </script>
+     @endsection

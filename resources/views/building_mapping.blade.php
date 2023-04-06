@@ -14,21 +14,7 @@
                      <h1 class="pt-2 text-xl font-bold text-center text-gray-900">{{ __('messages.Add #tags to describe the space and earn points!') }}</h1>
                      <div class="w-48 pt-4">
                         @php $locale = session()->get('locale'); @endphp
-                       @if ($locale == 'en')
-                         @foreach ($tags as $tag)
-                             <label>
-                                 <input type="checkbox" name="form-project-manager[]" value="{{ $tag->name }}"
-                                     class="sr-only peer">
-                                 <div
-                                     class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
-
-                                     <div class="flex justify-center">
-                                         <div class="font-semibold">{{ $tag->name }}</div>
-                                     </div>
-                                 </div>
-                             </label>
-                         @endforeach
-                                   @elseif ($locale == 'de')
+                          @if ($locale == 'de')
                             @foreach ($tags_de as $tag)
                              <label>
                                  <input type="checkbox" name="form-project-manager[]" value="{{ $tag->name }}"
@@ -42,7 +28,21 @@
                                  </div>
                              </label>
                          @endforeach
-                         @endif
+                         @else
+                            @foreach ($tags as $tag)
+                             <label>
+                                 <input type="checkbox" name="form-project-manager[]" value="{{ $tag->name }}"
+                                     class="sr-only peer">
+                                 <div
+                                     class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+
+                                     <div class="flex justify-center">
+                                         <div class="font-semibold">{{ $tag->name }}</div>
+                                     </div>
+                                 </div>
+                             </label>
+                         @endforeach
+                            @endif
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
                                  class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
