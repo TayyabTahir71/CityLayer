@@ -475,15 +475,21 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         $infos = Infosperso::where('user_id', $userid)->first();
+
         if ($infos->score > 0) {
             Infosperso::where('user_id', $userid)->update([
+                'email' => $request->email,
                 'age' => $request->age,
                 'gender' => $request->gender,
                 'profession' => $request->profession,
                 'relation' => $request->relation,
                 'preferences' => $request->preferences,
             ]);
-            return redirect('/');
+            if ($request->email != null) {
+                backpack_auth()->user()->email = $request->email;
+                backpack_auth()->user()->save();
+            }
+            return redirect('profile');
         } else {
             $infos = Infosperso::where('user_id', $userid)->first();
             $infos->user_id = $userid;
@@ -2217,4 +2223,13 @@ class GlobalController extends Controller
         $infos = Infosperso::all();
         return $infos;
     }
+
+    static function myprofile()
+    {
+        $userid = backpack_auth()->user()->id;
+        $infos = Infosperso::where('user_id', $userid)->first();
+        return $infos;
+    }
+
+
 }
