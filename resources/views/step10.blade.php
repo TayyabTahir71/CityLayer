@@ -80,7 +80,7 @@
                          </div>
                      </div>
                      <button id="savespacetags"
-                         class="px-4 text-2xl py-2 text-gray-800 bg-[#FAC710] hover:bg-yellow-300 active:bg-yellow-400 border focus:outline-none rounded-xl font-bold mt-4">
+                         class="px-4 text-2xl py-2 text-gray-800 bg-[#FAC710] hover:bg-yellow-300 active:bg-yellow-400 border focus:outline-none rounded-xl font-bold mt-4  mb-4">
                          {{ __('messages.Done!') }}
                      </button>
                  </div>

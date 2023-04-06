@@ -80,7 +80,7 @@
                          </div>
                      </div>
                      <button id="saveopinion"
-                         class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-4">
+                         class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-4  mb-4">
                         {{ __('messages.Next challenge!') }}
                      </button>
                      <input type="hidden" id="type" value="{{ $type }}">

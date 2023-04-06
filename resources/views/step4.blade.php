@@ -13,10 +13,10 @@
              <form action="upload-image" method="POST" enctype="multipart/form-data">
                  @csrf
                  <div class="flex flex-col items-center justify-center">
-                     <h1 class="pt-16 mx-8 text-4xl font-bold text-center text-gray-900">{{ __('messages.Would you change something in this space?') }}
+                     <h1 class="pt-[10%] mx-8 text-4xl font-bold text-center text-gray-900">{{ __('messages.Would you change something in this space?') }}
                      </h1>
-                     <div class="pt-4">
-                         <div x-data="{ total_value: 50 }" class="max-w-screen-md pt-16 pb-16 mx-auto">
+                     <div class="">
+                         <div x-data="{ total_value: 50 }" class="max-w-screen-md pt-10 pb-16 mx-auto">
                              <input name="change" id="change" class="hidden" type="input" x-model="total_value" />
                              <div class="flex justify-between">
                                  <label for="default-range"
@@ -96,7 +96,7 @@
                          </div>
                      </div>
                      <button id="saveplace" type="submit"
-                         class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-16">
+                         class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-16  mb-4">
                          {{ __('messages.Next challenge!') }}
                      </button>
                  </div>

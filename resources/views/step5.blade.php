@@ -11,7 +11,7 @@
             <form action="confortlevel" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
-                    <h1 class="pt-4 text-4xl font-bold text-center text-gray-900 mx-8">{{ __('messages.Let others know how comfortable the space is!') }}
+                    <h1 class="text-4xl font-bold text-center text-gray-900 mx-8">{{ __('messages.Let others know how comfortable the space is!') }}
                     </h1>
                     <div class="pb-8">
                         <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pt-4 pb-16">
@@ -495,7 +495,7 @@
 
                     </div>
                     <button id="saveplace" type="submit"
-                        class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-20">
+                        class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-20  mb-4">
                         {{ __('messages.Next challenge!') }}
                     </button>
                 </div>
