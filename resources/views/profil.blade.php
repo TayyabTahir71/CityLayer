@@ -4,8 +4,8 @@
     <div data-barba="container" class="relative h-screen">
         <form action="save_profile" class="flex flex-col items-center justify-center p-8 mx-auto" method="POST">
             {!! csrf_field() !!}
-                     <label for="dropzone-file" class="flex flex-col items-center justify-center w-2/3 mb-8">
-                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                     <label for="dropzone-file" class="flex flex-col items-center justify-center w-2/3">
+                <div class="flex flex-col items-center justify-center pb-6">
                     <h1 class="text-3xl font-bold text-gray-900">{{ __('messages.Your Profile') }}</h1>
                 </div>
             </label>
