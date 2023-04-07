@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Tag;
 use App\Models\Tag_de;
 use App\Models\Opinion;
-use App\Models\Opinions_de;
+use App\Models\Opinion_de;
 use App\Models\Space_tag;
 use App\Models\Space_tag_de;
 use Illuminate\Database\Seeder;
@@ -395,92 +395,92 @@ class GlobalSeeder extends Seeder
 
 
 
-                    Opinions_de::create( [
+                    Opinion_de::create( [
                         'id'=>1,
                         'name'=>'gefährlich'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>2,
                         'name'=>'leicht zu gehen'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>3,
                         'name'=>'zu laut'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>4,
                         'name'=>'schlecht konzipiert'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>5,
                         'name'=>'angenehm'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>6,
                         'name'=>'gut um Zeit zu verbringen'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>7,
                         'name'=>'unbequem'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>8,
                         'name'=>'schön'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>9,
                         'name'=>'Unvergesslich'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>10,
                         'name'=>'schwierig für Menschen mit Behinderungen'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>11,
                         'name'=>'unbenut'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>12,
                         'name'=>'keine Aktivitäten'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>13,
                         'name'=>'sehr ruhig'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>14,
                         'name'=>'Verkehrssicher'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>15,
                         'name'=>'schwer beweglich'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>16,
                         'name'=>'sicher in der Nacht'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>17,
                         'name'=>'vor Sonne, Regen und Wind geschützt'
                         ] );
                                     
-                        Opinions_de::create( [
+                        Opinion_de::create( [
                         'id'=>18,
                         'name'=>'sehr ruhig'
                         ] );
