@@ -115,6 +115,29 @@
                 </div>
             </div>
         </div>
+        <div x-data="{ modelOpen: false }">
+            <button id="commented" @click="modelOpen =!modelOpen" class="hidden"></button>
+
+            <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
+                role="dialog" aria-modal="true">
+                <div class="flex items-center justify-center px-4 text-center">
+                    <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
+                        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                        x-transition:leave="transition ease-in duration-200 transform"
+                        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        class="z-50 inline-block overflow-hidden transition-all transform bg-white rounded-lg shadow-xl mt-60">
+
+                        <div class="items-center px-2 py-3 space-x-4 bloc">
+                            <div class="flex justify-center font-bold">
+                                 Your comment as been saved
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -289,17 +312,11 @@ var legend = L.control({ position: "topright" });
                     comment: comment
                 },
                 success: function(data) {
-                    if (data == 'already') {
-                        document.getElementById('already').click();
+                    if (data == 'commented') {
+                        document.getElementById('commented').click();
                         //close popup after 3 seconds
                         setTimeout(function() {
-                            document.getElementById('already').click();
-                        }, 1000);
-                    } else {
-                        document.getElementById('comment').click();
-                        //close popup after 3 seconds
-                        setTimeout(function() {
-                            document.getElementById('comment').click();
+                            document.getElementById('commented').click();
                         }, 1000);
                     }
                 }

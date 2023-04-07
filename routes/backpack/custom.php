@@ -32,4 +32,6 @@ Route::group([
     Route::crud('space-tag-de', 'SpaceTagDeCrudController');
     Route::crud('opinion-de', 'OpinionDeCrudController');
     Route::crud('tag-de', 'TagDeCrudController');
+    Route::crud('comment-de', 'CommentDeCrudController');
+    Route::crud('comment-en', 'CommentsEnCrudController');
 }); // this should be the absolute last line of this file

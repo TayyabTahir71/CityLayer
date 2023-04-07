@@ -9,6 +9,8 @@ use App\Models\Building;
 use App\Models\Openspace;
 use App\Models\Opinion;
 use App\Models\Opinion_de;
+use App\Models\Comment_en;
+use App\Models\Comment_de;
 use App\Models\Pages;
 use App\Models\Tag;
 use App\Models\Tag_de;
@@ -75,14 +77,25 @@ class GlobalController extends Controller
     public function comment(Request $request)
     {
         $userid = backpack_auth()->user()->id;
+        $locale = session()->get('locale');
+        
+            if ($locale == 'de') {
+                $comment = new Comment_de();
+                $comment->user_id = $userid;
+                $comment->placeid = $request->id;
+                $comment->type = $request->type;
+                $comment->comment = $request->comment;
+                $comment->save();
+            } else {
+                $comment = new Comment_en();
+                $comment->user_id = $userid;
+                $comment->placeid = $request->id;
+                $comment->type = $request->type;
+                $comment->comment = $request->comment;
+                $comment->save();
+            }
 
-        if ($request->type == 'Street') {
-
-        } elseif ($request->type == 'Building') {
-          
-        } elseif ($request->type == 'Openspace') {
-         
-        }
+        return 'commented';
     }
 
     public function like(Request $request)

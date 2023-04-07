@@ -64,8 +64,9 @@ class OpenspaceCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
+        CRUD::column('id');
         $this->getFieldsData();
-        CRUD::column('name')->label('uuid');
+       // CRUD::column('name')->label('uuid');
         CRUD::column('latitude');
         CRUD::column('longitude');
         CRUD::column('user_id');

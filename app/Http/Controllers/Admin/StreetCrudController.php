@@ -54,6 +54,7 @@ class StreetCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
+        CRUD::column('id');
         $this->getFieldsData();
         // CRUD::column('name')->label('uuid');
         CRUD::column('latitude');
