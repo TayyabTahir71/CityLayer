@@ -33,6 +33,7 @@ Route::post('/place/bof', 'bof')->name('bof');
 Route::post('/place/weird', 'weird')->name('weird');
 Route::post('/place/ohh', 'ohh')->name('ohh');
 Route::post('/place/wtf', 'wtf')->name('wtf');
+Route::post('/place/comment', 'comment')->name('comment');
 Route::get('street', 'street')->name('street');
 Route::get('delete', 'delete')->name('delete');
 Route::get('building', 'building')->name('building');

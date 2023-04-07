@@ -72,6 +72,19 @@ class GlobalController extends Controller
         }
     }
 
+    public function comment(Request $request)
+    {
+        $userid = backpack_auth()->user()->id;
+
+        if ($request->type == 'Street') {
+
+        } elseif ($request->type == 'Building') {
+          
+        } elseif ($request->type == 'Openspace') {
+         
+        }
+    }
+
     public function like(Request $request)
     {
         $userid = backpack_auth()->user()->id;

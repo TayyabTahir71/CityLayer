@@ -195,7 +195,7 @@ var legend = L.control({ position: "topright" });
                 '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
                 '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                placeid + '\', \'' + placetype + '\', \'wtf\')"></div></div>'
+                placeid + '\', \'' + placetype + '\', \'wtf\')"></div><textarea name="comm" id="comm" cols="10" rows="4" class="font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea><button type="button"class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment(\'' +placeid + '\', \'' + placetype + '\')">Leave a comment</button> </div>'
             );
             markers[place.id] = markerx;
         }
@@ -268,6 +268,48 @@ var legend = L.control({ position: "topright" });
             });
             mymap0.closePopup();
         }
+
+        function comment(id, type){
+            
+            var comment = document.getElementById('comm').value;
+            var url = "/place/comment";
+        console.log(comment)
+ $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    id: id,
+                    type: type,
+                    comment: comment
+                },
+                success: function(data) {
+                    if (data == 'already') {
+                        document.getElementById('already').click();
+                        //close popup after 3 seconds
+                        setTimeout(function() {
+                            document.getElementById('already').click();
+                        }, 1000);
+                    } else {
+                        document.getElementById('comment').click();
+                        //close popup after 3 seconds
+                        setTimeout(function() {
+                            document.getElementById('comment').click();
+                        }, 1000);
+                    }
+                }
+            });
+            mymap0.closePopup();
+
+
+
+        }
+
     </script>
     <style>
 
