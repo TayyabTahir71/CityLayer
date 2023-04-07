@@ -10,7 +10,7 @@
  @section('main')
      <div data-barba="container">
          <div class="flex flex-col h-screen mx-auto">
-           <div id="message" class="fixed top-5 right-5 p-2 border rounded bg-green-500 text-white font-bold"></div>
+           <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
              <div class="p-3">
                  <div class="flex flex-row items-center pt-2">
                      <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
@@ -144,7 +144,7 @@
                      },
                      success: function(data) {
                          open("/step4?id=" + data, "_self");
-                     }
+                     } 
                  });
 
              });

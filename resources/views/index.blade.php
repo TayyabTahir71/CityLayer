@@ -2,10 +2,10 @@
 
 @section('main')
     <div data-barba="container" class="">
-        <div class="flex flex-col items-center p-8 mx-auto h-screen">
+        <div class="flex flex-col items-center h-screen p-8 mx-auto">
             <label for="dropzone-file" class="flex flex-col justify-center w-5/6 pt-[10%]">
                 <div class="flex flex-col items-center justify-center pb-6">
-                    <h1 class="text-3xl font-bold text-center text-gray-900">{{ __('messages.welcome to') }}<br> CITY LAYERS!
+                    <h1 class="text-3xl font-bold text-center text-gray-900">{{ __('messages.welcome to') }}<br> City Layers!
                     </h1>
                     <p class="mt-8 text-base text-center text-gray-600">
                         {{ __('messages.A network for people who care about their environment!') }} </p>
@@ -38,15 +38,15 @@
 
             </section>
 
-         <div class="flex justify-between mx-4 font-bold pt-4 text-center underline">
+         <div class="flex justify-between pt-4 mx-4 font-bold text-center underline">
           <a href="award">
             Citizen Science Award 2023<br>participate and win!
             </a>
             </div>
         </div>
         
-   <div class="fixed bottom-0 right-0 left-0 bg-black text-white">
-            <div class="flex justify-between mx-4 text-sm font-bold pt-4 pb-4 text-center">
+   <div class="fixed bottom-0 left-0 right-0 text-white bg-black">
+            <div class="flex justify-between pt-4 pb-4 mx-4 text-sm font-bold text-center">
             <a href="about">
             {{ __('messages.Mapping') }}<br>{{ __('messages.tool') }}
             </a>

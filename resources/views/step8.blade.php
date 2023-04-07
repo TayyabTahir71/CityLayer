@@ -3,7 +3,7 @@
 @section('main')
     <div data-barba="container">
         <div class="flex flex-col mx-auto">
-          <div id="message" class="fixed top-5 right-5 p-2 border rounded bg-green-500 text-white font-bold"></div>
+          <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
             <div class="">
                 <div id="map" class="h-[75vh] lg:h-[75vh] w-auto z-0"></div>
                 <div x-data="{ modelOpen: true }">
@@ -77,14 +77,14 @@
     <script>
         markers = {};
         let marker = null;
-        let mymap0 = L.map('map').setView([48.6890, 7.14086], 15);
-        osmLayer0 = L.tileLayer(
-            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                apikey: 'choisirgeoportail',
-                format: 'image/jpeg',
-                style: 'normal'
-            }).addTo(mymap0);
+        let mymap0 = L.map('map').setView([48.6890, 7.14086], 10);
+        osmLayer0 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+}).addTo(mymap0);
         mymap0.addLayer(osmLayer0);
         mymap0.touchZoom.enable();
         mymap0.scrollWheelZoom.enable();
@@ -94,6 +94,14 @@
             iconAnchor: [40, 40],
             popupAnchor: [0, -40]
         });
+
+        var legend = L.control({ position: "topright" });
+    legend.onAdd = function(mymap) {
+  var div = L.DomUtil.create("div", "legend bg-gray-200 p-2 border rounded");
+  div.innerHTML += '<button onclick="mylocation()"><i class="pr-2 fa fa-location-arrow"></i><span>My location</span><br></button>';
+    return div;
+    };
+    legend.addTo(mymap0);
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -119,6 +127,12 @@
          window.onload = function() {
              showMessage("New points");
          };
+
+                 function mylocation() {
+             navigator.geolocation.getCurrentPosition(function(position) {
+            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 12);
+             });
+        }
 
 
 

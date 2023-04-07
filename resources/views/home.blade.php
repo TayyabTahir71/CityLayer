@@ -124,13 +124,13 @@
         markers = {};
         let marker = null;
         let mymap0 = L.map('map').setView([48.6890, 7.14086], 5);
-        osmLayer0 = L.tileLayer(
-            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                apikey: 'choisirgeoportail',
-                format: 'image/jpeg',
-                style: 'normal'
-            }).addTo(mymap0);
+        osmLayer0 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+}).addTo(mymap0);
         mymap0.addLayer(osmLayer0);
         mymap0.touchZoom.enable();
         mymap0.scrollWheelZoom.enable();
@@ -147,10 +147,18 @@
             popupAnchor: [0, -40]
         });
 
+var legend = L.control({ position: "topright" });
+    legend.onAdd = function(mymap) {
+  var div = L.DomUtil.create("div", "legend bg-gray-200 p-2 border rounded");
+  div.innerHTML += '<button onclick="mylocation()"><i class="pr-2 fa fa-location-arrow"></i><span>My location</span><br></button>';
+    return div;
+    };
+    legend.addTo(mymap0);
+
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                    mymap0.setView([position.coords.latitude, position.coords.longitude], 19);
+                    mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
                     L.marker([position.coords.latitude, position.coords.longitude], {
                         icon: icon
                     }).addTo(mymap0);
@@ -174,7 +182,7 @@
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
             }).addTo(mymap0).bindPopup(
-                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="text-sm px-4">' + message +'</p><img id="img" class="pb-4 w-auto max-h-96 text-sm"  src="/storage' + pics +'"  onerror="missing()"/><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="px-4 text-sm">' + message +'</p><img id="img" class="w-auto pb-4 text-sm max-h-96"  src="/storage' + pics +'"  onerror="missing()"/><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
                 '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
@@ -194,6 +202,12 @@
 
         function missing() {
             document.getElementById("img").src = "/img/empty.png";
+        }
+
+        function mylocation() {
+             navigator.geolocation.getCurrentPosition(function(position) {
+            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 12);
+             });
         }
 
 

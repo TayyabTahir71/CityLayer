@@ -547,12 +547,28 @@ class GlobalController extends Controller
     {
         $locale = session()->get('locale');
         if ($locale == 'en') {
+            $stag = Tag::where('name', $request->name)->first();
+            if ($stag) {
+                return back();
+            } else {
             $tag = new Tag();
+            }
         } elseif ($locale == 'de') {
+            $stag = Tag_de::where('name', $request->name)->first();
+            if ($stag) {
+                return back();
+            } else {
             $tag = new Tag_de();
+            }
         } else {
+            $stag = Tag::where('name', $request->name)->first();
+            if ($stag) {
+                return back();
+            } else {
             $tag = new Tag();
+            }
         }
+
         $tag->name = $request->name;
         $tag->category = $request->category;
         $tag->save();
@@ -563,11 +579,26 @@ class GlobalController extends Controller
     {
         $locale = session()->get('locale');
         if ($locale == 'en') {
+            $stag = Opinion::where('name', $request->name)->first();
+            if ($stag) {
+                return back();
+            } else {
             $opinion = new Opinion();
+            }
         } elseif ($locale == 'de') {
+            $stag = Opinion_de::where('name', $request->name)->first();
+            if ($stag) {
+                return back();
+            } else {
             $opinion = new Opinion_de();
+            }
         } else {
+            $stag = Opinion::where('name', $request->name)->first();
+            if ($stag) {
+                return back();
+            } else {
             $opinion = new Opinion();
+            }
         }
         $opinion->name = $request->name;
         $opinion->save();
@@ -2163,10 +2194,15 @@ class GlobalController extends Controller
         } else {
             $spacetag = new Space_tag();
         }
-
-        $spacetag->name = $request->name;
-        $spacetag->save();
-        return 'ok';
+        //check if the tag already exists
+        $stag = Space_tag::where('name', $request->name)->first();
+        if ($stag) {
+            return 'exists';
+        } else {
+            $spacetag->name = $request->name;
+            $spacetag->save();
+            return 'ok';
+        }
     }
 
     public function place(Request $request)

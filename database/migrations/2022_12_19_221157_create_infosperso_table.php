@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('age')->nullable();
             $table->string('gender')->nullable();
             $table->string('profession')->nullable();
-            $table->string('relation')->nullable();
             $table->string('preferences')->nullable();
             $table->string('badge1')->nullable();
             $table->string('badge2')->nullable();

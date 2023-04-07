@@ -82,8 +82,6 @@
              <div class="flex justify-center pt-4 mx-4">
                  <div class="flex flex-col gap-y-2">
                      <h1 class="text-xs py-2 mx-2 px-2 text-center text-white bg-[#667DC7] rounded-lg">
-                         {{ $infos->relation }}</h1>
-                     <h1 class="text-xs py-2 mx-2 px-2 text-center text-white bg-[#667DC7] rounded-lg">
                          {{ $infos->preferences }}</h1>
                  </div>
              </div>
