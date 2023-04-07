@@ -166,7 +166,7 @@
 
          var legend = L.control({ position: "topright" });
     legend.onAdd = function(mymap) {
-  var div = L.DomUtil.create("div", "legend bg-gray-200 p-2 border rounded");
+  var div = L.DomUtil.create("div", "legend bg-gray-200 p-2 border rounded border-gray-400");
   div.innerHTML += '<button onclick="mylocation()"><i class="pr-2 fa fa-location-arrow"></i><span>My location</span><br></button>';
     return div;
     };
