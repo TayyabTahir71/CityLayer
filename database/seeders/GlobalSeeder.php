@@ -708,91 +708,91 @@ class GlobalSeeder extends Seeder
                             ] );
 
 
-                            SpaceTag_de::create( [
+                            Space_tag_de::create( [
                                 'id'=>3,
                                 'name'=>'Einwohner/-in'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>4,
                                 'name'=>'Arbeitnehmer/-in'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>5,
                                 'name'=>'Tourist/-in'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>6,
                                 'name'=>'Haustierbesitzer'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>7,
                                 'name'=>'Elternteil(e) mit Kindern'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>8,
                                 'name'=>'Kinder'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>9,
                                 'name'=>'Student/-in'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>10,
                                 'name'=>'LGBTQ+ group'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>11,
                                 'name'=>'Sportler/-in'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>12,
                                 'name'=>'Jugendliche'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>13,
                                 'name'=>'Senioren'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>14,
                                 'name'=>'Obdachlos'
                                 ] );
                                 
                                 
                                             
-                                SpaceTag_de::create( [
+                                Space_tag_de::create( [
                                 'id'=>15,
                                 'name'=>'niemand'
                                 ] );
