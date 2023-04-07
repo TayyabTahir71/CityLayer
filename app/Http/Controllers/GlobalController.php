@@ -494,7 +494,7 @@ class GlobalController extends Controller
                 'age' => $request->age,
                 'gender' => $request->gender,
                 'profession' => $request->profession,
-                'relation' => $request->relation,
+           
                 'preferences' => $request->preferences,
             ]);
             if ($request->email != null) {
@@ -522,11 +522,7 @@ class GlobalController extends Controller
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                 backpack_auth()->user()->save();
             }
-            $infos->relation = $request->relation;
-            if ($request->relation != null) {
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()->user()->save();
-            }
+         
             $infos->preferences = $request->preferences;
             if ($request->preferences != null) {
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
