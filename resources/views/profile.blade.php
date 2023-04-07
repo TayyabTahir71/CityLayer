@@ -16,35 +16,36 @@
                  </form>
              </div>
              <h1 class="pt-4 text-2xl text-center text-gray-800">{{ $name }}</h1>
-             <h2 class="pt-2 text-2xl font-bold text-center text-yellow-300">{{ $infos->score }}</h2>
+                <h1 class="pt-4 text-2xl text-center text-gray-800">{{  backpack_auth()->user()->email }}</h1>
+             <h2 class="pt-2 text-2xl font-bold text-center text-yellow-300">{{ backpack_auth()->user()->score }}</h2>
              <div class="w-1/2 mx-auto">
                  <div class="relative pt-1">
                      <div class="flex h-3 overflow-hidden text-xs bg-white border rounded">
-                         @php $score = $infos->score / 10; @endphp
+                         @php $score = backpack_auth()->user()->score / 10; @endphp
                          <div style="width:{{ $score }}%"
                              class="flex flex-col justify-center text-center text-white bg-yellow-300 shadow-none whitespace-nowrap">
                          </div>
                      </div>
                      <div class="pt-2">
-                         @if ($infos->score < 1000)
+                         @if (backpack_auth()->user()->score < 1000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 1</div>
-                         @elseif($infos->score < 2000)
+                         @elseif(backpack_auth()->user()->score < 2000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 2</div>
-                         @elseif($infos->score < 3000)
+                         @elseif(backpack_auth()->user()->score < 3000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 3</div>
-                         @elseif($infos->score < 4000)
+                         @elseif(backpack_auth()->user()->score < 4000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 4</div>
-                         @elseif($infos->score < 5000)
+                         @elseif(backpack_auth()->user()->score < 5000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 5</div>
-                         @elseif($infos->score < 6000)
+                         @elseif(backpack_auth()->user()->score < 6000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 6</div>
-                         @elseif($infos->score < 7000)
+                         @elseif(backpack_auth()->user()->score < 7000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 7</div>
-                         @elseif($infos->score < 8000)
+                         @elseif(backpack_auth()->user()->score < 8000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 8</div>
-                         @elseif($infos->score < 9000)
+                         @elseif(backpack_auth()->user()->score < 9000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 9</div>
-                         @elseif($infos->score < 10000)
+                         @elseif(backpack_auth()->user()->score < 10000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 10</div>
                          @endif
                      </div>
@@ -52,24 +53,24 @@
                          <div class="flex gap-x-2">
 
                              <div class="w-16 h-16 border-2 border-yellow-300 rounded-full">
-                             @if ($infos->score > 1000)
+                             @if (backpack_auth()->user()->score > 1000)
                                   <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
                                  @endif
                              </div>
                              <div class="w-16 h-16 border-2 border-yellow-300 rounded-full">
-                             @if($infos->score > 2000)
+                             @if(backpack_auth()->user()->score > 2000)
                                     <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
                                  @endif
                              </div>
 
                              <div class="w-16 h-16 border-2 border-yellow-300 rounded-full">
-                             @if($infos->score > 3000)
+                             @if(backpack_auth()->user()->score > 3000)
                                     <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
                                  @endif
                              </div>
 
                              <div class="w-16 h-16 border-2 border-yellow-300 rounded-full">
-                             @if($infos->score > 4000)
+                             @if(backpack_auth()->user()->score > 4000)
                                     <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
                                  @endif
                              </div>

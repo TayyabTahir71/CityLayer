@@ -24,13 +24,13 @@ $info = GlobalController::myprofile();
 
             <label for="age" class="block mb-2 text-base font-medium text-gray-900">{{ __('messages.Age:') }}</label>
              <div class="flex flex-row w-2/3 h-12 my-2 bg-transparent rounded-lg md:w-1/3">
-                <button data-action="decrement" onclick="return false;"
+                <button data-action="decrement" onclick="return false;" 
                     class="w-20 h-full text-gray-600 bg-gray-300 border border-gray-500 rounded-l outline-none cursor-pointer active:bg-gray-200">
                     <span class="m-auto text-2xl font-thin">−</span>
                 </button>
                 <input type="number" name="age" style="-moz-appearance: textfield"
                     class="flex items-center w-full font-semibold text-center text-gray-700 outline-none outline focus:outline-none text-md hover:text-black focus:text-black md:text-basecursor-default"
-                    name="custom-input-number" min="1" value="{{ $info->age }}">
+                    name="custom-input-number" min="10" value="{{ $info->age }}">
                 <button data-action="increment" onclick="return false;"
                     class="w-20 h-full text-gray-600 bg-gray-300 border border-gray-500 rounded-r cursor-pointer active:bg-gray-200">
                     <span class="m-auto text-2xl font-thin">+</span>

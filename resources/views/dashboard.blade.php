@@ -8,7 +8,7 @@
             <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-20">
                 <div class="flex flex-row justify-between">
                     <h4 class="pt-4 mt-2 font-semibold text-gray-900 ">{{ __('messages.Start New Mapping:') }}</h4>
-                    <h4 class="pt-4 mt-2 font-semibold text-gray-900 ">{{ __('messages.Points:') }} {{ $score }}</h4>
+                    <h4 class="pt-4 mt-2 font-semibold text-gray-900 ">{{ __('messages.Points:') }} {{ backpack_auth()->user()->score }}</h4>
                 </div>
                 <div class="flex items-center justify-between space-x-3 overflow-y-scroll">
                     <a href="street" class="prevent">
@@ -38,7 +38,7 @@
                      <h4 class="text-sm text-gray-900 " id="mylocation"></h4>
                 </div>
 
-                                    <h4 class="font-semibold text-gray-900 text-center text-xl">{{ __('messages.My Mapping data:') }}</h4>
+                                    <h4 class="text-xl font-semibold text-center text-gray-900">{{ __('messages.My Mapping data:') }}</h4>
                 <div class="grid grid-cols-1">
                     <div class="">
 
@@ -51,14 +51,14 @@
 
                                     <div class="flex items-center justify-between ">
                                         <div class="flex flex-col">
-                                            <h2 class="text-sm font-medium text-gray-800 pl-4">{{ $data['type'] }}</h2>
+                                            <h2 class="pl-4 text-sm font-medium text-gray-800">{{ $data['type'] }}</h2>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-between ">
                                         <div class="flex flex-col pr-4">
-                                            <h2 class="text-sm font-medium text-gray-800 pl-4">{{ $data['latitude'] }}</h2>
-                                             <h2 class="text-sm font-medium text-gray-800 pl-4">{{ $data['longitude'] }}</h2>
+                                            <h2 class="pl-4 text-sm font-medium text-gray-800">{{ $data['latitude'] }}</h2>
+                                             <h2 class="pl-4 text-sm font-medium text-gray-800">{{ $data['longitude'] }}</h2>
                                         </div>
                                     </div>
                             </div>

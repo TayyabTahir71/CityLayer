@@ -28,7 +28,7 @@ class CommentsEnCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Comment_en::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/comment-en');
-        CRUD::setEntityNameStrings('comment en', 'comments en');
+        CRUD::setEntityNameStrings('comment', 'comments EN');
     }
 
     /**

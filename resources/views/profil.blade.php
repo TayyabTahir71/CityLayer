@@ -10,6 +10,10 @@
                 </div>
             </label>
 
+            <label for="email" class="block mb-2 text-base font-medium text-gray-900">Email:</label>
+            <input id="email" name="email" type="email" value=""
+                class="block w-2/3 px-4 py-3 mb-2 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500">
+
             <label for="age" class="block mb-2 text-base font-medium text-gray-900">{{ __('messages.Age:') }}</label>
              <div class="flex flex-row w-2/3 h-12 my-2 bg-transparent rounded-lg md:w-1/3">
                 <button data-action="decrement" onclick="return false;"
@@ -18,7 +22,7 @@
                 </button>
                 <input type="number" name="age" style="-moz-appearance: textfield"
                     class="flex items-center w-full font-semibold text-center text-gray-700 outline-none outline focus:outline-none text-md hover:text-black focus:text-black md:text-basecursor-default"
-                    name="custom-input-number" min="1" value="1">
+                    name="custom-input-number" min="10" value="15">
                 <button data-action="increment" onclick="return false;"
                     class="w-20 h-full text-gray-600 bg-gray-300 border border-gray-500 rounded-r cursor-pointer active:bg-gray-200">
                     <span class="m-auto text-2xl font-thin">+</span>
@@ -40,12 +44,12 @@
             <select id="job" name="profession"
                 class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                 <option selected></option>
-             <option value="school pupil" {{ $info->profession == 'school pupil' ? 'selected' : '' }}>{{ __('messages.school pupil') }}</option>
-                <option value="high school student" {{ $info->profession == 'high school student' ? 'selected' : '' }}>{{ __('messages.high school student') }} &nbsp;</option>
-                <option value="high school graduate" {{ $info->profession == 'high school graduate' ? 'selected' : '' }}>{{ __('messages.high school graduate') }} &nbsp;</option>
-                <option value="university student" {{ $info->profession == 'university student' ? 'selected' : '' }}>{{ __('messages.university student') }} &nbsp;</option>
-                <option value="university graduate" {{ $info->profession == 'university graduate' ? 'selected' : '' }}>{{ __('messages.university graduate') }} &nbsp;</option>
-                <option value="teacher / professor" {{ $info->profession == 'teacher / professor' ? 'selected' : '' }}>{{ __('messages.teacher / professor') }} &nbsp;</option>
+             <option value="school pupil" >{{ __('messages.school pupil') }}</option>
+                <option value="high school student">{{ __('messages.high school student') }} &nbsp;</option>
+                <option value="high school graduate" >{{ __('messages.high school graduate') }} &nbsp;</option>
+                <option value="university student">{{ __('messages.university student') }} &nbsp;</option>
+                <option value="university graduate" >{{ __('messages.university graduate') }} &nbsp;</option>
+                <option value="teacher / professor" >{{ __('messages.teacher / professor') }} &nbsp;</option>
             </select>
 
             <label for="preferences"
@@ -72,20 +76,20 @@
                     {{ __('messages.I can only exercise during the evening') }}</option>
                 <option value="I enjoy being outside during night hours">
                     {{ __('messages.I enjoy being outside during night hours') }}</option>
-                    <option value="I love long walks"  {{ $info->preferences == 'I love long walks' ? 'selected' : '' }}>{{ __('messages.I love long walks') }}</option>
-                <option value="I enjoy outdoor sports and recreation" {{ $info->preferences == 'I enjoy outdoor sports and recreation' ? 'selected' : '' }}>{{ __('messages.I enjoy outdoor sports and recreation') }}</option>
-<option value="I walk to school / work" {{ $info->preferences == 'I walk to school / work' ? 'selected' : '' }}>{{ __('messages.I walk to school / work') }}</option>
-<option value="I cycle / scooter" {{ $info->preferences == 'I cycle / scooter' ? 'selected' : '' }}>{{ __('messages.I cycle / scooter') }}</option>
-<option value="I love exploring new places" {{ $info->preferences == 'I love exploring new places' ? 'selected' : '' }}>{{ __('messages.I love exploring new places') }}</option>
-<option value="I am interested in architecture and urban design" {{ $info->preferences == 'I am interested in architecture and urban design' ? 'selected' : '' }}>{{ __('messages.I am interested in architecture and urban design') }}</option>
-<option value="I enjoy visiting historical landmarks and monuments" {{ $info->preferences == 'I enjoy visiting historical landmarks and monuments' ? 'selected' : '' }}>{{ __('messages.I enjoy visiting historical landmarks and monuments') }}</option>
-<option value="I enjoy calm parks and nature" {{ $info->preferences == 'I enjoy calm parks and nature' ? 'selected' : '' }}>{{ __('messages.I enjoy calm parks and nature') }}</option>
-<option value="I love pocket parks" {{ $info->preferences == 'I love pocket parks' ? 'selected' : '' }}>{{ __('messages.I love pocket parks') }}</option>
-<option value="I enjoy gardening in urban spaces" {{ $info->preferences == 'I enjoy gardening in urban spaces' ? 'selected' : '' }}>{{ __('messages.I enjoy gardening in urban spaces') }}</option>
-<option value="I enjoy lively and vibrant places" {{ $info->preferences == 'I enjoy lively and vibrant places' ? 'selected' : '' }}>{{ __('messages.I enjoy lively and vibrant places') }}</option>
-<option value="I enjoy being outside in the evening" {{ $info->preferences == 'I enjoy being outside in the evening' ? 'selected' : '' }}>{{ __('messages.I enjoy being outside in the evening') }}</option>
-<option value="I have difficulties walking" {{ $info->preferences == 'I have difficulties walking' ? 'selected' : '' }}>{{ __('messages.I have difficulties walking') }}</option>
-<option value="I have issues with eyesight" {{ $info->preferences == 'I have issues with eyesight' ? 'selected' : '' }}>{{ __('messages.I have issues with eyesight') }}</option>
+                    <option value="I love long walks">{{ __('messages.I love long walks') }}</option>
+                <option value="I enjoy outdoor sports and recreation">{{ __('messages.I enjoy outdoor sports and recreation') }}</option>
+<option value="I walk to school / work">{{ __('messages.I walk to school / work') }}</option>
+<option value="I cycle / scooter">{{ __('messages.I cycle / scooter') }}</option>
+<option value="I love exploring new places">{{ __('messages.I love exploring new places') }}</option>
+<option value="I am interested in architecture and urban design">{{ __('messages.I am interested in architecture and urban design') }}</option>
+<option value="I enjoy visiting historical landmarks and monuments">{{ __('messages.I enjoy visiting historical landmarks and monuments') }}</option>
+<option value="I enjoy calm parks and nature" >{{ __('messages.I enjoy calm parks and nature') }}</option>
+<option value="I love pocket parks">{{ __('messages.I love pocket parks') }}</option>
+<option value="I enjoy gardening in urban spaces" >{{ __('messages.I enjoy gardening in urban spaces') }}</option>
+<option value="I enjoy lively and vibrant places" >{{ __('messages.I enjoy lively and vibrant places') }}</option>
+<option value="I enjoy being outside in the evening" >{{ __('messages.I enjoy being outside in the evening') }}</option>
+<option value="I have difficulties walking" >{{ __('messages.I have difficulties walking') }}</option>
+<option value="I have issues with eyesight" >{{ __('messages.I have issues with eyesight') }}</option>
             </select>
 
             <button type="submit"

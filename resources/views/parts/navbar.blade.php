@@ -1,11 +1,10 @@
  <nav class="fixed top-0 z-20 w-full">
      <div class="flex flex-wrap items-center justify-between pt-4 pb-4 mx-2 mr-2 bg-white border-b border-gray-400 lg:mx-16">
-         <a href="#" class="flex items-center">
-
-         </a>
-         <a href="/" class="prevent"> <span
-                 class="self-center pl-8 text-3xl font-bold text-center text-gray-800 whitespace-nowrap">City
-                 Layers</span></a>
+     <div class="flex items-center">
+         <a href="/" class="mx-2 text-sm font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-house"></i><span class="">Home</span></a>
+          <a href="dashboard" class="mx-2 text-sm font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-table"></i><span class="">Dashboard</span></a>
+           <a href="leaderboard" class="mx-2 text-sm font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-trophy"></i> <span class="">Leaderboard</span></a>
+           </div>
          <div x-data="{ modelOpen: false }">
              <button @click="modelOpen =!modelOpen"
                  class="inline-flex items-center p-2 ml-3 text-sm text-gray-400 rounded-lg focus:outline-none focus:ring-2 hover:bg-gray-700 focus:ring-gray-600">
@@ -20,7 +19,7 @@
              <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
                  role="dialog" aria-modal="true">
                  <div
-                     class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
+                     class="flex items-start justify-center min-h-screen px-4 pt-16 text-center sm:block sm:p-0">
                      <div x-cloak @click="modelOpen = false" x-show="modelOpen"
                          x-transition:enter="transition ease-out duration-300 transform"
                          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -39,22 +38,14 @@
 
                          <div class="w-full">
                              <ul
-                                 class="flex flex-col p-4 mt-4 font-bold bg-[#B8E7EB] shadow rounded-lg mynav">
-                                 <li>
-                                     <a href="/"
-                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">{{ __('messages.Home') }}</a>
-                                 </li>
-                                   <li>
-                                     <a href="/dashboard"
-                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">{{ __('messages.Dashboard') }}</a>
-                                 </li>
+                                 class="flex flex-col p-4 mt-4 font-bold bg-white rounded-lg shadow mynav">
                                  <li>
                                      <a href="/profile"
-                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">{{ __('messages.Profile') }}</a>
+                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent"><i class="pr-2 fa-solid fa-user"></i> {{ __('messages.Profile') }}</a>
                                  </li>
                                  <li>
                                      <a href="/admin/logout"
-                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent">{{ __('messages.Log-out') }}</a>
+                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:text-blue-500 prevent"><i class="pr-2 fa-solid fa-right-from-bracket"></i> {{ __('messages.Log-out') }}</a>
                                  </li>
                              </ul>
                          </div>

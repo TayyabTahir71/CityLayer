@@ -37,7 +37,7 @@ class AdminUserSeeder extends Seeder
                 'email_verified_at'=>NULL,
                 'password'=>'$2y$10$RXUTqRyovmqTqVtPUkn1DO6DzwQtZytMgzS8cyfdi8saNcyxSyCx6',
                 'avatar'=>'avatar.png',
-                'role'=>'user',
+                'role'=>'admin',
                 'firstuse'=>1,
                 'remember_token'=>NULL,
                 'created_at'=>'2023-03-23 12:28:40',
@@ -71,5 +71,19 @@ class AdminUserSeeder extends Seeder
                 'created_at'=>'2023-03-23 16:06:56',
                 'updated_at'=>'2023-03-23 16:06:56'
                 ] );
+
+                User::create( [
+                    'id'=>6,
+                    'name'=>'ankhelos',
+                    'email'=>NULL,
+                    'email_verified_at'=>NULL,
+                    'password'=>'$2y$10$TwM0nGmAZsCBUcuwgTUyqO0LwcBS8C65uE8IbXsA4Q//R/9YCMOWm',
+                    'avatar'=>'avatar.png',
+                    'role'=>'admin',
+                    'firstuse'=>1,
+                    'remember_token'=>NULL,
+                    'created_at'=>'2023-03-23 16:06:56',
+                    'updated_at'=>'2023-03-23 16:06:56'
+                    ] );
     }
 }

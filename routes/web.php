@@ -58,7 +58,7 @@ Route::post('spaceusage', 'spaceusage')->name('spaceusage');
 
 Route::post('spaceusagedetail', 'spaceusagedetail')->name('spaceusagedetail');
 Route::post('newspacetag', 'newspacetag')->name('newspacetag');
-
+Route::get('leaderboard', 'leaderboard')->name('leaderboard');
 
 Route::get('step2', function () {
     return view('step2');
@@ -71,6 +71,7 @@ Route::get('step8', function () {return view('step8');});
 Route::get('step9', function () {return view('step9');});
 Route::get('step10', function () {return view('step10');});
 Route::get('logout', 'logout');
+
 
 
 });

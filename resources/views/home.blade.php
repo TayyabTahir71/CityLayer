@@ -9,14 +9,14 @@
                     <div id="map" class="absolute mt-4 w-[100vw] z-10 h-screen"></div>
                 </div>
                 <div x-data="{ modelOpen: false }">
-                    <div @click="modelOpen =!modelOpen"
-                        class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] hover:bg-blue-400 text-center z-50">
-                        {{ __('messages.Start Playing!') }}
-                        <div class="fixed bottom-0 right-0 m-2">
-                            <a href="about"> <i
-                                    class="text-black hover:text-gray-800 active:text-black fa-solid fa-circle-info z-60"></i></a>
+                    <div
+                        class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] active:bg-blue-400 text-center z-50">
+                            <a class="mx-12" @click="modelOpen =!modelOpen" onclick="zoom()">  {{ __('messages.Start Playing!') }}</a>
+                             <div class="fixed bottom-0 right-0 m-2">
+                            <a href="about"> <img class="w-12 h-12" src="/img/about_icon.png"> </a>
                         </div>
                     </div>
+                    
 
                     <div x-cloak x-show="modelOpen" class="fixed bottom-0 z-50 overflow-y-auto"
                         aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -218,7 +218,7 @@ var legend = L.control({ position: "topright" });
                 '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
                 '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                placeid + '\', \'' + placetype + '\', \'wtf\')"></div><textarea name="comm" id="comm" cols="10" rows="4" class="font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea><button type="button"class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment(\'' +placeid + '\', \'' + placetype + '\')">Leave a comment</button> </div>'
+                placeid + '\', \'' + placetype + '\', \'wtf\')"></div><textarea name="comm" id="comm" cols="10" rows="2" class="font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea><button type="button"class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment(\'' +placeid + '\', \'' + placetype + '\')">Leave a comment</button> </div>'
             );
             markers[place.id] = markerx;
         }
@@ -322,9 +322,12 @@ var legend = L.control({ position: "topright" });
                 }
             });
             mymap0.closePopup();
+        }
 
-
-
+        function zoom(){
+            navigator.geolocation.getCurrentPosition(function(position) {
+            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 17);
+             });
         }
 
     </script>

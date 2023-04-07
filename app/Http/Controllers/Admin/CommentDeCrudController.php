@@ -29,7 +29,7 @@ class CommentDeCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Comment_de::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/comment-de');
-        CRUD::setEntityNameStrings('comment de', 'comments de');
+        CRUD::setEntityNameStrings('comment', 'comments DE');
     }
 
     /**

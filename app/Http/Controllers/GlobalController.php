@@ -65,7 +65,6 @@ class GlobalController extends Controller
             } else {
                 $infos = new Infosperso();
                 $infos->user_id = $userid;
-                $infos->score = 0;
                 $infos->save();
                 return view('profil');
             }
@@ -74,26 +73,34 @@ class GlobalController extends Controller
         }
     }
 
+    public function leaderboard()
+    {
+        $users = User::all();
+        //sort by usr->score
+        $users = $users->sortByDesc('score');
+        return view('leaderboard', compact('users'));
+    }
+
     public function comment(Request $request)
     {
         $userid = backpack_auth()->user()->id;
         $locale = session()->get('locale');
-        
-            if ($locale == 'de') {
-                $comment = new Comment_de();
-                $comment->user_id = $userid;
-                $comment->placeid = $request->id;
-                $comment->type = $request->type;
-                $comment->comment = $request->comment;
-                $comment->save();
-            } else {
-                $comment = new Comment_en();
-                $comment->user_id = $userid;
-                $comment->placeid = $request->id;
-                $comment->type = $request->type;
-                $comment->comment = $request->comment;
-                $comment->save();
-            }
+
+        if ($locale == 'de') {
+            $comment = new Comment_de();
+            $comment->user_id = $userid;
+            $comment->placeid = $request->id;
+            $comment->type = $request->type;
+            $comment->comment = $request->comment;
+            $comment->save();
+        } else {
+            $comment = new Comment_en();
+            $comment->user_id = $userid;
+            $comment->placeid = $request->id;
+            $comment->type = $request->type;
+            $comment->comment = $request->comment;
+            $comment->save();
+        }
 
         return 'commented';
     }
@@ -112,9 +119,8 @@ class GlobalController extends Controller
                 $street = Street::find($request->id);
                 $street->likes = $street->likes + 1;
                 $street->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -128,9 +134,8 @@ class GlobalController extends Controller
                 $building = Building::find($request->id);
                 $building->likes = $building->likes + 1;
                 $building->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -144,9 +149,9 @@ class GlobalController extends Controller
                 $openspace = Openspace::find($request->id);
                 $openspace->likes = $openspace->likes + 1;
                 $openspace->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
+  
             } else {
                 return 'already';
             }
@@ -167,9 +172,8 @@ class GlobalController extends Controller
                 $street = Street::find($request->id);
                 $street->dislike = $street->dislike + 1;
                 $street->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -183,9 +187,8 @@ class GlobalController extends Controller
                 $building = Building::find($request->id);
                 $building->dislike = $building->dislike + 1;
                 $building->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -199,9 +202,8 @@ class GlobalController extends Controller
                 $openspace = Openspace::find($request->id);
                 $openspace->dislike = $openspace->dislike + 1;
                 $openspace->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -222,9 +224,8 @@ class GlobalController extends Controller
                 $street = Street::find($request->id);
                 $street->stars = $street->stars + 1;
                 $street->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -238,9 +239,8 @@ class GlobalController extends Controller
                 $building = Building::find($request->id);
                 $building->stars = $building->stars + 1;
                 $building->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -254,9 +254,8 @@ class GlobalController extends Controller
                 $openspace = Openspace::find($request->id);
                 $openspace->stars = $openspace->stars + 1;
                 $openspace->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -277,9 +276,8 @@ class GlobalController extends Controller
                 $street = Street::find($request->id);
                 $street->bof = $street->bof + 1;
                 $street->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -293,9 +291,8 @@ class GlobalController extends Controller
                 $building = Building::find($request->id);
                 $building->bof = $building->bof + 1;
                 $building->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -309,9 +306,8 @@ class GlobalController extends Controller
                 $openspace = Openspace::find($request->id);
                 $openspace->bof = $openspace->bof + 1;
                 $openspace->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -332,9 +328,8 @@ class GlobalController extends Controller
                 $street = Street::find($request->id);
                 $street->weird = $street->weird + 1;
                 $street->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -348,9 +343,8 @@ class GlobalController extends Controller
                 $building = Building::find($request->id);
                 $building->weird = $building->weird + 1;
                 $building->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -364,9 +358,8 @@ class GlobalController extends Controller
                 $openspace = Openspace::find($request->id);
                 $openspace->weird = $openspace->weird + 1;
                 $openspace->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -387,9 +380,8 @@ class GlobalController extends Controller
                 $street = Street::find($request->id);
                 $street->ohh = $street->ohh + 1;
                 $street->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -403,9 +395,8 @@ class GlobalController extends Controller
                 $building = Building::find($request->id);
                 $building->ohh = $building->ohh + 1;
                 $building->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -419,9 +410,8 @@ class GlobalController extends Controller
                 $openspace = Openspace::find($request->id);
                 $openspace->ohh = $openspace->ohh + 1;
                 $openspace->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -442,9 +432,8 @@ class GlobalController extends Controller
                 $street = Street::find($request->id);
                 $street->wtf = $street->wtf + 1;
                 $street->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -458,9 +447,8 @@ class GlobalController extends Controller
                 $building = Building::find($request->id);
                 $building->wtf = $building->wtf + 1;
                 $building->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -474,9 +462,8 @@ class GlobalController extends Controller
                 $openspace = Openspace::find($request->id);
                 $openspace->wtf = $openspace->wtf + 1;
                 $openspace->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             } else {
                 return 'already';
             }
@@ -492,8 +479,8 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         $name = backpack_auth()->user()->name;
+        $score =  backpack_auth()->user()->score;
         $infos = Infosperso::where('user_id', $userid)->first();
-        $score = $infos->score;
         return view('profile', compact('name', 'infos', 'score'));
     }
 
@@ -501,8 +488,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         $infos = Infosperso::where('user_id', $userid)->first();
-
-        if ($infos->score > 0) {
+        if (backpack_auth()->user()->score > 0) {
             Infosperso::where('user_id', $userid)->update([
                 'email' => $request->email,
                 'age' => $request->age,
@@ -513,7 +499,9 @@ class GlobalController extends Controller
             ]);
             if ($request->email != null) {
                 backpack_auth()->user()->email = $request->email;
-                backpack_auth()->user()->save();
+                backpack_auth()
+                    ->user()
+                    ->save();
             }
             return redirect('profile');
         } else {
@@ -521,23 +509,28 @@ class GlobalController extends Controller
             $infos->user_id = $userid;
             $infos->age = $request->age;
             if ($request->age != null) {
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
             $infos->gender = $request->gender;
             if ($request->gender != null) {
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
             $infos->profession = $request->profession;
             if ($request->profession != null) {
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
             $infos->relation = $request->relation;
             if ($request->relation != null) {
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
             $infos->preferences = $request->preferences;
             if ($request->preferences != null) {
-                $infos->score = $infos->score + 2;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
             $infos->newuser = 0;
             $infos->save();
@@ -577,21 +570,21 @@ class GlobalController extends Controller
             if ($stag) {
                 return back();
             } else {
-            $tag = new Tag();
+                $tag = new Tag();
             }
         } elseif ($locale == 'de') {
             $stag = Tag_de::where('name', $request->name)->first();
             if ($stag) {
                 return back();
             } else {
-            $tag = new Tag_de();
+                $tag = new Tag_de();
             }
         } else {
             $stag = Tag::where('name', $request->name)->first();
             if ($stag) {
                 return back();
             } else {
-            $tag = new Tag();
+                $tag = new Tag();
             }
         }
 
@@ -609,21 +602,21 @@ class GlobalController extends Controller
             if ($stag) {
                 return back();
             } else {
-            $opinion = new Opinion();
+                $opinion = new Opinion();
             }
         } elseif ($locale == 'de') {
             $stag = Opinion_de::where('name', $request->name)->first();
             if ($stag) {
                 return back();
             } else {
-            $opinion = new Opinion_de();
+                $opinion = new Opinion_de();
             }
         } else {
             $stag = Opinion::where('name', $request->name)->first();
             if ($stag) {
                 return back();
             } else {
-            $opinion = new Opinion();
+                $opinion = new Opinion();
             }
         }
         $opinion->name = $request->name;
@@ -647,9 +640,8 @@ class GlobalController extends Controller
             //count tags
             $count = count($tags);
             //add 1 point for each tag
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + $count;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->save();
             $street->save();
             //return the id after saving
             $streetid = $street->id;
@@ -666,9 +658,8 @@ class GlobalController extends Controller
             //count tags
             $count = count($tags);
             //add 1 point for each tag
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + $count;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->save();
             $building->save();
             //return the id after saving
             $buildingid = $building->id;
@@ -685,9 +676,8 @@ class GlobalController extends Controller
             //count tags
             $count = count($tags);
             //add 1 point for each tag
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + $count;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->save();
             $openspace->save();
             //return the id after saving
             $openspaceid = $openspace->id;
@@ -706,9 +696,8 @@ class GlobalController extends Controller
             $street->opinions = implode(',', $opinions);
             //count opinions
             $count = count($opinions);
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + $count * 2;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->save();
             $street->save();
             return $request->placeid . '&type=street';
         } elseif ($request->type == 'building') {
@@ -716,9 +705,8 @@ class GlobalController extends Controller
             $opinions = $request->opinions;
             $building->opinions = implode(',', $opinions);
             $count = count($opinions);
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + $count * 2;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->save();
             $building->save();
             return $request->placeid . '&type=building';
         } elseif ($request->type == 'openspace') {
@@ -726,9 +714,8 @@ class GlobalController extends Controller
             $opinions = $request->opinions;
             $openspace->opinions = implode(',', $opinions);
             $count = count($opinions);
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + $count * 2;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->save();
             $openspace->save();
             return $request->placeid . '&type=openspace';
         }
@@ -741,23 +728,20 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             $street = Street::find($request->id);
             $street->feeling = $request->feeling;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->id);
             $building->feeling = $request->feeling;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->id);
             $openspace->feeling = $request->feeling;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->save();
             $openspace->save();
         }
         return $placeid;
@@ -791,9 +775,8 @@ class GlobalController extends Controller
 
         $user = User::find($userid);
 
-        $infos = Infosperso::where('user_id', $userid)->first();
-        $infos->score = $infos->score + 1;
-        $infos->save();
+        backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+        backpack_auth()->user()->save();
 
         $user->avatar = $imageName;
         $user->save();
@@ -807,14 +790,8 @@ class GlobalController extends Controller
         $street = Street::where('user_id', $userid)->get();
         $building = Building::where('user_id', $userid)->get();
         $openspace = Openspace::where('user_id', $userid)->get();
-        if (Infosperso::where('user_id', $userid)->exists()) {
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $score = $infos->score;
-            $infos->save();
-        } else {
-            $score = 1;
-            $infos->save();
-        }
+        $infos = Infosperso::where('user_id', $userid)->first();
+        $score = backpack_auth()->user()->score;
 
         $all_data = array_merge(
             $street->toArray(),
@@ -841,20 +818,18 @@ class GlobalController extends Controller
                     $imageName
                 );
                 $street->image0 = '/uploads/street/feeling/' . $imageName;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 5;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 5;
+                backpack_auth()->user()->save();
                 $street->save();
             }
             if ($request->description != null) {
                 $street->description = $request->description;
                 $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
@@ -866,20 +841,17 @@ class GlobalController extends Controller
                     $imageName
                 );
                 $building->image0 = '/uploads/building/feeling/' . $imageName;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 5;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 5;
+                backpack_auth()->user()->save();
                 $building->save();
             }
             if ($request->description != null) {
                 $building->description = $request->description;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
@@ -891,20 +863,17 @@ class GlobalController extends Controller
                     $imageName
                 );
                 $openspace->image0 = '/uploads/openspace/feeling/' . $imageName;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 5;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 5;
+                backpack_auth()->user()->save();
                 $openspace->save();
             }
             if ($request->description != null) {
                 $openspace->description = $request->description;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $openspace->save();
         }
 
@@ -928,21 +897,18 @@ class GlobalController extends Controller
                     $imageName
                 );
                 $street->image = '/uploads/street/tochange/' . $imageName;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 5;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 5;
+                backpack_auth()->user()->save();
                 $street->save();
             }
             if ($request->description != null) {
                 $street->description2 = $request->description;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
             $street->change = $request->change;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
@@ -954,22 +920,19 @@ class GlobalController extends Controller
                     $imageName
                 );
                 $building->image = '/uploads/building/tochange/' . $imageName;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 5;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 5;
+                backpack_auth()->user()->save();
                 $building->save();
             }
 
             if ($request->description != null) {
                 $building->description2 = $request->description;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
             $building->change = $request->change;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
@@ -981,21 +944,18 @@ class GlobalController extends Controller
                     $imageName
                 );
                 $openspace->image = '/uploads/openspace/tochange/' . $imageName;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 5;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 5;
+                backpack_auth()->user()->save();
                 $openspace->save();
             }
             if ($request->description != null) {
                 $openspace->description2 = $request->description;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-                $infos->save();
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
             }
             $openspace->change = $request->change;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $openspace->save();
         }
 
@@ -1011,23 +971,20 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
             $street->confort = $request->level;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $building->confort = $request->level;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $openspace->confort = $request->level;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $openspace->save();
         }
 
@@ -1045,199 +1002,176 @@ class GlobalController extends Controller
             $street = Street::find($request->placeid);
             if ($request->action == 'rest') {
                 $street->rest = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->rest_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'movement') {
                 $street->movement = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->movement_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'activities') {
                 $street->activities = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->activities_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'orientation') {
                 $street->orientation = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->orientation_text = $request->text;
                 }
-                $infos->save();
 
                 $street->save();
             }
             if ($request->action == 'weather') {
                 $street->weather = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->weather_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'facilities') {
                 $street->facilities = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->facilities_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'noise') {
                 $street->noise = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->noise_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             if ($request->action == 'rest') {
                 $building->rest = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->rest_text = $request->text;
                 }
-                $infos->save();
-
                 $building->save();
             }
             if ($request->action == 'movement') {
                 $building->movement = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->movement_text = $request->text;
                 }
-                $infos->save();
-
                 $building->save();
             }
             if ($request->action == 'activities') {
                 $building->activities = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->activities_text = $request->text;
                 }
-                $infos->save();
-
                 $building->save();
             }
             if ($request->action == 'orientation') {
                 $building->orientation = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->orientation_text = $request->text;
                 }
-                $infos->save();
-
                 $building->save();
             }
             if ($request->action == 'weather') {
                 $building->weather = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->weather_text = $request->text;
                 }
-                $infos->save();
-
                 $building->save();
             }
             if ($request->action == 'facilities') {
                 $building->facilities = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->facilities_text = $request->text;
                 }
-                $infos->save();
+
 
                 $building->save();
             }
             if ($request->action == 'noise') {
                 $building->noise = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->noise_text = $request->text;
                 }
-                $infos->save();
+
 
                 $building->save();
             }
@@ -1245,86 +1179,77 @@ class GlobalController extends Controller
             $openspace = Openspace::find($request->placeid);
             if ($request->action == 'rest') {
                 $openspace->rest = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->rest_text = $request->text;
                 }
-                $infos->save();
 
                 $openspace->save();
             }
             if ($request->action == 'movement') {
                 $openspace->movement = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->movement_text = $request->text;
                 }
-                $infos->save();
 
                 $openspace->save();
             }
             if ($request->action == 'activities') {
                 $openspace->activities = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->activities_text = $request->text;
                 }
-                $infos->save();
-
                 $openspace->save();
             }
             if ($request->action == 'orientation') {
                 $openspace->orientation = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->orientation_text = $request->text;
-
-                    $infos->save();
                 }
 
                 $openspace->save();
             }
             if ($request->action == 'weather') {
                 $openspace->weather = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->weather_text = $request->text;
                 }
-                $infos->save();
+
 
                 $openspace->save();
             }
             if ($request->action == 'noise') {
                 $openspace->noise = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->noise_text = $request->text;
                 }
-                $infos->save();
 
                 $openspace->save();
             }
@@ -1342,23 +1267,20 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
             $street->enjoyable = $request->enjoyable;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $building->enjoyable = $request->enjoyable;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $openspace->enjoyable = $request->enjoyable;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $openspace->save();
         }
 
@@ -1377,199 +1299,172 @@ class GlobalController extends Controller
             $street = Street::find($request->placeid);
             if ($request->action == 'talking') {
                 $street->talking = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->talking_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'seasonality') {
                 $street->seasonality = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->seasonality_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'plants') {
                 $street->plants = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->plants_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'sunlight') {
                 $street->sunlight = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->sunlight_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'interesting') {
                 $street->interesting = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->interesting_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'shade') {
                 $street->shade = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-
+            
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->shade_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
             if ($request->action == 'beauty') {
                 $street->beauty = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->beauty_text = $request->text;
                 }
-                $infos->save();
-
                 $street->save();
             }
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             if ($request->action == 'talking') {
                 $building->talking = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->talking_text = $request->text;
                 }
-                $infos->save();
-
                 $building->save();
             }
             if ($request->action == 'seasonality') {
                 $building->seasonality = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->seasonality_text = $request->text;
                 }
-                $infos->save();
 
                 $building->save();
             }
             if ($request->action == 'plants') {
                 $building->plants = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->plants_text = $request->text;
                 }
-                $infos->save();
-
                 $building->save();
             }
             if ($request->action == 'sunlight') {
                 $building->sunlight = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->sunlight_text = $request->text;
                 }
-                $infos->save();
 
                 $building->save();
             }
             if ($request->action == 'interesting') {
                 $building->interesting = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
                     $building->interesting_text = $request->text;
                 }
-                $infos->save();
+  
 
                 $building->save();
             }
             if ($request->action == 'shade') {
                 $building->shade = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->shade_text = $request->text;
                 }
-                $infos->save();
 
                 $building->save();
             }
             if ($request->action == 'beauty') {
                 $building->beauty = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->beauty_text = $request->text;
                 }
-                $infos->save();
+
 
                 $building->save();
             }
@@ -1577,104 +1472,100 @@ class GlobalController extends Controller
             $openspace = Openspace::find($request->placeid);
             if ($request->action == 'talking') {
                 $openspace->talking = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->talking_text = $request->text;
                 }
-                $infos->save();
+
 
                 $openspace->save();
             }
             if ($request->action == 'seasonality') {
                 $openspace->seasonality = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
-
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
                     $openspace->seasonality_text = $request->text;
                 }
-                $infos->save();
+    
 
                 $openspace->save();
             }
             if ($request->action == 'plants') {
                 $openspace->plants = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->plants_text = $request->text;
                 }
-                $infos->save();
+      
 
                 $openspace->save();
             }
             if ($request->action == 'sunlight') {
                 $openspace->sunlight = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->sunlight_text = $request->text;
                 }
-                $infos->save();
+    
 
                 $openspace->save();
             }
             if ($request->action == 'interesting') {
                 $openspace->interesting = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->interesting_text = $request->text;
                 }
-                $infos->save();
+
 
                 $openspace->save();
             }
             if ($request->action == 'shade') {
                 $openspace->shade = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->shade_text = $request->text;
                 }
-                $infos->save();
+        
 
                 $openspace->save();
             }
             if ($request->action == 'beauty') {
                 $openspace->beauty = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->beauty_text = $request->text;
                 }
-                $infos->save();
-
                 $openspace->save();
             }
         }
-
         return 'ok';
     }
 
@@ -1687,23 +1578,20 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
             $street->protected = $request->protected;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $building->protected = $request->protected;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $openspace->protected = $request->protected;
-            $infos = Infosperso::where('user_id', $userid)->first();
-            $infos->score = $infos->score + 1;
-            $infos->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
             $openspace->save();
         }
 
@@ -1722,81 +1610,80 @@ class GlobalController extends Controller
             $street = Street::find($request->placeid);
             if ($request->action == 'protection') {
                 $street->protection = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->protection_text = $request->text;
                 }
-                $infos->save();
+
 
                 $street->save();
             }
             if ($request->action == 'polluants') {
                 $street->polluants = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->polluants_text = $request->text;
                 }
-                $infos->save();
+
 
                 $street->save();
             }
             if ($request->action == 'night') {
                 $street->night = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->night_text = $request->text;
                 }
-                $infos->save();
+
 
                 $street->save();
             }
             if ($request->action == 'hazards') {
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->hazards = $request->text;
                 }
-                $infos->save();
+     
 
                 $street->save();
             }
             if ($request->action == 'dangerous') {
                 $street->dangerous = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->dangerous_text = $request->text;
                 }
-                $infos->save();
+ 
 
                 $street->save();
             }
             if ($request->action == 'protection_harm') {
                 $street->protection_harm = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->protection_harm_text = $request->text;
                 }
-                $infos->save();
 
                 $street->save();
             }
@@ -1804,50 +1691,50 @@ class GlobalController extends Controller
             $building = Building::find($request->placeid);
             if ($request->action == 'protection') {
                 $building->protection = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->protection_text = $request->text;
                 }
-                $infos->save();
+
 
                 $building->save();
             }
             if ($request->action == 'polluants') {
                 $building->polluants = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->polluants_text = $request->text;
                 }
-                $infos->save();
+  
 
                 $building->save();
             }
             if ($request->action == 'night') {
                 $building->night = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->night_text = $request->text;
                 }
-                $infos->save();
+
 
                 $building->save();
             }
             if ($request->action == 'hazards') {
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->hazards = $request->text;
                 }
                 $infos->save();
@@ -1856,29 +1743,29 @@ class GlobalController extends Controller
             }
             if ($request->action == 'dangerous') {
                 $building->dangerous = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->dangerous_text = $request->text;
                 }
-                $infos->save();
+
 
                 $building->save();
             }
             if ($request->action == 'protection_harm') {
                 $building->protection_harm = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->protection_harm_text = $request->text;
                 }
-                $infos->save();
+
 
                 $building->save();
             }
@@ -1886,81 +1773,81 @@ class GlobalController extends Controller
             $openspace = Openspace::find($request->placeid);
             if ($request->action == 'protection') {
                 $openspace->protection = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->protection_text = $request->text;
                 }
-                $infos->save();
+
 
                 $openspace->save();
             }
             if ($request->action == 'polluants') {
                 $openspace->polluants = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->polluants_text = $request->text;
                 }
-                $infos->save();
+ 
 
                 $openspace->save();
             }
             if ($request->action == 'night') {
                 $openspace->night = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->night_text = $request->text;
                 }
-                $infos->save();
+      
 
                 $openspace->save();
             }
             if ($request->action == 'hazards') {
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->hazards = $request->text;
                 }
-                $infos->save();
+
 
                 $openspace->save();
             }
             if ($request->action == 'dangerous') {
                 $openspace->dangerous = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->dangerous_text = $request->text;
                 }
-                $infos->save();
+       
 
                 $openspace->save();
             }
             if ($request->action == 'protection_harm') {
                 $openspace->protection_harm = $request->value;
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->score = $infos->score + 1;
+                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
 
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->protection_harm_text = $request->text;
                 }
-                $infos->save();
+
 
                 $openspace->save();
             }
@@ -2006,10 +1893,10 @@ class GlobalController extends Controller
             if ($request->action == 'spend_time') {
                 $street->spend_time = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->spend_time_text = $request->text;
-                    $infos->save();
+              
                 }
 
                 $street->save();
@@ -2017,10 +1904,10 @@ class GlobalController extends Controller
             if ($request->action == 'meeting') {
                 $street->meeting = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->meeting_text = $request->text;
-                    $infos->save();
+             
                 }
 
                 $street->save();
@@ -2028,10 +1915,10 @@ class GlobalController extends Controller
             if ($request->action == 'events') {
                 $street->events = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->events_text = $request->text;
-                    $infos->save();
+          
                 }
 
                 $street->save();
@@ -2040,10 +1927,10 @@ class GlobalController extends Controller
             if ($request->action == 'multifunctional') {
                 $street->multifunctional = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $street->multifunctional_text = $request->text;
-                    $infos->save();
+                
                 }
 
                 $street->save();
@@ -2053,10 +1940,10 @@ class GlobalController extends Controller
             if ($request->action == 'spend_time') {
                 $building->spend_time = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->spend_time_text = $request->text;
-                    $infos->save();
+                
                 }
 
                 $building->save();
@@ -2064,10 +1951,10 @@ class GlobalController extends Controller
             if ($request->action == 'meeting') {
                 $building->meeting = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->meeting_text = $request->text;
-                    $infos->save();
+                 
                 }
 
                 $building->save();
@@ -2075,10 +1962,10 @@ class GlobalController extends Controller
             if ($request->action == 'events') {
                 $building->events = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $building->events_text = $request->text;
-                    $infos->save();
+                
                 }
 
                 $building->save();
@@ -2086,10 +1973,10 @@ class GlobalController extends Controller
             if ($request->action == 'multifunctional') {
                 $building->multifunctional = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                backpack_auth()->user()->save();
                     $building->multifunctional_text = $request->text;
-                    $infos->save();
+                
                 }
 
                 $building->save();
@@ -2099,10 +1986,10 @@ class GlobalController extends Controller
             if ($request->action == 'spend_time') {
                 $openspace->spend_time = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->spend_time_text = $request->text;
-                    $infos->save();
+                
                 }
 
                 $openspace->save();
@@ -2110,10 +1997,10 @@ class GlobalController extends Controller
             if ($request->action == 'meeting') {
                 $openspace->meeting = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->meeting_text = $request->text;
-                    $infos->save();
+            
                 }
 
                 $openspace->save();
@@ -2121,10 +2008,10 @@ class GlobalController extends Controller
             if ($request->action == 'events') {
                 $openspace->events = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->meeting_text = $request->text;
-                    $infos->save();
+         
                 }
 
                 $openspace->save();
@@ -2132,10 +2019,10 @@ class GlobalController extends Controller
             if ($request->action == 'multifunctional') {
                 $openspace->multifunctional = $request->value;
                 if ($request->text != null) {
-                    $infos = Infosperso::where('user_id', $userid)->first();
-                    $infos->score = $infos->score + 1;
+                    backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+                    backpack_auth()->user()->save();
                     $openspace->multifunctional_text = $request->text;
-                    $infos->save();
+            
                 }
 
                 $openspace->save();
@@ -2292,6 +2179,4 @@ class GlobalController extends Controller
         $infos = Infosperso::where('user_id', $userid)->first();
         return $infos;
     }
-
-
 }
