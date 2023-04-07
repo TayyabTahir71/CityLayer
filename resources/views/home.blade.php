@@ -125,8 +125,8 @@
         let marker = null;
         let mymap0 = L.map('map').setView([48.6890, 7.14086], 15);
         osmLayer0 = L.tileLayer(
-            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
+            'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                maxZoom: 17,
                 apikey: 'choisirgeoportail',
                 format: 'image/jpeg',
                 style: 'normal'
@@ -158,7 +158,7 @@ var legend = L.control({ position: "topright" });
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                    mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
+                    mymap0.setView([position.coords.latitude, position.coords.longitude], 17);
                     L.marker([position.coords.latitude, position.coords.longitude], {
                         icon: icon
                     }).addTo(mymap0);
@@ -206,7 +206,7 @@ var legend = L.control({ position: "topright" });
 
         function mylocation() {
              navigator.geolocation.getCurrentPosition(function(position) {
-            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 12);
+            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 17);
              });
         }
 
