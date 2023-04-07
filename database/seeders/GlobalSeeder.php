@@ -485,7 +485,7 @@ class GlobalSeeder extends Seeder
                         'name'=>'sehr ruhig'
                         ] );
 
-                        Tagsde::create( [
+                        Tag_de::create( [
                             'id'=>1,
                             'name'=>'Gehsteig',
                             'category'=>'Street'
@@ -493,7 +493,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>2,
                             'name'=>'Weg',
                             'category'=>'Street'
@@ -501,7 +501,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>3,
                             'name'=>'Straße',
                             'category'=>'Street'
@@ -509,7 +509,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>4,
                             'name'=>'Kreuzung',
                             'category'=>'Street'
@@ -517,7 +517,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>5,
                             'name'=>'Durchgang',
                             'category'=>'Street'
@@ -525,7 +525,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>6,
                             'name'=>'Gallerie',
                             'category'=>'Street'
@@ -533,7 +533,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>7,
                             'name'=>'Fahrradweg',
                             'category'=>'Street'
@@ -541,7 +541,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>8,
                             'name'=>'Haltestelle',
                             'category'=>'Street'
@@ -549,7 +549,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>9,
                             'name'=>'Parkplatz',
                             'category'=>'Street'
@@ -557,7 +557,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>12,
                             'name'=>'Fassade',
                             'category'=>'Building'
@@ -565,7 +565,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>13,
                             'name'=>'Eingang',
                             'category'=>'Building'
@@ -573,7 +573,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>14,
                             'name'=>'Innenbereich',
                             'category'=>'Building'
@@ -581,7 +581,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>15,
                             'name'=>'Schule',
                             'category'=>'Building'
@@ -589,7 +589,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>16,
                             'name'=>'Museum',
                             'category'=>'Building'
@@ -597,7 +597,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>17,
                             'name'=>'Kirche',
                             'category'=>'Building'
@@ -605,7 +605,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>18,
                             'name'=>'Universität',
                             'category'=>'Building'
@@ -613,7 +613,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>19,
                             'name'=>'Bibliothek',
                             'category'=>'Building'
@@ -621,7 +621,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>21,
                             'name'=>'Denkmal',
                             'category'=>'Building'
@@ -629,7 +629,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>22,
                             'name'=>'Park',
                             'category'=>'Openspace'
@@ -637,7 +637,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>23,
                             'name'=>'öffentlicher Platz',
                             'category'=>'Openspace'
@@ -645,7 +645,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>24,
                             'name'=>'Weg',
                             'category'=>'Openspace'
@@ -653,7 +653,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>25,
                             'name'=>'Erholungsraum',
                             'category'=>'Openspace'
@@ -661,7 +661,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>26,
                             'name'=>'Spielplatz',
                             'category'=>'Openspace'
@@ -669,7 +669,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>27,
                             'name'=>'Hundepark',
                             'category'=>'Openspace'
@@ -677,7 +677,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>28,
                             'name'=>'leere Fläche',
                             'category'=>'Openspace'
@@ -685,7 +685,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>29,
                             'name'=>'Gemeinschaftsgarten',
                             'category'=>'Openspace'
@@ -693,7 +693,7 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>30,
                             'name'=>'Baustelle',
                             'category'=>'Openspace'
@@ -701,98 +701,98 @@ class GlobalSeeder extends Seeder
                             
                             
                                         
-                            Tags_de::create( [
+                            Tag_de::create( [
                             'id'=>31,
                             'name'=>'Brunnen',
                             'category'=>'Openspace'
                             ] );
 
 
-                            Spacetags_de::create( [
+                            SpaceTag_de::create( [
                                 'id'=>3,
                                 'name'=>'Einwohner/-in'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>4,
                                 'name'=>'Arbeitnehmer/-in'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>5,
                                 'name'=>'Tourist/-in'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>6,
                                 'name'=>'Haustierbesitzer'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>7,
                                 'name'=>'Elternteil(e) mit Kindern'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>8,
                                 'name'=>'Kinder'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>9,
                                 'name'=>'Student/-in'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>10,
                                 'name'=>'LGBTQ+ group'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>11,
                                 'name'=>'Sportler/-in'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>12,
                                 'name'=>'Jugendliche'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>13,
                                 'name'=>'Senioren'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>14,
                                 'name'=>'Obdachlos'
                                 ] );
                                 
                                 
                                             
-                                Spacetags_de::create( [
+                                SpaceTag_de::create( [
                                 'id'=>15,
                                 'name'=>'niemand'
                                 ] );
