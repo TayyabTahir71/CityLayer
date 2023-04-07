@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Tag;
 use App\Models\Tag_de;
 use App\Models\Opinion;
-use App\Models\Opinion_de;
+use App\Models\Opinions_de;
 use App\Models\Space_tag;
 use App\Models\Space_tag_de;
 use Illuminate\Database\Seeder;
