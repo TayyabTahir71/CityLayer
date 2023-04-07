@@ -29,7 +29,12 @@
                             class="px-4 py-2 font-bold text-white bg-gray-700 rounded hover:bg-gray-800">{{ __('messages. My first time here') }}</button>
                     </a>
                 </div>
-                       @php $locale = session()->get('locale'); @endphp
+                       @php 
+                       $locale = session()->get('locale');
+                       if ($locale == null) {
+                           $locale = 'en';
+                          }
+                        @endphp
   
         <div class="flex justify-center pt-8">
             <a class="mx-2" href="lang/en"><img src="{{ asset('img/flag/England.png') }}" width="25px"></a>
