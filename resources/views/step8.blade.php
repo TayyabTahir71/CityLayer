@@ -77,7 +77,7 @@
     <script>
         markers = {};
         let marker = null;
-        let mymap0 = L.map('map').setView([48.6890, 7.14086], 10);
+        let mymap0 = L.map('map').setView([48.6890, 7.14086], 13);
         osmLayer0 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 	subdomains: 'abcd',
@@ -105,7 +105,7 @@
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                    mymap0.setView([position.coords.latitude, position.coords.longitude], 19);
+                    mymap0.setView([position.coords.latitude, position.coords.longitude], 13);
                     L.marker([position.coords.latitude, position.coords.longitude], {
                         icon: icon
                     }).addTo(mymap0);
@@ -130,7 +130,7 @@
 
                  function mylocation() {
              navigator.geolocation.getCurrentPosition(function(position) {
-            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 12);
+            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 13);
              });
         }
 
