@@ -48,12 +48,14 @@
   <script src="https://kit.fontawesome.com/59ecaaffaa.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
       <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"
         integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin=""></script>
+          <script src="http://maps.stamen.com/js/tile.stamen.js"></script>
   <title>CityLayer</title>
 @vite('resources/css/app.css')
 <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
