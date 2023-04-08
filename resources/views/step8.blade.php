@@ -81,7 +81,7 @@
               osmLayer0 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
 	subdomains: 'abcd',
 	minZoom: 0,
-	maxZoom: 18,
+	maxZoom: 16,
 	ext: 'png'
 }).addTo(mymap0);
         mymap0.addLayer(osmLayer0);

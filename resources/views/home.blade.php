@@ -152,13 +152,13 @@
         data = {!! json_encode($all_data) !!};
         markers = {};
         let marker = null;
-        let mymap0 = L.map('map').setView([48.6890, 7.14086], 15);
+        let mymap0 = L.map('map').setView([48.6890, 7.14086], 14);
                                 // https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png
                                 //https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}
           osmLayer0 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
 	subdomains: 'abcd',
 	minZoom: 0,
-	maxZoom: 18,
+	maxZoom: 16,
 	ext: 'png'
 }).addTo(mymap0);
         mymap0.addLayer(osmLayer0);
@@ -188,7 +188,7 @@ var legend = L.control({ position: "topright" });
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                    mymap0.setView([position.coords.latitude, position.coords.longitude], 11);
+                    mymap0.setView([position.coords.latitude, position.coords.longitude], 16);
                     L.marker([position.coords.latitude, position.coords.longitude], {
                         icon: icon
                     }).addTo(mymap0);
@@ -236,7 +236,7 @@ var legend = L.control({ position: "topright" });
 
         function mylocation() {
              navigator.geolocation.getCurrentPosition(function(position) {
-            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 15);
+            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 16);
              });
         }
 
@@ -333,7 +333,7 @@ var legend = L.control({ position: "topright" });
 
         function zoom(){
             navigator.geolocation.getCurrentPosition(function(position) {
-            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 17);
+            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 16);
              });
         }
 
