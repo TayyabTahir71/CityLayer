@@ -153,10 +153,12 @@
         markers = {};
         let marker = null;
         let mymap0 = L.map('map').setView([48.6890, 7.14086], 15);
+                                // https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png
+                                //https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}
           osmLayer0 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
 	subdomains: 'abcd',
 	minZoom: 0,
-	maxZoom: 20,
+	maxZoom: 18,
 	ext: 'png'
 }).addTo(mymap0);
         mymap0.addLayer(osmLayer0);
