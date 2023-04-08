@@ -692,27 +692,27 @@ class GlobalController extends Controller
             $street->opinions = implode(',', $opinions);
             //count opinions
             $count = count($opinions);
+            $street->save();
             backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
             backpack_auth()->user()->save();
-            $street->save();
             return $request->placeid . '&type=street';
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $opinions = $request->opinions;
             $building->opinions = implode(',', $opinions);
             $count = count($opinions);
+            $building->save();
             backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
             backpack_auth()->user()->save();
-            $building->save();
             return $request->placeid . '&type=building';
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $opinions = $request->opinions;
             $openspace->opinions = implode(',', $opinions);
             $count = count($opinions);
+            $openspace->save();
             backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
             backpack_auth()->user()->save();
-            $openspace->save();
             return $request->placeid . '&type=openspace';
         }
     }
@@ -724,19 +724,19 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             $street = Street::find($request->id);
             $street->feeling = $request->feeling;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
             $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->id);
             $building->feeling = $request->feeling;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
             $building->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->id);
             $openspace->feeling = $request->feeling;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
             $openspace->save();
         }
@@ -875,13 +875,15 @@ class GlobalController extends Controller
 
         $placeid = $request->placeid;
         $type = $request->type;
+        session()->put('placeid', $placeid);
+        session()->put('type', $type);
 
         return view('step3', compact('placeid', 'type'));
     }
 
     public function store(Request $request)
     {
-        // dd($request->all());
+       // dd($request->all());
         $userid = backpack_auth()->user()->id;
 
         if ($request->type == 'street') {
@@ -893,19 +895,19 @@ class GlobalController extends Controller
                     $imageName
                 );
                 $street->image = '/uploads/street/tochange/' . $imageName;
+                $street->save();
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 5;
                 backpack_auth()->user()->save();
-                $street->save();
             }
-            if ($request->description != null) {
-                $street->description2 = $request->description;
+            if ($request->description2 != null) {
+                $street->description2 = $request->description2;
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                 backpack_auth()->user()->save();
             }
             $street->change = $request->change;
+            $street->save();
             backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
-            $street->save();
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             if ($request->image != null) {
@@ -916,20 +918,20 @@ class GlobalController extends Controller
                     $imageName
                 );
                 $building->image = '/uploads/building/tochange/' . $imageName;
+                $building->save();
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 5;
                 backpack_auth()->user()->save();
-                $building->save();
             }
 
-            if ($request->description != null) {
-                $building->description2 = $request->description;
+            if ($request->description2 != null) {
+                $building->description2 = $request->description2;
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                 backpack_auth()->user()->save();
             }
             $building->change = $request->change;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()->user()->save();
             $building->save();
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()->user()->save();
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             if ($request->image != null) {
@@ -940,19 +942,19 @@ class GlobalController extends Controller
                     $imageName
                 );
                 $openspace->image = '/uploads/openspace/tochange/' . $imageName;
+                $openspace->save();
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 5;
                 backpack_auth()->user()->save();
-                $openspace->save();
             }
-            if ($request->description != null) {
-                $openspace->description2 = $request->description;
+            if ($request->description2 != null) {
+                $openspace->description2 = $request->description2;
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                 backpack_auth()->user()->save();
             }
             $openspace->change = $request->change;
+            $openspace->save();
             backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
-            $openspace->save();
         }
 
         $placeid = $request->placeid;

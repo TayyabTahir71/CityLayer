@@ -28,6 +28,7 @@ return [
     'Log-out' => 'Log-out',
     'Start New Mapping:' => 'Start New Mapping:',
     'React to this place to earn points!' => 'React to this place to earn points!',
+    'You have already react to this place!' => 'You have already react to this place!',
     'Points:' => 'Points:',
     'Street' => 'Street',
     'Building' => 'Building',

@@ -1,8 +1,8 @@
  @php use \App\Http\Controllers\GlobalController; @endphp
  @php
      $opinions = GlobalController::allopinions();
-    $type = request()->query('type');
-    $placeid = request()->query('id');
+    $thetype = session()->get('type');
+    $theplaceid = session()->get('placeid');
  @endphp
 
  @extends('layouts.app')
@@ -10,13 +10,14 @@
  @section('main')
      <div data-barba="container">
          <div class="flex flex-col h-screen mx-auto">
-           <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
+             <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
              <div class="p-3">
                  <div class="flex flex-row items-center pt-2">
                      <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
                  </div>
                  <div class="flex flex-col items-center justify-center">
-                     <h1 class="pt-2 mx-8 text-xl font-bold text-center text-gray-900">{{ __('messages.Add #opinions to describe the space and earn points!') }}</h1>
+                     <h1 class="pt-2 mx-8 text-xl font-bold text-center text-gray-900">
+                         {{ __('messages.Add #opinions to describe the space and earn points!') }}</h1>
                      <div class="w-48 pt-8">
                          @foreach ($opinions as $opinion)
                              <label>
@@ -64,7 +65,8 @@
 
                                          <div class="items-center pt-3 space-x-4 bloc">
                                              <div class="flex flex-col justify-center">
-                                                 <h1 class="pb-4 text-2xl font-bold">{{ __('messages.Add a new opinion') }}</h1>
+                                                 <h1 class="pb-4 text-2xl font-bold">{{ __('messages.Add a new opinion') }}
+                                                 </h1>
                                                  <div>
                                                      <input type="text" name="opinionname" id="opinionname"
                                                          class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
@@ -81,10 +83,12 @@
                      </div>
                      <button id="saveopinion"
                          class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-4  mb-4">
-                        {{ __('messages.Next challenge!') }}
+                         {{ __('messages.Next challenge!') }}
                      </button>
-                     <input type="hidden" id="type" value="{{ $type }}">
-                     <input type="hidden" id="placeid" value="{{ $placeid }}">
+                
+                     <input type="hidden" id="thetype" value="{{ $thetype }}">
+                     <input type="hidden" id="theplaceid" value="{{ $theplaceid }}">
+     
                  </div>
              </div>
          </div>
@@ -92,18 +96,20 @@
      <script>
          window.addEventListener("DOMContentLoaded", (event) => {
 
-             $.ajaxSetup({
-                 headers: {
-                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                 }
-             });
+
 
              $('#newopinion').click(function() {
                  name = document.getElementById('opinionname').value;
-                 thedata = document.getElementById('placeid').value;
-                 thetype = document.getElementById('type').value;
+                 thedata = document.getElementById('theplaceid').value;
+                 thetype = document.getElementById('thetype').value;
                  var url = window.location.toString();
                  window.location = url.replace('upload-image0', 'step3?id=' + thedata + '&type=' + thetype);
+
+                 $.ajaxSetup({
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
+                 });
 
                  $.ajax({
                      type: 'POST',
@@ -120,8 +126,8 @@
              });
 
              $('#saveopinion').click(function() {
-                 const placeid = document.getElementById('placeid').value;
-                 const type = document.getElementById('type').value;
+                 placeid = document.getElementById('theplaceid').value;
+                 type = document.getElementById('thetype').value;
                  console.log(placeid);
                  console.log(type);
 
@@ -131,8 +137,16 @@
                      opinions.push(checkboxes[i].value);
                  }
 
+                 $.ajaxSetup({
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
+                 });
 
                  thename = Math.random().toString(8).substring(7);
+
+
+
                  $.ajax({
                      type: 'POST',
                      url: "/opinions",
@@ -143,8 +157,9 @@
                          type: type,
                      },
                      success: function(data) {
+                        console.log(data);
                          open("/step4?id=" + data, "_self");
-                     } 
+                     }
                  });
 
              });
@@ -163,13 +178,8 @@
          window.onload = function() {
              showMessage("New points");
          };
-
-
-
-
-
      </script>
-          <style>
+     <style>
          #message {
              display: none;
          }

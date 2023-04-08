@@ -6,7 +6,7 @@
      <div data-barba="container">
 
          <div class="flex flex-col h-screen mx-auto">
-  <div id="message" class="fixed top-5 right-5 p-2 border rounded bg-green-500 text-white font-bold"></div>
+  <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
              <div class="flex flex-row items-center pt-2">
                  <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
              </div>
@@ -70,7 +70,7 @@
                                                  <div class="flex flex-col space-y-2">
                                                      <label for="description"
                                                          class="text-sm font-bold text-gray-700">{{ __('messages.Describe what you would change!') }}</label>
-                                                     <textarea name="description" id="description" cols="10" rows="10"
+                                                     <textarea name="description2" id="description2" cols="10" rows="10"
                                                          class="w-full px-4 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-purple-300" placeholder=""></textarea>
                                                  </div>
                                                  <div class="flex flex-col space-y-2">
@@ -81,7 +81,7 @@
                                                              class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">
                                                              {{ __('messages.Upload a photo') }}</div>
                                                      </label>
-                                                      <div id="success-message" class="hidden text-green-500 font-bold">{{ __('messages.File selected successfully!') }}</div>
+                                                      <div id="success-message" class="hidden font-bold text-green-500">{{ __('messages.File selected successfully!') }}</div>
                                                  </div>
                                                  <button type="submit"
                                                      class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">{{ __('messages.Save') }}</button>

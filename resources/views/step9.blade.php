@@ -4,18 +4,18 @@
     <div data-barba="container">
 
         <div class="flex flex-col h-screen mx-auto">
-  <div id="message" class="fixed top-5 right-5 p-2 border rounded bg-green-500 text-white font-bold"></div>
+  <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
             <div class="flex flex-row items-center pt-2">
                 <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
             </div>
             <form action="spaceusage" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
-                    <h1 class="text-4xl font-bold text-center text-gray-900 mx-8">{{ __('messages.Let others know how well the space is used!') }}
+                    <h1 class="mx-8 text-4xl font-bold text-center text-gray-900">{{ __('messages.Let others know how well the space is used!') }}
                     </h1>
                     <div class="pb-8">
 
-                        <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pt-4 pb-16">
+                        <div x-data="{ total_value: 50 }" class="max-w-screen-md pt-4 pb-16 mx-auto">
                             <input name="know_space" id="know_space" class="hidden" type="input" x-model="total_value" />
                             <div class="flex justify-between">
                                 <label for="default-range"
@@ -23,21 +23,21 @@
                                 <label for="default-range"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.great!') }}</label>
                             </div>
-                            <div class="w-full flex justify-between text-xs px-2">
+                            <div class="flex justify-between w-full px-2 text-xs">
                                 <span>|</span>
                                 <span>|</span>
                                 <span>|</span>
 
                             </div>
                             <input id="range"
-                                class="w-80 block h-3 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg "
+                                class="block h-3 bg-gray-300 rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                 type="range" x-model="total_value" min="0" max="100" step="5">
                             <input type="hidden" name="type" id="type" value="{{ $type }}">
                             <input type="hidden" name="placeid" id="placeid" value="{{ $placeid }}">
 
                         </div>
                     </div>
-                    <div class="relative flex items-center justify-center h-64 w-64">
+                    <div class="relative flex items-center justify-center w-64 h-64">
 
                         {{-- play exercices --}}
                         <div x-data="{ modelOpen: false }">
@@ -69,15 +69,15 @@
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">{{ __('messages.Fun to spend time') }}</h1>
-                                                <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
+                                                <div x-data="{ total_value: 50 }" class="max-w-screen-md pb-4 mx-auto">
                                                     <input name="spend_time" id="spend_time" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
-                                                        class="w-80 block h-3 bg-white rounded-lg appearance-none cursor-pointer range-lg "
+                                                        class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0" max="100"
                                                         step="5">
-                                                    <div class="w-full flex justify-between text-xs px-2">
+                                                    <div class="flex justify-between w-full px-2 text-xs">
                                                         <span>|</span>
                                                         <span>|</span>
                                                         <span>|</span>
@@ -96,7 +96,7 @@
                                                         placeholder="Tell us more!">
                                                 </div>
                                                 <button type="button" id="activitiesbtn" onclick="newAction('spend_time')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
+                                                    class="px-4 py-2 mt-4 text-2xl font-bold text-gray-800 bg-white hover:bg-gray-100 active:bg-gray-200 focus:outline-none">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -134,15 +134,15 @@
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">{{ __('messages.Meeting friends') }}</h1>
-                                                <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
+                                                <div x-data="{ total_value: 50 }" class="max-w-screen-md pb-4 mx-auto">
                                                     <input name="meeting" id="meeting" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
-                                                        class="w-80 block h-3 bg-white rounded-lg appearance-none cursor-pointer range-lg "
+                                                        class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="w-full flex justify-between text-xs px-2">
+                                                    <div class="flex justify-between w-full px-2 text-xs">
                                                         <span>|</span>
                                                         <span>|</span>
                                                         <span>|</span>
@@ -161,7 +161,7 @@
                                                         placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                 <button type="button" id="restbtn" onclick="newAction('meeting')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
+                                                    class="px-4 py-2 mt-4 text-2xl font-bold text-gray-800 bg-white hover:bg-gray-100 active:bg-gray-200 focus:outline-none">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -199,15 +199,15 @@
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
                                                 <h1 class="py-4 text-3xl font-bold">{{ __('messages.events in space') }}</h1>
-                                                <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
+                                                <div x-data="{ total_value: 50 }" class="max-w-screen-md pb-4 mx-auto">
                                                     <input name="events" id="events" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
-                                                        class="w-80 block h-3 bg-white rounded-lg appearance-none cursor-pointer range-lg "
+                                                        class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="w-full flex justify-between text-xs px-2">
+                                                    <div class="flex justify-between w-full px-2 text-xs">
                                                         <span>|</span>
                                                         <span>|</span>
                                                         <span>|</span>
@@ -226,7 +226,7 @@
                                                         placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                 <button type="button" id="movementbtn" onclick="newAction('events')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
+                                                    class="px-4 py-2 mt-4 text-2xl font-bold text-gray-800 bg-white hover:bg-gray-100 active:bg-gray-200 focus:outline-none">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -263,16 +263,16 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold mx-2">{{ __('messages.Multifunctional!') }}</h1>
-                                                   <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
+                                                <h1 class="py-4 mx-2 text-3xl font-bold">{{ __('messages.Multifunctional!') }}</h1>
+                                                   <div x-data="{ total_value: 50 }" class="max-w-screen-md pb-4 mx-auto">
                                                     <input name="multifunctional" id="multifunctional" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
-                                                        class="w-80 block h-3 bg-white rounded-lg appearance-none cursor-pointer range-lg "
+                                                        class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="w-full flex justify-between text-xs px-2">
+                                                    <div class="flex justify-between w-full px-2 text-xs">
                                                         <span>|</span>
                                                         <span>|</span>
                                                         <span>|</span>
@@ -292,7 +292,7 @@
                                                 </div>
                                                 <button type="button" id="orientationbtn"
                                                     onclick="newAction('multifunctional')"
-                                                    class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
+                                                    class="px-4 py-2 mt-4 text-2xl font-bold text-gray-800 bg-white hover:bg-gray-100 active:bg-gray-200 focus:outline-none">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -366,18 +366,14 @@
                 var myElement1 = document.querySelector(".myclass1");
                 var myElement2 = document.querySelector(".myclass2");
                 var myElement3 = document.querySelector(".myclass3");
-                var myElement4 = document.querySelector(".myclass4");
-                var myElement5 = document.querySelector(".myclass5");
-                var myElement6 = document.querySelector(".myclass6");
+
 
              showMessage("New points");
                 myElement.click();
                 myElement1.click();
                 myElement2.click();
                 myElement3.click();
-                myElement4.click();
-                myElement5.click();
-                myElement6.click();
+
                 }
             });
         }
