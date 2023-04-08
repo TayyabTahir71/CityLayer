@@ -153,13 +153,12 @@
         markers = {};
         let marker = null;
         let mymap0 = L.map('map').setView([48.6890, 7.14086], 15);
-        osmLayer0 = L.tileLayer(
-            'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-                maxZoom: 17,
-                apikey: 'choisirgeoportail',
-                format: 'image/jpeg',
-                style: 'normal'
-            }).addTo(mymap0);
+          osmLayer0 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+}).addTo(mymap0);
         mymap0.addLayer(osmLayer0);
         mymap0.touchZoom.enable();
         mymap0.scrollWheelZoom.enable();

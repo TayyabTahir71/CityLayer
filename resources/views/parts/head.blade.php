@@ -55,7 +55,7 @@
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
       <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"
         integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin=""></script>
-
+   <script src="http://maps.stamen.com/js/tile.stamen.js"></script>
   <title>CityLayer</title>
 @vite('resources/css/app.css')
 <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
