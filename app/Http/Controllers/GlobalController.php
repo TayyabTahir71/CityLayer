@@ -820,7 +820,6 @@ class GlobalController extends Controller
             }
             if ($request->description != null) {
                 $street->description = $request->description;
-                $infos = Infosperso::where('user_id', $userid)->first();
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                 backpack_auth()->user()->save();
             }
@@ -1735,8 +1734,6 @@ class GlobalController extends Controller
                     backpack_auth()->user()->save();
                     $building->hazards = $request->text;
                 }
-                $infos->save();
-
                 $building->save();
             }
             if ($request->action == 'dangerous') {
@@ -2060,7 +2057,6 @@ class GlobalController extends Controller
     public function spaceusagedetail(Request $request)
     {
         $userid = backpack_auth()->user()->id;
-        $infos = Infosperso::where('user_id', $userid)->first();
 
         if ($request->type == 'street') {
             $street = Street::find($request->placeid);
