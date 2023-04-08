@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="flex items-center justify-between ">
                                         <div class="flex flex-col pr-4">
-                                             <h2 class="pl-4 text-sm font-medium text-gray-800">{{ $user->score }}</h2>
+                                             <h2 class="pl-4 text-sm font-medium text-gray-800">Score: {{ $user->score }}</h2>
                                         </div>
                                     </div>
                             </div>
