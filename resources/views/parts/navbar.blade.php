@@ -1,5 +1,5 @@
  <nav class="fixed top-0 z-20 w-full">
-     <div class="flex flex-wrap items-center justify-between pt-4 pb-4 mx-2 mr-2 bg-white border-b border-gray-400 lg:mx-16">
+     <div class="flex flex-wrap items-center justify-between pt-4 pb-4 mx-2 mr-2 bg-white border-b border-gray-400">
      <div class="flex items-center">
          <a href="/" class="mx-2 text-sm font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-house"></i><span class="">Home</span></a>
           <a href="dashboard" class="mx-2 text-sm font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-table"></i><span class="">Dashboard</span></a>
