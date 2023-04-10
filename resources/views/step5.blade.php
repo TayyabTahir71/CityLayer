@@ -103,11 +103,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div>
-                                                    <p type="text" name="activities_text" id="activities_text"
-                                                        class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent mx-auto">
-                                                        {{ __('messages.Show us!') }}</p>
-                                                </div>
+                                        
                                                 <button type="button" id="activitiesbtn" onclick="newAction('activities')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
@@ -543,10 +539,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div>
-                                                    <button type="button" name="noise_text" id="noise_text"
-                                                        class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent">{{ __('messages.Record!') }}</button>
-                                                </div>
+                                               
                                                 <button type="button" id="noisebtn" onclick="newAction('noise')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>

@@ -103,11 +103,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div>
-                                                    <p type="text" name="talking_text" id="talking_text"
-                                                        class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent mx-auto">
-                                                        Show us!</p>
-                                                </div>
+                                               
                                                 <button type="button" id="activitiesbtn" onclick="newAction('talking')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
