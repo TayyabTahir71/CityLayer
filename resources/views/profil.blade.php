@@ -4,7 +4,7 @@
     <div data-barba="container" class="relative h-screen">
         <form action="save_profile" class="flex flex-col items-center justify-center p-8 mx-auto" method="POST">
             {!! csrf_field() !!}
-            <label for="dropzone-file" class="flex flex-col items-center justify-center w-2/3">
+          <label for="dropzone-file" class="flex flex-col items-center justify-center w-2/3">
                 <div class="flex flex-col items-center justify-center pb-6">
                     <h1 class="text-3xl font-bold text-gray-900">{{ __('messages.Your Profile') }}</h1>
                 </div>
@@ -12,45 +12,38 @@
 
             <label for="email" class="block mb-2 text-base font-medium text-gray-900">Email:</label>
             <input id="email" name="email" type="email" value=""
-                class="block w-2/3 px-4 py-3 mb-2 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500">
+                class="block w-2/3 px-4 py-3 mb-2 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
+
 
             <label for="age" class="block mb-2 text-base font-medium text-gray-900">{{ __('messages.Age:') }}</label>
-             <div class="flex flex-row w-2/3 h-12 my-2 bg-transparent rounded-lg md:w-1/3">
-                <button data-action="decrement" onclick="return false;"
-                    class="w-20 h-full text-gray-600 bg-gray-300 border border-gray-500 rounded-l outline-none cursor-pointer active:bg-gray-200">
-                    <span class="m-auto text-2xl font-thin">−</span>
-                </button>
                 <input type="number" name="age" style="-moz-appearance: textfield"
-                    class="flex items-center w-full font-semibold text-center text-gray-700 outline-none outline focus:outline-none text-md hover:text-black focus:text-black md:text-basecursor-default"
-                    name="custom-input-number" min="10" value="15">
-                <button data-action="increment" onclick="return false;"
-                    class="w-20 h-full text-gray-600 bg-gray-300 border border-gray-500 rounded-r cursor-pointer active:bg-gray-200">
-                    <span class="m-auto text-2xl font-thin">+</span>
-                </button>
-            </div>
+                    class="block w-2/3 px-4 py-3 mb-2 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center"
+                    name="custom-input-number" min="10" value="">
 
-            <label for="gender"
-                class="block pt-4 mb-2 text-base font-medium text-gray-900">{{ __('messages.Gender:') }}</label>
+       
+
+            <label for="gender" class="block pt-4 mb-2 text-base font-medium text-gray-900">{{ __('messages.Gender:') }}</label>
             <select id="gender" name="gender"
-                class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
                 <option selected></option>
-                <option value="male">{{ __('messages.Male') }}</option>
-                <option value="female">{{ __('messages.Female') }}</option>
-                <option value="other">{{ __('messages.Other') }}</option>
+                <option value="male" >{{ __('messages.Male') }}</option>
+                <option value="female" >{{ __('messages.Female') }}</option>
+                <option value="other"  >{{ __('messages.Other') }}</option>
             </select>
 
             <label for="job"
                 class="block pt-4 mb-2 text-base font-medium text-gray-900">{{ __('messages.Education:') }}</label>
             <select id="job" name="profession"
-                class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
                 <option selected></option>
-             <option value="school pupil" >{{ __('messages.school pupil') }}</option>
-                <option value="high school student">{{ __('messages.high school student') }} &nbsp;</option>
+                <option value="school pupil" >{{ __('messages.school pupil') }}</option>
+                <option value="high school student" >{{ __('messages.high school student') }} &nbsp;</option>
                 <option value="high school graduate" >{{ __('messages.high school graduate') }} &nbsp;</option>
-                <option value="university student">{{ __('messages.university student') }} &nbsp;</option>
+                <option value="university student" >{{ __('messages.university student') }} &nbsp;</option>
                 <option value="university graduate" >{{ __('messages.university graduate') }} &nbsp;</option>
                 <option value="teacher / professor" >{{ __('messages.teacher / professor') }} &nbsp;</option>
             </select>
+
 
           
             <button type="submit"

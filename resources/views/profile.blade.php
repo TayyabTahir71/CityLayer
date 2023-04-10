@@ -81,10 +81,19 @@
                  </div>
              </div>
              <div class="flex justify-center pt-4 mx-4">
-                 <div class="flex flex-col gap-y-2">
+             @php
+              $preferences = explode(',', $infos->preferences);
+               // remove all special characters but keep the spaces
+                $preferences = preg_replace('/[^A-Za-z0-9 ]/', '', $preferences);
+             
+             @endphp
+             @foreach ($preferences as $preference)
+                   <div class="flex flex-col gap-y-2">
                      <h1 class="text-xs py-2 mx-2 px-2 text-center text-white bg-[#667DC7] rounded-lg">
-                         {{ $infos->preferences }}</h1>
+                         {{ $preference }}</h1>
                  </div>
+             @endforeach
+               
              </div>
              <button
                  class="px-4 py-2 mx-auto mt-8 text-xl font-bold text-center text-white bg-green-400 rounded-full hover:bg-green-300 active:bg-green-800">

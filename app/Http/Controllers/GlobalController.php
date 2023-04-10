@@ -17,6 +17,7 @@ use App\Models\Tag_de;
 use App\Models\Space_tag_de;
 use App\Models\Space_tag;
 use App\Models\Stat;
+use App\Models\Preference;
 use Carbon\Carbon;
 use Pestopancake\LaravelBackpackNotifications\Notifications\DatabaseNotification;
 use Illuminate\Http\Request;
@@ -489,20 +490,19 @@ class GlobalController extends Controller
         $userid = backpack_auth()->user()->id;
         $infos = Infosperso::where('user_id', $userid)->first();
         if (backpack_auth()->user()->score > 0) {
+            backpack_auth()->user()->email = $request->email;
+            backpack_auth()->user()->save();
             Infosperso::where('user_id', $userid)->update([
                 'email' => $request->email,
                 'age' => $request->age,
                 'gender' => $request->gender,
                 'profession' => $request->profession,
             ]);
-            if ($request->email != null) {
-                backpack_auth()->user()->email = $request->email;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            }
-            return redirect('profile');
+         
+            return redirect('preferences');
         } else {
+            backpack_auth()->user()->email = $request->email;
+            backpack_auth()->user()->save();
             $infos = Infosperso::where('user_id', $userid)->first();
             $infos->user_id = $userid;
             $infos->age = $request->age;
@@ -536,7 +536,12 @@ class GlobalController extends Controller
 
    public function preferences()
    {
-       return view('preferences');
+         $userid = backpack_auth()->user()->id;
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $preferences = $infos->preferences;
+           
+
+       return view('preferences', compact('preferences'));
    }
 
 
