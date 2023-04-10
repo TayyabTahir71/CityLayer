@@ -23,7 +23,7 @@
                                 <label for="default-range"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.great!') }}</label>
                             </div>
-                            <div class="flex justify-between w-full px-2 text-xs">
+                            <div class="flex justify-between w-full px-2 text-xs py-2">
                               <span>0</span>
                                  <span>1</span>
                                  <span>2</span>
