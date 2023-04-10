@@ -45,11 +45,11 @@
                     </div>
                     <div class="relative flex items-center justify-center w-64 h-64">
 
-                        {{-- play exercices --}}
+                
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="bottom: 100%; right: 90%; transform: translate(50%, 50%)">{{ __('messages.traffic safety') }}</button>
+                                style="bottom: 100%; right: 50%; transform: translate(50%, 50%)">{{ __('messages.traffic safety') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -117,7 +117,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="bottom: 100%; right: 10%; transform: translate(50%, 50%)">{{ __('messages.Pollutants') }}<br> ({{ __('messages.dust, smells') }})</button>
+                                style="top: 25%; right: 0; transform: translate(50%, -50%)">{{ __('messages.Pollutants') }}<br> ({{ __('messages.dust, smells') }})</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -190,7 +190,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 50%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.night lighting') }}</button>
+                                style="top: 75%; right: 0; transform: translate(50%, -50%)">{{ __('messages.night lighting') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -263,7 +263,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 100%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.other hazards') }}</button>
+                                style="bottom: 0; left: 50%; transform: translate(-50%, 50%)">{{ __('messages.other hazards') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -308,7 +308,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="bottom: 0; left: 10%; transform: translate(-50%, 50%)">{{ __('messages.dangerous objects') }}</button>
+                                style="top: 75%; left: 0; transform: translate(-50%, -50%)">{{ __('messages.dangerous objects') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -381,7 +381,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 50%; left: 10%;  transform: translate(-50%, -50%)">{{ __('messages.safety from harm') }}</button>
+                                style="top: 25%; left: 0; transform: translate(-50%, -50%)">{{ __('messages.safety from harm') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">

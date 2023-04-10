@@ -73,7 +73,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.play, exercise, activities') }}</h1>
+                                                <h1 class="py-4 text-3xl font-bold capitalize">{{ __('messages.play, exercise, activities') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="activities" id="activities" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -146,7 +146,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.place to rest') }}</h1>
+                                                <h1 class="py-4 text-3xl font-bold capitalize">{{ __('messages.place to rest') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="rest" id="rest" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -219,7 +219,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Walk, roll, bike comfort') }}</h1>
+                                                <h1 class="py-4 text-3xl font-bold capitalize">{{ __('messages.Walk, roll, bike comfort') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="movement" id="movement" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -292,7 +292,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.visibility & orientation') }}</h1>
+                                                <h1 class="py-4 text-3xl font-bold capitalize">{{ __('messages.visibility & orientation') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="orientation" id="orientation" class="hidden"
                                                         type="input" x-model="total_value" />
@@ -366,7 +366,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.rain & wind protection') }}</h1>
+                                                <h1 class="py-4 text-3xl font-bold capitalize">{{ __('messages.rain & wind protection') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="weather" id="weather" class="hidden" type="input"
                                                         x-model="total_value" />
@@ -439,7 +439,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Facilities') }}</h1>
+                                                <h1 class="py-4 text-3xl font-bold capitalize">{{ __('messages.facilities') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="facilities" id="facilities" class="hidden"
                                                         type="input" x-model="total_value" />
@@ -513,7 +513,7 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Noise') }}</h1>
+                                                <h1 class="py-4 text-3xl font-bold capitalize">{{ __('messages.noise') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
                                                     <input name="noise" id="noise" class="hidden" type="input"
                                                         x-model="total_value" />
