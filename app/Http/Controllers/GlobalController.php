@@ -599,7 +599,7 @@ class GlobalController extends Controller
         $tag->personal = 1;
         $tag->category = $request->category;
         $tag->save();
-        return back();
+        return $request->name;
     }
 
     public function newopinion(Request $request)

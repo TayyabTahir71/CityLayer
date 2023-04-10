@@ -32,6 +32,7 @@ return [
     'Points:' => 'Points:',
     'Street' => 'Street',
     'Building' => 'Building',
+    'Add a new tag' => 'Add a new tag',
     'Open space' => 'Open space',
     'Current Location:' => 'Current Location:',
     'My Mapping data:' => 'My Mapping data:',

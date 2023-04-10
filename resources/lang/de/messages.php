@@ -255,6 +255,7 @@ return [
     'years' => 'Jahre',
     'Gender:' => 'Geschlecht:',
     'Male' => 'Männlich',
+    'Add a new tag' => 'Füge einen neuen Tag hinzu',
     'Female' => 'Weiblich',
     'Other' => 'Andere',
     'Education:' => 'Bildung:',

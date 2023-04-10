@@ -3,6 +3,7 @@
  @section('main')
      <div data-barba="container">
          <div class="flex flex-col h-screen mx-auto">
+          <div id="newtagadded" class="fixed top-5 right-5 p-2 border rounded bg-blue-500 text-white font-bold"></div>
              <div class="p-3">
                  <div class="flex flex-row items-center pt-2">
                      <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
@@ -11,7 +12,7 @@
                      <button class="w-32 h-32 mx-4 text-gray-100 bg-[#55C5CF] focus:outline-none rounded-full" disabled>
                          <i class="fa-solid fa-building"></i><br>building
                      </button>
-                     <h1 class="pt-2 text-xl font-bold text-center text-gray-900">{{ __('messages.Add #tags to describe the space and earn points!') }}</h1>
+                     <h1 class="pt-2 text-xl font-bold text-center text-gray-900">{{ __('messages.Add #tags to describe the space and earn 1 point!') }}</h1>
                      <div class="w-48 pt-4">
                         @php $locale = session()->get('locale'); @endphp
                           @if ($locale == 'de')
@@ -43,11 +44,12 @@
                              </label>
                          @endforeach
                             @endif
+                              <input type="checkbox" id="personal" name="form-project-manager[]" value="" class="hidden peer">
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
                                  class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
                                  <div class="flex justify-center">
-                                     <div class="font-semibold">{{ __('messages.Add a new tag') }}</div>
+                                     <div class="font-semibold">{{ __('messages.Add a personal tag') }}</div>
                                  </div>
                              </button>
 
@@ -60,7 +62,7 @@
                                          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                                          x-transition:leave="transition ease-in duration-200 transform"
                                          x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                                         class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40"
+                                         class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40 hiddertag"
                                          aria-hidden="true">
                                      </div>
 
@@ -131,7 +133,12 @@
                      },
                      success: function(data) {
                          // refresh the webpage
-                         location.reload();
+                         var hiddertag = document.querySelector(".hiddertag");
+                      hiddertag.click();
+                       showMessage("Personal Tag saved");
+                       var personal = document.getElementById("personal");
+                       personal.value = data;
+                        personal.checked = true;
                      }
                  });
 
@@ -163,5 +170,19 @@
 
              });
          });
+
+         function showMessage(message) {
+             var messageBox = document.getElementById("newtagadded");
+             messageBox.innerHTML = message;
+             messageBox.style.display = "block"; // set display to block to show the message
+             setTimeout(function() {
+                 messageBox.style.display = "none"; // hide the message after 3 seconds
+             }, 2000);
+         }
      </script>
+          <style>
+       #newtagadded {
+             display: none;
+         }
+    </style>
  @endsection

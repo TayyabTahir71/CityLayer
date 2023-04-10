@@ -46,6 +46,8 @@
                                  </label>
                              @endforeach
                          @endif
+                          <input type="checkbox" id="personal" name="form-project-manager[]" value="" class="hidden peer">
+         
              
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
@@ -141,6 +143,9 @@
                        var hiddertag = document.querySelector(".hiddertag");
                       hiddertag.click();
                        showMessage("Personal Tag saved");
+                       var personal = document.getElementById("personal");
+                       personal.value = data;
+                       personal.checked = true;
 
                      }
                  });
