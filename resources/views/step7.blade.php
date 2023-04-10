@@ -22,12 +22,19 @@
                                 <label for="default-range"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.very safe') }}</label>
                             </div>
-                            <div class="flex justify-between w-full px-2 text-xs">
-                                <span>|</span>
-                                <span>|</span>
-                                <span>|</span>
-
-                            </div>
+                           <div class="flex justify-between w-full px-2 text-xs py-2">
+                                 <span>0</span>
+                                 <span>1</span>
+                                 <span>2</span>
+                                   <span>3</span>
+                                     <span>4</span>
+                                       <span>5</span>
+                                            <span>6</span>
+                                            <span>7</span>
+                                                <span>8</span>
+                                                <span>9</span>
+                                                    <span>10</span>
+                             </div>
                             <input id="range"
                                 class="block h-3 bg-gray-300 rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                 type="range" x-model="total_value" min="0" max="100" step="5">
@@ -76,11 +83,19 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0" max="100"
                                                         step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs">
-                                                        <span>|</span>
-                                                        <span>|</span>
-                                                        <span>|</span>
-                                                    </div>
+                                                   <div class="flex justify-between w-full px-2 text-xs py-2">
+                                 <span>0</span>
+                                 <span>1</span>
+                                 <span>2</span>
+                                   <span>3</span>
+                                     <span>4</span>
+                                       <span>5</span>
+                                            <span>6</span>
+                                            <span>7</span>
+                                                <span>8</span>
+                                                <span>9</span>
+                                                    <span>10</span>
+                             </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.poor') }}</label>
@@ -141,11 +156,19 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs">
-                                                        <span>|</span>
-                                                        <span>|</span>
-                                                        <span>|</span>
-                                                    </div>
+                                                    <div class="flex justify-between w-full px-2 text-xs py-2">
+                                  <span>0</span>
+                                 <span>1</span>
+                                 <span>2</span>
+                                   <span>3</span>
+                                     <span>4</span>
+                                       <span>5</span>
+                                            <span>6</span>
+                                            <span>7</span>
+                                                <span>8</span>
+                                                <span>9</span>
+                                                    <span>10</span>
+                             </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.poor') }}</label>
@@ -206,11 +229,19 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs">
-                                                        <span>|</span>
-                                                        <span>|</span>
-                                                        <span>|</span>
-                                                    </div>
+                                                  <div class="flex justify-between w-full px-2 text-xs py-2">
+                                 <span>0</span>
+                                 <span>1</span>
+                                 <span>2</span>
+                                   <span>3</span>
+                                     <span>4</span>
+                                       <span>5</span>
+                                            <span>6</span>
+                                            <span>7</span>
+                                                <span>8</span>
+                                                <span>9</span>
+                                                    <span>10</span>
+                             </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.poor') }}</label>
@@ -316,11 +347,19 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs">
-                                                        <span>|</span>
-                                                        <span>|</span>
-                                                        <span>|</span>
-                                                    </div>
+                                                     <div class="flex justify-between w-full px-2 text-xs py-2">
+                                 <span>0</span>
+                                 <span>1</span>
+                                 <span>2</span>
+                                   <span>3</span>
+                                     <span>4</span>
+                                       <span>5</span>
+                                            <span>6</span>
+                                            <span>7</span>
+                                                <span>8</span>
+                                                <span>9</span>
+                                                    <span>10</span>
+                             </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.none') }}</label>
@@ -381,11 +420,19 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs">
-                                                        <span>|</span>
-                                                        <span>|</span>
-                                                        <span>|</span>
-                                                    </div>
+                                                   <div class="flex justify-between w-full px-2 text-xs py-2">
+                                  <span>0</span>
+                                 <span>1</span>
+                                 <span>2</span>
+                                   <span>3</span>
+                                     <span>4</span>
+                                       <span>5</span>
+                                            <span>6</span>
+                                            <span>7</span>
+                                                <span>8</span>
+                                                <span>9</span>
+                                                    <span>10</span>
+                             </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.very unsafe') }}</label>

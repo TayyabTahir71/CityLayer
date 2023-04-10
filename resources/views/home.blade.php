@@ -225,7 +225,7 @@ var legend = L.control({ position: "topright" });
                 '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
                 placeid + '\', \'' + placetype +
                 '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                placeid + '\', \'' + placetype + '\', \'wtf\')"></div><textarea name="comm" id="comm" cols="10" rows="2" class="font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea><button type="button"class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment(\'' +placeid + '\', \'' + placetype + '\')">Leave a comment</button> </div>'
+                placeid + '\', \'' + placetype + '\', \'wtf\')"></div><textarea name="comm" id="comm" cols="10" rows="2" class="font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea><button type="button"class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment(\'' +placeid + '\', \'' + placetype + '\')">Leave a comment</button> </div>'
             );
             markers[place.id] = markerx;
         }
