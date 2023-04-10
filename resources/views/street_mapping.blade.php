@@ -14,7 +14,7 @@
                          <i class="fa-solid fa-road"></i><br>street
                      </button>
                      <h1 class="pt-2 text-xl font-bold text-center text-gray-900">
-                         {{ __('messages.Add #tags to describe the space and earn 1 points') }}</h1>
+                         {{ __('messages.Add #tags to describe the space and earn 1 point!') }}</h1>
                      <div class="w-48 pt-4">
                          @php $locale = session()->get('locale'); @endphp
                          @if ($locale == 'de')
@@ -46,7 +46,7 @@
                                  </label>
                              @endforeach
                          @endif
-
+             
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
                                  class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">

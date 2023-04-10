@@ -644,8 +644,12 @@ class GlobalController extends Controller
             $street->latitude = $request->latitude;
             $street->longitude = $request->longitude;
             //convert array tags to string
-            $tags = $request->tags;
-            $street->tags = implode(',', $tags);
+            if ($request->tags == null) {
+                $street->tags = null;
+            } else {
+                $tags = $request->tags;
+                $street->tags = implode(',', $tags);
+            }
 
             //add 1 point for each tag
             backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
@@ -663,6 +667,12 @@ class GlobalController extends Controller
             $building->longitude = $request->longitude;
             $tags = $request->tags;
             $building->tags = implode(',', $tags);
+            if ($request->tags == null) {
+                $building->tags = null;
+            } else {
+                $tags = $request->tags;
+                $building->tags = implode(',', $tags);
+            }
 
             //add 1 point for each tag
             backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
@@ -680,6 +690,12 @@ class GlobalController extends Controller
             $openspace->longitude = $request->longitude;
             $tags = $request->tags;
             $openspace->tags = implode(',', $tags);
+            if ($request->tags == null) {
+                $openspace->tags = null;
+            } else {
+                $tags = $request->tags;
+                $openspace->tags = implode(',', $tags);
+            }
 
             backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
