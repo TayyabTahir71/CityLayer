@@ -41,6 +41,7 @@ class OpinionCrudController extends CrudController
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
         CRUD::column('name');
+        $this->crud->addColumn('personal');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:

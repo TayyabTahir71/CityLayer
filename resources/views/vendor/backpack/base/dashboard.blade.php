@@ -1,8 +1,6 @@
 @php use \App\Http\Controllers\GlobalController; @endphp
 @php
     $users = GlobalController::allusers();
-    $infosperso = GlobalController::infosperso();
-    
 @endphp
 
 
@@ -21,8 +19,7 @@
                             </div>
                             <div class="flex-shrink-0">
                                 <a href="user/"
-                                    class="p-2 text-sm font-medium rounded-lg text-cyan-600 hover:bg-gray-100">Tout
-                                    voir</a>
+                                    class="p-2 text-sm font-medium rounded-lg text-cyan-600 hover:bg-gray-100">All users</a>
                             </div>
                         </div>
                         <div class="flex flex-col mt-2 h-[400px]">
@@ -48,18 +45,18 @@
                                             </thead>
                                             <tbody class="bg-white">
 
-                                                @foreach ($infosperso as $info)
+                                                @foreach ($users as $user)
                                                     <tr>
                                                         <td
                                                             class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap time-container">
-                                                            {{ $users->where('id', $info->user_id)->first()->name }}
+                                                            {{ $user->name }}
                                                         </td>
                                                          <td
                                                             class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap time-container">
-                                                            {{ $users->where('id', $info->user_id)->first()->email }}
+                                                            {{ $user->email }}
                                                         </td>
                                                         <td class="p-4 text-sm font-normal text-gray-900 rate-container">
-                                                            {{ $info->score }}
+                                                            {{ $user->score }}
                                                         </td>
                                                     </tr>
                                                 @endforeach

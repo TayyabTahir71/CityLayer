@@ -30,12 +30,13 @@
                         placeholder="name@mail.com">
                 </div> --}}
                 <div class="mb-3">
-                    <label for="password"
+                    <label for="password" id="passwordlabel"
                         class="block mb-1 text-sm font-medium text-gray-800">{{ __('messages.Password') }}</label>
                     <input type="password" name="password" id="password"
                         class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800 dark:focus:ring-gray-500 dark:focus:border-gray-500"
                         required>
                 </div>
+                <div id="passwordError" class="text-red-500 text-xs"></div>
 
                 <div class="mb-6">
                     <label for="password_confirmation"
@@ -85,4 +86,16 @@
             </div>
         </div>
     </div>
+    <script>
+    const passwordInput = document.getElementById('password');
+    const passwordError = document.getElementById('passwordError');
+    
+      passwordInput.addEventListener('input', () => {
+        if (passwordInput.value.length < 6) {
+            passwordError.textContent = '* Password must be at least 6 characters long';
+        } else {
+            passwordError.textContent = '';
+        }
+    });
+</script>
 @endsection

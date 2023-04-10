@@ -41,6 +41,7 @@ class SpaceTagCrudController extends CrudController
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
         $this->crud->addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Name']);
+        $this->crud->addColumn('personal');
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');

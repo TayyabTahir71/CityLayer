@@ -60,9 +60,8 @@ $info = GlobalController::myprofile();
             </select>
 
             <label for="preferences" class="block pt-4 mb-2 text-base font-medium text-gray-900">{{ __('messages.Preferences:') }}</label>
-            <select id="preferences" name="preferences"
-                class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500">
-                <option selected></option>
+            <select id="preferences" name="preferences preferences[]"
+                class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500" multiple>
                 <option value="I enjoy long walks in the city"  {{ $info->preferences == 'I enjoy long walks in the city' ? 'selected' : '' }}>{{ __('messages.I enjoy long walks in the city') }}</option>
                 <option value="I cycle to school / work"  {{ $info->preferences == 'I cycle to school / work' ? 'selected' : '' }}>{{ __('messages.I cycle to school, work') }}</option>
                 <option value="I enjoy urban photography"  {{ $info->preferences == 'I enjoy urban photography' ? 'selected' : '' }}>{{ __('messages.I enjoy urban photography') }}</option>

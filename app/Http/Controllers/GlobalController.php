@@ -494,8 +494,6 @@ class GlobalController extends Controller
                 'age' => $request->age,
                 'gender' => $request->gender,
                 'profession' => $request->profession,
-           
-                'preferences' => $request->preferences,
             ]);
             if ($request->email != null) {
                 backpack_auth()->user()->email = $request->email;
@@ -522,38 +520,46 @@ class GlobalController extends Controller
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                 backpack_auth()->user()->save();
             }
-         
-            $infos->preferences = $request->preferences;
-            if ($request->preferences != null) {
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()->user()->save();
-            }
             $infos->newuser = 0;
             $infos->save();
-            return redirect('/');
+            return redirect('preferences');
         }
     }
 
+   public function savepreferences(Request $request){
+    $userid = backpack_auth()->user()->id;
+    $infos = Infosperso::where('user_id', $userid)->first();
+    $infos->preferences = $request->preferences;
+    $infos->save();
+    return redirect('/');
+   }
+
+   public function preferences()
+   {
+       return view('preferences');
+   }
+
+
     public function street()
     {
-        $tags = Tag::where('category', 'street')->get();
-        $tags_de = Tag_de::where('category', 'street')->get();
+        $tags = Tag::where('category', 'street')->where('personal', null)->get();
+        $tags_de = Tag_de::where('category', 'street')->where('personal', null)->get();
 
         return view('street_mapping', compact('tags', 'tags_de'));
     }
 
     public function building()
     {
-        $tags = Tag::where('category', 'building')->get();
-        $tags_de = Tag_de::where('category', 'building')->get();
+        $tags = Tag::where('category', 'building')->where('personal', null)->get();
+        $tags_de = Tag_de::where('category', 'building')->where('personal', null)->get();
 
         return view('building_mapping', compact('tags', 'tags_de'));
     }
 
     public function openspace()
     {
-        $tags = Tag::where('category', 'openspace')->get();
-        $tags_de = Tag_de::where('category', 'openspace')->get();
+        $tags = Tag::where('category', 'openspace')->where('personal', null)->get();
+        $tags_de = Tag_de::where('category', 'openspace')->where('personal', null)->get();
 
         return view('openspace_mapping', compact('tags', 'tags_de'));
     }
@@ -585,6 +591,7 @@ class GlobalController extends Controller
         }
 
         $tag->name = $request->name;
+        $tag->personal = 1;
         $tag->category = $request->category;
         $tag->save();
         return back();
@@ -616,6 +623,7 @@ class GlobalController extends Controller
             }
         }
         $opinion->name = $request->name;
+        $opinion->personal = 1;
         $opinion->save();
         return back();
     }
@@ -633,10 +641,9 @@ class GlobalController extends Controller
             //convert array tags to string
             $tags = $request->tags;
             $street->tags = implode(',', $tags);
-            //count tags
-            $count = count($tags);
+
             //add 1 point for each tag
-            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
             $street->save();
             //return the id after saving
@@ -651,10 +658,9 @@ class GlobalController extends Controller
             $building->longitude = $request->longitude;
             $tags = $request->tags;
             $building->tags = implode(',', $tags);
-            //count tags
-            $count = count($tags);
+
             //add 1 point for each tag
-            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
             $building->save();
             //return the id after saving
@@ -669,10 +675,8 @@ class GlobalController extends Controller
             $openspace->longitude = $request->longitude;
             $tags = $request->tags;
             $openspace->tags = implode(',', $tags);
-            //count tags
-            $count = count($tags);
-            //add 1 point for each tag
-            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
             $openspace->save();
             //return the id after saving
@@ -690,28 +694,24 @@ class GlobalController extends Controller
             $street = Street::find($request->placeid);
             $opinions = $request->opinions;
             $street->opinions = implode(',', $opinions);
-            //count opinions
-            $count = count($opinions);
             $street->save();
-            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
             return $request->placeid . '&type=street';
         } elseif ($request->type == 'building') {
             $building = Building::find($request->placeid);
             $opinions = $request->opinions;
             $building->opinions = implode(',', $opinions);
-            $count = count($opinions);
             $building->save();
-            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
             return $request->placeid . '&type=building';
         } elseif ($request->type == 'openspace') {
             $openspace = Openspace::find($request->placeid);
             $opinions = $request->opinions;
             $openspace->opinions = implode(',', $opinions);
-            $count = count($opinions);
             $openspace->save();
-            backpack_auth()->user()->score = backpack_auth()->user()->score + $count;
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
             backpack_auth()->user()->save();
             return $request->placeid . '&type=openspace';
         }
@@ -2082,11 +2082,11 @@ class GlobalController extends Controller
     {
         $locale = session()->get('locale');
         if ($locale == 'en') {
-            $spacetags = Space_tag::all();
+            $spacetags = Space_tag::where('personal', null)->get();
         } elseif ($locale == 'de') {
-            $spacetags = Space_tag_de::all();
+            $spacetags = Space_tag_de::where('personal', null)->get();
         } else {
-            $spacetags = Space_tag::all();
+            $spacetags = Space_tag::where('personal', null)->get();
         }
         return $spacetags;
     }
@@ -2107,6 +2107,7 @@ class GlobalController extends Controller
             return 'exists';
         } else {
             $spacetag->name = $request->name;
+            $spacetag->personal = 1;
             $spacetag->save();
             return 'ok';
         }

@@ -24,6 +24,8 @@ Route::get('/', 'getAll');
 Route::get('profile', 'profile')->name('profile');
 Route::post('save_profile', 'saveprofile')->name('saveprofile');
 Route::get('save_profile', 'profil')->name('profil');
+Route::post('save_preferences', 'savepreferences')->name('savepreferences');
+Route::get('save_preferences', 'preferences')->name('preferences');
 Route::get('dashboard', 'dashboard')->name('dashboard');
 Route::get('place/{id}/{type}', 'place')->name('place');
 Route::post('/place/like', 'like')->name('like');
@@ -117,6 +119,10 @@ Route::get('edit_profile', function () {
 
 Route::get('profil', function () {
     return view('profil');
+});
+
+Route::get('preferences', function () {
+    return view('preferences');
 });
 
 Route::get('login', function () {

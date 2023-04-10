@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('opinions', function (Blueprint $table) {
             $table->id();
             $table->text('name');
+            $table->integer('personal')->nullable();
         });
     }
 
