@@ -52,7 +52,7 @@
                              <button id="point" @click="modelOpen =!modelOpen"
                                  class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
                                  <div class="flex justify-center">
-                                     <div class="font-semibold">{{ __('messages.Add a new tag') }}</div>
+                                     <div class="font-semibold">{{ __('messages.Add a personal tag') }}</div>
                                  </div>
                              </button>
 
