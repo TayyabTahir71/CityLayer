@@ -22,13 +22,13 @@
                     }
                  @endphp
                     <label>
-                        <input type="checkbox" name="preferences[]" value="I enjoy long walks in the city" {{ in_array("I enjoy long walks in the city", $preference) ? "checked" : "" }}
+                        <input type="checkbox" name="preferences[]" value="I love long walks" {{ in_array("I love long walks", $preference) ? "checked" : "" }}
                             class="sr-only peer">
                         <div
                             class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
 
                             <div class="flex justify-center">
-                                <div class="font-semibold">{{ __('messages.I enjoy long walks in the city') }}</div>
+                                <div class="font-semibold">{{ __('messages.I love long walks') }}</div>
                             </div>
                         </div>
                     </label>
@@ -93,12 +93,12 @@
                     </label>
 
                     <label>
-                        <input type="checkbox" name="preferences[]" value="I move in a wheelchair"  {{ in_array("I move in a wheelchair", $preference) ? "checked" : "" }}
+                        <input type="checkbox" name="preferences[]" value="I am in a wheelchair"  {{ in_array("I am in a wheelchair", $preference) ? "checked" : "" }}
                          class="sr-only peer">
                         <div
                             class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
                             <div class="flex justify-center">
-                                <div class="font-semibold">{{ __('messages.I move in a wheelchair') }}</div>
+                                <div class="font-semibold">{{ __('messages.I am in a wheelchair') }}</div>
                             </div>
                         </div>
                     </label>
@@ -143,6 +143,28 @@
                             class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
                             <div class="flex justify-center">
                                 <div class="font-semibold">{{ __('messages.I cycle / scooter') }}</div>
+                            </div>
+                        </div>
+                    </label>
+
+                                      <label>
+                        <input type="checkbox" name="preferences[]" value="I mostly travel by car"  {{ in_array("I mostly travel by car", $preference) ? "checked" : "" }}
+                         class="sr-only peer">
+                        <div
+                            class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
+                            <div class="flex justify-center">
+                                <div class="font-semibold">{{ __('messages.I mostly travel by car') }}</div>
+                            </div>
+                        </div>
+                    </label>
+
+                                      <label>
+                        <input type="checkbox" name="preferences[]" value="I mostly travel by public transport"  {{ in_array("I mostly travel by public transport", $preference) ? "checked" : "" }}
+                         class="sr-only peer">
+                        <div
+                            class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
+                            <div class="flex justify-center">
+                                <div class="font-semibold">{{ __('messages.I mostly travel by public transport') }}</div>
                             </div>
                         </div>
                     </label>
@@ -257,6 +279,17 @@
                             class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
                             <div class="flex justify-center">
                                 <div class="font-semibold">{{ __('messages.I have issues with eyesight') }}</div>
+                            </div>
+                        </div>
+                    </label>
+
+                       <label>
+                        <input type="checkbox" name="preferences[]" value="I am an assistant of people with disabilities"  {{ in_array("I am an assistant of people with disabilities", $preference) ? "checked" : "" }}
+                            class="sr-only peer">
+                        <div
+                            class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
+                            <div class="flex justify-center">
+                                <div class="font-semibold">{{ __('messages.I am an assistant of people with disabilities') }}</div>
                             </div>
                         </div>
                     </label>

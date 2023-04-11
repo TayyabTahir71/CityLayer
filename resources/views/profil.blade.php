@@ -6,7 +6,7 @@
             {!! csrf_field() !!}
           <label for="dropzone-file" class="flex flex-col items-center justify-center w-2/3">
                 <div class="flex flex-col items-center justify-center pb-6 pt-[10%]">
-                    <h1 class="text-3xl font-bold text-gray-900">{{ __('messages.Your Profile') }}</h1>
+                    <h1 class="text-3xl font-bold text-gray-900">{{ __('messages.Tell us more about yourself') }}</h1>
                 </div>
             </label>
 
@@ -36,12 +36,11 @@
             <select id="job" name="profession"
                 class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
                 <option selected></option>
-                <option value="school pupil" >{{ __('messages.school pupil') }}</option>
+                <option value="elementary school student" >{{ __('messages.elementary school student') }}</option>
                 <option value="high school student" >{{ __('messages.high school student') }} &nbsp;</option>
                 <option value="high school graduate" >{{ __('messages.high school graduate') }} &nbsp;</option>
                 <option value="university student" >{{ __('messages.university student') }} &nbsp;</option>
                 <option value="university graduate" >{{ __('messages.university graduate') }} &nbsp;</option>
-                <option value="teacher / professor" >{{ __('messages.teacher / professor') }} &nbsp;</option>
             </select>
 
 

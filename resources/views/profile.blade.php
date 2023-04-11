@@ -18,7 +18,7 @@
              <h1 class="pt-4 text-2xl text-center text-gray-800">{{ $name }}</h1>
                 <h1 class="pt-4 text-2xl text-center text-gray-800">{{  backpack_auth()->user()->email }}</h1>
              <h2 class="pt-2 text-2xl font-bold text-center text-yellow-300">{{ backpack_auth()->user()->score }}</h2>
-             <div class="w-1/2 mx-auto">
+             <div class="w-2/3 mx-auto">
                  <div class="relative pt-1">
                      <div class="flex h-3 overflow-hidden text-xs bg-white border rounded">
                          @php $score = backpack_auth()->user()->score / 10; @endphp
@@ -50,48 +50,98 @@
                          @endif
                      </div>
                      <div class="flex justify-center pt-4">
-                         <div class="flex gap-x-2">
-
-                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
-                             @if (backpack_auth()->user()->score > 1000)
-                                  <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
-                                 @endif
+                         <div class="flex flex-col gap-x-2">
+                            <div class="flex">
+                             <div class="mx-1">
+                                @if (backpack_auth()->user()->score > 100)
+                                <img class="w-24" src="/img/icons/01.png" alt="">
+                                
+                                @else
+                                <img class="w-24 grayscale" src="/img/icons/01.png" >
+                                @endif
                              </div>
-                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
-                             @if(backpack_auth()->user()->score > 2000)
-                                    <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
-                                 @endif
-                             </div>
-
-                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
-                             @if(backpack_auth()->user()->score > 3000)
-                                    <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
-                                 @endif
-                             </div>
-
-                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
-                             @if(backpack_auth()->user()->score > 4000)
-                                    <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
-                                 @endif
+                             <div class="mx-1">
+                              @if (backpack_auth()->user()->score > 200)
+                                <img class="w-24" src="/img/icons/02.png" alt="">
+                                
+                                @else
+                                <img class="w-24 grayscale" src="/img/icons/02.png" >
+                                @endif
                              </div>
 
-                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
-                             @if(backpack_auth()->user()->score > 4000)
-                                    <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
-                                 @endif
+                             <div class="mx-1">
+                              @if (backpack_auth()->user()->score > 300)
+                                <img class="w-24" src="/img/icons/03.png" alt="">
+                                
+                                @else
+                                <img class="w-24 grayscale" src="/img/icons/03.png" >
+                                @endif
                              </div>
 
-                            <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
-                             @if(backpack_auth()->user()->score > 4000)
-                                    <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
-                                 @endif
+                             <div class="mx-1">
+                               @if (backpack_auth()->user()->score > 400)
+                                <img class="w-24" src="/img/icons/04.png" alt="">
+                                
+                                @else
+                                <img class="w-24 grayscale" src="/img/icons/04.png" >
+                                @endif
                              </div>
 
-                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
-                             @if(backpack_auth()->user()->score > 4000)
-                                    <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
-                                 @endif
+                             <div class="mx-1">
+                               @if (backpack_auth()->user()->score > 500)
+                                <img class="w-24" src="/img/icons/05.png" alt="">
+                                
+                                @else
+                                <img class="w-24 grayscale" src="/img/icons/05.png" >
+                                @endif
                              </div>
+                                </div>
+                                <div class="flex pt-2">
+                            <div class="mx-1">
+                              @if (backpack_auth()->user()->score > 600)
+                                <img class="w-24" src="/img/icons/06.png" alt="">
+                                
+                                @else
+                                <img class="w-24 grayscale" src="/img/icons/06.png" >
+                                @endif
+                             </div>
+
+                             <div class="mx-1">
+                              @if (backpack_auth()->user()->score > 700)
+                                <img class="w-24" src="/img/icons/07.png" alt="">
+                                
+                                @else
+                                <img class="w-24 grayscale" src="/img/icons/07.png" >
+                                @endif
+                             </div>
+
+                              <div class="mx-1">
+                              @if (backpack_auth()->user()->score > 800)
+                                <img class="w-24" src="/img/icons/08.png" alt="">
+                                
+                                @else
+                                <img class="w-24 grayscale" src="/img/icons/08.png" >
+                                @endif
+                             </div>
+
+                              <div class="mx-1">
+                              @if (backpack_auth()->user()->score > 900)
+                                <img class="w-24" src="/img/icons/09.png" alt="">
+                                
+                                @else
+                                <img class="w-24 grayscale" src="/img/icons/09.png" >
+                                @endif
+                             </div>
+
+                              <div class="mx-1">
+                              @if (backpack_auth()->user()->score > 1000)
+                                <img class="w-24" src="/img/icons/10.png" alt="">
+                                
+                                @else
+                                <img class="w-24 grayscale" src="/img/icons/10.png" >
+                                @endif
+                             </div>
+                                </div>
 
                          </div>
                      </div>

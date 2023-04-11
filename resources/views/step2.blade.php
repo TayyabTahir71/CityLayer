@@ -38,8 +38,9 @@
                                          <img src="/img/worried.png" alt="worried" class="w-16 h-16 mb-2">
                                          <h1 class="font-bold ">{{ __('messages.worried') }}</h1>
                                      </button>
-                                     <button class="mr-2" onclick="feel('other')">
-                                         <h1 class="pt-4 font-bold">{{ __('messages.other') }}</h1>
+                                        <button class="" onclick="feel('worried')">
+                                         <img src="/img/other.png" alt="worried" class="w-16 h-16 mb-2">
+                                         <h1 class="font-bold ">{{ __('messages.other') }}</h1>
                                      </button>
                                  </div>
                              </div>

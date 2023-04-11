@@ -43,12 +43,12 @@ $info = GlobalController::myprofile();
             <select id="job" name="profession"
                 class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
                 <option selected></option>
-                <option value="school pupil" {{ $info->profession == 'school pupil' ? 'selected' : '' }}>{{ __('messages.school pupil') }}</option>
+                <option value="elementary school student" {{ $info->profession == 'elementary school student' ? 'selected' : '' }}>{{ __('messages.elementary school student') }}</option>
                 <option value="high school student" {{ $info->profession == 'high school student' ? 'selected' : '' }}>{{ __('messages.high school student') }} &nbsp;</option>
                 <option value="high school graduate" {{ $info->profession == 'high school graduate' ? 'selected' : '' }}>{{ __('messages.high school graduate') }} &nbsp;</option>
                 <option value="university student" {{ $info->profession == 'university student' ? 'selected' : '' }}>{{ __('messages.university student') }} &nbsp;</option>
                 <option value="university graduate" {{ $info->profession == 'university graduate' ? 'selected' : '' }}>{{ __('messages.university graduate') }} &nbsp;</option>
-                <option value="teacher / professor" {{ $info->profession == 'teacher / professor' ? 'selected' : '' }}>{{ __('messages.teacher / professor') }} &nbsp;</option>
+               
             </select>
 
 
