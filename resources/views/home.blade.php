@@ -9,18 +9,16 @@
 @section('main')
     <div data-barba="container">
         @include('parts.navbar')
-        <div class="flex flex-col h-full mx-auto">
+        <div class="flex flex-col mx-auto">
             <div class="pt-16">
                 <div class="relative">
-                    <div id="map" class="absolute mt-4 w-[100vw] z-10 h-screen"></div>
+                    <div id="map" class="absolute mt-4 w-[100vw] z-10 h-[85vh]"></div>
                 </div>
                 <div x-data="{ modelOpen: false }">
                     <div
                         class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] active:bg-blue-400 text-center z-50">
                             <a class="mx-12" @click="modelOpen =!modelOpen" onclick="zoom()">  {{ __('messages.Start Playing!') }}</a>
-                             <div class="fixed bottom-0 right-0 m-2">
-                            <a href="about"> <img class="w-12 h-12" src="/img/about_icon.png"> </a>
-                        </div>
+                        
                     </div>
                     
 
@@ -170,12 +168,7 @@
             iconAnchor: [40, 40],
             popupAnchor: [0, -40]
         });
-        icon2 = L.icon({
-            iconUrl: '/img/search-icon.png',
-            iconSize: [40, 40],
-            iconAnchor: [40, 40],
-            popupAnchor: [0, -40]
-        });
+    
 
 var legend = L.control({ position: "topright" });
     legend.onAdd = function(mymap) {
@@ -200,10 +193,38 @@ var legend = L.control({ position: "topright" });
 
         let count = 0;
         for (let i = 0; i < data.length; i++) {
+
             count = count + 1;
             place = data[i];
             placeid = place.id;
             placetype = place.type;
+            if (placetype == "Street"){
+            icon2 = L.icon({
+            iconUrl: '/img/street.png',
+            iconSize: [40, 40],
+            iconAnchor: [40, 40],
+            popupAnchor: [0, -40]
+             });
+            }
+            if (placetype == "Openspace"){
+            icon2 = L.icon({
+            iconUrl: '/img/openspace.png',
+            iconSize: [40, 40],
+            iconAnchor: [40, 40],
+            popupAnchor: [0, -40]
+             });
+            }
+            if (placetype == "Building"){
+            icon2 = L.icon({
+            iconUrl: '/img/building.png',
+            iconSize: [40, 40],
+            iconAnchor: [40, 40],
+            popupAnchor: [0, -40]
+             });
+            }
+         
+
+
             placename = place.name;
             pics = place.image0;
             placelatitude = place.latitude;

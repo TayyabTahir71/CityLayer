@@ -45,3 +45,11 @@ img{
 .reverted{
   all: revert;
 }
+
+#message {
+  display: none;
+}
+
+#newtagadded {
+  display: none;
+}

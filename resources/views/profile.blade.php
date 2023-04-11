@@ -16,7 +16,7 @@
                  </form>
              </div>
              <h1 class="pt-4 text-2xl text-center text-gray-800">{{ $name }}</h1>
-                <h1 class="pt-4 text-2xl text-center text-gray-800">{{  backpack_auth()->user()->email }}</h1>
+             <h1 class="pt-4 text-2xl text-center text-gray-800">{{ backpack_auth()->user()->email }}</h1>
              <h2 class="pt-2 text-2xl font-bold text-center text-yellow-300">{{ backpack_auth()->user()->score }}</h2>
              <div class="w-2/3 mx-auto">
                  <div class="relative pt-1">
@@ -49,99 +49,96 @@
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 10</div>
                          @endif
                      </div>
+
+
+                     <div class="popup fixed top-0 left-0 w-full h-full z-100" style="display:none;">
+                         <div class="popup-content absolute top-[50%] left-[50%] bg-white rounded p-4 text-xs font-bold text-center w-2/3">
+                         
+                         </div>
+                     </div>
                      <div class="flex justify-center pt-4">
                          <div class="flex flex-col gap-x-2">
-                            <div class="flex">
-                             <div class="mx-1">
-                                @if (backpack_auth()->user()->score > 100)
-                                <img class="w-24" src="/img/icons/01.png" alt="">
-                                
-                                @else
-                                <img class="w-24 grayscale" src="/img/icons/01.png" >
-                                @endif
-                             </div>
-                             <div class="mx-1">
-                              @if (backpack_auth()->user()->score > 200)
-                                <img class="w-24" src="/img/icons/02.png" alt="">
-                                
-                                @else
-                                <img class="w-24 grayscale" src="/img/icons/02.png" >
-                                @endif
-                             </div>
+                             <div class="flex">
+                                 <button id="btn1" class="mx-1">
+                                     @if (backpack_auth()->user()->score > 100)
+                                         <img class="w-24" src="/img/icons/explorer.png" alt="">
+                                     @else
+                                         <img class="w-24 grayscale" src="/img/icons/explorer.png">
+                                     @endif
+                                 </button>
+                                 <button id="btn2" class="mx-1">
+                                     @if (backpack_auth()->user()->score > 200)
+                                         <img class="w-24" src="/img/icons/citymaker.png" alt="">
+                                     @else
+                                         <img class="w-24 grayscale" src="/img/icons/citymaker.png">
+                                     @endif
+                                 </button>
 
-                             <div class="mx-1">
-                              @if (backpack_auth()->user()->score > 300)
-                                <img class="w-24" src="/img/icons/03.png" alt="">
-                                
-                                @else
-                                <img class="w-24 grayscale" src="/img/icons/03.png" >
-                                @endif
-                             </div>
+                                 <button id="btn3" class="mx-1">
+                                     @if (backpack_auth()->user()->score > 300)
+                                         <img class="w-24" src="/img/icons/architect.png" alt="">
+                                     @else
+                                         <img class="w-24 grayscale" src="/img/icons/architect.png">
+                                     @endif
+                                 </button>
 
-                             <div class="mx-1">
-                               @if (backpack_auth()->user()->score > 400)
-                                <img class="w-24" src="/img/icons/04.png" alt="">
-                                
-                                @else
-                                <img class="w-24 grayscale" src="/img/icons/04.png" >
-                                @endif
-                             </div>
+                                 <button id="btn4" class="mx-1">
+                                     @if (backpack_auth()->user()->score > 400)
+                                         <img class="w-24" src="/img/icons/flaneur.png" alt="">
+                                     @else
+                                         <img class="w-24 grayscale" src="/img/icons/flaneur.png">
+                                     @endif
+                                 </button>
 
-                             <div class="mx-1">
-                               @if (backpack_auth()->user()->score > 500)
-                                <img class="w-24" src="/img/icons/05.png" alt="">
-                                
-                                @else
-                                <img class="w-24 grayscale" src="/img/icons/05.png" >
-                                @endif
+                                 <button id="btn5" class="mx-1">
+                                     @if (backpack_auth()->user()->score > 500)
+                                         <img class="w-24" src="/img/icons/urbanist.png" alt="">
+                                     @else
+                                         <img class="w-24 grayscale" src="/img/icons/urbanist.png">
+                                     @endif
+                                 </button>
                              </div>
-                                </div>
-                                <div class="flex pt-2">
-                            <div class="mx-1">
-                              @if (backpack_auth()->user()->score > 600)
-                                <img class="w-24" src="/img/icons/06.png" alt="">
-                                
-                                @else
-                                <img class="w-24 grayscale" src="/img/icons/06.png" >
-                                @endif
-                             </div>
+                             <div class="flex pt-2">
+                                 <button id="btn6" class="mx-1">
+                                     @if (backpack_auth()->user()->score > 600)
+                                         <img class="w-24" src="/img/icons/influencer.png" alt="">
+                                     @else
+                                         <img class="w-24 grayscale" src="/img/icons/influencer.png">
+                                     @endif
+                                 </button>
 
-                             <div class="mx-1">
-                              @if (backpack_auth()->user()->score > 700)
-                                <img class="w-24" src="/img/icons/07.png" alt="">
-                                
-                                @else
-                                <img class="w-24 grayscale" src="/img/icons/07.png" >
-                                @endif
-                             </div>
+                                 <button id="btn7" class="mx-1">
+                                     @if (backpack_auth()->user()->score > 700)
+                                         <img class="w-24" src="/img/icons/star.png" alt="">
+                                     @else
+                                         <img class="w-24 grayscale" src="/img/icons/star.png">
+                                     @endif
+                                 </button>
 
-                              <div class="mx-1">
-                              @if (backpack_auth()->user()->score > 800)
-                                <img class="w-24" src="/img/icons/08.png" alt="">
-                                
-                                @else
-                                <img class="w-24 grayscale" src="/img/icons/08.png" >
-                                @endif
-                             </div>
+                                 <button id="btn8" class="mx-1">
+                                     @if (backpack_auth()->user()->score > 800)
+                                         <img class="w-24" src="/img/icons/guru.png" alt="">
+                                     @else
+                                         <img class="w-24 grayscale" src="/img/icons/guru.png">
+                                     @endif
+                                 </button>
 
-                              <div class="mx-1">
-                              @if (backpack_auth()->user()->score > 900)
-                                <img class="w-24" src="/img/icons/09.png" alt="">
-                                
-                                @else
-                                <img class="w-24 grayscale" src="/img/icons/09.png" >
-                                @endif
-                             </div>
+                                 <button id="btn9" class="mx-1">
+                                     @if (backpack_auth()->user()->score > 900)
+                                         <img class="w-24" src="/img/icons/investigator.png" alt="">
+                                     @else
+                                         <img class="w-24 grayscale" src="/img/icons/investigator.png">
+                                     @endif
+                                 </button>
 
-                              <div class="mx-1">
-                              @if (backpack_auth()->user()->score > 1000)
-                                <img class="w-24" src="/img/icons/10.png" alt="">
-                                
-                                @else
-                                <img class="w-24 grayscale" src="/img/icons/10.png" >
-                                @endif
+                                 <button id="btn10" class="mx-1">
+                                     @if (backpack_auth()->user()->score > 1000)
+                                         <img class="w-24" src="/img/icons/supermapper.png" alt="">
+                                     @else
+                                         <img class="w-24 grayscale" src="/img/icons/supermapper.png">
+                                     @endif
+                                 </button>
                              </div>
-                                </div>
 
                          </div>
                      </div>
@@ -149,19 +146,19 @@
                  </div>
              </div>
              <div class="flex justify-center pt-4 mx-4">
-             @php
-              $preferences = explode(',', $infos->preferences);
-               // remove all special characters but keep the spaces
-                $preferences = preg_replace('/[^A-Za-z0-9 ]/', '', $preferences);
-             
-             @endphp
-             @foreach ($preferences as $preference)
-                   <div class="flex flex-col gap-y-2">
-                     <h1 class="text-xs flex py-2 mx-2 px-2 text-center text-white bg-[#667DC7] rounded-lg">
-                         {{ $preference }}</h1>
-                 </div>
-             @endforeach
-               
+                 @php
+                     $preferences = explode(',', $infos->preferences);
+                     // remove all special characters but keep the spaces
+                     $preferences = preg_replace('/[^A-Za-z0-9 ]/', '', $preferences);
+                     
+                 @endphp
+                 @foreach ($preferences as $preference)
+                     <div class="flex flex-col gap-y-2">
+                         <h1 class="text-xs flex py-2 mx-2 px-2 text-center text-white bg-[#667DC7] rounded-lg">
+                             {{ $preference }}</h1>
+                     </div>
+                 @endforeach
+
              </div>
              <button
                  class="px-4 py-2 mx-auto mt-8 mb-8 text-center text-white bg-green-400 rounded-full hover:bg-green-300 active:bg-green-800">
@@ -169,4 +166,101 @@
              </button>
          </div>
      </div>
+
+     <script>
+         // Get references to all the buttons
+         var button1 = document.getElementById("btn1");
+         var button2 = document.getElementById("btn2");
+         var button3 = document.getElementById("btn3");
+         var button4 = document.getElementById("btn4");
+         var button5 = document.getElementById("btn5");
+         var button6 = document.getElementById("btn6");
+         var button7 = document.getElementById("btn7");
+         var button8 = document.getElementById("btn8");
+         var button9 = document.getElementById("btn9");
+         var button10 = document.getElementById("btn10");
+         var popup = document.querySelector(".popup");
+
+         // Add event listeners to each button
+         button1.addEventListener("click", function() {
+             var popupContent = "<img class='mx-auto' src='/img/icons/explorer.png'><br><p>explorer - Map a space that was not mapped before!</p>";
+             popup.querySelector(".popup-content").innerHTML = popupContent;
+             popup.style.display = "block";
+         });
+
+         button2.addEventListener("click", function() {
+                 var popupContent = "<img class='mx-auto' src='/img/icons/citymaker.png'><br><p>city-maker – Map at least 10 spaces!</p>";
+             popup.querySelector(".popup-content").innerHTML = popupContent;
+             popup.style.display = "block";
+         });
+
+         button3.addEventListener("click", function() {
+                 var popupContent = "<img class='mx-auto' src='/img/icons/architect.png'><br><p>architect - Map at least 10 buildings!</p>";
+             popup.querySelector(".popup-content").innerHTML = popupContent;
+             popup.style.display = "block";
+         });
+
+         button4.addEventListener("click", function() {
+                    var popupContent = "<img class='mx-auto' src='/img/icons/flaneur.png'><br><p>flaneur - Map at least 10 streets!</p>";
+             popup.querySelector(".popup-content").innerHTML = popupContent;
+             popup.style.display = "block";
+         });
+
+         button5.addEventListener("click", function() {
+               var popupContent = "<img class='mx-auto' src='/img/icons/urbanist.png'><br><p>urbanist - Map at least 10 open spaces!</p>";
+             popup.querySelector(".popup-content").innerHTML = popupContent;
+             popup.style.display = "block";
+         });
+
+         button6.addEventListener("click", function() {
+                            var popupContent = "<img class='mx-auto' src='/img/icons/influencer.png'><br><p>influencer – Receive 10+ comments by other users on one contribution!</p>";
+             popup.querySelector(".popup-content").innerHTML = popupContent;
+             popup.style.display = "block";
+         });
+
+         button7.addEventListener("click", function() {
+                   var popupContent = "<img class='mx-auto' src='/img/icons/star.png'><br><p>star - Receive 20+ reactions by other users on one contribution!</p>";
+             popup.querySelector(".popup-content").innerHTML = popupContent;
+             popup.style.display = "block";
+         });
+
+         button8.addEventListener("click", function() {
+                    var popupContent = "<img class='mx-auto' src='/img/icons/guru.png'><br><p>guru - Comment on 10 other people's posts!</p>";
+             popup.querySelector(".popup-content").innerHTML = popupContent;
+             popup.style.display = "block";
+         });
+
+         button9.addEventListener("click", function() {
+                   var popupContent = "<img class='mx-auto' src='/img/icons/investigator.png'><br><p>investigator - Post more that 10 pictures!</p>";
+             popup.querySelector(".popup-content").innerHTML = popupContent;
+             popup.style.display = "block";
+         });
+
+         button10.addEventListener("click", function() {
+                 var popupContent = "<img class='mx-auto' src='/img/icons/supermapper.png'><br><p>supermapper - Collect 500 points!</p>";
+             popup.querySelector(".popup-content").innerHTML = popupContent;
+             popup.style.display = "block";
+         });
+
+ popup.addEventListener("click", function(e) {
+    // Check if the user clicked outside of the popup content
+    if (e.target === popup) {
+      // Hide the popup if the user clicked outside of it
+      popup.style.display = "none";
+    }
+  });
+
+
+         // Repeat the same pattern for the other buttons
+     </script>
+                          <style>
+         .popup {
+             background-color: rgba(0, 0, 0, 0.5);
+             z-index: 100;
+         }
+
+         .popup-content {
+             transform: translate(-50%, -50%);
+         }
+     </style>
  @endsection
