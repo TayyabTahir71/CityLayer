@@ -5,9 +5,9 @@
 
         <div class="flex flex-col h-screen mx-auto">
   <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
-            <div class="flex flex-row items-center pt-2">
-                <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
-            </div>
+                 <div class="flex flex-row justify-between pt-2">
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
+                 </div>
             <form action="spaceusage" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
@@ -196,7 +196,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#FAC710] w-28 h-28 text-white font-bold"
-                                style="top: 95%; right: 90%; transform: translate(50%, -50%)">{{ __('messages.events') }}<br>{{ __('messages.in space') }}</button>
+                                style="top: 90%; right: 90%; transform: translate(50%, -50%)">{{ __('messages.events') }}<br>{{ __('messages.in space') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -269,7 +269,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#FAC710] w-28 h-28 text-white font-bold"
-                                style="top: 95%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.multifunctional') }}</button>
+                                style="top: 90%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.multifunctional') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -429,9 +429,10 @@
              }, 2000);
          }
 
-         window.onload = function() {
-             showMessage("New points");
-         };
+ $('#skip').click(function() {
+          var btn = document.getElementById("saveplace");
+          btn.click();
+         });
 
     </script>
     <style>

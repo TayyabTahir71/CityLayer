@@ -7,9 +7,9 @@
 
          <div class="flex flex-col h-screen mx-auto">
   <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
-             <div class="flex flex-row items-center pt-2">
-                 <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
-             </div>
+                <div class="flex flex-row justify-between pt-2">
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
+                 </div>
              <form action="upload-image" method="POST" enctype="multipart/form-data">
                  @csrf
                  <div class="flex flex-col items-center justify-center">
@@ -129,9 +129,10 @@
              }, 2000);
          }
 
-         window.onload = function() {
-             showMessage("New points");
-         };
+        $('#skip').click(function() {
+          var btn = document.getElementById("saveplace");
+          btn.click();
+         });
 
      </script>
      <style>

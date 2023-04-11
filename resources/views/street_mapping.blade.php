@@ -5,13 +5,12 @@
          <div class="flex flex-col h-screen mx-auto">
                        <div id="newtagadded" class="fixed top-5 right-5 p-2 border rounded bg-blue-500 text-white font-bold"></div>
              <div class="p-3">
-                 <div class="flex flex-row items-center pt-2">
-   
-                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
+                <div class="flex flex-row justify-between pt-2">
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
                  </div>
                  <div class="flex flex-col items-center justify-center">
                      <button class="w-32 h-32 mx-4 text-gray-100 bg-[#55C5CF] focus:outline-none rounded-full" disabled>
-                         <i class="fa-solid fa-road"></i><br>street
+                         <i class="fa-solid fa-road"></i><br>Street
                      </button>
                      <h1 class="pt-2 text-xl font-bold text-center text-gray-900">
                          {{ __('messages.Add #tags to describe the space and earn 1 point!') }}</h1>
@@ -171,6 +170,28 @@
                          latitude: latitude,
                          longitude: longitude,
                          tags: tags
+                     },
+                     success: function(data) {
+                         open("/step2?id=" + data, "_self");
+                     }
+                 });
+
+             });
+
+          $('#skip').click(function() {
+          
+                 latitude = document.getElementById('latitude').value;
+                 longitude = document.getElementById('longitude').value;
+                 thename = Math.random().toString(8).substring(7);
+                 $.ajax({
+                     type: 'POST',
+                     url: "/new_place",
+                     data: {
+                         name: thename,
+                         type: "Street",
+                         latitude: latitude,
+                         longitude: longitude,
+                         tags: [""]
                      },
                      success: function(data) {
                          open("/step2?id=" + data, "_self");

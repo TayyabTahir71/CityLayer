@@ -57,15 +57,18 @@
                                  <div class="items-center max-w-2xl space-x-4">
                                      <h1 class="pb-8 text-3xl text-center text-black">{{ __('messages.Share what makes you feel that way!') }}
                                      </h1>
-                                     <div class="flex flex-col pt-4 space-y-6">
+                                     <div class="flex flex-col pt-2">
                                          <div class="flex justify-center w-full">
                                              <button class="" onclick="document.getElementById('modalform').click()">
                                                  <h1 class="px-4 py-8 text-3xl font-bold text-center bg-white rounded-xl">
                                                      {{ __('messages.Describe and share a photo!') }}</h1>
                                              </button>
-
                                          </div>
+                                          <div class="flex justify-center">
+                                             <button id="skip" class="mt-4">Skip</button>
+                                             </div>
                                      </div>
+                                     
                                  </div>
                              </div>
                          </div>
@@ -119,7 +122,7 @@
                                              </label>
                                              <div id="success-message" class="hidden font-bold text-green-500">{{ __('messages.File selected successfully!') }}</div>
                                          </div>
-                                         <button type="submit"
+                                         <button type="submit" id="submit"
                                              class="w-full px-4 py-4 font-bold text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus:shadow-outline">{{ __('messages.Save') }}</button>
                                          <input type="hidden" name="type" value="{{ $type }}">
                                          <input type="hidden" name="placeid" value="{{ $placeid }}">
@@ -183,6 +186,11 @@
                  });
          }
 
+ $('#skip').click(function() {
+          var btn = document.getElementById("submit");
+          btn.click();
+         });
+
 
         function mylocation() {
              navigator.geolocation.getCurrentPosition(function(position) {
@@ -235,10 +243,6 @@
                  messageBox.style.display = "none"; // hide the message after 3 seconds
              }, 2000);
          }
-
-         window.onload = function() {
-             showMessage("New points");
-         };
 
 
 

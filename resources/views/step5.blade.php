@@ -5,9 +5,9 @@
 
         <div class="flex flex-col h-screen mx-auto">
   <div id="message" class="fixed top-5 right-5 p-2 border rounded bg-green-500 text-white font-bold"></div>
-            <div class="flex flex-row items-center pt-2">
-                <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
-            </div>
+               <div class="flex flex-row justify-between pt-2">
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
+                 </div>
             <form action="confortlevel" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
@@ -103,7 +103,11 @@
                                                     </div>
 
                                                 </div>
-                                        
+                                                <div>
+                                                    <input type="text" name="activities_text" id="activities_text"
+                                                        class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
+                                                </div>
                                                 <button type="button" id="activitiesbtn" onclick="newAction('activities')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
@@ -189,7 +193,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 25%; right: 0; transform: translate(50%, -50%)">{{ __('messages.walk, roll & ') }}<br>{{ __('messages.bike comfort') }}</button>
+                                style="top: 25%; right: 5%; transform: translate(50%, -50%)">{{ __('messages.walk, roll & ') }}<br>{{ __('messages.bike comfort') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -262,7 +266,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 75%; right: 0; transform: translate(50%, -50%)">{{ __('messages.visibility & orientation') }}</button>
+                                style="top: 75%; right: 5%; transform: translate(50%, -50%)">{{ __('messages.visibility & orientation') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -409,7 +413,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 75%; left: 0; transform: translate(-50%, -50%)">{{ __('messages.facilities') }}</button>
+                                style="top: 75%; left: 5%; transform: translate(-50%, -50%)">{{ __('messages.facilities') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -483,7 +487,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 25%; left: 0; transform: translate(-50%, -50%)">{{ __('messages.noise') }}</button>
+                                style="top: 25%; left: 5%; transform: translate(-50%, -50%)">{{ __('messages.noise') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -538,6 +542,11 @@
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.loud and') }}<br>{{ __('messages.iritating!') }}</label>
                                                     </div>
 
+                                                </div>
+                                                         <div>
+                                                    <input type="text" name="noise_text" id="noise_text"
+                                                        class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                
                                                 <button type="button" id="noisebtn" onclick="newAction('noise')"
@@ -653,9 +662,10 @@ showMessage("New points");
              }, 2000);
          }
 
-         window.onload = function() {
-             showMessage("New points");
-         };
+ $('#skip').click(function() {
+          var btn = document.getElementById("saveplace");
+          btn.click();
+         });
 
     </script>
     <style>

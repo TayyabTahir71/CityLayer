@@ -10,8 +10,8 @@
          <div class="flex flex-col h-screen mx-auto">
            <div id="message" class="fixed top-5 right-5 p-2 border rounded bg-green-500 text-white font-bold"></div>
              <div class="p-3">
-                 <div class="flex flex-row items-center pt-2">
-                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
+                        <div class="flex flex-row justify-between pt-2">
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
                  </div>
                   <input type="hidden" name="type" id="type" value="{{ $type }}">
                  <input type="hidden" name="placeid" id="placeid" value="{{ $placeid }}">
@@ -143,6 +143,31 @@
                  });
 
              });
+
+               $('#skip').click(function() {
+
+            const placeid = document.getElementById('placeid').value;
+            const type = document.getElementById('type').value;
+            console.log(placeid);
+            console.log(type);
+
+                 spacetag = [""];
+                 
+                 thename = Math.random().toString(8).substring(7);
+                 $.ajax({
+                     type: 'POST',
+                     url: "/spaceusagedetail",
+                     data: {
+                         placeid: placeid,
+                         spacetag: spacetag,
+                         type: type,
+                     },
+                     success: function(data) {
+                        open("/", "_self");
+                     }
+                 });
+
+             });
          });
 
 
@@ -155,9 +180,7 @@
              }, 2000);
          }
 
-         window.onload = function() {
-             showMessage("New points");
-         };
+
 
      </script>
 

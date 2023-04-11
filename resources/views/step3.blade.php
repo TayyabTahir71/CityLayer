@@ -12,12 +12,12 @@
          <div class="flex flex-col h-screen mx-auto">
              <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
              <div class="p-3">
-                 <div class="flex flex-row items-center pt-2">
-                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
+                       <div class="flex flex-row justify-between pt-2">
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
                  </div>
                  <div class="flex flex-col items-center justify-center">
-                     <h1 class="pt-2 mx-8 text-xl font-bold text-center text-gray-900">
-                         {{ __('messages.Add #opinions to describe the space and earn points!') }}</h1>
+                     <h1 class="pt-4 mx-8 text-xl font-bold text-center text-gray-900">
+                         {{ __('messages.Add #opinions to describe the space and earn 1 point!') }}</h1>
                      <div class="w-48 pt-8">
                          @foreach ($opinions as $opinion)
                              <label>
@@ -123,7 +123,7 @@
                      }
                  });
 
-             });
+       
 
              $('#saveopinion').click(function() {
                  placeid = document.getElementById('theplaceid').value;
@@ -165,6 +165,40 @@
              });
          });
 
+          $('#skip').click(function() {
+                 placeid = document.getElementById('theplaceid').value;
+                 type = document.getElementById('thetype').value;
+                 console.log(placeid);
+                 console.log(type);
+
+                 opinions = [""];
+                
+                 $.ajaxSetup({
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
+                 });
+
+                 thename = Math.random().toString(8).substring(7);
+
+                 $.ajax({
+                     type: 'POST',
+                     url: "/opinions",
+                     data: {
+                         name: thename,
+                         placeid: placeid,
+                         opinions: opinions,
+                         type: type,
+                     },
+                     success: function(data) {
+                        console.log(data);
+                         open("/step4?id=" + data, "_self");
+                     }
+                 });
+
+             });
+         });
+
 
          function showMessage(message) {
              var messageBox = document.getElementById("message");
@@ -175,9 +209,6 @@
              }, 2000);
          }
 
-         window.onload = function() {
-             showMessage("New points");
-         };
      </script>
      <style>
          #message {

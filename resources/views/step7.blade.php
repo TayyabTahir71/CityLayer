@@ -5,9 +5,9 @@
 
         <div class="flex flex-col h-screen mx-auto">
   <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
-            <div class="flex flex-row items-center pt-2">
-                <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
-            </div>
+                  <div class="flex flex-row justify-between pt-2">
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
+                 </div>
             <form action="protected" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
@@ -117,7 +117,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 25%; right: 0; transform: translate(50%, -50%)">{{ __('messages.Pollutants') }}<br> ({{ __('messages.dust, smells') }})</button>
+                                style="top: 25%; right: 5%; transform: translate(50%, -50%)">{{ __('messages.Pollutants') }}<br> ({{ __('messages.dust, smells') }})</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -190,7 +190,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 75%; right: 0; transform: translate(50%, -50%)">{{ __('messages.night lighting') }}</button>
+                                style="top: 75%; right: 5%; transform: translate(50%, -50%)">{{ __('messages.night lighting') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -308,7 +308,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 75%; left: 0; transform: translate(-50%, -50%)">{{ __('messages.dangerous objects') }}</button>
+                                style="top: 75%; left: 5%; transform: translate(-50%, -50%)">{{ __('messages.dangerous objects') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -381,7 +381,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="top: 25%; left: 0; transform: translate(-50%, -50%)">{{ __('messages.safety from harm') }}</button>
+                                style="top: 25%; left: 5%; transform: translate(-50%, -50%)">{{ __('messages.safety from harm') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -455,7 +455,7 @@
 
                     </div>
                     <button id="saveplace" type="submit"
-                        class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-24  mb-4">
+                        class="px-4 text-2xl py-2 text-gray-800 bg-[#CDB8EB] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-20 mb-4">
                          {{ __('messages.Next challenge!') }} 
                     </button>
                 </div>
@@ -553,9 +553,10 @@
              }, 2000);
          }
 
-         window.onload = function() {
-             showMessage("New points");
-         };
+   $('#skip').click(function() {
+          var btn = document.getElementById("saveplace");
+          btn.click();
+         });
 
     </script>
     <style>
