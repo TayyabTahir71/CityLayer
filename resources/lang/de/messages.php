@@ -29,7 +29,7 @@ return [
     'Profile' => 'Profil',
     'Log-out' => 'Abmelden',
     'Start New Mapping:' => 'Neue Kartierung starten:',
-    "React to this place to earn points!" => "Reagiere an diesem Ort, um Punkte zu verdienen!",
+    "React to this place to earn 1 point!" => "Reagiere an diesem Ort, um Punkte zu verdienen!",
     'Points:' => 'Punkte:',
     'Street' => 'Straße',
     'Building' => 'Gebäude',

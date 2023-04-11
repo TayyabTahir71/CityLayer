@@ -1,12 +1,27 @@
-@php 
-                       $locale = session()->get('locale');
-                       if ($locale == null) {
-                           $locale = 'en';
-                          }
-                        @endphp
+@php
+    $locale = session()->get('locale');
+    if ($locale == null) {
+        $locale = 'en';
+    }
+@endphp
 @extends('layouts.app')
 
 @section('main')
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+
+
+    </style>
     <div data-barba="container">
         @include('parts.navbar')
         <div class="flex flex-col mx-auto">
@@ -17,10 +32,11 @@
                 <div x-data="{ modelOpen: false }">
                     <div
                         class="fixed bottom-0 w-full py-6 text-2xl font-bold text-black bg-[#B8E7EB] active:bg-blue-400 text-center z-50">
-                            <a class="mx-12" @click="modelOpen =!modelOpen" onclick="zoom()">  {{ __('messages.Start Playing!') }}</a>
-                        
+                        <a class="mx-12" @click="modelOpen =!modelOpen" onclick="zoom()">
+                            {{ __('messages.Start Playing!') }}</a>
+
                     </div>
-                    
+
 
                     <div x-cloak x-show="modelOpen" class="fixed bottom-0 z-50 overflow-y-auto"
                         aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -43,25 +59,29 @@
 
                                 <div class="items-center space-x-4 bloc">
 
-                                    <h1 class="text-3xl font-bold text-center text-black">{{ __('messages.This space is...') }}</h1>
+                                    <h1 class="text-3xl font-bold text-center text-black">
+                                        {{ __('messages.This space is...') }}</h1>
                                     <div class="flex flex-col pt-6">
                                         <div class="flex justify-center">
 
                                             <a href="street"> <button
                                                     class="w-32 h-32 mx-4 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400  focus:outline-none hover:text-gray-200 rounded-full">
-                                                    <i class="fa-solid fa-road"></i><br>{{ __('messages.a street') }}</button>
+                                                    <i
+                                                        class="fa-solid fa-road"></i><br>{{ __('messages.a street') }}</button>
                                             </a>
                                         </div>
                                         <div class="flex justify-center space-x-6">
                                             <a href="building">
                                                 <button
                                                     class="w-32 h-32 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
-                                                    <i class="fa-solid fa-building"></i><br>{{ __('messages.a building') }}</button>
+                                                    <i
+                                                        class="fa-solid fa-building"></i><br>{{ __('messages.a building') }}</button>
                                             </a>
                                             <a href="openspace">
                                                 <button
                                                     class="w-32 h-32  py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
-                                                    <i class="fa-solid fa-street-view"></i><br>{{ __('messages.an open space') }}</button>
+                                                    <i
+                                                        class="fa-solid fa-street-view"></i><br>{{ __('messages.an open space') }}</button>
                                             </a>
                                         </div>
                                     </div>
@@ -89,7 +109,8 @@
 
                         <div class="items-center px-2 pt-3 space-x-4 bloc">
                             <div class="flex justify-center font-bold">
-                                {{ __('messages.You have earned') }} <img src="/img/plus1.png" class="w-8 h-8 pb-2">{{ __('messages.point!') }}
+                                {{ __('messages.You have earned') }} <img src="/img/plus1.png"
+                                    class="w-8 h-8 pb-2">{{ __('messages.point!') }}
                             </div>
                         </div>
                     </div>
@@ -112,7 +133,7 @@
 
                         <div class="items-center px-2 py-3 space-x-4 bloc">
                             <div class="flex justify-center font-bold">
-                                 {{ __('messages.You have already react to this place!') }}
+                                {{ __('messages.You have already react to this place!') }}
                             </div>
                         </div>
                     </div>
@@ -135,7 +156,7 @@
 
                         <div class="items-center px-2 py-3 space-x-4 bloc">
                             <div class="flex justify-center font-bold">
-                                 Your comment as been saved
+                                Your comment as been saved
                             </div>
                         </div>
                     </div>
@@ -144,21 +165,27 @@
         </div>
     </div>
 
+    <div id="myModal" class="modal bg-white">
+    <div class="flex flex-row justify-between pt-2">
+                    <i id="closemodal" class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i>
+                 </div>
+        <div class="modal-content">
+            <p>Some text in the modal.</p>
+        </div>
+    </div>
     <script>
-      
-
         data = {!! json_encode($all_data) !!};
         markers = {};
         let marker = null;
         let mymap0 = L.map('map').setView([48.6890, 7.14086], 17);
-                                // https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png
-                              
-          osmLayer0 = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-	subdomains: 'abcd',
-	minZoom: 0,
-	maxZoom: 19,
-	ext: 'png'
-}).addTo(mymap0);
+        // https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png
+
+        osmLayer0 = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            subdomains: 'abcd',
+            minZoom: 0,
+            maxZoom: 19,
+            ext: 'png'
+        }).addTo(mymap0);
         mymap0.addLayer(osmLayer0);
         mymap0.touchZoom.enable();
         mymap0.scrollWheelZoom.enable();
@@ -168,15 +195,18 @@
             iconAnchor: [40, 40],
             popupAnchor: [0, -40]
         });
-    
 
-var legend = L.control({ position: "topright" });
-    legend.onAdd = function(mymap) {
-  var div = L.DomUtil.create("div", "legend bg-gray-200 p-2 border border-gray-400 rounded");
-  div.innerHTML += '<button class="" onclick="mylocation()"><i class="pr-2 fa fa-location-arrow"></i><span>My location</span><br></button>';
-    return div;
-    };
-    legend.addTo(mymap0);
+
+        var legend = L.control({
+            position: "topright"
+        });
+        legend.onAdd = function(mymap) {
+            var div = L.DomUtil.create("div", "legend bg-gray-200 p-2 border border-gray-400 rounded");
+            div.innerHTML +=
+                '<button class="" onclick="mylocation()"><i class="pr-2 fa fa-location-arrow"></i><span>My location</span><br></button>';
+            return div;
+        };
+        legend.addTo(mymap0);
 
 
         if (navigator.geolocation) {
@@ -198,57 +228,72 @@ var legend = L.control({ position: "topright" });
             place = data[i];
             placeid = place.id;
             placetype = place.type;
-            if (placetype == "Street"){
-            icon2 = L.icon({
-            iconUrl: '/img/street.png',
-            iconSize: [40, 40],
-            iconAnchor: [40, 40],
-            popupAnchor: [0, -40]
-             });
+            if (placetype == "Street") {
+                icon2 = L.icon({
+                    iconUrl: '/img/street.png',
+                    iconSize: [40, 40],
+                    iconAnchor: [40, 40],
+                    popupAnchor: [0, -40]
+                });
             }
-            if (placetype == "Openspace"){
-            icon2 = L.icon({
-            iconUrl: '/img/openspace.png',
-            iconSize: [40, 40],
-            iconAnchor: [40, 40],
-            popupAnchor: [0, -40]
-             });
+            if (placetype == "Openspace") {
+                icon2 = L.icon({
+                    iconUrl: '/img/openspace.png',
+                    iconSize: [40, 40],
+                    iconAnchor: [40, 40],
+                    popupAnchor: [0, -40]
+                });
             }
-            if (placetype == "Building"){
-            icon2 = L.icon({
-            iconUrl: '/img/building.png',
-            iconSize: [40, 40],
-            iconAnchor: [40, 40],
-            popupAnchor: [0, -40]
-             });
+            if (placetype == "Building") {
+                icon2 = L.icon({
+                    iconUrl: '/img/building.png',
+                    iconSize: [40, 40],
+                    iconAnchor: [40, 40],
+                    popupAnchor: [0, -40]
+                });
             }
-         
+
 
 
             placename = place.name;
             pics = place.image0;
             placelatitude = place.latitude;
             placelongitude = place.longitude;
-            var message = '{{ __('messages.React to this place to earn points!') }}';
+            var message = '{{ __('messages.React to this place to earn 1 point!') }}';
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
-            }).addTo(mymap0).bindPopup(
-                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="px-4 text-sm">' + message +'</p><img id="img" class="object-contain w-auto pb-4 text-sm max-h-64"  src="/storage' + pics +'"  onerror="missing()"/><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                placeid + '\', \'' + placetype +
-                '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                placeid + '\', \'' + placetype +
-                '\', \'dislike\')"><img src="/img/3.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                placeid + '\', \'' + placetype +
-                '\', \'stars\')"><img src="/img/4.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                placeid + '\', \'' + placetype +
-                '\', \'bof\')"><img src="/img/5.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                placeid + '\', \'' + placetype +
-                '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                placeid + '\', \'' + placetype +
-                '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                placeid + '\', \'' + placetype + '\', \'wtf\')"></div><textarea name="comm" style="overflow:auto;resize:none" id="comm" cols="10" rows="2" class="font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea><button type="button"class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment(\'' +placeid + '\', \'' + placetype + '\')">Leave a comment</button> </div>'
-            );
+            }).addTo(mymap0);
             markers[place.id] = markerx;
+
+
+            var modal = document.getElementById("myModal");
+
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on the marker, open the modal
+            markerx.on("click", function() {
+                modal.style.display = "block";
+                modal.querySelector(".modal-content").innerHTML =
+                    '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="px-4 pb-4">' +
+                    message +
+                    '</p><img id="img" class="object-contain w-auto pb-4 text-sm max-h-64"  src="/storage' + pics + '"  onerror="missing()"/><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                    placeid + '\', \'' + placetype +
+                    '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                    placeid + '\', \'' + placetype +
+                    '\', \'dislike\')"><img src="/img/3.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                    placeid + '\', \'' + placetype +
+                    '\', \'stars\')"><img src="/img/4.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                    placeid + '\', \'' + placetype +
+                    '\', \'bof\')"><img src="/img/5.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                    placeid + '\', \'' + placetype +
+                    '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                    placeid + '\', \'' + placetype +
+                    '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                    placeid + '\', \'' + placetype +
+                    '\', \'wtf\')"></div><textarea name="comm" style="overflow:auto;resize:none" id="comm" cols="10" rows="2" class="font-light border rounded focus:outline-none focus:border-blue-300 mx-2" placeholder=""></textarea><button type="button"class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment(\'' +
+                    placeid + '\', \'' + placetype + '\')">Leave a comment</button> </div>';
+
+            });
         }
 
         function missing() {
@@ -256,10 +301,12 @@ var legend = L.control({ position: "topright" });
         }
 
         function mylocation() {
-             navigator.geolocation.getCurrentPosition(function(position) {
-            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 19);
-             });
+            navigator.geolocation.getCurrentPosition(function(position) {
+                mymap0.flyTo([position.coords.latitude, position.coords.longitude], 19);
+            });
         }
+
+
 
 
         function mapAction(id, type, action) {
@@ -288,11 +335,11 @@ var legend = L.control({ position: "topright" });
                     url = "/place/wtf";
                     break;
             }
-                   $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
             $.ajax({
                 type: 'POST',
@@ -303,12 +350,14 @@ var legend = L.control({ position: "topright" });
                 },
                 success: function(data) {
                     if (data == 'already') {
+                        document.getElementById('myModal').style.display = "none";
                         document.getElementById('already').click();
                         //close popup after 3 seconds
                         setTimeout(function() {
                             document.getElementById('already').click();
                         }, 1000);
                     } else {
+                        document.getElementById('myModal').style.display = "none";
                         document.getElementById('point').click();
                         //close popup after 3 seconds
                         setTimeout(function() {
@@ -320,16 +369,16 @@ var legend = L.control({ position: "topright" });
             mymap0.closePopup();
         }
 
-        function comment(id, type){
-            
+        function comment(id, type) {
+
             var comment = document.getElementById('comm').value;
             var url = "/place/comment";
-        console.log(comment)
- $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+            console.log(comment)
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
             $.ajax({
                 type: 'POST',
@@ -341,6 +390,7 @@ var legend = L.control({ position: "topright" });
                 },
                 success: function(data) {
                     if (data == 'commented') {
+                        document.getElementById('myModal').style.display = "none";
                         document.getElementById('commented').click();
                         //close popup after 3 seconds
                         setTimeout(function() {
@@ -352,14 +402,18 @@ var legend = L.control({ position: "topright" });
             mymap0.closePopup();
         }
 
-        function zoom(){
+        function zoom() {
             navigator.geolocation.getCurrentPosition(function(position) {
-            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 16);
-             });
+                mymap0.flyTo([position.coords.latitude, position.coords.longitude], 16);
+            });
         }
+        var mymodal =  document.getElementById('myModal');
+
+          mymodal.addEventListener("click", function() {
+            mymodal.style.display = "none";
+         });
+
 
     </script>
-    <style>
 
-    </style>
 @endsection

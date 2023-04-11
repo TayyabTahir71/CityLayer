@@ -44,7 +44,7 @@ return [
     'Profile' => 'Profile',
     'Log-out' => 'Log-out',
     'Start New Mapping:' => 'Start New Mapping:',
-    'React to this place to earn points!' => 'React to this place to earn points!',
+    'React to this place to earn 1 point!' => 'React to this place to earn 1 point!',
     'You have already react to this place!' => 'You have already react to this place!',
     'Points:' => 'Points:',
     'Street' => 'Street',

@@ -6,7 +6,7 @@
             {!! csrf_field() !!}
           <label for="dropzone-file" class="flex flex-col items-center justify-center w-2/3">
                 <div class="flex flex-col items-center justify-center pb-6 pt-[10%]">
-                    <h1 class="text-3xl font-bold text-gray-900">{{ __('messages.Tell us more about yourself') }}</h1>
+                    <h1 class="text-3xl font-bold text-gray-900 text-center">{{ __('messages.Tell us more about yourself') }}</h1>
                 </div>
             </label>
 
