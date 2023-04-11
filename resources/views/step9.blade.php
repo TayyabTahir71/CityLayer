@@ -11,7 +11,7 @@
             <form action="spaceusage" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
-                    <h1 class="mx-8 text-4xl font-bold text-center text-gray-900">{{ __('messages.Let others know how well the space is used!') }}
+                    <h1 class="mx-8 text-3xl font-bold text-center text-gray-900">{{ __('messages.Let others know how well the space is used!') }}
                     </h1>
                     <div class="pb-8">
 
@@ -196,7 +196,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#FAC710] w-28 h-28 text-white font-bold"
-                                style="top: 100%; right: 90%; transform: translate(50%, -50%)">{{ __('messages.events') }}<br>{{ __('messages.in space') }}</button>
+                                style="top: 95%; right: 90%; transform: translate(50%, -50%)">{{ __('messages.events') }}<br>{{ __('messages.in space') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -269,7 +269,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#FAC710] w-28 h-28 text-white font-bold"
-                                style="top: 100%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.multifunctional') }}</button>
+                                style="top: 95%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.multifunctional') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -343,7 +343,7 @@
               
                     </div>
                     <button id="saveplace" type="submit"
-                        class="px-4 text-2xl py-2 text-gray-800 bg-[#FAC710] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-24 mb-4">
+                        class="px-4 text-2xl py-2 text-gray-800 bg-[#FAC710] hover:bg-purple-300 active:bg-purple-400 border focus:outline-none rounded-xl font-bold mt-16 mb-4">
                         {{ __('messages.Next challenge!') }} 
                     </button>
                 </div>

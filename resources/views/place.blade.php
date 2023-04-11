@@ -833,7 +833,7 @@
                     <legend class="pt-4 mb-1 font-medium text-center border-t text-xl">{{ __('messages.modify:') }}</legend>
                     <div class="flex flex-row justify-between w-96 mx-auto pb-8">
                         <a href="/step2?id={{ $placeid }}&type={{ $type }}" class="w-1/2 mx-1"> <button
-                                class="w-full h-12 px-4 py-2 mx-1 text-sm font-medium text-white bg-green-800 rounded">{{ __('messages.Edit') }}</button></a>
+                                class="w-full h-12 px-4 py-2 mx-1 text-sm font-medium text-white bg-green-800 rounded">{{ __('messages.Save') }}</button></a>
 
                         <a href="/delete?id={{ $placeid }}&type={{ $type }}" class="w-1/2 mx-1"> <button
                                 class="w-full h-12 px-4 py-2 mx-1 text-sm font-medium text-white bg-red-800 rounded">{{ __('messages.Delete') }}</button></a>

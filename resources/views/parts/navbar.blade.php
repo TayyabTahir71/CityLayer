@@ -1,13 +1,13 @@
  <nav class="fixed top-0 z-20 w-full">
      <div class="flex flex-wrap items-center justify-between pt-4 pb-4 mx-2 mr-2 bg-white border-b border-gray-400">
      <div class="flex items-center">
-         <a href="/" class="mx-2 text-sm font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-house"></i><span class="">Home</span></a>
-          <a href="dashboard" class="mx-2 text-sm font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-table"></i><span class="">Dashboard</span></a>
-           <a href="leaderboard" class="mx-2 text-sm font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-trophy"></i> <span class="">Leaderboard</span></a>
+         <a href="/" class="mx-1 text-xs font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-house"></i><span class="">Home</span></a>
+          <a href="dashboard" class="mx-1 text-xs font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-table"></i><span class="">Dashboard</span></a>
+           <a href="leaderboard" class="mx-1 text-xs font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-trophy"></i> <span class="">Leaderboard</span></a>
            </div>
          <div x-data="{ modelOpen: false }">
              <button @click="modelOpen =!modelOpen"
-                 class="inline-flex items-center p-2 ml-3 text-sm text-gray-400 rounded-lg focus:outline-none focus:ring-2 hover:bg-gray-700 focus:ring-gray-600">
+                 class="inline-flex items-center p-2 ml-1 text-sm text-gray-400 rounded-lg focus:outline-none focus:ring-2 hover:bg-gray-700 focus:ring-gray-600">
                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                      <path fill-rule="evenodd"
                          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"

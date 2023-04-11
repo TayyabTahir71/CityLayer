@@ -10,7 +10,7 @@
                      <input type="file" name="image" id="image" class="hidden" accept="image/*"
                          onchange="javascript:this.form.submit();">
                      <label for="image" class="cursor-pointer">
-                         <img class="object-cover w-32 h-32 rounded-full ring ring-gray-300 dark:ring-gray-600"
+                         <img class="object-cover w-24 h-24 rounded-full ring ring-gray-300 dark:ring-gray-600"
                              src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
                      </label>
                  </form>
@@ -52,24 +52,42 @@
                      <div class="flex justify-center pt-4">
                          <div class="flex gap-x-2">
 
-                             <div class="w-16 h-16 border-2 border-yellow-300 rounded-full">
+                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
                              @if (backpack_auth()->user()->score > 1000)
                                   <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
                                  @endif
                              </div>
-                             <div class="w-16 h-16 border-2 border-yellow-300 rounded-full">
+                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
                              @if(backpack_auth()->user()->score > 2000)
                                     <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
                                  @endif
                              </div>
 
-                             <div class="w-16 h-16 border-2 border-yellow-300 rounded-full">
+                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
                              @if(backpack_auth()->user()->score > 3000)
                                     <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
                                  @endif
                              </div>
 
-                             <div class="w-16 h-16 border-2 border-yellow-300 rounded-full">
+                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
+                             @if(backpack_auth()->user()->score > 4000)
+                                    <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
+                                 @endif
+                             </div>
+
+                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
+                             @if(backpack_auth()->user()->score > 4000)
+                                    <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
+                                 @endif
+                             </div>
+
+                            <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
+                             @if(backpack_auth()->user()->score > 4000)
+                                    <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
+                                 @endif
+                             </div>
+
+                             <div class="w-8 h-8 border-2 border-yellow-300 rounded-full">
                              @if(backpack_auth()->user()->score > 4000)
                                     <i class="px-3 py-4 fa-solid fa-trophy fa-2x"></i>
                                  @endif
@@ -77,7 +95,7 @@
 
                          </div>
                      </div>
-                     <h1 class="pt-4 text-2xl text-center text-gray-800">{{ $infos->profession }}</h1>
+                     <h1 class="pt-4 text-xl text-center text-gray-800">{{ $infos->profession }}</h1>
                  </div>
              </div>
              <div class="flex justify-center pt-4 mx-4">
@@ -89,14 +107,14 @@
              @endphp
              @foreach ($preferences as $preference)
                    <div class="flex flex-col gap-y-2">
-                     <h1 class="text-xs py-2 mx-2 px-2 text-center text-white bg-[#667DC7] rounded-lg">
+                     <h1 class="text-xs flex py-2 mx-2 px-2 text-center text-white bg-[#667DC7] rounded-lg">
                          {{ $preference }}</h1>
                  </div>
              @endforeach
                
              </div>
              <button
-                 class="px-4 py-2 mx-auto mt-8 text-xl font-bold text-center text-white bg-green-400 rounded-full hover:bg-green-300 active:bg-green-800">
+                 class="px-4 py-2 mx-auto mt-8 mb-8 text-center text-white bg-green-400 rounded-full hover:bg-green-300 active:bg-green-800">
                  <a href="/edit_profile">{{ __('messages.Edit Profile') }}</a>
              </button>
          </div>

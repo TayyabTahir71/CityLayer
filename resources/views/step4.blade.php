@@ -13,7 +13,7 @@
              <form action="upload-image" method="POST" enctype="multipart/form-data">
                  @csrf
                  <div class="flex flex-col items-center justify-center">
-                     <h1 class="pt-[10%] mx-8 text-4xl font-bold text-center text-gray-900">{{ __('messages.Would you change something in this space?') }}
+                     <h1 class="pt-[8%] mx-8 text-3xl font-bold text-center text-gray-900">{{ __('messages.Would you change something in this space?') }}
                      </h1>
                      <div class="">
                          <div x-data="{ total_value: 50 }" class="max-w-screen-md pt-10 pb-16 mx-auto">

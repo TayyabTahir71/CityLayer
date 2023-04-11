@@ -11,7 +11,7 @@
             <form action="enjoyable" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col items-center justify-center">
-                    <h1 class="text-4xl font-bold text-center text-gray-900 mx-8">{{ __('messages.Let others know how enjoyable the space is!') }}
+                    <h1 class="text-3xl font-bold text-center text-gray-900 mx-8">{{ __('messages.Let others know how enjoyable the space is!') }}
                     </h1>
                     <div class="pb-8">
                         <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pt-4 pb-16">
