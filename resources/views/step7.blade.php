@@ -104,6 +104,12 @@
                                                     </div>
 
                                                 </div>
+
+                                                      <div>
+                                                    <input type="text" name="protection_text" id="protection_text"
+                                                        class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
+                                                        placeholder="Describe!">
+                                                </div>
                                                 
                                                 <button type="button" id="activitiesbtn" onclick="newAction('protection')"
                                                     class="px-4 py-2 mt-4 text-2xl font-bold text-gray-800 bg-white hover:bg-gray-100 active:bg-gray-200 focus:outline-none">{{ __('messages.Save') }}</button>

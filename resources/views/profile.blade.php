@@ -27,25 +27,25 @@
                          </div>
                      </div>
                      <div class="pt-2">
-                         @if (backpack_auth()->user()->score < 1000)
+                         @if (backpack_auth()->user()->score < 100)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 1</div>
-                         @elseif(backpack_auth()->user()->score < 2000)
+                         @elseif(backpack_auth()->user()->score < 200)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 2</div>
-                         @elseif(backpack_auth()->user()->score < 3000)
+                         @elseif(backpack_auth()->user()->score < 300)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 3</div>
-                         @elseif(backpack_auth()->user()->score < 4000)
+                         @elseif(backpack_auth()->user()->score < 400)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 4</div>
-                         @elseif(backpack_auth()->user()->score < 5000)
+                         @elseif(backpack_auth()->user()->score < 500)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 5</div>
-                         @elseif(backpack_auth()->user()->score < 6000)
+                         @elseif(backpack_auth()->user()->score < 600)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 6</div>
-                         @elseif(backpack_auth()->user()->score < 7000)
+                         @elseif(backpack_auth()->user()->score < 700)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 7</div>
-                         @elseif(backpack_auth()->user()->score < 8000)
+                         @elseif(backpack_auth()->user()->score < 800)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 8</div>
-                         @elseif(backpack_auth()->user()->score < 9000)
+                         @elseif(backpack_auth()->user()->score < 900)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 9</div>
-                         @elseif(backpack_auth()->user()->score < 10000)
+                         @elseif(backpack_auth()->user()->score < 1000)
                              <div class="text-xs font-semibold text-center text-yellow-300">Level 10</div>
                          @endif
                      </div>

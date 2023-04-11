@@ -8,7 +8,7 @@
  @section('main')
      <div data-barba="container">
          <div class="flex flex-col h-screen mx-auto">
-           <div id="message" class="fixed top-5 right-5 p-2 border rounded bg-green-500 text-white font-bold"></div>
+             <div id="newtagadded" class="fixed top-5 right-5 p-2 border rounded bg-blue-500 text-white font-bold"></div>
              <div class="p-3">
                         <div class="flex flex-row justify-between pt-2">
                      <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
@@ -31,12 +31,13 @@
                                  </div>
                              </label>
                          @endforeach
+                         <input type="checkbox" id="personal" name="form-project-manager[]" value="" class="hidden peer">
 
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
                                  class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#FAC710]  bg-yellow-200 peer-focus:ring-2">
                                  <div class="flex justify-center">
-                                     <div class="font-semibold">{{ __('messages.Add a new tag') }}</div>
+                                     <div class="font-semibold">{{ __('messages.Add a personal tag') }}</div>
                                  </div>
                              </button>
 
@@ -49,7 +50,7 @@
                                          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                                          x-transition:leave="transition ease-in duration-200 transform"
                                          x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                                         class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40"
+                                         class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40 hiddertag"
                                          aria-hidden="true">
                                      </div>
 
@@ -107,8 +108,12 @@
                          name: name,
                      },
                      success: function(data) {
-                         // refresh the webpage
-                         location.reload();
+                      var hiddertag = document.querySelector(".hiddertag");
+                      hiddertag.click();
+                       showMessage("Personal Tag saved");
+                       var personal = document.getElementById("personal");
+                       personal.value = data;
+                       personal.checked = true;
                      }
                  });
 
@@ -172,7 +177,7 @@
 
 
                   function showMessage(message) {
-             var messageBox = document.getElementById("message");
+             var messageBox = document.getElementById("newtagadded");
              messageBox.innerHTML = message;
              messageBox.style.display = "block"; // set display to block to show the message
              setTimeout(function() {
@@ -188,5 +193,9 @@
          #message {
              display: none;
          }
-     </style>
+
+       #newtagadded {
+             display: none;
+         }
+    </style>
  @endsection

@@ -575,21 +575,21 @@ class GlobalController extends Controller
         if ($locale == 'en') {
             $stag = Tag::where('name', $request->name)->first();
             if ($stag) {
-                return back();
+                return $request->name;
             } else {
                 $tag = new Tag();
             }
         } elseif ($locale == 'de') {
             $stag = Tag_de::where('name', $request->name)->first();
             if ($stag) {
-                return back();
+                return $request->name;
             } else {
                 $tag = new Tag_de();
             }
         } else {
             $stag = Tag::where('name', $request->name)->first();
             if ($stag) {
-                return back();
+              return $request->name;
             } else {
                 $tag = new Tag();
             }
@@ -608,21 +608,21 @@ class GlobalController extends Controller
         if ($locale == 'en') {
             $stag = Opinion::where('name', $request->name)->first();
             if ($stag) {
-                return back();
+                return $request->name;
             } else {
                 $opinion = new Opinion();
             }
         } elseif ($locale == 'de') {
             $stag = Opinion_de::where('name', $request->name)->first();
             if ($stag) {
-                return back();
+                return $request->name;
             } else {
                 $opinion = new Opinion_de();
             }
         } else {
             $stag = Opinion::where('name', $request->name)->first();
             if ($stag) {
-                return back();
+                return $request->name;
             } else {
                 $opinion = new Opinion();
             }
@@ -630,7 +630,7 @@ class GlobalController extends Controller
         $opinion->name = $request->name;
         $opinion->personal = 1;
         $opinion->save();
-        return back();
+        return $request->name;
     }
 
     public function newplace(Request $request)
@@ -768,11 +768,11 @@ class GlobalController extends Controller
     {
         $locale = session()->get('locale');
         if ($locale == 'en') {
-            $opinions = Opinion::all();
+            $opinions = Opinion::where('personal', null)->get();
         } elseif ($locale == 'de') {
-            $opinions = Opinion_de::all();
+            $opinions = Opinion_de::where('personal', null)->get();
         } else {
-            $opinions = Opinion::all();
+            $opinions = Opinion::where('personal', null)->get();
         }
 
         return $opinions;
@@ -1326,14 +1326,14 @@ class GlobalController extends Controller
                 }
                 $street->save();
             }
-            if ($request->action == 'seasonality') {
-                $street->seasonality = $request->value;
+            if ($request->action == 'cleanliness') {
+                $street->cleanliness = $request->value;
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                 backpack_auth()->user()->save();
                 if ($request->text != null) {
                     backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                     backpack_auth()->user()->save();
-                    $street->seasonality_text = $request->text;
+                    $street->cleanliness_text = $request->text;
                 }
                 $street->save();
             }
@@ -1407,15 +1407,15 @@ class GlobalController extends Controller
                 }
                 $building->save();
             }
-            if ($request->action == 'seasonality') {
-                $building->seasonality = $request->value;
+            if ($request->action == 'cleanliness') {
+                $building->cleanliness = $request->value;
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                 backpack_auth()->user()->save();
 
                 if ($request->text != null) {
                     backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                     backpack_auth()->user()->save();
-                    $building->seasonality_text = $request->text;
+                    $building->cleanliness_text = $request->text;
                 }
 
                 $building->save();
@@ -1502,14 +1502,14 @@ class GlobalController extends Controller
 
                 $openspace->save();
             }
-            if ($request->action == 'seasonality') {
-                $openspace->seasonality = $request->value;
+            if ($request->action == 'cleanliness') {
+                $openspace->cleanliness = $request->value;
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                 backpack_auth()->user()->save();
                 if ($request->text != null) {
                 backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
                 backpack_auth()->user()->save();
-                    $openspace->seasonality_text = $request->text;
+                    $openspace->cleanliness_text = $request->text;
                 }
     
 
@@ -2130,7 +2130,7 @@ class GlobalController extends Controller
             $spacetag->name = $request->name;
             $spacetag->personal = 1;
             $spacetag->save();
-            return 'ok';
+            return $request->name;
         }
     }
 

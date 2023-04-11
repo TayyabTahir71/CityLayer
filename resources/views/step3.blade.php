@@ -10,7 +10,7 @@
  @section('main')
      <div data-barba="container">
          <div class="flex flex-col h-screen mx-auto">
-             <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
+              <div id="newtagadded" class="fixed top-5 right-5 p-2 border rounded bg-blue-500 text-white font-bold"></div>
              <div class="p-3">
                        <div class="flex flex-row justify-between pt-2">
                      <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
@@ -32,12 +32,13 @@
                                  </div>
                              </label>
                          @endforeach
+                         <input type="checkbox" id="personal" name="form-project-manager[]" value="" class="hidden peer">
 
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
                                  class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
                                  <div class="flex justify-center">
-                                     <div class="font-semibold">{{ __('messages.Add a new opinion') }}</div>
+                                     <div class="font-semibold">{{ __('messages.Add a personal opinion') }}</div>
                                  </div>
                              </button>
 
@@ -50,7 +51,7 @@
                                          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                                          x-transition:leave="transition ease-in duration-200 transform"
                                          x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                                         class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40"
+                                         class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40 hiddertag"
                                          aria-hidden="true">
                                      </div>
 
@@ -72,7 +73,7 @@
                                                          class="w-48 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                          placeholder="Enter tag name">
                                                  </div>
-                                                 <button id="newopinion"
+                                                 <button id="newopinion" type="button"
                                                      class="px-4 text-2xl py-2 bg-[#CDB8EB] text-gray-800 hover:bg-purple-300 active:bg-purple-400 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                              </div>
                                          </div>
@@ -102,8 +103,8 @@
                  name = document.getElementById('opinionname').value;
                  thedata = document.getElementById('theplaceid').value;
                  thetype = document.getElementById('thetype').value;
-                 var url = window.location.toString();
-                 window.location = url.replace('upload-image0', 'step3?id=' + thedata + '&type=' + thetype);
+                 console.log(thedata);
+            
 
                  $.ajaxSetup({
                      headers: {
@@ -118,12 +119,16 @@
                          name: name,
                      },
                      success: function(data) {
-                         // refresh the webpage
-                         location.reload();
+                         var hiddertag = document.querySelector(".hiddertag");
+                      hiddertag.click();
+                       showMessage("Personal Opinion saved");
+                       var personal = document.getElementById("personal");
+                       personal.value = data;
+                       personal.checked = true;
                      }
                  });
-
-       
+});
+   
 
              $('#saveopinion').click(function() {
                  placeid = document.getElementById('theplaceid').value;
@@ -197,11 +202,10 @@
                  });
 
              });
-         });
 
 
-         function showMessage(message) {
-             var messageBox = document.getElementById("message");
+                function showMessage(message) {
+             var messageBox = document.getElementById("newtagadded");
              messageBox.innerHTML = message;
              messageBox.style.display = "block"; // set display to block to show the message
              setTimeout(function() {
@@ -212,6 +216,10 @@
      </script>
      <style>
          #message {
+             display: none;
+         }
+
+                #newtagadded {
              display: none;
          }
      </style>

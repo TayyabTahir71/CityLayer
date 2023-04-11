@@ -47,7 +47,7 @@
                     </div>
                     <div class="relative flex items-center justify-center w-64 h-64">
 
-                        {{-- play exercices --}}
+                      
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                class="absolute rounded-full bg-[#FAC710] w-28 h-28 text-white font-bold"
@@ -85,7 +85,7 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0" max="100"
                                                         step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs">
+                                                    <div class="flex justify-between w-full px-2 text-xs py-2">
                                                     <span>0</span>
                                  <span>1</span>
                                  <span>2</span>
@@ -158,7 +158,7 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs">
+                                                    <div class="flex justify-between w-full px-2 text-xs  py-2">
                                                      <span>0</span>
                                  <span>1</span>
                                  <span>2</span>
@@ -231,7 +231,7 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs">
+                                                    <div class="flex justify-between w-full px-2 text-xs  py-2">
                                                     <span>0</span>
                                  <span>1</span>
                                  <span>2</span>
@@ -304,7 +304,7 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs">
+                                                    <div class="flex justify-between w-full px-2 text-xs  py-2">
                                                          <span>0</span>
                                  <span>1</span>
                                  <span>2</span>

@@ -50,8 +50,8 @@ return new class extends Migration
 
             $table->integer('beauty')->default(0)->nullable();
             $table->longText('beauty_text')->nullable();
-            $table->integer('seasonality')->default(0)->nullable();
-            $table->longText('seasonality_text')->nullable();
+            $table->integer('cleanliness')->default(0)->nullable();
+            $table->longText('cleanliness_text')->nullable();
             $table->integer('plants')->default(0)->nullable();
             $table->longText('plants_text')->nullable();
             $table->integer('talking')->default(0)->nullable();

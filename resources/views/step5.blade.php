@@ -399,7 +399,7 @@
                                                 <div>
                                                     <input type="text" name="weather_text" id="weather_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
-                                                        placeholder="Describe!">
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                 <button type="button" id="weatherbtn" onclick="newAction('weather')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
@@ -472,7 +472,7 @@
                                                 <div>
                                                     <input type="text" name="facilities_text" id="facilities_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
-                                                        placeholder="Tell us more!">
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                 <button type="button" id="facilitiesbtn"
                                                     onclick="newAction('facilities')"

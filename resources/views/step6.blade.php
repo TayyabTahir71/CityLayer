@@ -101,7 +101,11 @@
                                                         <label for="default-range"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.simple & effortless') }}</label>
                                                     </div>
-
+ </div>
+                                                  <div>
+                                                    <input type="text" name="talking_text" id="talking_text"
+                                                        class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
                                                
                                                 <button type="button" id="activitiesbtn" onclick="newAction('talking')"
@@ -116,7 +120,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#CDB8EB] w-28 h-28 text-white font-bold"
-                                style="bottom: 100%; right: 50%; transform: translate(50%, 50%)">{{ __('messages.seasonality') }}</button>
+                                style="bottom: 100%; right: 50%; transform: translate(50%, 50%)">{{ __('messages.cleanliness') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -142,9 +146,9 @@
 
                                         <div class="items-center pt-3 space-x-4 bloc">
                                             <div class="flex flex-col justify-center">
-                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Seasonality') }}</h1>
+                                                <h1 class="py-4 text-3xl font-bold">{{ __('messages.Cleanliness') }}</h1>
                                                 <div x-data="{ total_value: 50 }" class="max-w-screen-md mx-auto pb-4">
-                                                    <input name="seasonality" id="seasonality" class="hidden" type="input"
+                                                    <input name="cleanliness" id="cleanliness" class="hidden" type="input"
                                                         x-model="total_value" />
 
                                                     <input id="range2"
@@ -166,18 +170,18 @@
                              </div>
                                                     <div class="flex justify-between">
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.poor in some seasons') }}</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.very dirty!') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.great year round') }}</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.very clean!') }}</label>
                                                     </div>
 
                                                 </div>
                                                 <div>
-                                                    <input type="text" name="seasonality_text" id="seasonality_text"
+                                                    <input type="text" name="cleanliness_text" id="cleanliness_text"
                                                         class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
                                                         placeholder="{{ __('messages.Tell us more!') }}">
                                                 </div>
-                                                <button type="button" id="restbtn" onclick="newAction('seasonality')"
+                                                <button type="button" id="restbtn" onclick="newAction('cleanliness')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
                                             </div>
                                         </div>
@@ -539,6 +543,11 @@
                                                     </div>
 
                                                 </div>
+                                                <div>
+                                                       <input type="text" name="beauty_text" id="beauty_text"
+                                                        class="w-80 h-10 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#CDB8EB] focus:border-transparent"
+                                                        placeholder="{{ __('messages.Tell us more!') }}">
+                                                </div>
                                
                                                 <button type="button" id="noisebtn" onclick="newAction('beauty')"
                                                     class="px-4 text-2xl py-2 bg-white text-gray-800 hover:bg-gray-100 active:bg-gray-200 focus:outline-none font-bold mt-4">{{ __('messages.Save') }}</button>
@@ -572,10 +581,10 @@
                     thisvalue = document.getElementById('talking').value;
                     thistext = document.getElementById('talking_text').value;
                     break;
-                case 'seasonality':
-                    thisaction = "seasonality";
-                    thisvalue = document.getElementById('seasonality').value;
-                    thistext = document.getElementById('seasonality_text').value;
+                case 'cleanliness':
+                    thisaction = "cleanliness";
+                    thisvalue = document.getElementById('cleanliness').value;
+                    thistext = document.getElementById('cleanliness_text').value;
                     break;
                 case 'plants':
                     thisaction = "plants";
@@ -600,7 +609,7 @@
                 case 'beauty':
                     thisaction = "beauty";
                     thisvalue = document.getElementById('beauty').value;
-                    thistext = "null";
+                    thistext = document.getElementById('beauty_text').value;
                     break;
             }
 
