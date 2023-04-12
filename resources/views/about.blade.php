@@ -6,11 +6,12 @@
          
              @php $locale = session()->get('locale');  @endphp
              <div data-barba="container">
-                 <div class="flex flex-col h-screen mx-auto">
-                     <div class="p-3 pt-8 lg:mx-16 md:pt-20">
-                         <div class="flex flex-row items-center pt-2">
+                  <div class="flex flex-row items-center pt-4">
                              <a href="/" class="prevent"> <i class="ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
                          </div>
+                 <div class="flex flex-col h-screen mx-auto">
+                     <div class="p-3 lg:mx-16">
+                    
                          <div class="h-full">
                              <ul class="block w-11/12 my-4 mx-auto">
                                  <li class="flex align-center flex-col pb-4">
