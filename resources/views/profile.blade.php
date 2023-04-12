@@ -51,12 +51,13 @@
                      </div>
 
 
-                     <div class="popup fixed top-0 left-0 w-full h-full z-100" style="display:none;">
+                     <div class="fixed top-0 left-0 w-full h-full popup z-100" style="display:none;">
                          <div class="popup-content absolute top-[50%] left-[50%] bg-white rounded p-4 text-xs font-bold text-center w-2/3">
                          
                          </div>
                      </div>
-                     <div class="flex justify-center pt-4">
+                     <h1 class="pt-2 text-xs font-bold text-center text-gray-800">{{ __('messages.My badges:') }}</h1>
+                     <div class="flex justify-center pt-2">
                          <div class="flex flex-col gap-x-2">
                              <div class="flex">
                                  <button id="btn1" class="mx-1">
@@ -183,61 +184,61 @@
 
          // Add event listeners to each button
          button1.addEventListener("click", function() {
-             var popupContent = "<img class='mx-auto' src='/img/icons/explorer.png'><br><p>explorer - Map a space that was not mapped before!</p>";
+             var popupContent = "<img class='mx-auto' src='/img/icons/explorer.png'><br><p>Explorer - Map a space that was not mapped before!</p>";
              popup.querySelector(".popup-content").innerHTML = popupContent;
              popup.style.display = "block";
          });
 
          button2.addEventListener("click", function() {
-                 var popupContent = "<img class='mx-auto' src='/img/icons/citymaker.png'><br><p>city-maker – Map at least 10 spaces!</p>";
+                 var popupContent = "<img class='mx-auto' src='/img/icons/citymaker.png'><br><p>City-maker – Map at least 10 spaces!</p>";
              popup.querySelector(".popup-content").innerHTML = popupContent;
              popup.style.display = "block";
          });
 
          button3.addEventListener("click", function() {
-                 var popupContent = "<img class='mx-auto' src='/img/icons/architect.png'><br><p>architect - Map at least 10 buildings!</p>";
+                 var popupContent = "<img class='mx-auto' src='/img/icons/architect.png'><br><p>Architect - Map at least 10 buildings!</p>";
              popup.querySelector(".popup-content").innerHTML = popupContent;
              popup.style.display = "block";
          });
 
          button4.addEventListener("click", function() {
-                    var popupContent = "<img class='mx-auto' src='/img/icons/flaneur.png'><br><p>flaneur - Map at least 10 streets!</p>";
+                    var popupContent = "<img class='mx-auto' src='/img/icons/flaneur.png'><br><p>Flaneur - Map at least 10 streets!</p>";
              popup.querySelector(".popup-content").innerHTML = popupContent;
              popup.style.display = "block";
          });
 
          button5.addEventListener("click", function() {
-               var popupContent = "<img class='mx-auto' src='/img/icons/urbanist.png'><br><p>urbanist - Map at least 10 open spaces!</p>";
+               var popupContent = "<img class='mx-auto' src='/img/icons/urbanist.png'><br><p>Urbanist - Map at least 10 open spaces!</p>";
              popup.querySelector(".popup-content").innerHTML = popupContent;
              popup.style.display = "block";
          });
 
          button6.addEventListener("click", function() {
-                            var popupContent = "<img class='mx-auto' src='/img/icons/influencer.png'><br><p>influencer – Receive 10+ comments by other users on one contribution!</p>";
+                            var popupContent = "<img class='mx-auto' src='/img/icons/influencer.png'><br><p>Influencer – Receive 10+ comments by other users on one contribution!</p>";
              popup.querySelector(".popup-content").innerHTML = popupContent;
              popup.style.display = "block";
          });
 
          button7.addEventListener("click", function() {
-                   var popupContent = "<img class='mx-auto' src='/img/icons/star.png'><br><p>star - Receive 20+ reactions by other users on one contribution!</p>";
+                   var popupContent = "<img class='mx-auto' src='/img/icons/star.png'><br><p>Star - Receive 20+ reactions by other users on one contribution!</p>";
              popup.querySelector(".popup-content").innerHTML = popupContent;
              popup.style.display = "block";
          });
 
          button8.addEventListener("click", function() {
-                    var popupContent = "<img class='mx-auto' src='/img/icons/guru.png'><br><p>guru - Comment on 10 other people's posts!</p>";
+                    var popupContent = "<img class='mx-auto' src='/img/icons/guru.png'><br><p>Guru - Comment on 10 other people's posts!</p>";
              popup.querySelector(".popup-content").innerHTML = popupContent;
              popup.style.display = "block";
          });
 
          button9.addEventListener("click", function() {
-                   var popupContent = "<img class='mx-auto' src='/img/icons/investigator.png'><br><p>investigator - Post more that 10 pictures!</p>";
+                   var popupContent = "<img class='mx-auto' src='/img/icons/investigator.png'><br><p>Investigator - Post more that 10 pictures!</p>";
              popup.querySelector(".popup-content").innerHTML = popupContent;
              popup.style.display = "block";
          });
 
          button10.addEventListener("click", function() {
-                 var popupContent = "<img class='mx-auto' src='/img/icons/supermapper.png'><br><p>supermapper - Collect 500 points!</p>";
+                 var popupContent = "<img class='mx-auto' src='/img/icons/supermapper.png'><br><p>Supermapper - Collect 500 points!</p>";
              popup.querySelector(".popup-content").innerHTML = popupContent;
              popup.style.display = "block";
          });

@@ -19,8 +19,6 @@
             height: 100%;
             overflow: auto;
         }
-
-
     </style>
     <div data-barba="container">
         @include('parts.navbar')
@@ -165,12 +163,38 @@
         </div>
     </div>
 
-    <div id="myModal" class="modal bg-white">
-    <div class="flex flex-row justify-between pt-2">
-                    <i id="closemodal" class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i>
-                 </div>
-        <div class="modal-content">
-            <p>Some text in the modal.</p>
+    <div id="myModal" class="bg-white modal">
+        <div class="flex flex-row justify-between pt-2">
+            <i id="closemodal" class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i>
+        </div>
+        <input id="placeid" type="text" class="hidden" value="">
+        <input id="placetype" type="text" class="hidden" value="">
+        <div class="pt-2 modal-content">
+            <h1 id="title" class="text-xl font-bold text-center">
+                {{ __('messages.React to this place to earn 1 point!') }}</h1>
+            <div class="relative pt-4">
+                <img id="img" src="" alt="image" class="object-cover w-full h-auto mx-auto"
+                    onerror="missing()">
+                <img id="feeling" src="" alt="feeling" class="absolute bottom-0 right-0 w-auto h-12 m-4">
+            </div>
+            <div id="opinions"></div>
+            <p id="description" class="p-2 m-2 text-base font-bold"></p>
+            <div class="pt-4">
+                <img id="img2" src="" alt="image" class="object-cover w-full h-auto mx-auto"
+                    onerror="missing()">
+            </div>
+             <p id="description2" class="p-2 m-2 text-base font-bold"></p>
+           <div class="flex flex-row justify-center pb-4">
+           <img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction('like')">
+           <img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction('dislike')">
+           <img src="/img/3.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction('stars')">
+           <img src="/img/4.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction('bof')">
+           <img src="/img/5.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction('weird')">
+           </div>
+           <div class="flex flex-col items-center justify-center w-full p-2 mb-16">
+             <textarea name="comm" style="overflow:auto;resize:none" id="comm" cols="10" rows="2" class="w-full mx-2 mb-4 font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea>
+             <button type="button" class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment()">Leave a comment</button>
+             </div>
         </div>
     </div>
     <script>
@@ -254,50 +278,72 @@
             }
 
 
-
+          
             placename = place.name;
             pics = place.image0;
+            pics2 = place.image;
             placelatitude = place.latitude;
             placelongitude = place.longitude;
-            var message = '{{ __('messages.React to this place to earn 1 point!') }}';
+            description = place.description;
+            description2 = place.description2;
+            opinions = place.opinions;
+            feeling = place.feeling;
+
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
             }).addTo(mymap0);
             markers[place.id] = markerx;
 
-
             var modal = document.getElementById("myModal");
-
-            var span = document.getElementsByClassName("close")[0];
 
             // When the user clicks on the marker, open the modal
             markerx.on("click", function() {
                 modal.style.display = "block";
-                modal.querySelector(".modal-content").innerHTML =
-                    '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="px-4 pb-4">' +
-                    message +
-                    '</p><img id="img" class="object-contain w-auto pb-4 text-sm max-h-64"  src="/storage' + pics + '"  onerror="missing()"/><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                    placeid + '\', \'' + placetype +
-                    '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                    placeid + '\', \'' + placetype +
-                    '\', \'dislike\')"><img src="/img/3.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                    placeid + '\', \'' + placetype +
-                    '\', \'stars\')"><img src="/img/4.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                    placeid + '\', \'' + placetype +
-                    '\', \'bof\')"><img src="/img/5.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                    placeid + '\', \'' + placetype +
-                    '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                    placeid + '\', \'' + placetype +
-                    '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                    placeid + '\', \'' + placetype +
-                    '\', \'wtf\')"></div><textarea name="comm" style="overflow:auto;resize:none" id="comm" cols="10" rows="2" class="font-light border rounded focus:outline-none focus:border-blue-300 mx-2" placeholder=""></textarea><button type="button"class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment(\'' +
-                    placeid + '\', \'' + placetype + '\')">Leave a comment</button> </div>';
+                document.getElementById("placeid").value = placeid;
+                document.getElementById("placetype").value = placetype;
+                document.getElementById("img").src = "/storage" + pics;
+
+                const opinionsArray = opinions.split(",");
+                let buttonsHtml = "";
+
+                for (let i = 0; i < opinionsArray.length; i++) {
+                    buttonsHtml += '<button class="p-2 m-2 text-sm font-bold text-white bg-blue-500 rounded-xl">' +
+                        opinionsArray[i] + '</button>';
+                }
+                document.getElementById("opinions").innerHTML = buttonsHtml;
+                document.getElementById("feeling").src = "/img/" + feeling + ".png";
+                document.getElementById("description").innerHTML = description;
+                document.getElementById("img2").src = "/storage" + pics2;
+                document.getElementById("description2").innerHTML = description2;
+
+                /*   modal.querySelector(".modal-content").innerHTML =
+                       '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="px-4 pb-4">' +
+                       message +
+                       '</p><img id="img" class="object-contain w-auto pb-4 text-sm max-h-64"  src="/storage' + pics + '"  onerror="missing()"/><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                       placeid + '\', \'' + placetype +
+                       '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                       placeid + '\', \'' + placetype +
+                       '\', \'dislike\')"><img src="/img/3.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                       placeid + '\', \'' + placetype +
+                       '\', \'stars\')"><img src="/img/4.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                       placeid + '\', \'' + placetype +
+                       '\', \'bof\')"><img src="/img/5.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                       placeid + '\', \'' + placetype +
+                       '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                       placeid + '\', \'' + placetype +
+                       '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
+                       placeid + '\', \'' + placetype +
+                       '\', \'wtf\')"></div><textarea name="comm" style="overflow:auto;resize:none" id="comm" cols="10" rows="2" class="mx-2 font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea><button type="button"class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment(\'' +
+                       placeid + '\', \'' + placetype + '\')">Leave a comment</button> </div>'; */
 
             });
         }
 
         function missing() {
             document.getElementById("img").src = "/img/empty.png";
+        }
+           function missing2() {
+            document.getElementById("img2").src = "/img/empty.png";
         }
 
         function mylocation() {
@@ -309,8 +355,10 @@
 
 
 
-        function mapAction(id, type, action) {
-            console.log(id);
+        function mapAction(action) {
+            var id = document.getElementById("placeid").value;
+            var type = document.getElementById("placetype").value;
+
             var url;
             switch (action) {
                 case 'like':
@@ -369,8 +417,9 @@
             mymap0.closePopup();
         }
 
-        function comment(id, type) {
-
+        function comment() {
+            var id = document.getElementById('placeid').value;
+            var type = document.getElementById('placetype').value;
             var comment = document.getElementById('comm').value;
             var url = "/place/comment";
             console.log(comment)
@@ -407,13 +456,10 @@
                 mymap0.flyTo([position.coords.latitude, position.coords.longitude], 16);
             });
         }
-        var mymodal =  document.getElementById('myModal');
+        var closemodal = document.getElementById('closemodal');
 
-          mymodal.addEventListener("click", function() {
-            mymodal.style.display = "none";
-         });
-
-
+        closemodal.addEventListener("click", function() {
+            closemodal.style.display = "none";
+        });
     </script>
-
 @endsection
