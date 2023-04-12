@@ -14,6 +14,7 @@
                              src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
                      </label>
                  </form>
+                
              </div>
              <h1 class="pt-4 text-2xl text-center text-gray-800">{{ $name }}</h1>
              <h1 class="pt-4 text-2xl text-center text-gray-800">{{ backpack_auth()->user()->email }}</h1>
