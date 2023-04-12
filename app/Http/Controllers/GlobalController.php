@@ -2195,4 +2195,12 @@ class GlobalController extends Controller
         $infos = Infosperso::where('user_id', $userid)->first();
         return $infos;
     }
+
+    public function edit(Request $request){
+
+         dd($request->all());
+
+        return back();
+    }
+
 }

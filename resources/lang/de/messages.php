@@ -18,6 +18,7 @@ return [
     'Start Playing!' => 'Beginne zu spielen!',
     ' My first time here' => 'Das ist mein erster Besuch hier',
     'My badges:' => 'Meine Abzeichen:',
+    'Your opinion' => 'Deine Meinung',
     'This space is...' => 'Dieser Ort ist...',
     'a street' => 'eine Straße',
     'a building' => 'ein Gebäude',

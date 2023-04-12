@@ -44,7 +44,7 @@ class SettingCrudController extends CrudController
         CRUD::addField([   // CustomHTML
             'name'  => 'separator',
             'type'  => 'custom_html',
-            'value' => '<h3 class="text-gray-800 text-sm">Attention la modification de ce paramétre redemarre le serveur patienter 1mn aprés la sauvegarde</h3>',
+            'value' => '<h3 class="text-gray-800 text-sm">Wait 1 minute after change this settings to successfully apply</h3>',
         ],);
         CRUD::addField([
             'name'       => 'key',

@@ -183,8 +183,8 @@
                             </div>
                         @endif
                     </div>
-{{-- FORM------------------------------- --}}
-                    <from action="" method="POST">
+                    {{-- FORM------------------------------- --}}
+                    <form action="/edit/{{ $data->id }}/{{ $data->type }}" method="POST">
                         @csrf
 
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
@@ -247,8 +247,8 @@
                         </div>
 
                         @php $image0 =  $data->image ?? null; @endphp
-                        <img src="{{ asset('storage' . $image0) }}" alt="" class="w-auto pt-4 pb-8 mx-auto max-h-96"
-                            onerror="this.src='/img/empty.png'">
+                        <img src="{{ asset('storage' . $image0) }}" alt=""
+                            class="w-auto pt-4 pb-8 mx-auto max-h-96" onerror="this.src='/img/empty.png'">
 
                         <legend class="pt-8 mb-1 text-xl font-medium text-center border-t">
                             {{ __('messages.How confortable is this space:') }}
@@ -277,7 +277,8 @@
                             </div>
                             <input id="range"
                                 class="block w-full h-3 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg "
-                                type="range" x-model="{{ $data->confort }}" min="0" max="100" step="5">
+                                type="range" x-model="{{ $data->confort }}" min="0" max="100"
+                                step="5">
                         </div>
 
 
@@ -310,11 +311,11 @@
                                 type="range" x-model="{{ $data->rest }}" min="0" max="100"
                                 step="5">
 
-                            </div>
-                            
-                             <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        </div>
+
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->rest_text }}</textarea>
-                            </div>
+                        </div>
 
 
                         {{-- -------------------------------- --}}
@@ -349,7 +350,7 @@
 
                         <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->movement_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
@@ -383,9 +384,9 @@
 
                         </div>
 
-                          <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->activities_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
@@ -419,9 +420,9 @@
 
                         </div>
 
-                            <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->orientation_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
@@ -453,9 +454,9 @@
                                 step="5">
                         </div>
 
-                                 <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->weather_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
@@ -488,9 +489,9 @@
                                 step="5">
                         </div>
 
-                            <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->facilities_text }}</textarea>
-                            </div>
+                        </div>
 
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">{{ __('messages.noise:') }}
                         </legend>
@@ -521,9 +522,9 @@
                                 step="5">
                         </div>
 
-                                    <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->noise_text }}</textarea>
-                            </div>
+                        </div>
 
 
 
@@ -594,9 +595,9 @@
 
                         </div>
 
-                                    <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->seasonality_text }}</textarea>
-                            </div>
+                        </div>
 
 
                         {{-- -------------------------------- --}}
@@ -631,9 +632,9 @@
 
                         </div>
 
-                           <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->plants_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">{{ __('messages.Sunlight:') }}
@@ -667,9 +668,9 @@
 
                         </div>
 
-                             <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->sunlight_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">{{ __('messages.shade:') }}
@@ -704,9 +705,9 @@
                         </div>
 
 
-                            <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->shade_text }}</textarea>
-                            </div>
+                        </div>
 
 
                         {{-- -------------------------------- --}}
@@ -742,9 +743,9 @@
                         </div>
 
 
-                             <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->talking_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
@@ -780,7 +781,7 @@
 
                         <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->interesting_text }}</textarea>
-                            </div>
+                        </div>
 
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">{{ __('messages.beauty:') }}
                         </legend>
@@ -811,9 +812,9 @@
                                 step="5">
                         </div>
 
-                                                <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->beauty_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- ------------PROTECTED----------- --}}
                         <legend class="pt-8 mb-1 text-3xl font-medium text-center border-t">
@@ -846,7 +847,7 @@
                                 step="5">
                         </div>
 
-                        
+
 
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
                             {{ __('messages.traffic safety:') }}</legend>
@@ -878,9 +879,9 @@
 
 
                         </div>
-                            <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->protection_text }}</textarea>
-                            </div>
+                        </div>
 
 
                         {{-- -------------------------------- --}}
@@ -916,9 +917,9 @@
 
                         </div>
 
-                           <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->polluants_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
@@ -952,17 +953,17 @@
 
                         </div>
 
-                             <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->night_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
                             {{ __('messages.other hazards:') }}</legend>
 
-                                     <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->hazards }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
@@ -997,9 +998,9 @@
                         </div>
 
 
-                             <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->dangerous_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
@@ -1035,9 +1036,9 @@
 
 
 
-                             <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->protection_harm_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- ----------SPENDING--------- --}}
                         <legend class="pt-4 mb-1 text-2xl font-medium text-center border-t">
@@ -1137,10 +1138,10 @@
 
                         </div>
 
- 
-                            <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->spend_time_text }}</textarea>
-                            </div>
+                        </div>
 
 
                         {{-- -------------------------------- --}}
@@ -1175,9 +1176,9 @@
 
                         </div>
 
-                            <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->meeting_text }}</textarea>
-                            </div>
+                        </div>
 
                         {{-- -------------------------------- --}}
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
@@ -1213,9 +1214,9 @@
 
 
 
-                            <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->multifunctional_text }}</textarea>
-                            </div>
+                        </div>
 
 
                         {{-- -------------------------------- --}}
@@ -1250,9 +1251,9 @@
 
                         </div>
 
-                                                <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
+                        <div class="flex flex-wrap justify-center overflow-y-hidden text-sm md:w-4xl">
                             <textarea class="w-full h-24 px-4 py-2 border rounded md:w-2/3" target="_blank">{{ $data->events_text }}</textarea>
-                            </div>
+                        </div>
 
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
                             {{ __('messages.Who use the space the most:') }}</legend>
@@ -1270,16 +1271,17 @@
                                 {{ __('messages.modify:') }}
                             </legend>
                             <div class="flex flex-row justify-between pb-8 mx-auto">
-                                <a class="w-1/2 mx-1">
+                                <div class="w-1/2 mx-1">
                                     <button type="submit"
-                                        class="w-full h-12 px-4 py-2 mx-1 text-sm font-medium text-white bg-green-800 rounded">{{ __('messages.Save') }}</button></a>
+                                        class="w-full h-12 px-4 py-2 mx-1 text-sm font-medium text-white bg-green-800 rounded">{{ __('messages.Save') }}</button>
+                                </div>
 
                                 <a href="/delete?id={{ $placeid }}&type={{ $type }}" class="w-1/2 mx-1">
                                     <button
                                         class="w-full h-12 px-4 py-2 mx-1 text-sm font-medium text-white bg-red-800 rounded">{{ __('messages.Delete') }}</button></a>
                             </div>
                         @endif
-                    </form>
+                        </form>
                 </div>
             </div>
         </div>

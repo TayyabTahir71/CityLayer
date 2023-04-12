@@ -12,16 +12,16 @@
                                      class="ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
                          </div>
                           @if ($locale == 'de')
-                            <h1 class="text-3xl font-bold text-gray-900 text-center">{{ $pages[7]->title }}</h1>
+                            <h1 class="text-3xl font-bold text-gray-900 text-center">{{ $pages[5]->title }}</h1>
                          @else
-                            <h1 class="text-3xl font-bold text-gray-900 text-center">{{ $pages[3]->title }}</h1>
+                            <h1 class="text-3xl font-bold text-gray-900 text-center">{{ $pages[0]->title }}</h1>
                             @endif
                          <div class="mx-8 page all-initial pt-8">
-                            @php
-                            if ($locale == 'de'){
-                                echo $pages[7]->content;
+                         @php
+                          if ($locale == 'de'){
+                                echo $pages[5]->content;
                            } else {
-                                   echo $pages[3]->content;
+                                echo $pages[0]->content;
                            }
                           @endphp
                          </div>

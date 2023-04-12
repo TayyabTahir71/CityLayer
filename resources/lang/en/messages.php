@@ -27,6 +27,7 @@ return [
     'shocked' => 'shocked',
     'disgusted' => 'disgusted',
     'unaffordable' => 'unaffordable',
+    'Your opinion' => 'Your opinion',
     'hot' => 'hot',
     'cold' => 'cold',
     ' My first time here' => ' My first time here',

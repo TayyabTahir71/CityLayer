@@ -3,6 +3,7 @@
          @extends('layouts.app')
 
          @section('main')
+          @php $locale = session()->get('locale');  @endphp
              <div data-barba="container">
                  <div class="flex flex-col h-screen mx-auto">
                      <div class="p-3 pt-8 lg:mx-16 md:pt-20">
@@ -10,8 +11,13 @@
                              <a href="/" class="prevent"> <i
                                      class="ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
                          </div>
-                         <div class="mx-8 page all-initial">
-                                        @php $locale = session()->get('locale'); 
+                          @if ($locale == 'de')
+                            <h1 class="text-3xl font-bold text-gray-900 text-center">{{ $pages[8]->title }}</h1>
+                         @else
+                            <h1 class="text-3xl font-bold text-gray-900 text-center">{{ $pages[4]->title }}</h1>
+                            @endif
+                         <div class="mx-8 page all-initial pt-8">
+                            @php
                            if ($locale == 'de'){
                                 echo $pages[8]->content;
                            } else {

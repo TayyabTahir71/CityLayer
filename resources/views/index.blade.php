@@ -5,7 +5,7 @@
         <div class="flex flex-col items-center h-screen p-8 mx-auto">
             <label for="dropzone-file" class="flex flex-col justify-center w-5/6 pt-[10%]">
                 <div class="flex flex-col items-center justify-center pb-6">
-                    <h1 class="text-3xl font-bold text-center text-gray-900">{{ __('messages.welcome to') }}<br> City Layers!
+                    <h1 class="text-4xl font-bold text-center text-gray-900">{{ __('messages.welcome to') }}<br> City Layers!
                     </h1>
                     <p class="mt-8 text-base text-center text-gray-600">
                         {{ __('messages.A network for people who care about their environment!') }} </p>

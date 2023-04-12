@@ -165,7 +165,7 @@
 
     <div id="myModal" class="bg-white modal">
         <div class="flex flex-row justify-between pt-2">
-            <i id="closemodal" class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i>
+            <i id="closemodal" class="mt-2 ml-4 text-2xl text-gray-900 fas fa-close"></i>
         </div>
         <input id="placeid" type="text" class="hidden" value="">
         <input id="placetype" type="text" class="hidden" value="">
@@ -173,28 +173,31 @@
             <h1 id="title" class="text-xl font-bold text-center">
                 {{ __('messages.React to this place to earn 1 point!') }}</h1>
             <div class="relative pt-4">
-                <img id="img" src="" alt="image" class="object-cover w-full h-auto mx-auto"
-                    onerror="missing()">
+                <img id="img" src="" alt="image" class="object-cover w-full h-auto mx-auto">
                 <img id="feeling" src="" alt="feeling" class="absolute bottom-0 right-0 w-auto h-12 m-4">
             </div>
-            <div id="opinions"></div>
+            <div id="opinions" class="pt-4"></div>
             <p id="description" class="p-2 m-2 text-base font-bold"></p>
             <div class="pt-4">
-                <img id="img2" src="" alt="image" class="object-cover w-full h-auto mx-auto"
-                    onerror="missing()">
+                <img id="img2" src="" alt="image" class="object-cover w-full h-auto mx-auto">
             </div>
-             <p id="description2" class="p-2 m-2 text-base font-bold"></p>
-           <div class="flex flex-row justify-center pb-4">
-           <img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction('like')">
-           <img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction('dislike')">
-           <img src="/img/3.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction('stars')">
-           <img src="/img/4.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction('bof')">
-           <img src="/img/5.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction('weird')">
-           </div>
-           <div class="flex flex-col items-center justify-center w-full p-2 mb-16">
-             <textarea name="comm" style="overflow:auto;resize:none" id="comm" cols="10" rows="2" class="w-full mx-2 mb-4 font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea>
-             <button type="button" class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment()">Leave a comment</button>
-             </div>
+            <p id="description2" class="p-2 m-2 text-base font-bold"></p>
+            <h1 id="title2" class="text-xl font-bold text-center pb-4">{{ __('messages.Your opinion') }}:</h1>
+            <div class="flex flex-row justify-center pb-8">
+                <img src="/img/1.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125" onclick="mapAction('like')">
+                <img src="/img/2.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125"
+                    onclick="mapAction('dislike')">
+                <img src="/img/3.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125" onclick="mapAction('stars')">
+                <img src="/img/4.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125" onclick="mapAction('bof')">
+                <img src="/img/5.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125" onclick="mapAction('weird')">
+            </div>
+            <div class="flex flex-col items-center justify-center w-full p-2 mb-16">
+                <textarea name="comm" style="overflow:auto;resize:none" id="comm" cols="10" rows="2"
+                    class="w-full mx-2 mb-4 font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea>
+                <button type="button"
+                    class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500"
+                    onclick="comment()">Leave a comment</button>
+            </div>
         </div>
     </div>
     <script>
@@ -219,7 +222,6 @@
             iconAnchor: [40, 40],
             popupAnchor: [0, -40]
         });
-
 
         var legend = L.control({
             position: "topright"
@@ -250,8 +252,8 @@
 
             count = count + 1;
             place = data[i];
-            placeid = place.id;
-            placetype = place.type;
+            var placeid = place.id;
+            var placetype = place.type;
             if (placetype == "Street") {
                 icon2 = L.icon({
                     iconUrl: '/img/street.png',
@@ -278,16 +280,16 @@
             }
 
 
-          
-            placename = place.name;
-            pics = place.image0;
-            pics2 = place.image;
-            placelatitude = place.latitude;
-            placelongitude = place.longitude;
-            description = place.description;
-            description2 = place.description2;
-            opinions = place.opinions;
-            feeling = place.feeling;
+
+            var placename = place.name;
+            var pics = place.image0;
+            var pics2 = place.image;
+            var placelatitude = place.latitude;
+            var placelongitude = place.longitude;
+            var description = place.description;
+            var description2 = place.description2;
+            var opinions = place.opinions;
+            var feeling = place.feeling;
 
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
@@ -301,48 +303,58 @@
                 modal.style.display = "block";
                 document.getElementById("placeid").value = placeid;
                 document.getElementById("placetype").value = placetype;
-                document.getElementById("img").src = "/storage" + pics;
 
-                const opinionsArray = opinions.split(",");
-                let buttonsHtml = "";
-
-                for (let i = 0; i < opinionsArray.length; i++) {
-                    buttonsHtml += '<button class="p-2 m-2 text-sm font-bold text-white bg-blue-500 rounded-xl">' +
-                        opinionsArray[i] + '</button>';
+                if (!pics) {
+                    document.getElementById("img").src = "/img/empty.png";
+                } else {
+                    // Remove any leading slashes from the pics2 URL using the replace function
+                    document.getElementById("img").src = "/storage" + pics;
                 }
-                document.getElementById("opinions").innerHTML = buttonsHtml;
+
+                if (!opinions) {
+                    document.getElementById("opinions").innerHTML = "";
+                } else {
+                      const opinionsArray = opinions.split(",");
+                    let buttonsHtml = "";
+
+                    for (let i = 0; i < opinionsArray.length; i++) {
+                        buttonsHtml += '<i class="p-2 m-2 text-sm font-bold text-white bg-blue-500 rounded-xl">' +
+                            opinionsArray[i] + '</i>';
+                    }
+                    document.getElementById("opinions").innerHTML = buttonsHtml;
+                }
+                if (!feeling) {
+                    document.getElementById("feeling").src = "";
+                } else {
                 document.getElementById("feeling").src = "/img/" + feeling + ".png";
-                document.getElementById("description").innerHTML = description;
-                document.getElementById("img2").src = "/storage" + pics2;
-                document.getElementById("description2").innerHTML = description2;
+                }
 
-                /*   modal.querySelector(".modal-content").innerHTML =
-                       '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="px-4 pb-4">' +
-                       message +
-                       '</p><img id="img" class="object-contain w-auto pb-4 text-sm max-h-64"  src="/storage' + pics + '"  onerror="missing()"/><div class="flex flex-row justify-center pb-4"><img src="/img/1.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                       placeid + '\', \'' + placetype +
-                       '\', \'like\')"><img src="/img/2.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                       placeid + '\', \'' + placetype +
-                       '\', \'dislike\')"><img src="/img/3.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                       placeid + '\', \'' + placetype +
-                       '\', \'stars\')"><img src="/img/4.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                       placeid + '\', \'' + placetype +
-                       '\', \'bof\')"><img src="/img/5.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                       placeid + '\', \'' + placetype +
-                       '\', \'weird\')"><img src="/img/6.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                       placeid + '\', \'' + placetype +
-                       '\', \'ohh\')"><img src="/img/7.png" class="w-8 h-8 mx-1 hover:scale-110 active:scale-125" onclick="mapAction(\'' +
-                       placeid + '\', \'' + placetype +
-                       '\', \'wtf\')"></div><textarea name="comm" style="overflow:auto;resize:none" id="comm" cols="10" rows="2" class="mx-2 font-light border rounded focus:outline-none focus:border-blue-300" placeholder=""></textarea><button type="button"class="w-1/2 px-2 py-2 mx-auto mt-1 text-xs text-white bg-gray-400 rounded-lg focus:outline-none focus:shadow-outline active:bg-gray-500" onclick="comment(\'' +
-                       placeid + '\', \'' + placetype + '\')">Leave a comment</button> </div>'; */
+                if (!description) {
+                    document.getElementById("description").innerHTML = "";
+                } else {
+                    document.getElementById("description").innerHTML = description;
+                }
 
+                if (!pics2) {
+                    document.getElementById("img2").src = "/img/empty.png";
+                } else {
+                    // Remove any leading slashes from the pics2 URL using the replace function
+                    document.getElementById("img2").src = "/storage" + pics2;
+                }
+
+               if (!description2) {
+                    document.getElementById("description2").innerHTML = "";
+                } else {
+                    document.getElementById("description2").innerHTML = description2;
+                }
             });
         }
 
         function missing() {
             document.getElementById("img").src = "/img/empty.png";
         }
-           function missing2() {
+
+        function missing2() {
             document.getElementById("img2").src = "/img/empty.png";
         }
 
@@ -459,7 +471,8 @@
         var closemodal = document.getElementById('closemodal');
 
         closemodal.addEventListener("click", function() {
-            closemodal.style.display = "none";
+            document.getElementById('myModal').style.display = "none";
+
         });
     </script>
 @endsection
