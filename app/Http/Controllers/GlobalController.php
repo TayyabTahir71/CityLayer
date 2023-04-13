@@ -110,7 +110,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
 
-        if ($request->type == 'Street') {
+        if ($request->type == 'street') {
             if (Stat::where('street_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -125,7 +125,7 @@ class GlobalController extends Controller
             } else {
                 return 'already';
             }
-        } elseif ($request->type == 'Building') {
+        } elseif ($request->type == 'building') {
             if (Stat::where('building_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -140,7 +140,7 @@ class GlobalController extends Controller
             } else {
                 return 'already';
             }
-        } elseif ($request->type == 'Openspace') {
+        } elseif ($request->type == 'openspace') {
             if (Stat::where('openspace_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -2201,6 +2201,26 @@ class GlobalController extends Controller
          dd($request->all());
 
         return back();
+    }
+
+
+    public function details(Request $request)
+    {
+      
+        $type = strtolower($request->type);
+        $placeid = $request->id;
+        if ($type == 'street') {
+            $data = Street::find($request->id);
+            return view('details', compact('data', 'type', 'placeid'));
+        }
+        if ($type == 'building') {
+            $data = Building::find($request->id);
+            return view('details', compact('data', 'type', 'placeid'));
+        }
+        if ($type == 'openspace') {
+            $data = Openspace::find($request->id);
+            return view('details', compact('data', 'type', 'placeid'));
+        }
     }
 
 }

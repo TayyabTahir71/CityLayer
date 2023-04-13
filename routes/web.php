@@ -29,6 +29,7 @@ Route::get('save_preferences', 'preferences')->name('preferences');
 Route::get('preferences', 'preferences')->name('preferences');
 Route::get('dashboard', 'dashboard')->name('dashboard');
 Route::get('place/{id}/{type}', 'place')->name('place');
+Route::get('details/{id}/{type}', 'details')->name('details');
 Route::post('/place/like', 'like')->name('like');
 Route::post('/place/dislike', 'dislike')->name('dislike');
 Route::post('/place/stars', 'stars')->name('stars');
