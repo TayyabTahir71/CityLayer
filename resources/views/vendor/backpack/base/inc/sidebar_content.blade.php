@@ -16,7 +16,7 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('comment-de') }}"> <img src="{{ asset('img/flag/Germany.png') }}" class="nav-icon" width="25px"> Comments</a></li>
 
     <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i><span>Users</span></a></li>
-{{-- <li class="nav-item"><a class="nav-link" href="{{ backpack_url('stat') }}"><i class="nav-icon la la-chart-area"></i> Stats</a></li> --}}
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('stat') }}"><i class="nav-icon la la-chart-area"></i> Stats</a></li>
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-cog"></i> Settings</a>
     <ul class="nav-dropdown-items">

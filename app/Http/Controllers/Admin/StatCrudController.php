@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\StatRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use PhpParser\Node\Stmt\Label;
 
 /**
  * Class StatCrudController
@@ -14,9 +15,9 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class StatCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    //use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    //use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+   // use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
    // use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -40,16 +41,15 @@ class StatCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('user_id');
-        CRUD::column('street_id');
-        CRUD::column('openspace_id');
-        CRUD::column('building_id');
+        CRUD::column('street_id')->label('Street ID');
+        CRUD::column('openspace_id')->label('Openspace ID');
+        CRUD::column('building_id')->label('Building ID');
         CRUD::column('likes');
         CRUD::column('dislikes');
         CRUD::column('stars');
         CRUD::column('bof');
         CRUD::column('weird');
-        CRUD::column('ohh');
-        CRUD::column('wtf');
+
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -77,8 +77,7 @@ class StatCrudController extends CrudController
         CRUD::field('stars');
         CRUD::field('bof');
         CRUD::field('weird');
-        CRUD::field('ohh');
-        CRUD::field('wtf');
+
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

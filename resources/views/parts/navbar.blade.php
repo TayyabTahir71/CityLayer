@@ -2,9 +2,9 @@
      <div class="flex flex-wrap items-center justify-between pt-4 pb-4 mx-2 mr-2 bg-white border-b border-gray-400">
      <div class="flex items-center">
          <a href="/" class="mx-1 text-xs font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-house"></i><span class="">Home</span></a>
-          <a href="dashboard" class="mx-1 text-xs font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-table"></i><span class="">Dashboard</span></a>
-           <a href="leaderboard" class="mx-1 text-xs font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-trophy"></i> <span class="">Leaderboard</span></a>
-            <a href="about" class="mx-1 text-xs font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-file"></i> <span class="">About</span></a>
+          <a href="/dashboard" class="mx-1 text-xs font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-table"></i><span class="">Dashboard</span></a>
+           <a href="/leaderboard" class="mx-1 text-xs font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-trophy"></i> <span class="">Leaderboard</span></a>
+            <a href="/about" class="mx-1 text-xs font-bold select-none active:text-gray-500"><i class="pr-1 fa-solid fa-file"></i> <span class="">About</span></a>
            </div>
          <div x-data="{ modelOpen: false }">
              <button @click="modelOpen =!modelOpen"

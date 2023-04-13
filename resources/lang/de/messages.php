@@ -224,7 +224,7 @@ return [
     'nothing at all' => 'gar nichts',
     'many things' => 'viele Dinge',
     'What you would change:' => 'Was würden Sie ändern:',
-    'How confortable is this space:' => 'Wie komfortabel ist dieser Raum:',
+    'How comfortable is this space:' => 'Wie komfortabel ist dieser Raum:',
     'uncomfortable' => 'unbequem',
     'very comfortable' => 'sehr komfortabel',
     'Place to rest:' => 'Ruheplatz:',
