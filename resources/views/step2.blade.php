@@ -17,32 +17,32 @@
                              <div class="flex flex-col pt-4 space-y-6">
                                  <div class="flex justify-between w-full">
                                      <button class="text-center" onclick="feel('happy')">
-                                         <img src="/img/happy.png" alt="happy" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.happy') }}</h1>
+                                         <img src="/img/happy.png" alt="happy" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.happy') }}</h1>
                                      </button>
-                                     <button class="text-center" onclick="feel('sad')">
-                                         <img src="/img/sad.png" alt="sad" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.sad') }}</h1>
+                                     <button class="text-center" onclick="feel('curious')">
+                                         <img src="/img/curious.png" alt="curious" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.curious') }}</h1>
                                      </button>
-                                     <button class="text-center" onclick="feel('stressed')">
-                                         <img src="/img/stressed.png" alt="stressed" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.stressed') }}</h1>
+                                     <button class="text-center" onclick="feel('confused')">
+                                         <img src="/img/confused.png" alt="confused" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.confused') }}</h1>
                                      </button>
 
                                  </div>
                                  <div id="down" class="flex justify-between w-full">
-                                     <button class="text-center" onclick="feel('angry')">
-                                         <img src="/img/angry.png" alt="angry" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.angry') }}</h1>
+                                     <button class="text-center" onclick="feel('sad')">
+                                         <img src="/img/sad.png" alt="sad" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.sad') }}</h1>
                                      </button>
-                                     <button class="text-center" onclick="feel('worried')">
-                                         <img src="/img/worried.png" alt="worried" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.worried') }}</h1>
+                                     <button class="text-center" onclick="feel('angry')">
+                                         <img src="/img/angry.png" alt="angry" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.angry') }}</h1>
                                      </button>
 
                                      <button id="btnid" class="">
-                                         <img src="/img/other.png" alt="worried" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.other') }}</h1>
+                                         <img src="/img/other.png" alt="worried" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.other') }}</h1>
                                      </button>
 
                                  </div>
@@ -67,99 +67,130 @@
                      x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                      class="z-50 inline-block w-full max-w-xl transition-all transform">
 
-                     <div class="w-full h-screen bg-[#CDB8EB]">
-                         <div class="items-center max-w-2xl space-x-4">
+                     <div class="flex justify-center w-full py-8 overflow-hidden transition-all transform bg-[#CDB8EB] shadow-xl z-50">
+                            <div class="items-center max-w-2xl">
                              <div class="flex flex-row justify-between pt-2">
                                  <a class="prevent" @click="modalOpen = false"> <i
                                          class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
                              </div>
-                             <div class="flex flex-col space-y-4 px-6 pt-4">
-                                 <h1 class="text-2xl font-bold text-center text-black pb-8">
+                             <div class="flex flex-col pt-4 space-y-4">
+                                 <h1 class="pb-8 text-2xl font-bold text-center text-black">
                                      {{ __('messages.How do you feel in this space?') }}</h1>
                                  <div class="flex justify-between w-full">
                                      <button class="text-center" onclick="feel('excited')">
-                                         <img src="/img/excited.png" alt="excited" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.excited') }}</h1>
+                                         <img src="/img/excited.png" alt="excited" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.excited') }}</h1>
                                      </button>
                                      <button class="text-center" onclick="feel('comfortable')">
-                                         <img src="/img/comfortable.png" alt="comfortable" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.comfortable') }}</h1>
+                                         <img src="/img/comfortable.png" alt="comfortable" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.comfortable') }}</h1>
                                      </button>
                                      <button class="text-center" onclick="feel('funny')">
-                                         <img src="/img/funny.png" alt="funny" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.funny') }}</h1>
+                                         <img src="/img/funny.png" alt="funny" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.funny') }}</h1>
                                      </button>
 
                                  </div>
                                  <div class="flex justify-between w-full">
                                      <button class="text-center" onclick="feel('playful')">
-                                         <img src="/img/playful.png" alt="playful" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.playful') }}</h1>
+                                         <img src="/img/playful.png" alt="playful" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.playful') }}</h1>
                                      </button>
                                      <button class="text-center" onclick="feel('pleasant')">
-                                         <img src="/img/pleasant.png" alt="pleasant" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.pleasant') }}</h1>
+                                         <img src="/img/pleasant.png" alt="pleasant" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.pleasant') }}</h1>
                                      </button>
 
-                                     <button class="text-center" onclick="feel('curious')">
-                                         <img src="/img/curious.png" alt="curious" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.curious') }}</h1>
+                                     <button class="text-center" onclick="feel('shy')">
+                                         <img src="/img/shy.png" alt="shy" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.shy') }}</h1>
+                                     </button>
+
+                                 </div>
+                                     <div class="flex justify-between w-full">
+                                     <button class="text-center" onclick="feel('speechless')">
+                                         <img src="/img/speechless.png" alt="speechless" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.speechless') }}</h1>
+                                     </button>
+                                     <button class="text-center" onclick="feel('envious')">
+                                         <img src="/img/envious.png" alt="envious" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.envious') }}</h1>
+                                     </button>
+
+                                     <button class="text-center" onclick="feel('indifferent')">
+                                         <img src="/img/indifferent.png" alt="indifferent" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.indifferent') }}</h1>
                                      </button>
 
                                  </div>
                                  <div class="flex justify-between w-full">
+                                     <button class="text-center" onclick="feel('shocked')">
+                                         <img src="/img/shocked.png" alt="shocked" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.shocked') }}</h1>
+                                     </button>
+                                     <button class="text-center" onclick="feel('worried')">
+                                         <img src="/img/worried.png" alt="worried" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.worried') }}</h1>
+                                     </button>
+
+                                        <button class="text-center" onclick="feel('stressed')">
+                                         <img src="/img/stressed.png" alt="stressed" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs">{{ __('messages.stressed') }}</h1>
+                                     </button>
+                                 </div>
+                                 
+                                 <div class="flex justify-between w-full">
                                      <button class="text-center" onclick="feel('bored')">
-                                         <img src="/img/bored.png" alt="bored" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.bored') }}</h1>
+                                         <img src="/img/bored.png" alt="bored" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.bored') }}</h1>
                                      </button>
                                      <button class="text-center" onclick="feel('uncomfortable')">
-                                         <img src="/img/uncomfortable.png" alt="uncomfortable" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.uncomfortable') }}</h1>
+                                         <img src="/img/uncomfortable.png" alt="uncomfortable" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.uncomfortable') }}</h1>
+                                     </button>
+
+                                     <button class="text-center" onclick="feel('unaffordable')">
+                                         <img src="/img/unaffordable.png" alt="unaffordable" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.unaffordable') }}</h1>
+                                     </button>
+
+                                 </div>
+
+                                 <div class="flex justify-between w-full ">
+                                     <button class="text-center" onclick="feel('overwhelmed')">
+                                         <img src="/img/overwhelmed.png" alt="overwhelmed" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.overwhelmed') }}</h1>
+                                     </button>
+                                     <button class="pr-2 text-center" onclick="feel('sleepy')">
+                                         <img src="/img/sleepy.png" alt="sleepy" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.sleepy') }}</h1>
                                      </button>
 
                                      <button class="text-center" onclick="feel('scared')">
-                                         <img src="/img/scared.png" alt="scared" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.scared') }}</h1>
+                                         <img src="/img/scared.png" alt="scared" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.scared') }}</h1>
                                      </button>
 
                                  </div>
-                                 <div class="flex justify-between w-full bg-[#CDB8EB]">
-                                     <button class="text-center" onclick="feel('confused')">
-                                         <img src="/img/confused.png" alt="confused" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.confused') }}</h1>
-                                     </button>
-                                     <button class="text-center" onclick="feel('shocked')">
-                                         <img src="/img/shocked.png" alt="shocked" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.shocked') }}</h1>
-                                     </button>
+                                 <div class="flex justify-between w-full ">
 
                                      <button class="text-center" onclick="feel('disgusted')">
-                                         <img src="/img/disgusted.png" alt="worried" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.disgusted') }}</h1>
+                                         <img src="/img/disgusted.png" alt="disgusted" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.disgusted') }}</h1>
                                      </button>
-
-                                 </div>
-                                 <div class="flex justify-between w-full bg-[#CDB8EB]">
-                                    
                                      <button class="text-center" onclick="feel('hot')">
-                                         <img src="/img/hot.png" alt="hot" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.hot') }}</h1>
+                                         <img src="/img/hot.png" alt="hot" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.hot') }}</h1>
                                      </button>
-
-                                      <button class="text-center" onclick="feel('unaffordable')">
-                                         <img src="/img/unaffordable.png" alt="unaffordable" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold">{{ __('messages.unaffordable') }}</h1>
-                                     </button>
-
                                      <button class="text-center" onclick="feel('pleasant')">
-                                         <img src="/img/cold.png" alt="cold" class="w-16 h-16 mb-2 mx-auto">
-                                         <h1 class="font-bold ">{{ __('messages.cold') }}</h1>
+                                         <img src="/img/cold.png" alt="cold" class="w-16 h-16 mx-auto mb-2">
+                                         <h1 class="text-xs ">{{ __('messages.cold') }}</h1>
                                      </button>
 
                                  </div>
                              </div>
                          </div>
-                     </div>
+                       </div>
                  </div>
              </div>
 

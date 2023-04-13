@@ -16,7 +16,13 @@
                     <img id="img" src="/storage{{ $data->image0 }}" alt="image" class="object-cover w-full h-auto mx-auto" onerror="missing()">
                     <img id="feeling" src="/img/{{ $data->feeling }}.png" alt="feeling" class="absolute bottom-0 right-0 w-auto h-12 m-4">
                 </div>
-                <div id="opinions" class="pt-4"></div>
+                 <div class="flex flex-wrap justify-center pt-4 pb-4 overflow-x-hidden text-sm md:w-4xl">
+                            @php $opinions = explode(',', $data->opinions); @endphp
+                            @foreach ($opinions as $opinion)
+                                <a class="px-4 mx-1 text-white truncate bg-green-800 rounded"
+                                    target="_blank">{{ $opinion }}</a>
+                            @endforeach
+                        </div>
                 <p id="description" class="p-2 m-2 text-base font-bold">{{ $data->description }}</p>
                 <div class="pt-4">
                     <img id="img2" src="/storage{{ $data->image }}" alt="image" class="object-cover w-full h-auto mx-auto" onerror="missing2()">
