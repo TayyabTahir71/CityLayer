@@ -14,7 +14,7 @@
                     {{ __('messages.React to this place to earn 1 point!') }}</h1>
                 <div class="relative pt-4">
                     <img id="img" src="/storage{{ $data->image0 }}" alt="image" class="object-cover w-full h-auto mx-auto" onerror="missing()">
-                    <img id="feeling" src="/img/{{ $data->feeling }}.png" alt="feeling" class="absolute bottom-0 right-0 w-auto h-12 m-4">
+                    <img id="feeling" src="/img/{{ $data->feeling }}.png" alt="feeling" class="absolute bottom-0 right-0 w-auto h-12 m-4" onerror="missing3()">
                 </div>
                  <div class="flex flex-wrap justify-center pt-4 pb-4 overflow-x-hidden text-sm md:w-4xl">
                             @php $opinions = explode(',', $data->opinions); @endphp
@@ -125,6 +125,11 @@
         function missing2() {
             document.getElementById("img2").src = "/img/empty.png";
         }
+
+                function missing3() {
+            document.getElementById("feeling").style.display = "none";
+        }
+
 
         function mapAction(action) {
             var id = document.getElementById("placeid").value;
