@@ -2097,14 +2097,6 @@ class GlobalController extends Controller
         return $infos;
     }
 
-    public function edit(Request $request){
-
-         dd($request->all());
-
-        return back();
-    }
-
-
     public function details(Request $request)
     {
       
@@ -2123,5 +2115,12 @@ class GlobalController extends Controller
             return view('details', compact('data', 'type', 'placeid'));
         }
     }
+
+    public function edit(Request $request){
+
+        dd($request->all());
+
+       return back();
+   }
 
 }
