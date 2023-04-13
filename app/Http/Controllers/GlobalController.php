@@ -163,7 +163,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
 
-        if ($request->type == 'Street') {
+        if ($request->type == 'street') {
             if (Stat::where('street_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -178,7 +178,7 @@ class GlobalController extends Controller
             } else {
                 return 'already';
             }
-        } elseif ($request->type == 'Building') {
+        } elseif ($request->type == 'building') {
             if (Stat::where('building_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -193,7 +193,7 @@ class GlobalController extends Controller
             } else {
                 return 'already';
             }
-        } elseif ($request->type == 'Openspace') {
+        } elseif ($request->type == 'openspace') {
             if (Stat::where('openspace_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -215,7 +215,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
 
-        if ($request->type == 'Street') {
+        if ($request->type == 'street') {
             if (Stat::where('street_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -230,7 +230,7 @@ class GlobalController extends Controller
             } else {
                 return 'already';
             }
-        } elseif ($request->type == 'Building') {
+        } elseif ($request->type == 'building') {
             if (Stat::where('building_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -245,7 +245,7 @@ class GlobalController extends Controller
             } else {
                 return 'already';
             }
-        } elseif ($request->type == 'Openspace') {
+        } elseif ($request->type == 'openspace') {
             if (Stat::where('openspace_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -267,7 +267,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
 
-        if ($request->type == 'Street') {
+        if ($request->type == 'street') {
             if (Stat::where('street_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -282,7 +282,7 @@ class GlobalController extends Controller
             } else {
                 return 'already';
             }
-        } elseif ($request->type == 'Building') {
+        } elseif ($request->type == 'building') {
             if (Stat::where('building_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -297,7 +297,7 @@ class GlobalController extends Controller
             } else {
                 return 'already';
             }
-        } elseif ($request->type == 'Openspace') {
+        } elseif ($request->type == 'openspace') {
             if (Stat::where('openspace_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -319,7 +319,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
 
-        if ($request->type == 'Street') {
+        if ($request->type == 'street') {
             if (Stat::where('street_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -334,7 +334,7 @@ class GlobalController extends Controller
             } else {
                 return 'already';
             }
-        } elseif ($request->type == 'Building') {
+        } elseif ($request->type == 'building') {
             if (Stat::where('building_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -349,7 +349,7 @@ class GlobalController extends Controller
             } else {
                 return 'already';
             }
-        } elseif ($request->type == 'Openspace') {
+        } elseif ($request->type == 'openspace') {
             if (Stat::where('openspace_id', $request->id)->doesntExist()) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -367,109 +367,10 @@ class GlobalController extends Controller
         }
     }
 
-    public function ohh(Request $request)
-    {
-        $userid = backpack_auth()->user()->id;
 
-        if ($request->type == 'Street') {
-            if (Stat::where('street_id', $request->id)->doesntExist()) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->street_id = $request->id;
-                $stat->ohh = 1;
-                $stat->save();
-                $street = Street::find($request->id);
-                $street->ohh = $street->ohh + 1;
-                $street->save();
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()->user()->save();
-            } else {
-                return 'already';
-            }
-        } elseif ($request->type == 'Building') {
-            if (Stat::where('building_id', $request->id)->doesntExist()) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->building_id = $request->id;
-                $stat->ohh = 1;
-                $stat->save();
-                $building = Building::find($request->id);
-                $building->ohh = $building->ohh + 1;
-                $building->save();
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()->user()->save();
-            } else {
-                return 'already';
-            }
-        } elseif ($request->type == 'Openspace') {
-            if (Stat::where('openspace_id', $request->id)->doesntExist()) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->openspace_id = $request->id;
-                $stat->ohh = 1;
-                $stat->save();
-                $openspace = Openspace::find($request->id);
-                $openspace->ohh = $openspace->ohh + 1;
-                $openspace->save();
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()->user()->save();
-            } else {
-                return 'already';
-            }
-        }
-    }
 
-    public function wtf(Request $request)
-    {
-        $userid = backpack_auth()->user()->id;
+   
 
-        if ($request->type == 'Street') {
-            if (Stat::where('street_id', $request->id)->doesntExist()) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->street_id = $request->id;
-                $stat->wtf = 1;
-                $stat->save();
-                $street = Street::find($request->id);
-                $street->wtf = $street->wtf + 1;
-                $street->save();
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()->user()->save();
-            } else {
-                return 'already';
-            }
-        } elseif ($request->type == 'Building') {
-            if (Stat::where('building_id', $request->id)->doesntExist()) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->building_id = $request->id;
-                $stat->wtf = 1;
-                $stat->save();
-                $building = Building::find($request->id);
-                $building->wtf = $building->wtf + 1;
-                $building->save();
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()->user()->save();
-            } else {
-                return 'already';
-            }
-        } elseif ($request->type == 'Openspace') {
-            if (Stat::where('openspace_id', $request->id)->doesntExist()) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->openspace_id = $request->id;
-                $stat->wtf = 1;
-                $stat->save();
-                $openspace = Openspace::find($request->id);
-                $openspace->wtf = $openspace->wtf + 1;
-                $openspace->save();
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()->user()->save();
-            } else {
-                return 'already';
-            }
-        }
-    }
 
     public function profil()
     {
