@@ -77,9 +77,12 @@ class GlobalController extends Controller
     public function leaderboard()
     {
         $users = User::all();
+        $street = Street::all();
+        $building = Building::all();
+        $openspace = Openspace::all();
         //sort by usr->score
         $users = $users->sortByDesc('score');
-        return view('leaderboard', compact('users'));
+        return view('leaderboard', compact('users', 'street', 'building', 'openspace'));
     }
 
     public function comment(Request $request)
@@ -1117,6 +1120,7 @@ class GlobalController extends Controller
         $openspace = Openspace::where('user_id', $userid)->get();
         $infos = Infosperso::where('user_id', $userid)->first();
         $score = backpack_auth()->user()->score;
+    
 
         $all_data = array_merge(
             $street->toArray(),
@@ -1124,7 +1128,7 @@ class GlobalController extends Controller
             $openspace->toArray()
         );
 
-        return view('dashboard', compact('all_data', 'score'));
+        return view('dashboard', compact('all_data', 'score', 'streetcount', 'buildingcount', 'openspacecount'));
     }
 
     public function store0(Request $request)
