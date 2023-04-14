@@ -59,82 +59,82 @@
                      </div>
                      <h1 class="pt-2 text-xs font-bold text-center text-gray-800">{{ __('messages.My badges:') }}</h1>
                      <div class="flex justify-center pt-2">
-                         <div class="flex flex-col gap-x-2">
-                             <div class="flex">
-                                 <button id="btn1" class="mx-1">
-                                     @if (backpack_auth()->user()->score > 100)
+                         <div class="flex flex-col">
+                             <div class="flex gap-x-1">
+                                 <button id="btn1">
+                                     @if (backpack_auth()->user()->score > 9)
                                          <img class="w-24" src="/img/icons/explorer.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/explorer.png">
                                      @endif
                                  </button>
-                                 <button id="btn2" class="mx-1">
-                                     @if (backpack_auth()->user()->score > 200)
+                                 <button id="btn2">
+                                     @if ($citymaker == 1)
                                          <img class="w-24" src="/img/icons/citymaker.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/citymaker.png">
                                      @endif
                                  </button>
 
-                                 <button id="btn3" class="mx-1">
-                                     @if (backpack_auth()->user()->score > 300)
+                                 <button id="btn3">
+                                     @if ($architect == 1)
                                          <img class="w-24" src="/img/icons/architect.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/architect.png">
                                      @endif
                                  </button>
 
-                                 <button id="btn4" class="mx-1">
-                                     @if (backpack_auth()->user()->score > 400)
+                                 <button id="btn4">
+                                     @if ($flaneur == 1)
                                          <img class="w-24" src="/img/icons/flaneur.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/flaneur.png">
                                      @endif
                                  </button>
 
-                                 <button id="btn5" class="mx-1">
-                                     @if (backpack_auth()->user()->score > 500)
+                                 <button id="btn5">
+                                     @if ($urbanist == 1)
                                          <img class="w-24" src="/img/icons/urbanist.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/urbanist.png">
                                      @endif
                                  </button>
                              </div>
-                             <div class="flex pt-2">
-                                 <button id="btn6" class="mx-1">
-                                     @if (backpack_auth()->user()->score > 600)
+                             <div class="flex pt-2 gap-x-1">
+                                 <button id="btn6">
+                                     @if ($influencer == 1)
                                          <img class="w-24" src="/img/icons/influencer.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/influencer.png">
                                      @endif
                                  </button>
 
-                                 <button id="btn7" class="mx-1">
-                                     @if (backpack_auth()->user()->score > 700)
+                                 <button id="btn7">
+                                     @if ($star == 1)
                                          <img class="w-24" src="/img/icons/star.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/star.png">
                                      @endif
                                  </button>
 
-                                 <button id="btn8" class="mx-1">
-                                     @if (backpack_auth()->user()->score > 800)
+                                 <button id="btn8">
+                                     @if ($guru == 1)
                                          <img class="w-24" src="/img/icons/guru.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/guru.png">
                                      @endif
                                  </button>
 
-                                 <button id="btn9" class="mx-1">
-                                     @if (backpack_auth()->user()->score > 900)
+                                 <button id="btn9">
+                                     @if ($investigator == 1)
                                          <img class="w-24" src="/img/icons/investigator.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/investigator.png">
                                      @endif
                                  </button>
 
-                                 <button id="btn10" class="mx-1">
-                                     @if (backpack_auth()->user()->score > 1000)
+                                 <button id="btn10">
+                                     @if ($supermapper == 1)
                                          <img class="w-24" src="/img/icons/supermapper.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/supermapper.png">

@@ -129,31 +129,14 @@ var legend = L.control({ position: "topright" });
             place = data[i];
             placeid = place.id;
             placetype = place.type;
-            if (placetype == "Street"){
+           
             icon2 = L.icon({
             iconUrl: '/img/street.png',
             iconSize: [40, 40],
             iconAnchor: [40, 40],
             popupAnchor: [0, -40]
              });
-            }
-            if (placetype == "Openspace"){
-            icon2 = L.icon({
-            iconUrl: '/img/openspace.png',
-            iconSize: [40, 40],
-            iconAnchor: [40, 40],
-            popupAnchor: [0, -40]
-             });
-            }
-            if (placetype == "Building"){
-            icon2 = L.icon({
-            iconUrl: '/img/building.png',
-            iconSize: [40, 40],
-            iconAnchor: [40, 40],
-            popupAnchor: [0, -40]
-             });
-            }
-            
+           
             placename = place.name;
             pics = place.image0;
             placelatitude = place.latitude;

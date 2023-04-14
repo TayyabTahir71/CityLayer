@@ -1185,7 +1185,7 @@
                         <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">
                             {{ __('messages.multifunctional:') }}</legend>
                         <div x-data="{ total_value: 50 }" class="pt-4 pb-4 mx-auto max-w-screen">
-                            <input name="multifonctional" id="multifonctional" class="hidden" type="input" x-model="total_value" />
+                            <input name="multifunctional" id="multifunctional" class="hidden" type="input" x-model="total_value" />
                             <div class="flex justify-between">
                                 <label for="default-range"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.for anything else!') }}</label>
@@ -1207,7 +1207,7 @@
                             </div>
                             <input id="range"
                                 class="block w-full h-3 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg"
-                                type="range" x-model="{{ $data->multifonctional }}" min="0" max="100"
+                                type="range" x-model="{{ $data->multifunctional }}" min="0" max="100"
                                 step="5">
 
 

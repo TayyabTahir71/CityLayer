@@ -11,21 +11,21 @@
                     <h4 class="pt-4 mt-2 font-semibold text-gray-900 ">{{ __('messages.Points:') }} {{ backpack_auth()->user()->score }}</h4>
                 </div>
                 <div class="flex items-center justify-between space-x-3 overflow-y-scroll">
-                    <a href="street" class="prevent">
+                    <a href="/street" class="prevent">
                         <div
                             class="flex flex-col items-center justify-center w-20 h-20 p-1 mb-2 text-gray-800 transition duration-300 ease-in bg-green-200 shadow cursor-pointer hover:bg-green-300 active:bg-green-400 rounded-2xl hover:shadow-md">
                             <i class="fa-solid fa-road"></i>
                             <p class="mt-1 text-xs ">{{ __('messages.Street') }}</p>
                         </div>
                     </a>
-                    <a href="building" class="prevent">
+                    <a href="/building" class="prevent">
                         <div
                             class="flex flex-col items-center justify-center w-20 h-20 p-1 mb-2 text-gray-800 transition duration-300 ease-in bg-yellow-200 shadow cursor-pointer hover:bg-yellow-300 active:bg-yellow-400 rounded-2xl hover:shadow-md">
                             <i class="fa-solid fa-building"></i>
                             <p class="mt-1 text-xs ">{{ __('messages.Building') }}</p>
                         </div>
                     </a>
-                    <a href="openspace" class="prevent">
+                    <a href="/openspace" class="prevent">
                         <div
                             class="flex flex-col items-center justify-center w-20 h-20 p-1 mb-2 text-gray-800 transition duration-300 ease-in bg-indigo-200 shadow cursor-pointer hover:bg-indigo-300 active:bg-indigo-400 rounded-2xl hover:shadow-md">
                             <i class="fa-solid fa-street-view"></i>
@@ -43,7 +43,7 @@
                     <div class="">
 
                         @forelse ($all_data as $data)
-                        <a href="place/{{ $data['id'] }}/{{ strtolower($data['type']) }}">
+                        <a href="/place/{{ $data['id'] }}/{{ strtolower($data['type']) }}">
                             <div class="flex p-2 mb-2 bg-white border rounded shadow-md">
                                @php $img = $data['image'] ?? null; @endphp
                                 <img src="{{ asset('storage' . $img) }}" alt="Just a flower" class="object-cover w-16 h-16 rounded" onerror="this.src='/img/empty.png'">

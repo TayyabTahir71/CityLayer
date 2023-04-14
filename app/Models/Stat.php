@@ -30,7 +30,7 @@ class Stat extends Model
         'bof',
         'weird',
         'ohh',
-        'wtf',
+        'comments',
      ];
     // protected $hidden = [];
     // protected $dates = [];

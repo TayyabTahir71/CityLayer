@@ -91,8 +91,7 @@ return new class extends Migration
             $table->integer('stars')->default(0);
             $table->integer('bof')->default(0);
             $table->integer('weird')->default(0);
-            $table->integer('ohh')->default(0);
-            $table->integer('wtf')->default(0);
+            $table->integer('comments')->default(0);
 
         });
     }
