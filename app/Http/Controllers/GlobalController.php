@@ -1128,7 +1128,7 @@ class GlobalController extends Controller
             $openspace->toArray()
         );
 
-        return view('dashboard', compact('all_data', 'score', 'streetcount', 'buildingcount', 'openspacecount'));
+        return view('dashboard', compact('all_data', 'score'));
     }
 
     public function store0(Request $request)
