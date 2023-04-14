@@ -5,7 +5,7 @@
     <div data-barba="container" class="">
         <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
 
-        <div class="flex flex-col w-full mt-24 mb-4 text-center">
+        <div class="flex flex-col w-full mt-8 mb-4 text-center">
             <h1 class="mb-2 text-3xl font-medium text-black md:text-5xl title-font">{{ __('messages.Contact us') }}</h1>
         </div>
         <div class="mx-auto">

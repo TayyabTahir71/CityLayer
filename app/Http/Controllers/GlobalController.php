@@ -610,7 +610,7 @@ class GlobalController extends Controller
         $countmycomments = count($mycomments);
         
   
-        $streets = Street::all();
+        $streets = Street::where('user_id', $userid)->get();
         $explorer = '0';
         // if distance between street entries is more than 50m then explorer = 1
         foreach ($streets as $street) {
