@@ -3,7 +3,7 @@
 @section('main')
     <div data-barba="container">
         @include('parts.navbar')
-        <div class="flex flex-col mx-auto">
+        <div class="flex flex-col mx-auto  max-w-4xl">
             <div class="pt-16">
                 <div class="flex flex-row items-center pt-2">
                     <a href="/dashboard" class="prevent"> <i
