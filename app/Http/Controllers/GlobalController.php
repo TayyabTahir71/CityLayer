@@ -611,6 +611,9 @@ class GlobalController extends Controller
         
   
         $streets = Street::where('user_id', $userid)->get();
+        $buildings = Building::where('user_id', $userid)->get();
+        $openspaces = Openspace::where('user_id', $userid)->get();
+
         $explorer = '0';
         // if distance between street entries is more than 50m then explorer = 1
         foreach ($streets as $street) {
@@ -619,6 +622,38 @@ class GlobalController extends Controller
             foreach ($streets as $otherStreet) {
                 if ($street->id !== $otherStreet->id) {
                     $distance = $this->haversine($street->latitude, $street->longitude, $otherStreet->latitude, $otherStreet->longitude);
+    
+                    if ($distance > 50) {
+                        $explorer = '1';
+                        break;
+                    }
+                }
+            }
+    
+        }
+
+        foreach ($buildings as $building) {
+
+   
+            foreach ($buildings as $otherStreet) {
+                if ($building->id !== $otherStreet->id) {
+                    $distance = $this->haversine($building->latitude, $building->longitude, $otherStreet->latitude, $otherStreet->longitude);
+    
+                    if ($distance > 50) {
+                        $explorer = '1';
+                        break;
+                    }
+                }
+            }
+    
+        }
+
+        foreach ($openspaces as $openspace) {
+
+  
+            foreach ($openspaces as $otherStreet) {
+                if ($openspace->id !== $otherStreet->id) {
+                    $distance = $this->haversine($openspace->latitude, $openspace->longitude, $otherStreet->latitude, $otherStreet->longitude);
     
                     if ($distance > 50) {
                         $explorer = '1';
