@@ -598,20 +598,29 @@ class GlobalController extends Controller
         $countopenspace = count($openspace);
         $countmycomments = count($mycomments);
         
-
-         if (Street::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicate->latitude - 0.0005)->where('latitude', '<', $duplicate->latitude + 0.0005)->where('longitude', '>', $duplicate->longitude - 0.0005)->where('longitude', '<', $duplicate->longitude + 0.0005)){
+        $duplicatestreet = Street::where('user_id', $userid)
+        ->where('latitude', '!=', null)
+        ->where('longitude', '!=', null)
+        ->get();
+         if (Street::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicatestreet->latitude - 0.0005)->where('latitude', '<', $duplicatestreet->latitude + 0.0005)->where('longitude', '>', $duplicatestreet->longitude - 0.0005)->where('longitude', '<', $duplicatestreet->longitude + 0.0005)){
            $explorer = 1;
          } else {
            $explorer = 0;
          }
-
-         if (Building::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicate->latitude - 0.0005)->where('latitude', '<', $duplicate->latitude + 0.0005)->where('longitude', '>', $duplicate->longitude - 0.0005)->where('longitude', '<', $duplicate->longitude + 0.0005)){
+         $duplicatebuilding = Street::where('user_id', $userid)
+         ->where('latitude', '!=', null)
+         ->where('longitude', '!=', null)
+         ->get();
+         if (Building::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicatebuilding->latitude - 0.0005)->where('latitude', '<', $duplicatebuilding->latitude + 0.0005)->where('longitude', '>', $duplicatebuilding->longitude - 0.0005)->where('longitude', '<', $duplicatebuilding->longitude + 0.0005)){
             $explorer = 1;
           } else {
             $explorer = 0;
           }
-
-          if (Openspace::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicate->latitude - 0.0005)->where('latitude', '<', $duplicate->latitude + 0.0005)->where('longitude', '>', $duplicate->longitude - 0.0005)->where('longitude', '<', $duplicate->longitude + 0.0005)){
+          $duplicateopenspace = Street::where('user_id', $userid)
+          ->where('latitude', '!=', null)
+          ->where('longitude', '!=', null)
+          ->get();
+          if (Openspace::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicateopenspace->latitude - 0.0005)->where('latitude', '<', $duplicateopenspace->latitude + 0.0005)->where('longitude', '>', $duplicateopenspace->longitude - 0.0005)->where('longitude', '<', $duplicateopenspace->longitude + 0.0005)){
             $explorer = 1;
           } else {
             $explorer = 0;
