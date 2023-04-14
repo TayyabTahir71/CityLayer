@@ -597,6 +597,26 @@ class GlobalController extends Controller
         $countbuilding = count($building);
         $countopenspace = count($openspace);
         $countmycomments = count($mycomments);
+        
+
+         if (Street::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicate->latitude - 0.0005)->where('latitude', '<', $duplicate->latitude + 0.0005)->where('longitude', '>', $duplicate->longitude - 0.0005)->where('longitude', '<', $duplicate->longitude + 0.0005)){
+           $explorer = 1;
+         } else {
+           $explorer = 0;
+         }
+
+         if (Building::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicate->latitude - 0.0005)->where('latitude', '<', $duplicate->latitude + 0.0005)->where('longitude', '>', $duplicate->longitude - 0.0005)->where('longitude', '<', $duplicate->longitude + 0.0005)){
+            $explorer = 1;
+          } else {
+            $explorer = 0;
+          }
+
+          if (Openspace::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicate->latitude - 0.0005)->where('latitude', '<', $duplicate->latitude + 0.0005)->where('longitude', '>', $duplicate->longitude - 0.0005)->where('longitude', '<', $duplicate->longitude + 0.0005)){
+            $explorer = 1;
+          } else {
+            $explorer = 0;
+          }
+
 
         if ($countall > 9) {
             $citymaker = '1';
@@ -667,7 +687,8 @@ class GlobalController extends Controller
                 'influencer',
                 'guru',
                 'star',
-                'investigator'
+                'investigator',
+                'explorer'
             )
         );
     }
@@ -732,6 +753,13 @@ class GlobalController extends Controller
         $infos = Infosperso::where('user_id', $userid)->first();
         $infos->preferences = $request->preferences;
         $infos->save();
+        if (backpack_auth()->user()->score > 3) {
+        } else {
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()
+                ->user()
+                ->save();
+        }
         return redirect('/');
     }
 

@@ -62,7 +62,7 @@
                          <div class="flex flex-col">
                              <div class="flex gap-x-1">
                                  <button id="btn1">
-                                     @if (backpack_auth()->user()->score > 9)
+                                     @if ($explorer == 1)
                                          <img class="w-24" src="/img/icons/explorer.png" alt="">
                                      @else
                                          <img class="w-24 grayscale" src="/img/icons/explorer.png">
