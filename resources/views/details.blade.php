@@ -2,8 +2,8 @@
 
 @section('main')
     <div data-barba="container">
-        <div class="flex flex-col mx-auto">
-            <div class="flex flex-row items-center pt-2 max-w-4xl">
+        <div class="flex flex-col mx-auto max-w-4xl">
+            <div class="flex flex-row items-center pt-2 ">
                 <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 lg:ml-16 fas fa-close"></i></a>
             </div>
 
