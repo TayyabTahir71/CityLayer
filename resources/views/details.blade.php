@@ -3,7 +3,7 @@
 @section('main')
     <div data-barba="container">
         <div class="flex flex-col mx-auto">
-            <div class="flex flex-row items-center pt-2">
+            <div class="flex flex-row items-center pt-2 max-w-4xl">
                 <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 lg:ml-16 fas fa-close"></i></a>
             </div>
 
@@ -13,7 +13,7 @@
                 <h1 id="title" class="text-xl font-bold text-center">
                     {{ __('messages.React to this place to earn 1 point!') }}</h1>
                 <div class="relative pt-4">
-                    <img id="img" src="/storage{{ $data->image0 }}" alt="image" class="object-cover w-full h-auto mx-auto max-w-4xl" onerror="missing()">
+                    <img id="img" src="/storage{{ $data->image0 }}" alt="image" class="object-cover w-full h-auto mx-auto" onerror="missing()">
                     <img id="feeling" src="/img/{{ $data->feeling }}.png" alt="feeling" class="absolute bottom-0 right-0 w-auto h-12 m-4" onerror="missing3()">
                 </div>
                  <div class="flex flex-wrap justify-center pt-4 pb-4 overflow-x-hidden text-sm md:w-4xl">
@@ -25,7 +25,7 @@
                         </div>
                 <p id="description" class="p-2 m-2 text-base font-bold">{{ $data->description }}</p>
                 <div class="pt-4">
-                    <img id="img2" src="/storage{{ $data->image }}" alt="image" class="object-cover w-full h-auto mx-auto max-w-4xl" onerror="missing2()">
+                    <img id="img2" src="/storage{{ $data->image }}" alt="image" class="object-cover w-full h-auto mx-auto" onerror="missing2()">
                 </div>
                 <p id="description2" class="p-2 m-2 text-base font-bold">{{ $data->description2 }}</p>
                 <h1 id="title2" class="pb-4 text-xl font-bold text-center">{{ __('messages.Your opinion') }}:</h1>
