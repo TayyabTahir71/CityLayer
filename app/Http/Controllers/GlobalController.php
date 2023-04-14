@@ -534,6 +534,17 @@ class GlobalController extends Controller
         return view('home');
     }
 
+    private function haversine($lat1, $lon1, $lat2, $lon2){
+        $earthRadius = 6371000; // in meters
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLon = deg2rad($lon2 - $lon1);
+        $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon/2) * sin($dLon/2);
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+        $distance = $earthRadius * $c;
+    
+        return $distance;
+    }
+
     public function profile()
     {
         $userid = backpack_auth()->user()->id;
@@ -598,35 +609,29 @@ class GlobalController extends Controller
         $countopenspace = count($openspace);
         $countmycomments = count($mycomments);
         
-        $duplicatestreet = Street::where('user_id', $userid)
-        ->where('latitude', '!=', null)
-        ->where('longitude', '!=', null)
-        ->get();
-         if (Street::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicatestreet->latitude - 0.0005)->where('latitude', '<', $duplicatestreet->latitude + 0.0005)->where('longitude', '>', $duplicatestreet->longitude - 0.0005)->where('longitude', '<', $duplicatestreet->longitude + 0.0005)){
-           $explorer = 1;
-         } else {
-           $explorer = 0;
-         }
-         $duplicatebuilding = Street::where('user_id', $userid)
-         ->where('latitude', '!=', null)
-         ->where('longitude', '!=', null)
-         ->get();
-         if (Building::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicatebuilding->latitude - 0.0005)->where('latitude', '<', $duplicatebuilding->latitude + 0.0005)->where('longitude', '>', $duplicatebuilding->longitude - 0.0005)->where('longitude', '<', $duplicatebuilding->longitude + 0.0005)){
-            $explorer = 1;
-          } else {
-            $explorer = 0;
-          }
-          $duplicateopenspace = Street::where('user_id', $userid)
-          ->where('latitude', '!=', null)
-          ->where('longitude', '!=', null)
-          ->get();
-          if (Openspace::where('latitude', '!=', null)->where('longitude', '!=', null)->where('latitude', '>', $duplicateopenspace->latitude - 0.0005)->where('latitude', '<', $duplicateopenspace->latitude + 0.0005)->where('longitude', '>', $duplicateopenspace->longitude - 0.0005)->where('longitude', '<', $duplicateopenspace->longitude + 0.0005)){
-            $explorer = 1;
-          } else {
-            $explorer = 0;
-          }
+  
+        $streets = Street::all();
+        $explorer = '0';
+        // if distance between street entries is more than 50m then explorer = 1
+        foreach ($streets as $street) {
+
+            // compare distance with other streets
+            foreach ($streets as $otherStreet) {
+                if ($street->id !== $otherStreet->id) {
+                    $distance = $this->haversine($street->latitude, $street->longitude, $otherStreet->latitude, $otherStreet->longitude);
+    
+                    if ($distance > 50) {
+                        $explorer = '1';
+                        break;
+                    }
+                }
+            }
+    
+        }
+    
 
 
+ 
         if ($countall > 9) {
             $citymaker = '1';
         } else {
