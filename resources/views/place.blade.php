@@ -3,13 +3,13 @@
 @section('main')
     <div data-barba="container">
         @include('parts.navbar')
-        <div class="flex flex-col mx-auto  max-w-4xl">
+        <div class="flex flex-col mx-auto">
             <div class="pt-16">
                 <div class="flex flex-row items-center pt-2">
                     <a href="/dashboard" class="prevent"> <i
                             class="mt-4 ml-4 text-2xl text-gray-900 lg:ml-16 fas fa-close"></i></a>
                 </div>
-                <div class="z-0 p-3 mx-4 space-y-4 lg:mx-16">
+                <div class="z-0 p-3 mx-4 space-y-4 md:mx-auto  max-w-4xl">
                     <h1 class="text-4xl font-semibold text-center text-gray-900">{{ $data->type }}</h1>
 
                     <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">{{ __('messages.Feedback:') }}
