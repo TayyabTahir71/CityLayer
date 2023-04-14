@@ -9,7 +9,7 @@
 
             <input type="hidden" id="placeid" value="{{ $placeid }}">
             <input type="hidden" id="placetype" value="{{ $type }}">
-            <div class="pt-2 modal-content  max-w-4xl">
+            <div class="pt-2 modal-content mx-auto max-w-4xl">
                 <h1 id="title" class="text-xl font-bold text-center">
                     {{ __('messages.React to this place to earn 1 point!') }}</h1>
                 <div class="relative pt-4">
