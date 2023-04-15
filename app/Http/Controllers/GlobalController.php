@@ -3112,6 +3112,6 @@ class GlobalController extends Controller
             ]);
         }
 
-        return view('dashboard', compact('all_data'));
+        return redirect()->route('dashboard');
     }
 }

@@ -15,14 +15,14 @@
       
                             <div class="flex p-2 mt-8 mb-2 bg-white border rounded shadow-md">
                                @php $img = $user['avatar'] ?? null; @endphp
-                                <img src="{{ asset('storage/uploads/avatar/' . $img) }}" alt="Just a flower" class="object-cover w-16 h-16 rounded" onerror="this.src='/img/empty.png'">
+                                <img src="{{ asset('storage/uploads/avatar/' . $img) }}" alt="Just a flower" class="object-cover w-12 h-12 rounded" onerror="this.src='/img/empty.png'">
                                 <div class="flex flex-col justify-center w-full px-2 py-1">
 
                                     <div class="flex items-center justify-between">
                                         <div class="flex flex-col">
                                             <h2 class="pl-4 text-sm font-medium text-gray-800">{{ $user['name'] }}</h2>
                                         </div>
-                                          <div class="flex flex-col pr-8">
+                                          <div class="flex flex-col mr-2">
                                             <h2 class="pl-4 text-xs font-medium text-gray-800">Street: {{ count($street->where('user_id', $user['id'])) }}</h2>
                                              <h2 class="pl-4 text-xs font-medium text-gray-800">Building: {{ count($building->where('user_id', $user['id'])) }}</h2>
                                               <h2 class="pl-4 text-xs font-medium text-gray-800">Openspace: {{ count($openspace->where('user_id', $user['id'])) }}</h2>
@@ -31,8 +31,8 @@
                                 </div>
             
                                 <div class="flex items-center justify-between ">
-                                        <div class="flex flex-col pr-4">
-                                             <h2 class="pl-4 text-sm font-medium text-gray-800">Score: {{ $user->score }}</h2>
+                                        <div class="flex flex-col pr-2">
+                                             <h2 class="pl-2 text-sm font-medium text-gray-800">Score: {{ $user->score }}</h2>
                                         </div>
                                     </div>
                             </div>
