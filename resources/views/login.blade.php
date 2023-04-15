@@ -27,7 +27,7 @@
                 </div>
                 <div class="flex items-start pb-2">
                     <div class="flex items-center h-5">
-                        <input id="remember" type="checkbox" value=""
+                        <input id="remember" name="remember" type="checkbox" value=""
                             class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800">
                     </div>
                     <label for="remember" class="ml-2 text-sm font-medium text-gray-400">{{ __('messages.Remember me') }}</label>
