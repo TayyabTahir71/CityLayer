@@ -95,7 +95,7 @@
         mymap0.touchZoom.enable();
         mymap0.scrollWheelZoom.enable();
         icon = L.icon({
-            iconUrl: '/img/marker.png',
+            iconUrl: '/img/openspace.png',
             iconSize: [40, 40],
             iconAnchor: [40, 40],
             popupAnchor: [0, -40]
