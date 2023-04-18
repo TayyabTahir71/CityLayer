@@ -31,7 +31,16 @@
                                  </div>
                              </label>
                          @endforeach
-                         <input type="checkbox" id="personal" name="form-project-manager[]" value="" class="hidden peer">
+                                <label id="perso" class="hidden">
+                          <input type="checkbox" id="personal" name="form-project-manager[]" value="" class="hidden sr-only peer">
+                                  <div
+                                         class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#FAC710]  bg-yellow-200 peer-focus:ring-2">
+
+                                         <div class="flex justify-center">
+                                             <div id="personame" class="font-semibold"></div>
+                                         </div>
+                                     </div>
+                                 </label>
 
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
@@ -110,10 +119,16 @@
                      success: function(data) {
                       var hiddertag = document.querySelector(".hiddertag");
                       hiddertag.click();
-                       showMessage("Personal Tag " + data + " saved");
-                       var personal = document.getElementById("personal");
-                       personal.value = data;
-                       personal.checked = true;
+                       var newtag = document.getElementById("personal");
+                    newtag.value = data;
+                    newtag.checked = true;
+                    newtag.classList.remove("hidden");
+                    
+                       showMessage("Personal Tag saved");
+                       var perso = document.getElementById("perso");
+                        perso.classList.remove("hidden");
+                        var personame = document.getElementById("personame");
+                        personame.innerHTML = name;
                      }
                  });
 

@@ -221,7 +221,7 @@
              messageBox.style.display = "block"; // set display to block to show the message
              setTimeout(function() {
                  messageBox.style.display = "none"; // hide the message after 3 seconds
-             }, 10000);
+             }, 2000);
          }
      </script>
      <style>
