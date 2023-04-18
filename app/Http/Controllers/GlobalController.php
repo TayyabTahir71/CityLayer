@@ -933,8 +933,13 @@ class GlobalController extends Controller
             $street->name = $request->name;
             $street->user_id = $userid;
             $street->type = 'Street';
+            if ($request->latitude && $request->longitude != null ){
             $street->latitude = $request->latitude;
             $street->longitude = $request->longitude;
+            } else {
+                $street->latitude = 0;
+                $street->longitude = 0;
+            }
             //convert array tags to string
             if ($request->tags == null) {
                 $street->tags = null;
@@ -957,8 +962,13 @@ class GlobalController extends Controller
             $building->name = $request->name;
             $building->user_id = $userid;
             $building->type = 'Building';
+            if ($request->latitude && $request->longitude != null ){
             $building->latitude = $request->latitude;
             $building->longitude = $request->longitude;
+            } else {
+                $building->latitude = 0;
+                $building->longitude = 0;
+            }
             $tags = $request->tags;
             $building->tags = implode(',', $tags);
             if ($request->tags == null) {
@@ -982,8 +992,13 @@ class GlobalController extends Controller
             $openspace->name = $request->name;
             $openspace->user_id = $userid;
             $openspace->type = 'Openspace';
+            if ($request->latitude && $request->longitude != null ){
             $openspace->latitude = $request->latitude;
             $openspace->longitude = $request->longitude;
+            } else {
+                $openspace->latitude = 0;
+                $openspace->longitude = 0;
+            }
             $tags = $request->tags;
             $openspace->tags = implode(',', $tags);
             if ($request->tags == null) {
