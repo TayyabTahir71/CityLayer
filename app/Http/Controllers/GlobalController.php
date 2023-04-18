@@ -60,7 +60,8 @@ class GlobalController extends Controller
                         'all_data',
                         'tagstreet',
                         'tagbuilding',
-                        'tagopenspace'
+                        'tagopenspace',
+                        'userid'
                     )
                 );
             } else {

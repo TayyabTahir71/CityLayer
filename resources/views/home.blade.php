@@ -79,6 +79,7 @@
       
 
         data = {!! json_encode($all_data) !!};
+        userid = {!! json_encode($userid) !!};
         markers = {};
         let marker = null;
         let mymap0 = L.map('map').setView([48.6890, 7.14086], 17);
@@ -129,13 +130,23 @@ var legend = L.control({ position: "topright" });
             place = data[i];
             placeid = place.id;
             placetype = place.type;
-           
-            icon2 = L.icon({
-            iconUrl: '/img/street.png',
-            iconSize: [40, 40],
-            iconAnchor: [40, 40],
-            popupAnchor: [0, -40]
-             });
+            useris = place.user_id;
+            if (place.user_id == userid) {
+                icon2 = L.icon({
+                    iconUrl: '/img/marker.png',
+                    iconSize: [40, 40],
+                    iconAnchor: [40, 40],
+                    popupAnchor: [0, -40]
+                });
+            } else {
+                icon2 = L.icon({
+                    iconUrl: '/img/street.png',
+                    iconSize: [40, 40],
+                    iconAnchor: [40, 40],
+                    popupAnchor: [0, -40]
+                });
+            }
+   
            
             placename = place.name;
             pics = place.image0;
