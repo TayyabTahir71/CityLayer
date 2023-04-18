@@ -10,10 +10,10 @@
  @section('main')
      <div data-barba="container">
          <div class="flex flex-col h-screen mx-auto">
-              <div id="newtagadded" class="fixed top-5 right-5 p-2 border rounded bg-blue-500 text-white font-bold"></div>
+              <div id="newtagadded" class="fixed p-2 font-bold text-white bg-blue-500 border rounded top-5 right-5"></div>
              <div class="p-3">
                        <div class="flex flex-row justify-between pt-2">
-                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="mt-6 mr-4 text-sm text-gray-800">Skip</button>
                  </div>
                  <div class="flex flex-col items-center justify-center">
                      <h1 class="pt-4 mx-8 text-xl font-bold text-center text-gray-900">
@@ -32,7 +32,16 @@
                                  </div>
                              </label>
                          @endforeach
-                         <input type="checkbox" id="personal" name="form-project-manager[]" value="" class="hidden peer">
+                                <label id="perso" class="hidden">
+                          <input type="checkbox" id="personal" name="form-project-manager[]" value="" class="hidden sr-only peer">
+                                  <div
+                                         class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
+
+                                         <div class="flex justify-center">
+                                             <div id="personame" class="font-semibold"></div>
+                                         </div>
+                                     </div>
+                                 </label>
 
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
@@ -121,10 +130,16 @@
                      success: function(data) {
                          var hiddertag = document.querySelector(".hiddertag");
                       hiddertag.click();
+                        var newtag = document.getElementById("personal");
+                    newtag.value = data;
+                    newtag.checked = true;
+                    newtag.classList.remove("hidden");
+                    
                        showMessage("Personal Opinion saved");
-                       var personal = document.getElementById("personal");
-                       personal.value = data;
-                       personal.checked = true;
+                       var perso = document.getElementById("perso");
+                        perso.classList.remove("hidden");
+                        var personame = document.getElementById("personame");
+                        personame.innerHTML = name;
                      }
                  });
 });
