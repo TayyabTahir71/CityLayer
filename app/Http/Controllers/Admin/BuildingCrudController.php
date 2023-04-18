@@ -52,23 +52,28 @@ class BuildingCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
-        CRUD::column('id');
+        CRUD::column('name')->label('uuid');
+        CRUD::column('user_id');
         $this->getFieldsData();
-       // CRUD::column('name')->label('uuid');
         CRUD::column('latitude');
         CRUD::column('longitude');
-        CRUD::column('user_id');
+        CRUD::column('likes')->label('Like')->type('number');
+        CRUD::column('dislikes')->label('dislike')->type('number');
+        CRUD::column('stars')->label('pleasant')->type('number');
+        CRUD::column('bof')->label('indifferent')->type('number');
+        CRUD::column('weird')->label('worried')->type('number');
         $this->crud->enableExportButtons();
+
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
          */
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     *
+     * 
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -531,7 +536,7 @@ class BuildingCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     *
+     * 
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
