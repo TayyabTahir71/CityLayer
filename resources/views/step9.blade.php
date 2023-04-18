@@ -6,7 +6,7 @@
         <div class="flex flex-col h-screen mx-auto">
   <div id="message" class="fixed p-2 font-bold text-white bg-green-500 border rounded top-5 right-5"></div>
                  <div class="flex flex-row justify-between pt-2">
-                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="mt-6 mr-4 text-sm text-gray-800">Skip</button>
                  </div>
             <form action="spaceusage" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -23,7 +23,7 @@
                                 <label for="default-range"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.great!') }}</label>
                             </div>
-                            <div class="flex justify-between w-full px-2 text-xs py-2">
+                            <div class="flex justify-between w-full px-2 py-2 text-xs">
                               <span>0</span>
                                  <span>1</span>
                                  <span>2</span>
@@ -85,7 +85,7 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0" max="100"
                                                         step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs py-2">
+                                                    <div class="flex justify-between w-full px-2 py-2 text-xs">
                                                     <span>0</span>
                                  <span>1</span>
                                  <span>2</span>
@@ -158,7 +158,7 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs  py-2">
+                                                    <div class="flex justify-between w-full px-2 py-2 text-xs">
                                                      <span>0</span>
                                  <span>1</span>
                                  <span>2</span>
@@ -231,7 +231,7 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs  py-2">
+                                                    <div class="flex justify-between w-full px-2 py-2 text-xs">
                                                     <span>0</span>
                                  <span>1</span>
                                  <span>2</span>
@@ -269,7 +269,7 @@
                         <div x-data="{ modelOpen: false }">
                             <button type="button" id="play" @click="modelOpen =!modelOpen"
                                 class="absolute rounded-full bg-[#FAC710] w-28 h-28 text-white font-bold"
-                                style="top: 90%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.multifunctional') }}</button>
+                                style="top: 90%; right: 10%; transform: translate(50%, -50%)">{{ __('messages.multi') }}-<br>{{ __('messages.functional') }}</button>
 
                             <div x-cloak x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
                                 aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -304,7 +304,7 @@
                                                         class="block h-3 bg-white rounded-lg appearance-none cursor-pointer w-80 range-lg "
                                                         type="range" x-model="total_value" min="0"
                                                         max="100" step="5">
-                                                    <div class="flex justify-between w-full px-2 text-xs  py-2">
+                                                    <div class="flex justify-between w-full px-2 py-2 text-xs">
                                                          <span>0</span>
                                  <span>1</span>
                                  <span>2</span>

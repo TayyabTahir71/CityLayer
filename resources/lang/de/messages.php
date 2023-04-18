@@ -226,6 +226,8 @@ return [
     'What you would change:' => 'Was würden Sie ändern:',
     'How comfortable is this space:' => 'Wie komfortabel ist dieser Raum:',
     'indifferent' => 'indifferent',
+    'multi' => 'multi',
+    'functional' => 'functional',
     'uncomfortable' => 'unbequem',
     'very comfortable' => 'sehr komfortabel',
     'Place to rest:' => 'Ruheplatz:',

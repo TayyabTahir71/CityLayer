@@ -8,10 +8,10 @@
  @section('main')
      <div data-barba="container">
          <div class="flex flex-col h-screen mx-auto">
-             <div id="newtagadded" class="fixed top-5 right-5 p-2 border rounded bg-blue-500 text-white font-bold"></div>
+             <div id="newtagadded" class="fixed p-2 font-bold text-white bg-blue-500 border rounded top-5 right-5"></div>
              <div class="p-3">
                         <div class="flex flex-row justify-between pt-2">
-                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="text-gray-800 text-sm mt-6 mr-4">Skip</button>
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="mt-6 mr-4 text-sm text-gray-800">Skip</button>
                  </div>
                   <input type="hidden" name="type" id="type" value="{{ $type }}">
                  <input type="hidden" name="placeid" id="placeid" value="{{ $placeid }}">
@@ -110,7 +110,7 @@
                      success: function(data) {
                       var hiddertag = document.querySelector(".hiddertag");
                       hiddertag.click();
-                       showMessage("Personal Tag saved");
+                       showMessage("Personal Tag " + data + " saved");
                        var personal = document.getElementById("personal");
                        personal.value = data;
                        personal.checked = true;
@@ -182,7 +182,7 @@
              messageBox.style.display = "block"; // set display to block to show the message
              setTimeout(function() {
                  messageBox.style.display = "none"; // hide the message after 3 seconds
-             }, 2000);
+             }, 10000);
          }
 
 

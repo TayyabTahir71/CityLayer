@@ -228,6 +228,8 @@ return [
     'How comfortable is this space:' => 'How comfortable is this space:',
     'uncomfortable' => 'uncomfortable',
     'indifferent' => 'indifferent',
+    'multi' => 'multi',
+    'functional' => 'functional',
     'very comfortable' => 'very comfortable',
     'Place to rest:' => 'Place to rest:',
     'no benches or other!' => 'no benches or other!',
