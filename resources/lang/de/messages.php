@@ -223,6 +223,7 @@ return [
     'Would you change something in this space:' => 'Würden Sie etwas in diesem Raum ändern:',
     'nothing at all' => 'gar nichts',
     'many things' => 'viele Dinge',
+    'Edit this place' => 'Edit this place',
     'What you would change:' => 'Was würden Sie ändern:',
     'How comfortable is this space:' => 'Wie komfortabel ist dieser Raum:',
     'indifferent' => 'indifferent',

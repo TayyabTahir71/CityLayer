@@ -219,6 +219,7 @@ return [
     'Location:' => 'Location:',
     'Tags:' => 'Tags:',
     'My feeling:' => 'My feeling:',
+    'Edit this place' => 'Edit this place',
     'Why this feeling:' => 'Why this feeling:',
     'Opinions:' => 'Opinions:',
     'Would you change something in this space:' => 'Would you change something in this space:',

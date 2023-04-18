@@ -130,7 +130,7 @@ var legend = L.control({ position: "topright" });
             place = data[i];
             placeid = place.id;
             placetype = place.type;
-            useris = place.user_id;
+           
             if (place.user_id == userid) {
                 icon2 = L.icon({
                     iconUrl: '/img/marker.png',
@@ -152,12 +152,20 @@ var legend = L.control({ position: "topright" });
             pics = place.image0;
             placelatitude = place.latitude;
             placelongitude = place.longitude;
+            if (place.user_id == userid) {
+             placetype = place.type.toLowerCase();
+             var url = "place";
+             var message = '';
+             var readmore = '{{ __('messages.Edit this place') }}';
+            } else {
+            var url = "details";
             var message = '{{ __('messages.React to this place to earn 1 point!') }}';
             var readmore = '{{ __('messages.Read more') }}';
+            }
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
             }).addTo(mymap0).bindPopup(
-                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p class="px-4 text-sm">' + message +'</p></div><a href="details/'+ placeid +'/'+ placetype +'" class="flex justify-center px-2 py-2 text-center bg-blue-600 rounded"><button class="text-white">' + readmore + '</button><a>'
+                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p id="title" class="px-4 text-sm">' + message +'</p></div><a href="' + url + '/' + placeid +'/'+ placetype +'" class="flex justify-center px-2 py-2 text-center bg-blue-600 rounded"><button class="text-white">' + readmore + '</button><a>'
             );
            
             markers[place.id] = markerx;
