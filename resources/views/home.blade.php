@@ -96,9 +96,9 @@
         mymap0.scrollWheelZoom.enable();
         icon = L.icon({
             iconUrl: '/img/openspace.png',
-            iconSize: [40, 40],
-            iconAnchor: [40, 40],
-            popupAnchor: [0, -40]
+            iconSize: [25, 25],
+            iconAnchor: [25, 25],
+            popupAnchor: [0, -25]
         });
     
 
@@ -134,16 +134,16 @@ var legend = L.control({ position: "topright" });
             if (place.user_id == userid) {
                 icon2 = L.icon({
                     iconUrl: '/img/marker.png',
-                    iconSize: [40, 40],
-                    iconAnchor: [40, 40],
-                    popupAnchor: [0, -40]
+                    iconSize: [25, 25],
+                    iconAnchor: [25, 25],
+                    popupAnchor: [0, -25]
                 });
             } else {
                 icon2 = L.icon({
                     iconUrl: '/img/street.png',
-                    iconSize: [40, 40],
-                    iconAnchor: [40, 40],
-                    popupAnchor: [0, -40]
+                    iconSize: [25, 25],
+                    iconAnchor: [25, 25],
+                    popupAnchor: [0, -25]
                 });
             }
    
