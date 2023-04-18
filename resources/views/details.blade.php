@@ -9,12 +9,16 @@
 
             <input type="hidden" id="placeid" value="{{ $placeid }}">
             <input type="hidden" id="placetype" value="{{ $type }}">
-            <div class="pt-2 modal-content mx-auto max-w-4xl">
+            <div class="max-w-4xl pt-2 mx-auto modal-content">
                 <h1 id="title" class="text-xl font-bold text-center">
                     {{ __('messages.React to this place to earn 1 point!') }}</h1>
                 <div class="relative pt-4">
+                  @if ($data->image0 == null)
+                  <img id="feeling" src="/img/{{ $data->feeling }}.png" alt="feeling" class="absolute right-0 w-auto h-12 mx-4 mt-16" onerror="missing3()">
+                  @else
                     <img id="img" src="/storage{{ $data->image0 }}" alt="image" class="object-cover w-full h-auto mx-auto" onerror="missing()">
                     <img id="feeling" src="/img/{{ $data->feeling }}.png" alt="feeling" class="absolute bottom-0 right-0 w-auto h-12 m-4" onerror="missing3()">
+                    @endif
                 </div>
                  <div class="flex flex-wrap justify-center pt-4 pb-4 overflow-x-hidden text-sm md:w-4xl">
                             @php $opinions = explode(',', $data->opinions); @endphp
@@ -25,16 +29,19 @@
                         </div>
                 <p id="description" class="p-2 m-2 text-base font-bold">{{ $data->description }}</p>
                 <div class="pt-4">
+                @if($data->image == null)
+                @else
                     <img id="img2" src="/storage{{ $data->image }}" alt="image" class="object-cover w-full h-auto mx-auto" onerror="missing2()">
+                    @endif
                 </div>
                 <p id="description2" class="p-2 m-2 text-base font-bold">{{ $data->description2 }}</p>
                 <h1 id="title2" class="pb-4 text-xl font-bold text-center">{{ __('messages.Your opinion') }}:</h1>
                 <div class="flex flex-row justify-center pb-8">
                     <img src="/img/1.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125" onclick="mapAction('like')">
-                    <img src="/img/2.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125" onclick="mapAction('dislike')">
                     <img src="/img/3.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125" onclick="mapAction('stars')">
                     <img src="/img/4.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125" onclick="mapAction('bof')">
                     <img src="/img/5.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125" onclick="mapAction('weird')">
+                    <img src="/img/2.png" class="w-8 h-8 mx-4 hover:scale-110 active:scale-125" onclick="mapAction('dislike')">
                 </div>
                 <div class="flex flex-col items-center justify-center w-full p-2 mb-16">
                     <textarea name="comm" style="overflow:auto;resize:none" id="comm" cols="10" rows="2"

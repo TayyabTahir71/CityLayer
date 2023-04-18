@@ -174,7 +174,7 @@ class GlobalSeeder extends Seeder
                         
             Tag::create( [
             'id'=>28,
-            'name'=>'community',
+            'name'=>'community garden',
             'category'=>'Openspace'
             ] );
                         
@@ -186,15 +186,10 @@ class GlobalSeeder extends Seeder
                         
             Tag::create( [
             'id'=>30,
-            'name'=>'construction',
+            'name'=>'construction site',
             'category'=>'Openspace'
             ] );
                         
-            Tag::create( [
-            'id'=>31,
-            'name'=>'Rito',
-            'category'=>'Openspace'
-            ] );
                         
             Tag::create( [
             'id'=>32,

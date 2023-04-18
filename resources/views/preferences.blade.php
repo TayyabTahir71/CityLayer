@@ -57,17 +57,6 @@
                     </label>
 
                     <label>
-                        <input type="checkbox" name="preferences[]" value="I enjoy outdoor exercising"  {{ in_array("I enjoy outdoor exercising", $preference) ? "checked" : "" }}
-                         class="sr-only peer">
-                        <div
-                            class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
-                            <div class="flex justify-center">
-                                <div class="font-semibold">{{ __('messages.I enjoy outdoor exercising') }}</div>
-                            </div>
-                        </div>
-                    </label>
-
-                    <label>
                         <input type="checkbox" name="preferences[]" value="I usually meet with my friends in open spaces" {{ in_array("I usually meet with my friends in open spaces", $preference) ? "checked" : "" }}
                             class="sr-only peer">
                         <div

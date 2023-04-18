@@ -227,6 +227,7 @@ return [
     'What you would change:' => 'What you would change:',
     'How comfortable is this space:' => 'How comfortable is this space:',
     'uncomfortable' => 'uncomfortable',
+    'indifferent' => 'indifferent',
     'very comfortable' => 'very comfortable',
     'Place to rest:' => 'Place to rest:',
     'no benches or other!' => 'no benches or other!',

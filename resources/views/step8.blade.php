@@ -52,8 +52,8 @@
                                             <form action="/timespending" method="POST">
                                             @csrf
                                                 <button type="submit">
-                                                    <img src="/img/worried.png" alt="stressed" class="w-16 h-16 mb-2">
-                                                    <h1 class="font-bold ">{{ __('messages.i dont know') }}</h1>
+                                                    <img src="/img/indifferent.png" alt="stressed" class="w-16 h-16 mb-2">
+                                                    <h1 class="font-bold ">{{ __('messages.indifferent') }}</h1>
                                                     <input type="hidden" name="step8" value="i don't know">
                                                 </button>
                                                 <input type="hidden" name="type" id="type2"
