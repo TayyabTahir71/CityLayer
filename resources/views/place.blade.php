@@ -9,7 +9,7 @@
                     <a href="/dashboard" class="prevent"> <i
                             class="mt-4 ml-4 text-2xl text-gray-900 lg:ml-16 fas fa-close"></i></a>
                 </div>
-                <div class="z-0 p-3 mx-4 space-y-4 md:mx-auto  max-w-4xl">
+                <div class="z-0 max-w-4xl p-3 mx-4 space-y-4 md:mx-auto">
                     <h1 class="text-4xl font-semibold text-center text-gray-900">{{ $data->type }}</h1>
 
                     <legend class="pt-4 mb-1 text-xl font-medium text-center border-t">{{ __('messages.Feedback:') }}
@@ -1062,13 +1062,13 @@
                                     <a class="px-4 mt-2 ml-1 font-bold truncate rounded"
                                         target="_blank">{{ $data->time_spending }}</a>
                                 </div>
-                            @elseif ($data->time_spending == 'dontknow')
+                            @elseif ($data->time_spending == 'indifferent')
                                 <div class="flex flex-col">
-                                    <img src="{{ asset('img/stressed.png') }}" alt="Just a flower"
+                                    <img src="{{ asset('img/indifferent.png') }}" alt="Just a flower"
                                         class="object-cover w-16 h-16 mx-auto rounded"
                                         onerror="this.src='/img/empty.png'">
                                     <a class="px-4 mt-2 font-bold truncate rounded"
-                                        target="_blank">{{ __('messages.i dont know') }}</a>
+                                        target="_blank">{{ __('messages.indifferent') }}</a>
                                 </div>
                             @endif
                         </div>

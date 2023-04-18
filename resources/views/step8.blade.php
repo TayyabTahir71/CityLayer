@@ -54,7 +54,7 @@
                                                 <button type="submit">
                                                     <img src="/img/indifferent.png" alt="stressed" class="w-16 h-16 mb-2">
                                                     <h1 class="font-bold ">{{ __('messages.indifferent') }}</h1>
-                                                    <input type="hidden" name="step8" value="i don't know">
+                                                    <input type="hidden" name="step8" value="indifferent">
                                                 </button>
                                                 <input type="hidden" name="type" id="type2"
                                                     value="{{ $type }}">
