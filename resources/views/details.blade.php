@@ -23,7 +23,7 @@
                  <div class="flex flex-wrap justify-center pt-4 pb-4 overflow-x-hidden text-sm md:w-4xl">
                             @php $opinions = explode(',', $data->opinions); @endphp
                             @foreach ($opinions as $opinion)
-                                <a class="px-4 mx-1 text-white truncate bg-green-800 rounded"
+                                <a class="px-4 mx-1 text-white truncate bg-green-800 rounded mb-2"
                                     target="_blank">{{ $opinion }}</a>
                             @endforeach
                         </div>
