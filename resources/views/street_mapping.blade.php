@@ -25,7 +25,7 @@
                                          class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
 
                                          <div class="flex justify-center">
-                                             <div class="font-semibold">{{ $tag->name }}</div>
+                                             <div class="text-xs font-semibold">{{ $tag->name }}</div>
                                          </div>
                                      </div>
                                  </label>
@@ -39,7 +39,7 @@
                                          class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
 
                                          <div class="flex justify-center">
-                                             <div class="font-semibold">{{ $tag->name }}</div>
+                                             <div class="text-xs font-semibold">{{ $tag->name }}</div>
                                          </div>
                                      </div>
                                  </label>

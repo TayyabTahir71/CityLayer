@@ -27,7 +27,7 @@
                                      class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
 
                                      <div class="flex justify-center">
-                                         <div class="font-semibold">{{ $opinion->name }}</div>
+                                         <div class="text-xs font-semibold">{{ $opinion->name }}</div>
                                      </div>
                                  </div>
                              </label>

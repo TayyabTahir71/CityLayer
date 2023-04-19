@@ -26,7 +26,7 @@
                                      class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#FAC710]  bg-yellow-200 peer-focus:ring-2">
 
                                      <div class="flex justify-center">
-                                         <div class="font-semibold">{{ $spacetag->name }}</div>
+                                         <div class="text-xs font-semibold">{{ $spacetag->name }}</div>
                                      </div>
                                  </div>
                              </label>

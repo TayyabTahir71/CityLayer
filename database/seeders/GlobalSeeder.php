@@ -70,11 +70,6 @@ class GlobalSeeder extends Seeder
             'category'=>'Street'
             ] );
                         
-            Tag::create( [
-            'id'=>10,
-            'name'=>'station',
-            'category'=>'Street'
-            ] );
                         
             Tag::create( [
             'id'=>11,
@@ -442,7 +437,7 @@ class GlobalSeeder extends Seeder
                                     
                         Opinion_de::create( [
                         'id'=>11,
-                        'name'=>'unbenut'
+                        'name'=>'unbenutzt'
                         ] );
                                     
                         Opinion_de::create( [

@@ -34,49 +34,13 @@
                     </label>
 
                     <label>
-                        <input type="checkbox" name="preferences[]" value="I cycle to school or work" {{ in_array("I cycle to school or work", $preference) ? "checked" : "" }}
+                        <input type="checkbox" name="preferences[]" value="I walk to school / work" {{ in_array("I walk to school / work", $preference) ? "checked" : "" }}
                          class="sr-only peer">
                         <div
                             class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
 
                             <div class="flex justify-center">
-                                <div class="font-semibold">{{ __('messages.I cycle to school or work') }}</div>
-                            </div>
-                        </div>
-                    </label>
-
-                    <label>
-                        <input type="checkbox" name="preferences[]" value="I enjoy urban photography" {{ in_array("I enjoy urban photography", $preference) ? "checked" : "" }}
-                         class="sr-only peer">
-                        <div
-                            class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
-                            <div class="flex justify-center">
-                                <div class="font-semibold">{{ __('messages.I enjoy urban photography') }}</div>
-                            </div>
-                        </div>
-                    </label>
-
-                    <label>
-                        <input type="checkbox" name="preferences[]" value="I usually meet with my friends in open spaces" {{ in_array("I usually meet with my friends in open spaces", $preference) ? "checked" : "" }}
-                            class="sr-only peer">
-                        <div
-                            class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
-                            <div class="flex justify-center">
-                                <div class="font-semibold">
-                                    {{ __('messages.I usually meet with my friends in open spaces') }}
-                                </div>
-                            </div>
-                        </div>
-                    </label>
-
-                    <label>
-                        <input type="checkbox" name="preferences[]" value="I like relaxing on the ground and read, eat"  {{ in_array("I like relaxing on the ground and read, eat", $preference) ? "checked" : "" }}
-                            class="sr-only peer">
-                        <div
-                            class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
-                            <div class="flex justify-center">
-                                <div class="font-semibold">{{ __('messages.I like relaxing on the ground and read, eat') }}
-                                </div>
+                                <div class="font-semibold">{{ __('messages.I walk to school / work') }}</div>
                             </div>
                         </div>
                     </label>
@@ -92,24 +56,14 @@
                         </div>
                     </label>
 
-                    <label>
-                        <input type="checkbox" name="preferences[]" value="I like skateboarding"  {{ in_array("I like skateboarding", $preference) ? "checked" : "" }}
-                         class="sr-only peer">
-                        <div
-                            class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
-                            <div class="flex justify-center">
-                                <div class="font-semibold">{{ __('messages.I like skateboarding') }}</div>
-                            </div>
-                        </div>
-                    </label>
 
                     <label>
-                        <input type="checkbox" name="preferences[]" value="I enjoy outdoor sports and recreation"  {{ in_array("I enjoy outdoor sports and recreation", $preference) ? "checked" : "" }}
+                        <input type="checkbox" name="preferences[]" value="I enjoy outdoor sports"  {{ in_array("I enjoy outdoor sports", $preference) ? "checked" : "" }}
                             class="sr-only peer">
                         <div
                             class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
                             <div class="flex justify-center">
-                                <div class="font-semibold">{{ __('messages.I enjoy outdoor sports and recreation') }}</div>
+                                <div class="font-semibold">{{ __('messages.I enjoy outdoor sports') }}</div>
                             </div>
                         </div>
                     </label>
@@ -126,7 +80,7 @@
                     </label>
 
                     <label>
-                        <input type="checkbox" name="preferences[]" value="I cycle or scooter"  {{ in_array("I cycle or scooter", $preference) ? "checked" : "" }}
+                        <input type="checkbox" name="preferences[]" value="I cycle / scooter"  {{ in_array("I cycle / scooter", $preference) ? "checked" : "" }}
                          class="sr-only peer">
                         <div
                             class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
@@ -171,26 +125,26 @@
 
                     <label>
                         <input type="checkbox" name="preferences[]"
-                            value="I am interested in architecture and urban design"  {{ in_array("I am interested in architecture and urban design", $preference) ? "checked" : "" }}
+                            value="I am interested in architecture"  {{ in_array("I am interested in architecture", $preference) ? "checked" : "" }}
                              class="sr-only peer">
                         <div
                             class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
                             <div class="flex justify-center">
                                 <div class="font-semibold">
-                                    {{ __('messages.I am interested in architecture and urban design') }}</div>
+                                    {{ __('messages.I am interested in architecture') }}</div>
                             </div>
                         </div>
                     </label>
 
                     <label>
                         <input type="checkbox" name="preferences[]"
-                            value="I enjoy visiting historical landmarks and monuments"  {{ in_array("I enjoy visiting historical landmarks and monuments", $preference) ? "checked" : "" }}
+                            value="I enjoy visiting historical landmarks"  {{ in_array("I enjoy visiting historical landmarks", $preference) ? "checked" : "" }}
                              class="sr-only peer">
                         <div
                             class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
                             <div class="flex justify-center">
                                 <div class="font-semibold">
-                                    {{ __('messages.I enjoy visiting historical landmarks and monuments') }}</div>
+                                    {{ __('messages.I enjoy visiting historical landmarks') }}</div>
                             </div>
                         </div>
                     </label>
@@ -240,12 +194,12 @@
                     </label>
 
                     <label>
-                        <input type="checkbox" name="preferences[]" value="I enjoy being outside in the evening"  {{ in_array("I enjoy being outside in the evening", $preference) ? "checked" : "" }}
+                        <input type="checkbox" name="preferences[]" value="I enjoy being outside in the night"  {{ in_array("I enjoy being outside in the night", $preference) ? "checked" : "" }}
                             class="sr-only peer">
                         <div
                             class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
                             <div class="flex justify-center">
-                                <div class="font-semibold">{{ __('messages.I enjoy being outside in the evening') }}</div>
+                                <div class="font-semibold">{{ __('messages.I enjoy being outside in the night') }}</div>
                             </div>
                         </div>
                     </label>
@@ -272,21 +226,11 @@
                         </div>
                     </label>
 
-                       <label>
-                        <input type="checkbox" name="preferences[]" value="I am an assistant of people with disabilities"  {{ in_array("I am an assistant of people with disabilities", $preference) ? "checked" : "" }}
-                            class="sr-only peer">
-                        <div
-                            class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#CDB8EB]  bg-purple-200 peer-focus:ring-2">
-                            <div class="flex justify-center">
-                                <div class="font-semibold">{{ __('messages.I am an assistant of people with disabilities') }}</div>
-                            </div>
-                        </div>
-                    </label>
 
 
                     <div class="flex justify-center">
                         <button type="submit"
-                            class="px-8 py-5 mt-8 mb-2 text-sm font-bold text-center text-white bg-[#0CA789] rounded-full hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 bg-green-600 hover:bg-green-700 focus:ring-green-800">{{ __('messages.Save Profile') }}</button>
+                            class="px-8 py-5 mt-8 mb-2 text-sm font-bold text-center text-white bg-[#0CA789] rounded-full hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300">{{ __('messages.Save Profile') }}</button>
                     </div>
         </form>
     </div>

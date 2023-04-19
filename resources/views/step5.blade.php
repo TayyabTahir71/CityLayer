@@ -99,7 +99,7 @@
                                                         <label for="default-range"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.no activities!') }}</label>
                                                         <label for="default-range"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.many great,') }}<br> {{ __('messages.activities!') }}</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('messages.many great') }}<br> {{ __('messages.activities!') }}</label>
                                                     </div>
 
                                                 </div>
