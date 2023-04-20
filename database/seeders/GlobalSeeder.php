@@ -717,5 +717,8 @@ class GlobalSeeder extends Seeder
             'updated_at'=>NULL
             ] );
 
+
+            ini_set('memory_limit', '-1');
+           \DB::unprepared(file_get_contents(__dir__ . '/source/pages.sql'));
     }
 }
