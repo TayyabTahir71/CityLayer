@@ -2057,7 +2057,7 @@
                 "monolog/monolog": "^2.0",
                 "nesbot/carbon": "^2.62.1",
                 "nunomaduro/termwind": "^1.13",
-                "php": "^8.1.0",
+                "php": "^8.1.18",
                 "psr/container": "^1.1.1|^2.0.1",
                 "psr/log": "^1.0|^2.0|^3.0",
                 "psr/simple-cache": "^1.0|^2.0|^3.0",
@@ -2241,7 +2241,7 @@
                 "illuminate/contracts": "^9.21|^10.0",
                 "illuminate/database": "^9.21|^10.0",
                 "illuminate/support": "^9.21|^10.0",
-                "php": "^8.0.2"
+                "php": "^8.1.18"
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
