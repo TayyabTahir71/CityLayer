@@ -59,6 +59,7 @@ class UserCrudController extends CrudController
         $this->getFieldsData();
         CRUD::column('name');
         CRUD::column('email');
+        CRUD::column('score')->type('number');
         //get score from infosperso class where user_id = id
 
  
@@ -95,6 +96,7 @@ class UserCrudController extends CrudController
                 'admin' => 'admin',
                 'user' => 'user',
             ]]);
+            CRUD::field('score')->type('number');
               
         /**
          * Fields can be defined using the fluent syntax or array syntax:
