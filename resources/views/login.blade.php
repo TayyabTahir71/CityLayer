@@ -51,20 +51,9 @@
             </div>
         </div>
         
-   <div class="fixed bottom-0 left-0 right-0 text-white bg-black">
-              <div class="flex justify-between pt-4 pb-4 mx-4 text-sm font-bold text-center">
-            <a href="about">
-            {{ __('messages.Mapping') }}<br>{{ __('messages.tool') }}
-            </a>
-             <a href="research">
-            {{ __('messages.research') }}<br>{{ __('messages.overview') }} 
-            </a>
-             <a href="team">
-            {{ __('messages.Project team') }}<br>{{ __('messages.& partners') }}
-            </a>
-             <a href="contact">
-            {{ __('messages.Contact') }}<br>{{ __('messages.us') }}
-            </a>
+        <div class="fixed bottom-0 left-0 right-0 text-white bg-black">
+            <div class="flex justify-center pt-4 pb-4 mx-4 text-sm font-bold text-center">
+            <a href="aboutus"><h1 class="text-3xl text-center text-white">{{ __('messages.About') }}</h1></a>
             </div>
         </div>
     </div>

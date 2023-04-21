@@ -8,6 +8,8 @@ return [
     'Password' => 'Passwort',
     'register' => 'registrieren',
     'login' => 'anmelden',
+    'About' => 'Über die City Layers',
+    'Back' => 'Zurück',
     'Submit' => 'Absenden',
     'Contact us' => 'Kontaktiere uns',
     'institution or name of participants' => 'Institution oder Name der Teilnehmer',

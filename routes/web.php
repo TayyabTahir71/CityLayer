@@ -73,6 +73,15 @@ Route::get('contactus', function () {
     return view('contactus');
 });
 
+Route::get('aboutus', function () {
+    return view('aboutus');
+});
+
+
+Route::get('impressum', function () {
+    return view('impressum');
+});
+
 Route::get('step3', function () {return view('step3');});
 Route::get('step4', function () {return view('step4');});
 Route::get('step5', function () {return view('step5');});

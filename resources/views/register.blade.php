@@ -36,7 +36,7 @@
                         class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-800 dark:focus:ring-gray-500 dark:focus:border-gray-500"
                         required>
                 </div>
-                <div id="passwordError" class="text-red-500 text-xs"></div>
+                <div id="passwordError" class="text-xs text-red-500"></div>
 
                 <div class="mb-6">
                     <label for="password_confirmation"
@@ -69,23 +69,13 @@
             </div>
         </div>
         
-   <div class="fixed bottom-0 left-0 right-0 text-white bg-black">
-                <div class="flex justify-between pt-4 pb-4 mx-4 text-sm font-bold text-center">
-            <a href="about">
-            {{ __('messages.Mapping') }}<br>{{ __('messages.tool') }}
-            </a>
-             <a href="research">
-            {{ __('messages.research') }}<br>{{ __('messages.overview') }} 
-            </a>
-             <a href="team">
-            {{ __('messages.Project team') }}<br>{{ __('messages.& partners') }}
-            </a>
-             <a href="contact">
-            {{ __('messages.Contact') }}<br>{{ __('messages.us') }}
-            </a>
+        <div class="fixed bottom-0 left-0 right-0 text-white bg-black">
+            <div class="flex justify-center pt-4 pb-4 mx-4 text-sm font-bold text-center">
+            <a href="aboutus"><h1 class="text-3xl text-center text-white">{{ __('messages.About') }}</h1></a>
             </div>
         </div>
     </div>
+
     <script>
     const passwordInput = document.getElementById('password');
     const passwordError = document.getElementById('passwordError');

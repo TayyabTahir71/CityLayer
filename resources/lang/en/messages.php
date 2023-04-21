@@ -8,6 +8,8 @@ return [
     'Password' => 'Password',
     'register' => 'register',
     'login' => 'login',
+    'About' => 'About',
+    'Back' => 'Back',
     'Submit' => 'Submit',
     'Contact us' => 'Contact us',
     'institution or name of participants' => 'institution or name of participants',
