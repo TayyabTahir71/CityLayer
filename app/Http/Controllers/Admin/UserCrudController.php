@@ -122,6 +122,7 @@ class UserCrudController extends CrudController
         CRUD::field('image')->label('avatar');
         CRUD::field('name');
         CRUD::field('email');
+        CRUD::field('score')->type('number');
         $this->crud->addField([   // select_from_array
             'name'        => 'role',
             'label'       => "role",
