@@ -335,7 +335,9 @@
                      }).addTo(mymap0);
                  },
                  function(e) {}, {
-                     enableHighAccuracy: true
+                       enableHighAccuracy: true,
+                           maximumAge: 10000,
+                           timeout: 5000
                  });
          }
 

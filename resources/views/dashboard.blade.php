@@ -82,7 +82,9 @@
                     document.getElementById("mylocation").innerHTML = pos.lat + " " + pos.lng;
                 },
                 function(e) {}, {
-                    enableHighAccuracy: true
+                      enableHighAccuracy: true,
+                           maximumAge: 10000,
+                           timeout: 5000
                 });
         }
         </script>

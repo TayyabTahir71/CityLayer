@@ -120,7 +120,9 @@
                          document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
                      },
                      function(e) {}, {
-                         enableHighAccuracy: true
+                           enableHighAccuracy: true,
+                           maximumAge: 10000,
+                           timeout: 5000
                      });
              }
 
