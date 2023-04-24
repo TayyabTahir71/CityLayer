@@ -113,7 +113,8 @@ var legend = L.control({ position: "topright" });
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                    mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
+                   // mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
+                    mymap0.locate({setView: true, maxZoom: 16});
                     L.marker([position.coords.latitude, position.coords.longitude], {
                         icon: icon
                     }).addTo(mymap0);
