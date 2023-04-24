@@ -9,6 +9,7 @@ return [
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
         'display' => 'standalone',
+        'required_features' => ['geolocation'],
         'orientation'=> 'any',
         'status_bar'=> 'black',
         'icons' => [
