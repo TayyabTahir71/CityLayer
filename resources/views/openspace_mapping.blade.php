@@ -115,7 +115,7 @@
          </div>
 
          <script>
-            
+             window.addEventListener("DOMContentLoaded", (event) => {
                  if (navigator.geolocation) {
                      navigator.geolocation.getCurrentPosition(function(position) {
 
@@ -188,7 +188,7 @@
                          }
                      });
 
-              
+                 });
 
               $('#skip').click(function() {
           

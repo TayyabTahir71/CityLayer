@@ -3,11 +3,10 @@
  @section('main')
      <div data-barba="container">
          <div class="flex flex-col h-screen mx-auto">
-             <div id="newtagadded" class="fixed p-2 font-bold text-white bg-blue-500 border rounded top-5 right-5"></div>
+                       <div id="newtagadded" class="fixed p-2 font-bold text-white bg-blue-500 border rounded top-5 right-5"></div>
              <div class="p-3">
-                 <div class="flex flex-row justify-between pt-2">
-                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
-                     <button id="skip" class="mt-6 mr-4 text-sm text-gray-800">Skip</button>
+                <div class="flex flex-row justify-between pt-2">
+                     <a href="/" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a> <button id="skip" class="mt-6 mr-4 text-sm text-gray-800">Skip</button>
                  </div>
                  <div class="flex flex-col items-center justify-center">
                      <button class="w-32 h-32 mx-4 text-gray-100 bg-[#55C5CF] focus:outline-none rounded-full" disabled>
@@ -46,18 +45,17 @@
                                  </label>
                              @endforeach
                          @endif
-                         <label id="perso" class="hidden">
-                             <input type="checkbox" id="personal" name="form-project-manager[]" value=""
-                                 class="hidden sr-only peer">
-                             <div
-                                 class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
+                          <label id="perso" class="hidden">
+                          <input type="checkbox" id="personal" name="form-project-manager[]" value="" class="hidden sr-only peer">
+                                  <div
+                                         class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white peer-checked:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
 
-                                 <div class="flex justify-center">
-                                     <div id="personame" class="font-semibold"></div>
-                                 </div>
-                             </div>
-                         </label>
-
+                                         <div class="flex justify-center">
+                                             <div id="personame" class="font-semibold"></div>
+                                         </div>
+                                     </div>
+                                 </label>
+             
                          <div x-data="{ modelOpen: false }">
                              <button id="point" @click="modelOpen =!modelOpen"
                                  class="group mb-3 flex items-center rounded border p-3 ring-offset-2 peer-checked:text-white active:bg-[#55C5CF]  bg-blue-50 peer-focus:ring-2">
@@ -116,110 +114,110 @@
          </div>
      </div>
      <script>
-    
+         window.addEventListener("DOMContentLoaded", (event) => {
 
 
-         if (navigator.geolocation) {
-             navigator.geolocation.getCurrentPosition(function(position) {
+             if (navigator.geolocation) {
+                 navigator.geolocation.getCurrentPosition(function(position) {
 
-                     document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
-                     document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
-                 },
-                 function(e) {}, {
-                     enableHighAccuracy: true,
-                     maximumAge: 10000,
-                     timeout: 5000
+                         document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
+                         document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
+                     },
+                     function(e) {}, {
+                         enableHighAccuracy: true,
+                           maximumAge: 10000,
+                           timeout: 5000
+                     });
+             }
+
+
+             $.ajaxSetup({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 }
+             });
+
+             $('#newtag').click(function() {
+                 name = document.getElementById('tagname').value;
+
+                 $.ajax({
+                     type: 'POST',
+                     url: "/newtag",
+                     data: {
+                         name: name,
+                         category: "Street"
+                     },
+                     success: function(data) {
+                         // refresh the webpage
+                       var hiddertag = document.querySelector(".hiddertag");
+                      hiddertag.click();
+                    var newtag = document.getElementById("personal");
+                    newtag.value = data;
+                    newtag.checked = true;
+                    newtag.classList.remove("hidden");
+                    
+                       showMessage("Personal Tag saved");
+                       var perso = document.getElementById("perso");
+                        perso.classList.remove("hidden");
+                        var personame = document.getElementById("personame");
+                        personame.innerHTML = name;
+                     }
                  });
-         }
 
-
-         $.ajaxSetup({
-             headers: {
-                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-             }
-         });
-
-         $('#newtag').click(function() {
-             name = document.getElementById('tagname').value;
-
-             $.ajax({
-                 type: 'POST',
-                 url: "/newtag",
-                 data: {
-                     name: name,
-                     category: "Street"
-                 },
-                 success: function(data) {
-                     // refresh the webpage
-                     var hiddertag = document.querySelector(".hiddertag");
-                     hiddertag.click();
-                     var newtag = document.getElementById("personal");
-                     newtag.value = data;
-                     newtag.checked = true;
-                     newtag.classList.remove("hidden");
-
-                     showMessage("Personal Tag saved");
-                     var perso = document.getElementById("perso");
-                     perso.classList.remove("hidden");
-                     var personame = document.getElementById("personame");
-                     personame.innerHTML = name;
-                 }
              });
 
-         });
-
-         $('#saveplace').click(function() {
-             tags = [];
-             var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-             for (var i = 0; i < checkboxes.length; i++) {
-                 tags.push(checkboxes[i].value);
-             }
-             latitude = document.getElementById('latitude').value;
-             longitude = document.getElementById('longitude').value;
-             //generate a random string name
-             thename = Math.random().toString(8).substring(7);
-             $.ajax({
-                 type: 'POST',
-                 url: "/new_place",
-                 data: {
-                     name: thename,
-                     type: "Street",
-                     latitude: latitude,
-                     longitude: longitude,
-                     tags: tags
-                 },
-                 success: function(data) {
-                     open("/step2?id=" + data, "_self");
+             $('#saveplace').click(function() {
+                 tags = [];
+                 var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                 for (var i = 0; i < checkboxes.length; i++) {
+                     tags.push(checkboxes[i].value);
                  }
+                 latitude = document.getElementById('latitude').value;
+                 longitude = document.getElementById('longitude').value;
+                 //generate a random string name
+                 thename = Math.random().toString(8).substring(7);
+                 $.ajax({
+                     type: 'POST',
+                     url: "/new_place",
+                     data: {
+                         name: thename,
+                         type: "Street",
+                         latitude: latitude,
+                         longitude: longitude,
+                         tags: tags
+                     },
+                     success: function(data) {
+                         open("/step2?id=" + data, "_self");
+                     }
+                 });
+
              });
 
-         });
+          $('#skip').click(function() {
+          
+                 latitude = document.getElementById('latitude').value;
+                 longitude = document.getElementById('longitude').value;
+                 thename = Math.random().toString(8).substring(7);
+                 $.ajax({
+                     type: 'POST',
+                     url: "/new_place",
+                     data: {
+                         name: thename,
+                         type: "Street",
+                         latitude: latitude,
+                         longitude: longitude,
+                         tags: [""]
+                     },
+                     success: function(data) {
+                         open("/step2?id=" + data, "_self");
+                     }
+                 });
 
-         $('#skip').click(function() {
-
-             latitude = document.getElementById('latitude').value;
-             longitude = document.getElementById('longitude').value;
-             thename = Math.random().toString(8).substring(7);
-             $.ajax({
-                 type: 'POST',
-                 url: "/new_place",
-                 data: {
-                     name: thename,
-                     type: "Street",
-                     latitude: latitude,
-                     longitude: longitude,
-                     tags: [""]
-                 },
-                 success: function(data) {
-                     open("/step2?id=" + data, "_self");
-                 }
              });
-
          });
 
 
-
-         function showMessage(message) {
+          function showMessage(message) {
              var messageBox = document.getElementById("newtagadded");
              messageBox.innerHTML = message;
              messageBox.style.display = "block"; // set display to block to show the message
@@ -229,8 +227,8 @@
          }
      </script>
      <style>
-         #newtagadded {
+       #newtagadded {
              display: none;
          }
-     </style>
+    </style>
  @endsection
