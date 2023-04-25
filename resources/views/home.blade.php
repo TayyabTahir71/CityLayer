@@ -144,7 +144,18 @@
                     alert("User denied the request for Geolocation.");
                     break;
                 case error.POSITION_UNAVAILABLE:
-                    alert("Location information is unavailable.");
+                     $.getJSON('https://ipinfo.io/geo', function(response) { 
+        var loc = response.loc.split(',');
+        var coords = {
+            latitude: loc[0],
+            longitude: loc[1]
+        };
+
+          mymap0.setView([coords.latitude, coords.longitude], 10);
+            L.marker([coords.latitude, coords.longitude], {
+                icon: icon
+            }).addTo(mymap0);
+        });  
                     break;
                 case error.TIMEOUT:
                     alert("The request to get user location timed out.");
