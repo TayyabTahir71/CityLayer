@@ -116,11 +116,6 @@
         };
         legend.addTo(mymap0);
 
-        const options = {
-            enableHighAccuracy: true,
-            maximumAge: 15000,
-            timeout: 6000,
-        };
 
         //get the location
         //pause the script for 3 seconds
@@ -137,7 +132,9 @@
             }, function(e) {
                  alert("The request to get user location timed out.");
             }, {
-                enableHighAccuracy: true
+                      enableHighAccuracy: true,
+            maximumAge: 15000,
+            timeout: 6000,
             });
 
         } else {
