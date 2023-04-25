@@ -129,9 +129,9 @@
     
         if (navigator && navigator.geolocation) {
             //wait 3 seconds before getting the location
-                   setTimeout(function() {
+    
                 navigator.geolocation.getCurrentPosition(showPosition, showError, options);
-               }, 3000);
+   
         } else {
             alert("Geolocation is not supported by this browser.");
         }
@@ -149,7 +149,7 @@
                     alert("User denied the request for Geolocation.");
                     break;
                 case error.POSITION_UNAVAILABLE:
-                    alert("Location information is unavailable.");
+                    navigator.geolocation.getCurrentPosition(showPosition, showError, options);
       
                     break;
                 case error.TIMEOUT:
