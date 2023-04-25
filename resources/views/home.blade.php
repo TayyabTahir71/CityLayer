@@ -123,7 +123,7 @@
         };
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError, options);
+            navigator.geolocation.watchPosition(showPosition, showError, options);
         } else {
             alert("Geolocation is not supported by this browser.");
         }
