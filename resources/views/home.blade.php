@@ -120,6 +120,8 @@
         if (navigator.geolocation) {
             //wait 3 seconds to get position
             setTimeout(getposition, 1000);
+        } else {
+            alert("Geolocation is not supported by this browser.");
         }
 
 

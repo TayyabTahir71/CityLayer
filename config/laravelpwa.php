@@ -3,8 +3,8 @@
 return [
     'name' => 'CityLayer',
     'manifest' => [
-        'name' => env('APP_NAME', 'City Layer App'),
-        'short_name' => 'CityLayer',
+        'name' => env('APP_NAME', 'City Layers App'),
+        'short_name' => 'CityLayers',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
