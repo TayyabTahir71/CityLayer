@@ -117,20 +117,21 @@
         legend.addTo(mymap0);
 
         const options = {
-            enableHighAccuracy: true,
-            maximumAge: 60000,
-            timeout: 5000,
+            enableHighAccuracy: false,
+            maximumAge: 15000,
+            timeout: 30000,
         };
-           navigator.geolocation.getCurrentPosition(function () {}, function () {}, {});
+        
 
-        if (navigator.geolocation) {
-         
+        if (navigator && navigator.geolocation) {
+    
             navigator.geolocation.getCurrentPosition(showPosition, showError, options);
         } else {
             alert("Geolocation is not supported by this browser.");
         }
 
         function showPosition(position) {
+            navigator.geolocation.getCurrentPosition(function () {}, function () {}, {});
             mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
             L.marker([position.coords.latitude, position.coords.longitude], {
                 icon: icon
