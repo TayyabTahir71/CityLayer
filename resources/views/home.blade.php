@@ -219,7 +219,7 @@
 
         function mylocation() {
               navigator.geolocation.getCurrentPosition(function () {}, function () {}, {});
-            mymap0.flyto([position.coords.latitude, position.coords.longitude], 14);
+            mymap0.flyTo([position.coords.latitude, position.coords.longitude], 14);
         }
 
         function showError(error) {
@@ -235,7 +235,7 @@
             longitude: loc[1]
         };
 
-          mymap0.flyto([coords.latitude, coords.longitude], 14);
+          mymap0.flyTo([coords.latitude, coords.longitude], 14);
         });  
                     break;
                 case error.TIMEOUT:
