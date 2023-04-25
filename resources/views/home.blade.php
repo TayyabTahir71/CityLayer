@@ -120,7 +120,7 @@
         const options = {
             enableHighAccuracy: true,
             maximumAge: 15000,
-            timeout: 30000,
+            timeout: 0,
         };
 
         //get the location
@@ -216,7 +216,7 @@
         function mylocation() {
             navigator.geolocation.getCurrentPosition(function(position) {
                 mymap0.flyTo([position.coords.latitude, position.coords.longitude], 19);
-            });
+            }, showError, options );
         }
 
         function zoom() {
