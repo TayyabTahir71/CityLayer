@@ -116,9 +116,14 @@
         };
         legend.addTo(mymap0);
 
+        const options = {
+            enableHighAccuracy: true,
+            maximumAge: 30000,
+            timeout: 27000,
+        };
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
+            navigator.geolocation.getCurrentPosition(showPosition, showError, options);
         } else {
             alert("Geolocation is not supported by this browser.");
         }
@@ -139,10 +144,10 @@
                     alert("Location information is unavailable.");
                     break;
                 case error.TIMEOUT:
-                     alert("The request to get user location timed out.");
+                    alert("The request to get user location timed out.");
                     break;
                 case error.UNKNOWN_ERROR:
-                     alert("An unknown error occurred.");
+                    alert("An unknown error occurred.");
                     break;
             }
         }
