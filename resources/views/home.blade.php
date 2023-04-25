@@ -118,7 +118,7 @@
 
         const options = {
             enableHighAccuracy: true,
-            maximumAge: 0,
+            maximumAge: 5000,
             timeout: 5000,
         };
 
