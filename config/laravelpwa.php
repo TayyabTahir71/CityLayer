@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'CityLayer',
+    'name' => 'CityLayers',
     'manifest' => [
         'name' => env('APP_NAME', 'City Layers App'),
         'short_name' => 'CityLayers',
