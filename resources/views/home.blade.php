@@ -81,7 +81,6 @@
     </div>
 
     <script>
-
         data = {!! json_encode($all_data) !!};
         userid = {!! json_encode($userid) !!};
         markers = {};
@@ -126,41 +125,22 @@
         //get the location
         //pause the script for 3 seconds
 
-    
-        if (navigator && navigator.geolocation) {
-            //wait 3 seconds before getting the location
-               
-                navigator.geolocation.getCurrentPosition(showPosition, showError, options);
-   
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
 
-        function showPosition(position) {
-           
-            mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
+ 
+            navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
+            //The working next statement.
+            navigator.geolocation.getCurrentPosition(function(position) {
+                   mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
             L.marker([position.coords.latitude, position.coords.longitude], {
                 icon: icon
             }).addTo(mymap0);
-        }
+            }, function(e) {
+                 alert("The request to get user location timed out.");
+            }, {
+                enableHighAccuracy: true
+            });
 
-        function showError(error) {
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    alert("User denied the request for Geolocation.");
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    navigator.geolocation.getCurrentPosition(showPosition, showError, options);
-      
-                    break;
-                case error.TIMEOUT:
-                    alert("The request to get user location timed out.");
-                    break;
-                case error.UNKNOWN_ERROR:
-                    alert("An unknown error occurred.");
-                    break;
-            }
-        }
+
 
         let count = 0;
         for (let i = 0; i < data.length; i++) {
@@ -216,7 +196,7 @@
         function mylocation() {
             navigator.geolocation.getCurrentPosition(function(position) {
                 mymap0.flyTo([position.coords.latitude, position.coords.longitude], 19);
-            }, showError, options );
+            }, showError, options);
         }
 
         function zoom() {
@@ -224,7 +204,6 @@
                 mymap0.flyTo([position.coords.latitude, position.coords.longitude], 16);
             });
         }
-
     </script>
     <style>
 
