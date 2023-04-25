@@ -141,3 +141,5 @@ Route::get("redirect/{provider}",[SocialiteController::class, 'redirect'])->name
 
 // Le callback du provider
 Route::get("callback/{provider}",[SocialiteController::class, 'callback'])->name('socialite.callback');
+
+URL::forceScheme('https');
