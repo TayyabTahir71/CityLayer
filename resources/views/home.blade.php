@@ -81,6 +81,7 @@
     </div>
 
     <script>
+      window.addEventListener("DOMContentLoaded", (event) => {
         data = {!! json_encode($all_data) !!};
         userid = {!! json_encode($userid) !!};
         markers = {};
@@ -117,7 +118,7 @@
         legend.addTo(mymap0);
 
         const options = {
-            enableHighAccuracy: false,
+            enableHighAccuracy: true,
             maximumAge: 15000,
             timeout: 30000,
         };
@@ -133,7 +134,6 @@
         }
 
         function showPosition(position) {
-            navigator.geolocation.getCurrentPosition(function () {}, function () {}, {});
             mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
             L.marker([position.coords.latitude, position.coords.longitude], {
                 icon: icon
@@ -147,6 +147,7 @@
                     break;
                 case error.POSITION_UNAVAILABLE:
                     alert("Location information is unavailable.");
+      
                     break;
                 case error.TIMEOUT:
                     alert("The request to get user location timed out.");
@@ -219,6 +220,7 @@
                 mymap0.flyTo([position.coords.latitude, position.coords.longitude], 16);
             });
         }
+      }
     </script>
     <style>
 
