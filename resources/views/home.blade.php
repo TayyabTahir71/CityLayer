@@ -112,7 +112,8 @@ var legend = L.control({ position: "topright" });
 
 
         if (navigator.geolocation) {
-              getposition();
+            //wait 3 seconds to get position
+            setTimeout(getposition, 3000);
         }
 
 
