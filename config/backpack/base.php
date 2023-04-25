@@ -260,7 +260,7 @@ return [
     // Can be a single class or an array of classes
     'middleware_class' => [
         App\Http\Middleware\CheckIfAdmin::class,
-        App\Http\Middleware\MyMiddleware::class,
+       // App\Http\Middleware\MyMiddleware::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ],
 
