@@ -112,7 +112,13 @@ var legend = L.control({ position: "topright" });
 
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
+              getposition();
+        }
+
+
+       function getposition() 
+        {
+         navigator.geolocation.getCurrentPosition(function(position) {
                     mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
                     L.marker([position.coords.latitude, position.coords.longitude], {
                         icon: icon
@@ -123,8 +129,6 @@ var legend = L.control({ position: "topright" });
                 });
         }
 
-
-        
 
         let count = 0;
         for (let i = 0; i < data.length; i++) {
