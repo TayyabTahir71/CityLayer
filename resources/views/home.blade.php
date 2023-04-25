@@ -126,7 +126,7 @@
         //pause the script for 3 seconds
 
 
- 
+        if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
             //The working next statement.
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -140,6 +140,9 @@
                 enableHighAccuracy: true
             });
 
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
 
 
         let count = 0;
