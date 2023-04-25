@@ -120,7 +120,7 @@
         const options = {
             enableHighAccuracy: true,
             maximumAge: 15000,
-            timeout: 0,
+            timeout: 3000,
         };
 
         //get the location
