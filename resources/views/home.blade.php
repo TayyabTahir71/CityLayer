@@ -129,7 +129,7 @@
     
         if (navigator && navigator.geolocation) {
             //wait 3 seconds before getting the location
-    
+                  navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
                 navigator.geolocation.getCurrentPosition(showPosition, showError, options);
    
         } else {
