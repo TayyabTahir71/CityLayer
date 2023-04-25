@@ -121,9 +121,10 @@
             maximumAge: 60000,
             timeout: 5000,
         };
+           navigator.geolocation.getCurrentPosition(function () {}, function () {}, {});
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function () {}, function () {}, {});
+         
             navigator.geolocation.getCurrentPosition(showPosition, showError, options);
         } else {
             alert("Geolocation is not supported by this browser.");
