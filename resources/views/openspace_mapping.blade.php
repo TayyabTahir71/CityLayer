@@ -118,8 +118,8 @@
              window.addEventListener("DOMContentLoaded", (event) => {
                  if (navigator.geolocation) {
              
-                     navigator.geolocation.getCurrentPosition(function(position) {
-
+                        navigator.geolocation.getCurrentPosition(
+                        (position) => {
                              document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
                              document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
                          },

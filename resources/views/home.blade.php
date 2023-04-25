@@ -119,7 +119,7 @@
 
         if (navigator.geolocation) {
             //wait 3 seconds to get position
-            setTimeout(getposition, 3000);
+            setTimeout(getposition, 1000);
         }
 
 
