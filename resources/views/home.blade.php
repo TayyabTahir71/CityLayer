@@ -81,7 +81,7 @@
     </div>
 
     <script>
-      window.addEventListener("DOMContentLoaded", (event) => {
+
         data = {!! json_encode($all_data) !!};
         userid = {!! json_encode($userid) !!};
         markers = {};
@@ -123,12 +123,12 @@
             timeout: 30000,
         };
         
-
+    setTimeout(function () {
         if (navigator && navigator.geolocation) {
             //wait 3 seconds before getting the location
-            setTimeout(function () {
+        
                 navigator.geolocation.getCurrentPosition(showPosition, showError, options);
-            }, 3000);
+           
         } else {
             alert("Geolocation is not supported by this browser.");
         }
@@ -220,7 +220,7 @@
                 mymap0.flyTo([position.coords.latitude, position.coords.longitude], 16);
             });
         }
-      }
+       }, 3000);
     </script>
     <style>
 
