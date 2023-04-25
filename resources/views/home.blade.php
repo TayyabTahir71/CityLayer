@@ -79,8 +79,9 @@
             </div>
         </div>
     </div>
+
     <script>
-    navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess, geolocationError, geoprogress, options) {
+ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess, geolocationError, geoprogress, options) {
     var lastCheckedPosition,
         locationEventCount = 0,
         watchID,
@@ -97,8 +98,6 @@
             clearTimeout(timerID);
             navigator.geolocation.clearWatch(watchID);
             foundPosition(position);
-        } else {
-            geoprogress(position);
         }
     };
 
@@ -127,9 +126,7 @@
     watchID = navigator.geolocation.watchPosition(checkLocation, onError, options);
     timerID = setTimeout(stopTrying, options.maxWait); // Set a timeout that will abandon the location loop
 };
-</script>
 
-    <script>
         data = {!! json_encode($all_data) !!};
         userid = {!! json_encode($userid) !!};
         markers = {};
@@ -167,9 +164,8 @@
 
 
         if (navigator && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
             //The working next statement.
-            navigator.geolocation.getCurrentPosition(function(position) {
+            navigator.geolocation.getAccurateCurrentPosition(function(position) {
                    mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
             L.marker([position.coords.latitude, position.coords.longitude], {
                 icon: icon
@@ -177,9 +173,8 @@
             }, function(e) {
                  alert("The request to get user location timed out.");
             }, {
-                      enableHighAccuracy: true,
-            maximumAge: 0,
-            timeout: 60000,
+                     desiredAccuracy:20,
+                      maxWait:3000
             });
 
         } else {
@@ -249,6 +244,55 @@
                 mymap0.flyTo([position.coords.latitude, position.coords.longitude], 16);
             });
         }
+
+
+         navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess, geolocationError, geoprogress, options) {
+    var lastCheckedPosition,
+        locationEventCount = 0,
+        watchID,
+        timerID;
+
+    options = options || {};
+
+    var checkLocation = function (position) {
+        lastCheckedPosition = position;
+        locationEventCount = locationEventCount + 1;
+        // We ignore the first event unless it's the only one received because some devices seem to send a cached
+        // location even when maxaimumAge is set to zero
+        if ((position.coords.accuracy <= options.desiredAccuracy) && (locationEventCount > 1)) {
+            clearTimeout(timerID);
+            navigator.geolocation.clearWatch(watchID);
+            foundPosition(position);
+        } else {
+            geoprogress(position);
+        }
+    };
+
+    var stopTrying = function () {
+        navigator.geolocation.clearWatch(watchID);
+        foundPosition(lastCheckedPosition);
+    };
+
+    var onError = function (error) {
+        clearTimeout(timerID);
+        navigator.geolocation.clearWatch(watchID);
+        geolocationError(error);
+    };
+
+    var foundPosition = function (position) {
+        geolocationSuccess(position);
+    };
+
+    if (!options.maxWait)            options.maxWait = 10000; // Default 10 seconds
+    if (!options.desiredAccuracy)    options.desiredAccuracy = 20; // Default 20 meters
+    if (!options.timeout)            options.timeout = options.maxWait; // Default to maxWait
+
+    options.maximumAge = 0; // Force current locations only
+    options.enableHighAccuracy = true; // Force high accuracy (otherwise, why are you using this function?)
+
+    watchID = navigator.geolocation.watchPosition(checkLocation, onError, options);
+    timerID = setTimeout(stopTrying, options.maxWait); // Set a timeout that will abandon the location loop
+};
     </script>
     <style>
 
