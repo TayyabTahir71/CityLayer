@@ -137,6 +137,7 @@
         }
 
         function showPosition(position) {
+             navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
             mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
             L.marker([position.coords.latitude, position.coords.longitude], {
                 icon: icon
