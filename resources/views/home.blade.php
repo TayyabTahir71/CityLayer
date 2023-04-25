@@ -128,6 +128,8 @@ var legend = L.control({ position: "topright" });
                 },
                 function(e) {}, {
                         enableHighAccuracy: true,
+                            timeout: 30000,
+    maximumAge: 0
                 });
         }
 
