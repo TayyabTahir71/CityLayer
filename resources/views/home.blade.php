@@ -118,12 +118,12 @@
 
         const options = {
             enableHighAccuracy: true,
-            maximumAge: 30000,
-            timeout: 27000,
+            maximumAge: 0,
+            timeout: 5000,
         };
 
         if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(showPosition, showError, options);
+            navigator.geolocation.getCurrentPosition(showPosition, showError, options);
         } else {
             alert("Geolocation is not supported by this browser.");
         }
