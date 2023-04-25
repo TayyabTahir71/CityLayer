@@ -112,6 +112,7 @@ var legend = L.control({ position: "topright" });
 
 
         if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
             //wait 3 seconds to get position
             setTimeout(getposition, 3000);
         }
@@ -126,7 +127,7 @@ var legend = L.control({ position: "topright" });
                     }).addTo(mymap0);
                 },
                 function(e) {}, {
-                
+                        enableHighAccuracy: true,
                 });
         }
 
