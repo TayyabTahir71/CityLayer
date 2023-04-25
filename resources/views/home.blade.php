@@ -117,11 +117,16 @@
         legend.addTo(mymap0);
 
 
-        //get the location
-        //pause the script for 3 seconds
+function storeCoordinates(position) {
+    console.log(position.coords.latitude, position.coords.longitude);
+}    
+
+function errorHandler() {...}
+
+navigator.geolocation.getCurrentPosition(storeCoordinates, errorHandler, { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
 
 
-        if (navigator && navigator.geolocation) {
+       /* if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
             //The working next statement.
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -140,7 +145,7 @@
         } else {
             alert("Geolocation is not supported by this browser.");
         }
-
+*/
 
         let count = 0;
         for (let i = 0; i < data.length; i++) {
