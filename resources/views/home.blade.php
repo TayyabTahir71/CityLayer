@@ -118,7 +118,6 @@
 
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
             //wait 3 seconds to get position
             setTimeout(getposition, 3000);
         }
