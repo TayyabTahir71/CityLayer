@@ -79,6 +79,55 @@
             </div>
         </div>
     </div>
+    <script>
+    navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess, geolocationError, geoprogress, options) {
+    var lastCheckedPosition,
+        locationEventCount = 0,
+        watchID,
+        timerID;
+
+    options = options || {};
+
+    var checkLocation = function (position) {
+        lastCheckedPosition = position;
+        locationEventCount = locationEventCount + 1;
+        // We ignore the first event unless it's the only one received because some devices seem to send a cached
+        // location even when maxaimumAge is set to zero
+        if ((position.coords.accuracy <= options.desiredAccuracy) && (locationEventCount > 1)) {
+            clearTimeout(timerID);
+            navigator.geolocation.clearWatch(watchID);
+            foundPosition(position);
+        } else {
+            geoprogress(position);
+        }
+    };
+
+    var stopTrying = function () {
+        navigator.geolocation.clearWatch(watchID);
+        foundPosition(lastCheckedPosition);
+    };
+
+    var onError = function (error) {
+        clearTimeout(timerID);
+        navigator.geolocation.clearWatch(watchID);
+        geolocationError(error);
+    };
+
+    var foundPosition = function (position) {
+        geolocationSuccess(position);
+    };
+
+    if (!options.maxWait)            options.maxWait = 10000; // Default 10 seconds
+    if (!options.desiredAccuracy)    options.desiredAccuracy = 20; // Default 20 meters
+    if (!options.timeout)            options.timeout = options.maxWait; // Default to maxWait
+
+    options.maximumAge = 0; // Force current locations only
+    options.enableHighAccuracy = true; // Force high accuracy (otherwise, why are you using this function?)
+
+    watchID = navigator.geolocation.watchPosition(checkLocation, onError, options);
+    timerID = setTimeout(stopTrying, options.maxWait); // Set a timeout that will abandon the location loop
+};
+</script>
 
     <script>
         data = {!! json_encode($all_data) !!};
@@ -117,18 +166,7 @@
         legend.addTo(mymap0);
 
 
-function storeCoordinates(position) {
-    console.log(position.coords.latitude, position.coords.longitude);
-}    
-
-function errorHandler() {
-    alert("The request to get user location timed out.");
-}
-
-navigator.geolocation.getCurrentPosition(storeCoordinates, errorHandler, { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
-
-
-       /* if (navigator && navigator.geolocation) {
+        if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
             //The working next statement.
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -140,14 +178,14 @@ navigator.geolocation.getCurrentPosition(storeCoordinates, errorHandler, { enabl
                  alert("The request to get user location timed out.");
             }, {
                       enableHighAccuracy: true,
-            maximumAge: 15000,
-            timeout: 6000,
+            maximumAge: 0,
+            timeout: 60000,
             });
 
         } else {
             alert("Geolocation is not supported by this browser.");
         }
-*/
+
 
         let count = 0;
         for (let i = 0; i < data.length; i++) {
@@ -203,7 +241,7 @@ navigator.geolocation.getCurrentPosition(storeCoordinates, errorHandler, { enabl
         function mylocation() {
             navigator.geolocation.getCurrentPosition(function(position) {
                 mymap0.flyTo([position.coords.latitude, position.coords.longitude], 19);
-            }, showError, options);
+            });
         }
 
         function zoom() {
