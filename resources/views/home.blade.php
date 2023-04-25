@@ -129,7 +129,7 @@
     
         if (navigator && navigator.geolocation) {
             //wait 3 seconds before getting the location
-                  navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
+               
                 navigator.geolocation.getCurrentPosition(showPosition, showError, options);
    
         } else {
@@ -137,7 +137,7 @@
         }
 
         function showPosition(position) {
-             navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
+           
             mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
             L.marker([position.coords.latitude, position.coords.longitude], {
                 icon: icon

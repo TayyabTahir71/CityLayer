@@ -117,7 +117,7 @@
          <script>
              window.addEventListener("DOMContentLoaded", (event) => {
                  if (navigator.geolocation) {
-                      navigator.geolocation.getCurrentPosition(function() {}, function() {}, {});
+             
                      navigator.geolocation.getCurrentPosition(function(position) {
 
                              document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
