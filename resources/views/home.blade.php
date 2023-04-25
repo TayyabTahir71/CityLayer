@@ -121,7 +121,9 @@ function storeCoordinates(position) {
     console.log(position.coords.latitude, position.coords.longitude);
 }    
 
-function errorHandler() {...}
+function errorHandler() {
+    alert("The request to get user location timed out.");
+}
 
 navigator.geolocation.getCurrentPosition(storeCoordinates, errorHandler, { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
 
