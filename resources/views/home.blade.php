@@ -218,9 +218,33 @@
         }
 
         function mylocation() {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                mymap0.flyTo([position.coords.latitude, position.coords.longitude], 19);
-            });
+              navigator.geolocation.getCurrentPosition(function () {}, function () {}, {});
+            mymap0.flyto([position.coords.latitude, position.coords.longitude], 14);
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                     $.getJSON('https://ipinfo.io/geo', function(response) { 
+        var loc = response.loc.split(',');
+        var coords = {
+            latitude: loc[0],
+            longitude: loc[1]
+        };
+
+          mymap0.flyto([coords.latitude, coords.longitude], 14);
+        });  
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
         }
 
         function zoom() {
