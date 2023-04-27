@@ -114,19 +114,50 @@
      <script>
          window.addEventListener("DOMContentLoaded", (event) => {
                if (navigator.geolocation) {
-         
-                            navigator.geolocation.getCurrentPosition(
-                (position) => {
+                     //wait 3 seconds to get position
+                     getposition(success, fail);
+                 } else {
+                     alert("Geolocation is not supported by this browser.");
+                 }
 
-                         document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
-                         document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
-                     },
-                     function(e) {}, {
-                           enableHighAccuracy: true,
-                           maximumAge: 10000,
-                           timeout: 5000
-                     });
-             }
+                 function getposition(success, fail) {
+                     var is_echo = false;
+                     if (navigator && navigator.geolocation) {
+                         navigator.geolocation.getCurrentPosition(
+                             function(pos) {
+                                 if (is_echo) {
+                                     return;
+                                 }
+                                 is_echo = true;
+                                  document.getElementById('latitude').value = pos.coords.latitude.toFixed(6);
+                                  document.getElementById('longitude').value = pos.coords.longitude.toFixed(6);
+                                 success(pos.coords.latitude, pos.coords.longitude);
+                             },
+                             function() {
+                                 if (is_echo) {
+                                     return;
+                                 }
+                                 is_echo = true;
+                                 fail();
+                             }
+                         );
+                     } else {
+                         fail();
+                     }
+                 }
+
+                 function success(lat, lng) {
+                     mymap0.setView([lat, lng], 10);
+                     L.marker([lat, lng], {
+                         icon: icon
+                     }).addTo(mymap0);
+                      
+                 }
+
+                 function fail() {
+                     alert("location failed");
+                 }
+
 
              $.ajaxSetup({
                  headers: {

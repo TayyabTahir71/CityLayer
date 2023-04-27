@@ -27,20 +27,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <!-- Primary Meta Tags -->
-  <meta name="title" content="CityLayer">
+  <meta name="title" content="CityLayers">
   <meta name="description" content="" />
   <meta name="keywords" content="" />
   <link rel="shortcut icon" href="/images/icons/icon-96x96.png" type="image/x-icon" />
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="">
-  <meta property="og:title" content="CityLayer">
+  <meta property="og:title" content="CityLayers">
   <meta property="og:description" content="">
   <meta property="og:image" content="/images/icons/icon-96x96.png">
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="#">
-  <meta property="twitter:title" content="CityLayer">
+  <meta property="twitter:title" content="CityLayers">
   <meta property="twitter:description" content="">
   <meta property="twitter:image" content="/images/icons/icon-96x96.png">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -55,7 +55,7 @@
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
       <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"
         integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin=""></script>
-  <title>CityLayer</title>
+  <title>CityLayers</title>
 @vite('resources/css/app.css')
 <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 <script>

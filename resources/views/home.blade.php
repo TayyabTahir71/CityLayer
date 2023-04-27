@@ -85,7 +85,7 @@
         userid = {!! json_encode($userid) !!};
         markers = {};
         let marker = null;
-        let mymap0 = L.map('map').setView([48.6890, 7.14086], 17);
+        let mymap0 = L.map('map').setView([48.6890, 7.14086], 6);
         // https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png
 
         osmLayer0 = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -119,13 +119,13 @@
 
         if (navigator.geolocation) {
             //wait 3 seconds to get position
-            setTimeout(getposition, 1000);
+            getposition(success, fail);
         } else {
             alert("Geolocation is not supported by this browser.");
         }
 
 
-        function getposition() {
+      /*  function getposition() {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
@@ -150,6 +150,38 @@
                 }
             );
         }
+        */
+
+ function getposition(success, fail){
+    var is_echo = false;
+    if(navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(pos) {
+          if (is_echo){ return; }
+          is_echo = true;
+          success(pos.coords.latitude,pos.coords.longitude);
+        }, 
+        function() {
+          if (is_echo){ return; }
+          is_echo = true;
+          fail();
+        }
+      );
+    } else {
+      fail();
+    }
+  }
+
+  function success(lat, lng){
+      mymap0.setView([lat, lng], 10);
+                    L.marker([lat, lng], {
+                        icon: icon
+                    }).addTo(mymap0);
+  }
+  function fail(){
+    alert("location failed");
+  }
+
 
 
 
@@ -205,30 +237,74 @@
         }
 
         function mylocation() {
-             navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    mymap0.flyTo([position.coords.latitude, position.coords.longitude], 19);
-                },
-                (e) => {
-                   $.getJSON('https://ipinfo.io/geo', function(response) { 
-        var loc = response.loc.split(',');
-        var coords = {
-            latitude: loc[0],
-            longitude: loc[1]
-        };
-         mymap0.flyTo([coords.latitude, coords.longitude], 19);
-        });  
-                }, {
-                    enableHighAccuracy: true,
-                }
-            );
+                  getmyposition(success, fail);
         }
 
-        function zoom() {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                mymap0.flyTo([position.coords.latitude, position.coords.longitude], 16);
-            });
+ function getmyposition(success, fail){
+    var is_echo = false;
+    if(navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(pos) {
+          if (is_echo){ return; }
+          is_echo = true;
+          success(pos.coords.latitude,pos.coords.longitude);
+        }, 
+        function() {
+          if (is_echo){ return; }
+          is_echo = true;
+          fail();
         }
+      );
+    } else {
+      fail();
+    }
+  }
+
+  function success(lat, lng){
+     mymap0.flyTo([lat, lng], 19);
+       L.marker([lat, lng], {
+                        icon: icon
+                    }).addTo(mymap0);
+  }
+  function fail(){
+    alert("location failed");
+  }
+
+        function zoom() {
+            myzoom(success, fail);
+        }
+
+ function myzoom(success, fail){
+    var is_echo = false;
+    if(navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(pos) {
+          if (is_echo){ return; }
+          is_echo = true;
+          success(pos.coords.latitude,pos.coords.longitude);
+        }, 
+        function() {
+          if (is_echo){ return; }
+          is_echo = true;
+          fail();
+        }
+      );
+    } else {
+      fail();
+    }
+  }
+
+  function success(lat, lng){
+     mymap0.flyTo([lat, lng], 16);
+       L.marker([lat, lng], {
+                        icon: icon
+                    }).addTo(mymap0);
+  }
+  function fail(){
+    alert("location failed");
+  }
+
+
     </script>
     <style>
 
