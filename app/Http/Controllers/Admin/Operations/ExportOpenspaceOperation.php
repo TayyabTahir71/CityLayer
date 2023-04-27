@@ -55,13 +55,13 @@ trait ExportOpenspaceOperation
 
         array_unshift($data, $header_row); // Add header row to beginning of data array
 
-        $handle = fopen('Openspace.csv', 'w');
+        $handle = fopen('storage/uploads/Openspace.csv', 'w');
 
         collect($data)->each(fn($row) => fputcsv($handle, $row));
 
         fclose($handle);
 
-        return response()->download('Openspace.csv');
+        return response()->download('storage/uploads/Openspace.csv');
         return redirect()->back();
     }
 }

@@ -55,13 +55,13 @@ trait ExportStreetOperation
 
         array_unshift($data, $header_row); // Add header row to beginning of data array
 
-        $handle = fopen('Street.csv', 'w');
+        $handle = fopen('storage/uploads/Street.csv', 'w');
 
         collect($data)->each(fn($row) => fputcsv($handle, $row));
 
         fclose($handle);
 
-        return response()->download('Street.csv');
+        return response()->download('storage/uploads/Street.csv');
         return redirect()->back();
     }
 }

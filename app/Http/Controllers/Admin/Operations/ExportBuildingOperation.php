@@ -55,13 +55,13 @@ trait ExportBuildingOperation
 
         array_unshift($data, $header_row); // Add header row to beginning of data array
 
-        $handle = fopen('Building.csv', 'w');
+        $handle = fopen('storage/uploads/Building.csv', 'w');
 
         collect($data)->each(fn($row) => fputcsv($handle, $row));
 
         fclose($handle);
 
-        return response()->download('Building.csv');
+        return response()->download('storage/uploads/Building.csv');
         return redirect()->back();
     }
 }
