@@ -205,9 +205,23 @@
         }
 
         function mylocation() {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                mymap0.flyTo([position.coords.latitude, position.coords.longitude], 19);
-            });
+             navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    mymap0.flyTo([position.coords.latitude, position.coords.longitude], 19);
+                },
+                (e) => {
+                   $.getJSON('https://ipinfo.io/geo', function(response) { 
+        var loc = response.loc.split(',');
+        var coords = {
+            latitude: loc[0],
+            longitude: loc[1]
+        };
+         mymap0.flyTo([coords.latitude, coords.longitude], 19);
+        });  
+                }, {
+                    enableHighAccuracy: true,
+                }
+            );
         }
 
         function zoom() {
