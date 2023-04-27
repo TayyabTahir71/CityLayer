@@ -134,7 +134,17 @@
                     }).addTo(mymap0);
                 },
                 (e) => {
-                    this.strError = e.message;
+                   $.getJSON('https://ipinfo.io/geo', function(response) { 
+        var loc = response.loc.split(',');
+        var coords = {
+            latitude: loc[0],
+            longitude: loc[1]
+        };
+         mymap0.setView([coords.latitude, coords.longitude], 10);
+                    L.marker([coords.latitude, coords.longitude], {
+                        icon: icon
+                    }).addTo(mymap0);
+        });  
                 }, {
                     enableHighAccuracy: true,
                 }
