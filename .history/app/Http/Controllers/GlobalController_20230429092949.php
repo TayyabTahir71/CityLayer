@@ -1152,98 +1152,97 @@ class GlobalController extends Controller
         //dd($request->all());
         $userid = backpack_auth()->user()->id;
         // dd($request->all());
-        if($userid){
-            if ($request->type == 'street') {
-                $street = Street::find($request->placeid);
-                if ($request->imagefirst != null) {
-                    $imageName =
-                        $street->name . '.' . $request->imagefirst->extension();
-                    $request->imagefirst->storeAs(
-                        'public/uploads/street/feeling/',
-                        $imageName
-                    );
-                    $street->image0 = '/uploads/street/feeling/' . $imageName;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->save();
-                }
-                if ($request->description != null) {
-                    $street->description = $request->description;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                }
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+
+        if ($request->type == 'street') {
+            $street = Street::find($request->placeid);
+            if ($request->imagefirst != null) {
+                $imageName =
+                    $street->name . '.' . $request->imagefirst->extension();
+                $request->imagefirst->storeAs(
+                    'public/uploads/street/feeling/',
+                    $imageName
+                );
+                $street->image0 = '/uploads/street/feeling/' . $imageName;
+                backpack_auth()->user()->score =
+                    backpack_auth()->user()->score + 5;
                 backpack_auth()
                     ->user()
                     ->save();
                 $street->save();
-            } elseif ($request->type == 'building') {
-                $building = Building::find($request->placeid);
-                if ($request->imagefirst != null) {
-                    $imageName =
-                        $building->name . '.' . $request->imagefirst->extension();
-                    $request->imagefirst->storeAs(
-                        'public/uploads/building/feeling/',
-                        $imageName
-                    );
-                    $building->image0 = '/uploads/building/feeling/' . $imageName;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->save();
-                }
-                if ($request->description != null) {
-                    $building->description = $request->description;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                }
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            }
+            if ($request->description != null) {
+                $street->description = $request->description;
+                backpack_auth()->user()->score =
+                    backpack_auth()->user()->score + 1;
+                backpack_auth()
+                    ->user()
+                    ->save();
+            }
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()
+                ->user()
+                ->save();
+            $street->save();
+        } elseif ($request->type == 'building') {
+            $building = Building::find($request->placeid);
+            if ($request->imagefirst != null) {
+                $imageName =
+                    $building->name . '.' . $request->imagefirst->extension();
+                $request->imagefirst->storeAs(
+                    'public/uploads/building/feeling/',
+                    $imageName
+                );
+                $building->image0 = '/uploads/building/feeling/' . $imageName;
+                backpack_auth()->user()->score =
+                    backpack_auth()->user()->score + 5;
                 backpack_auth()
                     ->user()
                     ->save();
                 $building->save();
-            } elseif ($request->type == 'openspace') {
-                $openspace = Openspace::find($request->placeid);
-                if ($request->imagefirst != null) {
-                    $imageName =
-                        $openspace->name . '.' . $request->imagefirst->extension();
-                    $request->imagefirst->storeAs(
-                        'public/uploads/openspace/feeling/',
-                        $imageName
-                    );
-                    $openspace->image0 = '/uploads/openspace/feeling/' . $imageName;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->save();
-                }
-                if ($request->description != null) {
-                    $openspace->description = $request->description;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                }
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            }
+            if ($request->description != null) {
+                $building->description = $request->description;
+                backpack_auth()->user()->score =
+                    backpack_auth()->user()->score + 1;
+                backpack_auth()
+                    ->user()
+                    ->save();
+            }
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()
+                ->user()
+                ->save();
+            $building->save();
+        } elseif ($request->type == 'openspace') {
+            $openspace = Openspace::find($request->placeid);
+            if ($request->imagefirst != null) {
+                $imageName =
+                    $openspace->name . '.' . $request->imagefirst->extension();
+                $request->imagefirst->storeAs(
+                    'public/uploads/openspace/feeling/',
+                    $imageName
+                );
+                $openspace->image0 = '/uploads/openspace/feeling/' . $imageName;
+                backpack_auth()->user()->score =
+                    backpack_auth()->user()->score + 5;
                 backpack_auth()
                     ->user()
                     ->save();
                 $openspace->save();
             }
+            if ($request->description != null) {
+                $openspace->description = $request->description;
+                backpack_auth()->user()->score =
+                    backpack_auth()->user()->score + 1;
+                backpack_auth()
+                    ->user()
+                    ->save();
+            }
+            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
+            backpack_auth()
+                ->user()
+                ->save();
+            $openspace->save();
         }
 
         $placeid = $request->placeid;
