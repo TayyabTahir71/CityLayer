@@ -36,6 +36,7 @@ class GlobalController extends Controller
      */
     public function getAll()
     {
+
         if (backpack_auth()->check()) {
             $userid = backpack_auth()->user()->id;
             if (Infosperso::where('user_id', $userid)->exists()) {
@@ -179,8 +180,8 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             if (
                 Stat::where('street_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -201,8 +202,8 @@ class GlobalController extends Controller
         } elseif ($request->type == 'building') {
             if (
                 Stat::where('building_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -223,8 +224,8 @@ class GlobalController extends Controller
         } elseif ($request->type == 'openspace') {
             if (
                 Stat::where('openspace_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -252,8 +253,8 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             if (
                 Stat::where('street_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -274,8 +275,8 @@ class GlobalController extends Controller
         } elseif ($request->type == 'building') {
             if (
                 Stat::where('building_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -296,8 +297,8 @@ class GlobalController extends Controller
         } elseif ($request->type == 'openspace') {
             if (
                 Stat::where('openspace_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -325,8 +326,8 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             if (
                 Stat::where('street_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -347,8 +348,8 @@ class GlobalController extends Controller
         } elseif ($request->type == 'building') {
             if (
                 Stat::where('building_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -369,8 +370,8 @@ class GlobalController extends Controller
         } elseif ($request->type == 'openspace') {
             if (
                 Stat::where('openspace_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -398,8 +399,8 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             if (
                 Stat::where('street_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -420,8 +421,8 @@ class GlobalController extends Controller
         } elseif ($request->type == 'building') {
             if (
                 Stat::where('building_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -442,8 +443,8 @@ class GlobalController extends Controller
         } elseif ($request->type == 'openspace') {
             if (
                 Stat::where('openspace_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -471,8 +472,8 @@ class GlobalController extends Controller
         if ($request->type == 'street') {
             if (
                 Stat::where('street_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -493,8 +494,8 @@ class GlobalController extends Controller
         } elseif ($request->type == 'building') {
             if (
                 Stat::where('building_id', $request->id)
-                    ->where('user_id', $userid)
-                    ->doesntExist()
+                ->where('user_id', $userid)
+                ->doesntExist()
             ) {
                 $stat = new Stat();
                 $stat->user_id = $userid;
@@ -538,14 +539,15 @@ class GlobalController extends Controller
         return view('home');
     }
 
-    private function haversine($lat1, $lon1, $lat2, $lon2){
+    private function haversine($lat1, $lon1, $lat2, $lon2)
+    {
         $earthRadius = 6371000; // in meters
         $dLat = deg2rad($lat2 - $lat1);
         $dLon = deg2rad($lon2 - $lon1);
-        $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon/2) * sin($dLon/2);
-        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+        $a = sin($dLat / 2) * sin($dLat / 2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
         $distance = $earthRadius * $c;
-    
+
         return $distance;
     }
 
@@ -583,23 +585,23 @@ class GlobalController extends Controller
         //count how many street image are not null
         $countimage =
             Street::where('user_id', $userid)
-                ->whereNotNull('image')
-                ->count() +
+            ->whereNotNull('image')
+            ->count() +
             Street::where('user_id', $userid)
-                ->whereNotNull('image0')
-                ->count() +
+            ->whereNotNull('image0')
+            ->count() +
             Building::where('user_id', $userid)
-                ->whereNotNull('image')
-                ->count() +
+            ->whereNotNull('image')
+            ->count() +
             Building::where('user_id', $userid)
-                ->whereNotNull('image0')
-                ->count() +
+            ->whereNotNull('image0')
+            ->count() +
             Openspace::where('user_id', $userid)
-                ->whereNotNull('image')
-                ->count() +
+            ->whereNotNull('image')
+            ->count() +
             Openspace::where('user_id', $userid)
-                ->whereNotNull('image0')
-                ->count();
+            ->whereNotNull('image0')
+            ->count();
 
         if ($locale == 'de') {
             $mycomments = Comment_de::where('user_id', $userid)->get();
@@ -612,8 +614,8 @@ class GlobalController extends Controller
         $countbuilding = count($building);
         $countopenspace = count($openspace);
         $countmycomments = count($mycomments);
-        
-  
+
+
         $streets = Street::where('user_id', $userid)->get();
         $buildings = Building::where('user_id', $userid)->get();
         $openspaces = Openspace::where('user_id', $userid)->get();
@@ -626,51 +628,48 @@ class GlobalController extends Controller
             foreach ($streets as $otherStreet) {
                 if ($street->id !== $otherStreet->id) {
                     $distance = $this->haversine($street->latitude, $street->longitude, $otherStreet->latitude, $otherStreet->longitude);
-    
+
                     if ($distance > 50) {
                         $explorer = '1';
                         break;
                     }
                 }
             }
-    
         }
 
         foreach ($buildings as $building) {
 
-   
+
             foreach ($buildings as $otherStreet) {
                 if ($building->id !== $otherStreet->id) {
                     $distance = $this->haversine($building->latitude, $building->longitude, $otherStreet->latitude, $otherStreet->longitude);
-    
+
                     if ($distance > 50) {
                         $explorer = '1';
                         break;
                     }
                 }
             }
-    
         }
 
         foreach ($openspaces as $openspace) {
 
-  
+
             foreach ($openspaces as $otherStreet) {
                 if ($openspace->id !== $otherStreet->id) {
                     $distance = $this->haversine($openspace->latitude, $openspace->longitude, $otherStreet->latitude, $otherStreet->longitude);
-    
+
                     if ($distance > 50) {
                         $explorer = '1';
                         break;
                     }
                 }
             }
-    
         }
-    
 
 
- 
+
+
         if ($countall > 9) {
             $citymaker = '1';
         } else {
@@ -933,9 +932,9 @@ class GlobalController extends Controller
             $street->name = $request->name;
             $street->user_id = $userid;
             $street->type = 'Street';
-            if ($request->latitude && $request->longitude != null ){
-            $street->latitude = $request->latitude;
-            $street->longitude = $request->longitude;
+            if ($request->latitude && $request->longitude != null) {
+                $street->latitude = $request->latitude;
+                $street->longitude = $request->longitude;
             } else {
                 $street->latitude = 0;
                 $street->longitude = 0;
@@ -962,9 +961,9 @@ class GlobalController extends Controller
             $building->name = $request->name;
             $building->user_id = $userid;
             $building->type = 'Building';
-            if ($request->latitude && $request->longitude != null ){
-            $building->latitude = $request->latitude;
-            $building->longitude = $request->longitude;
+            if ($request->latitude && $request->longitude != null) {
+                $building->latitude = $request->latitude;
+                $building->longitude = $request->longitude;
             } else {
                 $building->latitude = 0;
                 $building->longitude = 0;
@@ -992,9 +991,9 @@ class GlobalController extends Controller
             $openspace->name = $request->name;
             $openspace->user_id = $userid;
             $openspace->type = 'Openspace';
-            if ($request->latitude && $request->longitude != null ){
-            $openspace->latitude = $request->latitude;
-            $openspace->longitude = $request->longitude;
+            if ($request->latitude && $request->longitude != null) {
+                $openspace->latitude = $request->latitude;
+                $openspace->longitude = $request->longitude;
             } else {
                 $openspace->latitude = 0;
                 $openspace->longitude = 0;
@@ -1136,7 +1135,7 @@ class GlobalController extends Controller
         $openspace = Openspace::where('user_id', $userid)->get();
         $infos = Infosperso::where('user_id', $userid)->first();
         $score = backpack_auth()->user()->score;
-    
+
 
         $all_data = array_merge(
             $street->toArray(),
@@ -1152,7 +1151,7 @@ class GlobalController extends Controller
         //dd($request->all());
         $userid = backpack_auth()->user()->id;
         // dd($request->all());
-        if($userid){
+        if ($userid) {
             if ($request->type == 'street') {
                 $street = Street::find($request->placeid);
                 if ($request->imagefirst != null) {
