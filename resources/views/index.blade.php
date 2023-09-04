@@ -31,6 +31,9 @@
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                     spaceBetween: 10,
+                     pagination: {
+          el: '.swiper-pagination',
+                },
                     breakpoints: {
                         640: {
                             slidesPerView: 1,
@@ -49,8 +52,8 @@
                             spaceBetween: 5,
                         },
                     },
-                
-                
+
+
                 })">
 
 
@@ -74,8 +77,26 @@
 
                             </div>
                         </div>
+
+                        <div class="flex justify-center items-center mt-3">
+                            <div class="swiper-pagination"></div>
+                        </div>
+
                     </div>
                 </div>
+
+            </section>
+
+
+            <section class="flex justify-center gap-4 items-center flex-col mt-12">
+
+
+                <button class="btn btn-primary">
+                    Get Started
+                </button>
+                <button class="btn btn-secondary">
+                    Login
+                </button>
 
             </section>
 
