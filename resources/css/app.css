@@ -1,67 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
 
-body{
-  font-family: 'Roboto', sans-serif;
-
+body {
+    font-family: "Roboto", sans-serif;
 }
 
-
-img{
-  user-select: none;
+img {
+    user-select: none;
 }
 
 [x-cloak] {
-  display: none;
+    display: none;
 }
 
 [v-cloak] {
-  display: none;
+    display: none;
 }
 
-
 .sidebar {
-  @apply p-4 shadow-md shadow-black border-t border-black border-opacity-50 rounded-lg mb-2 mt-3 bg-gray-900 w-[230px] !important;
+    @apply p-4 shadow-md shadow-black border-t border-black border-opacity-50 rounded-lg mb-2 mt-3 bg-gray-900 w-[230px] !important;
 }
 
 .nav-link {
-  @apply rounded-lg my-1 !important;
+    @apply rounded-lg my-1 !important;
 }
 
 .page-link {
-  color: rgb(202, 202, 202) !important;
+    color: rgb(202, 202, 202) !important;
 }
 
-.reverted{
-  all: revert;
+.reverted {
+    all: revert;
 }
 
 #message {
-  display: none;
+    display: none;
 }
 
 #newtagadded {
-  display: none;
+    display: none;
 }
 
-.btn{
-    @apply px-36 py-4 rounded-full font-medium text-base transition ;
+.btn {
+    @apply py-4 text-base font-medium transition rounded-full;
 }
 
-.btn-primary{
-    @apply bg-blue-500 text-white hover:bg-blue-400;
+.btn-primary {
+    @apply text-white bg-blue-500 px-[138px] hover:bg-blue-400;
 }
 
-.btn-secondary{
-    @apply border-blue-500 text-blue-500 border-2 px-40 hover:bg-blue-100 transition py-3;
+.btn-secondary {
+    @apply px-40 py-3 text-blue-500 transition border-2 border-blue-500 hover:bg-blue-100;
+}
+.form-input {
+    @apply py-3 text-base rounded-full px-[90px];
+    @apply text-center text-blue-500 border-2 border-blue-500 outline-0;
 }
