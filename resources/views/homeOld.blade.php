@@ -8,10 +8,11 @@
 
 @section('main')
     <div data-barba="container">
+        @include('parts.navbar')
         <div class="flex flex-col mx-auto">
-            <div class="">
+            <div class="pt-16">
                 <div class="relative">
-                    <div id="map" class="absolute w-[100vw] z-10 h-[90vh]"></div>
+                    <div id="map" class="absolute mt-4 w-[100vw] z-10 h-[85vh]"></div>
                 </div>
                 <div x-data="{ modelOpen: false }">
                     <div
@@ -107,12 +108,12 @@
         var legend = L.control({
             position: "topright"
         });
-        // legend.onAdd = function(mymap) {
-        //     var div = L.DomUtil.create("div", "legend bg-gray-200 p-2 border border-gray-400 rounded");
-        //     div.innerHTML +=
-        //         '<button class="" onclick="mylocation()"><i class="pr-2 fa fa-location-arrow"></i><span>My location</span><br></button>';
-        //     return div;
-        // };
+        legend.onAdd = function(mymap) {
+            var div = L.DomUtil.create("div", "legend bg-gray-200 p-2 border border-gray-400 rounded");
+            div.innerHTML +=
+                '<button class="" onclick="mylocation()"><i class="pr-2 fa fa-location-arrow"></i><span>My location</span><br></button>';
+            return div;
+        };
         legend.addTo(mymap0);
 
 
@@ -133,7 +134,7 @@
                     }).addTo(mymap0);
                 },
                 (e) => {
-                   $.getJSON('https://ipinfo.io/geo', function(response) {
+                   $.getJSON('https://ipinfo.io/geo', function(response) { 
         var loc = response.loc.split(',');
         var coords = {
             latitude: loc[0],
@@ -143,7 +144,7 @@
                     L.marker([coords.latitude, coords.longitude], {
                         icon: icon
                     }).addTo(mymap0);
-        });
+        });  
                 }, {
                     enableHighAccuracy: true,
                 }
@@ -159,7 +160,7 @@
           if (is_echo){ return; }
           is_echo = true;
           success(pos.coords.latitude,pos.coords.longitude);
-        },
+        }, 
         function() {
           if (is_echo){ return; }
           is_echo = true;
@@ -247,7 +248,7 @@
           if (is_echo){ return; }
           is_echo = true;
           success(pos.coords.latitude,pos.coords.longitude);
-        },
+        }, 
         function() {
           if (is_echo){ return; }
           is_echo = true;
@@ -281,7 +282,7 @@
           if (is_echo){ return; }
           is_echo = true;
           success(pos.coords.latitude,pos.coords.longitude);
-        },
+        }, 
         function() {
           if (is_echo){ return; }
           is_echo = true;
