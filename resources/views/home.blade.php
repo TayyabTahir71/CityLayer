@@ -23,72 +23,93 @@
                     <div id="map" class="absolute w-[100vw] z-10 h-[90vh]"></div>
                 </div>
                 <div x-data="{ modelOpen: false }">
-                    <div class="fixed bottom-0 w-full py-3 text-2xl font-bold bg-black  text-center z-50">
-                        <a class="mx-12" @click="modelOpen =!modelOpen">
-                            <div class="bg-white py-2 rounded-3xl text-black">
-                                {{ __('messages.This place!') }}
+                    <div
+                        class="fixed bottom-0 w-full py-8 text-xl font-semibold rounded-t-3xl bg-gray-50  shadow-xl  text-center z-50 ">
+
+                        <div class="flex">
+                            <div class="absolute left-12 bottom-[18px] ">
+                                <div class="p-3 rounded-full bg-yellow-500 border-2 border-black">
+                                    <img src="{{ asset('img/search-icon.png') }}" class="w-7 h-7" alt="">
+                                </div>
+
+                            </div>
+                            <div class="absolute left-2 bottom-[18px] ">
+                                <div class="p-3 rounded-full bg-blue-500 border-2 border-black">
+                                    <img src="{{ asset('img/image.png') }}" class="w-7 h-7" alt="">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <a class="w-full pt-4" @click="modelOpen =!modelOpen">
+                            <span class="bg-blue-500 py-4 rounded-3xl text-white w-full px-12">
+                                Add on map
+                            </span>
 
                         </a>
+
+                        <div class="absolute right-5 bottom-[25px] ">
+                            <div class="p-1 rounded-full bg-blue-500 w-9">
+                                <span class="italic  text-white font-bold">
+                                    i
+                                </span>
+                            </div>
+                        </div>
+
                     </div>
 
 
-                </div>
+                    <div x-cloak x-show="modelOpen" class="fixed bottom-0 z-50 overflow-y-auto"
+                        aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                        <div class="flex items-end justify-center text-center">
+                            <div x-cloak @click="modelOpen = false" x-show="modelOpen"
+                                x-transition:enter="transition ease-out duration-300 transform"
+                                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                x-transition:leave="transition ease-in duration-200 transform"
+                                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                                class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true">
+                            </div>
 
+                            <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
+                                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                x-transition:leave="transition ease-in duration-200 transform"
+                                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                class="inline-block w-screen p-4 mt-60 overflow-hidden text-left bg-black rounded-t-3xl transition-all transform shadow-xl z-50">
 
-                <div x-cloak x-show="modelOpen" class="fixed bottom-0 z-50 overflow-y-auto" aria-labelledby="modal-title"
-                    role="dialog" aria-modal="true">
-                    <div class="flex items-end justify-center text-center">
-                        <div x-cloak @click="modelOpen = false" x-show="modelOpen"
-                            x-transition:enter="transition ease-out duration-300 transform"
-                            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                            x-transition:leave="transition ease-in duration-200 transform"
-                            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                            class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true">
-                        </div>
+                                <div class="px-1">
 
-                        <div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform"
-                            x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                            x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                            x-transition:leave="transition ease-in duration-200 transform"
-                            x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                            x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                            class="inline-block w-screen p-8 mt-60 overflow-hidden text-left transition-all transform shadow-xl z-50">
+                                    <input type="text" class="rounded-full px-2 w-full bg-white py-2"
+                                        placeholder="Choose tags or add new city layers" name="input" id="">
 
-                            <div class="items-center space-x-4 block">
+                                    <div class="flex mt-4">
+                                        <div class="absolute left-24 bottom-[18px] ">
+                                            <div class="p-3 rounded-full bg-yellow-500 border-2 border-black">
+                                                <img src="{{ asset('img/search-icon.png') }}" class="w-7 h-7"
+                                                    alt="">
+                                            </div>
 
-                                <h1 class="text-3xl font-bold text-center">
-                                    {{ __('messages.This space is...') }}</h1>
-                                <div class="flex flex-col pt-6">
-                                    <div class="flex justify-center">
+                                        </div>
+                                        <div class="absolute left-20 bottom-[18px] ">
+                                            <div class="p-3 rounded-full bg-blue-500 border-2 border-black">
+                                                <img src="{{ asset('img/image.png') }}" class="w-7 h-7" alt="">
+                                            </div>
 
-                                        <a href="street"> <button
-                                                class="w-32 h-32 mx-4 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400  focus:outline-none hover:text-gray-200 rounded-full">
-                                                <i class="fa-solid fa-road"></i><br>{{ __('messages.a street') }}</button>
-                                        </a>
+                                        </div>
                                     </div>
-                                    <div class="flex justify-center space-x-6">
-                                        <a href="building">
-                                            <button
-                                                class="w-32 h-32 py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
-                                                <i
-                                                    class="fa-solid fa-building"></i><br>{{ __('messages.a building') }}</button>
-                                        </a>
-                                        <a href="openspace">
-                                            <button
-                                                class="w-32 h-32  py-6 text-gray-100 bg-[#55C5CF] hover:bg-blue-400 rounded-full focus:outline-none hover:text-gray-200">
-                                                <i
-                                                    class="fa-solid fa-street-view"></i><br>{{ __('messages.an open space') }}</button>
-                                        </a>
-                                    </div>
+
+
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
     </div>
 
     <script>

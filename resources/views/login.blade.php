@@ -53,8 +53,8 @@
                             spaceBetween: 5,
                         },
                     },
-                
-                
+
+
                 })">
 
 
@@ -106,7 +106,7 @@
                     </div>
 
                     <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='password'">
-                        <input type="passsword" placeholder="Password" name="password" id="password" class="form-input"
+                        <input type="password" placeholder="Password" name="password" id="password" class="form-input"
                             required />
                         <button type="submit" class="cursor-pointer btn btn-primary">
                             <div class="text-center"> Login</div>
