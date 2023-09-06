@@ -62,7 +62,7 @@ img {
     @apply w-[360px] py-3 text-blue-500 transition border-2 border-blue-500 hover:bg-blue-100;
 }
 .form-input {
-    @apply h-12 rounded-full px-[85px];
+    @apply h-12 rounded-full w-[360px];
     @apply text-center text-blue-500 border-2 border-blue-500;
     box-shadow: 0;
     outline: 0px;
