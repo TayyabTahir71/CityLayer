@@ -27,13 +27,13 @@
                         class="fixed bottom-0 w-full py-8 text-xl font-semibold rounded-t-3xl bg-gray-50  shadow-xl  text-center z-50 ">
 
                         <div class="flex">
-                            <div class="absolute left-12 bottom-[18px] ">
+                            <div class="absolute left-16 bottom-[18px] ">
                                 <div class="p-3 rounded-full bg-yellow-500 border-2 border-black">
                                     <img src="{{ asset('img/search-icon.png') }}" class="w-7 h-7" alt="">
                                 </div>
 
                             </div>
-                            <div class="absolute left-2 bottom-[18px] ">
+                            <div class="absolute left-6 bottom-[18px] ">
                                 <div class="p-3 rounded-full bg-blue-500 border-2 border-black">
                                     <img src="{{ asset('img/image.png') }}" class="w-7 h-7" alt="">
                                 </div>
@@ -78,26 +78,86 @@
                                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                                 class="inline-block w-screen p-4 mt-60 overflow-hidden text-left bg-black rounded-t-3xl transition-all transform shadow-xl z-50">
 
-                                <div class="px-1">
+                                <div class="px-1 pt-4" x-data="{ tab: 'feature' }">
 
                                     <input type="text" class="rounded-full px-2 w-full bg-white py-2"
                                         placeholder="Choose tags or add new city layers" name="input" id="">
 
-                                    <div class="flex mt-4">
-                                        <div class="absolute left-24 bottom-[18px] ">
-                                            <div class="p-3 rounded-full bg-yellow-500 border-2 border-black">
-                                                <img src="{{ asset('img/search-icon.png') }}" class="w-7 h-7"
-                                                    alt="">
+
+                                    <div class="flex mt-20 justify-center items-center">
+                                        <div class="absolute left-[48%] top-[90px] cursor-pointer" @click="tab='place'"
+                                            onclick="place()">
+                                            <div class="flex flex-col">
+
+                                                <div class="rounded-full  border-2 border-black"
+                                                    :class="tab == 'place' ? 'bg-yellow-500 p-4' :
+                                                        'bg-yellow-500/70 p-[30px]'">
+                                                    <img src="{{ asset('img/search-icon.png') }}" class="w-7 h-7"
+                                                        :class="tab == 'place' ? 'block' : 'hidden'" id="place"
+                                                        alt="">
+                                                </div>
+
+
+
                                             </div>
 
                                         </div>
-                                        <div class="absolute left-20 bottom-[18px] ">
-                                            <div class="p-3 rounded-full bg-blue-500 border-2 border-black">
-                                                <img src="{{ asset('img/image.png') }}" class="w-7 h-7" alt="">
+                                        <div class="absolute left-[37%] top-[90px] cursor-pointer" @click="tab='feature'"
+                                            onclick="feature()">
+                                            <div class="flex flex-col">
+                                                <div class="rounded-full bg-blue-500 border-2 border-black"
+                                                    :class="tab == 'feature' ? 'bg-blue-500 p-4' : 'bg-blue-500/70 p-[30px]'">
+                                                    <img src="{{ asset('img/image.png') }}" class="w-7 h-7"
+                                                        :class="tab == 'feature' ? 'block' : 'hidden'" id="feature"
+                                                        alt="">
+                                                </div>
+
                                             </div>
 
+
                                         </div>
+
+
                                     </div>
+
+                                    <div class="flex mt-44 justify-center items-center">
+                                        <div class="absolute left-[52%] top-[150px] cursor-pointer" @click="tab='place'"
+                                            onclick="place()">
+
+
+                                            <div class="w-8" :class="tab == 'place' ? 'text-white' : 'text-white/30'">
+                                                Browse Observation
+                                            </div>
+
+                                        </div>
+                                        <div class="absolute left-[37%] top-[150px] cursor-pointer" @click="tab='feature'"
+                                            onclick="feature()">
+
+                                            <div class="w-8" :class="tab == 'feature' ? 'text-white' : 'text-white/30'">
+                                                Browse Places
+                                            </div>
+
+
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                    <div class="flex absolute top-[200px] gap-4">
+                                        <div class="rounded-full bg-blue-500 border-2 border-black p-[30px]">
+
+                                        </div>
+                                        <div class="rounded-full bg-blue-500 border-2 border-black p-[30px]">
+
+                                        </div>
+
+                                    </div>
+
+
 
 
 
@@ -350,6 +410,11 @@
 
         function fail() {
             alert("location failed");
+        }
+
+
+        function place() {
+
         }
     </script>
     <style>
