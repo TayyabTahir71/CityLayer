@@ -66,6 +66,8 @@ Route::controller(GlobalController::class)->group(function () {
     Route::post('newspacetag', 'newspacetag')->name('newspacetag');
     Route::get('leaderboard', 'leaderboard')->name('leaderboard');
 
+
+
     Route::get('step2', function () {
         return view('step2');
     });
@@ -147,6 +149,19 @@ Route::get('login', function () {
 Route::get('register', function () {
     return view('register');
 });
+
+
+
+//<-------------------------new routes---------------------------------------->
+
+
+Route::get('/all-places', function () {
+    return view('places');
+});
+
+
+
+
 
 Route::post('contactmail', [MailController::class, 'sendMessage']);
 
