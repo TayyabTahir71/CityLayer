@@ -88,35 +88,94 @@
 
 
             <section class="mt-12" x-data="{ tab: 'get_started' }">
+                <div class="" x-data="{ opt: '' }">
+                    <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='get_started' && opt == ''">
+                        <button @click="tab='login_optns'" class="cursor-pointer btn btn-primary">
+                            <div class="text-center">Get Started</div>
 
-                <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='get_started'">
-                    <button @click="tab='login_optns'" class="cursor-pointer btn btn-primary">
-                        <div class="text-center">Get Started</div>
+                        </button>
+                        <a href="/login" class="cursor-pointer btn btn-secondary">
+                            <div class="text-center">Login</div>
+                        </a>
 
-                    </button>
-                    <a href="/login" class="cursor-pointer btn btn-secondary">
-                        <div class="text-center">Login</div>
-                    </a>
+                        <p class="mt-2 text-center px-7">
+                            By Confirming you agree with 'City Layer' <span class="text-blue-500">Privacy Policy</span> and
+                            <span class="text-blue-500">Terms of Service.</span>
+                        </p>
+                    </div>
 
-                    <p class="mt-2 text-center px-7">
-                        By Confirming you agree with 'City Layer' <span class="text-blue-500">Privacy Policy</span> and
-                        <span class="text-blue-500">Terms of Service.</span>
-                    </p>
+                    <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='login_optns' && opt == ''">
+
+
+                        <button class="cursor-pointer btn btn-primary" @click="opt='username'">
+                            <div class="text-center">Sign up with username</div>
+
+                        </button>
+                        <button class="cursor-pointer btn btn-primary" @click="opt='email'">
+                            <div class="text-center">Sign up with email</div>
+
+                        </button>
+
+
+
+
+                        <a href="/signup" class="cursor-pointer my-2 btn btn-secondary">
+                            <div class="text-center">Sign up later</div>
+                        </a>
+                    </div>
+
+                    <div x-show="opt=='username'">
+                        <form role="form" method="POST" action="{{ route('backpack.auth.login') }}">
+                            {!! csrf_field() !!}
+                            <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='username'">
+                                <input type="text" placeholder="Username" name="name" id="name"
+                                    class="form-input" required />
+                                <button type="button" class="cursor-pointer btn btn-primary" @click="tab='password'">
+                                    <div class="text-center"> Next</div>
+
+                                </button>
+                            </div>
+
+
+
+                            <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='password'">
+                                <input type="password" placeholder="Password" name="password" id="password"
+                                    class="form-input" required />
+                                <button type="submit" class="cursor-pointer btn btn-primary">
+                                    <div class="text-center"> Login</div>
+
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div x-show="opt=='email'">
+
+                        <form role="form" method="POST" action="{{ route('backpack.auth.login') }}">
+                            {!! csrf_field() !!}
+                            <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='username'">
+                                <input type="text" placeholder="Username" name="name" id="name"
+                                    class="form-input" required />
+                                <button type="button" class="cursor-pointer btn btn-primary" @click="tab='password'">
+                                    <div class="text-center"> Next</div>
+
+                                </button>
+                            </div>
+
+
+
+                            <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='password'">
+                                <input type="password" placeholder="Password" name="password" id="password"
+                                    class="form-input" required />
+                                <button type="submit" class="cursor-pointer btn btn-primary">
+                                    <div class="text-center"> Login</div>
+
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
-                <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='login_optns'">
-                    <a href="/login" class="cursor-pointer btn btn-primary">
-                        <div class="text-center">Sign up with username</div>
 
-                    </a>
-                    <a href="/" class="cursor-pointer btn btn-primary">
-                        <div class="text-center">Sign up with email</div>
-
-                    </a>
-                    <a href="/signup" class="cursor-pointer my-2 btn btn-secondary">
-                        <div class="text-center">Sign up later</div>
-                    </a>
-                </div>
 
 
 

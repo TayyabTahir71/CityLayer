@@ -146,9 +146,16 @@ Route::get('login', function () {
     return view('login');
 });
 
-Route::get('register', function () {
-    return view('register');
+Route::get('login', function () {
+    return view('login');
 });
+
+Route::get('add-new-place', function () {
+    return view('add-new-place');
+});
+// Route::get('register', function () {
+//     return view('register');
+// });
 
 
 
