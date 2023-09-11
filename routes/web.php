@@ -149,6 +149,12 @@ Route::get('login', function () {
 Route::get('login', function () {
     return view('login');
 });
+Route::get('sign-up-u', function () {
+    return view('sign-up-u');
+});
+Route::get('sign-up-e', function () {
+    return view('sign-up-e');
+});
 
 Route::get('add-new-place', function () {
     return view('add-new-place');

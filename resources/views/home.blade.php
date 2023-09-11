@@ -11,16 +11,42 @@
         <div class="flex flex-col mx-auto">
             <div class="">
                 <div class="relative">
+                    <div class="" x-data="{ show: false }">
+                        <div class="absolute z-20 p-2 bg-black rounded-lg top-8 left-4" @click="show=true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-8 h-8 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </div>
 
-                    <div class="absolute z-20 p-2 bg-black rounded-lg top-8 left-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-8 h-8 text-white">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
+                        <div x-show="show" @click.outside="show=false"
+                            class="z-30 absolute top-[13vh] left-4 w-[60%] bg-white divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                aria-labelledby="dropdownDefaultButton">
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign
+                                        out</a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
 
-                    <div class="absolute top-[80vh] left-4 p-4 flex justify-center items-center rounded-full bg-black z-20">
+                    <div class="absolute top-[75vh] left-4 p-4 flex justify-center items-center rounded-full bg-black z-20">
                         <img src="{{ asset('img/triangle.png') }}" class="w-7 h-7" alt="">
                     </div>
 

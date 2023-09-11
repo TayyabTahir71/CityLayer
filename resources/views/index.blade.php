@@ -53,8 +53,8 @@
                             spaceBetween: 5,
                         },
                     },
-                
-                
+
+
                 })">
 
 
@@ -88,8 +88,8 @@
 
 
             <section class="mt-12" x-data="{ tab: 'get_started' }">
-                <div class="" x-data="{ opt: '' }">
-                    <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='get_started' && opt == ''">
+
+                    <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='get_started'">
                         <button @click="tab='login_optns'" class="cursor-pointer btn btn-primary">
                             <div class="text-center">Get Started</div>
 
@@ -104,17 +104,17 @@
                         </p>
                     </div>
 
-                    <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='login_optns' && opt == ''">
+                    <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='login_optns'">
 
 
-                        <button class="cursor-pointer btn btn-primary" @click="opt='username'">
+                        <a href="/sign-up-u" class="cursor-pointer btn btn-primary" @click="opt='username'">
                             <div class="text-center">Sign up with username</div>
 
-                        </button>
-                        <button class="cursor-pointer btn btn-primary" @click="opt='email'">
+                        </a>
+                        <a href="/sign-up-e" class="cursor-pointer btn btn-primary" @click="opt='email'">
                             <div class="text-center">Sign up with email</div>
 
-                        </button>
+                        </a>
 
 
 
@@ -124,7 +124,7 @@
                         </a>
                     </div>
 
-                    <div x-show="opt=='username'">
+                    {{-- <div class="flex flex-col items-center justify-center gap-4" x-show=" opt==='username'">
                         <form role="form" method="POST" action="{{ route('backpack.auth.login') }}">
                             {!! csrf_field() !!}
                             <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='username'">
@@ -148,7 +148,7 @@
                             </div>
                         </form>
                     </div>
-                    <div x-show="opt=='email'">
+                    <div class="flex flex-col items-center justify-center gap-4" x-show=" opt==='email'">
 
                         <form role="form" method="POST" action="{{ route('backpack.auth.login') }}">
                             {!! csrf_field() !!}
@@ -172,8 +172,8 @@
                                 </button>
                             </div>
                         </form>
-                    </div>
-                </div>
+                    </div> --}}
+
 
 
 
