@@ -21,7 +21,7 @@
                         </div>
 
                         <div x-show="show" @click.outside="show=false"
-                            class="z-30 absolute top-[13vh] left-4 w-[60%] bg-white divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700">
+                            class="z-30 absolute top-20 left-4 w-[60%] bg-white divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700">
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownDefaultButton">
                                 <li>
@@ -37,7 +37,7 @@
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a href="/admin/logout"
                                         class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign
                                         out</a>
                                 </li>
@@ -46,7 +46,7 @@
 
                     </div>
 
-                    <div class="absolute top-[75vh] left-4 p-4 flex justify-center items-center rounded-full bg-black z-20">
+                    <div class="fixed bottom-28 left-4 p-4 flex justify-center items-center rounded-full bg-black z-20">
                         <img src="{{ asset('img/triangle.png') }}" class="w-7 h-7" alt="">
                     </div>
 
@@ -97,7 +97,7 @@
                     </div>
 
 
-                    <div x-cloak x-show="modelOpen" class="fixed bottom-0 z-50 overflow-y-auto"
+                    <div x-cloak x-show="modelOpen " class="fixed bottom-0 z-50 overflow-y-auto"
                         aria-labelledby="modal-title" role="dialog" aria-modal="true">
                         <div class="flex items-end justify-center text-center">
                             <div x-cloak @click="modelOpen = false" x-show="modelOpen"
@@ -127,13 +127,15 @@
                                         <div class="-mr-2 cursor-pointer" @click="tab='place'" onclick="place()">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
                                                 <div class="border-2 border-black rounded-full shadow-xl bg-cyan-500"
-                                                    :class="tab == 'place' || tab == 'place1' ? 'bg-cyan-500 z-10 p-[22px]' :
+                                                    :class="tab == 'place' || tab == 'place1' ?
+                                                        'bg-cyan-500 z-10 p-[22px]' :
                                                         'bg-cyan-500/70 p-[35px]'">
                                                     <img src="{{ asset('img/image.png') }}" class="w-7 h-7"
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
                                                 </div>
-                                                <div class="text-justify pl-2">
+                                                <div class="text-justify font-semibold  pl-2"
+                                                    :class="tab == 'place' ? 'text-black' : 'text-black/50'">
                                                     Browse Places
                                                 </div>
                                             </div>
@@ -152,7 +154,8 @@
                                                         id="observation" alt="">🔍</span>
                                                 </div>
 
-                                                <div class="text-justify pl-8">
+                                                <div class="text-justify font-semibold  pl-8"
+                                                    :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
                                                     Browse Observation
                                                 </div>
                                             </div>
@@ -203,7 +206,7 @@
                                         </div>
 
                                         <div class="flex flex-col items-center justify-center">
-                                            <a href="/all-places">
+                                            <button onclick="see()">
                                                 <div class="rounded-full border-cyan-500 border-2  p-[22px]">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
@@ -214,7 +217,7 @@
 
                                                 </div>
                                                 <span class="mt-2 text-black">See more</span>
-                                            </a>
+                                            </button>
                                         </div>
 
 
@@ -278,7 +281,274 @@
                             </div>
                         </div>
                     </div>
+                    <div id="myfeel2" x-data="{ seeMore: false }">
+                        <button id="othertag" @click="seeMore =!seeMore" class="hidden"></button>
+
+                        <div x-cloak x-show="seeMore" class="absolute inset-0 z-[60] bg-white"
+                            aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+                            <div x-cloak x-show="seeMore" x-transition:enter="transition ease-out duration-300 transform"
+                                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                x-transition:leave="transition ease-in duration-200 transform"
+                                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                class="z-50 inline-block w-full max-w-xl transition-all transform">
+
+                                <div class="px-4 pt-4" x-data="{ tab: 'place' }">
+
+                                    <div @click="seeMore=false"
+                                        class="flex justify-start items-start bg-black my-4 mx-2 p-1.5 w-7 rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-white">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                                        </svg>
+
+                                    </div>
+
+                                    <input type="text" class="w-full px-2 py-2 bg-white rounded-full"
+                                        placeholder="Choose tags or add new city layers" name="input" id="">
+
+
+
+                                    <div class="flex items-center justify-center mt-12">
+                                        <div class="-mr-2 cursor-pointer" @click="tab='place'" onclick="place()">
+                                            <div class="flex flex-col w-[75px] justify-center items-center">
+                                                <div class="border-2 border-black rounded-full shadow-xl bg-cyan-500"
+                                                    :class="tab == 'place' || tab == 'place1' ?
+                                                        'bg-cyan-500 z-10 p-[22px]' :
+                                                        'bg-cyan-500/70 p-[35px]'">
+                                                    <img src="{{ asset('img/image.png') }}" class="w-7 h-7"
+                                                        :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
+                                                        id="place" alt="">
+                                                </div>
+                                                <div class="text-justify font-semibold  pl-2"
+                                                    :class="tab == 'place' ? 'text-black' : 'text-black/50'">
+                                                    Browse Places
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="-ml-2 cursor-pointer" @click="tab='observation'"
+                                            onclick="observation()">
+                                            <div class="flex flex-col w-[75px] justify-center items-center">
+
+                                                <div class="border-2 flex justify-center items-center border-black rounded-full shadow-xl"
+                                                    :class="tab == 'observation' || tab == 'observation1' ?
+                                                        'bg-yellow-300 z-10 p-[16px]' :
+                                                        'bg-yellow-300/70 p-[35px]'">
+                                                    <span class="w-10 h-10 flex justify-center items-center"
+                                                        :class="tab == 'observation' || tab == 'observation1' ? 'block' :
+                                                            'hidden'"
+                                                        id="observation" alt="">🔍</span>
+                                                </div>
+
+                                                <div class="text-justify font-semibold  pl-8"
+                                                    :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
+                                                    Browse Observation
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{-- <div class="flex items-center justify-center italic font-semibold mt-40">
+                                        <div class="absolute left-[52%] top-[170px] cursor-pointer" @click="tab='feature'"
+                                            onclick="place()">
+
+
+                                            <div class="w-8" :class="tab == 'feature' ? 'text-black' : 'text-black/50'">
+                                                Browse Observation
+                                            </div>
+
+                                        </div>
+                                        <div class="absolute left-[35%] top-[170px] cursor-pointer" @click="tab='place'"
+                                            onclick="feature()">
+
+                                            <div class="w-8" :class="tab == 'place' ? 'text-black' : 'text-black/50'">
+                                                Browse Places
+                                            </div>
+
+
+
+
+                                        </div>
+
+
+                                    </div> --}}
+
+
+
+                                    <div class="flex flex-col  justify-center items-center mt-6 gap-10 italic font-semibold"
+                                        x-show="tab=='place'">
+                                        <div class="flex gap-8">
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Place 1</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Place 2</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Place 2</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-8">
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Place 1</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Place 2</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Place 2</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-8">
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Place 1</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Place 2</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Place 2</span>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                    <div class="flex flex-col  justify-center items-center mt-6 gap-10 italic font-semibold"
+                                        x-show="tab=='observation'">
+                                        <div class="flex gap-8">
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Observation A</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Observation B</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Observation C</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-8">
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Observation E</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Observation F</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Observation G</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-8">
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Observation H</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Observation H</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center w-[80px]">
+                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                </div>
+                                                <span class="mt-2 text-black">Observation I</span>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    </div>
+
+
+
+                                    <div class="flex justify-center items-center mt-8">
+                                        <a href="/add-new-place"
+                                            class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white rounded-3xl bg-cyan-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="3" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            Add new</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                 </div>
+
 
             </div>
         </div>
@@ -527,9 +797,10 @@
             alert("location failed");
         }
 
-
-        function place() {
-
+        function see() {
+            // console.log('sdsd')
+            var btnid = document.getElementById("othertag");
+            btnid.click();
         }
     </script>
     <style>

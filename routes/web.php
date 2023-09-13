@@ -159,6 +159,10 @@ Route::get('sign-up-e', function () {
 Route::get('add-new-place', function () {
     return view('add-new-place');
 });
+
+Route::get('filter', function () {
+    return view('filter');
+});
 // Route::get('register', function () {
 //     return view('register');
 // });
