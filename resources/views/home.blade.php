@@ -11,7 +11,7 @@
         <div class="flex flex-col mx-auto">
             <div class="">
                 <div class="relative">
-                    <div class="" x-data="{ show: false }">
+                    <div class="" x-cloak x-data="{ show: false }">
                         <div class="absolute z-20 p-2 bg-black rounded-lg top-8 left-4" @click="show=true">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-8 h-8 text-white">
@@ -49,6 +49,10 @@
                     <div class="fixed bottom-28 left-4 p-4 flex justify-center items-center rounded-full bg-black z-20">
                         <img src="{{ asset('img/triangle.png') }}" class="w-7 h-7" alt="">
                     </div>
+                    <a href="/filter"
+                        class="fixed bottom-28 right-4 p-4 flex justify-center items-center rounded-full bg-white border-2 border-black z-20">
+                        <img src="{{ asset('img/icons/eye-icon.jpg') }}" class="w-7 h-7" alt="">
+                    </a>
 
                     <div id="map" class="absolute w-[100vw] z-10 h-[90vh]"></div>
                 </div>
@@ -529,7 +533,7 @@
 
 
 
-                                    <div class="flex justify-center items-center mt-8">
+                                    <div class="flex justify-center bottom-4 fixed items-center mt-8">
                                         <a href="/add-new-place"
                                             class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white rounded-3xl bg-cyan-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
