@@ -13,7 +13,7 @@
                 <div class="relative">
                     <div class="" x-cloak x-data="{ show: false }">
                         <div class="absolute z-20 p-2 bg-black rounded-lg top-8 left-4" @click="show=true">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                                 stroke="currentColor" class="w-8 h-8 text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />

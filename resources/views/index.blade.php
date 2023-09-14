@@ -53,8 +53,8 @@
                             spaceBetween: 5,
                         },
                     },
-
-
+                
+                
                 })">
 
 
@@ -77,10 +77,12 @@
 
 
                             </div>
+
+                            <div class="swiper-pagination mt-9"></div>
                         </div>
-                        <div class="flex items-center justify-center mt-3">
-                            <div class="swiper-pagination"></div>
-                        </div>
+
+
+
                     </div>
                 </div>
 
@@ -89,42 +91,42 @@
 
             <section class="mt-12" x-data="{ tab: 'get_started' }">
 
-                    <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='get_started'">
-                        <button @click="tab='login_optns'" class="cursor-pointer btn btn-primary">
-                            <div class="text-center">Get Started</div>
+                <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='get_started'">
+                    <button @click="tab='login_optns'" class="cursor-pointer btn btn-primary">
+                        <div class="text-center">Get Started</div>
 
-                        </button>
-                        <a href="/login" class="cursor-pointer btn btn-secondary">
-                            <div class="text-center">Login</div>
-                        </a>
+                    </button>
+                    <a href="/login" class="cursor-pointer btn btn-secondary">
+                        <div class="text-center">Login</div>
+                    </a>
 
-                        <p class="mt-2 text-center px-7">
-                            By Confirming you agree with 'City Layer' <span class="text-blue-500">Privacy Policy</span> and
-                            <span class="text-blue-500">Terms of Service.</span>
-                        </p>
-                    </div>
+                    <p class="mt-2 text-center px-7">
+                        By Confirming you agree with 'City Layer' <span class="text-blue-500">Privacy Policy</span> and
+                        <span class="text-blue-500">Terms of Service.</span>
+                    </p>
+                </div>
 
-                    <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='login_optns'">
-
-
-                        <a href="/sign-up-u" class="cursor-pointer btn btn-primary" @click="opt='username'">
-                            <div class="text-center">Sign up with username</div>
-
-                        </a>
-                        <a href="/sign-up-e" class="cursor-pointer btn btn-primary" @click="opt='email'">
-                            <div class="text-center">Sign up with email</div>
-
-                        </a>
+                <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='login_optns'">
 
 
+                    <a href="/sign-up-u" class="cursor-pointer btn btn-primary" @click="opt='username'">
+                        <div class="text-center">Sign up with username</div>
+
+                    </a>
+                    <a href="/sign-up-e" class="cursor-pointer btn btn-primary" @click="opt='email'">
+                        <div class="text-center">Sign up with email</div>
+
+                    </a>
 
 
-                        <a href="/signup" class="cursor-pointer my-2 btn btn-secondary">
-                            <div class="text-center">Sign up later</div>
-                        </a>
-                    </div>
 
-                    {{-- <div class="flex flex-col items-center justify-center gap-4" x-show=" opt==='username'">
+
+                    <a href="/signup" class="cursor-pointer my-2 btn btn-secondary">
+                        <div class="text-center">Sign up later</div>
+                    </a>
+                </div>
+
+                {{-- <div class="flex flex-col items-center justify-center gap-4" x-show=" opt==='username'">
                         <form role="form" method="POST" action="{{ route('backpack.auth.login') }}">
                             {!! csrf_field() !!}
                             <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='username'">
