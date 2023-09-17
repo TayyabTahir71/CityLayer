@@ -78,7 +78,7 @@
 
                             </div>
 
-                            <div class="swiper-pagination mt-9"></div>
+                            <div class="swiper-pagination"></div>
                         </div>
 
 

@@ -66,6 +66,8 @@ Route::controller(GlobalController::class)->group(function () {
     Route::post('newspacetag', 'newspacetag')->name('newspacetag');
     Route::get('leaderboard', 'leaderboard')->name('leaderboard');
 
+    Route::post('add/place', 'addNewPlace')->name('add.new.place');
+
 
 
     Route::get('step2', function () {

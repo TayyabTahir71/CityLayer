@@ -3130,4 +3130,10 @@ class GlobalController extends Controller
 
         return redirect()->route('dashboard');
     }
+
+    public function addNewPlace(Request $request)
+    {
+
+        dd($request);
+    }
 }
