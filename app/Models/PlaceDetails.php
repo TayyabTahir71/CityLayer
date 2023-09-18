@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Place extends Model
+class PlaceDetails extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'image',
+        'place_id',
         'user_id',
-        'description',
-        'parent_id'
+        'observation_id',
+        'image',
+        'latitude',
+        'longitude',
     ];
 }

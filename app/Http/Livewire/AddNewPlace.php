@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Observation;
 use App\Models\Place;
+use App\Models\PlaceDetails;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -12,6 +14,7 @@ class AddNewPlace extends Component
     use WithFileUploads;
 
     public $place;
+    public $search;
     public $observation;
 
 
@@ -30,20 +33,45 @@ class AddNewPlace extends Component
     public function addPlace()
     {
 
-        Place::create([
+        $place =  Place::create([
             'user_id' => backpack_user()->id,
-            'place' => $this->place,
-            'observation' => $this->observation,
+            'name' => $this->place,
         ]);
+
+        if ($this->observation) {
+            $observation = Observation::create([
+                'user_id' => backpack_user()->id,
+                'name' => $this->observation,
+            ]);
+
+            PlaceDetails::create([
+                'user_id' =>  backpack_user()->id,
+                'place_id' => $place->id,
+                'observation_id' => $observation->id,
+            ]);
+        }
     }
     public function addObservation()
     {
 
-        Place::create([
+        $observation =  Observation::create([
             'user_id' => backpack_user()->id,
-            'place' => $this->place,
-            'observation' => $this->observation,
+            'name' => $this->observation,
         ]);
+
+
+        if ($this->place) {
+            $place = Place::create([
+                'user_id' => backpack_user()->id,
+                'name' => $this->place,
+            ]);
+
+            PlaceDetails::create([
+                'user_id' =>  backpack_user()->id,
+                'place_id' => $place->id,
+                'observation_id' => $observation->id,
+            ]);
+        }
     }
 
 

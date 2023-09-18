@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('places', function (Blueprint $table) {
+        Schema::create('place_details', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            // $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('place_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('observation_id')->nullable();
             $table->longText('image')->nullable();
-            $table->longText('description')->nullable();
+            $table->decimal('latitude', 8, 6)->default(0.00)->nullable();
+            $table->decimal('longitude', 9, 6)->default(0.00)->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('places');
+        Schema::dropIfExists('place_details');
     }
 };

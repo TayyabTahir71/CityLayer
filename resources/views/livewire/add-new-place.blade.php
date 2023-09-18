@@ -42,7 +42,7 @@
         </div>
         <div class="flex flex-col items-center justify-center px-6 pt-6" x-show="tab=='observation'">
             <input type="text" class="w-full px-2 py-2 bg-gray-200 rounded-full" placeholder="" value=""
-                name="observation" id="">
+                wire:model.defer="observation" id="">
             <span class="mt-2 italic font-semibold">Add a new observation</span>
         </div>
         <div class="flex flex-col items-center justify-center px-6 pt-6" x-show="tab=='observation1'">
@@ -212,50 +212,70 @@
         </div>
 
 
-        <div class="fixed left-0 right-0 bottom-4">
+
+
+        <div class="fixed left-0 right-0 bottom-4" x-show="tab=='place'">
             <div class="flex items-center justify-center gap-2">
                 <button class="px-8 py-4 border-4 border-blue-500 rounded-3xl">
                     <span class="text-xl font-semibold text-blue-500">
                         Cancel
                     </span>
                 </button>
-                @if ($observation)
-                    <button wire:click="addObservation()"
-                        class="px-8 py-4 bg-blue-500 border-4 border-white rounded-3xl">
-                        <span class="text-xl font-semibold text-white">
-                            Submit
-                        </span>
-                    </button>
-                @else
-                    <button @click="tab='observation1'"
-                        class="px-8 py-4 bg-blue-500 border-4 border-white rounded-3xl">
-                        <span class="text-xl font-semibold text-white">
-                            Submit
-                        </span>
-                    </button>
-                @endif
+
+                <button @click="tab='observation1'" class="px-8 py-4 bg-blue-500 border-4 border-white rounded-3xl">
+                    <span class="text-xl font-semibold text-white">
+                        Submit
+                    </span>
+                </button>
+
             </div>
         </div>
-        <div class="fixed left-0 right-0 bottom-4">
+        <div class="fixed left-0 right-0 bottom-4" x-show="tab=='observation1'">
             <div class="flex items-center justify-center gap-2">
                 <button class="px-8 py-4 border-4 border-blue-500 rounded-3xl">
                     <span class="text-xl font-semibold text-blue-500">
                         Cancel
                     </span>
                 </button>
-                @if ($place)
-                    <button wire:click="addPlace()" class="px-8 py-4 bg-blue-500 border-4 border-white rounded-3xl">
-                        <span class="text-xl font-semibold text-white">
-                            Submit
-                        </span>
-                    </button>
-                @else
-                    <button @click="tab='place1'" class="px-8 py-4 bg-blue-500 border-4 border-white rounded-3xl">
-                        <span class="text-xl font-semibold text-white">
-                            Submit
-                        </span>
-                    </button>
-                @endif
+
+                <button wire:click="addPlace()" class="px-8 py-4 bg-blue-500 border-4 border-white rounded-3xl">
+                    <span class="text-xl font-semibold text-white">
+                        Submit
+                    </span>
+                </button>
+
+            </div>
+        </div>
+        <div class="fixed left-0 right-0 bottom-4" x-show="tab=='observation'">
+            <div class="flex items-center justify-center gap-2">
+                <button class="px-8 py-4 border-4 border-blue-500 rounded-3xl">
+                    <span class="text-xl font-semibold text-blue-500">
+                        Cancel
+                    </span>
+                </button>
+
+                <button @click="tab='place1'" class="px-8 py-4 bg-blue-500 border-4 border-white rounded-3xl">
+                    <span class="text-xl font-semibold text-white">
+                        Submit
+                    </span>
+                </button>
+
+            </div>
+        </div>
+        <div class="fixed left-0 right-0 bottom-4" x-show="tab=='place1'">
+            <div class="flex items-center justify-center gap-2">
+                <button class="px-8 py-4 border-4 border-blue-500 rounded-3xl">
+                    <span class="text-xl font-semibold text-blue-500">
+                        Cancel
+                    </span>
+                </button>
+
+                <button wire:click="addObservation()" class="px-8 py-4 bg-blue-500 border-4 border-white rounded-3xl">
+                    <span class="text-xl font-semibold text-white">
+                        Submit
+                    </span>
+                </button>
+
             </div>
         </div>
     </div>

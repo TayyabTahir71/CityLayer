@@ -199,14 +199,14 @@
                                             <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
 
                                             </div>
-                                            <span class="mt-2 text-black">Building</span>
+                                            <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
                                         </a>
 
                                         <a href="openspace" class="flex flex-col items-center justify-center">
                                             <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
 
                                             </div>
-                                            <span class="mt-2 text-black">Openspace</span>
+                                            <span class="mt-2 text-black">{{ $allPlaces[1]->name }}</span>
                                         </a>
 
                                         <div class="flex flex-col items-center justify-center">
@@ -235,14 +235,14 @@
                                             <div class="rounded-full bg-yellow-400 border-2  border-black p-[35px]">
 
                                             </div>
-                                            <span class="mt-2 text-black">Happy</span>
+                                            <span class="mt-2 text-black">{{ $allObservations[0]->name }}</span>
                                         </a>
 
                                         <div class="flex flex-col items-center justify-center">
                                             <div class="rounded-full bg-yellow-400 border-2  border-black p-[35px]">
 
                                             </div>
-                                            <span class="mt-2 text-black">Confused</span>
+                                            <span class="mt-2 text-black">{{ $allObservations[1]->name }}</span>
                                         </div>
 
                                         <div class="flex flex-col items-center justify-center">
@@ -383,94 +383,33 @@
 
                                     <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='place'">
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
 
+                                        @foreach ($allPlaces as $pls)
+                                            <div class="flex gap-8">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Place 1</span>
-                                            </div>
 
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
 
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
 
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
 
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Place 2</span>
                                             </div>
-                                        </div>
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                        @endforeach
 
-                                                </div>
-                                                <span class="mt-2 text-black">Place 1</span>
-                                            </div>
 
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 1</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 1</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
-                                        </div>
 
 
 
@@ -478,75 +417,34 @@
                                     </div>
                                     <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='observation'">
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
 
+                                        @foreach ($allObservations as $obs)
+                                            <div class="flex gap-8">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div
+                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Observation A</span>
-                                            </div>
 
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div
+                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
 
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Observation B</span>
-                                            </div>
 
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div
+                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
 
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Observation C</span>
                                             </div>
-                                        </div>
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation E</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation F</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation G</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation H</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation H</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation I</span>
-                                            </div>
-                                        </div>
-
-
-
+                                        @endforeach
 
 
                                     </div>
