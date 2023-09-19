@@ -46,11 +46,11 @@
 
                     </div>
 
-                    <div class="fixed bottom-28 left-4 p-4 flex justify-center items-center rounded-full bg-black z-20">
+                    <div  onclick="mylocation()" class="fixed z-20 flex items-center justify-center p-4 bg-black rounded-full cursor-pointer bottom-28 left-4">
                         <img src="{{ asset('img/triangle.png') }}" class="w-7 h-7" alt="">
                     </div>
                     <a href="/filter"
-                        class="fixed bottom-28 right-4 p-4 flex justify-center items-center rounded-full bg-white border-2 border-black z-20">
+                        class="fixed z-20 flex items-center justify-center p-4 bg-white border-2 border-black rounded-full bottom-28 right-4">
                         <img src="{{ asset('img/icons/eye-icon.jpg') }}" class="w-7 h-7" alt="">
                     </a>
 
@@ -85,7 +85,7 @@
 
                         <a class="w-full pt-4" @click="modelOpen =!modelOpen">
                             <span class="w-full px-12 py-4 text-white bg-cyan-500 rounded-3xl">
-                                Add on map
+                                Add to map
                             </span>
 
                         </a>
@@ -138,7 +138,7 @@
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
                                                 </div>
-                                                <div class="text-justify font-semibold  pl-2"
+                                                <div class="pl-2 font-semibold text-justify"
                                                     :class="tab == 'place' ? 'text-black' : 'text-black/50'">
                                                     Browse Places
                                                 </div>
@@ -148,17 +148,17 @@
                                             onclick="observation()">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
 
-                                                <div class="border-2 flex justify-center items-center border-black rounded-full shadow-xl"
+                                                <div class="flex items-center justify-center border-2 border-black rounded-full shadow-xl"
                                                     :class="tab == 'observation' || tab == 'observation1' ?
                                                         'bg-yellow-300 z-10 p-[16px]' :
                                                         'bg-yellow-300/70 p-[35px]'">
-                                                    <span class="w-10 h-10 flex justify-center items-center"
+                                                    <span class="flex items-center justify-center w-10 h-10"
                                                         :class="tab == 'observation' || tab == 'observation1' ? 'block' :
                                                             'hidden'"
                                                         id="observation" alt="">🔍</span>
                                                 </div>
 
-                                                <div class="text-justify font-semibold  pl-8"
+                                                <div class="pl-8 font-semibold text-justify"
                                                     :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
                                                     Browse Observation
                                                 </div>
@@ -166,7 +166,7 @@
                                         </div>
                                     </div>
 
-                                    {{-- <div class="flex items-center justify-center italic font-semibold mt-40">
+                                    {{-- <div class="flex items-center justify-center mt-40 italic font-semibold">
                                         <div class="absolute left-[52%] top-[170px] cursor-pointer" @click="tab='feature'"
                                             onclick="place()">
 
@@ -193,7 +193,7 @@
 
 
 
-                                    <div class="flex justify-center items-center mt-6 gap-10 italic font-semibold"
+                                    <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='place'">
                                         <div class="flex flex-col items-center justify-center">
                                             <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
@@ -229,7 +229,7 @@
 
 
                                     </div>
-                                    <div class="flex justify-center items-center mt-6 gap-10 italic font-semibold"
+                                    <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='observation'">
                                         <div class="flex flex-col items-center justify-center">
                                             <div class="rounded-full bg-yellow-400 border-2  border-black p-[35px]">
@@ -269,7 +269,7 @@
 
 
 
-                                    <div class="flex justify-center items-center mt-8">
+                                    <div class="flex items-center justify-center mt-8">
                                         <a href="/add-new-place"
                                             class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white rounded-3xl bg-cyan-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -327,7 +327,7 @@
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
                                                 </div>
-                                                <div class="text-justify font-semibold  pl-2"
+                                                <div class="pl-2 font-semibold text-justify"
                                                     :class="tab == 'place' ? 'text-black' : 'text-black/50'">
                                                     Browse Places
                                                 </div>
@@ -337,17 +337,17 @@
                                             onclick="observation()">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
 
-                                                <div class="border-2 flex justify-center items-center border-black rounded-full shadow-xl"
+                                                <div class="flex items-center justify-center border-2 border-black rounded-full shadow-xl"
                                                     :class="tab == 'observation' || tab == 'observation1' ?
                                                         'bg-yellow-300 z-10 p-[16px]' :
                                                         'bg-yellow-300/70 p-[35px]'">
-                                                    <span class="w-10 h-10 flex justify-center items-center"
+                                                    <span class="flex items-center justify-center w-10 h-10"
                                                         :class="tab == 'observation' || tab == 'observation1' ? 'block' :
                                                             'hidden'"
                                                         id="observation" alt="">🔍</span>
                                                 </div>
 
-                                                <div class="text-justify font-semibold  pl-8"
+                                                <div class="pl-8 font-semibold text-justify"
                                                     :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
                                                     Browse Observation
                                                 </div>
@@ -355,7 +355,7 @@
                                         </div>
                                     </div>
 
-                                    {{-- <div class="flex items-center justify-center italic font-semibold mt-40">
+                                    {{-- <div class="flex items-center justify-center mt-40 italic font-semibold">
                                         <div class="absolute left-[52%] top-[170px] cursor-pointer" @click="tab='feature'"
                                             onclick="place()">
 
@@ -382,7 +382,7 @@
 
 
 
-                                    <div class="flex flex-col  justify-center items-center mt-6 gap-10 italic font-semibold"
+                                    <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='place'">
                                         <div class="flex gap-8">
                                             <div class="flex flex-col items-center justify-center w-[80px]">
@@ -456,7 +456,7 @@
 
 
                                     </div>
-                                    <div class="flex flex-col  justify-center items-center mt-6 gap-10 italic font-semibold"
+                                    <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='observation'">
                                         <div class="flex gap-8">
                                             <div class="flex flex-col items-center justify-center w-[80px]">
@@ -533,7 +533,7 @@
 
 
 
-                                    <div class="flex justify-center bottom-4 fixed items-center mt-8">
+                                    <div class="fixed flex items-center justify-center mt-8 bottom-4">
                                         <a href="/add-new-place"
                                             class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white rounded-3xl bg-cyan-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
