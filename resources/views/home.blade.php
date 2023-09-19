@@ -195,19 +195,21 @@
 
                                     <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='place'">
-                                        <a href="building" class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                        <div class="flex flex-col items-center justify-center">
+                                            <div class="rounded-full bg-cyan-500  p-[35px]"
+                                                x-on:click="tab='observation'">
 
                                             </div>
                                             <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
-                                        </a>
+                                        </div>
 
-                                        <a href="openspace" class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                        <div class="flex flex-col items-center justify-center">
+                                            <div class="rounded-full bg-cyan-500  p-[35px]"
+                                                x-on:click="tab='observation'">
 
                                             </div>
                                             <span class="mt-2 text-black">{{ $allPlaces[1]->name }}</span>
-                                        </a>
+                                        </div>
 
                                         <div class="flex flex-col items-center justify-center">
                                             <button onclick="see()">
@@ -232,14 +234,14 @@
                                     <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='observation'">
                                         <a href="/feeling" class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-yellow-400 border-2  border-black p-[35px]">
+                                            <div class="rounded-full bg-yellow-400  p-[35px]">
 
                                             </div>
                                             <span class="mt-2 text-black">{{ $allObservations[0]->name }}</span>
                                         </a>
 
                                         <div class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-yellow-400 border-2  border-black p-[35px]">
+                                            <div class="rounded-full bg-yellow-400  p-[35px]">
 
                                             </div>
                                             <span class="mt-2 text-black">{{ $allObservations[1]->name }}</span>
@@ -387,21 +389,24 @@
                                         @foreach ($allPlaces as $pls)
                                             <div class="flex gap-8">
                                                 <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                                    <div class="rounded-full bg-cyan-500  p-[35px]"
+                                                        x-on:click="tab='observation'">
 
                                                     </div>
                                                     <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                 </div>
 
                                                 <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                                    <div class="rounded-full bg-cyan-500  p-[35px]"
+                                                        x-on:click="tab='observation'">
 
                                                     </div>
                                                     <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                 </div>
 
                                                 <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                                    <div class="rounded-full bg-cyan-500  p-[35px]"
+                                                        x-on:click="tab='observation'">
 
                                                     </div>
                                                     <span class="mt-2 text-black">{{ $pls->name }}</span>
@@ -421,24 +426,21 @@
                                         @foreach ($allObservations as $obs)
                                             <div class="flex gap-8">
                                                 <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div
-                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+                                                    <div class="rounded-full bg-yellow-300  p-[35px]">
 
                                                     </div>
                                                     <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                 </div>
 
                                                 <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div
-                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+                                                    <div class="rounded-full bg-yellow-300  p-[35px]">
 
                                                     </div>
                                                     <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                 </div>
 
                                                 <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div
-                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+                                                    <div class="rounded-full bg-yellow-300  p-[35px]">
 
                                                     </div>
                                                     <span class="mt-2 text-black">{{ $obs->name }}</span>
@@ -506,21 +508,13 @@
         });
 
 
-        var legend = L.control({
-            position: "topright"
-        });
-        // legend.onAdd = function(mymap) {
-        //     var div = L.DomUtil.create("div", "legend bg-gray-200 p-2 border border-gray-400 rounded");
-        //     div.innerHTML +=
-        //         '<button class="" onclick="mylocation()"><i class="pr-2 fa fa-location-arrow"></i><span>My location</span><br></button>';
-        //     return div;
-        // };
-        legend.addTo(mymap0);
+
 
 
         if (navigator.geolocation) {
             //wait 3 seconds to get position
-            getposition(success, fail);
+            console.log(getposition(success, fail));
+
         } else {
             alert("Geolocation is not supported by this browser.");
         }
@@ -554,6 +548,7 @@
           */
 
         function getposition(success, fail) {
+
             var is_echo = false;
             if (navigator && navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -575,7 +570,11 @@
             } else {
                 fail();
             }
+
         }
+
+
+
 
         function success(lat, lng) {
             mymap0.setView([lat, lng], 10);
@@ -646,11 +645,14 @@
             getmyposition(success, fail);
         }
 
+
         function getmyposition(success, fail) {
+
             var is_echo = false;
             if (navigator && navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     function(pos) {
+                        console.log(pos)
                         if (is_echo) {
                             return;
                         }
@@ -721,9 +723,23 @@
         }
 
         function see() {
-            // console.log('sdsd')
+            console.log('sdsd')
             var btnid = document.getElementById("othertag");
             btnid.click();
+        }
+
+        var lat;
+        var long;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+
+        function showPosition(position) {
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
         }
     </script>
     <style>
