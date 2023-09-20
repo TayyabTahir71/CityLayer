@@ -9,14 +9,43 @@
                      @csrf
                      <input type="file" name="image" id="image" class="hidden" accept="image/*"
                          onchange="javascript:this.form.submit();">
-                     <label for="image" class="cursor-pointer">
-                         <img class="object-cover w-24 h-24 rounded-full ring ring-gray-300 dark:ring-gray-600"
+                     <label for="image" class="cursor-pointer ">
+                         <img class="object-cover w-24 h-24 border-7 border-blue-500 rounded-full  " style="border-width: 7px"
                              src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
                      </label>
+                     <div class="bg-black rounded-full text-white  text-center text-lg relative mt-[-22%] text-2xl" style="width: 31px;font-size: 2rem">+</div>
                  </form>
-                
+
              </div>
              <h1 class="pt-4 text-2xl text-center text-gray-800">{{ $name }}</h1>
+             <br/>
+             <div class="flex flex-row items-center justify-center">
+                 <div class="flex flex-row items-center justify-center  w-1/2 gap-4">
+
+                     <button class="bg-yellow-400 w-1/2 rounded-md p-3">1</button>
+                     <button class="bg-yellow-400 w-1/2 rounded-md p-3">2</button>
+                 </div>
+             </div>
+             <br/>
+             <div class="flex flex-row items-center justify-center">
+                 <div class="flex flex-row items-center justify-center  w-1/2 gap-8">
+                     <button class="bg-yellow-400 w-1/2 rounded-md p-3" style="width:100%">3</button>
+                 </div>
+             </div>
+<br/>
+             <div class="flex flex-row items-center justify-center">
+                 <div class="flex flex-row items-center justify-center  w-1/2 gap-4">
+                     <button class="bg-yellow-400 w-1/2 rounded-md p-3" style="width:62%">4</button>
+                     <button class="bg-yellow-400 w-1/3 rounded-md p-3">5</button>
+                 </div>
+             </div><br/>
+             <div class="flex flex-row items-center justify-center">
+                 <div class="flex flex-row items-center justify-center  w-1/2 gap-4">
+                     <button class="bg-yellow-400 w-1/3 rounded-md p-3" style="width: 46%">6</button>
+                     <button class="bg-yellow-400 w-1/2 rounded-md p-3">7</button>
+                 </div>
+             </div>
+
              <h1 class="pt-4 text-2xl text-center text-gray-800">{{ backpack_auth()->user()->email }}</h1>
              <h2 class="pt-2 text-2xl font-bold text-center text-yellow-300">{{ backpack_auth()->user()->score }}</h2>
              <div class="w-2/3 mx-auto">
@@ -29,143 +58,151 @@
                      </div>
                      <div class="pt-2">
                          @if (backpack_auth()->user()->score < 100)
-                             <div class="text-xs font-semibold text-center text-yellow-300">Level 1</div>
+                             <div class="text-xs font-semibold text-center text-blue-300">Level 1</div>
                          @elseif(backpack_auth()->user()->score < 200)
-                             <div class="text-xs font-semibold text-center text-yellow-300">Level 2</div>
+                             <div class="text-xs font-semibold text-center text-blue-300">Level 2</div>
                          @elseif(backpack_auth()->user()->score < 300)
-                             <div class="text-xs font-semibold text-center text-yellow-300">Level 3</div>
+                             <div class="text-xs font-semibold text-center text-blue-300">Level 3</div>
                          @elseif(backpack_auth()->user()->score < 400)
-                             <div class="text-xs font-semibold text-center text-yellow-300">Level 4</div>
+                             <div class="text-xs font-semibold text-center text-blue-300">Level 4</div>
                          @elseif(backpack_auth()->user()->score < 500)
-                             <div class="text-xs font-semibold text-center text-yellow-300">Level 5</div>
+                             <div class="text-xs font-semibold text-center text-blue-300">Level 5</div>
                          @elseif(backpack_auth()->user()->score < 600)
-                             <div class="text-xs font-semibold text-center text-yellow-300">Level 6</div>
+                             <div class="text-xs font-semibold text-center text-blue-300">Level 6</div>
                          @elseif(backpack_auth()->user()->score < 700)
-                             <div class="text-xs font-semibold text-center text-yellow-300">Level 7</div>
+                             <div class="text-xs font-semibold text-center text-blue-300">Level 7</div>
                          @elseif(backpack_auth()->user()->score < 800)
-                             <div class="text-xs font-semibold text-center text-yellow-300">Level 8</div>
+                             <div class="text-xs font-semibold text-center text-blue-300">Level 8</div>
                          @elseif(backpack_auth()->user()->score < 900)
-                             <div class="text-xs font-semibold text-center text-yellow-300">Level 9</div>
+                             <div class="text-xs font-semibold text-center text-blue-300">Level 9</div>
                          @elseif(backpack_auth()->user()->score < 1000)
-                             <div class="text-xs font-semibold text-center text-yellow-300">Level 10</div>
+                             <div class="text-xs font-semibold text-center text-blue-300">Level 10</div>
                          @endif
                      </div>
-
-
-                     <div class="fixed top-0 left-0 w-full h-full popup z-100" style="display:none;">
-                         <div class="popup-content absolute top-[50%] left-[50%] bg-white rounded p-4 text-xs font-bold text-center w-2/3">
-                         
-                         </div>
+                     <div class="flex flex-col justify-center items-center">
+                         <img src="{{ asset('images/mir.png') }}" alt="Your Image">
                      </div>
-                     <h1 class="pt-2 text-xs font-bold text-center text-gray-800">{{ __('messages.My badges:') }}</h1>
-                     <div class="flex justify-center pt-2">
-                         <div class="flex flex-col">
-                             <div class="flex gap-x-1">
-                                 <button id="btn1">
-                                     @if ($explorer == 1)
-                                         <img class="w-24" src="/img/icons/explorer.png" alt="">
-                                     @else
-                                         <img class="w-24 grayscale" src="/img/icons/explorer.png">
-                                     @endif
-                                 </button>
-                                 <button id="btn2">
-                                     @if ($citymaker == 1)
-                                         <img class="w-24" src="/img/icons/citymaker.png" alt="">
-                                     @else
-                                         <img class="w-24 grayscale" src="/img/icons/citymaker.png">
-                                     @endif
-                                 </button>
-
-                                 <button id="btn3">
-                                     @if ($architect == 1)
-                                         <img class="w-24" src="/img/icons/architect.png" alt="">
-                                     @else
-                                         <img class="w-24 grayscale" src="/img/icons/architect.png">
-                                     @endif
-                                 </button>
-
-                                 <button id="btn4">
-                                     @if ($flaneur == 1)
-                                         <img class="w-24" src="/img/icons/flaneur.png" alt="">
-                                     @else
-                                         <img class="w-24 grayscale" src="/img/icons/flaneur.png">
-                                     @endif
-                                 </button>
-
-                                 <button id="btn5">
-                                     @if ($urbanist == 1)
-                                         <img class="w-24" src="/img/icons/urbanist.png" alt="">
-                                     @else
-                                         <img class="w-24 grayscale" src="/img/icons/urbanist.png">
-                                     @endif
-                                 </button>
-                             </div>
-                             <div class="flex pt-2 gap-x-1">
-                                 <button id="btn6">
-                                     @if ($influencer == 1)
-                                         <img class="w-24" src="/img/icons/influencer.png" alt="">
-                                     @else
-                                         <img class="w-24 grayscale" src="/img/icons/influencer.png">
-                                     @endif
-                                 </button>
-
-                                 <button id="btn7">
-                                     @if ($star == 1)
-                                         <img class="w-24" src="/img/icons/star.png" alt="">
-                                     @else
-                                         <img class="w-24 grayscale" src="/img/icons/star.png">
-                                     @endif
-                                 </button>
-
-                                 <button id="btn8">
-                                     @if ($guru == 1)
-                                         <img class="w-24" src="/img/icons/guru.png" alt="">
-                                     @else
-                                         <img class="w-24 grayscale" src="/img/icons/guru.png">
-                                     @endif
-                                 </button>
-
-                                 <button id="btn9">
-                                     @if ($investigator == 1)
-                                         <img class="w-24" src="/img/icons/investigator.png" alt="">
-                                     @else
-                                         <img class="w-24 grayscale" src="/img/icons/investigator.png">
-                                     @endif
-                                 </button>
-
-                                 <button id="btn10">
-                                     @if ($supermapper == 1)
-                                         <img class="w-24" src="/img/icons/supermapper.png" alt="">
-                                     @else
-                                         <img class="w-24 grayscale" src="/img/icons/supermapper.png">
-                                     @endif
-                                 </button>
-                             </div>
-
-                         </div>
+                     <br/>
+                     <div class="flex flex-row justify-center items-center gap-4">
+                         <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg">Close</button>
+                         <button class="text-blue-500 border border-blue-500 p-1 md:p-2 rounded-md cursor-pointer">Edit profile</button>
                      </div>
+
+
+{{--                     <div class="fixed top-0 left-0 w-full h-full popup z-100" style="display:none;">--}}
+{{--                         <div class="popup-content absolute top-[50%] left-[50%] bg-white rounded p-4 text-xs font-bold text-center w-2/3">--}}
+
+{{--                         </div>--}}
+{{--                     </div>--}}
+{{--                     <h1 class="pt-2 text-xs font-bold text-center text-gray-800">{{ __('messages.My badges:') }}</h1>--}}
+{{--                     <div class="flex justify-center pt-2">--}}
+{{--                         <div class="flex flex-col">--}}
+{{--                             <div class="flex gap-x-1">--}}
+{{--                                 <button id="btn1">--}}
+{{--                                     @if ($explorer == 1)--}}
+{{--                                         <img class="w-24" src="/img/icons/explorer.png" alt="">--}}
+{{--                                     @else--}}
+{{--                                         <img class="w-24 grayscale" src="/img/icons/explorer.png">--}}
+{{--                                     @endif--}}
+{{--                                 </button>--}}
+{{--                                 <button id="btn2">--}}
+{{--                                     @if ($citymaker == 1)--}}
+{{--                                         <img class="w-24" src="/img/icons/citymaker.png" alt="">--}}
+{{--                                     @else--}}
+{{--                                         <img class="w-24 grayscale" src="/img/icons/citymaker.png">--}}
+{{--                                     @endif--}}
+{{--                                 </button>--}}
+
+{{--                                 <button id="btn3">--}}
+{{--                                     @if ($architect == 1)--}}
+{{--                                         <img class="w-24" src="/img/icons/architect.png" alt="">--}}
+{{--                                     @else--}}
+{{--                                         <img class="w-24 grayscale" src="/img/icons/architect.png">--}}
+{{--                                     @endif--}}
+{{--                                 </button>--}}
+
+{{--                                 <button id="btn4">--}}
+{{--                                     @if ($flaneur == 1)--}}
+{{--                                         <img class="w-24" src="/img/icons/flaneur.png" alt="">--}}
+{{--                                     @else--}}
+{{--                                         <img class="w-24 grayscale" src="/img/icons/flaneur.png">--}}
+{{--                                     @endif--}}
+{{--                                 </button>--}}
+
+{{--                                 <button id="btn5">--}}
+{{--                                     @if ($urbanist == 1)--}}
+{{--                                         <img class="w-24" src="/img/icons/urbanist.png" alt="">--}}
+{{--                                     @else--}}
+{{--                                         <img class="w-24 grayscale" src="/img/icons/urbanist.png">--}}
+{{--                                     @endif--}}
+{{--                                 </button>--}}
+{{--                             </div>--}}
+{{--                             <div class="flex pt-2 gap-x-1">--}}
+{{--                                 <button id="btn6">--}}
+{{--                                     @if ($influencer == 1)--}}
+{{--                                         <img class="w-24" src="/img/icons/influencer.png" alt="">--}}
+{{--                                     @else--}}
+{{--                                         <img class="w-24 grayscale" src="/img/icons/influencer.png">--}}
+{{--                                     @endif--}}
+{{--                                 </button>--}}
+
+{{--                                 <button id="btn7">--}}
+{{--                                     @if ($star == 1)--}}
+{{--                                         <img class="w-24" src="/img/icons/star.png" alt="">--}}
+{{--                                     @else--}}
+{{--                                         <img class="w-24 grayscale" src="/img/icons/star.png">--}}
+{{--                                     @endif--}}
+{{--                                 </button>--}}
+
+{{--                                 <button id="btn8">--}}
+{{--                                     @if ($guru == 1)--}}
+{{--                                         <img class="w-24" src="/img/icons/guru.png" alt="">--}}
+{{--                                     @else--}}
+{{--                                         <img class="w-24 grayscale" src="/img/icons/guru.png">--}}
+{{--                                     @endif--}}
+{{--                                 </button>--}}
+
+{{--                                 <button id="btn9">--}}
+{{--                                     @if ($investigator == 1)--}}
+{{--                                         <img class="w-24" src="/img/icons/investigator.png" alt="">--}}
+{{--                                     @else--}}
+{{--                                         <img class="w-24 grayscale" src="/img/icons/investigator.png">--}}
+{{--                                     @endif--}}
+{{--                                 </button>--}}
+
+{{--                                 <button id="btn10">--}}
+{{--                                     @if ($supermapper == 1)--}}
+{{--                                         <img class="w-24" src="/img/icons/supermapper.png" alt="">--}}
+{{--                                     @else--}}
+{{--                                         <img class="w-24 grayscale" src="/img/icons/supermapper.png">--}}
+{{--                                     @endif--}}
+{{--                                 </button>--}}
+{{--                             </div>--}}
+
+{{--                         </div>--}}
+{{--                     </div>--}}
                      <h1 class="pt-4 text-xl text-center text-gray-800">{{ $infos->profession }}</h1>
                  </div>
              </div>
-             <div class="flex justify-center pt-4 mx-4">
-                 @php
-                     $preferences = explode(',', $infos->preferences);
-                     // remove all special characters but keep the spaces
-                     $preferences = preg_replace('/[^A-Za-z0-9 ]/', '', $preferences);
-                     
-                 @endphp
-                 @foreach ($preferences as $preference)
-                     <div class="flex flex-col gap-y-2">
-                         <h1 class="text-xs flex py-2 mx-2 px-2 text-center text-white bg-[#667DC7] rounded-lg">
-                             {{ $preference }}</h1>
-                     </div>
-                 @endforeach
+{{--             <div class="flex justify-center pt-4 mx-4">--}}
+{{--                 @php--}}
+{{--                     $preferences = explode(',', $infos->preferences);--}}
+{{--                     // remove all special characters but keep the spaces--}}
+{{--                     $preferences = preg_replace('/[^A-Za-z0-9 ]/', '', $preferences);--}}
 
-             </div>
-             <button
-                 class="px-4 py-2 mx-auto mt-8 mb-8 text-center text-white bg-green-400 rounded-full hover:bg-green-300 active:bg-green-800">
-                 <a href="/edit_profile">{{ __('messages.Edit Profile') }}</a>
-             </button>
+{{--                 @endphp--}}
+{{--                 @foreach ($preferences as $preference)--}}
+{{--                     <div class="flex flex-col gap-y-2">--}}
+{{--                         <h1 class="text-xs flex py-2 mx-2 px-2 text-center text-white bg-[#667DC7] rounded-lg">--}}
+{{--                             {{ $preference }}</h1>--}}
+{{--                     </div>--}}
+{{--                 @endforeach--}}
+
+{{--             </div>--}}
+{{--             <button--}}
+{{--                 class="px-4 py-2 mx-auto mt-8 mb-8 text-center text-white bg-green-400 rounded-full hover:bg-green-300 active:bg-green-800">--}}
+{{--                 <a href="/edit_profile">{{ __('messages.Edit Profile') }}</a>--}}
+{{--             </button>--}}
          </div>
      </div>
 
