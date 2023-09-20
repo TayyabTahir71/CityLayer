@@ -250,7 +250,7 @@
                                         </div>
 
                                         <div class="flex flex-col items-center justify-center">
-                                            <a href="/all-places">
+                                            <button onclick="see()">
                                                 <div class="rounded-full border-yellow-300 border-2  p-[22px]">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
@@ -261,7 +261,7 @@
 
                                                 </div>
                                                 <span class="mt-2 text-black">See more</span>
-                                            </a>
+                                            </button>
 
                                         </div>
 
@@ -387,9 +387,8 @@
 
                                     <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='place'">
-
-                                        @foreach ($allPlaces as $pls)
-                                            <div class="flex gap-8">
+                                        <div class="grid grid-cols-3 gap-8">
+                                            @foreach ($allPlaces as $pls)
                                                 <div class="flex flex-col items-center justify-center w-[80px]">
                                                     <div class="rounded-full bg-blue-500  p-[35px]"
                                                         x-on:click="tab='observation'">
@@ -397,25 +396,8 @@
                                                     </div>
                                                     <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                 </div>
-
-                                                <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-blue-500  p-[35px]"
-                                                        x-on:click="tab='observation'">
-
-                                                    </div>
-                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
-                                                </div>
-
-                                                <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-blue-500  p-[35px]"
-                                                        x-on:click="tab='observation'">
-
-                                                    </div>
-                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
-                                                </div>
-                                            </div>
-                                        @endforeach
-
+                                            @endforeach
+                                        </div>
 
 
 
@@ -424,32 +406,16 @@
                                     </div>
                                     <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='observation'">
-
-                                        @foreach ($allObservations as $obs)
-                                            <div class="flex gap-8">
+                                        <div class="grid grid-cols-3 gap-8">
+                                            @foreach ($allObservations as $obs)
                                                 <div class="flex flex-col items-center justify-center w-[80px]">
                                                     <div class="rounded-full bg-yellow-300  p-[35px]">
 
                                                     </div>
                                                     <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                 </div>
-
-                                                <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-yellow-300  p-[35px]">
-
-                                                    </div>
-                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
-                                                </div>
-
-                                                <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-yellow-300  p-[35px]">
-
-                                                    </div>
-                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
-                                                </div>
-                                            </div>
-                                        @endforeach
-
+                                            @endforeach
+                                        </div>
 
                                     </div>
 
