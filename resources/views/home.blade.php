@@ -447,7 +447,8 @@
         </div>
 
 
-
+        <input class="hidden" type="text" name="latitude" id="latitude" value="">
+        <input class="hidden" type="text" name="longitude" id="longitude" value="">
     </div>
 
     <script>
@@ -525,6 +526,8 @@
                             return;
                         }
                         is_echo = true;
+                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(6);
+                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(6);
                         success(pos.coords.latitude, pos.coords.longitude);
                     },
                     function() {
@@ -557,14 +560,15 @@
 
 
 
+        console.log(data);
 
         let count = 0;
         for (let i = 0; i < data.length; i++) {
 
             count = count + 1;
             place = data[i];
-            placeid = place.id;
-            placetype = place.type;
+            placeid = place.place_id;
+
 
             if (place.user_id == userid) {
                 icon2 = L.icon({
@@ -574,21 +578,21 @@
                     popupAnchor: [0, -25]
                 });
             } else {
-                icon2 = L.icon({
-                    iconUrl: '/img/street.png',
-                    iconSize: [25, 25],
-                    iconAnchor: [25, 25],
-                    popupAnchor: [0, -25]
+                icon2 = L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div class="circle-image" style="background-image: url('/img/marker.png')"></div>`,
+                    iconSize: [40, 40], // Size of the icon [width, height]
+                    iconAnchor: [20, 20] // Position of the icon relative to its container [x, y]
                 });
             }
 
 
-            placename = place.name;
-            pics = place.image0;
+            placename = place.place.name;
+            // pics = place.image0;
             placelatitude = place.latitude;
             placelongitude = place.longitude;
             if (place.user_id == userid) {
-                placetype = place.type.toLowerCase();
+                // placetype = place.type.toLowerCase();
                 var url = "place";
                 var message = '';
                 var readmore = '{{ __('messages.Edit this place') }}';
@@ -601,8 +605,8 @@
                 icon: icon2
             }).addTo(mymap0).bindPopup(
                 '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p id="title" class="px-4 text-sm">' +
-                message + '</p></div><a href="' + url + '/' + placeid + '/' + placetype +
-                '" class="flex justify-center px-2 py-2 text-center bg-blue-600 rounded"><button class="text-white">' +
+                message +
+                '</p></div><a href="" class="flex justify-center px-2 py-2 text-center bg-blue-600 rounded"><button class="text-white">' +
                 readmore + '</button><a>'
             );
 
@@ -625,6 +629,7 @@
                             return;
                         }
                         is_echo = true;
+
                         success(pos.coords.latitude, pos.coords.longitude);
                     },
                     function() {
@@ -696,23 +701,6 @@
             btnid.click();
         }
 
-        var lat;
-        var long;
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
-
-        function showPosition(position) {
-            lat = position.coords.latitude;
-            long = position.coords.longitude;
-        }
-
-        var place = '';
-
-        var observation = '';
 
         function select_place(place_id) {
             place = place_id;
@@ -724,7 +712,8 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-
+                latitude = document.getElementById('latitude').value;
+                longitude = document.getElementById('longitude').value;
 
                 $.ajax({
                     type: 'POST',
@@ -732,8 +721,8 @@
                     data: {
                         place: place,
                         observation: observation,
-                        lat: lat,
-                        long: long,
+                        lat: latitude,
+                        long: longitude,
                     },
                     success: function(data) {
                         alert(data.msg)
@@ -753,6 +742,8 @@
         function select_observation(observation_id) {
 
             observation = observation_id;
+            latitude = document.getElementById('latitude').value;
+            longitude = document.getElementById('longitude').value;
 
 
             if (place) {
@@ -769,8 +760,8 @@
                     data: {
                         place: place,
                         observation: observation,
-                        lat: lat,
-                        long: long,
+                        lat: latitude,
+                        long: longitude,
                     },
                     success: function(data) {
                         alert(data.msg)

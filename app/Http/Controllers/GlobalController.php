@@ -57,7 +57,9 @@ class GlobalController extends Controller
 
 
 
-                $all_data = PlaceDetails::where('user_id', backpack_auth()->user()->id)->get();
+                $all_data = PlaceDetails::where('user_id', backpack_auth()->user()->id)->with('place', 'observation')->get();
+
+                // dd($all_data);
 
 
                 return view(
@@ -3143,6 +3145,8 @@ class GlobalController extends Controller
 
     public function addNewPlace(Request $request)
     {
+
+        // dd($request->all());
 
 
         PlaceDetails::create([
