@@ -1,4 +1,4 @@
-@php use \App\Http\Controllers\GlobalController; 
+@php use \App\Http\Controllers\GlobalController;
 $info = GlobalController::myprofile();
 @endphp
 
@@ -6,55 +6,72 @@ $info = GlobalController::myprofile();
 
 @section('main')
     <div data-barba="container" class="relative h-screen">
+
                  <div class="flex flex-row items-center pt-2">
                  <a href="profile" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
              </div>
         <form action="save_profile" class="flex flex-col items-center justify-center p-8 mx-auto" method="POST">
             {!! csrf_field() !!}
+            @csrf
+            <input type="file" name="image" id="image" class="hidden" accept="image/*"
+                   onchange="javascript:this.form.submit();">
+            <label for="image" class="cursor-pointer ">
+                <img class="object-cover w-24 h-24 border-7 border-blue-500 rounded-full  " style="border-width: 7px"
+                     src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
+            </label>
            <label for="dropzone-file" class="flex flex-col items-center justify-center w-2/3">
                 <div class="flex flex-col items-center justify-center pb-6">
-                    <h1 class="text-3xl font-bold text-gray-900">{{ __('messages.Your Profile') }}</h1>
                 </div>
             </label>
+            <div id="toggleContainer" class="w-1/2 flex flex-row gap-16">
+           <div class="flex flex-col items-center justify-center pb-6 justify-start items-start" style="width: 58%">
+               <div class="text-xl font-bold">Username</div>
+               <div>change /add username</div>
+           </div>
+                <div class="bg-blue-500 text-white  flex items-center justify-center rounded-full text-3xl" style="height: 39px;width: 38px">+</div>
+            </div>
+<br/>
+            <div id="toggleContainer1" class="w-1/2 flex flex-row gap-16">
+           <div class="flex flex-col items-center justify-center pb-6 justify-start items-start" style="width: 58%">
+               <div class="text-xl font-bold">Email</div>
+               <div>change /add email</div>
+           </div>
+                <div class="bg-blue-500 text-white  flex items-center justify-center rounded-full text-3xl" style="height: 39px;width: 38px">+</div>
+            </div>
+            <br/>
+            <div id="toggleContainer1" class="w-1/2 flex flex-row gap-16">
+           <div class="flex flex-col items-center justify-center pb-6 justify-start items-start" style="width: 58%">
+               <div class="text-xl font-bold">Age</div>
+               <div>change /add age</div>
+           </div>
+                <div class="bg-blue-500 text-white  flex items-center justify-center rounded-full text-3xl" style="height: 39px;width: 38px">+</div>
+            </div>
+            <br/>
+            <div id="toggleContainer1" class="w-1/2 flex flex-row gap-16">
+           <div class="flex flex-col items-center justify-center pb-6 justify-start items-start" style="width: 58%">
+               <div class="text-xl font-bold">Gender</div>
+               <div>change /add gender</div>
+           </div>
+                <div class="bg-blue-500 text-white  flex items-center justify-center rounded-full text-3xl" style="height: 39px;width: 38px">+</div>
+            </div>
+            <br/>
+            <div id="toggleContainer1" class="w-1/2 flex flex-row gap-16">
+           <div class="flex flex-col items-center justify-center pb-6 justify-start items-start" style="width: 58%">
+               <div class="text-xl font-bold">Education</div>
+               <div>change /add education level</div>
+           </div>
+                <div class="bg-blue-500 text-white  flex items-center justify-center rounded-full text-3xl" style="height: 39px;width: 38px">+</div>
+            </div>
+            <br/>
+                <button class="text-blue-500 border border-blue-500 p-1 md:p-4 rounded-lg">Edit city tags</button>
+<br/>
+            <button class="bg-blue-500 text-white p-3 rounded-lg">
+                 Save and close
+            </button>
 
-            <label for="email" class="block mb-2 text-base font-medium text-gray-900">Email:</label>
-            <input id="email" name="email" type="email" value="{{ backpack_auth()->user()->email }}"
-                class="block w-2/3 px-4 py-3 mb-2 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
 
 
-            <label for="age" class="block mb-2 text-base font-medium text-gray-900">{{ __('messages.Age:') }}</label>
-                <input type="number" name="age" style="-moz-appearance: textfield"
-                    class="block w-2/3 px-4 py-3 mb-2 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center"
-                    name="custom-input-number" min="10" value="{{ $info->age }}">
-
-       
-
-            <label for="gender" class="block pt-4 mb-2 text-base font-medium text-gray-900">{{ __('messages.Gender:') }}</label>
-            <select id="gender" name="gender"
-                class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
-                <option selected></option>
-                <option value="male" {{ $info->gender == 'male' ? 'selected' : '' }}>{{ __('messages.Male') }}</option>
-                <option value="female" {{ $info->gender == 'female' ? 'selected' : '' }}>{{ __('messages.Female') }}</option>
-                <option value="other"  {{ $info->gender == 'other' ? 'selected' : '' }}>{{ __('messages.Other') }}</option>
-            </select>
-
-            <label for="job"
-                class="block pt-4 mb-2 text-base font-medium text-gray-900">{{ __('messages.Education:') }}</label>
-            <select id="job" name="profession"
-                class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
-                <option selected></option>
-                <option value="elementary school student" {{ $info->profession == 'elementary school student' ? 'selected' : '' }}>{{ __('messages.elementary school student') }}</option>
-                <option value="high school student" {{ $info->profession == 'high school student' ? 'selected' : '' }}>{{ __('messages.high school student') }} &nbsp;</option>
-                <option value="high school graduate" {{ $info->profession == 'high school graduate' ? 'selected' : '' }}>{{ __('messages.high school graduate') }} &nbsp;</option>
-                <option value="university student" {{ $info->profession == 'university student' ? 'selected' : '' }}>{{ __('messages.university student') }} &nbsp;</option>
-                <option value="university graduate" {{ $info->profession == 'university graduate' ? 'selected' : '' }}>{{ __('messages.university graduate') }} &nbsp;</option>
-               
-            </select>
-
-
-            <button type="submit"
-                class="px-8 py-5 mt-16 mb-2 text-sm font-bold text-center text-white bg-[#0CA789] rounded-full hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">{{ __('messages.Next') }}</button>
-        </form>
+         </form>
 
     </div>
     <script>
@@ -99,5 +116,43 @@ $info = GlobalController::myprofile();
             btn.addEventListener("click", increment);
         });
     </script>
+    <script>
+        const toggleContainer = document.getElementById('toggleContainer');
+
+        toggleContainer.addEventListener('click', function() {
+            // Create an input element
+            const inputElement = document.createElement('input');
+            inputElement.setAttribute('type', 'text');
+            inputElement.setAttribute('value', toggleContainer.textContent);
+            inputElement.classList.add('w-60', 'p-2', 'border', 'rounded');
+
+
+            // Replace the div with the input
+            toggleContainer.replaceWith(inputElement);
+
+            // Focus on the input
+            inputElement.focus();
+
+            const toggleContainer1 = document.getElementById('toggleContainer1');
+
+        toggleContainer1.addEventListener('click', function() {
+            // Create an input element
+            const inputElement = document.createElement('input');
+            inputElement.setAttribute('type', 'text');
+            inputElement.setAttribute('value', toggleContainer1.textContent);
+            inputElement.classList.add('w-60', 'p-2', 'border', 'rounded');
+
+
+            // Replace the div with the input
+            toggleContainer.replaceWith(inputElement);
+
+            // Focus on the input
+            inputElement.focus();
+        });
+            // Event listener to toggle back to div when clicking outside the input
+
+        });
+    </script>
+
 
 @endsection
