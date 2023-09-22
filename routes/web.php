@@ -74,6 +74,10 @@ Route::controller(GlobalController::class)->group(function () {
         return view('step2');
     });
 
+    Route::get('/test', function () {
+        return view('test');
+    });
+
     Route::get('contactus', function () {
         return view('contactus');
     });

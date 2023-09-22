@@ -70,13 +70,13 @@
 
                         <div class="flex">
                             <div class="absolute left-16 bottom-[18px] ">
-                                <div class="p-3 bg-yellow-300 border-2 border-black rounded-full">
+                                <div class="p-3 bg-yellow-300 border-2 border-white rounded-full">
                                     <img src="{{ asset('img/search-icon.png') }}" class="w-7 h-7" alt="">
                                 </div>
 
                             </div>
                             <div class="absolute left-6 bottom-[18px] ">
-                                <div class="p-3 bg-blue-500 border-2 border-black rounded-full">
+                                <div class="p-3 bg-blue-500 border-2 border-white rounded-full">
                                     <img src="{{ asset('img/image.png') }}" class="w-7 h-7" alt="">
                                 </div>
 
@@ -568,26 +568,33 @@
             count = count + 1;
             place = data[i];
             placeid = place.place_id;
+            observationid = place.observation_id;
 
 
             if (place.user_id == userid) {
                 icon2 = L.icon({
-                    iconUrl: '/img/marker.png',
-                    iconSize: [25, 25],
-                    iconAnchor: [25, 25],
-                    popupAnchor: [0, -25]
+                    className: 'circle-image',
+                    // html: `<div class="circle-image" style="background-image: url('/img/marker.png')"></div>`,
+                    iconSize: [40, 40], // Size of the icon [width, height]
+                    iconAnchor: [20, 20] // Position of the icon relative to its container [x, y]
                 });
             } else {
-                icon2 = L.divIcon({
-                    className: 'custom-marker',
-                    html: `<div class="circle-image" style="background-image: url('/img/marker.png')"></div>`,
+                icon2 = L.icon({
+                    className: 'circle-image',
+                    // html: `<div class="circle-image" style="background-image: url('/img/marker.png')"></div>`,
                     iconSize: [40, 40], // Size of the icon [width, height]
                     iconAnchor: [20, 20] // Position of the icon relative to its container [x, y]
                 });
             }
 
 
-            placename = place.place.name;
+            if (place.place) {
+                placename = place.place.name;
+            }
+            if (place.observation) {
+                observationname = observation.observation.name;
+            }
+
             // pics = place.image0;
             placelatitude = place.latitude;
             placelongitude = place.longitude;
@@ -601,13 +608,20 @@
                 var message = '{{ __('messages.React to this place to earn 1 point!') }}';
                 var readmore = '{{ __('messages.Read more') }}';
             }
-            markerx = L.marker([placelatitude, placelongitude], {
-                icon: icon2
+            if (placeid && observationid == null) {
+                color = '#246EB9';
+            }
+            if (placeid == null && observationid) {
+                color = '#FFE45E';
+            }
+            markerx = L.circle([placelatitude, placelongitude], {
+                color: '#F9F9F9',
+                fillColor: color,
+                fillOpacity: 1.5,
+                radius: 60, // Radius of the circle in meters
             }).addTo(mymap0).bindPopup(
-                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p id="title" class="px-4 text-sm">' +
-                message +
-                '</p></div><a href="" class="flex justify-center px-2 py-2 text-center bg-blue-600 rounded"><button class="text-white">' +
-                readmore + '</button><a>'
+                '<div class="absolute w-full"><div class=" bg-blue-500 flex justify-center items-center gap-2"> <div class="flex px-4 py-10 items-center justify-center w-[200px]"><div class="rounded-full bg-yellow-300  p-[35px]"></div><span class="mt-2 text-white font-bold text-lg">' +
+                place.place.name + '</span></div></div></div>'
             );
 
             markers[place.id] = markerx;
@@ -705,34 +719,34 @@
         function select_place(place_id) {
             place = place_id;
 
-            if (observation) {
+            observation = '';
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                latitude = document.getElementById('latitude').value;
-                longitude = document.getElementById('longitude').value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            latitude = document.getElementById('latitude').value;
+            longitude = document.getElementById('longitude').value;
 
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('add.new.place') }}",
-                    data: {
-                        place: place,
-                        observation: observation,
-                        lat: latitude,
-                        long: longitude,
-                    },
-                    success: function(data) {
-                        alert(data.msg)
-                        window.location.href = "/";
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('add.new.place') }}",
+                data: {
+                    place: place,
+                    observation: observation,
+                    lat: latitude,
+                    long: longitude,
+                },
+                success: function(data) {
+                    alert(data.msg)
+                    window.location.href = "/";
 
-                        place = '';
-                        observation = '';
-                    }
-                });
-            }
+                    place = '';
+                    observation = '';
+                }
+            });
+
 
 
 
@@ -742,36 +756,36 @@
         function select_observation(observation_id) {
 
             observation = observation_id;
+            place = '';
             latitude = document.getElementById('latitude').value;
             longitude = document.getElementById('longitude').value;
 
 
-            if (place) {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
 
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('add.new.place') }}",
-                    data: {
-                        place: place,
-                        observation: observation,
-                        lat: latitude,
-                        long: longitude,
-                    },
-                    success: function(data) {
-                        alert(data.msg)
-                        window.location.href = "/";
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('add.new.place') }}",
+                data: {
+                    place: place,
+                    observation: observation,
+                    lat: latitude,
+                    long: longitude,
+                },
+                success: function(data) {
+                    alert(data.msg)
+                    window.location.href = "/";
 
-                        place = '';
-                        observation = '';
-                    }
-                });
-            }
+                    place = '';
+                    observation = '';
+                }
+            });
+
 
 
 
