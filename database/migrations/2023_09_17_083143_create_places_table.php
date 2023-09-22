@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('places', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            // $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->longText('image')->nullable();
             $table->longText('description')->nullable();

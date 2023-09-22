@@ -46,11 +46,8 @@
 
                     </div>
 
-<<<<<<< HEAD
-                    <div  onclick="mylocation()" class="fixed z-20 flex items-center justify-center p-4 bg-black rounded-full cursor-pointer bottom-28 left-4">
-=======
-                    <div class="fixed z-20 flex items-center justify-center p-4 bg-black rounded-full bottom-28 left-4">
->>>>>>> 6ad0d3a063bd532695f9cfc89850c88f61e01fbb
+                    <div onclick="mylocation()"
+                        class="fixed z-20 flex items-center justify-center p-4 bg-black rounded-full cursor-pointer bottom-28 left-4">
                         <img src="{{ asset('img/triangle.png') }}" class="w-7 h-7" alt="">
                     </div>
                     <a href="/filter"
@@ -74,13 +71,13 @@
 
                         <div class="flex">
                             <div class="absolute left-16 bottom-[18px] ">
-                                <div class="p-3 bg-yellow-400 border-2 border-black rounded-full">
+                                <div class="p-3 bg-yellow-300 border-2 border-white rounded-full">
                                     <img src="{{ asset('img/search-icon.png') }}" class="w-7 h-7" alt="">
                                 </div>
 
                             </div>
                             <div class="absolute left-6 bottom-[18px] ">
-                                <div class="p-3 border-2 border-black rounded-full bg-cyan-500">
+                                <div class="p-3 bg-blue-500 border-2 border-white rounded-full">
                                     <img src="{{ asset('img/image.png') }}" class="w-7 h-7" alt="">
                                 </div>
 
@@ -89,13 +86,13 @@
 
                         <a class="w-full pt-4" @click="modelOpen =!modelOpen">
                             <span class="w-full px-12 py-4 text-white bg-cyan-500 rounded-3xl">
-                                Add to map
+                                Add on map
                             </span>
 
                         </a>
 
                         <div class="absolute right-5 bottom-[25px] ">
-                            <div class="p-1 rounded-full bg-cyan-500 w-9">
+                            <div class="p-1 bg-blue-500 rounded-full w-9">
                                 <span class="italic font-bold text-white">
                                     i
                                 </span>
@@ -132,12 +129,12 @@
 
 
                                     <div class="flex items-center justify-center mt-12">
-                                        <div class="-mr-2 cursor-pointer" @click="tab='place'" onclick="place()">
+                                        <div class="-mr-2 cursor-pointer" @click="tab='place'">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
-                                                <div class="border-2 border-black rounded-full shadow-xl bg-cyan-500"
+                                                <div class="bg-blue-500 border-2 border-black rounded-full shadow-xl"
                                                     :class="tab == 'place' || tab == 'place1' ?
-                                                        'bg-cyan-500 z-10 p-[22px]' :
-                                                        'bg-cyan-500/70 p-[35px]'">
+                                                        'bg-blue-500 z-10 p-[22px]' :
+                                                        'bg-blue-500/70 p-[35px]'">
                                                     <img src="{{ asset('img/image.png') }}" class="w-7 h-7"
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
@@ -148,8 +145,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="-ml-2 cursor-pointer" @click="tab='observation'"
-                                            onclick="observation()">
+                                        <div class="-ml-2 cursor-pointer" @click="tab='observation'">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
 
                                                 <div class="flex items-center justify-center border-2 border-black rounded-full shadow-xl"
@@ -199,26 +195,29 @@
 
                                     <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='place'">
-                                        <a href="building" class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                        <div class="flex flex-col items-center justify-center">
+                                            <div class="rounded-full bg-blue-500  p-[35px] focus:ring-offset-2 focus:ring-blue-400"
+                                                x-on:click="tab='observation'"
+                                                onclick="select_place({{ $allPlaces[0]->id }})">
 
                                             </div>
                                             <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
-                                        </a>
+                                        </div>
 
-                                        <a href="openspace" class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                        <div class="flex flex-col items-center justify-center">
+                                            <div class="rounded-full bg-blue-500  p-[35px]" x-on:click="tab='observation'"
+                                                onclick="select_place({{ $allPlaces[1]->id }})">
 
                                             </div>
                                             <span class="mt-2 text-black">{{ $allPlaces[1]->name }}</span>
-                                        </a>
+                                        </div>
 
                                         <div class="flex flex-col items-center justify-center">
                                             <button onclick="see()">
-                                                <div class="rounded-full border-cyan-500 border-2  p-[22px]">
+                                                <div class="rounded-full border-blue-500 border-2  p-[22px]">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
-                                                        class="w-6 h-6 font-bold text-cyan-500">
+                                                        class="w-6 h-6 font-bold text-blue-500">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             d="M12 6v12m6-6H6" />
                                                     </svg>
@@ -235,33 +234,35 @@
                                     </div>
                                     <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='observation'">
-                                        <a href="/feeling" class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-yellow-400 border-2  border-black p-[35px]">
+                                        <div class="flex flex-col items-center justify-center">
+                                            <div class="rounded-full bg-yellow-300  p-[35px]" x-on:click="tab='place'"
+                                                onclick="select_observation({{ $allObservations[0]->id }})">
 
                                             </div>
                                             <span class="mt-2 text-black">{{ $allObservations[0]->name }}</span>
-                                        </a>
+                                        </div>
 
                                         <div class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-yellow-400 border-2  border-black p-[35px]">
+                                            <div class="rounded-full bg-yellow-300  p-[35px]" x-on:click="tab='place'"
+                                                onclick="select_observation({{ $allObservations[1]->id }})">
 
                                             </div>
                                             <span class="mt-2 text-black">{{ $allObservations[1]->name }}</span>
                                         </div>
 
                                         <div class="flex flex-col items-center justify-center">
-                                            <a href="/all-places">
-                                                <div class="rounded-full border-yellow-400 border-2  p-[22px]">
+                                            <button onclick="see()">
+                                                <div class="rounded-full border-yellow-300 border-2  p-[22px]">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
-                                                        class="w-6 h-6 font-bold text-yellow-400">
+                                                        class="w-6 h-6 font-bold text-yellow-300">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             d="M12 6v12m6-6H6" />
                                                     </svg>
 
                                                 </div>
                                                 <span class="mt-2 text-black">See more</span>
-                                            </a>
+                                            </button>
 
                                         </div>
 
@@ -275,7 +276,7 @@
 
                                     <div class="flex items-center justify-center mt-8">
                                         <a href="/add-new-place"
-                                            class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white rounded-3xl bg-cyan-500">
+                                            class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white bg-blue-500 rounded-3xl">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="3" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -322,10 +323,10 @@
                                     <div class="flex items-center justify-center mt-12">
                                         <div class="-mr-2 cursor-pointer" @click="tab='place'" onclick="place()">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
-                                                <div class="border-2 border-black rounded-full shadow-xl bg-cyan-500"
+                                                <div class="bg-blue-500 border-2 border-black rounded-full shadow-xl"
                                                     :class="tab == 'place' || tab == 'place1' ?
-                                                        'bg-cyan-500 z-10 p-[22px]' :
-                                                        'bg-cyan-500/70 p-[35px]'">
+                                                        'bg-blue-500 z-10 p-[22px]' :
+                                                        'bg-blue-500/70 p-[35px]'">
                                                     <img src="{{ asset('img/image.png') }}" class="w-7 h-7"
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
@@ -387,32 +388,17 @@
 
                                     <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='place'">
-
-                                        @foreach ($allPlaces as $pls)
-                                            <div class="flex gap-8">
+                                        <div class="grid grid-cols-3 gap-8">
+                                            @foreach ($allPlaces as $pls)
                                                 <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                                    <div class="rounded-full bg-blue-500  p-[35px]"
+                                                        x-on:click="tab='observation'">
 
                                                     </div>
                                                     <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                 </div>
-
-                                                <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                    </div>
-                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
-                                                </div>
-
-                                                <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                    </div>
-                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
-                                                </div>
-                                            </div>
-                                        @endforeach
-
+                                            @endforeach
+                                        </div>
 
 
 
@@ -421,47 +407,24 @@
                                     </div>
                                     <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='observation'">
-
-                                        @foreach ($allObservations as $obs)
-                                            <div class="flex gap-8">
+                                        <div class="grid grid-cols-3 gap-8">
+                                            @foreach ($allObservations as $obs)
                                                 <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div
-                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+                                                    <div class="rounded-full bg-yellow-300  p-[35px]">
 
                                                     </div>
                                                     <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                 </div>
-
-                                                <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div
-                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                    </div>
-                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
-                                                </div>
-
-                                                <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div
-                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                    </div>
-                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
-                                                </div>
-                                            </div>
-                                        @endforeach
-
+                                            @endforeach
+                                        </div>
 
                                     </div>
 
 
 
-<<<<<<< HEAD
-                                    <div class="fixed flex items-center justify-center mt-8 bottom-4">
-=======
                                     <div class="flex items-center  justify-center pt-[20%] pb-4 bg-white">
->>>>>>> 6ad0d3a063bd532695f9cfc89850c88f61e01fbb
                                         <a href="/add-new-place"
-                                            class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white rounded-3xl bg-cyan-500">
+                                            class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white bg-blue-500 rounded-3xl">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="3" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -485,7 +448,8 @@
         </div>
 
 
-
+        <input class="hidden" type="text" name="latitude" id="latitude" value="">
+        <input class="hidden" type="text" name="longitude" id="longitude" value="">
     </div>
 
     <script>
@@ -514,21 +478,13 @@
         });
 
 
-        var legend = L.control({
-            position: "topright"
-        });
-        // legend.onAdd = function(mymap) {
-        //     var div = L.DomUtil.create("div", "legend bg-gray-200 p-2 border border-gray-400 rounded");
-        //     div.innerHTML +=
-        //         '<button class="" onclick="mylocation()"><i class="pr-2 fa fa-location-arrow"></i><span>My location</span><br></button>';
-        //     return div;
-        // };
-        legend.addTo(mymap0);
+
 
 
         if (navigator.geolocation) {
             //wait 3 seconds to get position
-            getposition(success, fail);
+            console.log(getposition(success, fail));
+
         } else {
             alert("Geolocation is not supported by this browser.");
         }
@@ -562,6 +518,7 @@
           */
 
         function getposition(success, fail) {
+
             var is_echo = false;
             if (navigator && navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -570,6 +527,8 @@
                             return;
                         }
                         is_echo = true;
+                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(6);
+                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(6);
                         success(pos.coords.latitude, pos.coords.longitude);
                     },
                     function() {
@@ -583,7 +542,11 @@
             } else {
                 fail();
             }
+
         }
+
+
+
 
         function success(lat, lng) {
             mymap0.setView([lat, lng], 10);
@@ -598,38 +561,46 @@
 
 
 
+        console.log(data);
 
         let count = 0;
         for (let i = 0; i < data.length; i++) {
 
             count = count + 1;
             place = data[i];
-            placeid = place.id;
-            placetype = place.type;
+            placeid = place.place_id;
+            observationid = place.observation_id;
+
 
             if (place.user_id == userid) {
                 icon2 = L.icon({
-                    iconUrl: '/img/marker.png',
-                    iconSize: [25, 25],
-                    iconAnchor: [25, 25],
-                    popupAnchor: [0, -25]
+                    className: 'circle-image',
+                    // html: `<div class="circle-image" style="background-image: url('/img/marker.png')"></div>`,
+                    iconSize: [40, 40], // Size of the icon [width, height]
+                    iconAnchor: [20, 20] // Position of the icon relative to its container [x, y]
                 });
             } else {
                 icon2 = L.icon({
-                    iconUrl: '/img/street.png',
-                    iconSize: [25, 25],
-                    iconAnchor: [25, 25],
-                    popupAnchor: [0, -25]
+                    className: 'circle-image',
+                    // html: `<div class="circle-image" style="background-image: url('/img/marker.png')"></div>`,
+                    iconSize: [40, 40], // Size of the icon [width, height]
+                    iconAnchor: [20, 20] // Position of the icon relative to its container [x, y]
                 });
             }
 
 
-            placename = place.name;
-            pics = place.image0;
+            if (place.place) {
+                placename = place.place.name;
+            }
+            if (place.observation) {
+                observationname = observation.observation.name;
+            }
+
+            // pics = place.image0;
             placelatitude = place.latitude;
             placelongitude = place.longitude;
             if (place.user_id == userid) {
-                placetype = place.type.toLowerCase();
+                // placetype = place.type.toLowerCase();
                 var url = "place";
                 var message = '';
                 var readmore = '{{ __('messages.Edit this place') }}';
@@ -638,13 +609,44 @@
                 var message = '{{ __('messages.React to this place to earn 1 point!') }}';
                 var readmore = '{{ __('messages.Read more') }}';
             }
-            markerx = L.marker([placelatitude, placelongitude], {
-                icon: icon2
+            if (placeid && observationid == null) {
+                color = '#246EB9';
+            }
+            if (placeid == null && observationid) {
+                color = '#FFE45E';
+            }
+            markerx = L.circle([placelatitude, placelongitude], {
+                color: '#F9F9F9',
+                fillColor: color,
+                fillOpacity: 1.5,
+                radius: 60, // Radius of the circle in meters
             }).addTo(mymap0).bindPopup(
-                '<div class="flex flex-col justify-center text-xl font-bold text-center text-black rounded-xl"><p id="title" class="px-4 text-sm">' +
-                message + '</p></div><a href="' + url + '/' + placeid + '/' + placetype +
-                '" class="flex justify-center px-2 py-2 text-center rounded bg-cyan-600"><button class="text-white">' +
-                readmore + '</button><a>'
+                `<div class="absolute top-0 bg-blue-400 w- flex flex-col"><div class="px-4 py-4 flex justify-start items-center gap-4 -mb-10"> <div class="flex flex-col items-center 
+                    justify-center">
+                <div class="rounded-full bg-blue-500 border-2 border-white p-[35px]" x-on:click="tab='observation'">
+                </div>
+            </div>
+            <img src="{{ asset('img/cam.PNG') }}" alt="" class="w-6 h-6 mt-4">
+            <span class="text-lg font-extrabold text-white mt-4 italic">Park</span>
+        </div>
+        <div class="px-4 py-2 flex justify-start items-center gap-4">
+            <div class="flex flex-col items-center justify-center">
+                <div class="rounded-full bg-yellow-300 border-2 border-white p-[35px]" x-on:click="tab='observation'">
+                </div>
+            </div>
+            <img src="{{ asset('img/cam-2.PNG') }}" alt="" class="w-6 h-6 mt-4">
+            <span class="text-lg font-extrabold text-white mt-4 italic">Happy</span>
+        </div>
+
+        <div class="mt-1 pl-24 mbp pr-4 font-semibold italic text-white">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam ipsam
+            quidem dolore deleniti praesentium, culpa
+        </div>
+
+        <span class="mt-4 flex justify-end items-end px-2 font-semibold italic text-white">
+            added by john wick
+        </span>
+    </div>`
             );
 
             markers[place.id] = markerx;
@@ -654,15 +656,19 @@
             getmyposition(success, fail);
         }
 
+
         function getmyposition(success, fail) {
+
             var is_echo = false;
             if (navigator && navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     function(pos) {
+                        console.log(pos)
                         if (is_echo) {
                             return;
                         }
                         is_echo = true;
+
                         success(pos.coords.latitude, pos.coords.longitude);
                     },
                     function() {
@@ -729,9 +735,88 @@
         }
 
         function see() {
-            // console.log('sdsd')
+            console.log('sdsd')
             var btnid = document.getElementById("othertag");
             btnid.click();
+        }
+
+
+        function select_place(place_id) {
+            place = place_id;
+
+            observation = '';
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            latitude = document.getElementById('latitude').value;
+            longitude = document.getElementById('longitude').value;
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('add.new.place') }}",
+                data: {
+                    place: place,
+                    observation: observation,
+                    lat: latitude,
+                    long: longitude,
+                },
+                success: function(data) {
+                    alert(data.msg)
+                    window.location.href = "/";
+
+                    place = '';
+                    observation = '';
+                }
+            });
+
+
+
+
+
+        }
+
+        function select_observation(observation_id) {
+
+            observation = observation_id;
+            place = '';
+            latitude = document.getElementById('latitude').value;
+            longitude = document.getElementById('longitude').value;
+
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('add.new.place') }}",
+                data: {
+                    place: place,
+                    observation: observation,
+                    lat: latitude,
+                    long: longitude,
+                },
+                success: function(data) {
+                    alert(data.msg)
+                    window.location.href = "/";
+
+                    place = '';
+                    observation = '';
+                }
+            });
+
+
+
+
+
+
+
         }
     </script>
     <style>

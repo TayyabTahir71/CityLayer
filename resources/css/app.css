@@ -72,3 +72,7 @@ img {
     outline: 0;
     box-shadow: none;
 }
+
+.circle-image {
+    @apply p-4 rounded-full bg-blue-500;
+}

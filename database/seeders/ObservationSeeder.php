@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Place;
+use App\Models\Observation;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PlaceSeeder extends Seeder
+class ObservationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,16 +15,17 @@ class PlaceSeeder extends Seeder
      */
     public function run()
     {
-        Place::create([
-            'name' => 'Park',
+        Observation::create([
+            'name' => 'Happy',
             'image' => '',
-            'description' => 'This is nice park',
+            'description' => '',
 
         ]);
-        Place::create([
-            'name' => 'Playing Ground',
+        Observation::create([
+            'name' => 'Sad',
             'image' => '',
-            'description' => 'This is nice place',
+            'description' => '',
+
         ]);
     }
 }
