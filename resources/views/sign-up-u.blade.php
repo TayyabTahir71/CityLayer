@@ -53,8 +53,8 @@
                             spaceBetween: 5,
                         },
                     },
-
-
+                
+                
                 })">
 
 
@@ -99,10 +99,17 @@
                     <div class="flex flex-col items-center justify-center gap-4 mt-12">
                         <input type="text" placeholder="Username" name="name" id="name" class="form-input"
                             required />
+<<<<<<< HEAD
                         <input type="password" placeholder="Password" name="password" id="password" class="form-input"
                             required />
                         <input type="password" placeholder="Confirm Password" name="password_confirmation"
                             id="password_confirmation" class="form-input" required />
+=======
+
+
+                        <input type="password" placeholder="Password" name="password" id="password" class="form-input"
+                            required />
+>>>>>>> 6ad0d3a063bd532695f9cfc89850c88f61e01fbb
                         <button type="submit" class="mb-3 cursor-pointer btn btn-primary">
                             <div class="text-center"> Signup</div>
 

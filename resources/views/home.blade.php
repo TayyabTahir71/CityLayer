@@ -13,7 +13,7 @@
                 <div class="relative">
                     <div class="" x-cloak x-data="{ show: false }">
                         <div class="absolute z-20 p-2 bg-black rounded-lg top-8 left-4" @click="show=true">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
                                 stroke="currentColor" class="w-8 h-8 text-white">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -46,7 +46,11 @@
 
                     </div>
 
+<<<<<<< HEAD
                     <div  onclick="mylocation()" class="fixed z-20 flex items-center justify-center p-4 bg-black rounded-full cursor-pointer bottom-28 left-4">
+=======
+                    <div class="fixed z-20 flex items-center justify-center p-4 bg-black rounded-full bottom-28 left-4">
+>>>>>>> 6ad0d3a063bd532695f9cfc89850c88f61e01fbb
                         <img src="{{ asset('img/triangle.png') }}" class="w-7 h-7" alt="">
                     </div>
                     <a href="/filter"
@@ -195,19 +199,19 @@
 
                                     <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='place'">
-                                        <div class="flex flex-col items-center justify-center">
+                                        <a href="building" class="flex flex-col items-center justify-center">
                                             <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
 
                                             </div>
-                                            <span class="mt-2 text-black">Place 1</span>
-                                        </div>
+                                            <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
+                                        </a>
 
-                                        <div class="flex flex-col items-center justify-center">
+                                        <a href="openspace" class="flex flex-col items-center justify-center">
                                             <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
 
                                             </div>
-                                            <span class="mt-2 text-black">Place 2</span>
-                                        </div>
+                                            <span class="mt-2 text-black">{{ $allPlaces[1]->name }}</span>
+                                        </a>
 
                                         <div class="flex flex-col items-center justify-center">
                                             <button onclick="see()">
@@ -231,18 +235,18 @@
                                     </div>
                                     <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='observation'">
+                                        <a href="/feeling" class="flex flex-col items-center justify-center">
+                                            <div class="rounded-full bg-yellow-400 border-2  border-black p-[35px]">
+
+                                            </div>
+                                            <span class="mt-2 text-black">{{ $allObservations[0]->name }}</span>
+                                        </a>
+
                                         <div class="flex flex-col items-center justify-center">
                                             <div class="rounded-full bg-yellow-400 border-2  border-black p-[35px]">
 
                                             </div>
-                                            <span class="mt-2 text-black">Feature 1</span>
-                                        </div>
-
-                                        <div class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-yellow-400 border-2  border-black p-[35px]">
-
-                                            </div>
-                                            <span class="mt-2 text-black">Feature 2</span>
+                                            <span class="mt-2 text-black">{{ $allObservations[1]->name }}</span>
                                         </div>
 
                                         <div class="flex flex-col items-center justify-center">
@@ -297,10 +301,9 @@
                                 x-transition:leave="transition ease-in duration-200 transform"
                                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                class="z-50 inline-block w-full max-w-xl transition-all transform">
+                                class="z-50 w-full max-w-xl transition-all transform">
 
                                 <div class="px-4 pt-4" x-data="{ tab: 'place' }">
-
                                     <div @click="seeMore=false"
                                         class="flex justify-start items-start bg-black my-4 mx-2 p-1.5 w-7 rounded-full">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -384,72 +387,32 @@
 
                                     <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='place'">
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
 
+                                        @foreach ($allPlaces as $pls)
+                                            <div class="flex gap-8">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Place 1</span>
-                                            </div>
 
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
 
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
 
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
 
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Place 2</span>
                                             </div>
-                                        </div>
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
+                                        @endforeach
 
-                                                </div>
-                                                <span class="mt-2 text-black">Place 1</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 1</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-cyan-500 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Place 2</span>
-                                            </div>
-                                        </div>
 
 
 
@@ -458,82 +421,45 @@
                                     </div>
                                     <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='observation'">
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
 
+                                        @foreach ($allObservations as $obs)
+                                            <div class="flex gap-8">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div
+                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Observation A</span>
-                                            </div>
 
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div
+                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
 
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Observation B</span>
-                                            </div>
 
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
+                                                <div class="flex flex-col items-center justify-center w-[80px]">
+                                                    <div
+                                                        class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
 
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">Observation C</span>
                                             </div>
-                                        </div>
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation E</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation F</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation G</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-8">
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation H</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation H</span>
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center w-[80px]">
-                                                <div class="rounded-full bg-yellow-300 border-2  border-black p-[35px]">
-
-                                                </div>
-                                                <span class="mt-2 text-black">Observation I</span>
-                                            </div>
-                                        </div>
-
-
-
+                                        @endforeach
 
 
                                     </div>
 
 
 
+<<<<<<< HEAD
                                     <div class="fixed flex items-center justify-center mt-8 bottom-4">
+=======
+                                    <div class="flex items-center  justify-center pt-[20%] pb-4 bg-white">
+>>>>>>> 6ad0d3a063bd532695f9cfc89850c88f61e01fbb
                                         <a href="/add-new-place"
                                             class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white rounded-3xl bg-cyan-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -543,6 +469,7 @@
                                             </svg>
                                             Add new</a>
                                     </div>
+
 
                                 </div>
                             </div>

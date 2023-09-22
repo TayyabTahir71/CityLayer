@@ -11,7 +11,9 @@ use App\Models\Opinion;
 use App\Models\Opinion_de;
 use App\Models\Comment_en;
 use App\Models\Comment_de;
+use App\Models\Observation;
 use App\Models\Pages;
+use App\Models\Place;
 use App\Models\Tag;
 use App\Models\Tag_de;
 use App\Models\Space_tag_de;
@@ -19,6 +21,7 @@ use App\Models\Space_tag;
 use App\Models\Stat;
 use App\Models\Preference;
 use Carbon\Carbon;
+use Database\Seeders\PlaceSeeder;
 use Pestopancake\LaravelBackpackNotifications\Notifications\DatabaseNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +50,9 @@ class GlobalController extends Controller
                 $tagstreet = Tag::where('Category', 'Street')->get();
                 $tagbuilding = Tag::where('Category', 'Building')->get();
                 $tagopenspace = Tag::where('Category', 'Openspace')->get();
+                $allPlaces = Place::where('user_id', null)->orWhere('user_id', backpack_auth()->user()->id)->get();
+                $allObservations = Observation::where('user_id', null)->orWhere('user_id', backpack_auth()->user()->id)->get();
+
 
                 $all_data = array_merge(
                     $street->toArray(),
@@ -62,7 +68,11 @@ class GlobalController extends Controller
                         'tagstreet',
                         'tagbuilding',
                         'tagopenspace',
-                        'userid'
+                        'userid',
+                        'allPlaces',
+                        'allObservations'
+
+
                     )
                 );
             } else {
@@ -3129,5 +3139,11 @@ class GlobalController extends Controller
         }
 
         return redirect()->route('dashboard');
+    }
+
+    public function addNewPlace(Request $request)
+    {
+
+        dd($request);
     }
 }
