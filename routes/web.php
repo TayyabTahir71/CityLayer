@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GlobalController;
 use App\Http\Controllers\MailController;
@@ -80,6 +81,10 @@ Route::controller(GlobalController::class)->group(function () {
         return view('step2');
     });
 
+    Route::get('/test', function () {
+        return view('test');
+    });
+
     Route::get('contactus', function () {
         return view('contactus');
     });
@@ -157,9 +162,6 @@ Route::get('login', function () {
     return view('login');
 });
 
-Route::get('login', function () {
-    return view('login');
-});
 Route::get('sign-up-u', function () {
     return view('sign-up-u');
 });
@@ -180,6 +182,7 @@ Route::get('filter', function () {
 
 
 
+
 //<-------------------------new routes---------------------------------------->
 
 
@@ -187,8 +190,8 @@ Route::get('/all-places', function () {
     return view('places');
 });
 
-
-
+Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/auth/signup', [AuthController::class, 'signup'])->name('auth.register');
 
 
 Route::post('contactmail', [MailController::class, 'sendMessage']);

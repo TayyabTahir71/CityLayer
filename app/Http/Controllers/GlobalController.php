@@ -11,7 +11,10 @@ use App\Models\Opinion;
 use App\Models\Opinion_de;
 use App\Models\Comment_en;
 use App\Models\Comment_de;
+use App\Models\Observation;
 use App\Models\Pages;
+use App\Models\Place;
+use App\Models\PlaceDetails;
 use App\Models\Tag;
 use App\Models\Tag_de;
 use App\Models\Space_tag_de;
@@ -19,12 +22,14 @@ use App\Models\Space_tag;
 use App\Models\Stat;
 use App\Models\Preference;
 use Carbon\Carbon;
+use Database\Seeders\PlaceSeeder;
 use Pestopancake\LaravelBackpackNotifications\Notifications\DatabaseNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class GlobalController extends Controller
 {
@@ -47,12 +52,15 @@ class GlobalController extends Controller
                 $tagstreet = Tag::where('Category', 'Street')->get();
                 $tagbuilding = Tag::where('Category', 'Building')->get();
                 $tagopenspace = Tag::where('Category', 'Openspace')->get();
+                $allPlaces = Place::where('user_id', null)->orWhere('user_id', backpack_auth()->user()->id)->get();
+                $allObservations = Observation::where('user_id', null)->orWhere('user_id', backpack_auth()->user()->id)->get();
 
-                $all_data = array_merge(
-                    $street->toArray(),
-                    $building->toArray(),
-                    $openspace->toArray()
-                );
+
+
+                $all_data = PlaceDetails::where('user_id', backpack_auth()->user()->id)->with('place', 'observation')->get();
+
+                // dd($all_data);
+
 
                 return view(
                     'home',
@@ -62,7 +70,11 @@ class GlobalController extends Controller
                         'tagstreet',
                         'tagbuilding',
                         'tagopenspace',
-                        'userid'
+                        'userid',
+                        'allPlaces',
+                        'allObservations'
+
+
                     )
                 );
             } else {
@@ -3134,6 +3146,22 @@ class GlobalController extends Controller
     public function addNewPlace(Request $request)
     {
 
-        dd($request);
+        // dd($request->all());
+
+
+        PlaceDetails::create([
+
+            'place_id' => $request->place,
+            'user_id' =>  backpack_auth()->user()->id,
+            'observation_id' => $request->observation,
+            'latitude' => $request->lat,
+            'longitude' => $request->long,
+
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'place added'
+        ]);
     }
 }

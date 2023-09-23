@@ -112,3 +112,7 @@ img {
     width: 51%;
 }
 
+.circle-image {
+    @apply p-4 rounded-full bg-blue-500;
+}
+
