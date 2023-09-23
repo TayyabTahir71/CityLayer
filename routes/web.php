@@ -20,10 +20,16 @@ use App\Http\Middleware\Cors;
 
 Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class, 'index']);
 
+Route::get('/badges_overview', function () {
+    return view('badges_overview');
+});Route::get('/city_tags', function () {
+    return view('edit_city_tags');
+});
 Route::controller(GlobalController::class)->group(function () {
     // Route::get('/', 'getAll')->name('getAll')->middleware('App\Http\Middleware\MyMiddleware');
     Route::get('/', 'getAll');
     Route::get('profile', 'profile')->name('profile');
+    Route::get('badges_overview', 'badges_overview')->name('badges_overview');
     Route::post('save_profile', 'saveprofile')->name('saveprofile');
     Route::get('save_profile', 'profil')->name('profil');
     Route::post('save_preferences', 'savepreferences')->name('savepreferences');
@@ -145,6 +151,9 @@ Route::get('edit_profile', function () {
 
 Route::get('profil', function () {
     return view('profil');
+});
+Route::get('badges_overview', function () {
+    return view('badges_overview');
 });
 
 
