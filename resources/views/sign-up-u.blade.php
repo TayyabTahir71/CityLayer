@@ -99,10 +99,20 @@
                     <div class="flex flex-col items-center justify-center gap-4 mt-12">
                         <input type="text" placeholder="Username" name="name" id="name" class="form-input"
                             required />
+                        @if ($errors->has('name'))
+                            <span class="text-red-500">{{ $errors->first('name') }}</span>
+                        @endif
                         <input type="password" placeholder="Password" name="password" id="password" class="form-input"
                             required />
+                        @if ($errors->has('password'))
+                            <span class="text-red-500">{{ $errors->first('password') }}</span>
+                        @endif
                         <input type="password" placeholder="Confirm Password" name="password_confirmation"
                             id="password_confirmation" class="form-input" required />
+
+                        @if ($errors->has('password_confirmation'))
+                            <span class="text-red-500">{{ $errors->first('password_confirmation') }}</span>
+                        @endif
 
                         <button type="submit" class="mb-3 cursor-pointer btn btn-primary">
                             <div class="text-center"> Signup</div>

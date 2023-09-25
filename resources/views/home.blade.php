@@ -129,9 +129,9 @@
 
 
                                     <div class="flex items-center justify-center mt-12">
-                                        <div class="-mr-2 cursor-pointer" @click="tab='place'">
+                                        <div class="-mr-1 cursor-pointer" @click="tab='place'">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
-                                                <div class="bg-blue-500 border-2 border-black rounded-full shadow-xl"
+                                                <div class="bg-blue-500 border-2 border-white rounded-full shadow-xl"
                                                     :class="tab == 'place' || tab == 'place1' ?
                                                         'bg-blue-500 z-10 p-[22px]' :
                                                         'bg-blue-500/70 p-[35px]'">
@@ -139,16 +139,16 @@
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
                                                 </div>
-                                                <div class="pl-2 font-semibold text-justify"
+                                                <div class="pl-2 font-semibold text-center"
                                                     :class="tab == 'place' ? 'text-black' : 'text-black/50'">
                                                     Browse Places
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="-ml-2 cursor-pointer" @click="tab='observation'">
+                                        <div class="-ml-1 cursor-pointer" @click="tab='observation'">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
 
-                                                <div class="flex items-center justify-center border-2 border-black rounded-full shadow-xl"
+                                                <div class="flex items-center justify-center border-2 border-white rounded-full shadow-xl"
                                                     :class="tab == 'observation' || tab == 'observation1' ?
                                                         'bg-yellow-300 z-10 p-[16px]' :
                                                         'bg-yellow-300/70 p-[35px]'">
@@ -158,80 +158,58 @@
                                                         id="observation" alt="">🔍</span>
                                                 </div>
 
-                                                <div class="pl-8 font-semibold text-justify"
+                                                <div class="pl-8 font-semibold text-center"
                                                     :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
                                                     Browse Observation
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    {{-- <div class="flex items-center justify-center mt-40 italic font-semibold">
-                                        <div class="absolute left-[52%] top-[170px] cursor-pointer" @click="tab='feature'"
-                                            onclick="place()">
-
-
-                                            <div class="w-8" :class="tab == 'feature' ? 'text-black' : 'text-black/50'">
-                                                Browse Observation
-                                            </div>
-
-                                        </div>
-                                        <div class="absolute left-[35%] top-[170px] cursor-pointer" @click="tab='place'"
-                                            onclick="feature()">
-
-                                            <div class="w-8" :class="tab == 'place' ? 'text-black' : 'text-black/50'">
-                                                Browse Places
-                                            </div>
-
-
-
-
-                                        </div>
-
-
-                                    </div> --}}
-
-
-
-                                    <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
-                                        x-show="tab=='place'">
-                                        <div class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-blue-500  p-[35px] focus:ring-offset-2 focus:ring-blue-400"
-                                                x-on:click="tab='observation'"
-                                                onclick="select_place({{ $allPlaces[0]->id }})">
-
-                                            </div>
-                                            <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
-                                        </div>
-
-                                        <div class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-blue-500  p-[35px]" x-on:click="tab='observation'"
-                                                onclick="select_place({{ $allPlaces[1]->id }})">
-
-                                            </div>
-                                            <span class="mt-2 text-black">{{ $allPlaces[1]->name }}</span>
-                                        </div>
-
-                                        <div class="flex flex-col items-center justify-center">
-                                            <button onclick="see()">
-                                                <div class="rounded-full border-blue-500 border-2  p-[22px]">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
-                                                        class="w-6 h-6 font-bold text-blue-500">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M12 6v12m6-6H6" />
-                                                    </svg>
+                                    <div class="" x-data="{ active: '' }">
+                                        <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
+                                            x-show="tab=='place'">
+                                            <div class="flex flex-col items-center justify-center">
+                                                <div class="rounded-full bg-blue-500 p-[35px] focus:border focus:border-"
+                                                    :class="active == 'PL-{{ $allPlaces[0]->id }}' ?
+                                                        'border-2 border-blue-300' ?
+                                                        ''">
 
                                                 </div>
-                                                <span class="mt-2 text-black">See more</span>
-                                            </button>
+                                                <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center">
+                                                <div class="rounded-full bg-blue-500 p-[35px]"
+                                                    :class="active == 'PL-{{ $allPlaces[1]->id }}' ?
+                                                        'border-2 border-blue-300' ?
+                                                        ''">
+
+                                                </div>
+                                                <span class="mt-2 text-black">{{ $allPlaces[1]->name }}</span>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center">
+                                                <button onclick="see()">
+                                                    <div class="rounded-full border-blue-500 border-2  p-[22px]">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+                                                            class="w-6 h-6 font-bold text-blue-500">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M12 6v12m6-6H6" />
+                                                        </svg>
+
+                                                    </div>
+                                                    <span class="mt-2 text-black">See more</span>
+                                                </button>
+                                            </div>
+
+
+
+
+
                                         </div>
-
-
-
-
-
                                     </div>
+
                                     <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='observation'">
                                         <div class="flex flex-col items-center justify-center">
@@ -265,24 +243,17 @@
                                             </button>
 
                                         </div>
-
-
-
-
-
                                     </div>
-
-
 
                                     <div class="flex items-center justify-center mt-8">
                                         <a href="/add-new-place"
                                             class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white bg-blue-500 rounded-3xl">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="3" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            Add new</a>
+                                            </svg> --}}
+                                            Submit</a>
                                     </div>
 
                                 </div>
@@ -358,34 +329,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    {{-- <div class="flex items-center justify-center mt-40 italic font-semibold">
-                                        <div class="absolute left-[52%] top-[170px] cursor-pointer" @click="tab='feature'"
-                                            onclick="place()">
-
-
-                                            <div class="w-8" :class="tab == 'feature' ? 'text-black' : 'text-black/50'">
-                                                Browse Observation
-                                            </div>
-
-                                        </div>
-                                        <div class="absolute left-[35%] top-[170px] cursor-pointer" @click="tab='place'"
-                                            onclick="feature()">
-
-                                            <div class="w-8" :class="tab == 'place' ? 'text-black' : 'text-black/50'">
-                                                Browse Places
-                                            </div>
-
-
-
-
-                                        </div>
-
-
-                                    </div> --}}
-
-
-
                                     <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                         x-show="tab=='place'">
                                         <div class="grid grid-cols-3 gap-8">
@@ -399,10 +342,6 @@
                                                 </div>
                                             @endforeach
                                         </div>
-
-
-
-
 
                                     </div>
                                     <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
@@ -470,12 +409,7 @@
         mymap0.addLayer(osmLayer0);
         mymap0.touchZoom.enable();
         mymap0.scrollWheelZoom.enable();
-        icon = L.icon({
-            iconUrl: '/img/openspace.png',
-            iconSize: [25, 25],
-            iconAnchor: [25, 25],
-            popupAnchor: [0, -25]
-        });
+
 
 
 
@@ -489,33 +423,6 @@
             alert("Geolocation is not supported by this browser.");
         }
 
-
-        /*  function getposition() {
-              navigator.geolocation.getCurrentPosition(
-                  (position) => {
-                      mymap0.setView([position.coords.latitude, position.coords.longitude], 10);
-                      L.marker([position.coords.latitude, position.coords.longitude], {
-                          icon: icon
-                      }).addTo(mymap0);
-                  },
-                  (e) => {
-                     $.getJSON('https://ipinfo.io/geo', function(response) {
-          var loc = response.loc.split(',');
-          var coords = {
-              latitude: loc[0],
-              longitude: loc[1]
-          };
-           mymap0.setView([coords.latitude, coords.longitude], 10);
-                      L.marker([coords.latitude, coords.longitude], {
-                          icon: icon
-                      }).addTo(mymap0);
-          });
-                  }, {
-                      enableHighAccuracy: true,
-                  }
-              );
-          }
-          */
 
         function getposition(success, fail) {
 
@@ -550,16 +457,18 @@
 
         function success(lat, lng) {
             mymap0.setView([lat, lng], 10);
-            L.marker([lat, lng], {
-                icon: icon
+
+            L.circle([lat, lng], {
+                color: '#F9F9F9',
+                fillColor: '#F9F9F9',
+                fillOpacity: 1.5,
+                radius: 60, // Radius of the circle in meters
             }).addTo(mymap0);
         }
 
         function fail() {
             alert("location failed");
         }
-
-
 
         console.log(data);
 
@@ -570,24 +479,6 @@
             place = data[i];
             placeid = place.place_id;
             observationid = place.observation_id;
-
-
-            if (place.user_id == userid) {
-                icon2 = L.icon({
-                    className: 'circle-image',
-                    // html: `<div class="circle-image" style="background-image: url('/img/marker.png')"></div>`,
-                    iconSize: [40, 40], // Size of the icon [width, height]
-                    iconAnchor: [20, 20] // Position of the icon relative to its container [x, y]
-                });
-            } else {
-                icon2 = L.icon({
-                    className: 'circle-image',
-                    // html: `<div class="circle-image" style="background-image: url('/img/marker.png')"></div>`,
-                    iconSize: [40, 40], // Size of the icon [width, height]
-                    iconAnchor: [20, 20] // Position of the icon relative to its container [x, y]
-                });
-            }
-
 
             if (place.place) {
                 placename = place.place.name;
@@ -621,7 +512,7 @@
                 fillOpacity: 1.5,
                 radius: 60, // Radius of the circle in meters
             }).addTo(mymap0).bindPopup(
-                `<div class="absolute top-0 bg-blue-400 w- flex flex-col"><div class="px-4 py-4 flex justify-start items-center gap-4 -mb-10"> <div class="flex flex-col items-center 
+                `<div class="absolute top-0 bg-blue-400 w- flex flex-col"><div class="px-4 py-4 flex justify-start items-center gap-4 -mb-10"> <div class="flex flex-col items-center
                     justify-center">
                 <div class="rounded-full bg-blue-500 border-2 border-white p-[35px]" x-on:click="tab='observation'">
                 </div>
