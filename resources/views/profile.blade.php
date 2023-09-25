@@ -2,52 +2,51 @@
 
  @section('main')
      <div data-barba="container">
-         @include('parts.navbar')
          <div class="flex flex-col h-screen mx-auto">
-             <div class="flex flex-col items-center pt-24 gap-x-6 lg:pt-32">
+             <div class="flex flex-col items-center pt-8 gap-x-6 lg:pt-32">
                  <form action="avatar" method="POST" enctype="multipart/form-data">
                      @csrf
                      <input type="file" name="image" id="image" class="hidden" accept="image/*"
                          onchange="javascript:this.form.submit();">
                      <label for="image" class="cursor-pointer ">
-                         <img class="object-cover w-24 h-24 border-7 border-blue-500 rounded-full  " style="border-width: 7px"
+                         <img class="object-cover w-24 hw h-24 border-7 border-blue-500 rounded-full  " style="border-width: 7px"
                              src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
                      </label>
                      <div class="bg-black rounded-full text-white  text-center text-lg relative mt-[-22%] text-2xl" style="width: 31px;font-size: 2rem">+</div>
                  </form>
 
              </div>
-             <h1 class="pt-4 text-2xl text-center text-gray-800">{{ $name }}</h1>
+             <h1 class="pt-4 text-2xl text-center text-gray-800 bol">{{ $name }}</h1>
              <br/>
              <div class="flex flex-row items-center justify-center">
-                 <div class="flex flex-row items-center justify-center  w-1/2 gap-4">
+                 <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
 
-                     <button class="bg-yellow-400 w-1/2 rounded-md p-3">1</button>
-                     <button class="bg-yellow-400 w-1/2 rounded-md p-3">2</button>
+                     <button class="bg-yel w-1/2 border-ms p5">1</button>
+                     <button class="bg-yel w-1/2 border-ms p5">2</button>
                  </div>
              </div>
              <br/>
              <div class="flex flex-row items-center justify-center">
-                 <div class="flex flex-row items-center justify-center  w-1/2 gap-8">
-                     <button class="bg-yellow-400 w-1/2 rounded-md p-3" style="width:100%">3</button>
+                 <div class="flex flex-row items-center justify-center  w-89 gap-8 w45">
+                     <button class="bg-yel w-1/2 border-ms p5" style="width:89%">3</button>
                  </div>
              </div>
 <br/>
              <div class="flex flex-row items-center justify-center">
-                 <div class="flex flex-row items-center justify-center  w-1/2 gap-4">
-                     <button class="bg-yellow-400 w-1/2 rounded-md p-3" style="width:62%">4</button>
-                     <button class="bg-yellow-400 w-1/3 rounded-md p-3">5</button>
+                 <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
+                     <button class="bg-yel w-1/2 border-ms p5" style="width:76%">4</button>
+                     <button class="bg-yel w-1/3 border-ms p5">5</button>
                  </div>
              </div><br/>
              <div class="flex flex-row items-center justify-center">
-                 <div class="flex flex-row items-center justify-center  w-1/2 gap-4">
-                     <button class="bg-yellow-400 w-1/3 rounded-md p-3" style="width: 46%">6</button>
-                     <button class="bg-yellow-400 w-1/2 rounded-md p-3">7</button>
+                 <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
+                     <button class="bg-yel w-1/3 rounded-md p5" style="width: 46%">6</button>
+                     <button class="bg-yel w-1/2 rounded-md p5 w-89">7</button>
                  </div>
              </div>
 
              <h1 class="pt-4 text-2xl text-center text-gray-800">{{ backpack_auth()->user()->email }}</h1>
-             <h2 class="pt-2 text-2xl font-bold text-center text-yellow-300">{{ backpack_auth()->user()->score }}</h2>
+             <h2 class="pt-2 text-2xl font-bold text-center text-yellow-300" style="color: skyblue"> Level {{ backpack_auth()->user()->score }}</h2>
              <div class="w-2/3 mx-auto">
                  <div class="relative pt-1">
                      <div class="flex h-3 overflow-hidden text-xs bg-white border rounded">
@@ -56,36 +55,52 @@
                              class="flex flex-col justify-center text-center text-white bg-yellow-300 shadow-none whitespace-nowrap">
                          </div>
                      </div>
-                     <div class="pt-2">
-                         @if (backpack_auth()->user()->score < 100)
-                             <div class="text-xs font-semibold text-center text-blue-300">Level 1</div>
-                         @elseif(backpack_auth()->user()->score < 200)
-                             <div class="text-xs font-semibold text-center text-blue-300">Level 2</div>
-                         @elseif(backpack_auth()->user()->score < 300)
-                             <div class="text-xs font-semibold text-center text-blue-300">Level 3</div>
-                         @elseif(backpack_auth()->user()->score < 400)
-                             <div class="text-xs font-semibold text-center text-blue-300">Level 4</div>
-                         @elseif(backpack_auth()->user()->score < 500)
-                             <div class="text-xs font-semibold text-center text-blue-300">Level 5</div>
-                         @elseif(backpack_auth()->user()->score < 600)
-                             <div class="text-xs font-semibold text-center text-blue-300">Level 6</div>
-                         @elseif(backpack_auth()->user()->score < 700)
-                             <div class="text-xs font-semibold text-center text-blue-300">Level 7</div>
-                         @elseif(backpack_auth()->user()->score < 800)
-                             <div class="text-xs font-semibold text-center text-blue-300">Level 8</div>
-                         @elseif(backpack_auth()->user()->score < 900)
-                             <div class="text-xs font-semibold text-center text-blue-300">Level 9</div>
-                         @elseif(backpack_auth()->user()->score < 1000)
-                             <div class="text-xs font-semibold text-center text-blue-300">Level 10</div>
-                         @endif
-                     </div>
-                     <div class="flex flex-col justify-center items-center">
-                         <img src="{{ asset('images/mir.png') }}" alt="Your Image">
+{{--                     <div class="pt-2">--}}
+{{--                         @if (backpack_auth()->user()->score < 100)--}}
+{{--                             <div class="text-xs font-semibold text-center text-blue-300">Level 1</div>--}}
+{{--                         @elseif(backpack_auth()->user()->score < 200)--}}
+{{--                             <div class="text-xs font-semibold text-center text-blue-300">Level 2</div>--}}
+{{--                         @elseif(backpack_auth()->user()->score < 300)--}}
+{{--                             <div class="text-xs font-semibold text-center text-blue-300">Level 3</div>--}}
+{{--                         @elseif(backpack_auth()->user()->score < 400)--}}
+{{--                             <div class="text-xs font-semibold text-center text-blue-300">Level 4</div>--}}
+{{--                         @elseif(backpack_auth()->user()->score < 500)--}}
+{{--                             <div class="text-xs font-semibold text-center text-blue-300">Level 5</div>--}}
+{{--                         @elseif(backpack_auth()->user()->score < 600)--}}
+{{--                             <div class="text-xs font-semibold text-center text-blue-300">Level 6</div>--}}
+{{--                         @elseif(backpack_auth()->user()->score < 700)--}}
+{{--                             <div class="text-xs font-semibold text-center text-blue-300">Level 7</div>--}}
+{{--                         @elseif(backpack_auth()->user()->score < 800)--}}
+{{--                             <div class="text-xs font-semibold text-center text-blue-300">Level 8</div>--}}
+{{--                         @elseif(backpack_auth()->user()->score < 900)--}}
+{{--                             <div class="text-xs font-semibold text-center text-blue-300">Level 9</div>--}}
+{{--                         @elseif(backpack_auth()->user()->score < 1000)--}}
+{{--                             <div class="text-xs font-semibold text-center text-blue-300">Level 10</div>--}}
+{{--                         @endif--}}
+{{--                     </div>--}}
+
+                     <div class="f">
+                         <div class="flax ">
+                             <img src="{{ asset('img/icons/guru.png') }}" class="image" alt="Your Image">
+                             <div class="tes">explorer</div>
+                         </div>
+                         <div class="flax margl">
+                             <img src="{{ asset('img/icons/guru.png') }}" class="image" alt="Your Image">
+                             <div class="tes">city maker</div>
+                         </div>
+                         <div class="flax margl">
+                             <img src="{{ asset('img/icons/guru.png') }}" class="image" alt="Your Image">
+                             <div class="tes">influencer</div>
+                         </div>
+                         <a href="" class="flax margl">
+                             <img src="{{ asset('img/icons/guru.png') }}" class="image" alt="Your Image">
+                             <div class="tes">see more</div>
+                         </a>
                      </div>
                      <br/>
                      <div class="flex flex-row justify-center items-center gap-4">
-                         <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg">Close</button>
-                         <button class="text-blue-500 border border-blue-500 p-1 md:p-2 rounded-md cursor-pointer">Edit profile</button>
+                         <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg btnpd">Close</button>
+                         <button class="text-blue-500 border border-blue-500 p-1 md:p-2 rounded-md cursor-pointer btn2p">Edit profile</button>
                      </div>
 
 
