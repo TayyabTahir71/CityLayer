@@ -2,7 +2,6 @@
 
 @section('main')
     <div data-barba="container">
-        @include('parts.navbar')
         <div class="flex flex-col h-screen mx-auto">
 {{--            <div class="flex flex-col items-center pt-24 gap-x-6 lg:pt-32">--}}
 {{--                <form action="avatar" method="POST" enctype="multipart/form-data">--}}
@@ -19,12 +18,9 @@
 {{--            </div>--}}
             <br/>
             <br/>
+            <h1 class="pt-4 bold text-center text-gray-800">Username</h1>
             <br/>
-            <br/>
-            <br/>
-            <h1 class="pt-4 text-2xl text-center text-gray-800">USername</h1>
-            <br/>
-            <h2 class="pt-2 text-2xl font-bold text-center text-blue-300">Level{{ backpack_auth()->user()->score }}!</h2>
+            <h2 class="pt-2  text-center cbl">Level{{ backpack_auth()->user()->score }}!</h2>
 
             <div class="w-2/3 mx-auto">
                 <div class="relative pt-1">
@@ -34,35 +30,93 @@
                              class="flex flex-col justify-center text-center text-white bg-yellow-300 shadow-none whitespace-nowrap">
                         </div>
                     </div>
-                    <div class="pt-2">
-                        @if (backpack_auth()->user()->score < 100)
-                            <div class="text-xs font-semibold text-center text-blue-300">Level 1</div>
-                        @elseif(backpack_auth()->user()->score < 200)
-                            <div class="text-xs font-semibold text-center text-blue-300">Level 2</div>
-                        @elseif(backpack_auth()->user()->score < 300)
-                            <div class="text-xs font-semibold text-center text-blue-300">Level 3</div>
-                        @elseif(backpack_auth()->user()->score < 400)
-                            <div class="text-xs font-semibold text-center text-blue-300">Level 4</div>
-                        @elseif(backpack_auth()->user()->score < 500)
-                            <div class="text-xs font-semibold text-center text-blue-300">Level 5</div>
-                        @elseif(backpack_auth()->user()->score < 600)
-                            <div class="text-xs font-semibold text-center text-blue-300">Level 6</div>
-                        @elseif(backpack_auth()->user()->score < 700)
-                            <div class="text-xs font-semibold text-center text-blue-300">Level 7</div>
-                        @elseif(backpack_auth()->user()->score < 800)
-                            <div class="text-xs font-semibold text-center text-blue-300">Level 8</div>
-                        @elseif(backpack_auth()->user()->score < 900)
-                            <div class="text-xs font-semibold text-center text-blue-300">Level 9</div>
-                        @elseif(backpack_auth()->user()->score < 1000)
-                            <div class="text-xs font-semibold text-center text-blue-300">Level 10</div>
-                        @endif
-                    </div>
+{{--                    <div class="pt-2">--}}
+{{--                        @if (backpack_auth()->user()->score < 100)--}}
+{{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 1</div>--}}
+{{--                        @elseif(backpack_auth()->user()->score < 200)--}}
+{{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 2</div>--}}
+{{--                        @elseif(backpack_auth()->user()->score < 300)--}}
+{{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 3</div>--}}
+{{--                        @elseif(backpack_auth()->user()->score < 400)--}}
+{{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 4</div>--}}
+{{--                        @elseif(backpack_auth()->user()->score < 500)--}}
+{{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 5</div>--}}
+{{--                        @elseif(backpack_auth()->user()->score < 600)--}}
+{{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 6</div>--}}
+{{--                        @elseif(backpack_auth()->user()->score < 700)--}}
+{{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 7</div>--}}
+{{--                        @elseif(backpack_auth()->user()->score < 800)--}}
+{{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 8</div>--}}
+{{--                        @elseif(backpack_auth()->user()->score < 900)--}}
+{{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 9</div>--}}
+{{--                        @elseif(backpack_auth()->user()->score < 1000)--}}
+{{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 10</div>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
+                    <br/>
                     <div class="flex flex-col justify-center items-center">
-                        <img src="{{ asset('images/badges.png') }}" style="width: 40%" class="w-57 cursor-pointer" alt="Your Image">
+                     </div>
+                    <div class="fc">
+                        <div class="df">
+                            <div class="box">
+                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+                            <div class="box">
+                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+                            <div class="box">
+                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+
+
+                        </div>
+                        <div class="df">
+                            <div class="box">
+                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+                            <div class="box">
+                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+                            <div class="box">
+                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+
+
+                        </div>
+                        <div class="df">
+                            <div class="box">
+                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+                            <div class="box">
+                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+                            <div class="box">
+                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+
+
+                        </div>
+                        <div class="box">
+                            <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+                            <div class="tes">explorer</div>
+                        </div>
+                    </div>
+
+                    <div>
+
                     </div>
                     <br/>
                     <div class="flex flex-row justify-center items-center gap-4">
-                        <button class="bg-blue-500 text-white font-bold py-2 px-7 rounded-lg">Close</button>
+                        <button class="bg-blue-500 text-white font-bold py-2 px-7 rounded-lg brad fnor">Close</button>
                     </div>
 
 

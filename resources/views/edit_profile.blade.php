@@ -23,47 +23,49 @@ $info = GlobalController::myprofile();
                 <div class="flex flex-col items-center justify-center pb-6">
                 </div>
             </label>
-            <div id="toggleContainer" class="w-1/2 flex flex-row gap-16">
+            <div id="toggleContainer" class="w-1/2 flex flex-row gap-16 wd10">
            <div class="flex flex-col items-center justify-center pb-6 justify-start items-start" style="width: 58%">
-               <div class="text-xl font-bold">Username</div>
-               <div>change /add username</div>
+               <div class="text-xl font-bold pd32">Username</div>
+               <div class="fn32">change /add username</div>
            </div>
                 <div class="bg-blue-500 text-white  flex items-center justify-center rounded-full text-3xl" style="height: 39px;width: 38px">+</div>
+
             </div>
+
 <br/>
-            <div id="toggleContainer1" class="w-1/2 flex flex-row gap-16">
+            <div id="toggleContainer1" class="w-1/2 flex flex-row gap-16 wd10">
            <div class="flex flex-col items-center justify-center pb-6 justify-start items-start" style="width: 58%">
-               <div class="text-xl font-bold">Email</div>
-               <div>change /add email</div>
+               <div class="text-xl font-bold pd32">Email</div>
+               <div >change /add email</div>
            </div>
                 <div class="bg-blue-500 text-white  flex items-center justify-center rounded-full text-3xl" style="height: 39px;width: 38px">+</div>
             </div>
             <br/>
-            <div id="toggleContainer1" class="w-1/2 flex flex-row gap-16">
+            <div id="toggleContainer2" class="w-1/2 flex flex-row gap-16 wd10">
            <div class="flex flex-col items-center justify-center pb-6 justify-start items-start" style="width: 58%">
-               <div class="text-xl font-bold">Age</div>
+               <div class="text-xl font-bold pd32">Age</div>
                <div>change /add age</div>
            </div>
                 <div class="bg-blue-500 text-white  flex items-center justify-center rounded-full text-3xl" style="height: 39px;width: 38px">+</div>
             </div>
             <br/>
-            <div id="toggleContainer1" class="w-1/2 flex flex-row gap-16">
+            <div id="toggleContainer3" class="w-1/2 flex flex-row gap-16 wd10">
            <div class="flex flex-col items-center justify-center pb-6 justify-start items-start" style="width: 58%">
-               <div class="text-xl font-bold">Gender</div>
+               <div class="text-xl font-bold pd32">Gender</div>
                <div>change /add gender</div>
            </div>
                 <div class="bg-blue-500 text-white  flex items-center justify-center rounded-full text-3xl" style="height: 39px;width: 38px">+</div>
             </div>
             <br/>
-            <div id="toggleContainer1" class="w-1/2 flex flex-row gap-16">
+            <div id="toggleContainer4" class="w-1/2 flex flex-row gap-16 wd10">
            <div class="flex flex-col items-center justify-center pb-6 justify-start items-start" style="width: 58%">
-               <div class="text-xl font-bold">Education</div>
+               <div class="text-xl font-bold pd32">Education</div>
                <div>change /add education level</div>
            </div>
                 <div class="bg-blue-500 text-white  flex items-center justify-center rounded-full text-3xl" style="height: 39px;width: 38px">+</div>
             </div>
             <br/>
-                <button class="text-blue-500 border border-blue-500 p-1 md:p-4 rounded-lg">Edit city tags</button>
+                <button class="text-blue-500 border border-blue-500 p-1 md:p-4 rounded-lg pd">Edit city tags</button>
 <br/>
             <button class="bg-blue-500 text-white p-3 rounded-lg">
                  Save and close
@@ -120,37 +122,48 @@ $info = GlobalController::myprofile();
         const toggleContainer = document.getElementById('toggleContainer');
 
         toggleContainer.addEventListener('click', function() {
-            // Create an input element
             const inputElement = document.createElement('input');
             inputElement.setAttribute('type', 'text');
-            inputElement.setAttribute('value', toggleContainer.textContent);
             inputElement.classList.add('w-60', 'p-2', 'border', 'rounded');
-
-
-            // Replace the div with the input
             toggleContainer.replaceWith(inputElement);
-
-            // Focus on the input
-            inputElement.focus();
-
-            const toggleContainer1 = document.getElementById('toggleContainer1');
-
-        toggleContainer1.addEventListener('click', function() {
-            // Create an input element
-            const inputElement = document.createElement('input');
-            inputElement.setAttribute('type', 'text');
-            inputElement.setAttribute('value', toggleContainer1.textContent);
-            inputElement.classList.add('w-60', 'p-2', 'border', 'rounded');
-
-
-            // Replace the div with the input
-            toggleContainer.replaceWith(inputElement);
-
-            // Focus on the input
             inputElement.focus();
         });
-            // Event listener to toggle back to div when clicking outside the input
+        const toggleContainer1 = document.getElementById('toggleContainer1');
 
+        toggleContainer1.addEventListener('click', function() {
+            const inputElement1 = document.createElement('input');
+            inputElement1.setAttribute('type', 'text');
+            inputElement1.classList.add('w-60', 'p-2', 'border', 'rounded');
+            toggleContainer1.replaceWith(inputElement1);
+            inputElement1.focus();
+        });
+
+        const toggleContainer2 = document.getElementById('toggleContainer2');
+
+        toggleContainer2.addEventListener('click', function() {
+            const inputElement2 = document.createElement('input');
+            inputElement2.setAttribute('type', 'text');
+            inputElement2.classList.add('w-60', 'p-2', 'border', 'rounded');
+            toggleContainer2.replaceWith(inputElement2);
+            inputElement2.focus();
+        });
+        const toggleContainer3 = document.getElementById('toggleContainer3');
+
+        toggleContainer3.addEventListener('click', function() {
+            const inputElement3 = document.createElement('input');
+            inputElement3.setAttribute('type', 'text');
+            inputElement3.classList.add('w-60', 'p-2', 'border', 'rounded');
+            toggleContainer3.replaceWith(inputElement3);
+            inputElement3.focus();
+        });
+
+        const toggleContainer4 = document.getElementById('toggleContainer4');
+        toggleContainer4.addEventListener('click', function() {
+            const inputElement4 = document.createElement('input');
+            inputElement4.setAttribute('type', 'text');
+            inputElement4.classList.add('w-60', 'p-2', 'border', 'rounded');
+            toggleContainer4.replaceWith(inputElement4);
+            inputElement4.focus();
         });
     </script>
 

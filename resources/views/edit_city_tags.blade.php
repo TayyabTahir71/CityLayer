@@ -28,38 +28,39 @@ $info = GlobalController::myprofile();
                 <div class="i">i</div>
             </div>
             <br/>
-            <input placeholder="Browse or add new city tags" class="inp ">
+            <input placeholder="Browse or add new city tags" class="inp1">
             <br/>
             <div class="flex flex-row items-center justify-center">
-                <div class="flex flex-row items-center justify-center   gap-4 w51" >
+                <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
 
-                    <button class="bg-yellow-400 w-1/2 rounded-md p-3">1</button>
-                    <button class="bg-yellow-400 w-1/2 rounded-md p-3">2</button>
+                    <button class="bg-yel w-1/2 border-ms p5">1</button>
+                    <button class="bg-yel w-1/2 border-ms p5">2</button>
                 </div>
             </div>
             <br/>
             <div class="flex flex-row items-center justify-center">
-                <div class="flex flex-row items-center justify-center  w-1/2 gap-8">
-                    <button class="bg-yellow-400 w-1/2 rounded-md p-3" style="width:100%">3</button>
+                <div class="flex flex-row items-center justify-center  w-89 gap-8 w45">
+                    <button class="bg-yel w-1/2 border-ms p5" style="width:89%">3</button>
                 </div>
             </div>
             <br/>
             <div class="flex flex-row items-center justify-center">
-                <div class="flex flex-row items-center justify-center  w-1/2 gap-4">
-                    <button class="bg-yellow-400 w-1/2 rounded-md p-3" style="width:62%">4</button>
-                    <button class="bg-yellow-400 w-1/3 rounded-md p-3">5</button>
+                <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
+                    <button class="bg-yel w-1/2 border-ms p5" style="width:76%">4</button>
+                    <button class="bg-yel w-1/3 border-ms p5">5</button>
                 </div>
             </div><br/>
             <div class="flex flex-row items-center justify-center">
-                <div class="flex flex-row items-center justify-center  w-1/2 gap-4">
-                    <button class="bg-yellow-400 w-1/3 rounded-md p-3" style="width: 46%">6</button>
-                    <button class="bg-yellow-400 w-1/2 rounded-md p-3">7</button>
+                <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
+                    <button class="bg-yel w-1/3 rounded-md p5" style="width: 46%">6</button>
+                    <button class="bg-yel w-1/2 rounded-md p5 w-89">7</button>
                 </div>
             </div>
+
             <br/>
             <div class="flex-r items-center justify-center">
-                <button class="text-blue-500 border border-blue-500 p-3  rounded-lg">Back</button>
-                <button class="bg-blue-500 text-white p-3 rounded-lg">Save and close</button>
+                <button class="bg-blue-500 text-white p-3 rounded-lg bb">Back</button>
+                <button class="text-blue-500 border border-blue-500 p-3   rounded-lg">Save and close</button>
             </div>
 
  </form>
