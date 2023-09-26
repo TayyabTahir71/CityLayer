@@ -3146,18 +3146,34 @@ class GlobalController extends Controller
     public function addNewPlace(Request $request)
     {
 
-        // dd($request->all());
+
+        $place = PlaceDetails::where('place_id', $request->place_id)
+            ->orWhere('observation_id', $request->observation_id)
+            ->first();
+
+        if (isset($place)) {
+            $place->update([
+
+                'place_id' => $request->place_id,
+                'user_id' =>  backpack_auth()->user()->id,
+                'observation_id' => $request->observation_id,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+
+            ]);
+        } else {
+            PlaceDetails::create([
+
+                'place_id' => $request->place_id,
+                'user_id' =>  backpack_auth()->user()->id,
+                'observation_id' => $request->observation_id,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+
+            ]);
+        }
 
 
-        PlaceDetails::create([
-
-            'place_id' => $request->place,
-            'user_id' =>  backpack_auth()->user()->id,
-            'observation_id' => $request->observation,
-            'latitude' => $request->lat,
-            'longitude' => $request->long,
-
-        ]);
 
         return response()->json([
             'status' => 'success',

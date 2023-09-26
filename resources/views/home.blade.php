@@ -165,11 +165,17 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
                                     <div class="" x-data="{ active: '' }">
-                                        <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
+
+                                        <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold all-places"
                                             x-show="tab=='place'">
-                                            <div class="flex flex-col items-center justify-center"
-                                                @click="active='PL_{{ $allPlaces[0]->id }}'">
+
+                                            <div class="flex flex-col items-center justify-center places-name"
+                                                @click="active='PL_{{ $allPlaces[0]->id }}'"
+                                                onclick="select_place({{ $allPlaces[0]->id }})">
                                                 <div class="rounded-full bg-blue-500 p-[35px] "
                                                     :class="active == 'PL_{{ $allPlaces[0]->id }}' ?
                                                         'border-2 border-lime-500' :
@@ -178,8 +184,9 @@
                                                 <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
                                             </div>
 
-                                            <div class="flex flex-col items-center justify-center"
-                                                @click="active='PL_{{ $allPlaces[1]->id }}'">
+                                            <div class="flex flex-col items-center justify-center places-name"
+                                                @click="active='PL_{{ $allPlaces[1]->id }}'"
+                                                onclick="select_place({{ $allPlaces[1]->id }})">
                                                 <div class="rounded-full bg-blue-500 p-[35px]"
                                                     :class="active == 'PL_{{ $allPlaces[1]->id }}' ?
                                                         'border-2 border-lime-500' :
@@ -204,58 +211,65 @@
                                             </div>
 
 
-
-
-
                                         </div>
                                     </div>
-
-                                    <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
-                                        x-show="tab=='observation'">
-                                        <div class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-yellow-300  p-[35px]" x-on:click="tab='place'"
+                                    <div class="" x-data="{ active: '' }">
+                                        <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
+                                            x-show="tab=='observation'">
+                                            <div class="flex flex-col items-center justify-center"
+                                                @click="active='OB_{{ $allObservations[0]->id }}'"
                                                 onclick="select_observation({{ $allObservations[0]->id }})">
-
-                                            </div>
-                                            <span class="mt-2 text-black">{{ $allObservations[0]->name }}</span>
-                                        </div>
-
-                                        <div class="flex flex-col items-center justify-center">
-                                            <div class="rounded-full bg-yellow-300  p-[35px]" x-on:click="tab='place'"
-                                                onclick="select_observation({{ $allObservations[1]->id }})">
-
-                                            </div>
-                                            <span class="mt-2 text-black">{{ $allObservations[1]->name }}</span>
-                                        </div>
-
-                                        <div class="flex flex-col items-center justify-center">
-                                            <button onclick="see()">
-                                                <div class="rounded-full border-yellow-300 border-2  p-[22px]">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
-                                                        class="w-6 h-6 font-bold text-yellow-300">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M12 6v12m6-6H6" />
-                                                    </svg>
+                                                <div class="rounded-full bg-yellow-300  p-[35px]"
+                                                    :class="active == 'OB_{{ $allObservations[0]->id }}' ?
+                                                        'border-2 border-lime-500' :
+                                                        ''">
 
                                                 </div>
-                                                <span class="mt-2 text-black">See more</span>
-                                            </button>
+                                                <span class="mt-2 text-black">{{ $allObservations[0]->name }}</span>
 
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center"
+                                                @click="active='OB_{{ $allObservations[1]->id }}'"
+                                                onclick="select_observation({{ $allObservations[1]->id }})">
+                                                <div class="rounded-full bg-yellow-300  p-[35px]"
+                                                    :class="active == 'OB_{{ $allObservations[1]->id }}' ?
+                                                        'border-2 border-lime-500' :
+                                                        ''">
+
+                                                </div>
+                                                <span class="mt-2 text-black">{{ $allObservations[1]->name }}</span>
+
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-center">
+                                                <button onclick="see()" type="button">
+                                                    <div class="rounded-full border-yellow-300 border-2  p-[22px]">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+                                                            class="w-6 h-6 font-bold text-yellow-300">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M12 6v12m6-6H6" />
+                                                        </svg>
+
+                                                    </div>
+                                                    <span class="mt-2 text-black">See more</span>
+                                                </button>
+
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="flex items-center justify-center mt-8">
-                                        <div
+                                        <div onclick="submitData()"
                                             class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white bg-blue-500 rounded-3xl">
                                             {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="3" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg> --}}
+                                                    stroke-width="3" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg> --}}
                                             Submit</div>
                                     </div>
-
                                 </div>
 
                             </div>
@@ -329,47 +343,54 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
-                                        x-show="tab=='place'">
-                                        <div class="grid grid-cols-3 gap-8">
-                                            @foreach ($allPlaces as $pls)
-                                                <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-blue-500  p-[35px]"
-                                                        x-on:click="tab='observation'">
-
+                                    <div x-data="{ active: '' }">
+                                        <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
+                                            x-show="tab=='place'">
+                                            <div class="grid grid-cols-3 gap-8">
+                                                @foreach ($allPlaces as $pls)
+                                                    <div class="flex flex-col items-center justify-center w-[80px]"
+                                                        @click="active='OB_{{ $pls->id }}'"
+                                                        onclick="select_observation({{ $pls->id }})">
+                                                        <div class="rounded-full bg-blue-500  p-[35px]"
+                                                            :class="active == 'OB_{{ $pls->id }}' ?
+                                                                'border-2 border-lime-500' :
+                                                                ''">
+                                                        </div>
+                                                        <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                     </div>
-                                                    <span class="mt-2 text-black">{{ $pls->name }}</span>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                                @endforeach
+                                            </div>
 
+                                        </div>
                                     </div>
-                                    <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
-                                        x-show="tab=='observation'">
-                                        <div class="grid grid-cols-3 gap-8">
-                                            @foreach ($allObservations as $obs)
-                                                <div class="flex flex-col items-center justify-center w-[80px]">
-                                                    <div class="rounded-full bg-yellow-300  p-[35px]">
-
+                                    <div x-data="{ active: '' }">
+                                        <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
+                                            x-show="tab=='observation'">
+                                            <div class="grid grid-cols-3 gap-8">
+                                                @foreach ($allObservations as $obs)
+                                                    <div class="flex flex-col items-center justify-center w-[80px]"
+                                                        @click="active='OB_{{ $pls->id }}'"
+                                                        onclick="select_observation({{ $pls->id }})">
+                                                        <div class="rounded-full bg-yellow-300  p-[35px]"
+                                                            :class="active == 'OB_{{ $obs->id }}' ?
+                                                                'border-2 border-lime-500' :
+                                                                ''">
+                                                        </div>
+                                                        <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                     </div>
-                                                    <span class="mt-2 text-black">{{ $obs->name }}</span>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                                @endforeach
+                                            </div>
 
+                                        </div>
                                     </div>
 
 
 
                                     <div class="flex items-center  justify-center pt-[20%] pb-4 bg-white">
-                                        <a href="/add-new-place"
+                                        <div onclick="submitData()"
                                             class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white bg-blue-500 rounded-3xl">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="3" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            Add new</a>
+
+                                            Submit</div>
                                     </div>
 
 
@@ -630,50 +651,21 @@
             btnid.click();
         }
 
+        var placeId = '';
 
-        function select_place(place_id) {
-            place = place_id;
-
-            observation = '';
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            latitude = document.getElementById('latitude').value;
-            longitude = document.getElementById('longitude').value;
-
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('add.new.place') }}",
-                data: {
-                    place: place,
-                    observation: observation,
-                    lat: latitude,
-                    long: longitude,
-                },
-                success: function(data) {
-                    alert(data.msg)
-                    window.location.href = "/";
-
-                    place = '';
-                    observation = '';
-                }
-            });
-
-
-
-
-
+        function select_place(id) {
+            placeId = id;
         }
 
-        function select_observation(observation_id) {
+        var observationId = '';
 
-            observation = observation_id;
-            place = '';
-            latitude = document.getElementById('latitude').value;
-            longitude = document.getElementById('longitude').value;
+        function select_observation(id) {
+            observationId = id;
+        }
+
+
+
+        function submitData() {
 
 
             $.ajaxSetup({
@@ -681,31 +673,25 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
+            latitude = document.getElementById('latitude').value;
+            longitude = document.getElementById('longitude').value;
 
             $.ajax({
                 type: 'POST',
                 url: "{{ route('add.new.place') }}",
                 data: {
-                    place: place,
-                    observation: observation,
-                    lat: latitude,
-                    long: longitude,
+                    place_id: placeId,
+                    observation_id: observationId,
+                    latitude: latitude,
+                    longitude: longitude,
                 },
                 success: function(data) {
                     alert(data.msg)
                     window.location.href = "/";
 
-                    place = '';
-                    observation = '';
+
                 }
             });
-
-
-
-
-
-
 
         }
     </script>
