@@ -71,28 +71,28 @@
 
                         <div class="flex">
                             <div class="absolute left-16 bottom-[18px] ">
-                                <div class="p-3 bg-yellow-300 border-2 border-white rounded-full">
-                                    <img src="{{ asset('img/search-icon.png') }}" class="w-7 h-7" alt="">
+                                <div class="p-3 bg-[#ffa726] border-2 border-white rounded-full">
+                                    <span class="w-8 h-4"> 🔍</span>
                                 </div>
 
                             </div>
                             <div class="absolute left-6 bottom-[18px] ">
-                                <div class="p-3 bg-blue-500 border-2 border-white rounded-full">
-                                    <img src="{{ asset('img/image.png') }}" class="w-7 h-7" alt="">
+                                <div class="p-3 bg-[#1976d2] border-2 border-white rounded-full">
+                                    <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" alt="">
                                 </div>
 
                             </div>
                         </div>
 
                         <a class="w-full pt-4" @click="modelOpen =!modelOpen">
-                            <span class="w-full px-12 py-4 text-white bg-blue-500 rounded-3xl">
+                            <span class="w-full px-12 py-4 text-white bg-[#2d9bf0] rounded-3xl">
                                 Add to map
                             </span>
 
                         </a>
 
                         <div class="absolute right-5 bottom-[25px] ">
-                            <div class="p-1 bg-blue-500 rounded-full w-9">
+                            <div class="p-1 bg-[#1976d2] rounded-full w-9">
                                 <span class="italic font-bold text-white">
                                     i
                                 </span>
@@ -131,11 +131,11 @@
                                     <div class="flex items-center justify-center mt-12">
                                         <div class="-mr-1 cursor-pointer" @click="tab='place'">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
-                                                <div class="bg-blue-500 border-2 border-white rounded-full shadow-xl"
+                                                <div class="bg-[#1976d2] border-2 border-white rounded-full shadow-xl"
                                                     :class="tab == 'place' || tab == 'place1' ?
-                                                        'bg-blue-500 z-10 p-[22px]' :
-                                                        'bg-blue-500/70 p-[35px]'">
-                                                    <img src="{{ asset('img/image.png') }}" class="w-7 h-7"
+                                                        'bg-[#1976d2] z-10 p-[22px]' :
+                                                        'bg-[#1976d2]/70 p-[35px]'">
+                                                    <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7"
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
                                                 </div>
@@ -150,8 +150,8 @@
 
                                                 <div class="flex items-center justify-center border-2 border-white rounded-full shadow-xl"
                                                     :class="tab == 'observation' || tab == 'observation1' ?
-                                                        'bg-yellow-300 z-10 p-[16px]' :
-                                                        'bg-yellow-300/70 p-[35px]'">
+                                                        'bg-[#ffa726] z-10 p-[16px]' :
+                                                        'bg-[#ffa726]/70 p-[35px]'">
                                                     <span class="flex items-center justify-center w-10 h-10"
                                                         :class="tab == 'observation' || tab == 'observation1' ? 'block' :
                                                             'hidden'"
@@ -175,22 +175,28 @@
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer"
                                                 @click="active='PL_{{ $allPlaces[0]->id }}'"
-                                                onclick="select_place({{ $allPlaces[0]->id }})">
-                                                <div class="rounded-full bg-blue-500 p-[35px] "
+                                                @if ($allPlaces[0]->subplaces->isNotEmpty()) onclick="subPlaces({{ $allPlaces[0]->id }})"
+                                                @else
+                                               onclick="select_place({{ $allPlaces[0]->id }})" @endif>
+                                                <div class="rounded-full bg-[#1976d2] p-[20px] "
                                                     :class="active == 'PL_{{ $allPlaces[0]->id }}' ?
                                                         'border-4 border-blue-300' :
                                                         ''">
+                                                    <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
                                                 </div>
                                                 <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
                                             </div>
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer"
                                                 @click="active='PL_{{ $allPlaces[1]->id }}'"
-                                                onclick="select_place({{ $allPlaces[1]->id }})">
-                                                <div class="rounded-full bg-blue-500 p-[35px]"
+                                                @if ($allPlaces[1]->subplaces->isNotEmpty()) onclick="subPlaces()"
+                                                 @else
+                                                onclick="select_place({{ $allPlaces[1]->id }})" @endif>
+                                                <div class="rounded-full bg-[#1976d2] p-[20px]"
                                                     :class="active == 'PL_{{ $allPlaces[1]->id }}' ?
                                                         'border-4 border-blue-300' :
                                                         ''">
+                                                    <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
                                                 </div>
                                                 <span class="mt-2 text-black">{{ $allPlaces[1]->name }}</span>
                                             </div>
@@ -219,10 +225,17 @@
                                             <div class="flex flex-col items-center justify-center cursor-pointer"
                                                 @click="active='OB_{{ $allObservations[0]->id }}'"
                                                 onclick="select_observation({{ $allObservations[0]->id }})">
-                                                <div class="rounded-full bg-yellow-300  p-[35px]"
+                                                <div class="rounded-full bg-[#ffa726]  px-[8px] py-[18px]"
                                                     :class="active == 'OB_{{ $allObservations[0]->id }}' ?
                                                         'border-4 border-yellow-100' :
                                                         ''">
+
+                                                    <div class="flex">
+                                                        <img src="{{ asset('new_img/sad.png') }}" alt=""
+                                                            class="w-8 h-8 -mr-1"> <img
+                                                            src="{{ asset('new_img/happy.png') }}" alt=""
+                                                            class="w-8 h-8 -ml-1">
+                                                    </div>
 
                                                 </div>
                                                 <span class="mt-2 text-black">{{ $allObservations[0]->name }}</span>
@@ -232,11 +245,16 @@
                                             <div class="flex flex-col items-center justify-center cursor-pointer"
                                                 @click="active='OB_{{ $allObservations[1]->id }}'"
                                                 onclick="select_observation({{ $allObservations[1]->id }})">
-                                                <div class="rounded-full bg-yellow-300  p-[35px]"
+                                                <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
                                                     :class="active == 'OB_{{ $allObservations[1]->id }}' ?
                                                         'border-4 border-yellow-100' :
                                                         ''">
-
+                                                    <div class="flex">
+                                                        <img src="{{ asset('new_img/sad.png') }}" alt=""
+                                                            class="w-8 h-8 -mr-1"> <img
+                                                            src="{{ asset('new_img/happy.png') }}" alt=""
+                                                            class="w-8 h-8 -ml-1">
+                                                    </div>
                                                 </div>
                                                 <span class="mt-2 text-black">{{ $allObservations[1]->name }}</span>
 
@@ -244,10 +262,10 @@
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer">
                                                 <button onclick="see()" type="button">
-                                                    <div class="rounded-full border-yellow-300 border-2  p-[22px]">
+                                                    <div class="rounded-full border-[#ffa726] border-2  p-[22px]">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
-                                                            class="w-6 h-6 font-bold text-yellow-300">
+                                                            class="w-6 h-6 font-bold text-[#ffa726]">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M12 6v12m6-6H6" />
                                                         </svg>
@@ -262,7 +280,7 @@
 
                                     <div class="flex items-center justify-center mt-8">
                                         <div onclick="submitData()"
-                                            class="flex cursor-pointer items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white bg-blue-500 rounded-3xl hover:shadow  hover:bg-blue-400 transition-all">
+                                            class="flex cursor-pointer items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white bg-[#1976d2] rounded-3xl hover:shadow  hover:bg-blue-400 transition-all">
                                             {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="3" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -308,11 +326,11 @@
                                     <div class="flex items-center justify-center mt-12">
                                         <div class="-mr-2 cursor-pointer" @click="tab='place'" onclick="place()">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
-                                                <div class="bg-blue-500 border-2 border-white rounded-full shadow-xl"
+                                                <div class="bg-[#1976d2] border-2 border-white rounded-full shadow-xl"
                                                     :class="tab == 'place' || tab == 'place1' ?
-                                                        'bg-blue-500 z-10 p-[22px]' :
-                                                        'bg-blue-500/70 p-[35px]'">
-                                                    <img src="{{ asset('img/image.png') }}" class="w-7 h-7"
+                                                        'bg-[#1976d2] z-10 p-[22px]' :
+                                                        'bg-[#1976d2]/70 p-[35px]'">
+                                                    <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7"
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
                                                 </div>
@@ -328,8 +346,8 @@
 
                                                 <div class="flex items-center justify-center border-2 border-white rounded-full shadow-xl"
                                                     :class="tab == 'observation' || tab == 'observation1' ?
-                                                        'bg-yellow-300 z-10 p-[16px]' :
-                                                        'bg-yellow-300/70 p-[35px]'">
+                                                        'bg-[#ffa726] z-10 p-[16px]' :
+                                                        'bg-[#ffa726]/70 p-[35px]'">
                                                     <span class="flex items-center justify-center w-10 h-10"
                                                         :class="tab == 'observation' || tab == 'observation1' ? 'block' :
                                                             'hidden'"
@@ -351,10 +369,12 @@
                                                     <div class="flex flex-col items-center justify-center w-[80px]"
                                                         @click="active='OB_{{ $pls->id }}'"
                                                         onclick="select_observation({{ $pls->id }})">
-                                                        <div class="rounded-full bg-blue-500  p-[35px]"
+                                                        <div class="rounded-full bg-[#1976d2]  p-[20px]"
                                                             :class="active == 'OB_{{ $pls->id }}' ?
                                                                 'border-4 border-blue-300' :
                                                                 ''">
+                                                            <img src="{{ asset('new_img/image.png') }}"
+                                                                class="w-7 h-7" />
                                                         </div>
                                                         <span class="mt-2 text-black">{{ $pls->name }}</span>
                                                     </div>
@@ -371,11 +391,18 @@
                                                     <div class="flex flex-col items-center justify-center w-[80px]"
                                                         @click="active='OB_{{ $pls->id }}'"
                                                         onclick="select_observation({{ $pls->id }})">
-                                                        <div class="rounded-full bg-yellow-300  p-[35px]"
+                                                        <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
                                                             :class="active == 'OB_{{ $obs->id }}' ?
                                                                 'border-4 border-yellow-100' :
                                                                 ''">
+                                                            <div class="flex">
+                                                                <img src="{{ asset('new_img/sad.png') }}" alt=""
+                                                                    class="w-8 h-8 -mr-1"> <img
+                                                                    src="{{ asset('new_img/happy.png') }}" alt=""
+                                                                    class="w-8 h-8 -ml-1">
+                                                            </div>
                                                         </div>
+
                                                         <span class="mt-2 text-black">{{ $obs->name }}</span>
                                                     </div>
                                                 @endforeach
@@ -388,7 +415,7 @@
 
                                     <div class="flex items-center  justify-center pt-[20%] pb-4 bg-white">
                                         <div onclick="submitData()"
-                                            class="flex cursor-pointer items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white bg-blue-500 rounded-3xl hover:shadow  hover:bg-blue-400 transition-all">
+                                            class="flex cursor-pointer items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white bg-[#1976d2] rounded-3xl hover:shadow  hover:bg-blue-400 transition-all">
 
                                             Submit</div>
                                     </div>
@@ -398,6 +425,10 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <div id="mysubplace" x-data="{ subPlace: false }">
+                        <button id="othertag" @click="subPlace =!subPlace" class="hidden"></button>
                     </div>
 
 
@@ -456,8 +487,8 @@
                             return;
                         }
                         is_echo = true;
-                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(6);
-                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(6);
+                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(2);
+                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(2);
                         success(pos.coords.latitude, pos.coords.longitude);
                     },
                     function() {
@@ -501,10 +532,6 @@
             place = data[i];
             placeid = place.place_id;
             observationid = place.observation_id;
-
-
-
-
             observationname = 'No Obervation';
             placename = 'No Place';
 
@@ -514,6 +541,8 @@
             if (place.observation) {
                 observationname = place.observation.name;
             }
+
+            username = place.user.name;
 
 
             // pics = place.image0;
@@ -532,29 +561,27 @@
                 fillOpacity: 1.5,
                 radius: 60, // Radius of the circle in meters
             }).addTo(mymap0).bindPopup(
-                `<div class="bg-blue-400 p-0 w-full"><div class="flex items-center justify-start gap-4 px-4 py-4 -mb-10"> <div class="flex flex-col items-center justify-center">
-                <div class="rounded-full bg-yellow-300 border-2 border-white p-[35px]" x-on:click="tab='observation'">
+                `<div class="bg-[#2d9bf0] p-0 w-full"><div class="flex items-center justify-start gap-4  -mb-2"> <div class="flex flex-col items-center justify-center">
+                <div class="rounded-full bg-[#ffa726] border-2 border-white p-[35px]" x-on:click="tab='observation'">
                 </div>
             </div>
             <img src="{{ asset('img/cam.PNG') }}" alt="" class="w-6 h-6 mt-4">
             <span class="mt-4 text-lg italic font-extrabold text-white">` + observationname + `</span>
         </div>
-        <div class="flex items-center justify-start gap-4 px-4 py-2">
+        <div class="flex items-center justify-start gap-4">
             <div class="flex flex-col items-center justify-center">
-                <div class="rounded-full bg-blue-500 border-2 border-white p-[35px]" x-on:click="tab='observation'">
+                <div class="rounded-full bg-[#1976d2] border-2 border-white p-[35px]" x-on:click="tab='observation'">
                 </div>
             </div>
             <img src="{{ asset('img/cam-2.PNG') }}" alt="" class="w-6 h-6 mt-4">
             <span class="mt-4 text-lg italic font-extrabold text-white">` + placename + `</span>
         </div>
 
-        <div class="pl-24 pr-4 mt-1 italic font-semibold text-white mbp">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam ipsam
-            quidem dolore deleniti praesentium, culpa
-        </div>
+        <textarea type="text" value="" class="pl-24 bg-[#2d9bf0] border-0 pr-4 mt-1 italic font-semibold text-white" />Place for a comment max 120 characters</textarea>
 
-        <span class="flex items-end justify-end px-2 mt-4 italic font-semibold text-white">
-            added by john wick
+
+        <span class="flex items-end justify-end px-2 mt-6 -mb-3 italic font-semibold text-white">
+            Added by ` + username + ` on 2023-12-19
         </span>
     </div>`
             );
@@ -688,13 +715,22 @@
                     longitude: longitude,
                 },
                 success: function(data) {
-                    swal(data.msg)
-                    window.location.href = "/";
+                    swal({
+                        icon: "success",
+                        title: data.msg,
+
+                    })
+                    //   window.location.href = "/";
 
 
                 }
             });
 
+        }
+
+
+        function subPlaces(id) {
+            alert(id);
         }
     </script>
     <style>

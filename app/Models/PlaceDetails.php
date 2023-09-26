@@ -40,4 +40,14 @@ class PlaceDetails extends Model
     {
         return $this->belongsTo(Observation::class);
     }
+
+    /**
+     * Get the user that owns the PlaceDetails
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

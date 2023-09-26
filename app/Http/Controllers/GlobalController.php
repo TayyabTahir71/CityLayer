@@ -52,12 +52,16 @@ class GlobalController extends Controller
                 $tagstreet = Tag::where('Category', 'Street')->get();
                 $tagbuilding = Tag::where('Category', 'Building')->get();
                 $tagopenspace = Tag::where('Category', 'Openspace')->get();
-                $allPlaces = Place::where('user_id', null)->orWhere('user_id', backpack_auth()->user()->id)->get();
+                $allPlaces = Place::where('user_id', null)
+                    ->orWhere('user_id', backpack_auth()->user()->id)
+                    ->whereNull('parent_id')->with('subplaces')
+                    ->get();
+
                 $allObservations = Observation::where('user_id', null)->orWhere('user_id', backpack_auth()->user()->id)->get();
 
 
 
-                $all_data = PlaceDetails::where('user_id', backpack_auth()->user()->id)->with('place', 'observation')->get();
+                $all_data = PlaceDetails::where('user_id', backpack_auth()->user()->id)->with('place', 'observation', 'user')->get();
 
                 // dd($all_data);
 
@@ -3157,15 +3161,19 @@ class GlobalController extends Controller
                 $place->update([
                     'place_id' => $request->place_id,
                 ]);
+                return response()->json([
+                    'status' => 'success',
+                    'msg' => 'Observation updated successfully'
+                ]);
             } else {
                 $place->update([
                     'observation_id' => $request->observation_id,
                 ]);
+                return response()->json([
+                    'status' => 'success',
+                    'msg' => 'Place updated successfully'
+                ]);
             }
-            return response()->json([
-                'status' => 'success',
-                'msg' => 'Place updated successfully'
-            ]);
         } else {
             PlaceDetails::create([
 
@@ -3176,10 +3184,18 @@ class GlobalController extends Controller
                 'longitude' => $request->longitude,
 
             ]);
-            return response()->json([
-                'status' => 'success',
-                'msg' => 'Place added successfully'
-            ]);
+
+            if ($request->place_id == NULL) {
+                return response()->json([
+                    'status' => 'success',
+                    'msg' => 'Observation added successfully'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'success',
+                    'msg' => 'Place added successfully'
+                ]);
+            }
         }
     }
 }
