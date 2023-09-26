@@ -3147,19 +3147,24 @@ class GlobalController extends Controller
     {
 
 
-        $place = PlaceDetails::where('place_id', $request->place_id)
-            ->orWhere('observation_id', $request->observation_id)
+        $place = PlaceDetails::where('latitude', $request->latitude)
+            ->where('user_id', backpack_auth()->user()->id)
+            ->orWhere('longitude', $request->longitude)
             ->first();
 
         if (isset($place)) {
-            $place->update([
-
-                'place_id' => $request->place_id,
-                'user_id' =>  backpack_auth()->user()->id,
-                'observation_id' => $request->observation_id,
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-
+            if ($place->place_id == NULL) {
+                $place->update([
+                    'place_id' => $request->place_id,
+                ]);
+            } else {
+                $place->update([
+                    'observation_id' => $request->observation_id,
+                ]);
+            }
+            return response()->json([
+                'status' => 'success',
+                'msg' => 'Place updated successfully'
             ]);
         } else {
             PlaceDetails::create([
@@ -3171,13 +3176,10 @@ class GlobalController extends Controller
                 'longitude' => $request->longitude,
 
             ]);
+            return response()->json([
+                'status' => 'success',
+                'msg' => 'Place added successfully'
+            ]);
         }
-
-
-
-        return response()->json([
-            'status' => 'success',
-            'msg' => 'place added'
-        ]);
     }
 }
