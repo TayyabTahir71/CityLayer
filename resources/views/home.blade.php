@@ -85,8 +85,8 @@
                         </div>
 
                         <a class="w-full pt-4" @click="modelOpen =!modelOpen">
-                            <span class="w-full px-12 py-4 text-white bg-cyan-500 rounded-3xl">
-                                Add on map
+                            <span class="w-full px-12 py-4 text-white bg-blue-500 rounded-3xl">
+                                Add to map
                             </span>
 
                         </a>
@@ -168,22 +168,22 @@
                                     <div class="" x-data="{ active: '' }">
                                         <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                             x-show="tab=='place'">
-                                            <div class="flex flex-col items-center justify-center">
-                                                <div class="rounded-full bg-blue-500 p-[35px] focus:border focus:border-"
-                                                    :class="active == 'PL-{{ $allPlaces[0]->id }}' ?
-                                                        'border-2 border-blue-300' ?
+                                            <div class="flex flex-col items-center justify-center"
+                                                @click="active='PL_{{ $allPlaces[0]->id }}'">
+                                                <div class="rounded-full bg-blue-500 p-[35px] "
+                                                    :class="active == 'PL_{{ $allPlaces[0]->id }}' ?
+                                                        'border-2 border-lime-500' :
                                                         ''">
-
                                                 </div>
                                                 <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
                                             </div>
 
-                                            <div class="flex flex-col items-center justify-center">
+                                            <div class="flex flex-col items-center justify-center"
+                                                @click="active='PL_{{ $allPlaces[1]->id }}'">
                                                 <div class="rounded-full bg-blue-500 p-[35px]"
-                                                    :class="active == 'PL-{{ $allPlaces[1]->id }}' ?
-                                                        'border-2 border-blue-300' ?
+                                                    :class="active == 'PL_{{ $allPlaces[1]->id }}' ?
+                                                        'border-2 border-lime-500' :
                                                         ''">
-
                                                 </div>
                                                 <span class="mt-2 text-black">{{ $allPlaces[1]->name }}</span>
                                             </div>
@@ -246,14 +246,14 @@
                                     </div>
 
                                     <div class="flex items-center justify-center mt-8">
-                                        <a href="/add-new-place"
+                                        <div
                                             class="flex items-center justify-center gap-2 px-4 py-3 text-lg font-extrabold text-white bg-blue-500 rounded-3xl">
                                             {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="3" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg> --}}
-                                            Submit</a>
+                                            Submit</div>
                                     </div>
 
                                 </div>
@@ -512,29 +512,28 @@
                 fillOpacity: 1.5,
                 radius: 60, // Radius of the circle in meters
             }).addTo(mymap0).bindPopup(
-                `<div class="absolute top-0 bg-blue-400 w- flex flex-col"><div class="px-4 py-4 flex justify-start items-center gap-4 -mb-10"> <div class="flex flex-col items-center
-                    justify-center">
+                `<div class="absolute top-0 flex flex-col bg-blue-400 w-"><div class="flex items-center justify-start gap-4 px-4 py-4 -mb-10"> <div class="flex flex-col items-center justify-center">
                 <div class="rounded-full bg-blue-500 border-2 border-white p-[35px]" x-on:click="tab='observation'">
                 </div>
             </div>
             <img src="{{ asset('img/cam.PNG') }}" alt="" class="w-6 h-6 mt-4">
-            <span class="text-lg font-extrabold text-white mt-4 italic">Park</span>
+            <span class="mt-4 text-lg italic font-extrabold text-white">Park</span>
         </div>
-        <div class="px-4 py-2 flex justify-start items-center gap-4">
+        <div class="flex items-center justify-start gap-4 px-4 py-2">
             <div class="flex flex-col items-center justify-center">
                 <div class="rounded-full bg-yellow-300 border-2 border-white p-[35px]" x-on:click="tab='observation'">
                 </div>
             </div>
             <img src="{{ asset('img/cam-2.PNG') }}" alt="" class="w-6 h-6 mt-4">
-            <span class="text-lg font-extrabold text-white mt-4 italic">Happy</span>
+            <span class="mt-4 text-lg italic font-extrabold text-white">Happy</span>
         </div>
 
-        <div class="mt-1 pl-24 mbp pr-4 font-semibold italic text-white">
+        <div class="pl-24 pr-4 mt-1 italic font-semibold text-white mbp">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam ipsam
             quidem dolore deleniti praesentium, culpa
         </div>
 
-        <span class="mt-4 flex justify-end items-end px-2 font-semibold italic text-white">
+        <span class="flex items-end justify-end px-2 mt-4 italic font-semibold text-white">
             added by john wick
         </span>
     </div>`
