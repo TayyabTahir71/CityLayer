@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('place_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('observation_id')->nullable();
+            $table->unsignedBigInteger('place_child_id')->nullable();
+            $table->unsignedBigInteger('observation_child_id')->nullable();
             $table->longText('image')->nullable();
             $table->decimal('latitude', 8, 6)->default(0.00)->nullable();
             $table->decimal('longitude', 9, 6)->default(0.00)->nullable();

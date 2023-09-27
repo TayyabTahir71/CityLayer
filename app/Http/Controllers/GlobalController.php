@@ -33,6 +33,8 @@ use Illuminate\Support\Facades\Validator;
 
 class GlobalController extends Controller
 {
+
+    public $place_id;
     /**
      * Handle the incoming request.
      *
@@ -3147,6 +3149,12 @@ class GlobalController extends Controller
         return redirect()->route('dashboard');
     }
 
+
+
+    //----------------------new code----------------------
+
+
+
     public function addNewPlace(Request $request)
     {
 
@@ -3197,5 +3205,12 @@ class GlobalController extends Controller
                 ]);
             }
         }
+    }
+
+    public function subPlace($id)
+    {
+        $place = Place::where('id', $id)->first();
+        $this->place_id = $place->id;
+        return view('sub-place', compact('place'));
     }
 }

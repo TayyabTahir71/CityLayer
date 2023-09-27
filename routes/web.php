@@ -22,7 +22,8 @@ Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class,
 
 Route::get('/badges_overview', function () {
     return view('badges_overview');
-});Route::get('/city_tags', function () {
+});
+Route::get('/city_tags', function () {
     return view('edit_city_tags');
 });
 Route::controller(GlobalController::class)->group(function () {
@@ -158,6 +159,16 @@ Route::get('badges_overview', function () {
 
 
 
+
+// Route::get('register', function () {
+//     return view('register');
+// });
+
+
+
+
+//<-------------------------new routes---------------------------------------->
+
 Route::get('login', function () {
     return view('login');
 });
@@ -176,19 +187,9 @@ Route::get('add-new-place', function () {
 Route::get('filter', function () {
     return view('filter');
 });
-// Route::get('register', function () {
-//     return view('register');
-// });
 
+Route::get('/sub-place/{id}', [GlobalController::class, 'subPlace'])->name('sub.place');
 
-
-
-//<-------------------------new routes---------------------------------------->
-
-
-Route::get('/all-places', function () {
-    return view('places');
-});
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/auth/signup', [AuthController::class, 'signup'])->name('auth.register');

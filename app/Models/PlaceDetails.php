@@ -14,6 +14,8 @@ class PlaceDetails extends Model
         'place_id',
         'user_id',
         'observation_id',
+        'observation_child_id',
+        'place_child_id',
         'image',
         'latitude',
         'longitude',

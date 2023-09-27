@@ -730,7 +730,7 @@
 
 
         function subPlaces(id) {
-            alert(id);
+            window.location.href = "/sub-place/" + id;
         }
     </script>
     <style>
