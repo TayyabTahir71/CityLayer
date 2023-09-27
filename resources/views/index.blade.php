@@ -24,10 +24,7 @@
 
                 <div class="drop-in" x-data="{ swiper: null }" x-init="swiper = new Swiper('.swiper-images', {
                     loop: true,
-                    pagination: {
-                        el: '.swiper-pagination',
-                        dynamicBullets: true,
-                    },
+                
                     slidesPerView: 1,
                     centeredSlides: true,
                     autoPlay: true,

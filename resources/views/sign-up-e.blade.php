@@ -53,8 +53,8 @@
                             spaceBetween: 5,
                         },
                     },
-
-
+                
+                
                 })">
 
 
@@ -97,14 +97,24 @@
                 <form role="form" method="POST" action="{{ route('backpack.auth.register') }}">
                     {!! csrf_field() !!}
                     <div class="flex flex-col items-center justify-center gap-4 mt-12">
-                         <input type="hidden" placeholder="Email" name="name" id="name" value="NULL" class="form-input"
-                            required />
+                        <input type="hidden" placeholder="Email" name="name" id="name" value="NULL"
+                            class="form-input" required />
                         <input type="text" placeholder="Email" name="email" id="email" class="form-input"
                             required />
+                        @if ($errors->has('email'))
+                            <span class="text-red-500">{{ $errors->first('email') }}</span>
+                        @endif
                         <input type="password" placeholder="Password" name="password" id="password" class="form-input"
                             required />
+                        @if ($errors->has('password'))
+                            <span class="text-red-500">{{ $errors->first('password') }}</span>
+                        @endif
                         <input type="password" placeholder="Confirm Password" name="password_confirmation"
                             id="password_confirmation" class="form-input" required />
+
+                        @if ($errors->has('password_confirmation'))
+                            <span class="text-red-500">{{ $errors->first('password_confirmation') }}</span>
+                        @endif
                         <button type="submit" class="mb-3 cursor-pointer btn btn-primary">
                             <div class="text-center"> Signup</div>
 

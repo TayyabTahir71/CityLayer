@@ -14,6 +14,8 @@ class PlaceDetails extends Model
         'place_id',
         'user_id',
         'observation_id',
+        'observation_child_id',
+        'place_child_id',
         'image',
         'latitude',
         'longitude',
@@ -39,5 +41,15 @@ class PlaceDetails extends Model
     public function observation(): BelongsTo
     {
         return $this->belongsTo(Observation::class);
+    }
+
+    /**
+     * Get the user that owns the PlaceDetails
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
