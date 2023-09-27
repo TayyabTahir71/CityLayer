@@ -61,7 +61,7 @@
                 <div class="grid grid-cols-3 gap-8">
                     @foreach ($place->subplaces as $pls)
                         <div class="flex flex-col items-center justify-center w-[80px]"
-                            @click="active='OB_{{ $pls->id }}'" onclick="select_observation({{ $pls->id }})">
+                            @click="active='OB_{{ $pls->id }}'" onclick="select_place({{ $pls->id }})">
                             <div class="rounded-full bg-[#1976d2]  p-[20px]"
                                 :class="active == 'OB_{{ $pls->id }}' ?
                                     'border-4 border-blue-300' :
@@ -108,11 +108,54 @@
 
                 Submit</div>
         </div>
-
+        <input class="hidden" type="text" name="latitude" id="latitude" value="">
+        <input class="hidden" type="text" name="longitude" id="longitude" value="">
 
     </div>
 
     <script>
+        if (navigator.geolocation) {
+            //wait 3 seconds to get position
+            console.log(getposition());
+
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+
+        function getposition() {
+
+            var is_echo = false;
+            if (navigator && navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(pos) {
+                        if (is_echo) {
+                            return;
+                        }
+                        is_echo = true;
+                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(2);
+                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(2);
+                        // success(pos.coords.latitude, pos.coords.longitude);
+                    },
+                    function() {
+                        if (is_echo) {
+                            return;
+                        }
+                        is_echo = true;
+                        fail();
+                    }
+                );
+            } else {
+                fail();
+            }
+
+        }
+
+
+
+        var parent = {!! json_encode($place) !!};
+
+        alert(parent.id);
+
         var placeId = '';
 
         function select_place(id) {
@@ -142,7 +185,8 @@
                 type: 'POST',
                 url: "{{ route('add.new.place') }}",
                 data: {
-                    place_id: placeId,
+                    place_id: parent.id,
+                    place_child_id: placeId,
                     observation_id: observationId,
                     latitude: latitude,
                     longitude: longitude,

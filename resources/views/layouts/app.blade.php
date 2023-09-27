@@ -5,6 +5,7 @@
     @include('parts.head')
     @livewireStyles
     <link rel='stylesheet' href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body class="overflow-x-hidden bg-white pattern">

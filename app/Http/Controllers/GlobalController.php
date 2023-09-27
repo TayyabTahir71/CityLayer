@@ -3158,34 +3158,60 @@ class GlobalController extends Controller
     public function addNewPlace(Request $request)
     {
 
-
         $place = PlaceDetails::where('latitude', $request->latitude)
             ->where('user_id', backpack_auth()->user()->id)
-            ->orWhere('longitude', $request->longitude)
+            ->where('longitude', $request->longitude)
             ->first();
 
         if (isset($place)) {
-            if ($place->place_id == NULL) {
+            if ($place->place_id != $request->place_id) {
                 $place->update([
                     'place_id' => $request->place_id,
+                    'place_child_id' => $request->place_child_id,
                 ]);
+                return response()->json([
+                    'status' => 'success',
+                    'msg' => 'Place updated successfully'
+                ]);
+            } elseif ($place->place_child_id != $request->place_child_id) {
+                $place->update([
+                    'place_child_id' => $request->place_child_id,
+                ]);
+                return response()->json([
+                    'status' => 'success',
+                    'msg' => 'SubPlace updated successfully'
+                ]);
+            } elseif ($place->observation_id != $request->observation_id) {
+
+                $place->update([
+                    'observation_id' => $request->observation_id,
+                ]);
+
+                return response()->json([
+                    'status' => 'success',
+                    'msg' => 'Observation updated successfully'
+                ]);
+            } elseif ($place->observation_child_id != $request->observation_child_id) {
+
+                $place->update([
+                    'observation_id' => $request->observation_id,
+                ]);
+
                 return response()->json([
                     'status' => 'success',
                     'msg' => 'Observation updated successfully'
                 ]);
             } else {
-                $place->update([
-                    'observation_id' => $request->observation_id,
-                ]);
                 return response()->json([
                     'status' => 'success',
-                    'msg' => 'Place updated successfully'
+                    'msg' => 'Place alreay exist'
                 ]);
             }
         } else {
             PlaceDetails::create([
 
                 'place_id' => $request->place_id,
+                'place_child_id' => $request->place_child_id,
                 'user_id' =>  backpack_auth()->user()->id,
                 'observation_id' => $request->observation_id,
                 'latitude' => $request->latitude,

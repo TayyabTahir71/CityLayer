@@ -443,7 +443,7 @@
         <input class="hidden" type="text" name="longitude" id="longitude" value="">
     </div>
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script>
         data = {!! json_encode($all_data) !!};
         userid = {!! json_encode($userid) !!};
