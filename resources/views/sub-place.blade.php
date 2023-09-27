@@ -154,7 +154,6 @@
 
         var parent = {!! json_encode($place) !!};
 
-        alert(parent.id);
 
         var placeId = '';
 

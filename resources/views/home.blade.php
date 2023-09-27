@@ -189,7 +189,7 @@
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer"
                                                 @click="active='PL_{{ $allPlaces[1]->id }}'"
-                                                @if ($allPlaces[1]->subplaces->isNotEmpty()) onclick="subPlaces()"
+                                                @if ($allPlaces[1]->subplaces->isNotEmpty()) onclick="subPlaces({{ $allPlaces[1]->id }})"
                                                  @else
                                                 onclick="select_place({{ $allPlaces[1]->id }})" @endif>
                                                 <div class="rounded-full bg-[#1976d2] p-[20px]"
@@ -367,8 +367,8 @@
                                             <div class="grid grid-cols-3 gap-8">
                                                 @foreach ($allPlaces as $pls)
                                                     <div class="flex flex-col items-center justify-center w-[80px]"
-                                                        @click="active='OB_{{ $pls->id }}'"
-                                                        onclick="select_observation({{ $pls->id }})">
+                                                        @click="active='PL_{{ $pls->id }}'"
+                                                        onclick="select_place({{ $pls->id }})">
                                                         <div class="rounded-full bg-[#1976d2]  p-[20px]"
                                                             :class="active == 'OB_{{ $pls->id }}' ?
                                                                 'border-4 border-blue-300' :
