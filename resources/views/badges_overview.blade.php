@@ -2,6 +2,11 @@
 
 @section('main')
     <div data-barba="container">
+        <a href="javascript:history.back()">
+            <img src="{{ asset('img/icons/arrow.png') }}" class="arrow">
+
+        </a>
+
         <div class="flex flex-col h-screen mx-auto">
 {{--            <div class="flex flex-col items-center pt-24 gap-x-6 lg:pt-32">--}}
 {{--                <form action="avatar" method="POST" enctype="multipart/form-data">--}}
@@ -16,13 +21,12 @@
 {{--                </form>--}}
 
 {{--            </div>--}}
+            <h1 class="pt-4 bold text-center text-gray-800 f15">Username</h1>
             <br/>
-            <br/>
-            <h1 class="pt-4 bold text-center text-gray-800">Username</h1>
-            <br/>
-            <h2 class="pt-2  text-center cbl">Level{{ backpack_auth()->user()->score }}!</h2>
+            <h2 class="pt-2  text-center  f13">Level{{ backpack_auth()->user()->score }}!</h2>
 
             <div class="w-2/3 mx-auto">
+                <div class="circle">2</div>
                 <div class="relative pt-1">
                     <div class="flex h-3 overflow-hidden text-xs bg-white border rounded">
                         @php $score = backpack_auth()->user()->score / 10; @endphp
@@ -63,27 +67,11 @@
 <div class="tes">explorer</div>
                             </div>
                             <div class="box">
-                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+                                <img src="{{ asset('img/icons/CL_B-star.png') }}" class="image cursor-pointer" alt="Your Image">
 <div class="tes">explorer</div>
                             </div>
                             <div class="box">
-                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
-
-
-                        </div>
-                        <div class="df">
-                            <div class="box">
-                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
-                            <div class="box">
-                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
-                            <div class="box">
-                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+                                <img src="{{ asset('img/icons/CL_B-citymaker.png') }}" class="image cursor-pointer" alt="Your Image">
 <div class="tes">explorer</div>
                             </div>
 
@@ -91,7 +79,7 @@
                         </div>
                         <div class="df">
                             <div class="box">
-                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+                                <img src="{{ asset('img/icons/CL_B-explorer.png') }}" class="image cursor-pointer" alt="Your Image">
 <div class="tes">explorer</div>
                             </div>
                             <div class="box">
@@ -99,14 +87,30 @@
 <div class="tes">explorer</div>
                             </div>
                             <div class="box">
+                                <img src="{{ asset('img/icons/guru.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+
+
+                        </div>
+                        <div class="df">
+                            <div class="box">
+                                <img src="{{ asset('img/icons/CL_B-investigator.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+                            <div class="box">
                                 <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+<div class="tes">explorer</div>
+                            </div>
+                            <div class="box">
+                                <img src="{{ asset('img/icons/CL_B-influencer.png') }}" class="image cursor-pointer" alt="Your Image">
 <div class="tes">explorer</div>
                             </div>
 
 
                         </div>
                         <div class="box">
-                            <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
+                            <img src="{{ asset('img/icons/CL_B-supermapper.png') }}" class="image cursor-pointer" alt="Your Image">
                             <div class="tes">explorer</div>
                         </div>
                     </div>
@@ -116,7 +120,7 @@
                     </div>
                     <br/>
                     <div class="flex flex-row justify-center items-center gap-4">
-                        <button class="bg-blue-500 text-white font-bold py-2 px-7 rounded-lg brad fnor">Close</button>
+                        <button class="bg-blue-500 text-white font-bold py-2 px-7 rounded-lg brad fnor clbtn">Close</button>
                     </div>
 
 

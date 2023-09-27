@@ -6,61 +6,66 @@ $info = GlobalController::myprofile();
 
 @section('main')
     <div data-barba="container" class="relative h-screen">
+        <a href="javascript:history.back()">
+            <img src="{{ asset('img/icons/arrow.png') }}" class="arrow">
 
-        <div class="flex flex-row items-center pt-2">
-            <a href="profile" class="prevent"> <i class="mt-4 ml-4 text-2xl text-gray-900 fas fa-close"></i></a>
-        </div>
+        </a>
         <form action="save_profile" class="flex flex-col  justify-center p-8 mx-auto" method="POST">
             {!! csrf_field() !!}
             @csrf
             <input type="file" name="image" id="image" class="hidden" accept="image/*"
                    onchange="javascript:this.form.submit();">
-            <label for="image" class="cursor-pointer ml" >
+            <label for="image" class="cursor-pointer new" >
                 <img class="object-cover w-24 h-24 border-7 border-blue-500 rounded-full  " style="border-width: 7px"
-                     src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
+                     src="{{asset('img/avatar.png')}}" alt="">
             </label>
             <label for="dropzone-file" class="flex flex-col items-center justify-center w-2/3 ">
                 <div class="flex flex-col items-center justify-center pb-6">
                 </div>
             </label>
-            <div class="ml-c flex-r">
+            <div class="flex-r">
                 <div class="bl">Edit city tags</div>
                 <div class="i">i</div>
             </div>
             <br/>
             <input placeholder="Browse or add new city tags" class="inp1">
             <br/>
-            <div class="flex flex-row items-center justify-center">
-                <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
+            <div class="fb">
+                <div class="flex flex-row items-center justify-center">
+                    <div class="flex flex-row items-center justify-center  w90 gap5 w45">
 
-                    <button class="bg-yel w-1/2 border-ms p5">1</button>
-                    <button class="bg-yel w-1/2 border-ms p5">2</button>
+                        <button class="bg-yel w-1/2 border-ms p5">1</button>
+                        <button class="bg-yel w-1/2 border-ms p5">2</button>
+                    </div>
                 </div>
-            </div>
-            <br/>
-            <div class="flex flex-row items-center justify-center">
-                <div class="flex flex-row items-center justify-center  w-89 gap-8 w45">
-                    <button class="bg-yel w-1/2 border-ms p5" style="width:89%">3</button>
+
+                <div class="flex flex-row items-center justify-center">
+                    <div class="flex flex-row items-center justify-center  w90 gap-8 w45">
+                        <button class="bg-yel w-1/2 border-ms p5" style="width:100%">3</button>
+                    </div>
                 </div>
-            </div>
-            <br/>
-            <div class="flex flex-row items-center justify-center">
-                <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
-                    <button class="bg-yel w-1/2 border-ms p5" style="width:76%">4</button>
-                    <button class="bg-yel w-1/3 border-ms p5">5</button>
+
+                <div class="flex flex-row items-center justify-center">
+                    <div class="flex flex-row items-center justify-center  w90 gap5 w45">
+                        <button class="bg-yel w-1/2 border-ms p5" style="width:76%">4</button>
+                        <button class="bg-yel w-1/3 border-ms p5">5</button>
+                    </div>
                 </div>
-            </div><br/>
-            <div class="flex flex-row items-center justify-center">
-                <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
-                    <button class="bg-yel w-1/3 rounded-md p5" style="width: 46%">6</button>
-                    <button class="bg-yel w-1/2 rounded-md p5 w-89">7</button>
+
+                <div class="flex flex-row items-center justify-center">
+                    <div class="flex flex-row items-center justify-center  w90 gap5 w45">
+                        <button class="bg-yel w-1/3 rounded-md p5" style="width: 46%">6</button>
+                        <button class="bg-yel w-1/2 rounded-md p5 w-89">7</button>
+                    </div>
                 </div>
             </div>
 
+
+            <br/>
             <br/>
             <div class="flex-r items-center justify-center">
-                <button class="bg-blue-500 text-white p-3 rounded-lg bb">Back</button>
-                <button class="text-blue-500 border border-blue-500 p-3   rounded-lg">Save and close</button>
+                <button class="bg-blue-500 text-white p-3 rounded-lg backbtn">Back</button>
+                <button class="text-blue-500 border border-blue-500 p-3   rounded-lg backbtn">Save and close</button>
             </div>
 
  </form>
