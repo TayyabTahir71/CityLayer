@@ -106,15 +106,6 @@ img {
 .border-ms{
     border-radius: 0.4rem;
 }
-.circle{
-    width: 7%;
-    border: 2px solid #2d9bf0;
-    border-radius: 100%;
-    text-align: center;
-    position: absolute;
-    margin-top: -1%;
-    margin-left: -7%;
-    color: #2d9bf0;
 
 .p5 {
     padding: 5px;
