@@ -2,15 +2,20 @@
 
  @section('main')
      <div data-barba="container">
+         <a href="javascript:history.back()">
+             <img src="{{ asset('img/icons/arrow.png') }}" class="arrow">
+
+         </a>
          <div class="flex flex-col h-screen mx-auto">
-             <div class="flex flex-col items-center pt-8 gap-x-6 lg:pt-32">
+             <div class="flex flex-col items-center pt-4 gap-x-6 lg:pt-32">
+
                  <form action="avatar" method="POST" enctype="multipart/form-data">
                      @csrf
                      <input type="file" name="image" id="image" class="hidden" accept="image/*"
                          onchange="javascript:this.form.submit();">
                      <label for="image" class="cursor-pointer ">
                          <img class="object-cover w-24 hw h-24 border-7 border-blue-500 rounded-full  " style="border-width: 7px"
-                             src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
+                             src="{{asset('img/avatar.png')}}" alt="">
                      </label>
                      <div class="bg-black rounded-full text-white  text-center text-lg relative mt-[-22%] text-2xl" style="width: 31px;font-size: 2rem">+</div>
                  </form>
@@ -18,37 +23,43 @@
              </div>
              <h1 class="pt-4 text-2xl text-center text-gray-800 bol">{{ $name }}</h1>
              <br/>
-             <div class="flex flex-row items-center justify-center">
-                 <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
+            <div class="fb">
+                <div class="flex flex-row items-center justify-center">
+                    <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
 
-                     <button class="bg-yel w-1/2 border-ms p5">1</button>
-                     <button class="bg-yel w-1/2 border-ms p5">2</button>
-                 </div>
-             </div>
-             <br/>
-             <div class="flex flex-row items-center justify-center">
-                 <div class="flex flex-row items-center justify-center  w-89 gap-8 w45">
-                     <button class="bg-yel w-1/2 border-ms p5" style="width:89%">3</button>
-                 </div>
-             </div>
-<br/>
-             <div class="flex flex-row items-center justify-center">
-                 <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
-                     <button class="bg-yel w-1/2 border-ms p5" style="width:76%">4</button>
-                     <button class="bg-yel w-1/3 border-ms p5">5</button>
-                 </div>
-             </div><br/>
-             <div class="flex flex-row items-center justify-center">
-                 <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
-                     <button class="bg-yel w-1/3 rounded-md p5" style="width: 46%">6</button>
-                     <button class="bg-yel w-1/2 rounded-md p5 w-89">7</button>
-                 </div>
-             </div>
+                        <button class="bg-yel w-1/2 border-ms p5">1</button>
+                        <button class="bg-yel w-1/2 border-ms p5">2</button>
+                    </div>
+                </div>
 
-             <h1 class="pt-4 text-2xl text-center text-gray-800">{{ backpack_auth()->user()->email }}</h1>
-             <h2 class="pt-2 text-2xl font-bold text-center text-yellow-300" style="color: skyblue"> Level {{ backpack_auth()->user()->score }}</h2>
+                <div class="flex flex-row items-center justify-center">
+                    <div class="flex flex-row items-center justify-center  w-89 gap-8 w45">
+                        <button class="bg-yel w-1/2 border-ms p5" style="width:89%">3</button>
+                    </div>
+                </div>
+
+                <div class="flex flex-row items-center justify-center">
+                    <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
+                        <button class="bg-yel w-1/2 border-ms p5" style="width:76%">4</button>
+                        <button class="bg-yel w-1/3 border-ms p5">5</button>
+                    </div>
+                </div>
+
+                <div class="flex flex-row items-center justify-center">
+                    <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
+                        <button class="bg-yel w-1/3 rounded-md p5" style="width: 46%">6</button>
+                        <button class="bg-yel w-1/2 rounded-md p5 w-89">7</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+             <h2 class="pt-2 text-2xl font-bold text-center" style="color: #2d9bf0;font-weight: 300"> Level {{ backpack_auth()->user()->score }} !</h2>
              <div class="w-2/3 mx-auto">
+                 <div class="circle">2</div>
                  <div class="relative pt-1">
+
                      <div class="flex h-3 overflow-hidden text-xs bg-white border rounded">
                          @php $score = backpack_auth()->user()->score / 10; @endphp
                          <div style="width:{{ $score }}%"
@@ -100,7 +111,7 @@
                      <br/>
                      <div class="flex flex-row justify-center items-center gap-4">
                          <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg btnpd">Close</button>
-                         <button class="text-blue-500 border border-blue-500 p-1 md:p-2 rounded-md cursor-pointer btn2p">Edit profile</button>
+                         <button class="text-blue-500 border border-blue-500 p-1 md:p-2 rounded-md cursor-pointer  edbt">Edit profile</button>
                      </div>
 
 

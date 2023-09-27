@@ -23,6 +23,14 @@ Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class,
 Route::get('/badges_overview', function () {
     return view('badges_overview');
 });
+
+Route::get('/community_achievements', function () {
+    return view('community_acheivements');
+});
+Route::get('/menu', function () {
+    return view('menu');
+});
+
 Route::get('/city_tags', function () {
     return view('edit_city_tags');
 });
