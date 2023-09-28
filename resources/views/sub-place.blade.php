@@ -132,8 +132,8 @@
                             return;
                         }
                         is_echo = true;
-                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(2);
-                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(2);
+                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(6);
+                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(6);
                         // success(pos.coords.latitude, pos.coords.longitude);
                     },
                     function() {
@@ -154,7 +154,7 @@
 
         var parent = {!! json_encode($place) !!};
 
-        alert(parent.id);
+
 
         var placeId = '';
 

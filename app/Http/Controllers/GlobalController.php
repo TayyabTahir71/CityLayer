@@ -3155,13 +3155,18 @@ class GlobalController extends Controller
 
 
 
-    public function addNewPlace(Request $request)
+    public function addMapPlace(Request $request, $id = null)
     {
 
         $place = PlaceDetails::where('latitude', $request->latitude)
             ->where('user_id', backpack_auth()->user()->id)
             ->where('longitude', $request->longitude)
             ->first();
+
+        $subPlsFnd = Place::where('id', $request->place_id)->first();
+
+
+        $subPlsz = $subPlsFnd->subplaces();
 
         if (isset($place)) {
             if ($place->place_id != $request->place_id) {
@@ -3194,7 +3199,7 @@ class GlobalController extends Controller
             } elseif ($place->observation_child_id != $request->observation_child_id) {
 
                 $place->update([
-                    'observation_id' => $request->observation_id,
+                    'observation_child_id' => $request->observation_child_id,
                 ]);
 
                 return response()->json([
@@ -3208,6 +3213,7 @@ class GlobalController extends Controller
                 ]);
             }
         } else {
+
             PlaceDetails::create([
 
                 'place_id' => $request->place_id,
@@ -3227,11 +3233,26 @@ class GlobalController extends Controller
             } else {
                 return response()->json([
                     'status' => 'success',
-                    'msg' => 'Place added successfully'
+                    'msg' => 'Place added successfully',
+                    'subPlsId' => $subPlsFnd->id
                 ]);
             }
         }
     }
+
+
+    public function addNewPlace(Request $request)
+    {
+
+        $place = Place::create([
+            'name' => $request->place_name,
+            'user_id' => backpack_user()->id,
+        ]);
+
+
+        $this->addMapPlace($place->id);
+    }
+
 
     public function subPlace($id)
     {

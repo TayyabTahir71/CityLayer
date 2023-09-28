@@ -175,9 +175,7 @@
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer"
                                                 @click="active='PL_{{ $allPlaces[0]->id }}'"
-                                                @if ($allPlaces[0]->subplaces->isNotEmpty()) onclick="subPlaces({{ $allPlaces[0]->id }})"
-                                                @else
-                                               onclick="select_place({{ $allPlaces[0]->id }})" @endif>
+                                                onclick="select_place({{ $allPlaces[0]->id }})">
                                                 <div class="rounded-full bg-[#1976d2] p-[20px] "
                                                     :class="active == 'PL_{{ $allPlaces[0]->id }}' ?
                                                         'border-4 border-blue-300' :
@@ -189,9 +187,7 @@
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer"
                                                 @click="active='PL_{{ $allPlaces[1]->id }}'"
-                                                @if ($allPlaces[1]->subplaces->isNotEmpty()) onclick="subPlaces()"
-                                                 @else
-                                                onclick="select_place({{ $allPlaces[1]->id }})" @endif>
+                                                onclick="select_place({{ $allPlaces[1]->id }})">
                                                 <div class="rounded-full bg-[#1976d2] p-[20px]"
                                                     :class="active == 'PL_{{ $allPlaces[1]->id }}' ?
                                                         'border-4 border-blue-300' :
@@ -465,6 +461,12 @@
 
 
 
+        var currentPosIcon = L.icon({
+            iconUrl: '/new_img/current-pos.svg', // Replace with the path to your icon image
+            iconSize: [45, 45], // Adjust the icon size as needed
+            iconAnchor: [16, 16], // Adjust the anchor point of the icon
+            popupAnchor: [0, -16] // Adjust the popup anchor for the icon
+        });
 
 
 
@@ -487,8 +489,8 @@
                             return;
                         }
                         is_echo = true;
-                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(2);
-                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(2);
+                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(6);
+                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(6);
                         success(pos.coords.latitude, pos.coords.longitude);
                     },
                     function() {
@@ -511,11 +513,8 @@
         function success(lat, lng) {
             mymap0.setView([lat, lng], 10);
 
-            L.circle([lat, lng], {
-                color: '#F48498',
-                fillColor: '#F48498',
-                fillOpacity: 1.5,
-                radius: 60, // Radius of the circle in meters
+            L.marker([lat, lng], {
+                icon: currentPosIcon
             }).addTo(mymap0);
         }
 
@@ -623,11 +622,8 @@
 
         function success(lat, lng) {
             mymap0.flyTo([lat, lng], 19);
-            L.circle([lat, lng], {
-                color: '#F48498',
-                fillColor: '#F48498',
-                fillOpacity: 1.5,
-                radius: 60, // Radius of the circle in meters
+            L.marker([lat, lng], {
+                icon: currentPosIcon
             }).addTo(mymap0);
         }
 
@@ -666,7 +662,7 @@
         function success(lat, lng) {
             mymap0.flyTo([lat, lng], 16);
             L.marker([lat, lng], {
-                icon: icon
+                icon: currentPosIcon
             }).addTo(mymap0);
         }
 
@@ -707,7 +703,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: "{{ route('add.new.place') }}",
+                url: "{{ route('map.add.place') }}",
                 data: {
                     place_id: placeId,
                     observation_id: observationId,
@@ -720,8 +716,9 @@
                         title: data.msg,
 
                     })
-                    //   window.location.href = "/";
-
+                    if (data.subPlsId) {
+                        window.location.href = "/sub-place/" + data.subPlsId;
+                    }
 
                 }
             });
