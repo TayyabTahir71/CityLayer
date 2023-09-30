@@ -82,7 +82,7 @@ Route::controller(GlobalController::class)->group(function () {
     Route::post('newspacetag', 'newspacetag')->name('newspacetag');
     Route::get('leaderboard', 'leaderboard')->name('leaderboard');
 
-    Route::post('add/place', 'addNewPlace')->name('add.new.place');
+
 
 
 
@@ -195,6 +195,10 @@ Route::get('add-new-place', function () {
 Route::get('filter', function () {
     return view('filter');
 });
+
+Route::post('map/add/place', [GlobalController::class, 'addMapPlace'])->name('map.add.place');
+
+Route::post('add/new/place', [GlobalController::class, 'addNewPlace'])->name('add.new.place');
 
 Route::get('/sub-place/{id}', [GlobalController::class, 'subPlace'])->name('sub.place');
 

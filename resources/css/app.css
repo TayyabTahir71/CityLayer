@@ -734,3 +734,24 @@ margin-left: 25%;
     /* color: #333; */
     /* box-shadow: 0 3px 14px rgba(0,0,0,0.4); */
 }
+
+
+/* Change pagination dot color */
+.slick-dots li button:before {
+     color: #3f83f8;
+    /* Change this to the desired color */
+}
+
+/* Change active pagination dot color */
+.slick-dots li.slick-active button:before {
+    color: #3f83f8;
+    /* Change this to the desired active color */
+}
+
+.slick-initialized .slick-slide {
+    /* display: block; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1305px;
+}
