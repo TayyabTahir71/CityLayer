@@ -187,13 +187,7 @@
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer"
                                                 @click="active='PL_{{ $allPlaces[1]->id }}'"
-<<<<<<< HEAD
-                                                @if ($allPlaces[1]->subplaces->isNotEmpty()) onclick="subPlaces({{ $allPlaces[1]->id }})"
-                                                 @else
-                                                onclick="select_place({{ $allPlaces[1]->id }})" @endif>
-=======
                                                 onclick="select_place({{ $allPlaces[1]->id }})">
->>>>>>> b21ac3395bbae6e5e9ffcedea70ba1b46c0784d8
                                                 <div class="rounded-full bg-[#1976d2] p-[20px]"
                                                     :class="active == 'PL_{{ $allPlaces[1]->id }}' ?
                                                         'border-4 border-blue-300' :
@@ -475,6 +469,21 @@
         });
 
 
+        var placeIcon = L.divIcon({
+            className: 'transparent-icon',
+            html: `<div class="rounded-full bg-[#1976d2] p-[16px] flex justify-center items-center" style="width: 54px"><img src="{{ asset('new_img/image.png') }}" class="w-6 h-6" /></div>`
+        });
+        var observationIcon = L.divIcon({
+            className: 'transparent-icon',
+            html: `<div class="rounded-full bg-[#ffa726] p-[16px] flex justify-center items-center" style="width: 52px"">
+                    <div class="flex">
+                     <img src="{{ asset('new_img/sad.png') }}" alt="" class="w-5 h-5 -mr-1">
+                     <img src="{{ asset('new_img/happy.png') }}" alt="" class="w-5 h-5 -ml-1">
+                    </div>
+                 </div>`
+        });
+
+
 
         if (navigator.geolocation) {
             //wait 3 seconds to get position
@@ -555,16 +564,13 @@
             placelongitude = place.longitude;
 
             if (placeid && observationid == null) {
-                color = '#246EB9';
+                icon2 = placeIcon;
             }
             if (placeid == null && observationid) {
-                color = '#FFE45E';
+                icon2 = observationIcon;
             }
-            markerx = L.circle([placelatitude, placelongitude], {
-                color: '#F9F9F9',
-                fillColor: color,
-                fillOpacity: 1.5,
-                radius: 60, // Radius of the circle in meters
+            markerx = L.marker([placelatitude, placelongitude], {
+                icon: icon2
             }).addTo(mymap0).bindPopup(
                 `<div class="bg-[#2d9bf0] p-0 w-full"><div class="flex items-center justify-start gap-4  -mb-2"> <div class="flex flex-col items-center justify-center">
                 <div class="rounded-full bg-[#ffa726] border-2 border-white p-[35px]" x-on:click="tab='observation'">

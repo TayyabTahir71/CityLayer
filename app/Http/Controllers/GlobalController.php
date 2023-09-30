@@ -3158,6 +3158,13 @@ class GlobalController extends Controller
     public function addMapPlace(Request $request, $id = null)
     {
 
+        if ($request->add_new_place == true) {
+            $newplace = Place::create([
+                'name' => $request->place_name,
+                'user_id' => backpack_user()->id,
+            ]);
+        }
+
         $place = PlaceDetails::where('latitude', $request->latitude)
             ->where('user_id', backpack_auth()->user()->id)
             ->where('longitude', $request->longitude)
@@ -3166,7 +3173,7 @@ class GlobalController extends Controller
         $subPlsFnd = Place::where('id', $request->place_id)->first();
 
 
-        $subPlsz = $subPlsFnd->subplaces();
+        // $subPlsz = $subPlsFnd->subplaces();
 
         if (isset($place)) {
             if ($place->place_id != $request->place_id) {
@@ -3216,7 +3223,7 @@ class GlobalController extends Controller
 
             PlaceDetails::create([
 
-                'place_id' => $request->place_id,
+                'place_id' => $request->place_id ?? $newplace->id,
                 'place_child_id' => $request->place_child_id,
                 'user_id' =>  backpack_auth()->user()->id,
                 'observation_id' => $request->observation_id,
@@ -3225,16 +3232,22 @@ class GlobalController extends Controller
 
             ]);
 
-            if ($request->place_id == NULL) {
+            if ($request->observation_id) {
                 return response()->json([
                     'status' => 'success',
                     'msg' => 'Observation added successfully'
                 ]);
+            } elseif (isset($subPlsFnd)) {
+                return response()->json([
+                    'status' => 'success',
+                    'msg' => 'Place added successfully, You can also add obervation for this place!',
+                    'subPlsId' => $subPlsFnd->id
+                ]);
             } else {
                 return response()->json([
                     'status' => 'success',
-                    'msg' => 'Place added successfully',
-                    'subPlsId' => $subPlsFnd->id
+                    'msg' => 'Place added successfully, You can also add obervation for this place!',
+
                 ]);
             }
         }
@@ -3249,15 +3262,28 @@ class GlobalController extends Controller
             'user_id' => backpack_user()->id,
         ]);
 
+        PlaceDetails::create([
+            'place_id' => $place->id,
+            'user_id' =>  backpack_auth()->user()->id,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
 
-        $this->addMapPlace($place->id);
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Place added successfully, You also add obervation for this place!',
+
+        ]);
     }
 
 
-    public function subPlace($id)
+    public function createNewPlace(Request $request)
     {
-        $place = Place::where('id', $id)->first();
-        $this->place_id = $place->id;
-        return view('sub-place', compact('place'));
+
+        $places = Place::all();
+        $observations = Observation::all();
+
+        return view('add-new-place', compact('places', 'observations'));
     }
 }

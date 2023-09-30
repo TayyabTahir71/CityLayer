@@ -188,9 +188,7 @@ Route::get('sign-up-e', function () {
     return view('sign-up-e');
 });
 
-Route::get('add-new-place', function () {
-    return view('add-new-place');
-});
+Route::get('add-new-place', [GlobalController::class, 'createNewPlace']);
 
 Route::get('filter', function () {
     return view('filter');

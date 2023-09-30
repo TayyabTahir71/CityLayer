@@ -36,63 +36,91 @@
             </div>
 
 
-            <div class="flex flex-col items-center justify-center px-6 pt-6">
+            <div class="hidden" id="btn1" @click="tab='observation1'"></div>
+            <div class="flex flex-col items-center justify-center px-6 pt-6" x-show="tab=='place'">
                 <input type="text" name="place_name" class="w-full px-2 py-2 bg-gray-200 rounded-full"
                     placeholder="What is this place?" id="place_name">
+                <span id="errorTxt" class="text-red-500"></span>
                 <span class="mt-2 italic font-semibold">Add new place</span>
             </div>
-            {{-- <div class="flex flex-col items-center justify-center px-6 pt-6">
-                <input type="text" class="w-full px-2 py-2 bg-gray-200 rounded-full" placeholder=""
-                    wire:model.defer="search" id="">
-                <span class="mt-2 italic font-semibold">Choose tags or add a new place</span>
-            </div> --}}
-
-
-            <div class="flex items-center justify-center gap-2 pt-10 italic font-semibold" x-show="tab=='observation1'">
-                <div class="flex flex-col items-center justify-center">
-                    <a href="">
-                        <div class="rounded-full bg-[#ffa726] border-2  p-[22px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
-                                stroke="currentColor" class="w-6 h-6 font-bold text-white">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                            </svg>
-
-                        </div>
-                        <span class="mt-2 text-black">Add new</span>
-                    </a>
-                </div>
-                <div class="flex flex-col items-center justify-center">
-                    <div wire:click="selected_observation('happy')" class="rounded-full bg-[#ffa726]  p-[35px]">
-
-                    </div>
-                    <span class="mt-2 text-black">Obser 1</span>
-                </div>
-
-                <div class="flex flex-col items-center justify-center">
-                    <div wire:click="selected_observation('sad')" class="rounded-full bg-[#ffa726]  p-[35px]">
-
-                    </div>
-                    <span class="mt-2 text-black">Obser 2</span>
-                </div>
-
-                <div class="flex flex-col items-center justify-center">
-                    <a href="/all-places">
-                        <div class="rounded-full border-[#ffa726] border-2  p-[22px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
-                                stroke="currentColor" class="w-6 h-6 font-bold text-[#ffa726]">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                            </svg>
-
-                        </div>
-                        <span class="mt-2 text-black">See more</span>
-                    </a>
-                </div>
-
-
-
-
-
+            <div class="flex flex-col items-center justify-center px-6 pt-6" x-show="tab=='observation'"> <input
+                    type="text" name="observation_name" class="w-full px-2 py-2 bg-gray-200 rounded-full" placeholder=""
+                    id="observation_name">
+                <span id="errorTxt" class="text-red-500"></span>
+                <span class="mt-2 italic font-semibold">Add new Observation</span>
             </div>
+            <div class="flex flex-col items-center justify-center px-6 pt-6" x-show="tab=='observation1'">
+                <input type="text" class="w-full px-2 py-2 bg-gray-200 rounded-full" placeholder="" id="">
+
+                <span class="mt-2 italic font-semibold">Choose tags or add a new observation</span>
+            </div>
+            <div class="flex flex-col items-center justify-center px-6 pt-6" x-show="tab=='place1'">
+                <input type="text" class="w-full px-2 py-2 bg-gray-200 rounded-full" placeholder="" id="">
+                <span class="mt-2 italic font-semibold">Choose tags or add a new place</span>
+            </div>
+
+
+            <div class="" x-data="{ 'active': '' }">
+                <div class="flex items-center justify-center gap-2 pt-10 italic font-semibold" x-show="tab=='observation1'">
+                    <div class="flex flex-col items-center justify-center">
+                        <a href="">
+                            <div class="rounded-full bg-[#ffa726] border-2  p-[22px]">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
+                                    stroke="currentColor" class="w-6 h-6 font-bold text-white">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                                </svg>
+
+                            </div>
+                            <span class="mt-2 text-black">Add new</span>
+                        </a>
+                    </div>
+                    <div class="flex flex-col items-center justify-center cursor-pointer"
+                        @click="active='OB_{{ $observations[0]->id }}'"
+                        onclick="select_observation({{ $observations[0]->id }})">
+                        <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                            :class="active == 'OB_{{ $observations[0]->id }}' ?
+                                'border-4 border-yellow-100' :
+                                ''">
+                            <div class="flex">
+                                <img src="{{ asset('new_img/sad.png') }}" alt="" class="w-8 h-8 -mr-1"> <img
+                                    src="{{ asset('new_img/happy.png') }}" alt="" class="w-8 h-8 -ml-1">
+                            </div>
+                        </div>
+                        <span class="mt-2 text-black">{{ $observations[0]->name }}</span>
+
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center cursor-pointer"
+                        @click="active='OB_{{ $observations[1]->id }}'"
+                        onclick="select_observation({{ $observations[1]->id }})">
+                        <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                            :class="active == 'OB_{{ $observations[1]->id }}' ?
+                                'border-4 border-yellow-100' :
+                                ''">
+                            <div class="flex">
+                                <img src="{{ asset('new_img/sad.png') }}" alt="" class="w-8 h-8 -mr-1"> <img
+                                    src="{{ asset('new_img/happy.png') }}" alt="" class="w-8 h-8 -ml-1">
+                            </div>
+                        </div>
+                        <span class="mt-2 text-black">{{ $observations[1]->name }}</span>
+
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center">
+                        <a href="/all-places">
+                            <div class="rounded-full border-[#ffa726] border-2  p-[22px]">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="3" stroke="currentColor" class="w-6 h-6 font-bold text-[#ffa726]">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                                </svg>
+
+                            </div>
+                            <span class="mt-2 text-black">See more</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex items-center justify-center gap-2 pt-10 italic font-semibold" x-show="tab=='place1'">
                 <div class="flex flex-col items-center justify-center">
                     <a href="/all-places">
@@ -214,14 +242,20 @@
 
             <div class="fixed left-0 right-0 bottom-4">
                 <div class="flex items-center justify-center gap-2">
-                    <a href="/" class="px-8 py-4 border-4 border-blue-500 rounded-3xl">
+                    <a href="/" class="px-6 py-3 border-2 border-blue-500 rounded-3xl">
                         <span class="text-xl font-semibold text-blue-500">
                             Cancel
                         </span>
                     </a>
 
-                    <button onclick="submitData()"
-                        class="px-8 py-4 bg-blue-500 border-4 border-white rounded-3xl hover:shadow  hover:bg-blue-400 transition-all cursor-pointer">
+                    <button onclick="submitPlace()" x-show="tab=='place'"
+                        class="px-6 py-3 bg-blue-500 border-4 border-white rounded-3xl hover:shadow  hover:bg-blue-400 transition-all cursor-pointer">
+                        <span class="text-xl font-semibold text-white">
+                            Submit
+                        </span>
+                    </button>
+                    <button onclick="submitObservation()" x-show="tab=='observation1'"
+                        class="px-6 py-3 bg-blue-500 border-4 border-white rounded-3xl hover:shadow  hover:bg-blue-400 transition-all cursor-pointer">
                         <span class="text-xl font-semibold text-white">
                             Submit
                         </span>
@@ -271,7 +305,11 @@
         }
 
 
-        var placeName = document.getElementById('place_name').value;
+
+
+        console.log(placeName)
+
+
 
         function select_place(id) {
             placeId = id;
@@ -283,10 +321,15 @@
             observationId = id;
         }
 
+        function see() {
+
+            var btnid = document.getElementById("btn1");
+            btnid.click();
+        }
 
 
-        function submitData() {
 
+        function submitPlace() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -294,23 +337,65 @@
             });
             latitude = document.getElementById('latitude').value;
             longitude = document.getElementById('longitude').value;
+            placeName = document.getElementById('place_name').value;
+
+            if (!placeName) {
+
+                $('#errorTxt').html('Place name is required!')
+                return false;
+            }
 
             $.ajax({
                 type: 'POST',
-                url: "{{ route('add.new.place') }}",
+                url: "{{ route('map.add.place') }}",
                 data: {
                     place_name: placeName,
+                    add_new_place: true,
+                    observation_id: observationId,
                     latitude: latitude,
                     longitude: longitude,
                 },
                 success: function(data) {
                     swal({
                         icon: "success",
-                        title: data.msg,
+                        text: data.msg,
 
                     })
-                    //   window.location.href = "/";
 
+                    var btnid = document.getElementById("btn1");
+                    btnid.click();
+                    // window.location.href = "/";
+
+                }
+            });
+
+        }
+
+        function submitObservation() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            latitude = document.getElementById('latitude').value;
+            longitude = document.getElementById('longitude').value;
+            // placeName = document.getElementById('place_name').value;
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('map.add.place') }}",
+                data: {
+                    observation_id: observationId,
+                    latitude: latitude,
+                    longitude: longitude,
+                },
+                success: function(data) {
+                    swal({
+                        icon: "success",
+                        text: data.msg,
+
+                    })
+                    window.location.href = "/";
 
                 }
             });
