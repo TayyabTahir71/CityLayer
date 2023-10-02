@@ -417,6 +417,9 @@ img {
     font-style: italic;
 }
 @media (min-width: 772px) {
+    .inp1{
+        margin-left: 0;
+    }
     .lbox{
         display: flex;
         flex-direction: row;
