@@ -33,14 +33,13 @@
                     </div>
 
                     <div class="flex gap-8">
-                        <div x-data="{ active: '' }">
+                        <div x-data="{ active: 'AC_1' }">
                             <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                 x-show="tab=='place'">
                                 <div class="grid grid-cols-3 gap-8">
                                     @foreach ($places as $pls)
-                                        <div class="flex flex-col items-center justify-center w-[80px]"
-                                            @click="active='AC_{{ $pls->is_home }}'"
-                                            wire:click="select_place({{ $pls->id }})">
+                                        <div class="flex flex-col items-center justify-center w-[80px] cursor-pointer"
+                                            id="PL_{{ $pls->id }}" wire:click="select_place({{ $pls->id }})">
                                             <div class="rounded-full @if ($pls->place_id != null) bg-[#1976d2] @else bg-[#ffa726] @endif p-[20px]"
                                                 :class="active == 'AC_{{ $pls->is_home }}' ?
                                                     'border-4 border-lime-300' :

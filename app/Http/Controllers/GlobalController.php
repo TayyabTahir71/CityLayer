@@ -3220,7 +3220,7 @@ class GlobalController extends Controller
 
             PlaceDetails::create([
 
-                'place_id' => $request->place_id ?? $newplace->id,
+                'place_id' => $request->place_id ?? $newplace->id ?? NULL,
                 'place_child_id' => $request->place_child_id,
                 'user_id' =>  backpack_auth()->user()->id,
                 'observation_id' => $request->observation_id,

@@ -51,8 +51,8 @@
                         <img src="{{ asset('img/triangle.png') }}" class="w-7 h-7" alt="">
                     </div>
                     <a href="/filter"
-                        class="fixed z-20 flex items-center justify-center p-4 bg-white border-2 border-black rounded-full bottom-28 right-4">
-                        <img src="{{ asset('img/icons/eye-icon.jpg') }}" class="w-7 h-7" alt="">
+                        class="fixed z-20 flex items-center justify-center p-5 bg-white border-2 border-black rounded-full bottom-28 right-4">
+                        <div class="">👁️</div>
                     </a>
 
                     <div id="map" class="absolute w-[100vw] z-10 h-[90vh]"></div>

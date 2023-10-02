@@ -38,7 +38,7 @@
             outline: 1px solid transparent;
         }
     </style>
-    <script>
+    {{-- <script>
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-right',
@@ -55,7 +55,7 @@
                 title: message
             })
         })
-    </script>
+    </script> --}}
 </body>
 
 </html>

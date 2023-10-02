@@ -14,8 +14,6 @@ class Filter extends Component
     public function select_place($id)
     {
         array_push($this->selected_places, $id);
-
-        // $this->selected_places = array_merge($this->selected_places);
     }
 
     public function updateMap()
