@@ -38,6 +38,24 @@
             outline: 1px solid transparent;
         }
     </style>
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-right',
+            iconColor: 'white',
+
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true
+        })
+
+        Livewire.on('success', message => {
+            Toast.fire({
+                icon: 'success',
+                title: message
+            })
+        })
+    </script>
 </body>
 
 </html>

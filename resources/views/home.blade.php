@@ -725,7 +725,7 @@
                 success: function(data) {
                     swal({
                         icon: "success",
-                        title: data.msg,
+                        text: data.msg,
 
                     })
                     if (data.subPlsId) {

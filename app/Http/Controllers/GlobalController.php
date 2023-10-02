@@ -3166,14 +3166,11 @@ class GlobalController extends Controller
         }
 
         $place = PlaceDetails::where('latitude', $request->latitude)
-            ->where('user_id', backpack_auth()->user()->id)
             ->where('longitude', $request->longitude)
+            ->where('user_id', backpack_auth()->user()->id)
             ->first();
 
         $subPlsFnd = Place::where('id', $request->place_id)->first();
-
-
-        // $subPlsz = $subPlsFnd->subplaces();
 
         if (isset($place)) {
             if ($place->place_id != $request->place_id) {
@@ -3285,5 +3282,30 @@ class GlobalController extends Controller
         $observations = Observation::all();
 
         return view('add-new-place', compact('places', 'observations'));
+    }
+
+    public function subPlace($id)
+    {
+
+        $place = Place::find($id);
+        $subplaces = Place::where('parent_id', $id)->get();
+
+
+        if ($subplaces->isNotEmpty()) {
+            return view('sub-place', compact('subplaces', 'place'));
+        } else {
+
+            return redirect('/');
+        }
+    }
+
+    public function filter()
+    {
+
+        $places = PlaceDetails::where('is_home', 1)->get();
+
+
+
+        return view('filter', compact('places'));
     }
 }

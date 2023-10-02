@@ -168,13 +168,6 @@ Route::get('badges_overview', function () {
 
 
 
-// Route::get('register', function () {
-//     return view('register');
-// });
-
-
-
-
 //<-------------------------new routes---------------------------------------->
 
 Route::get('login', function () {
@@ -190,9 +183,7 @@ Route::get('sign-up-e', function () {
 
 Route::get('add-new-place', [GlobalController::class, 'createNewPlace']);
 
-Route::get('filter', function () {
-    return view('filter');
-});
+Route::get('filter', [GlobalController::class, 'filter']);
 
 Route::post('map/add/place', [GlobalController::class, 'addMapPlace'])->name('map.add.place');
 
