@@ -3158,19 +3158,13 @@ class GlobalController extends Controller
     public function addMapPlace(Request $request, $id = null)
     {
 
-        if ($request->add_new_place == true) {
-            $newplace = Place::create([
-                'name' => $request->place_name,
-                'user_id' => backpack_user()->id,
-            ]);
-        }
 
         $place = PlaceDetails::where('latitude', $request->latitude)
             ->where('longitude', $request->longitude)
             ->where('user_id', backpack_auth()->user()->id)
             ->first();
 
-        $subPlsFnd = Place::where('id', $request->place_id)->first();
+        $subPlsFnd = Place::where('parent_id', $request->place_id)->orWhere('parent_id', $place?->id)->first();
 
         if (isset($place)) {
             if ($place->place_id != $request->place_id) {
@@ -3220,7 +3214,7 @@ class GlobalController extends Controller
 
             PlaceDetails::create([
 
-                'place_id' => $request->place_id ?? $newplace->id ?? NULL,
+                'place_id' => $request->place_id,
                 'place_child_id' => $request->place_child_id,
                 'user_id' =>  backpack_auth()->user()->id,
                 'observation_id' => $request->observation_id,
@@ -3237,7 +3231,7 @@ class GlobalController extends Controller
             } elseif (isset($subPlsFnd)) {
                 return response()->json([
                     'status' => 'success',
-                    'msg' => 'Place added successfully, You can also add obervation for this place!',
+                    'msg' => 'Sub Place added successfully, You can also add obervation for this place!',
                     'subPlsId' => $subPlsFnd->id
                 ]);
             } else {
@@ -3289,23 +3283,13 @@ class GlobalController extends Controller
 
         $place = Place::find($id);
         $subplaces = Place::where('parent_id', $id)->get();
-
+        $allObservations = Observation::all();
 
         if ($subplaces->isNotEmpty()) {
-            return view('sub-place', compact('subplaces', 'place'));
+            return view('sub-place', compact('subplaces', 'place', 'allObservations'));
         } else {
 
             return redirect('/');
         }
-    }
-
-    public function filter()
-    {
-
-        $places = PlaceDetails::where('is_home', 1)->get();
-
-
-
-        return view('filter', compact('places'));
     }
 }

@@ -75,13 +75,13 @@
 
             </div>
         </div>
-        {{-- <div x-data="{ active: '' }">
+        <div x-data="{ active: '' }">
             <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                 x-show="tab=='observation'">
                 <div class="grid grid-cols-3 gap-8">
                     @foreach ($allObservations as $obs)
                         <div class="flex flex-col items-center justify-center w-[80px]"
-                            @click="active='OB_{{ $pls->id }}'" onclick="select_observation({{ $pls->id }})">
+                            @click="active='OB_{{ $obs->id }}'" onclick="select_observation({{ $pls->id }})">
                             <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
                                 :class="active == 'OB_{{ $obs->id }}' ?
                                     'border-4 border-yellow-100' :
@@ -98,7 +98,7 @@
                 </div>
 
             </div>
-        </div> --}}
+        </div>
 
 
 
@@ -182,7 +182,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: "{{ route('add.new.place') }}",
+                url: "{{ route('map.add.place') }}",
                 data: {
                     place_id: parent.id,
                     place_child_id: placeId,
@@ -193,10 +193,10 @@
                 success: function(data) {
                     swal({
                         icon: "success",
-                        title: data.msg,
+                        text: data.msg,
 
                     })
-                    //   window.location.href = "/";
+                    window.location.href = "/";
 
 
                 }

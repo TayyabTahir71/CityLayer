@@ -473,6 +473,10 @@
             className: 'transparent-icon',
             html: `<div class="rounded-full bg-[#1976d2] p-[16px] flex justify-center items-center" style="width: 54px"><img src="{{ asset('new_img/image.png') }}" class="w-6 h-6" /></div>`
         });
+        var bothIcon = L.divIcon({
+            className: 'transparent-icon',
+            html: `<div class="rounded-full bg-gradient-to-r from-[#1976d2] to-[#ffa726] p-[16px] flex justify-center items-center" style="width: 54px"><img src="{{ asset('new_img/image.png') }}" class="w-6 h-6" /></div>`
+        });
         var observationIcon = L.divIcon({
             className: 'transparent-icon',
             html: `<div class="rounded-full bg-[#ffa726] p-[16px] flex justify-center items-center" style="width: 52px"">
@@ -566,13 +570,16 @@
             if (placeid && observationid == null) {
                 icon2 = placeIcon;
             }
+            if (placeid && observationid) {
+                icon2 = bothIcon;
+            }
             if (placeid == null && observationid) {
                 icon2 = observationIcon;
             }
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
             }).addTo(mymap0).bindPopup(
-                `<div class="bg-[#2d9bf0] p-0 w-full"><div class="flex items-center justify-start gap-4  -mb-2"> <div class="flex flex-col items-center justify-center">
+                `<div class="bg-[#2d9bf0] p-0 w-full"><div class="flex items-center justify-start gap-4 -mb-2"> <div class="flex flex-col items-center justify-center">
                 <div class="rounded-full bg-[#ffa726] border-2 border-white p-[35px]" x-on:click="tab='observation'">
                 </div>
             </div>
