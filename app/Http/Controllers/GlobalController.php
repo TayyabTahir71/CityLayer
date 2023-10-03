@@ -3165,44 +3165,47 @@ class GlobalController extends Controller
     {
 
 
-        // dd($request->all());
-
         $place = PlaceDetails::where('latitude', $request->latitude)
             ->where('longitude', $request->longitude)
             ->where('user_id', backpack_auth()->user()->id)
             ->first();
 
-        // if ($request->place_child_id != NULL || $place->place_child_id) {
-        //     $subPlsFnd = Place::where('parent_id', $request->place_id);
 
-        //     if (isset($place)) {
-        //         $subPlsFnd  = $subPlsFnd->where('id', $place->id);
-        //     }
+        if ($request->place_child_id == NULL && $request->place_id) {
+            $subPlsFnd = Place::where('parent_id', $request->place_id);
 
-        //     $subPlsFnd = $subPlsFnd->first();
+            if (isset($place)) {
+                $subPlsFnd  = $subPlsFnd->where('id', $place->id);
+            }
 
-        //     if (isset($subPlsFnd)) {
-        //         if (isset($place)) {
-        //             return response()->json([
-        //                 'status' => 'success',
-        //                 'subPlsId' => $place->id,
-
-        //             ]);
-        //         } else {
-        //             return response()->json([
-        //                 'status' => 'success',
-        //                 'subPlsId' => $request->place_id,
-
-        //             ]);
-        //         }
-        //     }
-        // }
+            $subPlsFnd = $subPlsFnd->first();
 
 
-        // dd($place);
+
+            if (isset($subPlsFnd)) {
+                if (isset($place)) {
+                    return response()->json([
+                        'status' => 'success',
+                        'subPlsId' => $place->id,
+
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => 'success',
+                        'subPlsId' => $request->place_id,
+
+                    ]);
+                }
+            }
+        }
+
+
+
+
+
 
         if (isset($place)) {
-            if ($place->place_id != $request->place_id) {
+            if (isset($request->place_id)) {
                 $place->update([
                     'place_id' => $request->place_id,
                     'place_child_id' => $request->place_child_id,
@@ -3211,7 +3214,7 @@ class GlobalController extends Controller
                     'status' => 'success',
                     'msg' => 'Place updated successfully'
                 ]);
-            } elseif ($place->place_child_id != $request->place_child_id) {
+            } elseif (isset($request->place_child_id)) {
                 $place->update([
                     'place_child_id' => $request->place_child_id,
                 ]);
@@ -3219,7 +3222,7 @@ class GlobalController extends Controller
                     'status' => 'success',
                     'msg' => 'SubPlace updated successfully'
                 ]);
-            } elseif ($place->observation_id != $request->observation_id || $place->observation_id == NULL) {
+            } elseif (isset($request->observation_id)) {
 
                 $place->update([
                     'observation_id' => $request->observation_id,
@@ -3229,7 +3232,7 @@ class GlobalController extends Controller
                     'status' => 'success',
                     'msg' => 'Observation updated successfully'
                 ]);
-            } elseif ($place->observation_child_id != $request->observation_child_id) {
+            } elseif (isset($request->observation_child_id)) {
 
                 $place->update([
                     'observation_child_id' => $request->observation_child_id,
@@ -3277,26 +3280,43 @@ class GlobalController extends Controller
     public function addNewPlace(Request $request)
     {
 
+        if ($request->place_name) {
+            $place = Place::create([
+                'name' => $request->place_name,
+                'user_id' => backpack_user()->id,
+            ]);
+        }
 
+        if ($request->observation_name) {
+            $observation = Observation::create([
+                'name' => $request->observation_name,
+                'user_id' => backpack_user()->id,
+            ]);
+        }
 
-        $place = Place::create([
-            'name' => $request->place_name,
-            'user_id' => backpack_user()->id,
-        ]);
 
         PlaceDetails::create([
-            'place_id' => $place->id,
+            'place_id' => $place->id ?? NULL,
+            'observation_id' => $observation->id ?? NULL,
             'user_id' =>  backpack_auth()->user()->id,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
 
         ]);
 
-        return response()->json([
-            'status' => 'success',
-            'msg' => 'Place added successfully, You also add obervation for this place!',
+        if ($request->observation_name) {
+            return response()->json([
+                'status' => 'success',
+                'msg' => 'Observation added successfully, You can also add place for this place!',
 
-        ]);
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'success',
+                'msg' => 'Place added successfully, You also add obervation for this place!',
+
+            ]);
+        }
     }
 
 

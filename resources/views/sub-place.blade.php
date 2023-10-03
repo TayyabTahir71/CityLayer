@@ -196,7 +196,7 @@
                         text: data.msg,
 
                     })
-                    window.location.href = "/";
+                    // window.location.href = "/";
 
 
                 }
