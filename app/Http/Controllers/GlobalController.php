@@ -55,15 +55,21 @@ class GlobalController extends Controller
                 $tagbuilding = Tag::where('Category', 'Building')->get();
                 $tagopenspace = Tag::where('Category', 'Openspace')->get();
                 $allPlaces = Place::where('user_id', null)
+                    ->where('parent_id', NULL)
                     ->orWhere('user_id', backpack_auth()->user()->id)
-                    ->whereNull('parent_id')->with('subplaces')
+                    ->with('subplaces')
                     ->get();
+
+                // dd($allPlaces);
 
                 $allObservations = Observation::where('user_id', null)->orWhere('user_id', backpack_auth()->user()->id)->get();
 
 
 
-                $all_data = PlaceDetails::where('user_id', backpack_auth()->user()->id)->with('place', 'observation', 'user')->get();
+                $all_data = PlaceDetails::where('user_id', backpack_auth()->user()->id)
+                    ->where('is_home', true)
+                    ->with('place', 'observation', 'user')
+                    ->get();
 
                 // dd($all_data);
 
@@ -3159,12 +3165,41 @@ class GlobalController extends Controller
     {
 
 
+        // dd($request->all());
+
         $place = PlaceDetails::where('latitude', $request->latitude)
             ->where('longitude', $request->longitude)
             ->where('user_id', backpack_auth()->user()->id)
             ->first();
 
-        $subPlsFnd = Place::where('parent_id', $request->place_id)->orWhere('parent_id', $place?->id)->first();
+        // if ($request->place_child_id != NULL || $place->place_child_id) {
+        //     $subPlsFnd = Place::where('parent_id', $request->place_id);
+
+        //     if (isset($place)) {
+        //         $subPlsFnd  = $subPlsFnd->where('id', $place->id);
+        //     }
+
+        //     $subPlsFnd = $subPlsFnd->first();
+
+        //     if (isset($subPlsFnd)) {
+        //         if (isset($place)) {
+        //             return response()->json([
+        //                 'status' => 'success',
+        //                 'subPlsId' => $place->id,
+
+        //             ]);
+        //         } else {
+        //             return response()->json([
+        //                 'status' => 'success',
+        //                 'subPlsId' => $request->place_id,
+
+        //             ]);
+        //         }
+        //     }
+        // }
+
+
+        // dd($place);
 
         if (isset($place)) {
             if ($place->place_id != $request->place_id) {
@@ -3184,7 +3219,7 @@ class GlobalController extends Controller
                     'status' => 'success',
                     'msg' => 'SubPlace updated successfully'
                 ]);
-            } elseif ($place->observation_id != $request->observation_id) {
+            } elseif ($place->observation_id != $request->observation_id || $place->observation_id == NULL) {
 
                 $place->update([
                     'observation_id' => $request->observation_id,
@@ -3228,12 +3263,6 @@ class GlobalController extends Controller
                     'status' => 'success',
                     'msg' => 'Observation added successfully'
                 ]);
-            } elseif (isset($subPlsFnd)) {
-                return response()->json([
-                    'status' => 'success',
-                    'msg' => 'Sub Place added successfully, You can also add obervation for this place!',
-                    'subPlsId' => $subPlsFnd->id
-                ]);
             } else {
                 return response()->json([
                     'status' => 'success',
@@ -3247,6 +3276,8 @@ class GlobalController extends Controller
 
     public function addNewPlace(Request $request)
     {
+
+
 
         $place = Place::create([
             'name' => $request->place_name,
@@ -3291,5 +3322,11 @@ class GlobalController extends Controller
 
             return redirect('/');
         }
+    }
+
+    public function filter()
+    {
+
+        return view('filter');
     }
 }

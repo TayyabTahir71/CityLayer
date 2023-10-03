@@ -254,6 +254,12 @@
                             Submit
                         </span>
                     </button>
+                    <button onclick="submitNewObservation()" x-show="tab=='observation'"
+                        class="px-6 py-3 bg-blue-500 border-4 border-white rounded-3xl hover:shadow  hover:bg-blue-400 transition-all cursor-pointer">
+                        <span class="text-xl font-semibold text-white">
+                            Submit
+                        </span>
+                    </button>
                     <button onclick="submitObservation()" x-show="tab=='observation1'"
                         class="px-6 py-3 bg-blue-500 border-4 border-white rounded-3xl hover:shadow  hover:bg-blue-400 transition-all cursor-pointer">
                         <span class="text-xl font-semibold text-white">
@@ -347,7 +353,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: "{{ route('map.add.place') }}",
+                url: "{{ route('add.new.place') }}",
                 data: {
                     place_name: placeName,
                     add_new_place: true,

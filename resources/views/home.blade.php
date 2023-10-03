@@ -85,7 +85,7 @@
                         </div>
 
                         <a class="w-full pt-4" @click="modelOpen =!modelOpen">
-                            <span class="w-full px-12 py-4 text-white bg-[#2d9bf0] rounded-3xl">
+                            <span class="w-full px-12 py-4 text-white bg-[#2d9bf0] rounded-3xl cursor-pointer">
                                 Add to map
                             </span>
 
@@ -366,7 +366,7 @@
                                                         @click="active='PL_{{ $pls->id }}'"
                                                         onclick="select_place({{ $pls->id }})">
                                                         <div class="rounded-full bg-[#1976d2]  p-[20px]"
-                                                            :class="active == 'OB_{{ $pls->id }}' ?
+                                                            :class="active == 'PL_{{ $pls->id }}' ?
                                                                 'border-4 border-blue-300' :
                                                                 ''">
                                                             <img src="{{ asset('new_img/image.png') }}"
@@ -730,13 +730,14 @@
                     longitude: longitude,
                 },
                 success: function(data) {
-                    swal({
-                        icon: "success",
-                        text: data.msg,
-
-                    })
                     if (data.subPlsId) {
                         window.location.href = "/sub-place/" + data.subPlsId;
+                    } else {
+                        swal({
+                            icon: "success",
+                            text: data.msg,
+
+                        })
                     }
 
                 }
