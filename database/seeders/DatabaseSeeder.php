@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             // GlobalSeeder::class
             PlaceSeeder::class,
-            ObservationSeeder::class
+            ObservationSeeder::class,
+            SubplaceSeeder::class
+
         ]);
     }
 }

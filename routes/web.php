@@ -82,7 +82,7 @@ Route::controller(GlobalController::class)->group(function () {
     Route::post('newspacetag', 'newspacetag')->name('newspacetag');
     Route::get('leaderboard', 'leaderboard')->name('leaderboard');
 
-    Route::post('add/place', 'addNewPlace')->name('add.new.place');
+
 
 
 
@@ -168,13 +168,6 @@ Route::get('badges_overview', function () {
 
 
 
-// Route::get('register', function () {
-//     return view('register');
-// });
-
-
-
-
 //<-------------------------new routes---------------------------------------->
 
 Route::get('login', function () {
@@ -188,13 +181,13 @@ Route::get('sign-up-e', function () {
     return view('sign-up-e');
 });
 
-Route::get('add-new-place', function () {
-    return view('add-new-place');
-});
+Route::get('add-new-place', [GlobalController::class, 'createNewPlace']);
 
-Route::get('filter', function () {
-    return view('filter');
-});
+Route::get('filter', [GlobalController::class, 'filter']);
+
+Route::post('map/add/place', [GlobalController::class, 'addMapPlace'])->name('map.add.place');
+
+Route::post('add/new/place', [GlobalController::class, 'addNewPlace'])->name('add.new.place');
 
 Route::get('/sub-place/{id}', [GlobalController::class, 'subPlace'])->name('sub.place');
 

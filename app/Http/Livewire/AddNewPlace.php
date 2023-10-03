@@ -13,9 +13,18 @@ class AddNewPlace extends Component
 
     use WithFileUploads;
 
+    public $observations;
     public $place;
     public $search;
     public $observation;
+    public $longitude;
+    public $latitude;
+
+    public function mount()
+    {
+        $this->observations = Observation::all();
+    }
+
 
 
 
@@ -33,6 +42,8 @@ class AddNewPlace extends Component
     public function addPlace()
     {
 
+        dd($this->latitude);
+
         $place =  Place::create([
             'user_id' => backpack_user()->id,
             'name' => $this->place,
@@ -48,6 +59,8 @@ class AddNewPlace extends Component
                 'user_id' =>  backpack_user()->id,
                 'place_id' => $place->id,
                 'observation_id' => $observation->id,
+                'latitude' => $this->latitude,
+                'longitude' => $this->longitude,
             ]);
         }
     }
@@ -70,6 +83,8 @@ class AddNewPlace extends Component
                 'user_id' =>  backpack_user()->id,
                 'place_id' => $place->id,
                 'observation_id' => $observation->id,
+                'latitude' => $this->latitude,
+                'longitude' => $this->longitude,
             ]);
         }
     }
