@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    @vite('resources/css/app.css')
 </head>
 
 <body class="overflow-x-hidden bg-white pattern">
@@ -18,8 +22,9 @@
 
     @vite('resources/js/app.js')
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     @livewireScripts
-    <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
+    @stack('scripts')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         ::-webkit-scrollbar {
@@ -35,6 +40,24 @@
             outline: 1px solid transparent;
         }
     </style>
+    {{-- <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-right',
+            iconColor: 'white',
+
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true
+        })
+
+        Livewire.on('success', message => {
+            Toast.fire({
+                icon: 'success',
+                title: message
+            })
+        })
+    </script> --}}
 </body>
 
 </html>

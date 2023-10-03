@@ -59,7 +59,7 @@
         <div x-data="{ active: '' }">
             <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold" x-show="tab=='place'">
                 <div class="grid grid-cols-3 gap-8">
-                    @foreach ($place->subplaces as $pls)
+                    @foreach ($subplaces as $pls)
                         <div class="flex flex-col items-center justify-center w-[80px]"
                             @click="active='OB_{{ $pls->id }}'" onclick="select_place({{ $pls->id }})">
                             <div class="rounded-full bg-[#1976d2]  p-[20px]"
@@ -132,8 +132,8 @@
                             return;
                         }
                         is_echo = true;
-                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(2);
-                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(2);
+                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(6);
+                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(6);
                         // success(pos.coords.latitude, pos.coords.longitude);
                     },
                     function() {
@@ -154,7 +154,6 @@
 
         var parent = {!! json_encode($place) !!};
 
-        alert(parent.id);
 
         var placeId = '';
 

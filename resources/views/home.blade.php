@@ -51,8 +51,8 @@
                         <img src="{{ asset('img/triangle.png') }}" class="w-7 h-7" alt="">
                     </div>
                     <a href="/filter"
-                        class="fixed z-20 flex items-center justify-center p-4 bg-white border-2 border-black rounded-full bottom-28 right-4">
-                        <img src="{{ asset('img/icons/eye-icon.jpg') }}" class="w-7 h-7" alt="">
+                        class="fixed z-20 flex items-center justify-center p-5 bg-white border-2 border-black rounded-full bottom-28 right-4">
+                        <div class="">👁️</div>
                     </a>
 
                     <div id="map" class="absolute w-[100vw] z-10 h-[90vh]"></div>
@@ -175,9 +175,7 @@
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer"
                                                 @click="active='PL_{{ $allPlaces[0]->id }}'"
-                                                @if ($allPlaces[0]->subplaces->isNotEmpty()) onclick="subPlaces({{ $allPlaces[0]->id }})"
-                                                @else
-                                               onclick="select_place({{ $allPlaces[0]->id }})" @endif>
+                                                onclick="select_place({{ $allPlaces[0]->id }})">
                                                 <div class="rounded-full bg-[#1976d2] p-[20px] "
                                                     :class="active == 'PL_{{ $allPlaces[0]->id }}' ?
                                                         'border-4 border-blue-300' :
@@ -189,9 +187,7 @@
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer"
                                                 @click="active='PL_{{ $allPlaces[1]->id }}'"
-                                                @if ($allPlaces[1]->subplaces->isNotEmpty()) onclick="subPlaces()"
-                                                 @else
-                                                onclick="select_place({{ $allPlaces[1]->id }})" @endif>
+                                                onclick="select_place({{ $allPlaces[1]->id }})">
                                                 <div class="rounded-full bg-[#1976d2] p-[20px]"
                                                     :class="active == 'PL_{{ $allPlaces[1]->id }}' ?
                                                         'border-4 border-blue-300' :
@@ -367,8 +363,8 @@
                                             <div class="grid grid-cols-3 gap-8">
                                                 @foreach ($allPlaces as $pls)
                                                     <div class="flex flex-col items-center justify-center w-[80px]"
-                                                        @click="active='OB_{{ $pls->id }}'"
-                                                        onclick="select_observation({{ $pls->id }})">
+                                                        @click="active='PL_{{ $pls->id }}'"
+                                                        onclick="select_place({{ $pls->id }})">
                                                         <div class="rounded-full bg-[#1976d2]  p-[20px]"
                                                             :class="active == 'OB_{{ $pls->id }}' ?
                                                                 'border-4 border-blue-300' :
@@ -465,6 +461,27 @@
 
 
 
+        var currentPosIcon = L.icon({
+            iconUrl: '/new_img/current-pos.svg', // Replace with the path to your icon image
+            iconSize: [45, 45], // Adjust the icon size as needed
+            iconAnchor: [16, 16], // Adjust the anchor point of the icon
+            popupAnchor: [0, -16] // Adjust the popup anchor for the icon
+        });
+
+
+        var placeIcon = L.divIcon({
+            className: 'transparent-icon',
+            html: `<div class="rounded-full bg-[#1976d2] p-[16px] flex justify-center items-center" style="width: 54px"><img src="{{ asset('new_img/image.png') }}" class="w-6 h-6" /></div>`
+        });
+        var observationIcon = L.divIcon({
+            className: 'transparent-icon',
+            html: `<div class="rounded-full bg-[#ffa726] p-[16px] flex justify-center items-center" style="width: 52px"">
+                    <div class="flex">
+                     <img src="{{ asset('new_img/sad.png') }}" alt="" class="w-5 h-5 -mr-1">
+                     <img src="{{ asset('new_img/happy.png') }}" alt="" class="w-5 h-5 -ml-1">
+                    </div>
+                 </div>`
+        });
 
 
 
@@ -487,8 +504,8 @@
                             return;
                         }
                         is_echo = true;
-                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(2);
-                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(2);
+                        document.getElementById('latitude').value = pos.coords.latitude.toFixed(6);
+                        document.getElementById('longitude').value = pos.coords.longitude.toFixed(6);
                         success(pos.coords.latitude, pos.coords.longitude);
                     },
                     function() {
@@ -511,11 +528,8 @@
         function success(lat, lng) {
             mymap0.setView([lat, lng], 10);
 
-            L.circle([lat, lng], {
-                color: '#F48498',
-                fillColor: '#F48498',
-                fillOpacity: 1.5,
-                radius: 60, // Radius of the circle in meters
+            L.marker([lat, lng], {
+                icon: currentPosIcon
             }).addTo(mymap0);
         }
 
@@ -550,16 +564,13 @@
             placelongitude = place.longitude;
 
             if (placeid && observationid == null) {
-                color = '#246EB9';
+                icon2 = placeIcon;
             }
             if (placeid == null && observationid) {
-                color = '#FFE45E';
+                icon2 = observationIcon;
             }
-            markerx = L.circle([placelatitude, placelongitude], {
-                color: '#F9F9F9',
-                fillColor: color,
-                fillOpacity: 1.5,
-                radius: 60, // Radius of the circle in meters
+            markerx = L.marker([placelatitude, placelongitude], {
+                icon: icon2
             }).addTo(mymap0).bindPopup(
                 `<div class="bg-[#2d9bf0] p-0 w-full"><div class="flex items-center justify-start gap-4  -mb-2"> <div class="flex flex-col items-center justify-center">
                 <div class="rounded-full bg-[#ffa726] border-2 border-white p-[35px]" x-on:click="tab='observation'">
@@ -623,11 +634,8 @@
 
         function success(lat, lng) {
             mymap0.flyTo([lat, lng], 19);
-            L.circle([lat, lng], {
-                color: '#F48498',
-                fillColor: '#F48498',
-                fillOpacity: 1.5,
-                radius: 60, // Radius of the circle in meters
+            L.marker([lat, lng], {
+                icon: currentPosIcon
             }).addTo(mymap0);
         }
 
@@ -666,7 +674,7 @@
         function success(lat, lng) {
             mymap0.flyTo([lat, lng], 16);
             L.marker([lat, lng], {
-                icon: icon
+                icon: currentPosIcon
             }).addTo(mymap0);
         }
 
@@ -707,7 +715,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: "{{ route('add.new.place') }}",
+                url: "{{ route('map.add.place') }}",
                 data: {
                     place_id: placeId,
                     observation_id: observationId,
@@ -717,11 +725,12 @@
                 success: function(data) {
                     swal({
                         icon: "success",
-                        title: data.msg,
+                        text: data.msg,
 
                     })
-                    //   window.location.href = "/";
-
+                    if (data.subPlsId) {
+                        window.location.href = "/sub-place/" + data.subPlsId;
+                    }
 
                 }
             });
