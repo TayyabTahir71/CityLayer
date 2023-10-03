@@ -12,10 +12,12 @@
                     @csrf
                     <input type="file" name="image" id="image" class="hidden" accept="image/*"
                            onchange="javascript:this.form.submit();">
-                    <label for="image" class="cursor-pointer">
-                        <img class="object-cover w-24 h-24 rounded-full ring ring-gray-300 dark:ring-gray-600"
-                             src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
+                    <label for="image" class="cursor-pointer ">
+                        <img class="object-cover w-24 hw h-24 border-7 border-blue-500 rounded-full  " style="border-width: 7px"
+                             src="{{asset('images/iconfinder_avatar_boy_kid_person_4043238.svg')}}" alt="">
                     </label>
+                    <div class="bg-black rounded-full text-white  text-center text-lg relative mt-[-22%] text-2xl" style="width: 31px;font-size: 2rem">+</div>
+
                 </form>
 
             </div>
@@ -29,7 +31,7 @@
 
                 @endphp
                 @foreach ($preferences as $preference)
-                    <div class="flex flex-row items-center justify-center">
+                    <div class="flex flex-row items-center justify-center " style="width: 45%">
                         <div class="flex flex-row items-center justify-center  w-89 gap5 w45">
 
                             <button class="bg-yel  border-ms p5">{{$preference}}</button>
@@ -38,16 +40,17 @@
                 @endforeach
 
             </div>
+            <br/>
 
-            <h2 class="pt-2 text-2xl font-bold text-center" style="color: #2d9bf0;font-weight: 300"> Level {{ backpack_auth()->user()->score }} !</h2>
+            <h2 class="pt-2 text-blue-600 font-bold text-center" style="color: #2d9bf0;font-weight: 300"> Level {{ backpack_auth()->user()->score }} !</h2>
             <div class="w-2/3 mx-auto">
                 <div class="circle">2</div>
                 <div class="relative pt-1">
 
-                    <div class="flex h-3 overflow-hidden text-xs bg-white border rounded">
+                    <div class="flex h-3 overflow-hidden text-xs bg-white border-2 border-blue-500 ">
                         @php $score = backpack_auth()->user()->score / 10; @endphp
                         <div style="width:{{ $score }}%"
-                             class="flex flex-col justify-center text-center text-white bg-yellow-300 shadow-none whitespace-nowrap">
+                             class="flex flex-col bg-blue-600 justify-center text-center text-white  shadow-none whitespace-nowrap">
                         </div>
                     </div>
                     {{--                     <div class="pt-2">--}}
@@ -80,36 +83,48 @@
                             <div class="flex gap-x-1">
                                 <button id="btn1">
                                     @if ($explorer == 1)
-                                        <img class="w-24" src="/img/icons/explorer.png" alt="">
-                                        <div class="tes">explorer</div>
+                                        <div class="flax ">
+                                            <img src="{{ asset('img/icons/explorer.png') }}"  alt="Your Image">
+                                            <div class="tes">explorer</div>
+                                        </div>
                                     @else
-                                        <img class="w-24 " src="/img/icons/explorer.png">
-                                        <div class="tes">explorer</div>
+                                        <div class="flax ">
+                                            <img src="{{ asset('img/icons/explorer.png') }}"  alt="Your Image">
+                                            <div class="tes">explorer</div>
+                                        </div>
                                     @endif
                                 </button>
                                 <button id="btn2">
                                     @if ($citymaker == 1)
-                                        <img class="w-24" src="/img/icons/citymaker.png" alt="">
-                                        <div class="tes">city maker</div>
+                                        <div class="flax margl">
+                                            <img src="{{ asset('img/icons/citymaker.png') }}"  alt="Your Image">
+                                            <div class="tes">city maker</div>
+                                        </div>
                                     @else
-                                        <img class="w-24 " src="/img/icons/citymaker.png">
-                                        <div class="tes">city maker</div>
+                                        <div class="flax margl">
+                                            <img src="{{ asset('img/icons/citymaker.png') }}"  alt="Your Image">
+                                            <div class="tes">city maker</div>
+                                        </div>
                                     @endif
                                 </button>
 
                                 <button id="btn3">
                                     @if ($architect == 1)
-                                        <img class="w-24" src="/img/icons/architect.png" alt="">
-                                        <div class="tes">architect</div>
+                                        <div class="flax margl">
+                                            <img src="{{ asset('img/icons/architect.png') }}"  alt="Your Image">
+                                            <div class="tes">architect</div>
+                                        </div>
                                     @else
-                                        <img class="w-24 " src="/img/icons/architect.png">
-                                        <div class="tes">architect</div>
+                                        <div class="flax margl">
+                                            <img src="{{ asset('img/icons/architect.png') }}"  alt="Your Image">
+                                            <div class="tes">architect</div>
+                                        </div>
                                     @endif
                                 </button>
 
-                                <a href="/badges_overview" id="btn4">
-                                    <img class="w-24" src="/img/icons/flaneur.png" alt="">
-                                    <div class="tes">see more</div>
+                                <a href="/badges_overview" id="btn4" class="flax margl">
+                                    <div class="plusbtn">+</div>
+                                    <div class="tes" style="margin-left: 2%">see more</div>
                                 </a>
 
                             </div>

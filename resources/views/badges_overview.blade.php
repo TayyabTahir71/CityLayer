@@ -23,15 +23,15 @@
 {{--            </div>--}}
             <h1 class="pt-4 bold text-center text-gray-800 f15">Username</h1>
             <br/>
-            <h2 class="pt-2  text-center  f13">Level{{ backpack_auth()->user()->score }}!</h2>
+            <h2 class="pt-2 text-blue-600 font-bold text-center" style="color: #2d9bf0;font-weight: 300"> Level {{ backpack_auth()->user()->score }} !</h2>
 
             <div class="w-2/3 mx-auto">
                 <div class="circle">2</div>
                 <div class="relative pt-1">
-                    <div class="flex h-3 overflow-hidden text-xs bg-white border rounded">
+                    <div class="flex h-3 overflow-hidden text-xs bg-white border-2 border-blue-500 ">
                         @php $score = backpack_auth()->user()->score / 10; @endphp
                         <div style="width:{{ $score }}%"
-                             class="flex flex-col justify-center text-center text-white bg-yellow-300 shadow-none whitespace-nowrap">
+                             class="flex flex-col bg-blue-600 justify-center text-center text-white  shadow-none whitespace-nowrap">
                         </div>
                     </div>
 {{--                    <div class="pt-2">--}}
@@ -120,7 +120,7 @@
                     </div>
                     <br/>
                     <div class="flex flex-row justify-center items-center gap-4">
-                        <button class="bg-blue-500 text-white font-bold py-2 px-7 rounded-lg brad fnor clbtn">Close</button>
+                        <button style="background: #2d9bf0;font-weight: bold" class="bg-blue-500 text-white font-bold py-2 px-7 rounded-lg brad fnor clbtn">Close</button>
                     </div>
 
 
