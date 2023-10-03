@@ -1,138 +1,126 @@
 @extends('layouts.app')
 
 @section('main')
-    <div data-barba="container">
-        <a href="javascript:history.back()">
-            <img src="{{ asset('img/icons/arrow.png') }}" class="arrow">
 
-        </a>
-        <br/>
-        <br/>
-        <div class="top">
-<div class="topo">
-    <input type="file" style="" name="image" id="image" class="hidden" accept="image/*"
-           onchange="javascript:this.form.submit();">
-    <label for="image" class="cursor-pointer new" >
-        <img class="object-cover w-24 h-24 border-7 border-blue-500 rounded-full nimage mimage"
-             style="height: 80px;width: 80px"
-             src="{{asset('img/avatar.png')}}" alt="">
-    </label>
-</div>
-            <div class="tops">
-                <div class="toptaxt">Hello "USername!"</div>
-                <div class="vieprofile">View Profile</div>
-            </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .popup-btn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -400px;
+            height: 100%;
+            width: 400px;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        .popup-content {
+            padding: 20px;
+        }
+
+        .close-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+    <button id="openPopup" class="popup-btn">Open Popup</button>
+
+    <div id="popup" class="popup-container">
+        <div class="popup-content">
+
+            <div class="top">
+                <div class="topo">
+                    <input type="file" style="" name="image" id="image" class="hidden" accept="image/*"
+                           onchange="javascript:this.form.submit();">
+                    <label for="image" class="cursor-pointer new" >
+                        <img class="object-cover w-24 h-24 border-7 border-blue-500 rounded-full nimage mimage"
+                             style="height: 80px;width: 80px"
+                             src="{{asset('images/iconfinder_avatar_boy_kid_person_4043238.svg')}}" alt="">
+                    </label>
+                </div>
+                <div class="tops">
+                    <div class="toptaxt">Hello "USername!"</div>
+                    <a href="/profile" class="vieprofile">View Profile</a>
+                </div>
 
 
-        </div>
-        <br/>
-        <br/>
-        <div class="list">
-            <div class="lbox">
-                <input type="checkbox" class="check">
-                <div class="ltax">Add to map</div>
             </div>
-            <div class="lbox">
-                <input type="checkbox" class="check">
-                <div class="ltax">Dashboard</div>
+            <br/>
+            <br/>
+            <div class="list">
+                <a href="/" class="lbox">
+                    <input type="checkbox" class="check">
+                    <div class="ltax">Add to map</div>
+                </a>
+                <a href="/dashboard" class="lbox">
+                    <input type="checkbox" class="check">
+                    <div class="ltax">Dashboard</div>
+                </a>
+                <a href="/preferences" class="lbox">
+                    <input type="checkbox" class="check">
+                    <div class="ltax">Community achievements</div>
+                </a>
+                <a href="" class="lbox">
+                    <input type="checkbox" class="check">
+                    <div class="ltax">About City Layers</div>
+                </a>
+                <a href="" class="lbox">
+                    <input type="checkbox" class="check">
+                    <div class="ltax">Term & contact</div>
+                </a>
+                <a href="" class="lbox">
+                    <input type="checkbox" class="check">
+                    <div class="ltax">Privacy Policy and Terms of Service</div>
+                </a>
+                <a href="" class="lbox">
+                    <input type="checkbox" class="check">
+                    <div class="ltax">Impressum & accessibility</div>
+                </a>
             </div>
-            <div class="lbox">
-                <input type="checkbox" class="check">
-                <div class="ltax">Community achievements</div>
-            </div>
-            <div class="lbox">
-                <input type="checkbox" class="check">
-                <div class="ltax">About City Layers</div>
-            </div>
-            <div class="lbox">
-                <input type="checkbox" class="check">
-                <div class="ltax">Term & contact</div>
-            </div>
-            <div class="lbox">
-                <input type="checkbox" class="check">
-                <div class="ltax">Privacy Policy and Terms of Service</div>
-            </div>
-            <div class="lbox">
-                <input type="checkbox" class="check">
-                <div class="ltax">Impressum & accessibility</div>
-            </div>
-        </div>
-
-
-        <div class="flex flex-col  mx-auto">
-
-
             <div class="belo">
                 <div class="mapping">Mappings are public. Youor username will be shown along with the mapping.</div>
-                <div class="closebt">Close</div>
+                <div class="closebt" id="closePopup">Close</div>
             </div>
-
-            {{--            <div class="z-0 p-3 pt-16 space-y-4 lg:mx-16 md:pt-20">--}}
-            {{--                <div class="flex flex-row justify-between">--}}
-            {{--                    <h4 class="pt-4 mt-2 font-semibold text-gray-900 ">{{ __('messages.Start New Mapping:') }}</h4>--}}
-            {{--                    <h4 class="pt-4 mt-2 font-semibold text-gray-900 ">{{ __('messages.Points:') }} {{ backpack_auth()->user()->score }}</h4>--}}
-            {{--                </div>--}}
-            {{--                <div class="flex items-center justify-between space-x-3 overflow-y-scroll">--}}
-            {{--                    <a href="/street" class="prevent">--}}
-            {{--                        <div--}}
-            {{--                            class="flex flex-col items-center justify-center w-20 h-20 p-1 mb-2 text-gray-800 transition duration-300 ease-in bg-green-200 shadow cursor-pointer hover:bg-green-300 active:bg-green-400 rounded-2xl hover:shadow-md">--}}
-            {{--                            <i class="fa-solid fa-road"></i>--}}
-            {{--                            <p class="mt-1 text-xs ">{{ __('messages.Street') }}</p>--}}
-            {{--                        </div>--}}
-            {{--                    </a>--}}
-            {{--                    <a href="/building" class="prevent">--}}
-            {{--                        <div--}}
-            {{--                            class="flex flex-col items-center justify-center w-20 h-20 p-1 mb-2 text-gray-800 transition duration-300 ease-in bg-yellow-200 shadow cursor-pointer hover:bg-yellow-300 active:bg-yellow-400 rounded-2xl hover:shadow-md">--}}
-            {{--                            <i class="fa-solid fa-building"></i>--}}
-            {{--                            <p class="mt-1 text-xs ">{{ __('messages.Building') }}</p>--}}
-            {{--                        </div>--}}
-            {{--                    </a>--}}
-            {{--                    <a href="/openspace" class="prevent">--}}
-            {{--                        <div--}}
-            {{--                            class="flex flex-col items-center justify-center w-20 h-20 p-1 mb-2 text-gray-800 transition duration-300 ease-in bg-indigo-200 shadow cursor-pointer hover:bg-indigo-300 active:bg-indigo-400 rounded-2xl hover:shadow-md">--}}
-            {{--                            <i class="fa-solid fa-street-view"></i>--}}
-            {{--                            <p class="mt-1 text-xs ">{{ __('messages.Open space') }}</p>--}}
-            {{--                        </div>--}}
-            {{--                    </a>--}}
-            {{--                </div>--}}
-            {{--                 <div class="flex flex-row justify-between">--}}
-            {{--                    <h4 class="font-semibold text-gray-900 ">{{ __('messages.Current Location:') }}</h4>--}}
-            {{--                     <h4 class="text-sm text-gray-900 " id="mylocation"></h4>--}}
-            {{--                </div>--}}
-
-            {{--                                    <h4 class="text-xl font-semibold text-center text-gray-900">{{ __('messages.My Mapping data:') }}</h4>--}}
-            {{--                <div class="grid grid-cols-1">--}}
-            {{--                    <div class="">--}}
-
-            {{--                        @forelse ($all_data as $data)--}}
-            {{--                        <a href="/place/{{ $data['id'] }}/{{ strtolower($data['type']) }}">--}}
-            {{--                            <div class="flex p-2 mb-2 bg-white border rounded shadow-md">--}}
-            {{--                               @php $img = $data['image'] ?? null; @endphp--}}
-            {{--                                <img src="{{ asset('storage' . $img) }}" alt="Just a flower" class="object-cover w-16 h-16 rounded" onerror="this.src='/img/empty.png'">--}}
-            {{--                                <div class="flex flex-col justify-center w-full px-2 py-1">--}}
-
-            {{--                                    <div class="flex items-center justify-between ">--}}
-            {{--                                        <div class="flex flex-col">--}}
-            {{--                                            <h2 class="pl-4 text-sm font-medium text-gray-800">{{ $data['type'] }}</h2>--}}
-            {{--                                        </div>--}}
-            {{--                                    </div>--}}
-            {{--                                </div>--}}
-            {{--                                <div class="flex items-center justify-between ">--}}
-            {{--                                        <div class="flex flex-col pr-4">--}}
-            {{--                                            <h2 class="pl-4 text-sm font-medium text-gray-800">{{ $data['latitude'] }}</h2>--}}
-            {{--                                             <h2 class="pl-4 text-sm font-medium text-gray-800">{{ $data['longitude'] }}</h2>--}}
-            {{--                                        </div>--}}
-            {{--                                    </div>--}}
-            {{--                            </div>--}}
-            {{--                            </a>--}}
-            {{--                        @empty--}}
-            {{--                        @endforelse--}}
-
-            {{--                    </div>--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
         </div>
     </div>
+
+    <script >
+        const openPopupButton = document.getElementById('openPopup');
+        const closePopupButton = document.getElementById('closePopup');
+        const popup = document.getElementById('popup');
+
+        openPopupButton.addEventListener('click', () => {
+            popup.style.display = 'block';
+            setTimeout(() => {
+                popup.style.right = '0';
+            }, 10);
+        });
+
+        closePopupButton.addEventListener('click', () => {
+            popup.style.right = '-400px';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 500); // This duration should match your CSS transition duration
+        });
+
+    </script>
     <script>
 
         if (navigator.geolocation) {

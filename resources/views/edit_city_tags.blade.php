@@ -17,7 +17,7 @@ $info = GlobalController::myprofile();
                    onchange="javascript:this.form.submit();">
             <label for="image" class="cursor-pointer new" >
                 <img class="object-cover w-24 h-24 border-7 border-blue-500 rounded-full  " style="border-width: 7px"
-                     src="{{asset('img/avatar.png')}}" alt="">
+                     src="{{asset('images/iconfinder_avatar_boy_kid_person_4043238.svg')}}" alt="">
             </label>
             <label for="dropzone-file" class="flex flex-col items-center justify-center w-2/3 ">
                 <div class="flex flex-col items-center justify-center pb-6">
