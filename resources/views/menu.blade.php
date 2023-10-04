@@ -43,6 +43,10 @@
     <button id="openPopup" class="popup-btn">Open Popup</button>
 
     <div id="popup" class="popup-container">
+        <a id="closePopup">
+            <img src="{{ asset('img/icons/arrow.png') }}" class="arrow">
+
+        </a>
         <div class="popup-content">
 
             <div class="top">
@@ -66,34 +70,37 @@
             <br/>
             <div class="list">
                 <a href="/" class="lbox">
-                    <input type="checkbox" class="check">
+                    <div class="check" style="text-align: center;font-weight: bold;font-size: 1rem">+</div>
                     <div class="ltax">Add to map</div>
                 </a>
                 <a href="/dashboard" class="lbox">
-                    <input type="checkbox" class="check">
+                    <div class="check" style="text-align: center;font-weight: bold;font-size: 1rem">.</div>
                     <div class="ltax">Dashboard</div>
                 </a>
                 <a href="/preferences" class="lbox">
-                    <input type="checkbox" class="check">
+                    <div class="check" style="text-align: center;font-weight: bold;font-size: 1rem">"</div>
                     <div class="ltax">Community achievements</div>
                 </a>
-                <a href="" class="lbox">
-                    <input type="checkbox" class="check">
+                <a href="/about" class="lbox">
+                    <div class="check" style="text-align: center;font-weight: bold;font-size: 1rem">?</div>
                     <div class="ltax">About City Layers</div>
                 </a>
-                <a href="" class="lbox">
-                    <input type="checkbox" class="check">
+                <a href="/contact" class="lbox">
+                    <div class="check" style="text-align: center;font-weight: bold;font-size: 1rem">.</div>
+
                     <div class="ltax">Term & contact</div>
                 </a>
-                <a href="" class="lbox">
-                    <input type="checkbox" class="check">
+                <a href="/privacy_policy" class="lbox">
+                    <div class="check" style="text-align: center;font-weight: bold;font-size: 1rem">!</div>
+
                     <div class="ltax">Privacy Policy and Terms of Service</div>
                 </a>
-                <a href="" class="lbox">
-                    <input type="checkbox" class="check">
+                <a href="/impressum" class="lbox">
+                    <div class="check" style="text-align: center;font-weight: bold;font-size: 1rem">i</div>
                     <div class="ltax">Impressum & accessibility</div>
                 </a>
             </div>
+            <br/>
             <div class="belo">
                 <div class="mapping">Mappings are public. Youor username will be shown along with the mapping.</div>
                 <div class="closebt" id="closePopup">Close</div>

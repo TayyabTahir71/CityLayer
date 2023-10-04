@@ -768,6 +768,199 @@ class GlobalController extends Controller
             )
         );
     }
+    public function badges_overview()
+    {
+        $userid = backpack_auth()->user()->id;
+        $locale = session()->get('locale');
+        $name = backpack_auth()->user()->name;
+        $score = backpack_auth()->user()->score;
+        $infos = Infosperso::where('user_id', $userid)->first();
+
+        $street = Street::where('user_id', $userid)->get();
+        $building = Building::where('user_id', $userid)->get();
+        $openspace = Openspace::where('user_id', $userid)->get();
+        $sumcomment =
+            Street::where('user_id', $userid)->sum('comments') +
+            Building::where('user_id', $userid)->sum('comments') +
+            Openspace::where('user_id', $userid)->sum('comments');
+        $sumreaction =
+            Street::where('user_id', $userid)->sum('likes') +
+            Street::where('user_id', $userid)->sum('dislikes') +
+            Street::where('user_id', $userid)->sum('stars') +
+            Street::where('user_id', $userid)->sum('bof') +
+            Street::where('user_id', $userid)->sum('weird') +
+            Building::where('user_id', $userid)->sum('likes') +
+            Building::where('user_id', $userid)->sum('dislikes') +
+            Building::where('user_id', $userid)->sum('stars') +
+            Building::where('user_id', $userid)->sum('bof') +
+            Building::where('user_id', $userid)->sum('weird') +
+            Openspace::where('user_id', $userid)->sum('likes') +
+            Openspace::where('user_id', $userid)->sum('dislikes') +
+            Openspace::where('user_id', $userid)->sum('stars') +
+            Openspace::where('user_id', $userid)->sum('bof') +
+            Openspace::where('user_id', $userid)->sum('weird');
+        //count how many street image are not null
+        $countimage =
+            Street::where('user_id', $userid)
+            ->whereNotNull('image')
+            ->count() +
+            Street::where('user_id', $userid)
+            ->whereNotNull('image0')
+            ->count() +
+            Building::where('user_id', $userid)
+            ->whereNotNull('image')
+            ->count() +
+            Building::where('user_id', $userid)
+            ->whereNotNull('image0')
+            ->count() +
+            Openspace::where('user_id', $userid)
+            ->whereNotNull('image')
+            ->count() +
+            Openspace::where('user_id', $userid)
+            ->whereNotNull('image0')
+            ->count();
+
+        if ($locale == 'de') {
+            $mycomments = Comment_de::where('user_id', $userid)->get();
+        } else {
+            $mycomments = Comment_en::where('user_id', $userid)->get();
+        }
+
+        $countall = count($street) + count($building) + count($openspace);
+        $countstreet = count($street);
+        $countbuilding = count($building);
+        $countopenspace = count($openspace);
+        $countmycomments = count($mycomments);
+
+
+        $streets = Street::where('user_id', $userid)->get();
+        $buildings = Building::where('user_id', $userid)->get();
+        $openspaces = Openspace::where('user_id', $userid)->get();
+
+        $explorer = '0';
+        // if distance between street entries is more than 50m then explorer = 1
+        foreach ($streets as $street) {
+
+            // compare distance with other streets
+            foreach ($streets as $otherStreet) {
+                if ($street->id !== $otherStreet->id) {
+                    $distance = $this->haversine($street->latitude, $street->longitude, $otherStreet->latitude, $otherStreet->longitude);
+
+                    if ($distance > 50) {
+                        $explorer = '1';
+                        break;
+                    }
+                }
+            }
+        }
+
+        foreach ($buildings as $building) {
+
+
+            foreach ($buildings as $otherStreet) {
+                if ($building->id !== $otherStreet->id) {
+                    $distance = $this->haversine($building->latitude, $building->longitude, $otherStreet->latitude, $otherStreet->longitude);
+
+                    if ($distance > 50) {
+                        $explorer = '1';
+                        break;
+                    }
+                }
+            }
+        }
+
+        foreach ($openspaces as $openspace) {
+
+
+            foreach ($openspaces as $otherStreet) {
+                if ($openspace->id !== $otherStreet->id) {
+                    $distance = $this->haversine($openspace->latitude, $openspace->longitude, $otherStreet->latitude, $otherStreet->longitude);
+
+                    if ($distance > 50) {
+                        $explorer = '1';
+                        break;
+                    }
+                }
+            }
+        }
+
+
+
+
+        if ($countall > 9) {
+            $citymaker = '1';
+        } else {
+            $citymaker = '0';
+        }
+
+        if ($countstreet > 9) {
+            $flaneur = '1';
+        } else {
+            $flaneur = '0';
+        }
+
+        if ($countbuilding > 9) {
+            $architect = '1';
+        } else {
+            $architect = '0';
+        }
+
+        if ($countopenspace > 9) {
+            $urbanist = '1';
+        } else {
+            $urbanist = '0';
+        }
+
+        if ($score == 500) {
+            $supermapper = '1';
+        } else {
+            $supermapper = '0';
+        }
+
+        if ($sumreaction > 19) {
+            $star = '1';
+        } else {
+            $star = '0';
+        }
+
+        if ($sumcomment > 9) {
+            $influencer = '1';
+        } else {
+            $influencer = '0';
+        }
+
+        if ($countmycomments > 9) {
+            $guru = '1';
+        } else {
+            $guru = '0';
+        }
+
+        if ($countimage > 9) {
+            $investigator = '1';
+        } else {
+            $investigator = '0';
+        }
+
+        // dd($citymaker);
+        return view(
+            'badges_overview',
+            compact(
+                'name',
+                'infos',
+                'score',
+                'citymaker',
+                'flaneur',
+                'architect',
+                'urbanist',
+                'supermapper',
+                'influencer',
+                'guru',
+                'star',
+                'investigator',
+                'explorer'
+            )
+        );
+    }
 
     public function saveprofile(Request $request)
     {
@@ -847,6 +1040,8 @@ class GlobalController extends Controller
 
         return view('preferences', compact('preferences'));
     }
+
+
 
     public function street()
     {

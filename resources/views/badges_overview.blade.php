@@ -2,7 +2,7 @@
 
 @section('main')
     <div data-barba="container">
-        <a href="javascript:history.back()">
+        <a href="/profile">
             <img src="{{ asset('img/icons/arrow.png') }}" class="arrow">
 
         </a>
@@ -21,12 +21,12 @@
 {{--                </form>--}}
 
 {{--            </div>--}}
-            <h1 class="pt-4 bold text-center text-gray-800 f15">Username</h1>
+            <h1 class="pt-4 bold text-center text-gray-800 f15">{{ $name }}</h1>
             <br/>
             <h2 class="pt-2 text-blue-600 font-bold text-center" style="color: #2d9bf0;font-weight: 300"> Level {{ backpack_auth()->user()->score }} !</h2>
 
             <div class="w-2/3 mx-auto">
-                <div class="circle">2</div>
+                <div class="circle">{{ backpack_auth()->user()->score }}</div>
                 <div class="relative pt-1">
                     <div class="flex h-3 overflow-hidden text-xs bg-white border-2 border-blue-500 ">
                         @php $score = backpack_auth()->user()->score / 10; @endphp
@@ -34,6 +34,7 @@
                              class="flex flex-col bg-blue-600 justify-center text-center text-white  shadow-none whitespace-nowrap">
                         </div>
                     </div>
+
 {{--                    <div class="pt-2">--}}
 {{--                        @if (backpack_auth()->user()->score < 100)--}}
 {{--                            <div class="text-xs font-semibold text-center text-blue-300">Level 1</div>--}}
@@ -62,57 +63,141 @@
                      </div>
                     <div class="fc">
                         <div class="df">
-                            <div class="box">
-                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
-                            <div class="box">
-                                <img src="{{ asset('img/icons/CL_B-star.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
-                            <div class="box">
-                                <img src="{{ asset('img/icons/CL_B-citymaker.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
+                            @if ($explorer == 1)
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-explorer.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes">explorer</div>
+                                </div>
+                            @else
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-explorer.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes">explorer</div>
+                                </div>
+                            @endif
+
+                                @if ($citymaker == 1)
+                                    <div class="box">
+                                        <img src="{{ asset('images/color/CL_B-citymaker.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                        <div class="tes">City Maker</div>
+                                    </div>
+                                @else
+                                    <div class="box">
+                                        <img src="{{ asset('images/color/CL_B-citymaker.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                        <div class="tes">City Maker</div>
+                                    </div>
+                                @endif
+
+
+                                @if ($architect == 1)
+                                    <div class="box">
+                                        <img src="{{ asset('images/color/CL_B-architect.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                        <div class="tes">Architect</div>
+                                    </div>
+                                @else
+                                    <div class="box">
+                                        <img src="{{ asset('images/color/CL_B-architect.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                        <div class="tes">Architect</div>
+                                    </div>
+                                @endif
 
 
                         </div>
                         <div class="df">
-                            <div class="box">
-                                <img src="{{ asset('img/icons/CL_B-explorer.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
-                            <div class="box">
-                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
-                            <div class="box">
-                                <img src="{{ asset('img/icons/guru.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
+
+
+                            @if ($flaneur == 1)
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-flaneur.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes">Flaneur</div>
+                                </div>
+                            @else
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-flaneur.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes">Flaneur</div>
+                                </div>
+                            @endif
+
+                            @if ($urbanist == 1)
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-urbanist.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes">Urbanist</div>
+                                </div>
+                            @else
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-urbanist.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes">Urbanist</div>
+                                </div>
+                            @endif
+
+
+
+                            @if ($influencer == 1)
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-influencer.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes">Influencer</div>
+                                </div>
+                            @else
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-influencer.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes">Influencer</div>
+                                </div>
+                            @endif
 
 
                         </div>
                         <div class="df">
-                            <div class="box">
-                                <img src="{{ asset('img/icons/CL_B-investigator.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
-                            <div class="box">
-                                <img src="{{ asset('img/icons/architect.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
-                            <div class="box">
-                                <img src="{{ asset('img/icons/CL_B-influencer.png') }}" class="image cursor-pointer" alt="Your Image">
-<div class="tes">explorer</div>
-                            </div>
+
+                            @if ($star == 1)
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-star.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes" style="text-align: center">Star</div>
+                                </div>
+                            @else
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-star.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes" style="text-align: center">Star</div>
+                                </div>
+                            @endif
+
+
+                            @if ($guru == 1)
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-guru.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes" style="text-align: center">Guru</div>
+                                </div>
+                            @else
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-guru.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes" style="text-align: center">Guru</div>
+                                </div>
+                            @endif
+
+                            @if ($investigator == 1)
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-investigator.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes">Investigator</div>
+                                </div>
+                            @else
+                                <div class="box">
+                                    <img src="{{ asset('images/color/CL_B-investigator.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                    <div class="tes">Investigator</div>
+                                </div>
+                            @endif
 
 
                         </div>
-                        <div class="box">
-                            <img src="{{ asset('img/icons/CL_B-supermapper.png') }}" class="image cursor-pointer" alt="Your Image">
-                            <div class="tes">explorer</div>
-                        </div>
+                        @if ($supermapper == 1)
+                            <div class="box">
+                                <img src="{{ asset('images/color/CL_B-supermapper.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                <div class="tes" style="text-align: center">Supermapper</div>
+                            </div>
+                        @else
+                            <div class="box" style="text-align: center;align-items: center">
+                                <img src="{{ asset('images/color/CL_B-supermapper.svg') }}" class="image cursor-pointer" alt="Your Image">
+                                <div class="tes" style="text-align: center">Supermapper</div>
+                            </div>
+                        @endif
+
                     </div>
 
                     <div>

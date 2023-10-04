@@ -23,6 +23,15 @@ Route::get('lang/{locale}', [App\Http\Controllers\LocalizationController::class,
 Route::get('/badges_overview', function () {
     return view('badges_overview');
 });
+Route::get('/term', function () {
+    return view('term');
+});
+Route::get('/privacy_policy', function () {
+    return view('term');
+});
+Route::get('/impressum', function () {
+    return view('impressum');
+});
 
 Route::get('/community_achievements', function () {
     return view('community_acheivements');
@@ -182,6 +191,7 @@ Route::get('sign-up-e', function () {
 });
 
 Route::get('add-new-place', [GlobalController::class, 'createNewPlace']);
+Route::get('badges_overview', [GlobalController::class, 'badges_overview']);
 
 Route::get('filter', [GlobalController::class, 'filter']);
 

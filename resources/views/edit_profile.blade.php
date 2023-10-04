@@ -7,7 +7,7 @@ $info = GlobalController::myprofile();
 @section('main')
     <div data-barba="container" class="relative h-screen">
 
-        <a href="javascript:history.back()">
+        <a href="/profile">
             <img src="{{ asset('img/icons/arrow.png') }}" class="arrow">
 
         </a>
@@ -35,7 +35,7 @@ $info = GlobalController::myprofile();
             <div id="email1">
                 <label for="email" class="block mb-2 text-base font-medium text-gray-900">Email:</label>
                 <input id="email" name="email" type="email" value="{{ backpack_auth()->user()->email }}"
-                       class="block w-2/3 px-4 py-3 mb-2 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
+                       class="inpW block w-2/3 px-4 py-3 mb-2 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
             </div>
             <br/>
             <div class="fbox" id="toggleContainer2">
@@ -50,7 +50,7 @@ $info = GlobalController::myprofile();
           <div id="age1">
               <label for="age" class="block mb-2 text-base font-medium text-gray-900">{{ __('messages.Age:') }}</label>
               <input type="number" name="age" style="-moz-appearance: textfield"
-                     class="block w-2/3 px-4 py-3 mb-2 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center"
+                     class="block w-2/3 px-4 py-3 mb-2 text-base text-gray-900 inpW placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center"
                      name="custom-input-number" min="10" value="{{ $info->age }}">
 
           </div>
@@ -67,7 +67,7 @@ $info = GlobalController::myprofile();
             <div id="gender1">
                 <label for="gender" class="block pt-4 mb-2 text-base font-medium text-gray-900">{{ __('messages.Gender:') }}</label>
                 <select id="gender" name="gender"
-                        class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
+                        class="block w-2/3 px-4 py-3 inpW text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
                     <option selected></option>
                     <option value="male" {{ $info->gender == 'male' ? 'selected' : '' }}>{{ __('messages.Male') }}</option>
                     <option value="female" {{ $info->gender == 'female' ? 'selected' : '' }}>{{ __('messages.Female') }}</option>
@@ -88,7 +88,7 @@ $info = GlobalController::myprofile();
                 <label for="job"
                        class="block pt-4 mb-2 text-base font-medium text-gray-900">{{ __('messages.Education:') }}</label>
                 <select id="job" name="profession"
-                        class="block w-2/3 px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
+                        class="block w-2/3 px-4 py-3  inpW text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg md:w-1/3 focus:ring-blue-500 focus:border-blue-500 text-center">
                     <option selected></option>
                     <option value="elementary school student" {{ $info->profession == 'elementary school student' ? 'selected' : '' }}>{{ __('messages.elementary school student') }}</option>
                     <option value="high school student" {{ $info->profession == 'high school student' ? 'selected' : '' }}>{{ __('messages.high school student') }} &nbsp;</option>

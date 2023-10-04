@@ -7,7 +7,7 @@
 
         </a>
         <div class="flex flex-col h-screen mx-auto">
-            <div class="flex flex-col items-center pt-24 gap-x-6 lg:pt-32">
+            <div class="flex flex-col items-center pt-12 gap-x-6 lg:pt-32">
                 <form action="avatar" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="file" name="image" id="image" class="hidden" accept="image/*"
@@ -44,7 +44,7 @@
 
             <h2 class="pt-2 text-blue-600 font-bold text-center" style="color: #2d9bf0;font-weight: 300"> Level {{ backpack_auth()->user()->score }} !</h2>
             <div class="w-2/3 mx-auto">
-                <div class="circle">2</div>
+                <div class="circle">{{ backpack_auth()->user()->score }}</div>
                 <div class="relative pt-1">
 
                     <div class="flex h-3 overflow-hidden text-xs bg-white border-2 border-blue-500 ">
@@ -84,12 +84,12 @@
                                 <button id="btn1">
                                     @if ($explorer == 1)
                                         <div class="flax ">
-                                            <img src="{{ asset('img/icons/explorer.png') }}"  alt="Your Image">
+                                            <img src="{{ asset('images/color/CL_B-explorer.svg') }}"  alt="Your Image">
                                             <div class="tes">explorer</div>
                                         </div>
                                     @else
                                         <div class="flax ">
-                                            <img src="{{ asset('img/icons/explorer.png') }}"  alt="Your Image">
+                                            <img src="{{ asset('images/color/CL_B-explorer.svg') }}"  alt="Your Image">
                                             <div class="tes">explorer</div>
                                         </div>
                                     @endif
@@ -97,12 +97,12 @@
                                 <button id="btn2">
                                     @if ($citymaker == 1)
                                         <div class="flax margl">
-                                            <img src="{{ asset('img/icons/citymaker.png') }}"  alt="Your Image">
+                                            <img src="{{ asset('images/color/CL_B-citymaker.svg') }}"  alt="Your Image">
                                             <div class="tes">city maker</div>
                                         </div>
                                     @else
                                         <div class="flax margl">
-                                            <img src="{{ asset('img/icons/citymaker.png') }}"  alt="Your Image">
+                                            <img src="{{ asset('images/color/CL_B-citymaker.svg') }}"  alt="Your Image">
                                             <div class="tes">city maker</div>
                                         </div>
                                     @endif
@@ -111,12 +111,12 @@
                                 <button id="btn3">
                                     @if ($architect == 1)
                                         <div class="flax margl">
-                                            <img src="{{ asset('img/icons/architect.png') }}"  alt="Your Image">
+                                            <img src="{{ asset('images/color/CL_B-architect.svg') }}"  alt="Your Image">
                                             <div class="tes">architect</div>
                                         </div>
                                     @else
                                         <div class="flax margl">
-                                            <img src="{{ asset('img/icons/architect.png') }}"  alt="Your Image">
+                                            <img src="{{ asset('images/color/CL_B-architect.svg') }}"  alt="Your Image">
                                             <div class="tes">architect</div>
                                         </div>
                                     @endif
@@ -136,7 +136,7 @@
                     <br/>
                     <div class="flex flex-row justify-center items-center gap-4">
                         <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg btnpd">Close</button>
-                        <button class="text-blue-500 border border-blue-500 p-1 md:p-2 rounded-md cursor-pointer  edbt">Edit profile</button>
+                        <a href="/edit_profile" class="text-blue-500 border border-blue-500 p-1 md:p-2 rounded-md cursor-pointer  edbt">Edit profile</a>
                     </div>
 
 
@@ -256,13 +256,13 @@
 
         // Add event listeners to each button
         button1.addEventListener("click", function() {
-            var popupContent = "<img class='mx-auto' src='/img/icons/explorer.png'><br><p>Explorer - Map a space that was not mapped before!</p>";
+            var popupContent = "<img class='mx-auto' src='/img/colors/CL_B-explorer.svg'><br><p>Explorer - Map a space that was not mapped before!</p>";
             popup.querySelector(".popup-content").innerHTML = popupContent;
             popup.style.display = "block";
         });
 
         button2.addEventListener("click", function() {
-            var popupContent = "<img class='mx-auto' src='/img/icons/citymaker.png'><br><p>City-maker – Map at least 10 spaces!</p>";
+            var popupContent = "<img class='mx-auto' src='/img/colors/CL_B-citymaker.svg'><br><p>City-maker – Map at least 10 spaces!</p>";
             popup.querySelector(".popup-content").innerHTML = popupContent;
             popup.style.display = "block";
         });
