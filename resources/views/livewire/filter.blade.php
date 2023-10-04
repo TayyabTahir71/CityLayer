@@ -1,4 +1,11 @@
 <div>
+    <a href="/" class="flex justify-start items-start bg-black my-4 mx-2 p-1.5 w-7 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+            class="w-4 h-4 text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+
+    </a>
     <div class="pt-24" x-cloak x-data="{ tab: 'place' }">
         <div x-cloak x-data="{ update: 'close' }">
 
@@ -8,13 +15,12 @@
                 <div class="flex items-center justify-center mt-6">
 
                     <div class="-ml-2 cursor-pointer" @click="update=!update">
-                        <div class="flex flex-col">
+                        <div class="flex flex-col justify-center items-center">
 
-                            <div
-                                class="border-2 flex justify-center items-center p-[22px] border-black  bg-white rounded-full shadow-xl">
-                                <img src="{{ asset('img/icons/eye-icon.jpg') }}" class="w-8 h-8" alt="">
-
-                            </div>
+                            <a href="/filter"
+                                class="flex items-center justify-center p-[25px] bg-white border-2 border-black rounded-full">
+                                <div class="">👁️</div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -66,13 +72,13 @@
 
                     <div class="fixed left-0 right-0 bottom-4">
                         <div class="flex items-center justify-center gap-2">
-                            <button class="px-6 py-3 border-2 border-blue-500 rounded-3xl">
+                            <a href="/" class="px-6 py-3 border-2 border-blue-500 rounded-3xl">
                                 <span class="text-xl font-semibold text-blue-500">
                                     Close
                                 </span>
-                            </button>
+                            </a>
                             <button wire:click='updateMap()' onclick="noti()"
-                                class="px-6 py-3 bg-blue-500 border-2 border-white rounded-3xl">
+                                class="px-6 py-3 bg-blue-500 border-2 border-white rounded-3xl cursor-pointer hover:bg-blue-300">
                                 <span class="text-xl font-semibold text-white">
                                     Update Map
                                 </span>

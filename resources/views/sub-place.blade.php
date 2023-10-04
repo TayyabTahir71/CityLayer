@@ -8,14 +8,14 @@
 
 @section('main')
     <div class="px-4 pt-4" x-data="{ tab: 'place' }">
-        <div class="flex justify-start items-start bg-black my-4 mx-2 p-1.5 w-7 rounded-full">
+        <a href="/" class="flex justify-start items-start bg-black my-4 mx-2 p-1.5 w-7 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
                 class="w-4 h-4 text-white">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
             </svg>
 
-        </div>
-
+        </a>
+        
         <input type="text" class="w-full px-2 py-2 bg-white rounded-full"
             placeholder="Choose tags or add new city layers" name="input" id="">
 

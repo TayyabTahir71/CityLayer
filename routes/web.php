@@ -191,6 +191,10 @@ Route::post('add/new/place', [GlobalController::class, 'addNewPlace'])->name('ad
 
 Route::get('/sub-place/{id}', [GlobalController::class, 'subPlace'])->name('sub.place');
 
+Route::get('/sub-observ/{id}', [GlobalController::class, 'subObserv'])->name('sub.observ');
+
+Route::post('/save-des', [GlobalController::class, 'saveDes']);
+
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/auth/signup', [AuthController::class, 'signup'])->name('auth.register');

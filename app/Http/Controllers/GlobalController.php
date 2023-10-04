@@ -57,12 +57,14 @@ class GlobalController extends Controller
                 $allPlaces = Place::where('user_id', null)
                     ->where('parent_id', NULL)
                     ->orWhere('user_id', backpack_auth()->user()->id)
-                    ->with('subplaces')
                     ->get();
 
                 // dd($allPlaces);
 
-                $allObservations = Observation::where('user_id', null)->orWhere('user_id', backpack_auth()->user()->id)->get();
+                $allObservations = Observation::where('user_id', null)
+                    ->where('parent_id', NULL)
+                    ->orWhere('user_id', backpack_auth()->user()->id)
+                    ->get();
 
 
 
@@ -3163,7 +3165,7 @@ class GlobalController extends Controller
 
     public function addMapPlace(Request $request, $id = null)
     {
-
+        // dd($request->all());
 
         $place = PlaceDetails::where('latitude', $request->latitude)
             ->where('longitude', $request->longitude)
@@ -3175,7 +3177,7 @@ class GlobalController extends Controller
             $subPlsFnd = Place::where('parent_id', $request->place_id);
 
             if (isset($place)) {
-                $subPlsFnd  = $subPlsFnd->where('id', $place->id);
+                $subPlsFnd  = $subPlsFnd->where('parent_id', $place->place_id);
             }
 
             $subPlsFnd = $subPlsFnd->first();
@@ -3186,13 +3188,40 @@ class GlobalController extends Controller
                 if (isset($place)) {
                     return response()->json([
                         'status' => 'success',
-                        'subPlsId' => $place->id,
+                        'subPlsId' => $place->place_id,
 
                     ]);
                 } else {
                     return response()->json([
                         'status' => 'success',
                         'subPlsId' => $request->place_id,
+
+                    ]);
+                }
+            }
+        }
+
+        if ($request->observation_child_id == NULL && $request->observation_id) {
+            $subObsFnd = Observation::where('parent_id', $request->observation_id);
+
+            if (isset($place)) {
+                $subObsFnd  = $subObsFnd->where('id', $place->observation_id);
+            }
+
+            $subObsFnd = $subObsFnd->first();
+
+            if (isset($subObsFnd)) {
+                if (isset($place)) {
+                    return response()->json([
+                        'status' => 'success',
+                        'subObsId' => $place->observation_id,
+
+                    ]);
+                } else {
+
+                    return response()->json([
+                        'status' => 'success',
+                        'subObsId' => $request->observation_id,
 
                     ]);
                 }
@@ -3254,6 +3283,7 @@ class GlobalController extends Controller
 
                 'place_id' => $request->place_id,
                 'place_child_id' => $request->place_child_id,
+                'observation_child_id' => $request->observation_child_id,
                 'user_id' =>  backpack_auth()->user()->id,
                 'observation_id' => $request->observation_id,
                 'latitude' => $request->latitude,
@@ -3335,10 +3365,24 @@ class GlobalController extends Controller
 
         $place = Place::find($id);
         $subplaces = Place::where('parent_id', $id)->get();
-        $allObservations = Observation::all();
+        $allObservations = Observation::where('parent_id', NULL)->get();
 
         if ($subplaces->isNotEmpty()) {
             return view('sub-place', compact('subplaces', 'place', 'allObservations'));
+        } else {
+
+            return redirect('/');
+        }
+    }
+    public function subObserv($id)
+    {
+
+        $obser = Observation::find($id);
+        $subobservs = Observation::where('parent_id', $id)->get();
+        $allPlaces = Place::where('parent_id', NULL)->get();
+
+        if ($subobservs->isNotEmpty()) {
+            return view('sub-observation', compact('subobservs', 'obser', 'allPlaces'));
         } else {
 
             return redirect('/');
@@ -3349,5 +3393,17 @@ class GlobalController extends Controller
     {
 
         return view('filter');
+    }
+
+
+    public function saveDes(Request $request)
+    {
+
+        PlaceDetails::where('place_id', $request->place_id)
+            ->update([
+
+                'description' => $request->data
+
+            ]);
     }
 }

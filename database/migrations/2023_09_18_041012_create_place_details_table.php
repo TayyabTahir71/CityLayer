@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('place_child_id')->nullable();
             $table->unsignedBigInteger('observation_child_id')->nullable();
             $table->longText('image')->nullable();
+            $table->longText('description')->nullable();
             $table->decimal('latitude', 8, 6)->default(0.00)->nullable();
             $table->decimal('longitude', 9, 6)->default(0.00)->nullable();
             $table->boolean('is_home')->default(1);
