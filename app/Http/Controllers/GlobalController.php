@@ -3323,8 +3323,9 @@ class GlobalController extends Controller
     public function createNewPlace(Request $request)
     {
 
-        $places = Place::all();
-        $observations = Observation::all();
+        $places = Place::whereNull('parent_id')->get();
+
+        $observations = Observation::whereNull('parent_id')->get();
 
         return view('add-new-place', compact('places', 'observations'));
     }

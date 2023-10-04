@@ -294,8 +294,8 @@
                                     <div class="grid grid-cols-3 gap-8">
                                         @foreach ($observations as $obs)
                                             <div class="flex flex-col items-center justify-center w-[80px]"
-                                                @click="active='OB_{{ $pls->id }}'"
-                                                onclick="select_observation({{ $pls->id }})">
+                                                @click="active='OB_{{ $obs->id }}'"
+                                                onclick="select_observation({{ $obs->id }})">
                                                 <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
                                                     :class="active == 'OB_{{ $obs->id }}' ?
                                                         'border-4 border-yellow-100' :
@@ -379,7 +379,7 @@
 
 
 
-            <div class="fixed left-0 right-0 bottom-4">
+            <div class="fixed left-0 right-0 bottom-4 z-[100]">
                 <div class="flex items-center justify-center gap-2">
                     <a href="/" class="px-6 py-3 border-2 border-blue-500 rounded-3xl">
                         <span class="text-xl font-semibold text-blue-500">
@@ -454,12 +454,6 @@
             }
 
         }
-
-
-
-
-        console.log(placeName)
-
 
 
         function select_place(id) {

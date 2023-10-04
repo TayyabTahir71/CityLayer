@@ -385,8 +385,8 @@
                                             <div class="grid grid-cols-3 gap-8">
                                                 @foreach ($allObservations as $obs)
                                                     <div class="flex flex-col items-center justify-center w-[80px]"
-                                                        @click="active='OB_{{ $pls->id }}'"
-                                                        onclick="select_observation({{ $pls->id }})">
+                                                        @click="active='OB_{{ $obs->id }}'"
+                                                        onclick="select_observation({{ $obs->id }})">
                                                         <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
                                                             :class="active == 'OB_{{ $obs->id }}' ?
                                                                 'border-4 border-yellow-100' :
@@ -595,7 +595,7 @@
             <span class="mt-4 text-lg italic font-extrabold text-white">` + placename + `</span>
         </div>
 
-        <textarea type="text" value="" class="pl-24 bg-[#2d9bf0] border-0 pr-4 mt-1 italic font-semibold text-white" />Place for a comment max 120 characters</textarea>
+        <textarea type="text" value="" id="myTextArea" class="pl-24 bg-[#2d9bf0] border-0 pr-4 mt-1 italic font-semibold text-white" />Place for a comment max 120 characters</textarea>
 
 
         <span class="flex items-end justify-end px-2 mt-6 -mb-3 italic font-semibold text-white">
@@ -745,6 +745,24 @@
 
         }
 
+        const textArea = document.getElementById('myTextArea');
+
+        console.log(textArea);
+
+        textArea.addEventListener('input', function() {
+            handleTextAreaChange(textArea.value);
+        });
+
+        function handleTextAreaChange(text) {
+            console.log(text);
+            // Perform actions with the data (e.g., send to a server, process it, etc.)
+            // Here, you might want to send the data to the server via AJAX or perform other actions based on the data.
+
+            console.log('Data submitted:', text);
+        }
+        document.addEventListener("DOMContentLoaded", (event) => {
+            console.log("DOM fully loaded and parsed");
+        });
 
         function subPlaces(id) {
             window.location.href = "/sub-place/" + id;

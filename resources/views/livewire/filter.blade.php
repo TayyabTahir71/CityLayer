@@ -71,7 +71,7 @@
                                     Close
                                 </span>
                             </button>
-                            <button wire:click='updateMap()'
+                            <button wire:click='updateMap()' onclick="noti()"
                                 class="px-6 py-3 bg-blue-500 border-2 border-white rounded-3xl">
                                 <span class="text-xl font-semibold text-white">
                                     Update Map
@@ -311,5 +311,16 @@
 <script>
     function toggleClass(id) {
         document.getElementById('PL_' + id).classList.toggle('highlight');
+    }
+
+    function noti() {
+        swal({
+            icon: "success",
+            title: 'Map updated successfully',
+
+        })
+
+        window.location.href = "/";
+
     }
 </script>
