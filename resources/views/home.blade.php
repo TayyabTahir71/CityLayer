@@ -318,7 +318,8 @@
                                         <input type="text" class="w-full px-2 py-2 bg-white rounded-full"
                                             placeholder="Choose tags or add new city layers" name="input"
                                             id="">
-                                        <a href="/add-new-place" class="bg-[#1976d2] p-2 rounded-full">
+                                        <a href="/add-new-place"
+                                            class="bg-[#1976d2] p-2 transition-all rounded-full hover:bg-blue-400">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -570,7 +571,19 @@
 
             username = place.user.name;
 
+            if (place.description != null) {
+                des = place.description;
+            } else {
+                des = '';
+            }
 
+            const givenDate = new Date(place.created_at); // Replace with your given date
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            };
+            const formattedDate = givenDate.toLocaleDateString('en-US', options);
             // pics = place.image0;
             placelatitude = place.latitude;
             placelongitude = place.longitude;
@@ -605,15 +618,17 @@
         </div>
         <form id="data-form">
         <textarea clas type="text" value="" id="myTextArea" class="pl-24 bg-[#2d9bf0] border-0 pr-4 mt-1 italic text-white" placeholder="Place for a comment max 120 characters" />` +
-                place.description + `</textarea>
-        <button class="flex justify-end items-end p-1 rounded shadow" type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white bg-purple-500">
+                des + `</textarea>
+        <div class="flex justify-end items-end "  >
+        <button class="p-1 rounded shadow" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white  bg-[#1976d2]">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
            </svg>
         </button>
+        </div>
 
         <span class="flex items-end justify-end px-2 mt-6 -mb-3 italic font-semibold text-white">
-            Added by ` + username + ` on 2023-12-19
+            Added by ` + username + ` on ` + formattedDate + `
         </span>
     </div>`
             );
