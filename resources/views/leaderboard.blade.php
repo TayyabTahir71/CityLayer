@@ -2,7 +2,7 @@
 
 @section('main')
     <div data-barba="container">
-        <a href="javascript:history.back()">
+        <a href="/profile">
             <img src="{{ asset('img/icons/arrow.png') }}" class="arrow">
         </a>
         <div class="flex flex-col h-screen mx-auto">

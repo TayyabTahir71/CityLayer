@@ -2,7 +2,7 @@
 
 @section('main')
     <div data-barba="container">
-        <a href="javascript:history.back()">
+        <a href="/profile">
             <img src="{{ asset('img/icons/arrow.png') }}" class="arrow">
 
         </a>
@@ -108,6 +108,7 @@
 
             <div class="belo">
                 <div class="first">see <div class="plu">+</div> all</div>
+                <br/>
                 <div class="scnd">Back</div>
             </div>
 
