@@ -139,7 +139,7 @@
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
                                                 </div>
-                                                <div class="pl-2 font-semibold text-center"
+                                                <div class="font-semibold text-center"
                                                     :class="tab == 'place' ? 'text-black' : 'text-black/50'">
                                                     Browse Places
                                                 </div>
@@ -158,16 +158,13 @@
                                                         id="observation" alt="">🔍</span>
                                                 </div>
 
-                                                <div class="pl-8 font-semibold text-center"
+                                                <div class=" font-semibold text-center"
                                                     :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
                                                     Browse Observation
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <div class="" x-data="{ active: '' }">
 
                                         <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold all-places"
@@ -301,7 +298,7 @@
                                 x-transition:leave="transition ease-in duration-200 transform"
                                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                class="z-50 w-full max-w-xl transition-all transform">
+                                class="z-50 max-w-screen-2xl transition-all transform bg-white">
 
                                 <div class="px-4 pt-4" x-data="{ tab: 'place' }">
                                     <div @click="seeMore=false"
@@ -329,7 +326,7 @@
                                         </a>
                                     </div>
                                     <div class="flex items-center justify-center mt-12">
-                                        <div class="-mr-2 cursor-pointer" @click="tab='place'" onclick="place()">
+                                        <div class="-mr-2 cursor-pointer" @click="tab='place'">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
                                                 <div class="bg-[#1976d2] border-2 border-white rounded-full shadow-xl"
                                                     :class="tab == 'place' || tab == 'place1' ?
@@ -339,14 +336,13 @@
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
                                                 </div>
-                                                <div class="pl-2 font-semibold text-justify"
+                                                <div class="font-semibold text-justify"
                                                     :class="tab == 'place' ? 'text-black' : 'text-black/50'">
                                                     Browse Places
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="-ml-2 cursor-pointer" @click="tab='observation'"
-                                            onclick="observation()">
+                                        <div class="-ml-2 cursor-pointer" @click="tab='observation'">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
 
                                                 <div class="flex items-center justify-center border-2 border-white rounded-full shadow-xl"
@@ -359,7 +355,7 @@
                                                         id="observation" alt="">🔍</span>
                                                 </div>
 
-                                                <div class="pl-8 font-semibold text-justify"
+                                                <div class="font-semibold text-justify"
                                                     :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
                                                     Browse Observation
                                                 </div>
