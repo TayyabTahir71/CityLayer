@@ -17,7 +17,7 @@
         </a>
 
         <input type="text" class="w-full px-2 py-2 bg-white rounded-full"
-            placeholder="Choose tags or add new city layers" name="input" id="">
+            placeholder="Choose tags or add new city layers" name="searchInput" id="searchInput">
 
 
 
@@ -58,7 +58,7 @@
         </div>
         <div x-data="{ active: '' }">
             <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold" x-show="tab=='place'">
-                <div class="grid grid-cols-3 gap-8">
+                <div class="grid grid-cols-3 gap-8" id="searchResultsPls">
                     @foreach ($allPlaces as $pls)
                         <div class="flex flex-col items-center justify-center w-[80px]"
                             @click="active='OB_{{ $pls->id }}'" onclick="select_place({{ $pls->id }})">
@@ -78,10 +78,10 @@
         <div x-data="{ active: '' }">
             <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                 x-show="tab=='observation'">
-                <div class="grid grid-cols-3 gap-8">
+                <div class="grid grid-cols-3 gap-8" id="searchResultsObs">
                     @foreach ($subobservs as $obs)
                         <div class="flex flex-col items-center justify-center w-[80px]"
-                            @click="active='OB_{{ $obs->id }}'" onclick="select_observation({{ $pls->id }})">
+                            @click="active='OB_{{ $obs->id }}'" onclick="select_observation({{ $obs->id }})">
                             <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
                                 :class="active == 'OB_{{ $obs->id }}' ?
                                     'border-4 border-yellow-100' :
@@ -186,7 +186,6 @@
                 data: {
                     observation_id: parent.id,
                     observation_child_id: observationId,
-                    place_id: placeId,
                     latitude: latitude,
                     longitude: longitude,
                 },
@@ -197,12 +196,85 @@
 
                     })
 
-                    window.location.href = "/";
+                    // window.location.href = "/";
 
 
                 }
             });
 
         }
+
+        $(document).ready(function() {
+            $('#searchInput').on('input', function() {
+                let query = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ route('sub-search-ob') }}",
+                    method: 'GET',
+                    data: {
+                        query: query,
+                        id: parent.id
+                    },
+                    success: function(response) {
+
+
+
+                        $('#searchResultsPls').empty();
+
+                        $('#searchResultsObs').empty();
+
+                        response.resultsPls.forEach(function(result) {
+
+                            $('#searchResultsPls').append(`
+                            <div class="flex flex-col items-center justify-center w-[80px]"
+                                @click="active='PL_` +
+                                result.id +
+                                `'"
+                                onclick="select_place(` + result.id + `)">
+                                <div class="rounded-full bg-[#1976d2]  p-[20px]"
+                                    :class="active == 'PL_` +
+                                result.id +
+                                `' ?
+                                        'border-4 border-blue-300' :
+                                        ''">
+                                    <img src="{{ asset('new_img/image.png') }}"
+                                        class="w-7 h-7" />
+                                </div>
+                                <span class="mt-2 text-black">` + result.name + `</span>
+                            </div>
+                        `); // Adjust based on your model properties
+                        });
+
+                        response.resultsObs.forEach(function(result) {
+
+                            $('#searchResultsObs').append(`
+                       <div class="flex flex-col items-center justify-center w-[80px]"
+                                  @click="active='OB_` + result.id + `'"
+                                   onclick="select_observation(` + result.id + `)">
+                                <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                                   :class="active == 'OB_` + result.id + `' ?
+                                  'border-4 border-yellow-100' :
+                               ''">
+                         <div class="flex">
+                         <img src="{{ asset('new_img/sad.png') }}" alt=""
+                            class="w-8 h-8 -mr-1"> <img
+                             src="{{ asset('new_img/happy.png') }}" alt=""
+                                  class="w-8 h-8 -ml-1">
+                                </div>
+                        </div>
+
+                      <span class="mt-2 text-black">` + result.name + `</span>
+                  </div>
+                          `); // Adjust based on your model properties
+                        });
+
+                    }
+                });
+            });
+        });
     </script>
 @endsection

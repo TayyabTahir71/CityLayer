@@ -205,6 +205,13 @@ Route::get('/sub-observ/{id}', [GlobalController::class, 'subObserv'])->name('su
 
 Route::post('/save-des', [GlobalController::class, 'saveDes']);
 
+Route::get('/search', [GlobalController::class, 'search'])->name('search');
+
+Route::get('/sub-search-ob', [GlobalController::class, 'subSearchOb'])->name('sub-search-ob');
+
+
+Route::get('/sub-search-pl', [GlobalController::class, 'subSearchPl'])->name('sub-search-pl');
+
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/auth/signup', [AuthController::class, 'signup'])->name('auth.register');
