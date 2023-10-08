@@ -3397,10 +3397,11 @@ class GlobalController extends Controller
         }
 
         if ($request->observation_child_id == NULL && $request->observation_id) {
+
             $subObsFnd = Observation::where('parent_id', $request->observation_id);
 
             if (isset($place)) {
-                $subObsFnd  = $subObsFnd->where('id', $place->observation_id);
+                $subObsFnd  = $subObsFnd->where('parent_id', $place->observation_id);
             }
 
             $subObsFnd = $subObsFnd->first();
@@ -3450,6 +3451,7 @@ class GlobalController extends Controller
 
                 $place->update([
                     'observation_id' => $request->observation_id,
+                    'observation_child_id' => $request->observation_child_id,
                 ]);
 
                 return response()->json([
@@ -3600,5 +3602,81 @@ class GlobalController extends Controller
                 'description' => $request->data
 
             ]);
+    }
+
+
+    public function search(Request $request)
+    {
+
+        $query = $request->get('query');
+        $results2Pls = Place::where('name', 'like', '%' . $query . '%')
+            ->where('parent_id', NULL)
+            ->take(2)->get();
+        $resultsPls = Place::where('name', 'like', '%' . $query . '%')
+            ->where(
+                'parent_id',
+                NULL
+            )->get();
+        $results2Obs = Observation::where('name', 'like', '%' . $query . '%')
+            ->where('parent_id', NULL)
+            ->take(2)->get();
+        $resultsObs = Observation::where('name', 'like', '%' . $query . '%')
+            ->where('parent_id', NULL)
+            ->get();
+
+        // dd($results2Obs);
+
+
+        return response()->json([
+            'resultsPls' => $resultsPls,
+            'results2Pls' => $results2Pls,
+            'results2Obs' => $results2Obs,
+            'resultsObs' => $resultsObs,
+        ]);
+    }
+
+    public function subSearchOb(Request $request)
+    {
+
+
+        $query = $request->get('query');
+        $id = $request->get('id');
+
+        $resultsObs = Observation::where('name', 'like', '%' . $query . '%')
+            ->where('parent_id', $id)->get();
+
+        $resultsPls = Place::where('name', 'like', '%' . $query . '%')
+            ->where(
+                'parent_id',
+                NULL
+            )->get();
+
+        return response()->json([
+            'resultsPls' => $resultsPls,
+            'resultsObs' => $resultsObs,
+        ]);
+    }
+
+
+    public function subSearchPl(Request $request)
+    {
+
+
+        $query = $request->get('query');
+        $id = $request->get('id');
+
+        $resultsPls = Place::where('name', 'like', '%' . $query . '%')
+            ->where('parent_id', $id)->get();
+
+        $resultsObs = Observation::where('name', 'like', '%' . $query . '%')
+            ->where(
+                'parent_id',
+                NULL
+            )->get();
+
+        return response()->json([
+            'resultsPls' => $resultsPls,
+            'resultsObs' => $resultsObs,
+        ]);
     }
 }

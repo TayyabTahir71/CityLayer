@@ -60,7 +60,8 @@
                                                     </div>
                                                 @endif
                                             </div>
-                                            <span class="mt-2 text-black">{{ $pls->name }}</span>
+                                            <span
+                                                class="mt-2 text-black">{{ $pls->place?->name ?? $pls->observation->name }}</span>
                                         </div>
                                     @endforeach
                                 </div>

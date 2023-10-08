@@ -124,7 +124,8 @@
                                 <div class="px-1 pt-4" x-data="{ tab: 'place' }">
 
                                     <input type="text" class="w-full px-2 py-2 bg-white rounded-full"
-                                        placeholder="Choose tags or add new city layers" name="input" id="">
+                                        placeholder="Choose tags or add new city layers" name="searchInput"
+                                        id="searchInput">
 
 
 
@@ -139,7 +140,7 @@
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
                                                 </div>
-                                                <div class="pl-2 font-semibold text-center"
+                                                <div class="font-semibold text-center"
                                                     :class="tab == 'place' ? 'text-black' : 'text-black/50'">
                                                     Browse Places
                                                 </div>
@@ -158,44 +159,46 @@
                                                         id="observation" alt="">🔍</span>
                                                 </div>
 
-                                                <div class="pl-8 font-semibold text-center"
+                                                <div class=" font-semibold text-center"
                                                     :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
                                                     Browse Observation
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <div class="" x-data="{ active: '' }">
 
                                         <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold all-places"
                                             x-show="tab=='place'">
 
-                                            <div class="flex flex-col items-center justify-center cursor-pointer"
-                                                @click="active='PL_{{ $allPlaces[0]->id }}'"
-                                                onclick="select_place({{ $allPlaces[0]->id }})">
-                                                <div class="rounded-full bg-[#1976d2] p-[20px] "
-                                                    :class="active == 'PL_{{ $allPlaces[0]->id }}' ?
-                                                        'border-4 border-blue-300' :
-                                                        ''">
-                                                    <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
+                                            <div class="flex items-center justify-center  italic font-semibold gap-10"
+                                                id="searchResults2Pls">
+                                                <div class="flex flex-col items-center justify-center cursor-pointer"
+                                                    @click="active='PL_{{ $allPlaces[0]->id }}'"
+                                                    onclick="select_place({{ $allPlaces[0]->id }})">
+                                                    <div class="rounded-full bg-[#1976d2] p-[20px] "
+                                                        :class="active == 'PL_{{ $allPlaces[0]->id }}' ?
+                                                            'border-4 border-blue-300' :
+                                                            ''">
+                                                        <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
                                                 </div>
-                                                <span class="mt-2 text-black">{{ $allPlaces[0]->name }}</span>
+
+                                                <div class="flex flex-col items-center justify-center cursor-pointer"
+                                                    @click="active='PL_{{ $allPlaces[1]->id }}'"
+                                                    onclick="select_place({{ $allPlaces[1]->id }})">
+                                                    <div class="rounded-full bg-[#1976d2] p-[20px]"
+                                                        :class="active == 'PL_{{ $allPlaces[1]->id }}' ?
+                                                            'border-4 border-blue-300' :
+                                                            ''">
+                                                        <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
+                                                    </div>
+                                                    <span class="mt-2 text-black">{{ $allPlaces[1]->name }}</span>
+                                                </div>
                                             </div>
 
-                                            <div class="flex flex-col items-center justify-center cursor-pointer"
-                                                @click="active='PL_{{ $allPlaces[1]->id }}'"
-                                                onclick="select_place({{ $allPlaces[1]->id }})">
-                                                <div class="rounded-full bg-[#1976d2] p-[20px]"
-                                                    :class="active == 'PL_{{ $allPlaces[1]->id }}' ?
-                                                        'border-4 border-blue-300' :
-                                                        ''">
-                                                    <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
-                                                </div>
-                                                <span class="mt-2 text-black">{{ $allPlaces[1]->name }}</span>
-                                            </div>
+
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer">
                                                 <button onclick="see()">
@@ -218,43 +221,47 @@
                                     <div class="" x-data="{ active: '' }">
                                         <div class="flex items-center justify-center gap-10 mt-6 italic font-semibold"
                                             x-show="tab=='observation'">
-                                            <div class="flex flex-col items-center justify-center cursor-pointer"
-                                                @click="active='OB_{{ $allObservations[0]->id }}'"
-                                                onclick="select_observation({{ $allObservations[0]->id }})">
-                                                <div class="rounded-full bg-[#ffa726]  px-[8px] py-[18px]"
-                                                    :class="active == 'OB_{{ $allObservations[0]->id }}' ?
-                                                        'border-4 border-yellow-100' :
-                                                        ''">
+                                            <div class="flex items-center justify-center  italic font-semibold gap-10"
+                                                id="searchResults2Obs">
+                                                <div class="flex flex-col items-center justify-center cursor-pointer"
+                                                    @click="active='OB_{{ $allObservations[0]->id }}'"
+                                                    onclick="select_observation({{ $allObservations[0]->id }})">
+                                                    <div class="rounded-full bg-[#ffa726]  px-[8px] py-[18px]"
+                                                        :class="active == 'OB_{{ $allObservations[0]->id }}' ?
+                                                            'border-4 border-yellow-100' :
+                                                            ''">
 
-                                                    <div class="flex">
-                                                        <img src="{{ asset('new_img/sad.png') }}" alt=""
-                                                            class="w-8 h-8 -mr-1"> <img
-                                                            src="{{ asset('new_img/happy.png') }}" alt=""
-                                                            class="w-8 h-8 -ml-1">
+                                                        <div class="flex">
+                                                            <img src="{{ asset('new_img/sad.png') }}" alt=""
+                                                                class="w-8 h-8 -mr-1"> <img
+                                                                src="{{ asset('new_img/happy.png') }}" alt=""
+                                                                class="w-8 h-8 -ml-1">
+                                                        </div>
+
                                                     </div>
+                                                    <span class="mt-2 text-black">{{ $allObservations[0]->name }}</span>
 
                                                 </div>
-                                                <span class="mt-2 text-black">{{ $allObservations[0]->name }}</span>
 
-                                            </div>
-
-                                            <div class="flex flex-col items-center justify-center cursor-pointer"
-                                                @click="active='OB_{{ $allObservations[1]->id }}'"
-                                                onclick="select_observation({{ $allObservations[1]->id }})">
-                                                <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
-                                                    :class="active == 'OB_{{ $allObservations[1]->id }}' ?
-                                                        'border-4 border-yellow-100' :
-                                                        ''">
-                                                    <div class="flex">
-                                                        <img src="{{ asset('new_img/sad.png') }}" alt=""
-                                                            class="w-8 h-8 -mr-1"> <img
-                                                            src="{{ asset('new_img/happy.png') }}" alt=""
-                                                            class="w-8 h-8 -ml-1">
+                                                <div class="flex flex-col items-center justify-center cursor-pointer"
+                                                    @click="active='OB_{{ $allObservations[1]->id }}'"
+                                                    onclick="select_observation({{ $allObservations[1]->id }})">
+                                                    <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                                                        :class="active == 'OB_{{ $allObservations[1]->id }}' ?
+                                                            'border-4 border-yellow-100' :
+                                                            ''">
+                                                        <div class="flex">
+                                                            <img src="{{ asset('new_img/sad.png') }}" alt=""
+                                                                class="w-8 h-8 -mr-1"> <img
+                                                                src="{{ asset('new_img/happy.png') }}" alt=""
+                                                                class="w-8 h-8 -ml-1">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <span class="mt-2 text-black">{{ $allObservations[1]->name }}</span>
+                                                    <span class="mt-2 text-black">{{ $allObservations[1]->name }}</span>
 
+                                                </div>
                                             </div>
+
 
                                             <div class="flex flex-col items-center justify-center cursor-pointer">
                                                 <button onclick="see()" type="button">
@@ -301,7 +308,7 @@
                                 x-transition:leave="transition ease-in duration-200 transform"
                                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                class="z-50 w-full max-w-xl transition-all transform">
+                                class="z-50 max-w-screen-2xl transition-all transform bg-white">
 
                                 <div class="px-4 pt-4" x-data="{ tab: 'place' }">
                                     <div @click="seeMore=false"
@@ -316,8 +323,8 @@
 
                                     <div class="flex justify-center items-center gap-1">
                                         <input type="text" class="w-full px-2 py-2 bg-white rounded-full"
-                                            placeholder="Choose tags or add new city layers" name="input"
-                                            id="">
+                                            placeholder="Choose tags or add new city layers " name="searchInput1"
+                                            id="searchInput1">
                                         <a href="/add-new-place"
                                             class="bg-[#1976d2] p-2 transition-all rounded-full hover:bg-blue-400">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -329,7 +336,7 @@
                                         </a>
                                     </div>
                                     <div class="flex items-center justify-center mt-12">
-                                        <div class="-mr-2 cursor-pointer" @click="tab='place'" onclick="place()">
+                                        <div class="-mr-2 cursor-pointer" @click="tab='place'">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
                                                 <div class="bg-[#1976d2] border-2 border-white rounded-full shadow-xl"
                                                     :class="tab == 'place' || tab == 'place1' ?
@@ -339,14 +346,13 @@
                                                         :class="tab == 'place' || tab == 'place1' ? 'block' : 'hidden'"
                                                         id="place" alt="">
                                                 </div>
-                                                <div class="pl-2 font-semibold text-justify"
+                                                <div class="font-semibold text-justify"
                                                     :class="tab == 'place' ? 'text-black' : 'text-black/50'">
                                                     Browse Places
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="-ml-2 cursor-pointer" @click="tab='observation'"
-                                            onclick="observation()">
+                                        <div class="-ml-2 cursor-pointer" @click="tab='observation'">
                                             <div class="flex flex-col w-[75px] justify-center items-center">
 
                                                 <div class="flex items-center justify-center border-2 border-white rounded-full shadow-xl"
@@ -359,7 +365,7 @@
                                                         id="observation" alt="">🔍</span>
                                                 </div>
 
-                                                <div class="pl-8 font-semibold text-justify"
+                                                <div class="font-semibold text-justify"
                                                     :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
                                                     Browse Observation
                                                 </div>
@@ -369,7 +375,7 @@
                                     <div x-data="{ active: '' }">
                                         <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                             x-show="tab=='place'">
-                                            <div class="grid grid-cols-3 gap-8">
+                                            <div class="grid grid-cols-3 gap-8" id="searchResultsPls">
                                                 @foreach ($allPlaces as $pls)
                                                     <div class="flex flex-col items-center justify-center w-[80px]"
                                                         @click="active='PL_{{ $pls->id }}'"
@@ -391,7 +397,7 @@
                                     <div x-data="{ active: '' }">
                                         <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                             x-show="tab=='observation'">
-                                            <div class="grid grid-cols-3 gap-8">
+                                            <div class="grid grid-cols-3 gap-8" id="searchResultsObs">
                                                 @foreach ($allObservations as $obs)
                                                     <div class="flex flex-col items-center justify-center w-[80px]"
                                                         @click="active='OB_{{ $obs->id }}'"
@@ -749,13 +755,28 @@
 
 
         function submitData() {
+
+
+            if (!placeId && !observationId) {
+                swal({
+                    icon: "error",
+                    text: "Please select place or observation",
+
+                });
+
+                return false;
+            }
+
+
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             latitude = document.getElementById('latitude').value;
-            longitude = document.getElementById('longitude').value;
+            longitude = document.getElementById(
+                'longitude').value;
 
             $.ajax({
                 type: 'POST',
@@ -818,6 +839,148 @@
         function subPlaces(id) {
             window.location.href = "/sub-place/" + id;
         }
+
+
+
+        $(document).ready(function() {
+            $('#searchInput').on('input', function() {
+                let query = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ route('search') }}",
+                    method: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(response) {
+
+
+
+                        $('#searchResults2Pls').empty();
+
+                        $('#searchResults2Obs').empty();
+
+                        response.results2Pls.forEach(function(result) {
+
+                            $('#searchResults2Pls').append(`
+                            <div class="flex flex-col items-center justify-center w-[80px]"
+                                @click="active='PL_` +
+                                result.id +
+                                `'"
+                                onclick="select_place(` + result.id + `)">
+                                <div class="rounded-full bg-[#1976d2]  p-[20px]"
+                                    :class="active == 'PL_` +
+                                result.id +
+                                `' ?
+                                        'border-4 border-blue-300' :
+                                        ''">
+                                    <img src="{{ asset('new_img/image.png') }}"
+                                        class="w-7 h-7" />
+                                </div>
+                                <span class="mt-2 text-black">` + result.name + `</span>
+                            </div>
+                        `); // Adjust based on your model properties
+                        });
+
+                        response.resultsObs.forEach(function(result) {
+
+                            $('#searchResultsObs').append(`
+                       <div class="flex flex-col items-center justify-center w-[80px]"
+                 @click="active='OB_` + result.id + `'"
+                       onclick="select_observation(` + result.id + `)">
+                     <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                   :class="active == 'OB_` + result.id + `' ?
+            'border-4 border-yellow-100' :
+            ''">
+                       <div class="flex">
+            <img src="{{ asset('new_img/sad.png') }}" alt=""
+                class="w-8 h-8 -mr-1"> <img
+                src="{{ asset('new_img/happy.png') }}" alt=""
+                class="w-8 h-8 -ml-1">
+                      </div>
+                        </div>
+
+                      <span class="mt-2 text-black">` + result.name + `</span>
+                  </div>
+                          `); // Adjust based on your model properties
+                        });
+
+                    }
+                });
+            });
+        });
+        $(document).ready(function() {
+            $('#searchInput1').on('input', function() {
+                let query = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ route('search') }}",
+                    method: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(response) {
+
+                        $('#searchResultsPls').empty();
+                        $('#searchResultsObs').empty();
+
+                        response.resultsPls.forEach(function(result) {
+
+                            $('#searchResultsPls').append(`
+                           <div class="flex flex-col items-center justify-center w-[80px]"
+                               @click="active='PL_` +
+                                result.id +
+                                `'"
+                               onclick="select_place(` + result.id + `)">
+                               <div class="rounded-full bg-[#1976d2]  p-[20px]"
+                                   :class="active == 'PL_` +
+                                result.id +
+                                `' ?
+                                       'border-4 border-blue-300' :
+                                       ''">
+                                   <img src="{{ asset('new_img/image.png') }}"
+                                       class="w-7 h-7" />
+                               </div>
+                               <span class="mt-2 text-black">` + result.name + `</span>
+                           </div>
+                       `); // Adjust based on your model properties
+                        });
+
+                        response.resultsObs.forEach(function(result) {
+
+                            $('#searchResultsObs').append(`
+                       <div class="flex flex-col items-center justify-center w-[80px]"
+                 @click="active='OB_` + result.id + `'"
+                       onclick="select_observation(` + result.id + `)">
+                     <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                   :class="active == 'OB_` + result.id + `' ?
+            'border-4 border-yellow-100' :
+            ''">
+                       <div class="flex">
+            <img src="{{ asset('new_img/sad.png') }}" alt=""
+                class="w-8 h-8 -mr-1"> <img
+                src="{{ asset('new_img/happy.png') }}" alt=""
+                class="w-8 h-8 -ml-1">
+                      </div>
+                        </div>
+
+                      <span class="mt-2 text-black">` + result.name + `</span>
+                  </div>
+                          `); // Adjust based on your model properties
+                        });
+
+                    }
+                });
+            });
+        });
     </script>
     <style>
 

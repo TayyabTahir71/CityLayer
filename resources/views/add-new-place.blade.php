@@ -17,7 +17,7 @@
         </a>
         <div class="relative pt-24" x-cloak x-data="{ tab: 'place' }">
             <div class="flex items-center justify-center mt-6">
-                <div class="-mr-2 cursor-pointer" @click="tab='place'" onclick="place()">
+                <div class="-mr-2 cursor-pointer" @click="tab='place'">
                     <div class="flex flex-col">
                         <div class="bg-[#1976d2] border-2 border-white rounded-full shadow-xl"
                             :class="tab == 'place' || tab == 'place1' ? 'bg-[#1976d2] z-10 p-[22px]' :
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="-ml-2 cursor-pointer" @click="tab='observation'" onclick="observation()">
+                <div class="-ml-2 cursor-pointer" @click="tab='observation'">
                     <div class="flex flex-col">
 
                         <div class="flex items-center justify-center border-2 border-white rounded-full shadow-xl"
@@ -57,13 +57,15 @@
                 <span id="errorTxtO" class="text-red-500"></span>
                 <span class="mt-2 italic font-semibold">Add new Observation</span>
             </div>
-            <div class="flex flex-col items-center justify-center px-6 pt-6" x-show="tab=='observation1'">
-                <input type="text" class="w-full px-2 py-2 bg-gray-200 rounded-full" placeholder="" id="">
+            <div class="flex flex-col  items-center justify-center px-6 pt-6" x-show="tab=='observation1'">
+                <input type="text" class="w-full px-2 py-2 bg-gray-200 rounded-full" placeholder="" name="searchInput"
+                    id="searchInputp">
 
                 <span class="mt-2 italic font-semibold">Choose tags or add a new observation</span>
             </div>
-            <div class="flex flex-col items-center justify-center px-6 pt-6" x-show="tab=='place1'">
-                <input type="text" class="w-full px-2 py-2 bg-gray-200 rounded-full" placeholder="" id="">
+            <div class="flex flex-col searchInput items-center justify-center px-6 pt-6" x-show="tab=='place1'">
+                <input type="text" class="w-full px-2 py-2 bg-gray-200 rounded-full" placeholder="" name="searchInput"
+                    id="searchInputo">
                 <span class="mt-2 italic font-semibold">Choose tags or add a new place</span>
             </div>
 
@@ -82,38 +84,39 @@
                             <span class="mt-2 text-black">Add new</span>
                         </a>
                     </div>
-                    <div class="flex flex-col items-center justify-center cursor-pointer"
-                        @click="active='OB_{{ $observations[0]->id }}'"
-                        onclick="select_observation({{ $observations[0]->id }})">
-                        <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
-                            :class="active == 'OB_{{ $observations[0]->id }}' ?
-                                'border-4 border-yellow-100' :
-                                ''">
-                            <div class="flex">
-                                <img src="{{ asset('new_img/sad.png') }}" alt="" class="w-8 h-8 -mr-1"> <img
-                                    src="{{ asset('new_img/happy.png') }}" alt="" class="w-8 h-8 -ml-1">
+                    <div class="flex items-center justify-center gap-2 " id="searchResults2Obs">
+                        <div class="flex flex-col items-center justify-center cursor-pointer"
+                            @click="active='OB_{{ $observations[0]->id }}'"
+                            onclick="select_observation({{ $observations[0]->id }})">
+                            <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                                :class="active == 'OB_{{ $observations[0]->id }}' ?
+                                    'border-4 border-yellow-100' :
+                                    ''">
+                                <div class="flex">
+                                    <img src="{{ asset('new_img/sad.png') }}" alt="" class="w-8 h-8 -mr-1"> <img
+                                        src="{{ asset('new_img/happy.png') }}" alt="" class="w-8 h-8 -ml-1">
+                                </div>
                             </div>
+                            <span class="mt-2 text-black">{{ $observations[0]->name }}</span>
+
                         </div>
-                        <span class="mt-2 text-black">{{ $observations[0]->name }}</span>
 
-                    </div>
-
-                    <div class="flex flex-col items-center justify-center cursor-pointer"
-                        @click="active='OB_{{ $observations[1]->id }}'"
-                        onclick="select_observation({{ $observations[1]->id }})">
-                        <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
-                            :class="active == 'OB_{{ $observations[1]->id }}' ?
-                                'border-4 border-yellow-100' :
-                                ''">
-                            <div class="flex">
-                                <img src="{{ asset('new_img/sad.png') }}" alt="" class="w-8 h-8 -mr-1"> <img
-                                    src="{{ asset('new_img/happy.png') }}" alt="" class="w-8 h-8 -ml-1">
+                        <div class="flex flex-col items-center justify-center cursor-pointer"
+                            @click="active='OB_{{ $observations[1]->id }}'"
+                            onclick="select_observation({{ $observations[1]->id }})">
+                            <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                                :class="active == 'OB_{{ $observations[1]->id }}' ?
+                                    'border-4 border-yellow-100' :
+                                    ''">
+                                <div class="flex">
+                                    <img src="{{ asset('new_img/sad.png') }}" alt="" class="w-8 h-8 -mr-1"> <img
+                                        src="{{ asset('new_img/happy.png') }}" alt="" class="w-8 h-8 -ml-1">
+                                </div>
                             </div>
+                            <span class="mt-2 text-black">{{ $observations[1]->name }}</span>
+
                         </div>
-                        <span class="mt-2 text-black">{{ $observations[1]->name }}</span>
-
                     </div>
-
                     <div class="flex flex-col items-center justify-center">
                         <button onclick="see()">
                             <div class="rounded-full border-[#ffa726] border-2  p-[22px]">
@@ -143,26 +146,30 @@
                             <span class="mt-2 text-black">Add new</span>
                         </a>
                     </div>
-                    <div class="flex flex-col items-center justify-center cursor-pointer"
-                        @click="active='PL_{{ $places[0]->id }}'" onclick="select_place({{ $places[0]->id }})">
-                        <div class="rounded-full bg-[#1976d2] p-[20px]"
-                            :class="active == 'PL_{{ $places[0]->id }}' ?
-                                'border-4 border-blue-300' :
-                                ''">
-                            <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
+
+                    <div class="flex items-center justify-center gap-2 " id="searchResults2Pls">
+                        <div class="flex flex-col items-center justify-center cursor-pointer"
+                            @click="active='PL_{{ $places[0]->id }}'" onclick="select_place({{ $places[0]->id }})">
+                            <div class="rounded-full bg-[#1976d2] p-[20px]"
+                                :class="active == 'PL_{{ $places[0]->id }}' ?
+                                    'border-4 border-blue-300' :
+                                    ''">
+                                <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
+                            </div>
+                            <span class="mt-2 text-black">{{ $places[0]->name }}</span>
                         </div>
-                        <span class="mt-2 text-black">{{ $places[0]->name }}</span>
-                    </div>
-                    <div class="flex flex-col items-center justify-center cursor-pointer"
-                        @click="active='PL_{{ $places[1]->id }}'" onclick="select_place({{ $places[1]->id }})">
-                        <div class="rounded-full bg-[#1976d2] p-[20px]"
-                            :class="active == 'PL_{{ $places[1]->id }}' ?
-                                'border-4 border-blue-300' :
-                                ''">
-                            <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
+                        <div class="flex flex-col items-center justify-center cursor-pointer"
+                            @click="active='PL_{{ $places[1]->id }}'" onclick="select_place({{ $places[1]->id }})">
+                            <div class="rounded-full bg-[#1976d2] p-[20px]"
+                                :class="active == 'PL_{{ $places[1]->id }}' ?
+                                    'border-4 border-blue-300' :
+                                    ''">
+                                <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
+                            </div>
+                            <span class="mt-2 text-black">{{ $places[1]->name }}</span>
                         </div>
-                        <span class="mt-2 text-black">{{ $places[1]->name }}</span>
                     </div>
+
 
 
                     <div class="flex flex-col items-center justify-center">
@@ -233,12 +240,12 @@
                             </div>
 
                             <input type="text" class="w-full px-2 py-2 bg-white rounded-full"
-                                placeholder="Choose tags or add new city layers" name="input" id="">
+                                placeholder="Choose tags or add new city layers" name="searchInput1" id="searchInput1">
 
 
 
                             <div class="flex items-center justify-center mt-12">
-                                <div class="-mr-2 cursor-pointer" @click="tab='place'" onclick="place()">
+                                <div class="-mr-2 cursor-pointer" @click="tab='place'">
                                     <div class="flex flex-col w-[75px] justify-center items-center">
                                         <div class="bg-[#1976d2] border-2 border-white rounded-full shadow-xl"
                                             :class="tab == 'place' || tab == 'place1' ?
@@ -254,7 +261,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="-ml-2 cursor-pointer" @click="tab='observation'" onclick="observation()">
+                                <div class="-ml-2 cursor-pointer" @click="tab='observation'">
                                     <div class="flex flex-col w-[75px] justify-center items-center">
 
                                         <div class="flex items-center justify-center border-2 border-white rounded-full shadow-xl"
@@ -277,7 +284,7 @@
                             <div x-data="{ active: '' }">
                                 <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                     x-show="tab=='place'">
-                                    <div class="grid grid-cols-3 gap-8">
+                                    <div class="grid grid-cols-3 gap-8" id="searchResultsPls">
                                         @foreach ($places as $pls)
                                             <div class="flex flex-col items-center justify-center w-[80px]"
                                                 @click="active='PL_{{ $pls->id }}'"
@@ -298,7 +305,7 @@
                             <div x-data="{ active: '' }">
                                 <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                     x-show="tab=='observation'">
-                                    <div class="grid grid-cols-3 gap-8">
+                                    <div class="grid grid-cols-3 gap-8" id="searchResultsObs">
                                         @foreach ($observations as $obs)
                                             <div class="flex flex-col items-center justify-center w-[80px]"
                                                 @click="active='OB_{{ $obs->id }}'"
@@ -334,7 +341,7 @@
 
             </div>
 
-            <div class="absolute top-[80vh] left-24 right-24" x-show="tab == 'place'" x-data="{ openDes: false }">
+            <div class="absolute top-[70vh] left-24 right-24" x-show="tab == 'place'" x-data="{ openDes: false }">
                 <div class="flex items-center justify-between">
 
                     <input type="file" wire:model='place_image' class="hidden" name="" id="image-upload">
@@ -357,7 +364,7 @@
                 </div>
             </div> --}}
             </div>
-            <div class="absolute top-[80vh] left-24 right-24" x-show="tab == 'observation'" x-data="{ openDes: false }">
+            <div class="absolute top-[70vh] left-24 right-24" x-show="tab == 'observation'" x-data="{ openDes: false }">
                 <div class="flex items-center justify-between">
 
                     <input type="file" wire:model='observation_image' class="hidden" name=""
@@ -629,6 +636,216 @@
             var btnid = document.getElementById("othertag");
             btnid.click();
         }
+
+
+        $(document).ready(function() {
+            $('#searchInputp').on('input', function() {
+                let query = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ route('search') }}",
+                    method: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(response) {
+
+
+
+                        $('#searchResults2Pls').empty();
+
+                        $('#searchResults2Obs').empty();
+
+                        response.results2Pls.forEach(function(result) {
+
+                            $('#searchResults2Pls').append(`
+                            <div class="flex flex-col items-center justify-center w-[80px]"
+                                @click="active='PL_` +
+                                result.id +
+                                `'"
+                                onclick="select_place(` + result.id + `)">
+                                <div class="rounded-full bg-[#1976d2]  p-[20px]"
+                                    :class="active == 'PL_` +
+                                result.id +
+                                `' ?
+                                        'border-4 border-blue-300' :
+                                        ''">
+                                    <img src="{{ asset('new_img/image.png') }}"
+                                        class="w-7 h-7" />
+                                </div>
+                                <span class="mt-2 text-black">` + result.name + `</span>
+                            </div>
+                        `); // Adjust based on your model properties
+                        });
+
+                        response.results2Obs.forEach(function(result) {
+
+                            $('#searchResults2Obs').append(`
+                       <div class="flex flex-col items-center justify-center w-[80px]"
+                 @click="active='OB_` + result.id + `'"
+                       onclick="select_observation(` + result.id + `)">
+                     <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                   :class="active == 'OB_` + result.id + `' ?
+            'border-4 border-yellow-100' :
+            ''">
+                       <div class="flex">
+            <img src="{{ asset('new_img/sad.png') }}" alt=""
+                class="w-8 h-8 -mr-1"> <img
+                src="{{ asset('new_img/happy.png') }}" alt=""
+                class="w-8 h-8 -ml-1">
+                      </div>
+                        </div>
+
+                      <span class="mt-2 text-black">` + result.name + `</span>
+                  </div>
+                          `); // Adjust based on your model properties
+                        });
+
+                    }
+                });
+            });
+            $('#searchInputo').on('input', function() {
+                let query = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ route('search') }}",
+                    method: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(response) {
+
+
+
+                        $('#searchResults2Pls').empty();
+
+                        $('#searchResults2Obs').empty();
+
+                        response.results2Pls.forEach(function(result) {
+
+                            $('#searchResults2Pls').append(`
+                            <div class="flex flex-col items-center justify-center w-[80px]"
+                                @click="active='PL_` +
+                                result.id +
+                                `'"
+                                onclick="select_place(` + result.id + `)">
+                                <div class="rounded-full bg-[#1976d2]  p-[20px]"
+                                    :class="active == 'PL_` +
+                                result.id +
+                                `' ?
+                                        'border-4 border-blue-300' :
+                                        ''">
+                                    <img src="{{ asset('new_img/image.png') }}"
+                                        class="w-7 h-7" />
+                                </div>
+                                <span class="mt-2 text-black">` + result.name + `</span>
+                            </div>
+                        `); // Adjust based on your model properties
+                        });
+
+                        response.results2Obs.forEach(function(result) {
+
+                            $('#searchResults2Obs').append(`
+                       <div class="flex flex-col items-center justify-center w-[80px]"
+                 @click="active='OB_` + result.id + `'"
+                       onclick="select_observation(` + result.id + `)">
+                     <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                   :class="active == 'OB_` + result.id + `' ?
+            'border-4 border-yellow-100' :
+            ''">
+                       <div class="flex">
+            <img src="{{ asset('new_img/sad.png') }}" alt=""
+                class="w-8 h-8 -mr-1"> <img
+                src="{{ asset('new_img/happy.png') }}" alt=""
+                class="w-8 h-8 -ml-1">
+                      </div>
+                        </div>
+
+                      <span class="mt-2 text-black">` + result.name + `</span>
+                  </div>
+                          `); // Adjust based on your model properties
+                        });
+
+                    }
+                });
+            });
+        });
+        $(document).ready(function() {
+            $('#searchInput1').on('input', function() {
+                let query = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ route('search') }}",
+                    method: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(response) {
+
+                        $('#searchResultsPls').empty();
+                        $('#searchResultsObs').empty();
+
+                        response.resultsPls.forEach(function(result) {
+
+                            $('#searchResultsPls').append(`
+                           <div class="flex flex-col items-center justify-center w-[80px]"
+                               @click="active='PL_` +
+                                result.id +
+                                `'"
+                               onclick="select_place(` + result.id + `)">
+                               <div class="rounded-full bg-[#1976d2]  p-[20px]"
+                                   :class="active == 'PL_` +
+                                result.id +
+                                `' ?
+                                       'border-4 border-blue-300' :
+                                       ''">
+                                   <img src="{{ asset('new_img/image.png') }}"
+                                       class="w-7 h-7" />
+                               </div>
+                               <span class="mt-2 text-black">` + result.name + `</span>
+                           </div>
+                       `); // Adjust based on your model properties
+                        });
+
+                        response.resultsObs.forEach(function(result) {
+
+                            $('#searchResultsObs').append(`
+                       <div class="flex flex-col items-center justify-center w-[80px]"
+                 @click="active='OB_` + result.id + `'"
+                       onclick="select_observation(` + result.id + `)">
+                     <div class="rounded-full bg-[#ffa726] px-[8px] py-[18px]"
+                   :class="active == 'OB_` + result.id + `' ?
+            'border-4 border-yellow-100' :
+            ''">
+                       <div class="flex">
+            <img src="{{ asset('new_img/sad.png') }}" alt=""
+                class="w-8 h-8 -mr-1"> <img
+                src="{{ asset('new_img/happy.png') }}" alt=""
+                class="w-8 h-8 -ml-1">
+                      </div>
+                        </div>
+
+                      <span class="mt-2 text-black">` + result.name + `</span>
+                  </div>
+                          `); // Adjust based on your model properties
+                        });
+
+                    }
+                });
+            });
+        });
     </script>
 @endsection
 @push('scripts')

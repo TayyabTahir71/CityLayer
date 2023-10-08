@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             // GlobalSeeder::class
             PlaceSeeder::class,
             ObservationSeeder::class,
-            SubplaceSeeder::class
+            // SubplaceSeeder::class
 
         ]);
     }
