@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 122,
+            "activePatchIndex": 123,
             "patches": [
                 {
                     "date": 1696869026456,
@@ -496,6 +496,10 @@
                 {
                     "date": 1696925401200,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,13 +34,11 @@\n                             Add or remove city layers from your map\n                         </div>\n \n                     </div>\n-{{var_dump($observationIds)}}\n-<br>\n-{{var_dump($placeIds)}}\n \n \n+\n                     \n                     <form wire:submit.prevent=\"updateMap\">\n                         <div class=\"flex gap-8\">\n                             <div x-data=\"{ active: 'AC_1' }\">\n"
+                },
+                {
+                    "date": 1696949145443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,10 +60,10 @@\n                                                 <label for=\"{{ 'checkbox_'.$pls->source.'_'.$pls->id }}\" id=\"PL_{{ $pls->source.'_'.$pls->id }}\" onclick=\"toggleClass('{{ $pls->source.'_'.$pls->id }}')\"\n                                                     class=\"rounded-full  \n                                                     \n     \n-                                                    @if($pls->source === 'place' && in_array($pls->id, $placeIds)) highlight @endif\n-                                                    @if($pls->source === 'observation' && in_array($pls->id, $observationIds)) highlight @endif\n+                                                    @if($pls->source === 'place' && is_array($placeIds)  &&  in_array($pls->id, $placeIds)) highlight @endif\n+                                                    @if($pls->source === 'observation' && is_array($observationIds)  && in_array($pls->id, $observationIds)) highlight @endif\n            \n     \n                                                     @if($pls->source === 'place') bg-[#1976d2] @else bg-[#ffa726] @endif p-[20px]\">\n                                                     @if ($pls->source === 'place')\n"
                 }
             ],
             "date": 1696869026456,
