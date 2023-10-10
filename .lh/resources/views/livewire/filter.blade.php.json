@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 123,
+            "activePatchIndex": 124,
             "patches": [
                 {
                     "date": 1696869026456,
@@ -500,6 +500,10 @@
                 {
                     "date": 1696949145443,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,10 +60,10 @@\n                                                 <label for=\"{{ 'checkbox_'.$pls->source.'_'.$pls->id }}\" id=\"PL_{{ $pls->source.'_'.$pls->id }}\" onclick=\"toggleClass('{{ $pls->source.'_'.$pls->id }}')\"\n                                                     class=\"rounded-full  \n                                                     \n     \n-                                                    @if($pls->source === 'place' && in_array($pls->id, $placeIds)) highlight @endif\n-                                                    @if($pls->source === 'observation' && in_array($pls->id, $observationIds)) highlight @endif\n+                                                    @if($pls->source === 'place' && is_array($placeIds)  &&  in_array($pls->id, $placeIds)) highlight @endif\n+                                                    @if($pls->source === 'observation' && is_array($observationIds)  && in_array($pls->id, $observationIds)) highlight @endif\n            \n     \n                                                     @if($pls->source === 'place') bg-[#1976d2] @else bg-[#ffa726] @endif p-[20px]\">\n                                                     @if ($pls->source === 'place')\n"
+                },
+                {
+                    "date": 1696949211362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,10 +51,10 @@\n                                                 >\n                                                 \n                                                 <input class=\"hidden\"  type=\"checkbox\" wire:model=\"formData\" value=\"{{ $pls->source.'_'.$pls->id }}\"\n                                                 id=\"{{ 'checkbox_'.$pls->source.'_'.$pls->id }}\"\n-                                                @if($pls->source === 'place' && in_array($pls->id, $placeIds)) checked @endif\n-                                                @if($pls->source === 'observation' && in_array($pls->id, $observationIds)) checked @endif\n+                                                @if($pls->source === 'place' && is_array($placeIds) && in_array($pls->id, $placeIds)) checked @endif\n+                                                @if($pls->source === 'observation' && is_array($observationIds) && in_array($pls->id, $observationIds)) checked @endif\n                                                 >\n                                                 \n \n                                                 <label for=\"{{ 'checkbox_'.$pls->source.'_'.$pls->id }}\" id=\"PL_{{ $pls->source.'_'.$pls->id }}\" onclick=\"toggleClass('{{ $pls->source.'_'.$pls->id }}')\"\n"
                 }
             ],
             "date": 1696869026456,
