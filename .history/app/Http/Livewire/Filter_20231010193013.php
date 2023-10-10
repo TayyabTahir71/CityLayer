@@ -18,18 +18,13 @@ class Filter extends Component
         $placeIds = session('placeIds');
         $observationIds = session('observationIds');
 
-        if(is_array($placeIds)){
-            foreach($placeIds as $placeId){
-                $this->formData[]='place_'.$placeId;
-            }
+        if($placeIds)
+        foreach($placeIds as $placeId){
+            $this->formData[]='place_'.$placeId;
         }
-        if(is_array($observationIds)){
-            foreach($observationIds as $observationId){
-                $this->formData[]='observation_'.$observationId;
-            }
+        foreach($observationIds as $observationId){
+            $this->formData[]='observation_'.$observationId;
         }
-        
-        
     }
 
 
