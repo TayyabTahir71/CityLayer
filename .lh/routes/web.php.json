@@ -3,11 +3,47 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1696316937998,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1696846602738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,12 +22,18 @@\n \n Route::get('/badges_overview', function () {\n     return view('badges_overview');\n });\n+Route::get('/term', function () {\n+    return view('term');\n+});\n+Route::get('/privacy_policy', function () {\n+    return view('term');\n+});\n+Route::get('/impressum', function () {\n+    return view('impressum');\n+});\n \n-Route::get('/community_achievements', function () {\n-    return view('community_acheivements');\n-});\n Route::get('/menu', function () {\n     return view('menu');\n });\n \n@@ -181,8 +187,9 @@\n     return view('sign-up-e');\n });\n \n Route::get('add-new-place', [GlobalController::class, 'createNewPlace']);\n+Route::get('badges_overview', [GlobalController::class, 'badges_overview']);\n \n Route::get('filter', [GlobalController::class, 'filter']);\n \n Route::post('map/add/place', [GlobalController::class, 'addMapPlace'])->name('map.add.place');\n@@ -190,9 +197,20 @@\n Route::post('add/new/place', [GlobalController::class, 'addNewPlace'])->name('add.new.place');\n \n Route::get('/sub-place/{id}', [GlobalController::class, 'subPlace'])->name('sub.place');\n \n+Route::get('/sub-observ/{id}', [GlobalController::class, 'subObserv'])->name('sub.observ');\n \n+Route::post('/save-des', [GlobalController::class, 'saveDes']);\n+\n+Route::get('/search', [GlobalController::class, 'search'])->name('search');\n+\n+Route::get('/sub-search-ob', [GlobalController::class, 'subSearchOb'])->name('sub-search-ob');\n+\n+\n+Route::get('/sub-search-pl', [GlobalController::class, 'subSearchPl'])->name('sub-search-pl');\n+\n+\n Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');\n Route::post('/auth/signup', [AuthController::class, 'signup'])->name('auth.register');\n \n \n"
+                },
+                {
+                    "date": 1696846610237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,9 +85,9 @@\n     Route::post('spaceusage', 'spaceusage')->name('spaceusage');\n \n     Route::post('spaceusagedetail', 'spaceusagedetail')->name('spaceusagedetail');\n     Route::post('newspacetag', 'newspacetag')->name('newspacetag');\n-    Route::get('leaderboard', 'leaderboard')->name('leaderboard');\n+    Route::get('community_achievements', 'community_achievements')->name('community_achievements');\n \n \n \n \n"
+                },
+                {
+                    "date": 1696846731708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,9 +85,9 @@\n     Route::post('spaceusage', 'spaceusage')->name('spaceusage');\n \n     Route::post('spaceusagedetail', 'spaceusagedetail')->name('spaceusagedetail');\n     Route::post('newspacetag', 'newspacetag')->name('newspacetag');\n-    Route::get('community_achievements', 'community_achievements')->name('community_achievements');\n+    Route::get('community-achievements', 'community_achievements')->name('community-achievements');\n \n \n \n \n"
+                },
+                {
+                    "date": 1696848642985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,13 +86,15 @@\n \n     Route::post('spaceusagedetail', 'spaceusagedetail')->name('spaceusagedetail');\n     Route::post('newspacetag', 'newspacetag')->name('newspacetag');\n     Route::get('community-achievements', 'community_achievements')->name('community-achievements');\n+    Route::get('/load-more-community-achievements', 'UserController@loadMore'); // Ajax load more\n \n \n \n \n \n+\n     Route::get('step2', function () {\n         return view('step2');\n     });\n \n"
+                },
+                {
+                    "date": 1696848664952,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n \n     Route::post('spaceusagedetail', 'spaceusagedetail')->name('spaceusagedetail');\n     Route::post('newspacetag', 'newspacetag')->name('newspacetag');\n     Route::get('community-achievements', 'community_achievements')->name('community-achievements');\n-    Route::get('/load-more-community-achievements', 'UserController@loadMore'); // Ajax load more\n+    Route::get('/load-more-community-achievements', 'loadMore_community_achievements')->name('loadMore_community_achievements');\n \n \n \n \n"
+                },
+                {
+                    "date": 1696859615405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,8 +50,9 @@\n     Route::post('save_preferences', 'savepreferences')->name('savepreferences');\n     Route::get('save_preferences', 'preferences');\n     Route::get('preferences', 'preferences')->name('preferences');\n     Route::get('dashboard', 'dashboard')->name('dashboard');\n+    Route::get('loadMore-dashboard', 'loadMore_dashboard')->name('loadMore-dashboard');\n     Route::get('place/{id}/{type}', 'place')->name('place');\n     Route::get('details/{id}/{type}', 'details')->name('details');\n     Route::post('/place/like', 'like')->name('like');\n     Route::post('/place/dislike', 'dislike')->name('dislike');\n"
+                },
+                {
+                    "date": 1696859821850,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,16 +31,8 @@\n });\n Route::get('/impressum', function () {\n     return view('impressum');\n });\n-\n-Route::get('/menu', function () {\n-    return view('menu');\n-});\n-\n-Route::get('/city_tags', function () {\n-    return view('edit_city_tags');\n-});\n Route::controller(GlobalController::class)->group(function () {\n     // Route::get('/', 'getAll')->name('getAll')->middleware('App\\Http\\Middleware\\MyMiddleware');\n     Route::get('/', 'getAll');\n     Route::get('profile', 'profile')->name('profile');\n"
+                },
+                {
+                    "date": 1696859899255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,14 @@\n });\n Route::get('/impressum', function () {\n     return view('impressum');\n });\n+\n+Route::get('/menu', function () {\n+    return view('menu');\n+});\n+\n+\n Route::controller(GlobalController::class)->group(function () {\n     // Route::get('/', 'getAll')->name('getAll')->middleware('App\\Http\\Middleware\\MyMiddleware');\n     Route::get('/', 'getAll');\n     Route::get('profile', 'profile')->name('profile');\n"
+                },
+                {
+                    "date": 1696865084779,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -164,11 +164,9 @@\n Route::get('edit_profile', function () {\n     return view('edit_profile');\n });\n \n-Route::get('profil', function () {\n-    return view('profil');\n-});\n+\n Route::get('badges_overview', function () {\n     return view('badges_overview');\n });\n \n"
                 }
             ],
             "date": 1696316937998,

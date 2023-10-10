@@ -1,0 +1,26 @@
+{
+    "sourceFile": "database/seeders/ReferencesTableSeeder.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1696840001791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1696840017491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,25 @@\n         $references = [\n             \"city cycling\",\n             \"street photography\",\n             \"cityscape exploring\",\n+            \"nature exploring\",\n+            \"urban gardening\",\n+            \"park picnics\",\n+            \"outdoor sports\",\n+            \"long walks through the city\",\n+            \"nightlife\",\n+            \"historic landmarks\",\n+            \"hidden germs\",\n+            \"architecture\",\n+            \"observing nature\",\n+            \"observing people\",\n+            \"lively and vibrant places\",\n+            \"walking difficulties\",\n+            \"walking to work / school\",\n+            \"car travelling\",\n+            \"public transport\",\n+            \"outdoor activities\"\n             \n         ];\n \n         foreach ($references as $reference) {\n"
+                },
+                {
+                    "date": 1696840031491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n <?php\n \n namespace Database\\Seeders;\n+use Illuminate\\Support\\Facades\\DB;\n \n use Illuminate\\Database\\Console\\Seeds\\WithoutModelEvents;\n use Illuminate\\Database\\Seeder;\n \n"
+                }
+            ],
+            "date": 1696840001791,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace Database\\Seeders;\n\nuse Illuminate\\Database\\Console\\Seeds\\WithoutModelEvents;\nuse Illuminate\\Database\\Seeder;\n\nclass ReferencesTableSeeder extends Seeder\n{\n    /**\n     * Run the database seeds.\n     *\n     * @return void\n     */\n    public function run()\n    {\n        $references = [\n            \"city cycling\",\n            \"street photography\",\n            \"cityscape exploring\",\n            \n        ];\n\n        foreach ($references as $reference) {\n            DB::table('references')->insert([\n                'name' => $reference,\n            ]);\n        }\n    }\n}\n"
+        }
+    ]
+}

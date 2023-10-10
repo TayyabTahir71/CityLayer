@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Models/Reference.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1696840414943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1696840520223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,13 +4,13 @@\n \n use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\n use Illuminate\\Database\\Eloquent\\Model;\n \n-class Reference extends Model\n+class Preference extends Model\n {\n     use HasFactory;\n \n-    public static function getReferences()\n+    public static function getPreference()\n     {\n         return self::pluck('name')->toArray();\n     }\n }\n"
+                }
+            ],
+            "date": 1696840414943,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass Reference extends Model\n{\n    use HasFactory;\n\n    public static function getReferences()\n    {\n        return self::pluck('name')->toArray();\n    }\n}\n"
+        }
+    ]
+}

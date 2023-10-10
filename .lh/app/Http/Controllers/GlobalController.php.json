@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1682742700646,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1696840442761,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n use App\\Models\\Tag_de;\n use App\\Models\\Space_tag_de;\n use App\\Models\\Space_tag;\n use App\\Models\\Stat;\n+use App\\Models\\Reference;\n use App\\Models\\Preference;\n use Carbon\\Carbon;\n use Database\\Seeders\\PlaceSeeder;\n use Pestopancake\\LaravelBackpackNotifications\\Notifications\\DatabaseNotification;\n"
+                },
+                {
+                    "date": 1696841313830,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1039,9 +1039,9 @@\n         $userid = backpack_auth()->user()->id;\n         $infos = Infosperso::where('user_id', $userid)->first();\n         $preferences = $infos->preferences;\n \n-        \n+        $preferences_array = \n \n         return view('preferences', compact('preferences'));\n     }\n \n"
                 }
             ],
             "date": 1682742700646,

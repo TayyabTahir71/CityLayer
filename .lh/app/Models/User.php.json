@@ -1,0 +1,38 @@
+{
+    "sourceFile": "app/Models/User.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1696847955291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1696847981131,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,61 @@\n+<?php\n+\n+namespace App\\Models;\n+\n+//  use Illuminate\\Contracts\\Auth\\MustVerifyEmail;\n+use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\n+use Illuminate\\Foundation\\Auth\\User as Authenticatable;\n+use Spatie\\Permission\\Traits\\HasRoles;\n+use Illuminate\\Notifications\\Notifiable;\n+use Laravel\\Sanctum\\HasApiTokens;\n+\n+\n+class User extends Authenticatable\n+{\n+\n+    use \\Backpack\\CRUD\\app\\Models\\Traits\\CrudTrait;\n+    use HasApiTokens, HasFactory, Notifiable;\n+    \n+    /**\n+     * The attributes that are mass assignable.\n+     *\n+     * @var array<int, string>\n+     */\n+    protected $fillable = [\n+        'name',\n+        'email',\n+        'password',\n+        'role',\n+        'score'\n+    ];\n+\n+    /**\n+     * The attributes that should be hidden for serialization.\n+     *\n+     * @var array<int, string>\n+     */\n+    protected $hidden = [\n+        'password',\n+        'remember_token',\n+    ];\n+\n+    /**\n+     * The attributes that should be cast.\n+     *\n+     * @var array<string, string>\n+     */\n+    protected $casts = [\n+        'email_verified_at' => 'datetime',\n+    ];\n+\n+    public function hasPermissionTo()\n+    {\n+        return 'notifications admin';\n+    }\n+    public function placeDetails()\n+    {\n+        return $this->hasMany(PlaceDetails::class, 'user_id');\n+    }\n+\n+\n+}\n"
+                },
+                {
+                    "date": 1696854648766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,67 +56,11 @@\n     {\n         return $this->hasMany(PlaceDetails::class, 'user_id');\n     }\n \n-\n-}\n-<?php\n-\n-namespace App\\Models;\n-\n-//  use Illuminate\\Contracts\\Auth\\MustVerifyEmail;\n-use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\n-use Illuminate\\Foundation\\Auth\\User as Authenticatable;\n-use Spatie\\Permission\\Traits\\HasRoles;\n-use Illuminate\\Notifications\\Notifiable;\n-use Laravel\\Sanctum\\HasApiTokens;\n-\n-\n-class User extends Authenticatable\n-{\n-\n-    use \\Backpack\\CRUD\\app\\Models\\Traits\\CrudTrait;\n-    use HasApiTokens, HasFactory, Notifiable;\n-    \n-    /**\n-     * The attributes that are mass assignable.\n-     *\n-     * @var array<int, string>\n-     */\n-    protected $fillable = [\n-        'name',\n-        'email',\n-        'password',\n-        'role',\n-        'score'\n-    ];\n-\n-    /**\n-     * The attributes that should be hidden for serialization.\n-     *\n-     * @var array<int, string>\n-     */\n-    protected $hidden = [\n-        'password',\n-        'remember_token',\n-    ];\n-\n-    /**\n-     * The attributes that should be cast.\n-     *\n-     * @var array<string, string>\n-     */\n-    protected $casts = [\n-        'email_verified_at' => 'datetime',\n-    ];\n-\n-    public function hasPermissionTo()\n+    public function places()\n     {\n-        return 'notifications admin';\n+        return $this->hasMany(PlaceDetails::class, 'user_id')->whereNotNull('place_id');\n     }\n-    public function placeDetails()\n-    {\n-        return $this->hasMany(PlaceDetail::class, 'user_id');\n-    }\n \n \n }\n"
+                },
+                {
+                    "date": 1696854658220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,11 +56,7 @@\n     {\n         return $this->hasMany(PlaceDetails::class, 'user_id');\n     }\n \n-    public function places()\n-    {\n-        return $this->hasMany(PlaceDetails::class, 'user_id')->whereNotNull('place_id');\n-    }\n \n \n }\n"
+                },
+                {
+                    "date": 1696854811708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,7 +56,12 @@\n     {\n         return $this->hasMany(PlaceDetails::class, 'user_id');\n     }\n \n+    public function places()\n+{\n+    return $this->hasMany(PlaceDetail::class, 'user_id')->whereNotNull('place_id');\n+}\n \n \n+\n }\n"
+                },
+                {
+                    "date": 1696854829298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,11 +57,16 @@\n         return $this->hasMany(PlaceDetails::class, 'user_id');\n     }\n \n     public function places()\n-{\n-    return $this->hasMany(PlaceDetail::class, 'user_id')->whereNotNull('place_id');\n-}\n+    {\n+        return $this->hasMany(PlaceDetails::class, 'user_id')->whereNotNull('place_id');\n+    }\n+    public function observations()\n+    {\n+        return $this->hasMany(PlaceDetails::class, 'user_id')->whereNotNull('observation_id');\n+    }\n \n \n \n+\n }\n"
+                }
+            ],
+            "date": 1696847955290,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\n//  use Illuminate\\Contracts\\Auth\\MustVerifyEmail;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Foundation\\Auth\\User as Authenticatable;\nuse Spatie\\Permission\\Traits\\HasRoles;\nuse Illuminate\\Notifications\\Notifiable;\nuse Laravel\\Sanctum\\HasApiTokens;\n\n\nclass User extends Authenticatable\n{\n\n    use \\Backpack\\CRUD\\app\\Models\\Traits\\CrudTrait;\n    use HasApiTokens, HasFactory, Notifiable;\n    \n    /**\n     * The attributes that are mass assignable.\n     *\n     * @var array<int, string>\n     */\n    protected $fillable = [\n        'name',\n        'email',\n        'password',\n        'role',\n        'score'\n    ];\n\n    /**\n     * The attributes that should be hidden for serialization.\n     *\n     * @var array<int, string>\n     */\n    protected $hidden = [\n        'password',\n        'remember_token',\n    ];\n\n    /**\n     * The attributes that should be cast.\n     *\n     * @var array<string, string>\n     */\n    protected $casts = [\n        'email_verified_at' => 'datetime',\n    ];\n\n    public function hasPermissionTo()\n    {\n        return 'notifications admin';\n    }\n    public function placeDetails()\n    {\n        return $this->hasMany(PlaceDetail::class, 'user_id');\n    }\n\n\n}\n"
+        }
+    ]
+}

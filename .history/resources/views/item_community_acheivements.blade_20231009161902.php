@@ -1,0 +1,33 @@
+@forelse ($usersWithTotals as $user)
+
+                    <div class="flex p-2 mt-8 mb-2">
+                       @php $img = $user['avatar'] ?? null; @endphp
+                        <img src="{{ asset('storage/uploads/avatar/' . $img) }}" alt="Just a flower" class="object-cover w-16 h-16 rounded-full border-4 border-site" onerror="this.src='/img/empty.png'">
+                        <div class="flex flex-col justify-center w-full px-2 py-1">
+
+                            <div class="flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <h2 class="pl-2 italic text-base font-bold">{{ $user->name }}</h2>
+                                </div>
+                                  <div class="flex flex-col mr-2">
+                                    <h2 class="pl-4 text-sm font-normal text-gray-800">Places added {{$user->total_places}}</h2>
+                                    <h2 class="pl-4 mt-2 text-sm font-normal text-gray-800">Observations added {{$user->total_observations}}</h2>
+                                </div>
+                            </div>
+                        </div>
+    
+              
+                    </div>
+
+                    
+            
+                @endforeach
+
+                
+                    <div class="belo m-4">
+                        @if ($usersWithTotals->hasMorePages())
+                            <div class="first load-more-button cursor-pointer" data-page="{{ $usersWithTotals->currentPage() + 1 }}">see <div class="plu">+</div> all</div>
+                        @endif
+                        <a href="/" class="scnd mt-2">Back</a>
+                    </div>
+                

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Models/PlaceDetails.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1696848031580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1696848031580,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;\n\nclass PlaceDetails extends Model\n{\n    use HasFactory;\n\n    protected $fillable = [\n        'place_id',\n        'user_id',\n        'observation_id',\n        'observation_child_id',\n        'place_child_id',\n        'image',\n        'latitude',\n        'longitude',\n    ];\n\n\n    /**\n     * Get the place that owns the PlaceDetails\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\n     */\n    public function place(): BelongsTo\n    {\n        return $this->belongsTo(Place::class);\n    }\n\n\n    /**\n     * Get the observation that owns the PlaceDetails\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\n     */\n    public function observation(): BelongsTo\n    {\n        return $this->belongsTo(Observation::class);\n    }\n\n    /**\n     * Get the user that owns the PlaceDetails\n     *\n     * @return \\Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\n     */\n    public function user(): BelongsTo\n    {\n        return $this->belongsTo(User::class);\n    }\n\n\n}\n"
+        }
+    ]
+}
