@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 123,
+            "activePatchIndex": 124,
             "patches": [
                 {
                     "date": 1696531253602,
@@ -500,6 +500,10 @@
                 {
                     "date": 1696936954214,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,8 @@\n         <div class=\"flex flex-col h-screen mx-auto\">\n             <div class=\"flex flex-col items-center pt-12 gap-x-6 lg:pt-20\">\n \n \n-                <textarea clas type=\"text\" value=\"\" id=\"myTextArea\" class=\"border-0 focus:outline-none focus:border-0 focus:ring-0\" placeholder=\"Place for a comment max 120 characters\" />\n-                \n-            </textarea>\n-\n-\n                 <form action=\"avatar\" method=\"POST\" enctype=\"multipart/form-data\">\n                     @csrf\n                     <input type=\"file\" name=\"image\" id=\"image\" class=\"hidden\" accept=\"image/*\"\n                            onchange=\"javascript:this.form.submit();\">\n"
+                },
+                {
+                    "date": 1697088128647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n             <div class=\"fb justify-center\">\n                 <div class=\"flex flex-row items-center justify-center gap-3 flex-wrap\t\">\n         \n                 @foreach ($preferences as $preference)\n-                        <button class=\"bg-yel  border-ms px-5 italic font-light\">{{ucfirst($preference)}}</button>\n+                        <button class=\"bg-yel  border-ms px-5 italic font-light\">{{($preference)}}</button>\n                 @endforeach\n                 </div>\n \n             </div>\n"
                 }
             ],
             "date": 1696531253602,

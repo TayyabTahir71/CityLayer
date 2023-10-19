@@ -57,29 +57,28 @@ class Filter extends Component
     public function render()
     {
         $userid = backpack_auth()->user()->id;
-        $placeIds = PlaceDetails::where('user_id', $userid)
-            ->whereNotNull('place_id')
-            ->distinct()
-            ->pluck('place_id');
-        $observationIds = PlaceDetails::where('user_id', $userid)
-            ->whereNotNull('observation_id')
-            ->distinct()
-            ->pluck('observation_id');
-        $places = Place::select('name','id')->whereIn('id', $placeIds)->get();
-        $observations = Observation::select('name','id')->whereIn('id', $observationIds)->get();
 
-        $places->each(function ($place) {
-            $place->source = 'place';
-        });
-        
-        $observations->each(function ($observation) {
-            $observation->source = 'observation';
-        });
+        $user = User::find($userid);
 
-        $combined = $places->concat($observations);
-        $places = $combined->sortBy(function ($item) {
-            return $item->name;
-        });
+        $places = $user->placeDetails->map(function ($post) {
+            return (object)[
+                'id' => $post->placeDetail->place->id,
+                'name' => $post->placeDetail->place->name,
+                'source' => 'place',
+            ];
+        })->unique('id');
+
+        $observations = $user->placeDetails->flatMap(function ($post) {
+            return $post->observationsDetail;
+        })->map(function ($observation) {
+            return (object)[
+                'id' => $observation->observation->id,
+                'name' => $observation->observation->name,
+                'source' => 'observation',
+            ];
+        })->unique('id');
+
+        $places = $places->concat($observations)->sortBy('name');
 
         $placeIds = session('placeIds');
         $observationIds = session('observationIds');

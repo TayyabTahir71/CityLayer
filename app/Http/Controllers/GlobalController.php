@@ -14,7 +14,10 @@ use App\Models\Comment_de;
 use App\Models\Observation;
 use App\Models\Pages;
 use App\Models\Place;
+use App\Models\Feeling;
 use App\Models\PlaceDetails;
+use App\Models\PlaceDetailPlace;
+use App\Models\PlaceDetailObservation;
 use App\Models\Tag;
 use App\Models\Tag_de;
 use App\Models\Space_tag_de;
@@ -41,7 +44,7 @@ class GlobalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getAll()
+    public function getAll($edit_id='')
     {
 
         if (backpack_auth()->check()) {
@@ -63,23 +66,47 @@ class GlobalController extends Controller
 
 
 
-                $query = PlaceDetails::where('user_id', $userid)
-                    ->with('place', 'observation', 'user');
+                $query = PlaceDetails::where('user_id', $userid)->whereNotNull('latitude')->whereNotNull('longitude')
+                    ->with('placeDetail','placeDetail.place', 'placeDetail.placeChild', 'observationsDetail','observationsDetail.observation','observationsDetail.observationChild','observationsDetail.feeling', 'user');
 
-                if (session()->has('placeIds') && count(session('placeIds')) > 0) {
-                    $placeIds = session('placeIds');
-                    $query->whereIn('place_id', $placeIds);
-                }
+                    if (session()->has('placeIds') && count(session('placeIds')) > 0 && session()->has('observationIds') && count(session('observationIds')) > 0) {
+                        
+                        $query->where(function ($query) {
+                            $query->whereHas('placeDetail', function ($subQuery) {
+                                $subQuery->whereIn('place_id', session('placeIds'));
+                            });
+                        });
+                        $query->orWhere(function ($query) {
+                            $query->whereHas('observationsDetail', function ($subQuery) {
+                                $subQuery->whereIn('observation_id', session('observationIds'));
+                            });
+                        });
 
-                if (session()->has('observationIds') && count(session('observationIds')) > 0) {
-                    $observationIds = session('observationIds');
-                    $query->orWhereIn('observation_id', $observationIds);
-                }
+                    } elseif (session()->has('placeIds') && count(session('placeIds')) > 0) {
+                        $query->where(function ($query) {
+                            $query->whereHas('placeDetail', function ($subQuery) {
+                                $subQuery->whereIn('place_id', session('placeIds'));
+                            });
+                        });
+                    } elseif (session()->has('observationIds') && count(session('observationIds')) > 0) {
+                        $query->Where(function ($query) {
+                            $query->whereHas('observationsDetail', function ($subQuery) {
+                                $subQuery->whereIn('observation_id', session('observationIds'));
+                            });
+                        });
+                    }
+
+          
+
+
+                // var_dump(session('placeIds'));
+                // die();
+   
 
                 $all_data = $query->get();
 
-                // dd($all_data);
 
+                $feelings = Feeling::all();
 
                 return view(
                     'home',
@@ -88,7 +115,9 @@ class GlobalController extends Controller
                         'all_data',
                         'userid',
                         'allPlaces',
-                        'allObservations'
+                        'allObservations',
+                        'feelings',
+                        'edit_id'
                     )
                 );
             } else {
@@ -105,18 +134,15 @@ class GlobalController extends Controller
     public function community_achievements()
     {
 
-        $usersWithTotals = User::withCount([
-            'placeDetails as total_places' => function ($query) {
-                $query->whereNotNull('place_id');
-            },
-            'placeDetails as total_observations' => function ($query) {
-                $query->whereNotNull('observation_id');
-            },
-        ])->orderBy('score', 'desc')->paginate(10);
-    
-    
-        
-      
+        $usersWithTotals = User::select('*')
+        ->addSelect(['total_places' => PlaceDetailPlace::selectRaw('COUNT(*)')
+            ->whereIn('place_detail_id', PlaceDetails::select('id')
+            ->whereColumn('user_id', 'users.id'))])
+        ->addSelect(['total_observations' => PlaceDetailObservation::selectRaw('COUNT(*)')
+            ->whereIn('place_detail_id', PlaceDetails::select('id')
+            ->whereColumn('user_id', 'users.id'))])
+        ->orderBy('score', 'desc')->paginate(10);
+
         return view('community_acheivements', compact('usersWithTotals'));
     }
 
@@ -124,14 +150,14 @@ class GlobalController extends Controller
     {
         $page = $request->get('page');
 
-        $usersWithTotals = User::withCount([
-            'placeDetails as total_places' => function ($query) {
-                $query->whereNotNull('place_id');
-            },
-            'placeDetails as total_observations' => function ($query) {
-                $query->whereNotNull('observation_id');
-            },
-        ])->orderBy('score', 'desc')->paginate(10, ['*'], 'page', $page);
+        $usersWithTotals = User::select('*')
+        ->addSelect(['total_places' => PlaceDetailPlace::selectRaw('COUNT(*)')
+            ->whereIn('place_detail_id', PlaceDetails::select('id')
+            ->whereColumn('user_id', 'users.id'))])
+        ->addSelect(['total_observations' => PlaceDetailObservation::selectRaw('COUNT(*)')
+            ->whereIn('place_detail_id', PlaceDetails::select('id')
+            ->whereColumn('user_id', 'users.id'))])
+        ->orderBy('score', 'desc')->paginate(10, ['*'], 'page', $page);
 
         $html = view('item_community_acheivements', compact('usersWithTotals'))->render();
 
@@ -371,220 +397,6 @@ class GlobalController extends Controller
         }
     }
 
-    public function stars(Request $request)
-    {
-        $userid = backpack_auth()->user()->id;
-
-        if ($request->type == 'street') {
-            if (
-                Stat::where('street_id', $request->id)
-                ->where('user_id', $userid)
-                ->doesntExist()
-            ) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->street_id = $request->id;
-                $stat->stars = 1;
-                $stat->save();
-                $street = Street::find($request->id);
-                $street->stars = $street->stars + 1;
-                $street->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            } else {
-                return 'already';
-            }
-        } elseif ($request->type == 'building') {
-            if (
-                Stat::where('building_id', $request->id)
-                ->where('user_id', $userid)
-                ->doesntExist()
-            ) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->building_id = $request->id;
-                $stat->stars = 1;
-                $stat->save();
-                $building = Building::find($request->id);
-                $building->stars = $building->stars + 1;
-                $building->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            } else {
-                return 'already';
-            }
-        } elseif ($request->type == 'openspace') {
-            if (
-                Stat::where('openspace_id', $request->id)
-                ->where('user_id', $userid)
-                ->doesntExist()
-            ) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->openspace_id = $request->id;
-                $stat->stars = 1;
-                $stat->save();
-                $openspace = Openspace::find($request->id);
-                $openspace->stars = $openspace->stars + 1;
-                $openspace->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            } else {
-                return 'already';
-            }
-        }
-    }
-
-    public function bof(Request $request)
-    {
-        $userid = backpack_auth()->user()->id;
-
-        if ($request->type == 'street') {
-            if (
-                Stat::where('street_id', $request->id)
-                ->where('user_id', $userid)
-                ->doesntExist()
-            ) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->street_id = $request->id;
-                $stat->bof = 1;
-                $stat->save();
-                $street = Street::find($request->id);
-                $street->bof = $street->bof + 1;
-                $street->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            } else {
-                return 'already';
-            }
-        } elseif ($request->type == 'building') {
-            if (
-                Stat::where('building_id', $request->id)
-                ->where('user_id', $userid)
-                ->doesntExist()
-            ) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->building_id = $request->id;
-                $stat->bof = 1;
-                $stat->save();
-                $building = Building::find($request->id);
-                $building->bof = $building->bof + 1;
-                $building->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            } else {
-                return 'already';
-            }
-        } elseif ($request->type == 'openspace') {
-            if (
-                Stat::where('openspace_id', $request->id)
-                ->where('user_id', $userid)
-                ->doesntExist()
-            ) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->openspace_id = $request->id;
-                $stat->bof = 1;
-                $stat->save();
-                $openspace = Openspace::find($request->id);
-                $openspace->bof = $openspace->bof + 1;
-                $openspace->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            } else {
-                return 'already';
-            }
-        }
-    }
-
-    public function weird(Request $request)
-    {
-        $userid = backpack_auth()->user()->id;
-
-        if ($request->type == 'street') {
-            if (
-                Stat::where('street_id', $request->id)
-                ->where('user_id', $userid)
-                ->doesntExist()
-            ) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->street_id = $request->id;
-                $stat->weird = 1;
-                $stat->save();
-                $street = Street::find($request->id);
-                $street->weird = $street->weird + 1;
-                $street->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            } else {
-                return 'already';
-            }
-        } elseif ($request->type == 'building') {
-            if (
-                Stat::where('building_id', $request->id)
-                ->where('user_id', $userid)
-                ->doesntExist()
-            ) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->building_id = $request->id;
-                $stat->weird = 1;
-                $stat->save();
-                $building = Building::find($request->id);
-                $building->weird = $building->weird + 1;
-                $building->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            } else {
-                return 'already';
-            }
-        } elseif ($request->type == 'openspace') {
-            if (Stat::where('openspace_id', $request->id)->doesntExist()) {
-                $stat = new Stat();
-                $stat->user_id = $userid;
-                $stat->openspace_id = $request->id;
-                $stat->weird = 1;
-                $stat->save();
-                $openspace = Openspace::find($request->id);
-                $openspace->weird = $openspace->weird + 1;
-                $openspace->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            } else {
-                return 'already';
-            }
-        }
-    }
 
     // public function profil()
     // {
@@ -1053,14 +865,33 @@ class GlobalController extends Controller
         $infos = Infosperso::where('user_id', $userid)->first();
         $infos->preferences = $request->preferences;
         $infos->save();
-        if (backpack_auth()->user()->score > 3) {
-        } else {
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-        }
+        
         return redirect('/');
+    }
+
+    public function newpreference(Request $request)
+    {
+
+        $userid = backpack_auth()->user()->id;
+
+
+       
+        
+        $tag=strtolower($request->preference);
+        $preference=Preference::create([
+            'user_id'=>$userid,
+            'name'=>$tag,
+        ]);
+        if($preference){
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $existingPreferences = explode(',', $infos->preferences);
+            $existingPreferences = preg_replace('/[^A-Za-z0-9 ]/', '', $existingPreferences);
+            $existingPreferences[]=$tag;
+            $infos->preferences = $existingPreferences;
+            $infos->save();
+        }
+        
+        return redirect('/preferences');
     }
 
     public function preferences()
@@ -1071,291 +902,13 @@ class GlobalController extends Controller
         $preferences = explode(',', $infos->preferences);
         $preferences = preg_replace('/[^A-Za-z0-9 ]/', '', $preferences);
 
-        $preferences_array = Preference::getPreferences();
+        $preferences_array = Preference::getPreferences($userid);
 
 
         return view('preferences', compact('preferences','preferences_array'));
     }
 
 
-
-    public function street()
-    {
-        $tags = Tag::where('category', 'street')
-            ->where('personal', null)
-            ->get();
-        $tags_de = Tag_de::where('category', 'street')
-            ->where('personal', null)
-            ->get();
-
-        return view('street_mapping', compact('tags', 'tags_de'));
-    }
-
-    public function building()
-    {
-        $tags = Tag::where('category', 'building')
-            ->where('personal', null)
-            ->get();
-        $tags_de = Tag_de::where('category', 'building')
-            ->where('personal', null)
-            ->get();
-
-        return view('building_mapping', compact('tags', 'tags_de'));
-    }
-
-    public function openspace()
-    {
-        $tags = Tag::where('category', 'openspace')
-            ->where('personal', null)
-            ->get();
-        $tags_de = Tag_de::where('category', 'openspace')
-            ->where('personal', null)
-            ->get();
-
-        return view('openspace_mapping', compact('tags', 'tags_de'));
-    }
-
-    public function newtag(Request $request)
-    {
-        $locale = session()->get('locale');
-        if ($locale == 'en') {
-            $stag = Tag::where('name', $request->name)->first();
-            if ($stag) {
-                return $request->name;
-            } else {
-                $tag = new Tag();
-            }
-        } elseif ($locale == 'de') {
-            $stag = Tag_de::where('name', $request->name)->first();
-            if ($stag) {
-                return $request->name;
-            } else {
-                $tag = new Tag_de();
-            }
-        } else {
-            $stag = Tag::where('name', $request->name)->first();
-            if ($stag) {
-                return $request->name;
-            } else {
-                $tag = new Tag();
-            }
-        }
-
-        $tag->name = $request->name;
-        $tag->personal = 1;
-        $tag->category = $request->category;
-        $tag->save();
-        return $request->name;
-    }
-
-    public function newopinion(Request $request)
-    {
-        $locale = session()->get('locale');
-        if ($locale == 'en') {
-            $stag = Opinion::where('name', $request->name)->first();
-            if ($stag) {
-                return $request->name;
-            } else {
-                $opinion = new Opinion();
-            }
-        } elseif ($locale == 'de') {
-            $stag = Opinion_de::where('name', $request->name)->first();
-            if ($stag) {
-                return $request->name;
-            } else {
-                $opinion = new Opinion_de();
-            }
-        } else {
-            $stag = Opinion::where('name', $request->name)->first();
-            if ($stag) {
-                return $request->name;
-            } else {
-                $opinion = new Opinion();
-            }
-        }
-        $opinion->name = $request->name;
-        $opinion->personal = 1;
-        $opinion->save();
-        return $request->name;
-    }
-
-    public function newplace(Request $request)
-    {
-        $userid = backpack_auth()->user()->id;
-        if ($request->type == 'Street') {
-            $street = new Street();
-            $street->name = $request->name;
-            $street->user_id = $userid;
-            $street->type = 'Street';
-            if ($request->latitude && $request->longitude != null) {
-                $street->latitude = $request->latitude;
-                $street->longitude = $request->longitude;
-            } else {
-                $street->latitude = 0;
-                $street->longitude = 0;
-            }
-            //convert array tags to string
-            if ($request->tags == null) {
-                $street->tags = null;
-            } else {
-                $tags = $request->tags;
-                $street->tags = implode(',', $tags);
-            }
-
-            //add 1 point for each tag
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $street->save();
-            //return the id after saving
-            $streetid = $street->id;
-            return $streetid . '&type=street';
-        } elseif ($request->type == 'Building') {
-            $building = new Building();
-            $building->name = $request->name;
-            $building->user_id = $userid;
-            $building->type = 'Building';
-            if ($request->latitude && $request->longitude != null) {
-                $building->latitude = $request->latitude;
-                $building->longitude = $request->longitude;
-            } else {
-                $building->latitude = 0;
-                $building->longitude = 0;
-            }
-            $tags = $request->tags;
-            $building->tags = implode(',', $tags);
-            if ($request->tags == null) {
-                $building->tags = null;
-            } else {
-                $tags = $request->tags;
-                $building->tags = implode(',', $tags);
-            }
-
-            //add 1 point for each tag
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $building->save();
-            //return the id after saving
-            $buildingid = $building->id;
-            return $buildingid . '&type=building';
-        } elseif ($request->type == 'Openspace') {
-            $openspace = new Openspace();
-            $openspace->name = $request->name;
-            $openspace->user_id = $userid;
-            $openspace->type = 'Openspace';
-            if ($request->latitude && $request->longitude != null) {
-                $openspace->latitude = $request->latitude;
-                $openspace->longitude = $request->longitude;
-            } else {
-                $openspace->latitude = 0;
-                $openspace->longitude = 0;
-            }
-            $tags = $request->tags;
-            $openspace->tags = implode(',', $tags);
-            if ($request->tags == null) {
-                $openspace->tags = null;
-            } else {
-                $tags = $request->tags;
-                $openspace->tags = implode(',', $tags);
-            }
-
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $openspace->save();
-            //return the id after saving
-            $openspaceid = $openspace->id;
-            return $openspaceid . '&type=openspace';
-        } else {
-            return 'error';
-        }
-    }
-
-    public function opinions(Request $request)
-    {
-        $userid = backpack_auth()->user()->id;
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            $opinions = $request->opinions;
-            $street->opinions = implode(',', $opinions);
-            $street->save();
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            return $request->placeid . '&type=street';
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            $opinions = $request->opinions;
-            $building->opinions = implode(',', $opinions);
-            $building->save();
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            return $request->placeid . '&type=building';
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            $opinions = $request->opinions;
-            $openspace->opinions = implode(',', $opinions);
-            $openspace->save();
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            return $request->placeid . '&type=openspace';
-        }
-    }
-
-    public function feeling(Request $request)
-    {
-        $userid = backpack_auth()->user()->id;
-        $placeid = $request->id;
-        if ($request->type == 'street') {
-            $street = Street::find($request->id);
-            $street->feeling = $request->feeling;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->id);
-            $building->feeling = $request->feeling;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->id);
-            $openspace->feeling = $request->feeling;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $openspace->save();
-        }
-        return $placeid;
-    }
-
-    static function allopinions()
-    {
-        $locale = session()->get('locale');
-        if ($locale == 'en') {
-            $opinions = Opinion::where('personal', null)->get();
-        } elseif ($locale == 'de') {
-            $opinions = Opinion_de::where('personal', null)->get();
-        } else {
-            $opinions = Opinion::where('personal', null)->get();
-        }
-
-        return $opinions;
-    }
 
     public function avatar(Request $request)
     {
@@ -1386,6 +939,7 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         $placeDetails = User::with('placeDetails')->find($userid)->placeDetails()->orderBy('id', 'desc')->paginate(10);
+
         $score = backpack_auth()->user()->score;
 
   
@@ -1403,1756 +957,11 @@ class GlobalController extends Controller
         return response()->json(['html' => $html,'hasMorePages'=>$placeDetails->hasMorePages()]);
     }
 
-    public function store0(Request $request)
-    {
-        //dd($request->all());
-        $userid = backpack_auth()->user()->id;
-        // dd($request->all());
-        if ($userid) {
-            if ($request->type == 'street') {
-                $street = Street::find($request->placeid);
-                if ($request->imagefirst != null) {
-                    $imageName =
-                        $street->name . '.' . $request->imagefirst->extension();
-                    $request->imagefirst->storeAs(
-                        'public/uploads/street/feeling/',
-                        $imageName
-                    );
-                    $street->image0 = '/uploads/street/feeling/' . $imageName;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->save();
-                }
-                if ($request->description != null) {
-                    $street->description = $request->description;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                }
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-                $street->save();
-            } elseif ($request->type == 'building') {
-                $building = Building::find($request->placeid);
-                if ($request->imagefirst != null) {
-                    $imageName =
-                        $building->name . '.' . $request->imagefirst->extension();
-                    $request->imagefirst->storeAs(
-                        'public/uploads/building/feeling/',
-                        $imageName
-                    );
-                    $building->image0 = '/uploads/building/feeling/' . $imageName;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->save();
-                }
-                if ($request->description != null) {
-                    $building->description = $request->description;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                }
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-                $building->save();
-            } elseif ($request->type == 'openspace') {
-                $openspace = Openspace::find($request->placeid);
-                if ($request->imagefirst != null) {
-                    $imageName =
-                        $openspace->name . '.' . $request->imagefirst->extension();
-                    $request->imagefirst->storeAs(
-                        'public/uploads/openspace/feeling/',
-                        $imageName
-                    );
-                    $openspace->image0 = '/uploads/openspace/feeling/' . $imageName;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->save();
-                }
-                if ($request->description != null) {
-                    $openspace->description = $request->description;
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                }
-                backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-                $openspace->save();
-            }
-        }
 
-        $placeid = $request->placeid;
-        $type = $request->type;
-        session()->put('placeid', $placeid);
-        session()->put('type', $type);
+    
 
-        return view('step3', compact('placeid', 'type'));
-    }
 
-    public function store(Request $request)
-    {
-        // dd($request->all());
-        $userid = backpack_auth()->user()->id;
-
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            if ($request->image != null) {
-                $imageName = $street->name . '.' . $request->image->extension();
-                $request->image->storeAs(
-                    'public/uploads/street/tochange/',
-                    $imageName
-                );
-                $street->image = '/uploads/street/tochange/' . $imageName;
-                $street->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 5;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            }
-            if ($request->description2 != null) {
-                $street->description2 = $request->description2;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            }
-            $street->change = $request->change;
-            $street->save();
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            if ($request->image != null) {
-                $imageName =
-                    $building->name . '.' . $request->image->extension();
-                $request->image->storeAs(
-                    'public/uploads/building/tochange/',
-                    $imageName
-                );
-                $building->image = '/uploads/building/tochange/' . $imageName;
-                $building->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 5;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            }
-
-            if ($request->description2 != null) {
-                $building->description2 = $request->description2;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            }
-            $building->change = $request->change;
-            $building->save();
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            if ($request->image != null) {
-                $imageName =
-                    $openspace->name . '.' . $request->image->extension();
-                $request->image->storeAs(
-                    'public/uploads/openspace/tochange/',
-                    $imageName
-                );
-                $openspace->image = '/uploads/openspace/tochange/' . $imageName;
-                $openspace->save();
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 5;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            }
-            if ($request->description2 != null) {
-                $openspace->description2 = $request->description2;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-            }
-            $openspace->change = $request->change;
-            $openspace->save();
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-        }
-
-        $placeid = $request->placeid;
-        $type = $request->type;
-
-        return view('step5', compact('placeid', 'type'));
-    }
-
-    public function confortlevel(Request $request)
-    {
-        $userid = backpack_auth()->user()->id;
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            $street->confort = $request->level;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            $building->confort = $request->level;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            $openspace->confort = $request->level;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $openspace->save();
-        }
-
-        $placeid = $request->placeid;
-        $type = $request->type;
-
-        return view('step6', compact('placeid', 'type'));
-    }
-
-    public function enjoy(Request $request)
-    {
-        // dd($request->all());
-        $userid = backpack_auth()->user()->id;
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            if ($request->action == 'rest') {
-                $street->rest = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->rest_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'movement') {
-                $street->movement = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->movement_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'activities') {
-                $street->activities = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->activities_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'orientation') {
-                $street->orientation = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->orientation_text = $request->text;
-                }
-
-                $street->save();
-            }
-            if ($request->action == 'weather') {
-                $street->weather = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->weather_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'facilities') {
-                $street->facilities = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->facilities_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'noise') {
-                $street->noise = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->noise_text = $request->text;
-                }
-                $street->save();
-            }
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            if ($request->action == 'rest') {
-                $building->rest = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->rest_text = $request->text;
-                }
-                $building->save();
-            }
-            if ($request->action == 'movement') {
-                $building->movement = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->movement_text = $request->text;
-                }
-                $building->save();
-            }
-            if ($request->action == 'activities') {
-                $building->activities = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->activities_text = $request->text;
-                }
-                $building->save();
-            }
-            if ($request->action == 'orientation') {
-                $building->orientation = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->orientation_text = $request->text;
-                }
-                $building->save();
-            }
-            if ($request->action == 'weather') {
-                $building->weather = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->weather_text = $request->text;
-                }
-                $building->save();
-            }
-            if ($request->action == 'facilities') {
-                $building->facilities = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->facilities_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'noise') {
-                $building->noise = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->noise_text = $request->text;
-                }
-
-                $building->save();
-            }
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            if ($request->action == 'rest') {
-                $openspace->rest = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->rest_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'movement') {
-                $openspace->movement = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->movement_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'activities') {
-                $openspace->activities = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->activities_text = $request->text;
-                }
-                $openspace->save();
-            }
-            if ($request->action == 'orientation') {
-                $openspace->orientation = $request->value;
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->orientation_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'weather') {
-                $openspace->weather = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->weather_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'noise') {
-                $openspace->noise = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->noise_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-        }
-
-        return 'ok';
-    }
-
-    public function enjoyable(Request $request)
-    {
-        $placeid = $request->placeid;
-        $type = $request->type;
-        $userid = backpack_auth()->user()->id;
-
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            $street->enjoyable = $request->enjoyable;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            $building->enjoyable = $request->enjoyable;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            $openspace->enjoyable = $request->enjoyable;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $openspace->save();
-        }
-
-        $placeid = $request->placeid;
-        $type = $request->type;
-
-        return view('step7', compact('placeid', 'type'));
-    }
-
-    public function enjoydetail(Request $request)
-    {
-        $placeid = $request->placeid;
-        $type = $request->type;
-        $userid = backpack_auth()->user()->id;
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            if ($request->action == 'talking') {
-                $street->talking = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->talking_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'cleanliness') {
-                $street->cleanliness = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->cleanliness_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'plants') {
-                $street->plants = $request->value;
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->plants_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'sunlight') {
-                $street->sunlight = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->sunlight_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'interesting') {
-                $street->interesting = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->interesting_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'shade') {
-                $street->shade = $request->value;
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->shade_text = $request->text;
-                }
-                $street->save();
-            }
-            if ($request->action == 'beauty') {
-                $street->beauty = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->beauty_text = $request->text;
-                }
-                $street->save();
-            }
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            if ($request->action == 'talking') {
-                $building->talking = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->talking_text = $request->text;
-                }
-                $building->save();
-            }
-            if ($request->action == 'cleanliness') {
-                $building->cleanliness = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->cleanliness_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'plants') {
-                $building->plants = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->plants_text = $request->text;
-                }
-                $building->save();
-            }
-            if ($request->action == 'sunlight') {
-                $building->sunlight = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->sunlight_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'interesting') {
-                $building->interesting = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->interesting_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'shade') {
-                $building->shade = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->shade_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'beauty') {
-                $building->beauty = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->beauty_text = $request->text;
-                }
-
-                $building->save();
-            }
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            if ($request->action == 'talking') {
-                $openspace->talking = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->talking_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'cleanliness') {
-                $openspace->cleanliness = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->cleanliness_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'plants') {
-                $openspace->plants = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->plants_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'sunlight') {
-                $openspace->sunlight = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->sunlight_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'interesting') {
-                $openspace->interesting = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->interesting_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'shade') {
-                $openspace->shade = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->shade_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'beauty') {
-                $openspace->beauty = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->beauty_text = $request->text;
-                }
-                $openspace->save();
-            }
-        }
-        return 'ok';
-    }
-
-    public function protected(Request $request)
-    {
-        $placeid = $request->placeid;
-        $type = $request->type;
-        $userid = backpack_auth()->user()->id;
-
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            $street->protected = $request->protected;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            $building->protected = $request->protected;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            $openspace->protected = $request->protected;
-            backpack_auth()->user()->score = backpack_auth()->user()->score + 1;
-            backpack_auth()
-                ->user()
-                ->save();
-            $openspace->save();
-        }
-
-        $placeid = $request->placeid;
-        $type = $request->type;
-
-        return view('step8', compact('placeid', 'type'));
-    }
-
-    public function protectedetail(Request $request)
-    {
-        $placeid = $request->placeid;
-        $type = $request->type;
-        $userid = backpack_auth()->user()->id;
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            if ($request->action == 'protection') {
-                $street->protection = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->protection_text = $request->text;
-                }
-
-                $street->save();
-            }
-            if ($request->action == 'polluants') {
-                $street->polluants = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->polluants_text = $request->text;
-                }
-
-                $street->save();
-            }
-            if ($request->action == 'night') {
-                $street->night = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->night_text = $request->text;
-                }
-
-                $street->save();
-            }
-            if ($request->action == 'hazards') {
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->hazards = $request->text;
-                }
-
-                $street->save();
-            }
-            if ($request->action == 'dangerous') {
-                $street->dangerous = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->dangerous_text = $request->text;
-                }
-
-                $street->save();
-            }
-            if ($request->action == 'protection_harm') {
-                $street->protection_harm = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->protection_harm_text = $request->text;
-                }
-
-                $street->save();
-            }
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            if ($request->action == 'protection') {
-                $building->protection = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->protection_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'polluants') {
-                $building->polluants = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->polluants_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'night') {
-                $building->night = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->night_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'hazards') {
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->hazards = $request->text;
-                }
-                $building->save();
-            }
-            if ($request->action == 'dangerous') {
-                $building->dangerous = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->dangerous_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'protection_harm') {
-                $building->protection_harm = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->protection_harm_text = $request->text;
-                }
-
-                $building->save();
-            }
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            if ($request->action == 'protection') {
-                $openspace->protection = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->protection_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'polluants') {
-                $openspace->polluants = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->polluants_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'night') {
-                $openspace->night = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->night_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'hazards') {
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->hazards = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'dangerous') {
-                $openspace->dangerous = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->dangerous_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'protection_harm') {
-                $openspace->protection_harm = $request->value;
-                backpack_auth()->user()->score =
-                    backpack_auth()->user()->score + 1;
-                backpack_auth()
-                    ->user()
-                    ->save();
-
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->protection_harm_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-        }
-
-        return 'ok';
-    }
-
-    public function timespending(Request $request)
-    {
-        $placeid = $request->placeid;
-        $type = $request->type;
-        $userid = backpack_auth()->user()->id;
-
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            $street->time_spending = $request->step8;
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            $building->time_spending = $request->step8;
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            $openspace->time_spending = $request->step8;
-            $openspace->save();
-        }
-
-        $placeid = $request->placeid;
-        $type = $request->type;
-
-        return view('step9', compact('placeid', 'type'));
-    }
-
-    public function timespendingdetail(Request $request)
-    {
-        $placeid = $request->placeid;
-        $type = $request->type;
-        $userid = backpack_auth()->user()->id;
-
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            if ($request->action == 'spend_time') {
-                $street->spend_time = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->spend_time_text = $request->text;
-                }
-
-                $street->save();
-            }
-            if ($request->action == 'meeting') {
-                $street->meeting = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->meeting_text = $request->text;
-                }
-
-                $street->save();
-            }
-            if ($request->action == 'events') {
-                $street->events = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->events_text = $request->text;
-                }
-
-                $street->save();
-            }
-
-            if ($request->action == 'multifunctional') {
-                $street->multifunctional = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $street->multifunctional_text = $request->text;
-                }
-
-                $street->save();
-            }
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            if ($request->action == 'spend_time') {
-                $building->spend_time = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->spend_time_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'meeting') {
-                $building->meeting = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->meeting_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'events') {
-                $building->events = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->events_text = $request->text;
-                }
-
-                $building->save();
-            }
-            if ($request->action == 'multifunctional') {
-                $building->multifunctional = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $building->multifunctional_text = $request->text;
-                }
-
-                $building->save();
-            }
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            if ($request->action == 'spend_time') {
-                $openspace->spend_time = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->spend_time_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'meeting') {
-                $openspace->meeting = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->meeting_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'events') {
-                $openspace->events = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->meeting_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-            if ($request->action == 'multifunctional') {
-                $openspace->multifunctional = $request->value;
-                if ($request->text != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 5;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                    $openspace->multifunctional_text = $request->text;
-                }
-
-                $openspace->save();
-            }
-        }
-
-        return 'ok';
-        // return view('step10', compact('placeid', 'type'));
-    }
-
-    public function spaceusage(Request $request)
-    {
-        $placeid = $request->placeid;
-        $type = $request->type;
-        $userid = backpack_auth()->user()->id;
-
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            $street->spaceusage = $request->know_space;
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            $building->spaceusage = $request->know_space;
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            $openspace->spaceusage = $request->know_space;
-            $openspace->save();
-        }
-
-        $placeid = $request->placeid;
-        $type = $request->type;
-
-        return view('step10', compact('placeid', 'type'));
-    }
-
-    public function spaceusagedetail(Request $request)
-    {
-        $userid = backpack_auth()->user()->id;
-
-        if ($request->type == 'street') {
-            $street = Street::find($request->placeid);
-            $spacetag = $request->spacetag;
-            $street->usagedetail = implode(',', $spacetag);
-            $street->save();
-        } elseif ($request->type == 'building') {
-            $building = Building::find($request->placeid);
-            $spacetag = $request->spacetag;
-            $building->usagedetail = implode(',', $spacetag);
-            $building->save();
-        } elseif ($request->type == 'openspace') {
-            $openspace = Openspace::find($request->placeid);
-            $spacetag = $request->spacetag;
-            $openspace->usagedetail = implode(',', $spacetag);
-            $openspace->save();
-        }
-
-        return 'ok';
-    }
-
-    static function allspacetag()
-    {
-        $locale = session()->get('locale');
-        if ($locale == 'en') {
-            $spacetags = Space_tag::where('personal', null)->get();
-        } elseif ($locale == 'de') {
-            $spacetags = Space_tag_de::where('personal', null)->get();
-        } else {
-            $spacetags = Space_tag::where('personal', null)->get();
-        }
-        return $spacetags;
-    }
-
-    public function newspacetag(Request $request)
-    {
-        $locale = session()->get('locale');
-        if ($locale == 'en') {
-            $spacetag = new Space_tag();
-        } elseif ($locale == 'de') {
-            $spacetag = new Space_tag_de();
-        } else {
-            $spacetag = new Space_tag();
-        }
-        //check if the tag already exists
-        $stag = Space_tag::where('name', $request->name)->first();
-        if ($stag) {
-            return 'exists';
-        } else {
-            $spacetag->name = $request->name;
-            $spacetag->personal = 1;
-            $spacetag->save();
-            return $request->name;
-        }
-    }
-
-    public function place(Request $request)
-    {
-        $type = strtolower($request->type);
-        $placeid = $request->id;
-        if ($request->type == 'street') {
-            $data = Street::find($request->id);
-            return view('place', compact('data', 'type', 'placeid'));
-        }
-        if ($request->type == 'building') {
-            $data = Building::find($request->id);
-            return view('place', compact('data', 'type', 'placeid'));
-        }
-        if ($request->type == 'openspace') {
-            $data = Openspace::find($request->id);
-            return view('place', compact('data', 'type', 'placeid'));
-        }
-    }
-
-    public function delete(Request $request)
-    {
-        if ($request->type == 'Street') {
-            $data = Street::find($request->id);
-            $data->delete();
-            return redirect('/dashboard');
-        }
-        if ($request->type == 'Building') {
-            $data = Building::find($request->id);
-            $data->delete();
-            return redirect('/dashboard');
-        }
-        if ($request->type == 'Openspace') {
-            $data = Openspace::find($request->id);
-            $data->delete();
-            return redirect('/dashboard');
-        }
-    }
+   
 
     static function pages()
     {
@@ -3179,216 +988,6 @@ class GlobalController extends Controller
         return $infos;
     }
 
-    public function details(Request $request)
-    {
-        $type = strtolower($request->type);
-        $placeid = $request->id;
-        if ($type == 'street') {
-            $data = Street::find($request->id);
-            return view('details', compact('data', 'type', 'placeid'));
-        }
-        if ($type == 'building') {
-            $data = Building::find($request->id);
-            return view('details', compact('data', 'type', 'placeid'));
-        }
-        if ($type == 'openspace') {
-            $data = Openspace::find($request->id);
-            return view('details', compact('data', 'type', 'placeid'));
-        }
-    }
-
-    public function edit(Request $request)
-    {
-        //dd($request->all());
-        $street = Street::all();
-        $building = Building::all();
-        $openspace = Openspace::all();
-
-        $all_data = array_merge(
-            $street->toArray(),
-            $building->toArray(),
-            $openspace->toArray()
-        );
-
-        if ($request->type == 'street') {
-            Street::where('id', $request->placeid)->update([
-                'description' => $request->description,
-                'change' => $request->change,
-                'description2' => $request->description2,
-                'confort' => $request->confort,
-                'rest' => $request->rest,
-                'rest_text' => $request->rest_text,
-                'movement' => $request->movement,
-                'movement_text' => $request->movement_text,
-                'activities' => $request->activities,
-                'activities_text' => $request->activities_text,
-                'orientation' => $request->orientation,
-                'orientation_text' => $request->orientation_text,
-                'weather' => $request->weather,
-                'weather_text' => $request->weather_text,
-                'facilities' => $request->facilities,
-                'facilities_text' => $request->facilities_text,
-                'noise' => $request->noise,
-                'noise_text' => $request->noise_text,
-                'enjoyable' => $request->enjoyable,
-                'cleanliness' => $request->cleanliness,
-                'cleanliness_text' => $request->cleanliness_text,
-                'plants' => $request->plants,
-                'plants_text' => $request->plants_text,
-                'sunlight' => $request->sunlight,
-                'sunlight_text' => $request->sunlight_text,
-                'shade' => $request->shade,
-                'shade_text' => $request->shade_text,
-                'talking' => $request->talking,
-                'talking_text' => $request->talking_text,
-                'interesting' => $request->interesting,
-                'interesting_text' => $request->interesting_text,
-                'beauty' => $request->beauty,
-                'beauty_text' => $request->beauty_text,
-                'protected' => $request->protected,
-                'protection' => $request->protection,
-                'protection_text' => $request->protection_text,
-                'polluants' => $request->polluants,
-                'polluants_text' => $request->polluants_text,
-                'night' => $request->night,
-                'night_text' => $request->night_text,
-                'hazards' => $request->hazards,
-                'dangerous' => $request->dangerous,
-                'dangerous_text' => $request->dangerous_text,
-                'protection_harm' => $request->protection_harm,
-                'protection_harm_text' => $request->protection_harm_text,
-                'spaceusage' => $request->spaceusage,
-                'spend_time' => $request->spend_time,
-                'spend_time_text' => $request->spend_time_text,
-                'meeting' => $request->meeting,
-                'meeting_text' => $request->meeting_text,
-                'multifunctional' => $request->multifonctional,
-                'multifunctional_text' => $request->multifonctional_text,
-                'events' => $request->events,
-                'events_text' => $request->events_text,
-            ]);
-        }
-        if ($request->type == 'building') {
-            Building::where('id', $request->placeid)->update([
-                'description' => $request->description,
-                'change' => $request->change,
-                'description2' => $request->description2,
-                'confort' => $request->confort,
-                'rest' => $request->rest,
-                'rest_text' => $request->rest_text,
-                'movement' => $request->movement,
-                'movement_text' => $request->movement_text,
-                'activities' => $request->activities,
-                'activities_text' => $request->activities_text,
-                'orientation' => $request->orientation,
-                'orientation_text' => $request->orientation_text,
-                'weather' => $request->weather,
-                'weather_text' => $request->weather_text,
-                'facilities' => $request->facilities,
-                'facilities_text' => $request->facilities_text,
-                'noise' => $request->noise,
-                'noise_text' => $request->noise_text,
-                'enjoyable' => $request->enjoyable,
-                'cleanliness' => $request->cleanliness,
-                'cleanliness_text' => $request->cleanliness_text,
-                'plants' => $request->plants,
-                'plants_text' => $request->plants_text,
-                'sunlight' => $request->sunlight,
-                'sunlight_text' => $request->sunlight_text,
-                'shade' => $request->shade,
-                'shade_text' => $request->shade_text,
-                'talking' => $request->talking,
-                'talking_text' => $request->talking_text,
-                'interesting' => $request->interesting,
-                'interesting_text' => $request->interesting_text,
-                'beauty' => $request->beauty,
-                'beauty_text' => $request->beauty_text,
-                'protected' => $request->protected,
-                'protection' => $request->protection,
-                'protection_text' => $request->protection_text,
-                'polluants' => $request->polluants,
-                'polluants_text' => $request->polluants_text,
-                'night' => $request->night,
-                'night_text' => $request->night_text,
-                'hazards' => $request->hazards,
-                'dangerous' => $request->dangerous,
-                'dangerous_text' => $request->dangerous_text,
-                'protection_harm' => $request->protection_harm,
-                'protection_harm_text' => $request->protection_harm_text,
-                'spaceusage' => $request->spaceusage,
-                'spend_time' => $request->spend_time,
-                'spend_time_text' => $request->spend_time_text,
-                'meeting' => $request->meeting,
-                'meeting_text' => $request->meeting_text,
-                'multifunctional' => $request->multifonctional,
-                'multifunctional_text' => $request->multifonctional_text,
-                'events' => $request->events,
-                'events_text' => $request->events_text,
-            ]);
-        }
-        if ($request->type == 'openspace') {
-            Openspace::where('id', $request->placeid)->update([
-                'description' => $request->description,
-                'change' => $request->change,
-                'description2' => $request->description2,
-                'confort' => $request->confort,
-                'rest' => $request->rest,
-                'rest_text' => $request->rest_text,
-                'movement' => $request->movement,
-                'movement_text' => $request->movement_text,
-                'activities' => $request->activities,
-                'activities_text' => $request->activities_text,
-                'orientation' => $request->orientation,
-                'orientation_text' => $request->orientation_text,
-                'weather' => $request->weather,
-                'weather_text' => $request->weather_text,
-                'facilities' => $request->facilities,
-                'facilities_text' => $request->facilities_text,
-                'noise' => $request->noise,
-                'noise_text' => $request->noise_text,
-                'enjoyable' => $request->enjoyable,
-                'cleanliness' => $request->cleanliness,
-                'cleanliness_text' => $request->cleanliness_text,
-                'plants' => $request->plants,
-                'plants_text' => $request->plants_text,
-                'sunlight' => $request->sunlight,
-                'sunlight_text' => $request->sunlight_text,
-                'shade' => $request->shade,
-                'shade_text' => $request->shade_text,
-                'talking' => $request->talking,
-                'talking_text' => $request->talking_text,
-                'interesting' => $request->interesting,
-                'interesting_text' => $request->interesting_text,
-                'beauty' => $request->beauty,
-                'beauty_text' => $request->beauty_text,
-                'protected' => $request->protected,
-                'protection' => $request->protection,
-                'protection_text' => $request->protection_text,
-                'polluants' => $request->polluants,
-                'polluants_text' => $request->polluants_text,
-                'night' => $request->night,
-                'night_text' => $request->night_text,
-                'hazards' => $request->hazards,
-                'dangerous' => $request->dangerous,
-                'dangerous_text' => $request->dangerous_text,
-                'protection_harm' => $request->protection_harm,
-                'protection_harm_text' => $request->protection_harm_text,
-                'spaceusage' => $request->spaceusage,
-                'spend_time' => $request->spend_time,
-                'spend_time_text' => $request->spend_time_text,
-                'meeting' => $request->meeting,
-                'meeting_text' => $request->meeting_text,
-                'multifunctional' => $request->multifonctional,
-                'multifunctional_text' => $request->multifonctional_text,
-                'events' => $request->events,
-                'events_text' => $request->events_text,
-            ]);
-        }
-
-        return redirect()->route('dashboard');
-    }
-
-
 
     //----------------------new code----------------------
 
@@ -3397,146 +996,125 @@ class GlobalController extends Controller
     public function addMapPlace(Request $request, $id = null)
     {
         // dd($request->all());
-
-        $place = PlaceDetails::where('latitude', $request->latitude)
-            ->where('longitude', $request->longitude)
-            ->where('user_id', backpack_auth()->user()->id)
-            ->first();
+       
+        $postData=json_decode($request->place_data,true);
+        $postData = (object)$postData;
 
 
-        if ($request->place_child_id == NULL && $request->place_id) {
-            $subPlsFnd = Place::where('parent_id', $request->place_id);
+        // dd($postData);
 
-            if (isset($place)) {
-                $subPlsFnd  = $subPlsFnd->where('parent_id', $place->place_id);
-            }
+        $userId = backpack_auth()->user()->id;
+        $response = ['status'=>'','msg'=>'','place_detail_id'=>'','tab'=>'','completed'=>false];
 
-            $subPlsFnd = $subPlsFnd->first();
-
-
-
-            if (isset($subPlsFnd)) {
-                if (isset($place)) {
-                    return response()->json([
-                        'status' => 'success',
-                        'subPlsId' => $place->place_id,
-
-                    ]);
-                } else {
-                    return response()->json([
-                        'status' => 'success',
-                        'subPlsId' => $request->place_id,
-
-                    ]);
-                }
-            }
-        }
-
-        if ($request->observation_child_id == NULL && $request->observation_id) {
-
-            $subObsFnd = Observation::where('parent_id', $request->observation_id);
-
-            if (isset($place)) {
-                $subObsFnd  = $subObsFnd->where('parent_id', $place->observation_id);
-            }
-
-            $subObsFnd = $subObsFnd->first();
-
-            if (isset($subObsFnd)) {
-                if (isset($place)) {
-                    return response()->json([
-                        'status' => 'success',
-                        'subObsId' => $place->observation_id,
-
-                    ]);
-                } else {
-
-                    return response()->json([
-                        'status' => 'success',
-                        'subObsId' => $request->observation_id,
-
-                    ]);
-                }
-            }
+        if(isset($postData->place_detail_id) && $postData->place_detail_id!=''){
+            $place_detail = PlaceDetails::find($postData->place_detail_id);
+        }else{
+            $latitude = $postData->latitude;
+            $longitude = $postData->longitude;
+            $radius = 100; // Meters
+            $place_detail = PlaceDetails::selectRaw("*,
+                    ( 6371 * acos( cos( radians(?) )
+                    * cos( radians( latitude ) )
+                    * cos( radians( longitude ) - radians(?)) + sin( radians(?) )
+                    * sin( radians( latitude ) ) )) AS distance", [$latitude, $longitude, $latitude])
+                    ->having("distance", "<", ($radius/1000))
+                    ->where('user_id',$userId)
+                    ->first();    
         }
 
 
 
 
+        if (isset($place_detail)) {
 
-
-        if (isset($place)) {
-            if (isset($request->place_id)) {
-                $place->update([
-                    'place_id' => $request->place_id,
-                    'place_child_id' => $request->place_child_id,
-                ]);
-                return response()->json([
-                    'status' => 'success',
-                    'msg' => 'Place updated successfully'
-                ]);
-            } elseif (isset($request->place_child_id)) {
-                $place->update([
-                    'place_child_id' => $request->place_child_id,
-                ]);
-                return response()->json([
-                    'status' => 'success',
-                    'msg' => 'SubPlace updated successfully'
-                ]);
-            } elseif (isset($request->observation_id)) {
-
-                $place->update([
-                    'observation_id' => $request->observation_id,
-                    'observation_child_id' => $request->observation_child_id,
-                ]);
-
-                return response()->json([
-                    'status' => 'success',
-                    'msg' => 'Observation updated successfully'
-                ]);
-            } elseif (isset($request->observation_child_id)) {
-
-                $place->update([
-                    'observation_child_id' => $request->observation_child_id,
-                ]);
-
-                return response()->json([
-                    'status' => 'success',
-                    'msg' => 'Observation updated successfully'
-                ]);
-            } else {
-                return response()->json([
-                    'status' => 'success',
-                    'msg' => 'Place alreay exist'
-                ]);
-            }
-        } else {
-
-            PlaceDetails::create([
-
-                'place_id' => $request->place_id,
-                'place_child_id' => $request->place_child_id,
-                'observation_child_id' => $request->observation_child_id,
+            $place_detail->update([
                 'user_id' =>  backpack_auth()->user()->id,
-                'observation_id' => $request->observation_id,
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
+                'place_description' =>  $postData->place_description?$postData->place_description:NULL,
+                'obsevation_description' =>  $postData->observation_description?$postData->observation_description:NULL,
+                // 'latitude' => $postData->latitude,
+                // 'longitude' => $postData->longitude,
+            ]);
+            
+            if(isset($postData->update) && $postData->update=='place'){
+                $place_detail->updatePlaces($place_detail,$postData);
+            }else if(isset($postData->update) && $postData->update=='observation'){
+                $place_detail->updateObservations($place_detail,$postData);
+            }else{
+                $place_detail->updateMethod($place_detail,$postData);
+            }
 
+
+            $response['status'] = 'success';
+            $response['msg'] = 'data updated successfully!';
+        } else {
+            $place_detail=PlaceDetails::create([
+                'user_id' =>  backpack_auth()->user()->id,
+                'place_description' =>  $postData->place_description?$postData->place_description:NULL,
+                'obsevation_description' =>  $postData->observation_description?$postData->observation_description:NULL,
+                'latitude' => $postData->latitude,
+                'longitude' => $postData->longitude,
             ]);
 
-            if ($request->observation_id) {
-                return response()->json([
-                    'status' => 'success',
-                    'msg' => 'Observation added successfully'
-                ]);
-            } else {
-                return response()->json([
-                    'status' => 'success',
-                    'msg' => 'Place added successfully, You can also add obervation for this place!',
-
+            if($postData->place_id){
+                PlaceDetailPlace::create([
+                    'place_detail_id' => $place_detail->id,
+                    'place_id' => $postData->place_id,
+                    'place_child_id' => $postData->child_place_id?$postData->child_place_id:NULL,
                 ]);
             }
+            
+            if(isset($postData->observations) && is_array($postData->observations) && count($postData->observations)>0){
+                foreach($postData->observations as $obsrv){
+                    PlaceDetailObservation::create([
+                        'place_detail_id' => $place_detail->id,
+                        'observation_id' => $obsrv['observation_id'],
+                        'observation_child_id' => $obsrv['child_observation_id']?$obsrv['child_observation_id']:NULL,
+                        'feeling_id' => $obsrv['feeling_id'],
+                    ]);
+                }
+            }
+            
+
+           
+            backpack_auth()->user()->incrementScore(1);
+            $response['status'] = 'success';
+            $response['msg'] = 'data added successfully!';
         }
+
+        if ($request->hasFile('place_image')) {
+            $request->validate([
+                'place_image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            ]);
+            $imageName = time() . '_place.' . $request->place_image->extension();
+            $request->place_image->storeAs('public/uploads/place/', $imageName);
+            $place_detail->update([
+                'place_image' =>  $imageName,
+            ]);
+        }
+
+        if ($request->hasFile('observation_image')) {
+            $request->validate([
+                'observation_image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            ]);
+            $imageName = time() . '_observation.' . $request->observation_image->extension();
+            $request->observation_image->storeAs('public/uploads/observation/', $imageName);
+            $place_detail->update([
+                'obsevation_image' =>  $imageName,
+            ]);
+        }
+
+
+
+        $response['place_detail_id'] = $place_detail->id;
+
+        
+        if((isset($place_detail->placeDetail) && $place_detail->placeDetail->id) && (isset($place_detail->observationsDetail) &&  count($place_detail->observationsDetail))>0){
+            $response['completed'] = true;
+        }
+            
+        $response['tab'] = $postData->tab;
+        return response()->json($response);
+
     }
 
 
@@ -3583,44 +1161,26 @@ class GlobalController extends Controller
     }
 
 
-    public function createNewPlace(Request $request)
+    public function createNew($type='place')
     {
+       
+        
+        $allPlaces = Place::where('user_id', null)
+            ->where('parent_id', NULL)
+            ->orWhere('user_id', backpack_auth()->user()->id)
+            ->get();
 
-        $places = Place::whereNull('parent_id')->get();
+      
 
-        $observations = Observation::whereNull('parent_id')->get();
+        $allObservations = Observation::where('user_id', null)
+            ->where('parent_id', NULL)
+            ->orWhere('user_id', backpack_auth()->user()->id)
+            ->get();
 
-        return view('add-new-place', compact('places', 'observations'));
+        return view('add-new-place', compact('allObservations', 'allPlaces','type'));
     }
 
-    public function subPlace($id)
-    {
-
-        $place = Place::find($id);
-        $subplaces = Place::where('parent_id', $id)->get();
-        $allObservations = Observation::where('parent_id', NULL)->get();
-
-        if ($subplaces->isNotEmpty()) {
-            return view('sub-place', compact('subplaces', 'place', 'allObservations'));
-        } else {
-
-            return redirect('/');
-        }
-    }
-    public function subObserv($id)
-    {
-
-        $obser = Observation::find($id);
-        $subobservs = Observation::where('parent_id', $id)->get();
-        $allPlaces = Place::where('parent_id', NULL)->get();
-
-        if ($subobservs->isNotEmpty()) {
-            return view('sub-observation', compact('subobservs', 'obser', 'allPlaces'));
-        } else {
-
-            return redirect('/');
-        }
-    }
+   
 
     public function filter()
     {
@@ -3641,78 +1201,5 @@ class GlobalController extends Controller
     }
 
 
-    public function search(Request $request)
-    {
-
-        $query = $request->get('query');
-        $results2Pls = Place::where('name', 'like', '%' . $query . '%')
-            ->where('parent_id', NULL)
-            ->take(2)->get();
-        $resultsPls = Place::where('name', 'like', '%' . $query . '%')
-            ->where(
-                'parent_id',
-                NULL
-            )->get();
-        $results2Obs = Observation::where('name', 'like', '%' . $query . '%')
-            ->where('parent_id', NULL)
-            ->take(2)->get();
-        $resultsObs = Observation::where('name', 'like', '%' . $query . '%')
-            ->where('parent_id', NULL)
-            ->get();
-
-        // dd($results2Obs);
-
-
-        return response()->json([
-            'resultsPls' => $resultsPls,
-            'results2Pls' => $results2Pls,
-            'results2Obs' => $results2Obs,
-            'resultsObs' => $resultsObs,
-        ]);
-    }
-
-    public function subSearchOb(Request $request)
-    {
-
-
-        $query = $request->get('query');
-        $id = $request->get('id');
-
-        $resultsObs = Observation::where('name', 'like', '%' . $query . '%')
-            ->where('parent_id', $id)->get();
-
-        $resultsPls = Place::where('name', 'like', '%' . $query . '%')
-            ->where(
-                'parent_id',
-                NULL
-            )->get();
-
-        return response()->json([
-            'resultsPls' => $resultsPls,
-            'resultsObs' => $resultsObs,
-        ]);
-    }
-
-
-    public function subSearchPl(Request $request)
-    {
-
-
-        $query = $request->get('query');
-        $id = $request->get('id');
-
-        $resultsPls = Place::where('name', 'like', '%' . $query . '%')
-            ->where('parent_id', $id)->get();
-
-        $resultsObs = Observation::where('name', 'like', '%' . $query . '%')
-            ->where(
-                'parent_id',
-                NULL
-            )->get();
-
-        return response()->json([
-            'resultsPls' => $resultsPls,
-            'resultsObs' => $resultsObs,
-        ]);
-    }
+    
 }

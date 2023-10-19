@@ -8,8 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Preference extends Model
 {
     use HasFactory;
-    public static function getPreferences()
+    protected $fillable = [
+        'name',
+        'user_id',
+    ];
+    public static function getPreferences($userId)
     {
-        return self::pluck('name')->toArray();
+        return self::where(function ($query) use ($userId) {
+            $query->where('user_id', $userId)
+                ->orWhereNull('user_id');
+        })->pluck('name')->toArray();
     }
+
 }

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Models/Feeling.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1697224544416,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1697226909252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,5 +9,10 @@\n {\n     use HasFactory;\n \n     protected $fillable = ['name', 'star', 'image'];\n+\n+    public function placeDetails()\n+    {\n+        return $this->hasMany(PlaceDetail::class, 'feeling_id');\n+    }\n }\n"
+                }
+            ],
+            "date": 1697224544416,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass Feeling extends Model\n{\n    use HasFactory;\n\n    protected $fillable = ['name', 'star', 'image'];\n}\n"
+        }
+    ]
+}

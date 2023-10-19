@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 5,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1696847955291,
@@ -28,6 +28,14 @@
                 {
                     "date": 1696854829298,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,11 +57,16 @@\n         return $this->hasMany(PlaceDetails::class, 'user_id');\n     }\n \n     public function places()\n-{\n-    return $this->hasMany(PlaceDetail::class, 'user_id')->whereNotNull('place_id');\n-}\n+    {\n+        return $this->hasMany(PlaceDetails::class, 'user_id')->whereNotNull('place_id');\n+    }\n+    public function observations()\n+    {\n+        return $this->hasMany(PlaceDetails::class, 'user_id')->whereNotNull('observation_id');\n+    }\n \n \n \n+\n }\n"
+                },
+                {
+                    "date": 1697182943503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,8 +65,14 @@\n     {\n         return $this->hasMany(PlaceDetails::class, 'user_id')->whereNotNull('observation_id');\n     }\n \n+    public function incrementScore()\n+    {\n+        $this->score = $this->score + 1;\n+        $this->save();\n+    }\n \n \n \n+\n }\n"
+                },
+                {
+                    "date": 1697182969895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,11 +65,11 @@\n     {\n         return $this->hasMany(PlaceDetails::class, 'user_id')->whereNotNull('observation_id');\n     }\n \n-    public function incrementScore()\n+    public function incrementScore($number)\n     {\n-        $this->score = $this->score + 1;\n+        $this->score = $this->score + $number;\n         $this->save();\n     }\n \n \n"
                 }
             ],
             "date": 1696847955290,

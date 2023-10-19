@@ -1,0 +1,26 @@
+{
+    "sourceFile": "database/seeders/FeelingSeeder.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1697224332577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1697224558673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n <?php\n \n namespace Database\\Seeders;\n+use App\\Feeling;\n \n use Illuminate\\Database\\Console\\Seeds\\WithoutModelEvents;\n use Illuminate\\Database\\Seeder;\n \n"
+                },
+                {
+                    "date": 1697224588544,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n <?php\n \n namespace Database\\Seeders;\n-use App\\Feeling;\n+use App\\Models\\Feeling;\n \n use Illuminate\\Database\\Console\\Seeds\\WithoutModelEvents;\n use Illuminate\\Database\\Seeder;\n \n@@ -22,7 +22,9 @@\n             ['name' => 'Unpleasant, subpar', 'star' => 2, 'image' => '/img/happy.png'],\n             ['name' => 'Unsatisfactory, intolerable', 'star' => 1, 'image' => '/img/disgusted.png'],\n         ];\n \n-        \\DB::table('feelings')->insert($feeling_list);\n+        foreach ($feeling_list as $feelingData) {\n+            Feeling::create($feelingData);\n+        }\n     }\n }\n"
+                }
+            ],
+            "date": 1697224332577,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace Database\\Seeders;\n\nuse Illuminate\\Database\\Console\\Seeds\\WithoutModelEvents;\nuse Illuminate\\Database\\Seeder;\n\nclass FeelingSeeder extends Seeder\n{\n    /**\n     * Run the database seeds.\n     *\n     * @return void\n     */\n    public function run()\n    {\n        $feeling_list = [\n            ['name' => 'Superb, exceptional', 'star' => 5, 'image' => '/img/comfortable.png'],\n            ['name' => 'Good, enjoyable', 'star' => 4, 'image' => '/img/confused.png'],\n            ['name' => 'Average, fair', 'star' => 3, 'image' => '/img/sad.png'],\n            ['name' => 'Unpleasant, subpar', 'star' => 2, 'image' => '/img/happy.png'],\n            ['name' => 'Unsatisfactory, intolerable', 'star' => 1, 'image' => '/img/disgusted.png'],\n        ];\n\n        \\DB::table('feelings')->insert($feeling_list);\n    }\n}\n"
+        }
+    ]
+}

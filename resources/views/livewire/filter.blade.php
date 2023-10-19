@@ -44,10 +44,10 @@
                             <div x-data="{ active: 'AC_1' }">
                                 <div class="flex flex-col items-center justify-center gap-10 mt-6 italic font-semibold"
                                     x-show="tab=='place'">
-                                    <div class="grid grid-cols-3 gap-8">
+                                    <div class="grid grid-cols-3 italic font-semibold gap-10">
                                         @foreach ($places as $pls)
                                             <div wire:ignore
-                                                class="flex flex-col items-center justify-top text-center w-[80px] cursor-pointer"
+                                                class="flex flex-col items-center justify-top text-center cursor-pointer"
                                                 >
                                                 
                                                 <input class="hidden"  type="checkbox" wire:model="formData" value="{{ $pls->source.'_'.$pls->id }}"
@@ -58,27 +58,28 @@
                                                 
 
                                                 <label for="{{ 'checkbox_'.$pls->source.'_'.$pls->id }}" id="PL_{{ $pls->source.'_'.$pls->id }}" onclick="toggleClass('{{ $pls->source.'_'.$pls->id }}')"
-                                                    class="rounded-full  
+                                                    class="w-[76px] h-[76px] cursor-pointer rounded-full  
                                                     
     
-                                                    @if($pls->source === 'place' && is_array($placeIds)  &&  in_array($pls->id, $placeIds)) highlight @endif
-                                                    @if($pls->source === 'observation' && is_array($observationIds)  && in_array($pls->id, $observationIds)) highlight @endif
+                                                    @if($pls->source === 'place' && is_array($placeIds)  &&  in_array($pls->id, $placeIds)) border-4 border-blue-300 highlight @endif
+                                                    @if($pls->source === 'observation' && is_array($observationIds)  && in_array($pls->id, $observationIds)) border-4 border-blue-300 highlight @endif
            
     
-                                                    @if($pls->source === 'place') bg-[#1976d2] @else bg-[#ffa726] @endif p-[20px]">
-                                                    @if ($pls->source === 'place')
-                                                        <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
-                                                    @else
-                                                        <div class="flex items-center justify-center w-7">
-                                                            <img src="{{ asset('new_img/sad.png') }}" alt=""
-                                                                class="-mr-1 w-7 h-7"> <img
-                                                                src="{{ asset('new_img/happy.png') }}" alt=""
-                                                                class="-ml-1 w-7 h-7">
-                                                        </div>
-                                                    @endif
+                                                    @if($pls->source === 'place') bg-site @else bg-[#ffa726] @endif p-[20px]">
+                                                    <div class="flex align-item-center justify-center items-center h-full">
+                                                        @if ($pls->source === 'place')
+                                                            <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
+                                                        @else
+                                                            <div class="flex items-center justify-center w-7">
+                                                                <img src="{{ asset('new_img/sad.png') }}" alt=""
+                                                                    class="-mr-1 w-7 h-7"> <img
+                                                                    src="{{ asset('new_img/happy.png') }}" alt=""
+                                                                    class="-ml-1 w-7 h-7">
+                                                            </div>
+                                                        @endif
+                                                    </div>
                                                 </label>
-                                                <span
-                                                    class="mt-2 text-black">{{ $pls->name }}</span>
+                                                <span class="mt-4 text-black font-normal">{{ $pls->name }}</span>
                                             </div>
                                         @endforeach
                                     </div>
@@ -89,7 +90,7 @@
                         </div>
     
     
-                        <div class="flex flex-row justify-center items-center gap-4 mt-8">
+                        <div class="flex flex-row justify-center items-center gap-4 mt-16">
                             <a href="/" class="px-6 py-4 font-bold	font-sm rounded-3xl color-site border-2 border-site cursor-pointer">Close</a>
     
                             
@@ -104,232 +105,17 @@
 
             </div>
 
-            {{-- <div class="" x-show="update == 'open'">
-                <div class="flex items-center justify-center mt-6">
-                    <div class="-mr-2 cursor-pointer" @click="tab='place'" onclick="observation()">
-                        <div class="flex flex-col">
-
-                            <div class="flex items-center justify-center bg-black border-2 border-white rounded-full shadow-xl"
-                                :class="tab == 'place' || tab == 'observation1' ? 'z-10 p-[35px]' :
-                                    'p-[35px] bg-black/50'">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-white">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                </svg>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="-ml-2 cursor-pointer" @click="tab='observation'" onclick="observation()">
-                        <div class="flex flex-col">
-
-                            <div class="flex items-center justify-center bg-blue-400 border-2 border-white rounded-full shadow-xl"
-                                :class="tab == 'observation' ? 'z-10 p-[35px]' :
-                                    'p-[35px] bg-blue-400/50'">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-white">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                                </svg>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="flex flex-col items-center justify-center px-6 py-6" x-show="tab=='place'">
-                    <span class="my-3 text-xl italic font-bold">
-                        Update your City Layers!
-                    </span>
-                    <input type="text" class="w-full px-2 py-2 mb-6 bg-gray-200 rounded-full" wire:model='search'
-                        placeholder="Browse and remove city layers" name="input" id="">
-
-                    <div class="flex gap-8">
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-blue-300 border-4  border-white p-[35px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">Obser 1</span>
-                        </div>
-
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-yellow-300 border-4  border-red-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">Obser 1</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-blue-300 border-4  border-red-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">PLace 1</span>
-                        </div>
-                    </div>
-                    <div class="flex gap-8">
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-yellow-300 border-4  border-red-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">Obser 1</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-yellow-300 border-4  border-red-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">Obser 1</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-blue-300 border-4  border-red-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-red-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">Place 1</span>
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <div class="flex flex-col items-center justify-center px-6 py-6" x-show="tab=='observation'">
-                    <span class="my-3 text-xl italic font-bold">
-                        Update your City Layers!
-                    </span>
-                    <input type="text" class="w-full px-2 py-2 mb-6 bg-gray-200 rounded-full" wire:model='search'
-                        placeholder="Browse and add city layers" name="input" id="">
-
-                    <div class="flex gap-8">
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-blue-300 border-4  border-lime-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-lime-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">Obser 1</span>
-                        </div>
-
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-yellow-300 border-4  border-lime-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-lime-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">Obser 1</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-blue-300 border-4  border-lime-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-lime-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">PLace 1</span>
-                        </div>
-                    </div>
-                    <div class="flex gap-8">
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-yellow-300 border-4  border-lime-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-lime-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">Obser 1</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-yellow-300 border-4  border-lime-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-lime-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">Obser 1</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center w-[80px]">
-
-                            <div class="rounded-full bg-blue-300 border-4  border-lime-500 p-[24px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="2.5" stroke="currentColor" class="w-6 h-6 text-lime-500">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                                </svg>
-
-                            </div>
-                            <span class="mt-2 text-black">Place 1</span>
-                        </div>
-                    </div>
-
-
-                </div>
-
-
-                <div class="mt-8">
-                    <div class="absolute left-0 right-0 bottom-4">
-                        <div class="flex items-center justify-center gap-2">
-                            <button class="px-8 py-4 border-4 border-blue-500 rounded-3xl">
-                                <span class="text-xl font-semibold text-blue-500">
-                                    Save and Close
-                                </span>
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-
-
 
         </div>
     </div>
 </div>
-<style>
-    .highlight {
-        border: 4px solid limegreen;
-    }
-</style>
+
 <script>
     function toggleClass(id) {
-        document.getElementById('PL_' + id).classList.toggle('highlight');
+        const element = document.getElementById('PL_' + id);
+        element.classList.toggle('border-4');
+        element.classList.toggle('border-blue-300');
+        element.classList.toggle('highlight');
     }
 
     function noti() {

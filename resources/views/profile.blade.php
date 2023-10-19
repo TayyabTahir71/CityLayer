@@ -29,7 +29,7 @@
                 <div class="flex flex-row items-center justify-center gap-3 flex-wrap	">
         
                 @foreach ($preferences as $preference)
-                        <button class="bg-yel  border-ms px-5 italic font-light">{{ucfirst($preference)}}</button>
+                        <button class="bg-yel  border-ms px-5 italic font-light">{{($preference)}}</button>
                 @endforeach
                 </div>
 
@@ -139,99 +139,6 @@
                     </div>
 
 
-                    {{--                     <div class="fixed top-0 left-0 w-full h-full popup z-100" style="display:none;">--}}
-                    {{--                         <div class="popup-content absolute top-[50%] left-[50%] bg-white rounded p-4 text-xs font-bold text-center w-2/3">--}}
-
-                    {{--                         </div>--}}
-                    {{--                     </div>--}}
-                    {{--                     <h1 class="pt-2 text-xs font-bold text-center text-gray-800">{{ __('messages.My badges:') }}</h1>--}}
-                    {{--                     <div class="flex justify-center pt-2">--}}
-                    {{--                         <div class="flex flex-col">--}}
-                    {{--                             <div class="flex gap-x-1">--}}
-                    {{--                                 <button id="btn1">--}}
-                    {{--                                     @if ($explorer == 1)--}}
-                    {{--                                         <img class="w-24" src="/img/icons/explorer.png" alt="">--}}
-                    {{--                                     @else--}}
-                    {{--                                         <img class="w-24 grayscale" src="/img/icons/explorer.png">--}}
-                    {{--                                     @endif--}}
-                    {{--                                 </button>--}}
-                    {{--                                 <button id="btn2">--}}
-                    {{--                                     @if ($citymaker == 1)--}}
-                    {{--                                         <img class="w-24" src="/img/icons/citymaker.png" alt="">--}}
-                    {{--                                     @else--}}
-                    {{--                                         <img class="w-24 grayscale" src="/img/icons/citymaker.png">--}}
-                    {{--                                     @endif--}}
-                    {{--                                 </button>--}}
-
-                    {{--                                 <button id="btn3">--}}
-                    {{--                                     @if ($architect == 1)--}}
-                    {{--                                         <img class="w-24" src="/img/icons/architect.png" alt="">--}}
-                    {{--                                     @else--}}
-                    {{--                                         <img class="w-24 grayscale" src="/img/icons/architect.png">--}}
-                    {{--                                     @endif--}}
-                    {{--                                 </button>--}}
-
-                    {{--                                 <button id="btn4">--}}
-                    {{--                                     @if ($flaneur == 1)--}}
-                    {{--                                         <img class="w-24" src="/img/icons/flaneur.png" alt="">--}}
-                    {{--                                     @else--}}
-                    {{--                                         <img class="w-24 grayscale" src="/img/icons/flaneur.png">--}}
-                    {{--                                     @endif--}}
-                    {{--                                 </button>--}}
-
-                    {{--                                 <button id="btn5">--}}
-                    {{--                                     @if ($urbanist == 1)--}}
-                    {{--                                         <img class="w-24" src="/img/icons/urbanist.png" alt="">--}}
-                    {{--                                     @else--}}
-                    {{--                                         <img class="w-24 grayscale" src="/img/icons/urbanist.png">--}}
-                    {{--                                     @endif--}}
-                    {{--                                 </button>--}}
-                    {{--                             </div>--}}
-                    {{--                             <div class="flex pt-2 gap-x-1">--}}
-                    {{--                                 <button id="btn6">--}}
-                    {{--                                     @if ($influencer == 1)--}}
-                    {{--                                         <img class="w-24" src="/img/icons/influencer.png" alt="">--}}
-                    {{--                                     @else--}}
-                    {{--                                         <img class="w-24 grayscale" src="/img/icons/influencer.png">--}}
-                    {{--                                     @endif--}}
-                    {{--                                 </button>--}}
-
-                    {{--                                 <button id="btn7">--}}
-                    {{--                                     @if ($star == 1)--}}
-                    {{--                                         <img class="w-24" src="/img/icons/star.png" alt="">--}}
-                    {{--                                     @else--}}
-                    {{--                                         <img class="w-24 grayscale" src="/img/icons/star.png">--}}
-                    {{--                                     @endif--}}
-                    {{--                                 </button>--}}
-
-                    {{--                                 <button id="btn8">--}}
-                    {{--                                     @if ($guru == 1)--}}
-                    {{--                                         <img class="w-24" src="/img/icons/guru.png" alt="">--}}
-                    {{--                                     @else--}}
-                    {{--                                         <img class="w-24 grayscale" src="/img/icons/guru.png">--}}
-                    {{--                                     @endif--}}
-                    {{--                                 </button>--}}
-
-                    {{--                                 <button id="btn9">--}}
-                    {{--                                     @if ($investigator == 1)--}}
-                    {{--                                         <img class="w-24" src="/img/icons/investigator.png" alt="">--}}
-                    {{--                                     @else--}}
-                    {{--                                         <img class="w-24 grayscale" src="/img/icons/investigator.png">--}}
-                    {{--                                     @endif--}}
-                    {{--                                 </button>--}}
-
-                    {{--                                 <button id="btn10">--}}
-                    {{--                                     @if ($supermapper == 1)--}}
-                    {{--                                         <img class="w-24" src="/img/icons/supermapper.png" alt="">--}}
-                    {{--                                     @else--}}
-                    {{--                                         <img class="w-24 grayscale" src="/img/icons/supermapper.png">--}}
-                    {{--                                     @endif--}}
-                    {{--                                 </button>--}}
-                    {{--                             </div>--}}
-
-                    {{--                         </div>--}}
-                    {{--                     </div>--}}
-                    {{-- <h1 class="pt-4 text-xl text-center text-gray-800">{{ $infos->profession }}</h1> --}}
                 </div>
             </div>
 

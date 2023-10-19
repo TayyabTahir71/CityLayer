@@ -41,50 +41,29 @@ Route::get('/menu', function () {
 Route::controller(GlobalController::class)->group(function () {
     // Route::get('/', 'getAll')->name('getAll')->middleware('App\Http\Middleware\MyMiddleware');
     Route::get('/', 'getAll');
+    Route::get('edit/{id}', 'getAll');
     Route::get('profile', 'profile')->name('profile');
     Route::get('badges_overview', 'badges_overview')->name('badges_overview');
     Route::post('save_profile', 'saveprofile')->name('saveprofile');
     Route::get('save_profile', 'profil')->name('profil');
-    Route::post('save_preferences', 'savepreferences')->name('savepreferences');
-    Route::get('save_preferences', 'preferences');
+
     Route::get('preferences', 'preferences')->name('preferences');
+    Route::post('save_preferences', 'savepreferences')->name('savepreferences');
+    Route::post('new_preference', 'newpreference')->name('newpreference');
+
     Route::get('dashboard', 'dashboard')->name('dashboard');
     Route::get('loadMore-dashboard', 'loadMore_dashboard')->name('loadMore-dashboard');
-    Route::get('place/{id}/{type}', 'place')->name('place');
-    Route::get('details/{id}/{type}', 'details')->name('details');
+   
     Route::post('/place/like', 'like')->name('like');
     Route::post('/place/dislike', 'dislike')->name('dislike');
-    Route::post('/place/stars', 'stars')->name('stars');
-    Route::post('/place/bof', 'bof')->name('bof');
-    Route::post('/place/weird', 'weird')->name('weird');
-    Route::post('/place/ohh', 'ohh')->name('ohh');
-    Route::post('/place/wtf', 'wtf')->name('wtf');
     Route::post('/place/comment', 'comment')->name('comment');
     Route::post('edit/{id}/{type}', 'edit')->name('edit');
-    Route::get('street', 'street')->name('street');
+    
     Route::get('delete', 'delete')->name('delete');
-    Route::get('building', 'building')->name('building');
-    Route::get('openspace', 'openspace')->name('openspace');
-    Route::post('newtag', 'newtag')->name('newtag');
-    Route::post('newopinion', 'newopinion')->name('newopinion');
-    Route::post('opinions', 'opinions')->name('opinions');
-    Route::post('new_place', 'newplace')->name('newplace');
-    Route::post('feeling', 'feeling')->name('feeling');
-    Route::post('upload-image0', 'store0')->name('uploadimage0');
-    Route::post('upload-image', 'store')->name('uploadimage');
-    Route::post('avatar', 'avatar')->name('avatar');
-    Route::post('confortlevel', 'confortlevel')->name('confortlevel');
-    Route::post('enjoy', 'enjoy')->name('enjoy');
-    Route::post('enjoyable', 'enjoyable')->name('enjoyable');
-    Route::post('enjoydetail', 'enjoydetail')->name('enjoydetail');
-    Route::post('protected', 'protected')->name('protected');
-    Route::post('protectedetail', 'protectedetail')->name('protectedetail');
-    Route::post('timespending', 'timespending')->name('timespending');
-    Route::post('timespendingdetail', 'timespendingdetail')->name('timespendingdetail');
-    Route::post('spaceusage', 'spaceusage')->name('spaceusage');
 
-    Route::post('spaceusagedetail', 'spaceusagedetail')->name('spaceusagedetail');
-    Route::post('newspacetag', 'newspacetag')->name('newspacetag');
+
+    Route::post('avatar', 'avatar')->name('avatar');
+  
     Route::get('community-achievements', 'community_achievements')->name('community-achievements');
     Route::get('/load-more-community-achievements', 'loadMore_community_achievements')->name('loadMore_community_achievements');
 
@@ -186,7 +165,7 @@ Route::get('sign-up-e', function () {
     return view('sign-up-e');
 });
 
-Route::get('add-new-place', [GlobalController::class, 'createNewPlace']);
+Route::get('add-new/{type?}', [GlobalController::class, 'createNew'])->where('type', 'place|observation');;
 Route::get('badges_overview', [GlobalController::class, 'badges_overview']);
 
 Route::get('filter', [GlobalController::class, 'filter']);

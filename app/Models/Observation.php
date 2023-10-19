@@ -19,13 +19,9 @@ class Observation extends Model
     ];
 
 
-    /**
-     * The subobservs that belong to the Place
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function subobservs(): HasMany
     {
-        return $this->hasMany(Observation::class,  'parent_id');
+        return $this->hasMany(Observation::class, 'parent_id');
     }
+
 }
