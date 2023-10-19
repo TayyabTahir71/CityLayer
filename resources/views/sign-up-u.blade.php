@@ -3,14 +3,14 @@
 @section('main')
     <div data-barba="container" class="">
 
-        <div class="flex flex-col items-center justify-center mt-14">
+        <div class="flex flex-col items-center justify-center mt-8">
 
             <section class="flex flex-col items-center justify-center text-gray-900">
 
-                <img src="" alt="" class="w-12 h-12 bg-no-repeat bg-cover">
+                <img src="{{asset('images/logo.svg')}}" alt="" class="w-[100px] h-[100px] bg-no-repeat bg-cover">
 
 
-                <div class="flex flex-col items-center justify-center mt-4 text-2xl italic font-extrabold">
+                <div class="flex flex-col items-center justify-center mt-2 text-2xl italic font-extrabold">
 
                     <span>Introducing</span>
                     <span class="uppercase">City Layers!</span>
@@ -21,7 +21,7 @@
             </section>
 
             <section class="">
-                <div class="px-8 mt-16">
+                <div class="px-8 mt-8">
                     <div class="max-h-full lg:w-[1400px] md:w-[900px] px-12  w-[400px]">
                         <div class="w-full mysilder flex justify-center items-center gap-2">
 
@@ -56,7 +56,7 @@
 
                 <form role="form" method="POST" action="{{ route('backpack.auth.register') }}">
                     {!! csrf_field() !!}
-                    <div class="flex flex-col items-center justify-center gap-4 mt-12">
+                    <div class="flex flex-col items-center justify-center gap-4 mt-8">
                         <input type="text" placeholder="Username" name="name" id="name" class="form-input"
                             required />
                         @if ($errors->has('name'))
