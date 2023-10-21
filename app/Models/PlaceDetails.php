@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 class PlaceDetails extends Model
 {
     use HasFactory;
+    use CrudTrait;
 
     protected $fillable = [
         'user_id',
@@ -22,6 +24,30 @@ class PlaceDetails extends Model
         'longitude',
     ];
 
+
+    public function getPlaceString()
+    {
+        return $this->placeDetail->place->name.($this->placeDetail->placeChild?' → '.$this->placeDetail->placeChild->name:'');
+    }
+    public function getObservationString()
+    {
+
+        $observationString=NULL;
+
+        foreach ($this->observationsDetail as $observation) {
+            $observationName = $observation->observation->name;
+            $observationChildName = $observation->observationChild ? ' → ' . $observation->observationChild->name : '';
+            $observationString .= $observationName . $observationChildName . ', ';
+        }
+        if(empty($observationString)){
+            $observationString='No Observation';
+        }
+        $observationString = rtrim($observationString, ', ');
+
+
+
+        return $observationString;
+    }
 
     public function placeDetail()
     {

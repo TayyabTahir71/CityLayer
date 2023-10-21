@@ -27,9 +27,9 @@ class StreetCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Street::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/street');
-        CRUD::setEntityNameStrings('street', 'streets');
+        CRUD::setModel(\App\Models\PlaceDetails::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/place');
+        CRUD::setEntityNameStrings('place', 'places');
     }
 
     function getFieldsData()
@@ -54,23 +54,31 @@ class StreetCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
-        CRUD::column('name')->label('uuid');
+        CRUD::column('id')->label('uuid');
         CRUD::column('user_id');
-        $this->getFieldsData();
         CRUD::column('latitude');
         CRUD::column('longitude');
-        CRUD::column('likes')->label('Like')->type('number');
-        CRUD::column('dislikes')->label('dislike')->type('number');
-        CRUD::column('stars')->label('pleasant')->type('number');
-        CRUD::column('bof')->label('indifferent')->type('number');
-        CRUD::column('weird')->label('worried')->type('number');
+       
+        
+        $this->crud->addColumn([ 
+            'label' => "Place", 
+            'type' => "model_function",
+            'function_name' => 'getPlaceString',
+        ]);
+        $this->crud->addColumn([ 
+            'label' => "Observation", 
+            'type' => "model_function",
+            'limit' => 99999,
+            'function_name' => 'getObservationString',
+        ]);
+        
+        $this->crud->removeAllButtons();
+
+
+       
+      
         $this->crud->enableExportButtons();
 
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
     }
 
     /**

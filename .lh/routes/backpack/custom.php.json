@@ -1,0 +1,18 @@
+{
+    "sourceFile": "routes/backpack/custom.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1697835824851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1697835824851,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Support\\Facades\\Route;\nuse App\\Http\\Middleware\\MyMiddleware;\n\n\n// --------------------------\n// Custom Backpack Routes\n// --------------------------\n// This route file is loaded automatically by Backpack\\Base.\n// Routes you generate using Backpack\\Generators will be placed here.\n\nRoute::group([\n    'prefix'     => config('backpack.base.route_prefix', 'admin'),\n    'middleware' => array_merge(\n        (array) config('backpack.base.web_middleware', 'web'),\n        (array) config('backpack.base.middleware_key', 'admin')\n    ),\n    'namespace'  => 'App\\Http\\Controllers\\Admin',\n], function () { // custom admin routes\n    Route::crud('user', 'UserCrudController');\n    Route::crud('pages', 'PagesCrudController');\n\n    Route::crud('street', 'StreetCrudController');\n    Route::crud('openspace', 'OpenspaceCrudController');\n    Route::crud('building', 'BuildingCrudController');\n \n    Route::crud('tag', 'TagCrudController');\n\n    Route::crud('stat', 'StatCrudController');\n    Route::crud('opinion', 'OpinionCrudController');\n    Route::crud('space-tag', 'SpaceTagCrudController');\n    Route::crud('space-tag-de', 'SpaceTagDeCrudController');\n    Route::crud('opinion-de', 'OpinionDeCrudController');\n    Route::crud('tag-de', 'TagDeCrudController');\n    Route::crud('comment-de', 'CommentDeCrudController');\n    Route::crud('comment-en', 'CommentsEnCrudController');\n}); // this should be the absolute last line of this file"
+        }
+    ]
+}
