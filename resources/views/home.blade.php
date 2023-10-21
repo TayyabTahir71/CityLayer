@@ -63,7 +63,7 @@
 
                     <div id="map" class="absolute w-[100vw] z-10 h-[90vh]"></div>
                 </div>
-                
+
                 <div x-data="{modelOpen: false,showMore: false,hidetab:'no',tab: 'place',searchQuery: '' }">
                     <div
                         class="fixed bottom-0 z-50 w-full pt-3 pb-8 text-xl font-semibold text-center shadow-xl rounded-t-3xl bg-gray-50 ">
@@ -97,7 +97,7 @@
                             </span>
 
                         </div>
-                        
+
 
                         <div class="absolute right-5 bottom-[25px] ">
                             <div class="p-1 bg-site rounded-full w-9">
@@ -109,11 +109,11 @@
 
                     </div>
 
-                    
+
                     <div class="parentDiv" x-data="{ height: 'auto'}">
                         <button class="hidden OpenObservationModel" @click="modelOpen=true; showMore = true; hidetab = 'place'; tab='observation'; height = '100vh';"></button>
                         <button class="hidden openPlaceModel" @click="modelOpen=true; showMore = true; hidetab = 'observation'; tab='place'; height = '100vh';"></button>
-                
+
                         <div x-cloak x-show="modelOpen " class="fixed bottom-0 z-50 overflow-y-auto"
                             aria-labelledby="modal-title" role="dialog" aria-modal="true">
                             <div class="flex items-end justify-center text-center">
@@ -121,7 +121,7 @@
                                     class="closeAddProcess fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true">
                                 </div>
 
-                                <div x-cloak x-show="modelOpen" 
+                                <div x-cloak x-show="modelOpen"
                                     x-transition:enter="transition ease-out duration-300 transform"
                                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -140,8 +140,8 @@
                                         x-show="showMore" class="mb-4">
                                             <img src="{{ asset('img/icons/arrow.png') }}" class="arrow">
                                         </div>
-                                        
-                                        
+
+
 
                                         <div class="flex justity-between items-center gap-4">
                                             <input type="text" class="w-full px-2 py-2 bg-white rounded-full"
@@ -149,7 +149,7 @@
                                             x-model="searchQuery"
                                             @keyup="showMore = true; height = '100vh'">
 
-                                            <a 
+                                            <a
                                             :href="tab === 'place' ? '/add-new/place' : '/add-new/observation'"
                                             class="p-2 border-2  transition-all rounded-full"
                                             :class="tab == 'place' ? 'bg-[#2d9bf0] border-[#2d9bf0]' : 'bg-[#ffa726] border-[#ffa726]'"
@@ -208,13 +208,13 @@
                                                 x-show="tab=='place'">
 
                                                 <div class="grid grid-cols-3 italic font-semibold gap-10" id="searchResults2Pls">
-                                                
+
 
                                                 @foreach($allPlaces as $key=>$place)
-                                                    <div 
-                                                   
+                                                    <div
+
                                                     x-show="(showMore || {{ $key }} < 2) && (searchQuery === '' || '{{ strtolower($place->name) }}'.includes(searchQuery.toLowerCase()))"
-                                                   
+
                                                     class="flex flex-col items-center cursor-pointer"
                                                         @click="active='PL_{{ $place->id }}'">
                                                         <div data-place="{{ json_encode(['id'=>$place->id,'name'=>$place->name,'child'=>$place->subplaces]) }}" class="w-[76px] h-[76px] rounded-full bg-[#2d9bf0]"
@@ -268,7 +268,7 @@
                                                     @endforeach
 
 
-                                                   
+
                                                     <div x-show="!showMore" class="flex flex-col items-center justify-center cursor-pointer">
                                                         <button @click="showMore = true; height = '100vh'" type="button">
                                                             <div class="rounded-full border-[#ffa726] border-4  p-[22px]">
@@ -278,21 +278,21 @@
                                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                                         d="M12 6v12m6-6H6" />
                                                                 </svg>
-        
+
                                                             </div>
                                                             <div class="mt-4 text-black font-normal">See more</div>
                                                         </button>
-        
+
                                                     </div>
-                                                    
+
                                                 </div>
 
 
-                                                
+
                                             </div>
                                         </div>
 
-                                        
+
                                     </div>
 
                                 </div>
@@ -311,25 +311,25 @@
                         </div>
                     </div>
 
-                    
 
 
-                   
 
 
-                                       
+
+
+
                 </div>
 
-                    
+
                 <div class="parentDiv" x-data="{ subModelOpen: false,subtab:''}" x-cloak x-show="subModelOpen">
-                    
+
                     <button class="hidden subModeltrigerPlace" @click="subModelOpen=true;subtab='place'"></button>
-                    
+
                     <button class="hidden subModeltrigerObservation" @click="subModelOpen=true;subtab='observation'"></button>
-                    
+
 
                     <div  x-data="{subactive:''}" class="fixed h-screen overflow-auto bottom-0 bg-white z-[60] w-full pb-8 text-xl font-semibold text-center shadow-xl">
-                        
+
                         <div class="p-6 lg:p-12">
 
                             <div @click="subModelOpen=false;subactive='';subtab=''" class="mb-4 OpenObservationModel openPlaceModel">
@@ -348,7 +348,7 @@
                                                 :class="subtab == 'place' ? 'block' : 'hidden'"
                                                 alt="">
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                                 <div class="-ml-1 cursor-pointer" x-show="subtab=='observation'">
@@ -371,7 +371,7 @@
                                             </div>
                                         </div>
 
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -379,12 +379,12 @@
                             <div>
                                 <div x-show="subtab=='place'"  class="flex flex-col items-center justify-center mt-12">
                                     <div class="placeparent mb-10"></div>
-                                    
-                                    <div class="grid grid-cols-3 italic font-semibold gap-10 subPlacesItems">
-                                            
-                                        
 
-                                            
+                                    <div class="grid grid-cols-3 italic font-semibold gap-10 subPlacesItems">
+
+
+
+
                                     </div>
                                     <div class="flex items-center justify-between w-2/3 pt-28 pb-16">
                                         <label class="flex flex-col items-center gap-1 cursor-pointer" for="image-upload">
@@ -392,7 +392,7 @@
                                             <img src="{{ asset('img/cam-2.PNG') }}" alt="" class="w-10 h-9">
                                             <div class="text-sm">Upload image</div>
                                         </label>
-                    
+
                                         <div class="relative" x-data="{ placeText: false }">
                                             <div @click="placeText = !placeText" class="flex flex-col items-center gap-1 cursor-pointer">
                                                 <img src="{{ asset('img/msg.PNG') }}" alt="" class="w-10 h-9">
@@ -400,20 +400,20 @@
                                             </div>
                                             <textarea class="font-normal place_description absolute px-2 py-2 bg-white rounded-xl w-[300px] right-0" x-show="placeText"></textarea>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
 
                                 <div x-show="subtab=='observation'" class="flex flex-col items-center justify-center">
                                     <div class="grid grid-cols italic font-semibold gap-10 subObservationItems mt-12">
-                                           
 
-                                        
+
+
 
                                     </div>
 
-                                    
-                                    
+
+
 
                                     <div class="flex items-center justify-between w-2/3 pt-20 pb-16">
                                         <label for="obser-image-upload" class="flex flex-col items-center gap-1 cursor-pointer">
@@ -421,8 +421,8 @@
                                             <img src="{{ asset('img/cam.PNG') }}" alt="" class="w-10 h-9">
                                             <div class="text-sm">Upload image</div>
                                         </label>
-                    
-                                        
+
+
 
                                         <div class="relative" x-data="{ observationText: false }">
                                             <div @click="observationText = !observationText" class="flex flex-col items-center gap-1 cursor-pointer">
@@ -474,12 +474,12 @@
 
             <div class="top">
                 <div class="topo">
-                   
+
                     <label for="image" class="cursor-pointer new" >
                         <img class="object-cover w-24 h-24 border-7 border-blue-500 rounded-full nimage mimage"
-                             
+
                              src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
-                             
+
                     </label>
                 </div>
                 <div class="tops">
@@ -504,21 +504,21 @@
                     <div class="flex justify-center items-center w-7 h-7 border-[3px] font-bold text-base border-black rounded-full text-center" >⌃</div>
                     <div class="ltax">Community achievements</div>
                 </a>
-                <a href="/about" class="lbox">
+                <a href="/about-us" class="lbox">
                     <div class="flex justify-center items-center w-7 h-7 border-[3px] font-bold text-base border-black rounded-full text-center" >?</div>
                     <div class="ltax">About City Layers</div>
                 </a>
-                <a href="/contact" class="lbox">
+                <a href="/contact-us" class="lbox">
                     <div class="flex justify-center items-center w-7 h-7 border-[3px] font-bold text-base border-black rounded-full text-center" >•</div>
 
                     <div class="ltax">Term & contact</div>
                 </a>
-                <a href="/privacy_policy" class="lbox">
+                <a href="/privacy-policy" class="lbox">
                     <div class="flex justify-center items-center w-7 h-7 border-[3px] font-bold text-base border-black rounded-full text-center" >!</div>
 
                     <div class="ltax">Privacy Policy and Terms of Service</div>
                 </a>
-                <a href="/impressum" class="lbox">
+                <a href="/impressum-accessibility" class="lbox">
                     <div class="flex justify-center items-center w-7 h-7 border-[3px] font-bold text-base border-black rounded-full text-center" >i</div>
                     <div class="ltax">Impressum & accessibility</div>
                 </a>
@@ -541,12 +541,12 @@
         });
 
         function close_pop_profile(){
-            
-            
+
+
             popup.style.transform = 'translateX(100%)';
             setTimeout(() => {
                 popup.style.display = 'none';
-            }, 300); 
+            }, 300);
         }
 
     </script>
@@ -559,7 +559,7 @@
         markers = {};
         const edit_id = {{$edit_id?$edit_id:'0'}};
         let marker = null;
-        
+
         let pin=[48.6890, 7.14086];
         if (data && data[0] && typeof data[0].latitude !== 'undefined' && typeof data[0].longitude !== 'undefined') {
             pin = [data[0].latitude, data[0].longitude];
@@ -637,7 +637,7 @@
 
 
         if (navigator.geolocation) {
-            
+
             //wait 3 seconds to get position
             getposition(success, fail)
 
@@ -656,7 +656,7 @@
                             return;
                         }
                         is_echo = true;
-                     
+
                         place_data['latitude']=pos.coords.latitude;
                         place_data['longitude']=pos.coords.longitude;
 
@@ -691,7 +691,7 @@
             alert("location failed");
         }
 
-       
+
 
         function generateObservationHTML(observationDetail,place_detail_id) {
             var obsrName= '';
@@ -709,10 +709,10 @@
                 </div>
                 `;
             }
-            
-           
+
+
             return `
-            <div class="flex items-center justify-start gap-3 -mb-4 overflow-hidden"> 
+            <div class="flex items-center justify-start gap-3 -mb-4 overflow-hidden">
                 <div class="flex flex-col items-center justify-center">
                     <div class="rounded-full bg-[#ffa726] border-4 border-white w-[68px] h-[68px]">
                         <img src="${observationDetail.feeling.image}" alt="">
@@ -735,8 +735,8 @@
 
             count = count + 1;
             place = data[i];
-            
-           
+
+
             placename = 'No Place';
             var addicon=`
                 <div data-id="${place.id}" class="cursor-pointer border-2 transition-all rounded-full bg-[#2d9bf0] border-white w-6 h-6 mt-1 noPlace">
@@ -747,18 +747,18 @@
                 `;
 
             if (place.place_detail) {
-                
+
                 placename = (place.place_detail.place ? place.place_detail.place.name : '') +
                 (place.place_detail.place && place.place_detail.place_child ? '<span class="text-xs font-light"> → ' + place.place_detail.place_child.name + '</span>' : '');
-                
+
 
                 addicon='';
             }
-            
-            
-              
 
-            
+
+
+
+
 
             username = place.user.name;
 
@@ -776,7 +776,7 @@
             placelongitude = place.longitude;
             var obsrvTotal=Object.keys(place.observations_detail).length;
 
-           
+
             if ((place.place_detail) && obsrvTotal==0) {
                 icon2 = placeIcon;
             }
@@ -798,19 +798,19 @@
                 observationsList += generateObservationHTML({
                     observation: 'null',
                     observation_child: null,
-                    
+
                     feeling: { image: '' }
                 },place.id);
             }
-            
+
 
             markerx = L.marker([placelatitude, placelongitude], {
                 icon: icon2
             }).addTo(mymap0).bindPopup(
 
-              
+
                 `<div class="bg-[#2d9bf0] p-0 w-full">
-                    
+
                     <div class="flex items-center justify-start gap-3 -mb-4 overflow-hidden">
                         <div class="flex flex-col items-center justify-center">
                             <div class="rounded-full bg-[#2d9bf0] border-4 border-white p-3 w-[68px] h-[68px]">
@@ -820,13 +820,13 @@
                         <div class="flex gap-4 mt-4">
                             <div class="text-center">
                                 <img src="{{ asset('img/cam-2.PNG') }}" alt="" class="w-7 h-6">
-                                <div class="font-sm font-light text-white">view</div>    
+                                <div class="font-sm font-light text-white">view</div>
                             </div>
                             <span class="text-lg italic font-extrabold text-white">
                             ` + placename + `
                             </span>
                             `+addicon+`
-                            
+
 
                         </div>
                     </div>
@@ -842,17 +842,17 @@
                 </div>`
             );
 
-            markerx.on('popupopen', (event) => { 
+            markerx.on('popupopen', (event) => {
                 const _id = event.popup._source.placeDetailID;
                 if(_id && temp_des['_'+_id]){
                     $('body #myTextArea').text(`${temp_des['_'+_id]}`);
                 }
-                var typingTimer; 
+                var typingTimer;
                 var delay = 1000;
                 function handleTypingStopped() {
                     const data = $('body #myTextArea').val();
                     const id = $('body #myTextArea').data('id');
-  
+
                     if(data && id){
                         temp_des['_'+id]=data;
                         saveDescription(data, id);
@@ -874,9 +874,9 @@
         }
 
 
-    
-       
-        
+
+
+
 
 
         function getmyposition(success, fail) {
@@ -885,7 +885,7 @@
             if (navigator && navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     function(pos) {
-         
+
                         if (is_echo) {
                             return;
                         }
@@ -956,13 +956,13 @@
             alert("location failed");
         }
 
- 
 
-       
+
+
 
         $('body').on('click', '.addToMap', function() {
             set_empty();
-           
+
 
         });
         $('body').on('click', '.submitData', function() {
@@ -971,7 +971,7 @@
             $('.subObservationItems').html('');
 
             var place_detail = $(this).closest('.parentDiv').find('.placeActive').data('place');
-            
+
             var observations_detail = [];
             $(this).closest('.parentDiv').find('.observationActive').each(function() {
                 var data = $(this).data('observations');
@@ -990,7 +990,7 @@
                     place_detail.child.forEach(place => {
                         allHtml+=`
                         <div class="flex flex-col items-center cursor-pointer" @click="subactive='SPL_${place.id}'">
-                                            <div data-subplaceid="${place.id}" class="w-[76px] h-[76px] rounded-full bg-[#2d9bf0]" 
+                                            <div data-subplaceid="${place.id}" class="w-[76px] h-[76px] rounded-full bg-[#2d9bf0]"
                                             :class="subactive == 'SPL_${place.id}' ? 'border-4 border-blue-300 subplaceActive' : ''">
                                                 <div class="flex align-item-center justify-center items-center h-full">
                                                     <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
@@ -1007,7 +1007,7 @@
                     submitDetailData(place_data);
                 }
 
-                
+
             }else if($homeTab=='observation'){
                 var allHtml = '';
 
@@ -1037,7 +1037,7 @@
                         `;
                     }else{
                         observation.child.forEach(observ => {
-                            allHtml+=`                            
+                            allHtml+=`
                             <div data-subobservation_id="${observ.id}" class="flex gap-2 lg:gap-20 items-center justify-between mb-10">
                                 <div class="flex flex-col items-center w-[160px]">
                                     <div class="w-[76px] h-[76px] rounded-full bg-[#ffa726]">
@@ -1060,19 +1060,19 @@
                 });
 
                 $('.subObservationItems').html(allHtml);
-                
-                
-                
+
+
+
                 $('.subModeltrigerObservation').click();
             }
 
-          
-            
+
+
         });
 
         var fileInput_place='';
         var fileInput_observation='';
-        
+
         $('body').on('click', '.submitDataAll', function() {
 
             var $SubTab = $(this).closest('.parentDiv').find('.subobservationTabActive').length > 0 ? 'observation' : 'place';
@@ -1098,17 +1098,17 @@
                     });
                 });
                 place_data['observations']=dataList;
-                
+
             }
             // console.log(place_data);
             submitDetailData(place_data);
-            
+
         });
 
 
-        
+
         $('body').on('click', '.noPlace', function() {
-            
+
             set_empty();
 
 
@@ -1118,7 +1118,7 @@
         });
 
         $('body').on('click', '.noObservation', function() {
-            
+
             set_empty();
 
             place_data['place_detail_id'] = $(this).data('id');
@@ -1136,13 +1136,13 @@
             place_data['tab']='place';
             place_data['update']='';
         }
-        
+
 
 
         function submitDetailData(place_data) {
-         
 
-            const formData = new FormData(); 
+
+            const formData = new FormData();
             if (fileInput_place) {
                 formData.append('place_image', fileInput_place);
             }
@@ -1157,7 +1157,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-          
+
 
             $.ajax({
                 type: 'POST',
@@ -1192,7 +1192,7 @@
                             });
                         }
 
-                        
+
                     }
 
                 }
@@ -1230,7 +1230,7 @@
         }
 
         $(document).ready(function(){
-           
+
             if(edit_id && edit_id!=0){
                 $('.openPlaceModel').click();
                 // $('.OpenObservationModel').click();
