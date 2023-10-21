@@ -45,17 +45,17 @@ Route::controller(GlobalController::class)->group(function () {
 
     Route::get('dashboard', 'dashboard')->name('dashboard');
     Route::get('loadMore-dashboard', 'loadMore_dashboard')->name('loadMore-dashboard');
-   
+
     Route::post('/place/like', 'like')->name('like');
     Route::post('/place/dislike', 'dislike')->name('dislike');
     Route::post('/place/comment', 'comment')->name('comment');
     Route::post('edit/{id}/{type}', 'edit')->name('edit');
-    
+
     Route::get('delete', 'delete')->name('delete');
 
 
     Route::post('avatar', 'avatar')->name('avatar');
-  
+
     Route::get('community-achievements', 'community_achievements')->name('community-achievements');
     Route::get('/load-more-community-achievements', 'loadMore_community_achievements')->name('loadMore_community_achievements');
 
@@ -79,7 +79,7 @@ Route::controller(GlobalController::class)->group(function () {
         return view('impressum');
     });
 
-  
+
     Route::get('logout', 'logout');
 });
 Route::post('contactmail', [MailController::class, 'sendMessage']);
