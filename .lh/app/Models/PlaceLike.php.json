@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Models/PlaceLike.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1698574482889,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1698574482889,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass PlaceLike extends Model\n{\n    use HasFactory;\n    protected $fillable = ['place_detail_id', 'user_id'];\n}\n"
+        }
+    ]
+}

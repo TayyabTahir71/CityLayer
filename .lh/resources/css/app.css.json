@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 56,
+            "activePatchIndex": 57,
             "patches": [
                 {
                     "date": 1696313770158,
@@ -232,6 +232,10 @@
                 {
                     "date": 1697221080571,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,8 +35,11 @@\n     font-weight: 500;\n     padding: 15px 30px;\n     color: #2d9bf0;\n }\n+.swal-button--cancel:hover{\n+    background: white !important;\n+}\n .swal-button--confirm{\n     background: #2d9bf0;\n     border: 2px solid #2d9bf0;\n     border-radius: 25px;\n"
+                },
+                {
+                    "date": 1698601919038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -475,8 +475,10 @@\n     border: 2px solid #2d9bf0;\n     border-radius: 21px;\n     padding: 12px 33px;\n     font-weight: bold;\n+    text-align: center;\n+    width: fit-content;\n }\n .tops {\n     display: flex;\n     flex-direction: column;\n@@ -489,9 +491,9 @@\n .lbox {\n     display: flex;\n     flex-direction: row;\n     gap: 1rem;\n-    padding-left: 13%;\n+\n }\n .check {\n     border-radius: 100%;\n     border: 2px solid black;\n@@ -857,9 +859,9 @@\n }\n .leaflet-popup-content{\n     margin: 0 !important;\n     padding: 10px;\n-    min-width: 325px;\n+    min-width: 360px;\n }\n \n .leaflet-popup-content-wrapper,\n .leaflet-popup-tip {\n"
                 }
             ],
             "date": 1696313770158,
