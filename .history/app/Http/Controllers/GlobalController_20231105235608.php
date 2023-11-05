@@ -38,7 +38,7 @@ class GlobalController extends Controller
      */
 
 
-     public function homeDefault($edit_id=''){
+     public function homeDefault(){
 
         if (backpack_auth()->check()) {
             $userid = backpack_auth()->user()->id;
@@ -154,7 +154,7 @@ class GlobalController extends Controller
         // dd('good');
      }
 
-    public function getAll()
+    public function getAll($edit_id='')
     {
         return view('index');
     }
