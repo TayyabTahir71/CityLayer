@@ -25,6 +25,7 @@ use App\Models\Stat;
 use App\Models\Preference;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GlobalController extends Controller
 {
@@ -38,7 +39,8 @@ class GlobalController extends Controller
      */
 
 
-     public function homeDefault($edit_id=''){
+    public function homeDefault($edit_id = '')
+    {
 
         if (backpack_auth()->check()) {
             $userid = backpack_auth()->user()->id;
@@ -54,7 +56,7 @@ class GlobalController extends Controller
 
             if (Infosperso::where('user_id', $userid)->exists()) {
                 $infos = Infosperso::where('user_id', $userid)->first();
-               
+
                 $allPlaces = Place::where('user_id', null)
                     ->where('parent_id', NULL)
                     ->orWhere('user_id', backpack_auth()->user()->id)
@@ -70,62 +72,61 @@ class GlobalController extends Controller
 
 
                 $query = PlaceDetails::whereNotNull('latitude')->whereNotNull('longitude')
-                        ->with([
-                            'placeDetail',
-                            'placeDetail.place',
-                            'placeDetail.placeChild',
-                            'observationsDetail',
-                            'observationsDetail.observation',
-                            'observationsDetail.observationChild',
-                            'observationsDetail.feeling',
-                            'user',
-                            'placeComment' => function ($query) {
-                                $query->where('user_id', backpack_auth()->user()->id);
-                            }
-                        ]);
+                    ->with([
+                        'placeDetail',
+                        'placeDetail.place',
+                        'placeDetail.placeChild',
+                        'observationsDetail',
+                        'observationsDetail.observation',
+                        'observationsDetail.observationChild',
+                        'observationsDetail.feeling',
+                        'user',
+                        'placeComment' => function ($query) {
+                            $query->where('user_id', backpack_auth()->user()->id);
+                        }
+                    ]);
 
-                    if (session()->has('placeIds') && count(session('placeIds')) > 0 && session()->has('observationIds') && count(session('observationIds')) > 0) {
-                        
-                        $query->where(function ($query) {
-                            $query->whereHas('placeDetail', function ($subQuery) {
-                                $subQuery->whereIn('place_id', session('placeIds'));
-                            });
-                        });
-                        $query->orWhere(function ($query) {
-                            $query->whereHas('observationsDetail', function ($subQuery) {
-                                $subQuery->whereIn('observation_id', session('observationIds'));
-                            });
-                        });
+                if (session()->has('placeIds') && count(session('placeIds')) > 0 && session()->has('observationIds') && count(session('observationIds')) > 0) {
 
-                    } elseif (session()->has('placeIds') && count(session('placeIds')) > 0) {
-                        $query->where(function ($query) {
-                            $query->whereHas('placeDetail', function ($subQuery) {
-                                $subQuery->whereIn('place_id', session('placeIds'));
-                            });
+                    $query->where(function ($query) {
+                        $query->whereHas('placeDetail', function ($subQuery) {
+                            $subQuery->whereIn('place_id', session('placeIds'));
                         });
-                    } elseif (session()->has('observationIds') && count(session('observationIds')) > 0) {
-                        $query->Where(function ($query) {
-                            $query->whereHas('observationsDetail', function ($subQuery) {
-                                $subQuery->whereIn('observation_id', session('observationIds'));
-                            });
+                    });
+                    $query->orWhere(function ($query) {
+                        $query->whereHas('observationsDetail', function ($subQuery) {
+                            $subQuery->whereIn('observation_id', session('observationIds'));
                         });
-                    }
+                    });
+                } elseif (session()->has('placeIds') && count(session('placeIds')) > 0) {
+                    $query->where(function ($query) {
+                        $query->whereHas('placeDetail', function ($subQuery) {
+                            $subQuery->whereIn('place_id', session('placeIds'));
+                        });
+                    });
+                } elseif (session()->has('observationIds') && count(session('observationIds')) > 0) {
+                    $query->Where(function ($query) {
+                        $query->whereHas('observationsDetail', function ($subQuery) {
+                            $subQuery->whereIn('observation_id', session('observationIds'));
+                        });
+                    });
+                }
 
-          
+
 
 
                 // var_dump(session('placeIds'));
                 // die();
-   
+
 
                 $all_data = $query->get();
 
 
                 $feelings = Feeling::all();
 
-                $edited_place=PlaceDetails::with(['observationsDetail.feeling','observationsDetail','placeDetail'])->find($edit_id);
+                $edited_place = PlaceDetails::with(['observationsDetail.feeling', 'observationsDetail', 'placeDetail'])->find($edit_id);
 
-                $likedPlaces=backpack_auth()->user()->likedPlaces->pluck('place_detail_id');
+                $likedPlaces = backpack_auth()->user()->likedPlaces->pluck('place_detail_id');
 
                 return view(
                     'home',
@@ -147,12 +148,12 @@ class GlobalController extends Controller
                 $infos->save();
                 return view('edit_profile');
             }
-        }else{
+        } else {
             return view('home-default');
         }
-       
+
         // dd('good');
-     }
+    }
 
     public function getAll()
     {
@@ -163,13 +164,13 @@ class GlobalController extends Controller
     {
 
         $usersWithTotals = User::select('*')
-        ->addSelect(['total_places' => PlaceDetailPlace::selectRaw('COUNT(*)')
-            ->whereIn('place_detail_id', PlaceDetails::select('id')
-            ->whereColumn('user_id', 'users.id'))])
-        ->addSelect(['total_observations' => PlaceDetailObservation::selectRaw('COUNT(*)')
-            ->whereIn('place_detail_id', PlaceDetails::select('id')
-            ->whereColumn('user_id', 'users.id'))])
-        ->orderBy('score', 'desc')->paginate(10);
+            ->addSelect(['total_places' => PlaceDetailPlace::selectRaw('COUNT(*)')
+                ->whereIn('place_detail_id', PlaceDetails::select('id')
+                    ->whereColumn('user_id', 'users.id'))])
+            ->addSelect(['total_observations' => PlaceDetailObservation::selectRaw('COUNT(*)')
+                ->whereIn('place_detail_id', PlaceDetails::select('id')
+                    ->whereColumn('user_id', 'users.id'))])
+            ->orderBy('score', 'desc')->paginate(10);
 
         return view('community_acheivements', compact('usersWithTotals'));
     }
@@ -179,22 +180,22 @@ class GlobalController extends Controller
         $page = $request->get('page');
 
         $usersWithTotals = User::select('*')
-        ->addSelect(['total_places' => PlaceDetailPlace::selectRaw('COUNT(*)')
-            ->whereIn('place_detail_id', PlaceDetails::select('id')
-            ->whereColumn('user_id', 'users.id'))])
-        ->addSelect(['total_observations' => PlaceDetailObservation::selectRaw('COUNT(*)')
-            ->whereIn('place_detail_id', PlaceDetails::select('id')
-            ->whereColumn('user_id', 'users.id'))])
-        ->orderBy('score', 'desc')->paginate(10, ['*'], 'page', $page);
+            ->addSelect(['total_places' => PlaceDetailPlace::selectRaw('COUNT(*)')
+                ->whereIn('place_detail_id', PlaceDetails::select('id')
+                    ->whereColumn('user_id', 'users.id'))])
+            ->addSelect(['total_observations' => PlaceDetailObservation::selectRaw('COUNT(*)')
+                ->whereIn('place_detail_id', PlaceDetails::select('id')
+                    ->whereColumn('user_id', 'users.id'))])
+            ->orderBy('score', 'desc')->paginate(10, ['*'], 'page', $page);
 
         $html = view('item_community_acheivements', compact('usersWithTotals'))->render();
 
-        return response()->json(['html' => $html,'hasMorePages'=>$usersWithTotals->hasMorePages()]);
+        return response()->json(['html' => $html, 'hasMorePages' => $usersWithTotals->hasMorePages()]);
     }
 
 
 
-    
+
 
     // public function profil()
     // {
@@ -213,23 +214,24 @@ class GlobalController extends Controller
         return $distance;
     }
 
-    public function allbadges(){
+    public function allbadges()
+    {
         $explorer = 0;
-        if(backpack_auth()->user()->placeDetails->count()>0){
+        if (backpack_auth()->user()->placeDetails->count() > 0) {
             $explorer = 1;
         }
 
         $citymaker = 0;
-        if(backpack_auth()->user()->observations->count()>=10){
+        if (backpack_auth()->user()->observations->count() >= 10) {
             $citymaker = 1;
         }
-           
-        
+
+
         $architect = 0;
         $allplace = backpack_auth()->user()->placeDetails->flatMap(function ($placeDetail) {
             return $placeDetail->placeDetail->pluck('place_id');
         });
-        if($allplace->count()>=20){
+        if ($allplace->count() >= 20) {
             $architect = 1;
         }
 
@@ -239,14 +241,14 @@ class GlobalController extends Controller
                 return $observation->only(['place_detail_id', 'observation_id']);
             });
         })->unique();
-        if($allobservation->count()>=20){
+        if ($allobservation->count() >= 20) {
             $flaneur = 1;
         }
 
-        
+
         $urbanist = 0;
         $higherCount = max($allplace->count(), $allobservation->count());
-        if($higherCount>=30){
+        if ($higherCount >= 30) {
             $urbanist = 1;
         }
 
@@ -264,33 +266,38 @@ class GlobalController extends Controller
         }
 
         $guru = 0;
-        if(backpack_auth()->user()->likedPlaces->count()>=10){
+        if (backpack_auth()->user()->likedPlaces->count() >= 10) {
             $guru = 1;
         }
-        
+
         $investigator = 0;
         $totalImagesCount = backpack_auth()->user()->placeDetails->sum(function ($placeDetail) {
             $observationImageCount = !empty($placeDetail->obsevation_image) ? 1 : 0;
             $placeImageCount = !empty($placeDetail->place_image) ? 1 : 0;
             return $observationImageCount + $placeImageCount;
         });
-       
-        if(($totalImagesCount)>=10){
+
+        if (($totalImagesCount) >= 10) {
             $investigator = 1;
         }
-        
+
         $supermapper = 0;
-        if(backpack_auth()->user()->score>=500){
+        if (backpack_auth()->user()->score >= 500) {
             $supermapper = 1;
         }
-        
-        return compact('explorer', 'citymaker', 'architect','flaneur',
-        'urbanist',
-        'influencer',
-        'star',
-        'guru',
-        'investigator',
-        'supermapper',);
+
+        return compact(
+            'explorer',
+            'citymaker',
+            'architect',
+            'flaneur',
+            'urbanist',
+            'influencer',
+            'star',
+            'guru',
+            'investigator',
+            'supermapper',
+        );
     }
 
     public function profile()
@@ -305,7 +312,7 @@ class GlobalController extends Controller
         $badgeData = $this->allbadges();
         extract($badgeData);
 
-        
+
 
         // dd($citymaker);
         return view(
@@ -319,7 +326,7 @@ class GlobalController extends Controller
                 'architect',
                 'explorer',
 
-                
+
             )
         );
     }
@@ -329,12 +336,12 @@ class GlobalController extends Controller
         $locale = session()->get('locale');
         $name = backpack_auth()->user()->name;
         $score = backpack_auth()->user()->score;
-        
+
         $badgeData = $this->allbadges();
         extract($badgeData);
 
-        
-       
+
+
 
         // dd($citymaker);
         return view(
@@ -352,7 +359,7 @@ class GlobalController extends Controller
                 'guru',
                 'investigator',
                 'supermapper',
-                
+
             )
         );
     }
@@ -417,7 +424,7 @@ class GlobalController extends Controller
         $infos = Infosperso::where('user_id', $userid)->first();
         $infos->preferences = $request->preferences;
         $infos->save();
-        
+
         return redirect('/');
     }
 
@@ -427,22 +434,22 @@ class GlobalController extends Controller
         $userid = backpack_auth()->user()->id;
 
 
-       
-        
-        $tag=strtolower($request->preference);
-        $preference=Preference::create([
-            'user_id'=>$userid,
-            'name'=>$tag,
+
+
+        $tag = strtolower($request->preference);
+        $preference = Preference::create([
+            'user_id' => $userid,
+            'name' => $tag,
         ]);
-        if($preference){
+        if ($preference) {
             $infos = Infosperso::where('user_id', $userid)->first();
             $existingPreferences = explode(',', $infos->preferences);
             $existingPreferences = preg_replace('/[^A-Za-z0-9 ]/', '', $existingPreferences);
-            $existingPreferences[]=$tag;
+            $existingPreferences[] = $tag;
             $infos->preferences = $existingPreferences;
             $infos->save();
         }
-        
+
         return redirect('/preferences');
     }
 
@@ -450,14 +457,14 @@ class GlobalController extends Controller
     {
         $userid = backpack_auth()->user()->id;
         $infos = Infosperso::where('user_id', $userid)->first();
-       
+
         $preferences = explode(',', $infos->preferences);
         $preferences = preg_replace('/[^A-Za-z0-9 ]/', '', $preferences);
 
         $preferences_array = Preference::getPreferences($userid);
 
 
-        return view('preferences', compact('preferences','preferences_array'));
+        return view('preferences', compact('preferences', 'preferences_array'));
     }
 
 
@@ -498,10 +505,7 @@ class GlobalController extends Controller
 
 
             return view('placeDetail', compact('placeSignle'));
-
-
         }
-
     }
     public function dashboard()
     {
@@ -510,7 +514,7 @@ class GlobalController extends Controller
 
         $score = backpack_auth()->user()->score;
 
-  
+
         return view('dashboard', compact('placeDetails', 'score'));
     }
     public function loadMore_dashboard(Request $request)
@@ -522,14 +526,14 @@ class GlobalController extends Controller
 
         $html = view('item_dashboard', compact('placeDetails'))->render();
 
-        return response()->json(['html' => $html,'hasMorePages'=>$placeDetails->hasMorePages()]);
+        return response()->json(['html' => $html, 'hasMorePages' => $placeDetails->hasMorePages()]);
     }
 
 
-    
 
 
-   
+
+
 
     static function pages()
     {
@@ -560,50 +564,64 @@ class GlobalController extends Controller
     //----------------------new code----------------------
 
 
-    function addNewPlaceData($postData){
+    function addNewPlaceData($postData)
+    {
 
-        $result_array=[];
-       
-
+        $result_array = [];
         if (isset($postData->place_name) && !empty($postData->place_name)) {
+
+
+            $check = Place::where('name', $postData->place_name)->exists();
+
+            if ($check) {
+                dd('sd');
+                return response()->json([
+                    'status' => 'error',
+                    'msg' => 'Place already exist!',
+
+                ]);
+            }
+
+
+
             $place = Place::create([
                 'name' => $postData->place_name,
                 'user_id' => backpack_user()->id,
             ]);
-            $result_array['place_id']=$place->id;
+            $result_array['place_id'] = $place->id;
         }
         if (isset($postData->observation_name) && !empty($postData->observation_name)) {
             $observation = Observation::create([
                 'name' => $postData->observation_name,
                 'user_id' => backpack_user()->id,
             ]);
-            $result_array['observations'][]=array(
+            $result_array['observations'][] = array(
                 'observation_id' => $observation->id,
                 'child_observation_id' => NULL,
-                'feeling_id' => $postData->feeling_id?$postData->feeling_id:NULL,
+                'feeling_id' => $postData->feeling_id ? $postData->feeling_id : NULL,
             );
         }
-        
+
         return (object)$result_array;
     }
 
     public function addMapPlace(Request $request, $id = null)
     {
 
-        $postData=json_decode($request->place_data,true);
+        $postData = json_decode($request->place_data, true);
         $postData = (object)$postData;
-        $returnData=$this->addNewPlaceData($postData);
+        $returnData = $this->addNewPlaceData($postData);
         $postData = (object)array_merge((array)$postData, (array)$returnData);
 
 
-    //    dd($postData);
+        //    dd($postData);
 
         $userId = backpack_auth()->user()->id;
-        $response = ['status'=>'','msg'=>'','place_detail_id'=>'','tab'=>'','completed'=>false];
+        $response = ['status' => '', 'msg' => '', 'place_detail_id' => '', 'tab' => '', 'completed' => false];
 
-        if(isset($postData->place_detail_id) && $postData->place_detail_id!=''){
+        if (isset($postData->place_detail_id) && $postData->place_detail_id != '') {
             $place_detail = PlaceDetails::find($postData->place_detail_id);
-        }else{
+        } else {
             $latitude = $postData->latitude;
             $longitude = $postData->longitude;
             $radius = 100; // Meters
@@ -612,9 +630,9 @@ class GlobalController extends Controller
                     * cos( radians( latitude ) )
                     * cos( radians( longitude ) - radians(?)) + sin( radians(?) )
                     * sin( radians( latitude ) ) )) AS distance", [$latitude, $longitude, $latitude])
-                    ->having("distance", "<", ($radius/1000))
-                    ->where('user_id',$userId)
-                    ->first();    
+                ->having("distance", "<", ($radius / 1000))
+                ->where('user_id', $userId)
+                ->first();
         }
 
 
@@ -624,17 +642,17 @@ class GlobalController extends Controller
 
             $place_detail->update([
                 'user_id' =>  backpack_auth()->user()->id,
-                'place_description' =>  $postData->place_description?$postData->place_description:NULL,
-                'obsevation_description' =>  $postData->observation_description?$postData->observation_description:NULL,
+                'place_description' =>  $postData->place_description ? $postData->place_description : NULL,
+                'obsevation_description' =>  $postData->observation_description ? $postData->observation_description : NULL,
                 // 'latitude' => $postData->latitude,
                 // 'longitude' => $postData->longitude,
             ]);
-            
-            if(isset($postData->update) && $postData->update=='place'){
-                $place_detail->updatePlaces($place_detail,$postData);
-            }else if(isset($postData->update) && $postData->update=='observation'){
-                $place_detail->updateObservations($place_detail,$postData);
-            }else{
+
+            if (isset($postData->update) && $postData->update == 'place') {
+                $place_detail->updatePlaces($place_detail, $postData);
+            } else if (isset($postData->update) && $postData->update == 'observation') {
+                $place_detail->updateObservations($place_detail, $postData);
+            } else {
 
                 dd('here');
                 // $place_detail->updateMethod($place_detail,$postData);
@@ -644,35 +662,35 @@ class GlobalController extends Controller
             $response['status'] = 'success';
             $response['msg'] = 'data updated successfully!';
         } else {
-            $place_detail=PlaceDetails::create([
+            $place_detail = PlaceDetails::create([
                 'user_id' =>  backpack_auth()->user()->id,
-                'place_description' =>  $postData->place_description?$postData->place_description:NULL,
-                'obsevation_description' =>  $postData->observation_description?$postData->observation_description:NULL,
+                'place_description' =>  $postData->place_description ? $postData->place_description : NULL,
+                'obsevation_description' =>  $postData->observation_description ? $postData->observation_description : NULL,
                 'latitude' => $postData->latitude,
                 'longitude' => $postData->longitude,
             ]);
 
-            if($postData->place_id){
+            if ($postData->place_id) {
                 PlaceDetailPlace::create([
                     'place_detail_id' => $place_detail->id,
                     'place_id' => $postData->place_id,
-                    'place_child_id' => $postData->child_place_id?$postData->child_place_id:NULL,
+                    'place_child_id' => $postData->child_place_id ? $postData->child_place_id : NULL,
                 ]);
             }
-            
-            if(isset($postData->observations) && is_array($postData->observations) && count($postData->observations)>0){
-                foreach($postData->observations as $obsrv){
+
+            if (isset($postData->observations) && is_array($postData->observations) && count($postData->observations) > 0) {
+                foreach ($postData->observations as $obsrv) {
                     PlaceDetailObservation::create([
                         'place_detail_id' => $place_detail->id,
                         'observation_id' => $obsrv['observation_id'],
-                        'observation_child_id' => $obsrv['child_observation_id']?$obsrv['child_observation_id']:NULL,
+                        'observation_child_id' => $obsrv['child_observation_id'] ? $obsrv['child_observation_id'] : NULL,
                         'feeling_id' => $obsrv['feeling_id'],
                     ]);
                 }
             }
-            
 
-           
+
+
             backpack_auth()->user()->incrementScore(1);
             $response['status'] = 'success';
             $response['msg'] = 'data added successfully!';
@@ -684,7 +702,7 @@ class GlobalController extends Controller
             ]);
             $imageName = time() . '_place.' . $request->place_image->extension();
             $request->place_image->storeAs('public/uploads/place/', $imageName);
-         
+
             $place_detail->update([
                 'place_image' =>  $imageName,
             ]);
@@ -705,22 +723,23 @@ class GlobalController extends Controller
 
         $response['place_detail_id'] = $place_detail->id;
 
-        
-        if((isset($place_detail->placeDetail) && $place_detail->placeDetail->id) && (isset($place_detail->observationsDetail) &&  count($place_detail->observationsDetail))>0){
+
+        if ((isset($place_detail->placeDetail) && $place_detail->placeDetail->id) && (isset($place_detail->observationsDetail) &&  count($place_detail->observationsDetail)) > 0) {
             $response['completed'] = true;
         }
-            
+
         $response['tab'] = $postData->tab;
 
         $response['place_id'] = $place_detail->placeDetail->place_id ?? null;
 
         return response()->json($response);
-
     }
 
 
     public function addNewPlace(Request $request)
     {
+
+
 
         if ($request->place_name) {
             $place = Place::create([
@@ -762,34 +781,34 @@ class GlobalController extends Controller
     }
 
 
-    public function createNew($type='place',$edit_id = null)
+    public function createNew($type = 'place', $edit_id = null)
     {
-       
+
         if ($edit_id) {
             $checkplace = PlaceDetails::find($edit_id);
             if (!($checkplace && $checkplace->user_id == backpack_auth()->user()->id)) {
                 return redirect('/');
             }
         }
-        
+
         $allPlaces = Place::where('user_id', null)
             ->where('parent_id', NULL)
             ->orWhere('user_id', backpack_auth()->user()->id)
             ->get();
 
-      
+
 
         $allObservations = Observation::where('user_id', null)
             ->where('parent_id', NULL)
             ->orWhere('user_id', backpack_auth()->user()->id)
             ->get();
-        
+
         $feelings = Feeling::all();
 
-        return view('add-new-place', compact('allObservations', 'allPlaces','type','feelings','edit_id'));
+        return view('add-new-place', compact('allObservations', 'allPlaces', 'type', 'feelings', 'edit_id'));
     }
 
-   
+
 
     public function filter()
     {
@@ -825,8 +844,8 @@ class GlobalController extends Controller
     {
 
         $placeLike = PlaceLike::where('place_detail_id', $request->id)
-        ->where('user_id', backpack_auth()->user()->id)
-        ->first();
+            ->where('user_id', backpack_auth()->user()->id)
+            ->first();
 
         if ($placeLike) {
             $placeLike->delete();
@@ -838,7 +857,8 @@ class GlobalController extends Controller
         }
     }
 
-    public function truncate(){
+    public function truncate()
+    {
         // DB::table('place_likes')->delete();
         // DB::table('place_comments')->delete();
         // DB::table('place_detail_places')->delete();
@@ -846,7 +866,4 @@ class GlobalController extends Controller
         // DB::table('place_details')->delete();
 
     }
-
-
-    
 }

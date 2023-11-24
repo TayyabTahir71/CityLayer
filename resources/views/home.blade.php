@@ -22,12 +22,12 @@
                     @endif
 
                     <div onclick="mylocation()"
-                        class="fixed z-20 flex items-center justify-center p-4 bg-black rounded-full cursor-pointer h-14 w-14 bottom-28 left-4">
-                        <img src="{{ asset('img/triangle.png') }}" class="w-6 h-6" alt="">
+                        class="fixed z-20 flex items-center justify-center p-4 bg-transparent rounded-full cursor-pointer h-14 w-20 bottom-[6.8rem] left-4">
+                        <img src="{{ asset('img/loc.jpg') }}" class="w-20 h-12" alt="">
                     </div>
                     <a href="/filter"
-                        class="fixed z-20 flex items-center justify-center p-5 text-xl bg-white border-2 border-black rounded-full h-14 w-14 bottom-28 right-4">
-                        <div class="">👁️</div>
+                        class="fixed z-20 flex items-center justify-center p-1 text-xl bg-white border-2 border-black rounded-full h-14 w-14 bottom-28 right-4">
+                        <div class=""> <img src="{{ asset('img/eye.jpg') }}" class="w-8 h-6" alt=""></div>
                     </a>
 
                     <div id="map" class="absolute w-[100vw] z-10 h-[90vh]"></div>
@@ -47,8 +47,9 @@
 
                         <div class="flex">
                             <div class="absolute left-16 bottom-[18px] ">
-                                <div class="p-3 bg-[#ffa726] border-2 border-white rounded-full h-14 w-14">
-                                    <span class="w-8 h-4">🔍</span>
+                                <div class="pl-4 py-3 pr-2.5 bg-[#ffa726] border-2 border-white rounded-full h-14 w-14">
+                                    <span class="w-10 h-14"><img src="{{ asset('img/search.png') }}" class="w-9 h-7"
+                                            alt=""></span>
                                 </div>
 
                             </div>
@@ -98,7 +99,6 @@
                                     x-transition:enter="transition ease-out duration-300 transform"
                                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" {{-- x-transition:leave="transition ease-in duration-200 transform" --}}
-                                    {{-- x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" --}} {{-- x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" --}} {{-- x-transition:enter="transition ease-in duration-300" --}}
                                     class="transition-height z-50 w-screen pb-16 transition-all transform bg-white h-[50%] shadow-xl mt-60 rounded-t-3xl"
                                     :style="'height: ' + height" :class="{ 'overflow-auto': showMore }">
 
@@ -1076,6 +1076,7 @@
         });
         $('body').on('click', '.submitData', function() {
 
+
             $('.subPlacesItems').html('');
             $('.subObservationItems').html('');
 
@@ -1094,7 +1095,7 @@
             if ($homeTab == 'place' && place_detail.id) {
                 place_data['place_id'] = place_detail.id;
 
-                if (place_detail.child.length > 0) {
+                if (place_detail.child.length >= 0) {
                     $('.placeparent').text(place_detail.name);
                     var allHtml = '';
                     place_detail.child.forEach(place => {
@@ -1364,6 +1365,9 @@
 
                     }
 
+                }
+                fail: function(status) {
+                    alert(status);
                 }
             });
 
