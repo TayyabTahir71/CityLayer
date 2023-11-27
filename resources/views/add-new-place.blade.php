@@ -338,7 +338,7 @@
                         place_detail.child.forEach(place => {
                             allHtml += `
                             <div class="flex flex-col items-center cursor-pointer" @click="subactive='SPL_${place.id}'">
-                                                <div data-subplaceid="${place.id}" class="w-[76px] h-[76px] rounded-full bg-[#2d9bf0]" 
+                                                <div data-subplaceid="${place.id}" class="w-[76px] h-[76px] rounded-full bg-[#2d9bf0]"
                                                 :class="subactive == 'SPL_${place.id}' ? 'border-4 border-blue-300 subplaceActive' : ''">
                                                     <div class="flex align-item-center justify-center items-center h-full">
                                                         <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
@@ -420,7 +420,7 @@
                         `;
                         } else {
                             observation.child.forEach(observ => {
-                                allHtml += `                            
+                                allHtml += `
                             <div data-subobservation_id="${observ.id}" class="flex gap-2 lg:gap-20 items-center justify-between mb-10">
                                 <div class="flex flex-col items-center w-[160px]">
                                     <div class="w-[76px] h-[76px] rounded-full bg-[#ffa726]">
@@ -502,43 +502,54 @@
                 contentType: false,
                 processData: false,
                 success: function(data) {
-                    place_data['place_name'] = '';
-                    place_data['observation_name'] = '';
-                    place_data['place_id'] = data.place_id;
-
-                    var reverse_tab = data.tab == 'place' ? 'observation' : 'place';
                     if (data.status == 'success') {
+                        place_data['place_name'] = '';
+                        place_data['observation_name'] = '';
+                        place_data['place_id'] = data.place_id;
 
-                        if (totalswal >= 1) {
-                            window.location.href = '/';
-                        } else {
-                            totalswal = totalswal + 1;
-                            place_data['place_detail_id'] = data.place_detail_id;
-                            place_data['update'] = reverse_tab;
-                            swal({
-                                title: "Success!",
-                                text: data.tab.charAt(0).toUpperCase() + data.tab.slice(1) + " " + data
-                                    .msg + " Do you want to add " + reverse_tab + " tag?",
-                                icon: "success",
-                                buttons: ["Close", "Continue"],
-                            }).then((userConfirmed) => {
-                                if (userConfirmed) {
-                                    if (reverse_tab == 'place') {
-                                        $('.openPlaceModel').click();
+                        var reverse_tab = data.tab == 'place' ? 'observation' : 'place';
+                        if (data.status == 'success') {
+
+                            if (totalswal >= 1) {
+                                window.location.href = '/';
+                            } else {
+                                totalswal = totalswal + 1;
+                                place_data['place_detail_id'] = data.place_detail_id;
+                                place_data['update'] = reverse_tab;
+                                swal({
+                                    title: "Success!",
+                                    text: data.tab.charAt(0).toUpperCase() + data.tab.slice(1) + " " +
+                                        data
+                                        .msg + " Do you want to add " + reverse_tab + " tag?",
+                                    icon: "success",
+                                    buttons: ["Close", "Continue"],
+                                }).then((userConfirmed) => {
+                                    if (userConfirmed) {
+                                        if (reverse_tab == 'place') {
+                                            $('.openPlaceModel').click();
+                                        } else {
+                                            $('.OpenObservationModel').click();
+                                        }
                                     } else {
-                                        $('.OpenObservationModel').click();
+                                        window.location.href = '/';
+                                        // $('.closeAddProcess').click();
                                     }
-                                } else {
-                                    window.location.href = '/';
-                                    // $('.closeAddProcess').click();
-                                }
-                            });
+                                });
+                            }
+
+
                         }
-
-
+                    } else {
+                        swal({
+                            title: "error",
+                            text: data.msg,
+                            icon: "error"
+                        });
                     }
 
-                }
+
+                },
+
             });
 
         }

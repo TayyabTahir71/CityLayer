@@ -45,7 +45,7 @@ class GlobalController extends Controller
         if (backpack_auth()->check()) {
             $userid = backpack_auth()->user()->id;
 
-            // check for edit 
+            // check for edit
             if ($edit_id) {
                 $checkplace = PlaceDetails::find($edit_id);
                 if (!($checkplace && $checkplace->user_id == $userid)) {
@@ -574,12 +574,8 @@ class GlobalController extends Controller
             $check = Place::where('name', $postData->place_name)->exists();
 
             if ($check) {
-                dd('sd');
-                return response()->json([
-                    'status' => 'error',
-                    'msg' => 'Place already exist!',
 
-                ]);
+                return false;
             }
 
 
@@ -591,6 +587,14 @@ class GlobalController extends Controller
             $result_array['place_id'] = $place->id;
         }
         if (isset($postData->observation_name) && !empty($postData->observation_name)) {
+
+            $check = Observation::where('name', $postData->observation_name)->exists();
+
+            if ($check) {
+
+                return false;
+            }
+
             $observation = Observation::create([
                 'name' => $postData->observation_name,
                 'user_id' => backpack_user()->id,
@@ -611,6 +615,12 @@ class GlobalController extends Controller
         $postData = json_decode($request->place_data, true);
         $postData = (object)$postData;
         $returnData = $this->addNewPlaceData($postData);
+
+        if ($returnData == false) {
+            $response['status'] = 'error';
+            $response['msg'] = 'Place or observation already exist!';
+            return response()->json($response);
+        }
         $postData = (object)array_merge((array)$postData, (array)$returnData);
 
 
