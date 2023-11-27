@@ -100,7 +100,9 @@ Route::get('research', function () {
 Route::get('edit_profile', function () {
     return view('edit_profile');
 });
-
+Route::get('about', function () {
+    return view('new-about');
+});
 
 Route::get('badges_overview', function () {
     return view('badges_overview');
@@ -172,8 +174,8 @@ Route::get('/impressum-accessibility', function () {
 });
 
 
-if(env('FORCE_HTTPS')) {
+if (env('FORCE_HTTPS')) {
     URL::forceScheme('https');
-}else{
+} else {
     URL::forceScheme('http');
 }

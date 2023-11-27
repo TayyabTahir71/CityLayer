@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\Feeling;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,10 +18,10 @@ class FeelingSeeder extends Seeder
     {
         $feeling_list = [
             ['name' => 'Superb, exceptional', 'star' => 5, 'image' => '/img/comfortable.png'],
-            ['name' => 'Good, enjoyable', 'star' => 4, 'image' => '/img/confused.png'],
+            ['name' => 'Good, enjoyable', 'star' => 4, 'image' => '/img/happy.png'],
             ['name' => 'Average, fair', 'star' => 3, 'image' => '/img/sad.png'],
-            ['name' => 'Unpleasant, subpar', 'star' => 2, 'image' => '/img/happy.png'],
-            ['name' => 'Unsatisfactory, intolerable', 'star' => 1, 'image' => '/img/disgusted.png'],
+            ['name' => 'Unsatisfactory, intolerable', 'star' => 2, 'image' => '/img/confused.png'],
+            ['name' => 'Unpleasant, subpar', 'star' => 1, 'image' => '/img/disgusted.png'],
         ];
 
         foreach ($feeling_list as $feelingData) {

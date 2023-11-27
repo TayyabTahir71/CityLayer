@@ -23,12 +23,19 @@
 
                     <div onclick="mylocation()"
                         class="fixed z-20 flex items-center justify-center p-4 bg-transparent rounded-full cursor-pointer h-14 w-20 bottom-[6.8rem] left-4">
-                        <img src="{{ asset('img/loc.jpg') }}" class="w-20 h-12" alt="">
+                        <img src="{{ asset('img/location.png') }}" class="w-20 h-12" alt="">
                     </div>
                     <a href="/filter"
                         class="fixed z-20 flex items-center justify-center p-1 text-xl bg-white border-2 border-black rounded-full h-14 w-14 bottom-28 right-4">
-                        <div class=""> <img src="{{ asset('img/eye.jpg') }}" class="w-8 h-6" alt=""></div>
+                        <div class=""> <img src="{{ asset('img/eye.png') }}" class="w-8 h-6" alt=""></div>
                     </a>
+
+                    <div class="flex justify-center items-center">
+                        <span class="fixed z-[30] top-10 mr-20 text-center">
+                            Explore the map to view the activities of other users.
+                        </span>
+                    </div>
+
 
                     <div id="map" class="absolute w-[100vw] z-10 h-[90vh]"></div>
                 </div>
@@ -64,7 +71,7 @@
                         <div class="w-full pt-4 addToMap" @click="tab ='place'; modelOpen =true; searchQuery=''">
                             <span
                                 class="border-2 border-site w-full px-12 py-4 text-white bg-[#2d9bf0] rounded-3xl cursor-pointer">
-                                Add to map
+                                Add to Pin
                             </span>
 
                         </div>
@@ -81,7 +88,7 @@
                     </div>
 
 
-                    <div class="parentDiv" x-data="{ height: 'auto' }">
+                    <div class="parentDiv" x-data="{ height: 'auto' }">f
                         <button class="hidden OpenObservationModel"
                             @click="modelOpen=true; showMore = true; hidetab = 'place'; tab='observation'; height = '100vh';"></button>
                         <button class="hidden openPlaceModel"
@@ -139,6 +146,12 @@
                                             </a>
 
                                         </div>
+
+                                        <div class="mt-2">
+                                            Drop a pin to share observations, opinions and ideas.
+                                        </div>
+
+
 
 
 
@@ -376,8 +389,10 @@
 
                                     <div class="grid grid-cols-3 gap-10 italic font-semibold subPlacesItems">
 
-
-
+                                    </div>
+                                    <div class="mt-4 text-center font-normal">
+                                        Tap "submit" to pin this place to the map and share it with other users.
+                                        Provide more details by adding a description, and uploading a photo.
 
                                     </div>
                                     <div class="flex items-center justify-between w-2/3 pb-12 pb-16 pt-28">
@@ -410,6 +425,12 @@
                                     </div>
 
 
+
+                                    <div class="mt-4 text-center font-normal">
+                                        Tap "submit" to pin this observation to the map and share it with other users.
+                                        Provide more details through rating, adding a description, and uploading a photo.
+
+                                    </div>
 
 
                                     <div class="flex items-center justify-between w-2/3 pt-20 pb-16 mb-12">
@@ -548,7 +569,8 @@
             </div>
             <br />
             <div class="belo">
-                <div class="mapping">Mappings are public. Your username will be shown along with the mapping.</div>
+                <div class="mapping">Maps are public and visible to all users. Your username will be shown along with your
+                    pins and added layers.</div>
                 <div class="cursor-pointer closebt" onclick="close_pop_profile()">Close</div>
             </div>
         </div>
@@ -750,7 +772,7 @@
                 <div class="flex gap-4 mt-4">
                     <div class="text-center">
                         <img src="{{ asset('img/cam.PNG') }}" alt="" class="h-6 w-7">
-                        <div class="font-light text-white font-sm">view</div>
+                        <div @click="viewo=!viewo" class="font-light text-white font-sm">view</div>
                     </div>
                     <span class="text-lg italic font-extrabold text-white whitespace-nowrap ` + (observationDetail
                 .observation.id ? 'w-screen' : '') + `">` + obsrName + `</span>
@@ -882,7 +904,7 @@
             }).addTo(mymap0).bindPopup(
 
 
-                `<div class="bg-[#2d9bf0] p-0 w-full">
+                `<div class="bg-[#2d9bf0] p-0 w-full" x-data="{ viewp: false,viewo: false }">
 
                     <div class="flex items-center justify-start gap-3 -mb-4 overflow-hidden">
                         <div class="flex flex-col items-center justify-center">
@@ -893,7 +915,7 @@
                         <div class="flex gap-4 mt-4">
                             <div class="text-center">
                                 <img src="{{ asset('img/cam-2.PNG') }}" alt="" class="h-6 w-7">
-                                <div class="font-light text-white font-sm">view</div>
+                                <div @click="viewp=!viewp" class="font-light text-white font-sm">view</div>
                             </div>
                             <span class="text-lg italic font-extrabold text-white">
                             ` + placename + `
@@ -932,8 +954,26 @@
                         </div>
                     </div>
 
+                    <div x-show="viewp" class="fixed top-0 w-full height-[30vh] bg-white rounded">
+                  
+                        <img src="storage/uploads/place/${place.place_image}"  class="w-full h-full" />
+                    
+                    </div>
+                     <div x-show="viewo" class="fixed top-0 w-full height-[30vh] bg-white rounded">
+                  
+                        <img src="storage/uploads/observation/${place.obsevation_image}"  class="w-full h-full" />
+                    
+                    </div>
+                </div>
 
-                </div>`
+
+             
+                
+                
+                `
+
+
+
             );
 
             markerx.on('popupopen', (event) => {
@@ -1102,7 +1142,7 @@
                         allHtml += `
                         <div class="flex flex-col items-center cursor-pointer" @click="subactive='SPL_${place.id}'">
                                             <div data-subplaceid="${place.id}" class="SPL_${place.id} w-[76px] h-[76px] rounded-full bg-[#2d9bf0]"
-                                            :class="subactive == 'SPL_${place.id}' ? 'border-4 border-blue-300 subplaceActive' : ''">
+                                            :class="subactive == 'SPL_${place.id}' ? 'border-4 border-[12CDD4] subplaceActive' : ''">
                                                 <div class="flex items-center justify-center h-full align-item-center">
                                                     <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
                                                 </div>
@@ -1207,7 +1247,7 @@
                                         <div data-feeling_id="{{ $feeling->id }}"
                                             @click="feelActive${observation.id}='feel_${observation.id}_{{ $feeling->id }}'"
                                             class="feel_${observation.id}${child.id ? '_' + child.id : ''}_{{ $feeling->id }} cursor-pointer rounded-full"
-                                            :class="feelActive${observation.id} == 'feel_${observation.id}_{{ $feeling->id }}' ? 'border-4 border-blue-300 feelingActive' : ''"
+                                            :class="feelActive${observation.id} == 'feel_${observation.id}_{{ $feeling->id }}' ? 'border-4 border-[#12CDD4] feelingActive' : ''"
                                             >
                                             <img class="w-12 h-12 sm:w-16 sm:h-16" src="{{ asset($feeling->image) }}" alt="">
                                         </div>
@@ -1366,9 +1406,7 @@
                     }
 
                 }
-                fail: function(status) {
-                    alert(status);
-                }
+
             });
 
         }

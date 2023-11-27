@@ -1,7 +1,6 @@
-@php use \App\Http\Controllers\GlobalController;
-$info = GlobalController::myprofile();
-@endphp
-
+@phpuse App\Http\Controllers\GlobalController;
+                    $info = GlobalController ?? ''::myprofile();
+@endphp ?> ?>
 @extends('layouts.app')
 
 @section('main')
@@ -22,14 +21,19 @@ $info = GlobalController::myprofile();
                             src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
                         <div class="bg-black text-white  text-center plus_circle">+</div>
                     </label>
-                    
+
 
                 </form>
             </div>
+            <div class="mt-2 text-center">
+                The data you input is entirely up to you, and all data is
+                collected solely for statistical purposes.
+            </div>
         </div>
+
         <form action="save_profile" class="flex flex-col items-center justify-center pt-8 mx-auto" method="POST">
             @csrf
-           
+
             <div class="w-full lg:w-2/6">
                 <div class="mb-4">
                     <div class="flex justify-between items-center" id="toggleContainer1">
@@ -39,11 +43,11 @@ $info = GlobalController::myprofile();
                         </div>
                         <div class="plus bg-site"> + </div>
                     </div>
-    
+
                     <div id="email1">
                         <label for="email" class="block mb-2 text-gray-900 text">Email</label>
                         <input id="email" name="email" type="email" value="{{ backpack_auth()->user()->email }}"
-                               class="inpW block w-full px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            class="inpW block w-full px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
 
@@ -54,14 +58,14 @@ $info = GlobalController::myprofile();
                             <div class="italic font-light">change /add age</div>
                         </div>
                         <div class="plus bg-site"> + </div>
-                     </div>
-    
-    
-                     <div id="age1">
+                    </div>
+
+
+                    <div id="age1">
                         <label for="age" class="block mb-2 text-gray-900 text">Age</label>
                         <input type="number" name="age" style="-moz-appearance: textfield"
-                               class="block w-full px-4 py-3 mb-2 text-base text-gray-900 inpW placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                               name="custom-input-number" min="10" value="{{ $info->age }}">
+                            class="block w-full px-4 py-3 mb-2 text-base text-gray-900 inpW placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            name="custom-input-number" min="10" value="{{ $info->age ?? '' }}">
                     </div>
                 </div>
 
@@ -79,11 +83,15 @@ $info = GlobalController::myprofile();
                     <div id="gender1">
                         <label for="gender" class="block mb-2 text-gray-900 text">Gender</label>
                         <select id="gender" name="gender"
-                                class="block w-full px-4 py-3 inpW text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            class="block w-full px-4 py-3 inpW text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                             <option selected></option>
-                            <option value="male" {{ $info->gender == 'male' ? 'selected' : '' }}>{{ __('messages.Male') }}</option>
-                            <option value="female" {{ $info->gender == 'female' ? 'selected' : '' }}>{{ __('messages.Female') }}</option>
-                            <option value="other"  {{ $info->gender == 'other' ? 'selected' : '' }}>{{ __('messages.Other') }}</option>
+                            <option value="male" {{ $info->gender ?? '' == 'male' ? 'selected' : '' }}>
+                                {{ __('messages.Male') }}
+                            </option>
+                            <option value="female" {{ $info->gender ?? '' == 'female' ? 'selected' : '' }}>
+                                {{ __('messages.Female') }}</option>
+                            <option value="other" {{ $info->gender ?? '' == 'other' ? 'selected' : '' }}>
+                                {{ __('messages.Other') }}</option>
                         </select>
                     </div>
 
@@ -103,36 +111,48 @@ $info = GlobalController::myprofile();
                     <div id="job1">
                         <label for="job" class="block mb-2 text-gray-900 text">Education</label>
                         <select id="job" name="profession"
-                                class="block w-full px-4 py-3  inpW text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            class="block w-full px-4 py-3  inpW text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
                             <option selected></option>
-                            <option value="elementary school student" {{ $info->profession == 'elementary school student' ? 'selected' : '' }}>{{ __('messages.elementary school student') }}</option>
-                            <option value="high school student" {{ $info->profession == 'high school student' ? 'selected' : '' }}>{{ __('messages.high school student') }} &nbsp;</option>
-                            <option value="high school graduate" {{ $info->profession == 'high school graduate' ? 'selected' : '' }}>{{ __('messages.high school graduate') }} &nbsp;</option>
-                            <option value="university student" {{ $info->profession == 'university student' ? 'selected' : '' }}>{{ __('messages.university student') }} &nbsp;</option>
-                            <option value="university graduate" {{ $info->profession == 'university graduate' ? 'selected' : '' }}>{{ __('messages.university graduate') }} &nbsp;</option>
-        
+                            <option value="elementary school student"
+                                {{ $info->profession ?? '' == 'elementary school student' ? 'selected' : '' }}>
+                                {{ __('messages.elementary school student') }}</option>
+                            <option value="high school student"
+                                {{ $info->profession ?? '' == 'high school student' ? 'selected' : '' }}>
+                                {{ __('messages.high school student') }} &nbsp;</option>
+                            <option value="high school graduate"
+                                {{ $info->profession ?? '' == 'high school graduate' ? 'selected' : '' }}>
+                                {{ __('messages.high school graduate') }} &nbsp;</option>
+                            <option value="university student"
+                                {{ $info->profession ?? '' == 'university student' ? 'selected' : '' }}>
+                                {{ __('messages.university student') }} &nbsp;</option>
+                            <option value="university graduate"
+                                {{ $info->profession ?? '' == 'university graduate' ? 'selected' : '' }}>
+                                {{ __('messages.university graduate') }} &nbsp;</option>
+
                         </select>
-        
+
                     </div>
 
                 </div>
 
             </div>
-            
-         
-            
-            
-            
-          
+
+
+
+
+
+
 
             <div class="mt-8 flex flex-col">
-                <button class="font-bold color-site border-2 border-site px-8 py-4 font-bold	font-sm rounded-3xl block mb-6" type="submit">Edit city tags</button>
-            
-                <button class="font-bold bg-site text-white border-2 border-site p-1 px-8 py-4 font-bold	font-sm rounded-3xl block">
+                <button class="font-bold color-site border-2 border-site px-8 py-4 font-bold	font-sm rounded-3xl block mb-6"
+                    type="submit">Edit city tags</button>
+
+                <button
+                    class="font-bold bg-site text-white border-2 border-site p-1 px-8 py-4 font-bold	font-sm rounded-3xl block">
                     Save and close
-                </button>  
-        </div> 
-        
+                </button>
+            </div>
+
         </form>
 
     </div>
@@ -204,7 +224,5 @@ $info = GlobalController::myprofile();
             document.getElementById('job1').style.display = "block";
             toggleContainer4.style.display = "none";
         });
-
     </script>
-
 @endsection

@@ -1,15 +1,33 @@
 @extends('layouts.app')
 
 @section('main')
-    <div data-barba="container" class="">
+    {{-- <div class="relative">
+        <div class="absolute top-0 right-4 z-50">
+            <div class="px-6 py-4 rounded-full border border-black text-black">
+                About
+            </div>
+        </div>
+    </div> --}}
 
+    <div data-barba="container " class=" relative">
+        <div class="absolute top-0 -mt-2 right-7  z-50">
+            <a href="/about" class="px-6 py-4 rounded-full border border-black text-black">
+                About
+            </a>
+        </div>
         <div class="flex flex-col items-center justify-center mt-8">
 
             @include('authTop')
 
 
+            <div class="md:w-[400px] px-5 text-center mt-2">
+                Create an account to keep track of your activities, or continue without signing up. If you wish to receive
+                notifications from City Layers, sign up using your email. By proceeding, you agree to participate
+                voluntarily in this study.
+            </div>
 
-            <section class="" x-data="{ tab: 'username' }">
+
+            <section class="mb-4" x-data="{ tab: 'username' }">
 
 
                 <form role="form" method="POST" action="{{ route('backpack.auth.login') }}">
@@ -39,10 +57,6 @@
             </section>
 
 
-            <p class="mt-4 text-center px-7">
-                By Confirming you agree with 'City Layer' <span class="text-blue-500">Privacy Policy</span> and <span
-                    class="text-blue-500">Terms of Service.</span>
-            </p>
 
         </div>
 

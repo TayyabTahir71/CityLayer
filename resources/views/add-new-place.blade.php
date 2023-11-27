@@ -48,7 +48,14 @@
 
 
 
-            <div class="placeSubTab flex flex-col items-center justify-center" x-data="{ placeSubtab: 'add', searchQueryPlace: '', placeTitle: 'Add new place', placeInput: 'Enter a new place', active: '', placeModel: 'parent' }" x-show="tab=='place'"
+            <div class="placeSubTab flex flex-col items-center justify-center" x-data="{
+                placeSubtab: 'add',
+                searchQueryPlace: '',
+                placeTitle: 'Want to pin a place that has not been mapped before? Add a layer by giving it a name. Provide more details by adding a description, and uploading a photo.',
+                placeInput: 'Enter a new place',
+                active: '',
+                placeModel: 'parent'
+            }" x-show="tab=='place'"
                 :class="placeSubtab == 'choose' ? 'choose' : 'add'">
                 <button class="hidden openPlaceModel"
                     @click="tab='place';placeSubtab='choose';placeTitle='Choose tags or add a new place';placeInput='Browse place tags'"></button>
@@ -60,13 +67,14 @@
                         <input type="text" :placeholder="placeInput" x-model="searchQueryPlace" name="place_name"
                             class="w-full px-4 py-2 bg-white rounded-full">
                         <span id="err" class="text-center text-red-500"></span>
-                        <div class="mt-2 italic font-normal" x-text="placeTitle"></div>
+                        <div class="mt-2 italic font-normal text-center" x-text="placeTitle"></div>
 
                     </div>
 
                     <div class="grid grid-cols-4 italic font-semibold gap-10" x-show="placeSubtab=='choose'">
                         <div class="flex flex-col items-center cursor-pointer">
-                            <button @click="placeSubtab='add';placeTitle='Add new place';placeInput='Enter a new place'">
+                            <button
+                                @click="placeSubtab='add';placeTitle='Want to pin a place that has not been mapped before? Add a layer by giving it a name. Provide more details by adding a description, and uploading a photo.';placeInput='Enter a new place'">
                                 <div class="rounded-full border-site border-4 p-[22px] bg-site">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="3" stroke="#ffff" class="w-6 h-6 font-bold color-site">
@@ -84,7 +92,7 @@
                                 class="flex flex-col items-center cursor-pointer" @click="active='PL_{{ $place->id }}'">
                                 <div data-place="{{ json_encode(['id' => $place->id, 'name' => $place->name, 'child' => $place->subplaces]) }}"
                                     class="w-[76px] h-[76px] rounded-full bg-[#2d9bf0]"
-                                    :class="active == 'PL_{{ $place->id }}' ? 'border-4 border-blue-300 placeActive' : ''">
+                                    :class="active == 'PL_{{ $place->id }}' ? 'border-4 border-[#12CDD4] placeActive' : ''">
                                     <div class="flex align-item-center justify-center items-center h-full">
                                         <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
                                     </div>
@@ -113,6 +121,13 @@
                     </div>
                 </div>
 
+                <div x-show="placeSubtab=='choose'" class="px-5 mt-2 text-center">
+
+                    Tap "submit" to pin this place to the map and share it with other users.
+                    Provide more details through rating, adding a description, and uploading a photo.
+
+
+                </div>
 
                 <div class="flex items-center justify-between w-2/3 pt-28 pb-16 font-semibold">
                     <label class="flex flex-col items-center gap-1 cursor-pointer" for="image-upload">
@@ -134,7 +149,14 @@
 
             </div>
 
-            <div class="observationSubTab flex flex-col items-center justify-center" x-data="{ observationSubtab: 'add', searchQueryObservation: '', observationTitle: 'Add new observation', observationInput: 'Enter a new observation', active: '', observationModel: 'parent' }"
+            <div class="observationSubTab flex flex-col items-center justify-center" x-data="{
+                observationSubtab: 'add',
+                searchQueryObservation: '',
+                observationTitle: 'Want to pin an observation that has not been mapped before? Add a layer by giving it a name. Provide more details through rating, adding a description, and uploading a photo.',
+                observationInput: 'Enter a new observation',
+                active: '',
+                observationModel: 'parent'
+            }"
                 x-show="tab=='observation'" :class="observationSubtab == 'choose' ? 'choose' : 'add'">
 
                 <button class="hidden OpenObservationModel"
@@ -148,13 +170,13 @@
                     <div class="flex flex-col items-center justify-center mt-12 mb-12 w-full">
                         <input type="text" name="observation_name" :placeholder="observationInput"
                             x-model="searchQueryObservation" class="w-full px-4 py-2 bg-white rounded-full">
-                        <div class="mt-2 italic font-normal" x-text="observationTitle"></div>
+                        <div class="mt-2 italic font-normal text-center" x-text="observationTitle"></div>
                     </div>
                     <div class="flex items-start justify-center gap-10 mt-6 mb-6 italic font-semibold">
                         <div class="grid grid-cols-4 italic font-semibold gap-10" x-show="observationSubtab=='choose'">
                             <div class="flex flex-col items-center cursor-pointer">
                                 <button
-                                    @click="observationSubtab='add';observationTitle='Add new observation';observationInput='Enter a new observation'">
+                                    @click="observationSubtab='add';observationTitle='Want to pin an observation that has not been mapped before? Add a layer by giving it a name. Provide more details through rating, adding a description, and uploading a photo.';observationInput='Enter a new observation'">
                                     <div class="rounded-full border-site border-4 p-[22px] bg-site">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="3" stroke="#ffff" class="w-6 h-6 font-bold color-site">
@@ -172,7 +194,7 @@
                                     <div data-observations="{{ json_encode(['id' => $observation->id, 'name' => $observation->name, 'child' => $observation->subobservs]) }}"
                                         class="w-[76px] h-[76px] rounded-full bg-[#ffa726]"
                                         :class="active == 'OB_{{ $observation->id }}' ?
-                                            'border-4 border-blue-300 observationActive' : ''">
+                                            'border-4 border-[#12CDD4] observationActive' : ''">
                                         <div class="flex align-item-center justify-center items-center h-full">
                                             <img src="{{ asset('new_img/sad.png') }}" alt=""
                                                 class="w-8 h-8 -mr-1">
@@ -212,12 +234,21 @@
                     @foreach ($feelings as $feeling)
                         <div data-feeling_id="{{ $feeling->id }}" @click="feelActive='feel_{{ $feeling->id }}'"
                             class="cursor-pointer rounded-full"
-                            :class="feelActive == 'feel_{{ $feeling->id }}' ? 'border-4 border-blue-300 feelingActive' : ''">
+                            :class="feelActive == 'feel_{{ $feeling->id }}' ? 'border-4 border-[#12CDD4] feelingActive' : ''">
                             <img class="w-12 h-12 sm:w-16 sm:h-16" src="{{ asset($feeling->image) }}" alt="">
                         </div>
                     @endforeach
+
                 </div>
 
+
+                <div x-show="observationSubtab=='choose'" class="px-5 mt-2 text-center">
+
+                    Tap "submit" to pin this observation to the map and share it with other users.
+                    Provide more details through rating, adding a description, and uploading a photo.
+
+
+                </div>
                 <div class="flex items-center justify-between w-2/3 pt-28 pb-16 font-semibold">
                     <label for="obser-image-upload" class="flex flex-col items-center gap-1 cursor-pointer">
                         <input id="obser-image-upload" type="file" class="hidden observation_image"
@@ -339,7 +370,7 @@
                             allHtml += `
                             <div class="flex flex-col items-center cursor-pointer" @click="subactive='SPL_${place.id}'">
                                                 <div data-subplaceid="${place.id}" class="w-[76px] h-[76px] rounded-full bg-[#2d9bf0]"
-                                                :class="subactive == 'SPL_${place.id}' ? 'border-4 border-blue-300 subplaceActive' : ''">
+                                                :class="subactive == 'SPL_${place.id}' ? 'border-4 border-[#12CDD4] subplaceActive' : ''">
                                                     <div class="flex align-item-center justify-center items-center h-full">
                                                         <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
                                                     </div>
@@ -404,7 +435,7 @@
                                         <div data-feeling_id="{{ $feeling->id }}"
                                             @click="feelActive${observation.id}='feel_${observation.id}_{{ $feeling->id }}'"
                                             class="cursor-pointer rounded-full"
-                                            :class="feelActive${observation.id} == 'feel_${observation.id}_{{ $feeling->id }}' ? 'border-4 border-blue-300 feelingActive' : ''"
+                                            :class="feelActive${observation.id} == 'feel_${observation.id}_{{ $feeling->id }}' ? 'border-4 border-[#12CDD4] feelingActive' : ''"
                                             >
                                             <img class="w-12 h-12 sm:w-16 sm:h-16" src="{{ asset($feeling->image) }}" alt="">
                                         </div>
@@ -541,7 +572,7 @@
                         }
                     } else {
                         swal({
-                            title: "error",
+                            title: "Failed!",
                             text: data.msg,
                             icon: "error"
                         });
