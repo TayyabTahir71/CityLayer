@@ -50,7 +50,8 @@
 
             <div class="placeSubTab flex flex-col items-center justify-center" x-data="{
                 placeSubtab: 'add',
-                searchQueryPlace: '',
+                
+                searchQueryPlace:'',
                 placeTitle: 'Want to pin a place that has not been mapped before? Add a layer by giving it a name. Provide more details by adding a description, and uploading a photo.',
                 placeInput: 'Enter a new place',
                 active: '',
@@ -61,10 +62,11 @@
                     @click="tab='place';placeSubtab='choose';placeTitle='Choose tags or add a new place';placeInput='Browse place tags'"></button>
                 <button class="hidden OpenSubPlaceModel" @click="tab='place';placeModel='child'"></button>
 
+
                 <div class="PlaceItems w-full" x-show="placeModel=='parent'"
                     :class="placeModel == 'parent' ? 'parent' : 'child'">
                     <div class="flex flex-col items-center justify-center w-full mt-12 mb-12">
-                        <input type="text" :placeholder="placeInput" x-model="searchQueryPlace" name="place_name"
+                        <input  type="text" :placeholder="placeInput" id="searchQueryPlace" x-model="searchQueryPlace" name="place_name"
                             class="w-full px-4 py-2 bg-white rounded-full">
                         <span id="err" class="text-center text-red-500"></span>
                         <div class="mt-2 italic font-normal text-center" x-text="placeTitle"></div>
@@ -169,7 +171,7 @@
                     :class="observationModel == 'parent' ? 'parent' : 'child'">
                     <div class="flex flex-col items-center justify-center mt-12 mb-12 w-full">
                         <input type="text" name="observation_name" :placeholder="observationInput"
-                            x-model="searchQueryObservation" class="w-full px-4 py-2 bg-white rounded-full">
+                            x-model="searchQueryObservation" id="searchQueryObservation" class="w-full px-4 py-2 bg-white rounded-full">
                         <div class="mt-2 italic font-normal text-center" x-text="observationTitle"></div>
                     </div>
                     <div class="flex items-start justify-center gap-10 mt-6 mb-6 italic font-semibold">
@@ -293,6 +295,19 @@
     </div>
 
     <script>
+
+$(document).ready(function () {
+    setTimeout(() => {
+        $('#searchQueryPlace').val(' ');
+        var inputEvent = new Event('input', { bubbles: true });
+        $('#searchQueryPlace')[0].dispatchEvent(inputEvent);
+        
+        $('#searchQueryObservation').val(' ');
+        var inputEvent = new Event('input', { bubbles: true });
+        $('#searchQueryObservation')[0].dispatchEvent(inputEvent);
+    }, 1);
+});
+
         let place_data = {
             place_name: '',
             place_id: '',

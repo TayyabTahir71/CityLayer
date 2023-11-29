@@ -33,7 +33,7 @@ Route::get('/badges_overview', function () {
 Route::controller(GlobalController::class)->group(function () {
     // Route::get('/', 'getAll')->name('getAll')->middleware('App\Http\Middleware\MyMiddleware');
     // Route::get('/', 'homeDefault')->name('default');
-    Route::get('edit/{id}', 'homeDefault');
+    Route::get('edit/{id}', 'getAll');
 
     // Route::get('/get-started', 'getAll');
 
