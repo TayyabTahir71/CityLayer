@@ -39,7 +39,7 @@ class GlobalController extends Controller
      */
 
 
-    public function homeDefault($edit_id = '')
+    public function getAll($edit_id = '')
     {
 
         if (backpack_auth()->check()) {
@@ -149,16 +149,16 @@ class GlobalController extends Controller
                 return view('edit_profile');
             }
         } else {
-            return view('home-default');
+            return view('index');
         }
 
         // dd('good');
     }
 
-    public function getAll()
-    {
-        return view('index');
-    }
+    // public function getAll()
+    // {
+    //     return view('index');
+    // }
 
     public function community_achievements()
     {

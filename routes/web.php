@@ -32,9 +32,12 @@ Route::get('/badges_overview', function () {
 
 Route::controller(GlobalController::class)->group(function () {
     // Route::get('/', 'getAll')->name('getAll')->middleware('App\Http\Middleware\MyMiddleware');
-    Route::get('/', 'homeDefault')->name('default');
+    // Route::get('/', 'homeDefault')->name('default');
     Route::get('edit/{id}', 'homeDefault');
-    Route::get('/get-started', 'getAll');
+
+    // Route::get('/get-started', 'getAll');
+
+    Route::get('/', 'getAll')->name('default');
 
     Route::get('profile', 'profile')->name('profile');
     Route::get('badges_overview', 'badges_overview')->name('badges_overview');
