@@ -78,9 +78,6 @@
                     <div class="flex justify-center pt-8">
                         <div class="flex flex-col">
                             <div class="flex gap-x-1">
-
-
-                                
                                 <button id="btn1" class="z-40">
                                     @if ($explorer == 1)
                                         <div class="flax ">
@@ -137,7 +134,7 @@
                     <br/>
                     <br/>
                     <div class="flex flex-row justify-center items-center gap-4">
-                        <a href="/" class="px-6 py-4 font-bold border-2	font-sm rounded-3xl text-white bg-site border-site">Close</a>
+                        <button class="px-6 py-4 font-bold border-2	font-sm rounded-3xl text-white bg-site border-site">Close</button>
                         <a href="/edit_profile" class="px-6 py-4 font-bold	font-sm rounded-3xl color-site border-2 border-site cursor-pointer">Edit profile</a>
                     </div>
 

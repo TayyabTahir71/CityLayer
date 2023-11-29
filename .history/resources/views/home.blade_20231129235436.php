@@ -1391,12 +1391,6 @@
                                 buttons: ["Close", "Continue"],
                             }).then((userConfirmed) => {
                                 if (userConfirmed) {
-
-                                    setTimeout(() => {
-                                        var hrefValue = $('.tabNewLink').attr('href');
-                                        $('.tabNewLink').attr('href', hrefValue + '?only=true');
-                                    }, 200);
-
                                     if (reverse_tab == 'place') {
                                         $('.openPlaceModel').click();
                                     } else {

@@ -431,7 +431,9 @@ class GlobalController extends Controller
                 return redirect('/');
             }
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors('error')->withInput();
+           
+            // Handle any exceptions that may occur during the update
+            return redirect()->back()->with('error', 'Error updating record: ' . $e->getMessage());
         }
     }
 

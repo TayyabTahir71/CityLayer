@@ -770,9 +770,9 @@
                     </div>
                 </div>
                 <div class="flex gap-4 mt-4">
-                    <div @click="viewo=!viewo" class="text-center cursor-pointer">
+                    <div class="text-center">
                         <img src="{{ asset('img/cam.PNG') }}" alt="" class="h-6 w-7">
-                        <div class="font-light text-white font-sm">view</div>
+                        <div @click="viewo=!viewo" class="font-light text-white font-sm cursor-pointer">view</div>
                     </div>
                     <span class="text-lg italic font-extrabold text-white whitespace-nowrap ` + (observationDetail
                 .observation.id ? 'w-screen' : '') + `">` + obsrName + `</span>
@@ -959,7 +959,6 @@
                         <img src="storage/uploads/place/${place.place_image}"  class="w-full h-full" />
                     
                     </div>
-                    
                      <div x-show="viewo" class="fixed top-0 w-full height-[30vh] bg-white rounded">
                   
                         <img src="storage/uploads/observation/${place.obsevation_image}"  class="w-full h-full" />
@@ -1391,12 +1390,6 @@
                                 buttons: ["Close", "Continue"],
                             }).then((userConfirmed) => {
                                 if (userConfirmed) {
-
-                                    setTimeout(() => {
-                                        var hrefValue = $('.tabNewLink').attr('href');
-                                        $('.tabNewLink').attr('href', hrefValue + '?only=true');
-                                    }, 200);
-
                                     if (reverse_tab == 'place') {
                                         $('.openPlaceModel').click();
                                     } else {

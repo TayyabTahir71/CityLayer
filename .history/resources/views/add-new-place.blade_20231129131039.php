@@ -562,33 +562,25 @@ $(document).ready(function () {
                                 totalswal = totalswal + 1;
                                 place_data['place_detail_id'] = data.place_detail_id;
                                 place_data['update'] = reverse_tab;
-
-                                @if(!$only)
-                                    swal({
-                                        title: "Success!",
-                                        text: data.tab.charAt(0).toUpperCase() + data.tab.slice(1) + " " +
-                                            data
-                                            .msg + " Do you want to add " + reverse_tab + " tag?",
-                                        icon: "success",
-                                        buttons: ["Close", "Continue"],
-                                    }).then((userConfirmed) => {
-                                        if (userConfirmed) {
-                                            if (reverse_tab == 'place') {
-                                                $('.openPlaceModel').click();
-                                            } else {
-                                                $('.OpenObservationModel').click();
-                                            }
+                                swal({
+                                    title: "Success!",
+                                    text: data.tab.charAt(0).toUpperCase() + data.tab.slice(1) + " " +
+                                        data
+                                        .msg + " Do you want to add " + reverse_tab + " tag?",
+                                    icon: "success",
+                                    buttons: ["Close", "Continue"],
+                                }).then((userConfirmed) => {
+                                    if (userConfirmed) {
+                                        if (reverse_tab == 'place') {
+                                            $('.openPlaceModel').click();
                                         } else {
-                                            window.location.href = '/';
-                                            // $('.closeAddProcess').click();
+                                            $('.OpenObservationModel').click();
                                         }
-                                    });
-                                @else
-                                    window.location.href = '/';
-                                @endif
-
-
-                                
+                                    } else {
+                                        window.location.href = '/';
+                                        // $('.closeAddProcess').click();
+                                    }
+                                });
                             }
 
 

@@ -27,9 +27,6 @@ use App\Models\Preference;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use Illuminate\Validation\Rule;
-
-
 class GlobalController extends Controller
 {
 
@@ -431,7 +428,8 @@ class GlobalController extends Controller
                 return redirect('/');
             }
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors('error')->withInput();
+            // Handle any exceptions that may occur during the update
+            return redirect()->back()->with('error', 'Error updating record: ' . $e->getMessage());
         }
     }
 

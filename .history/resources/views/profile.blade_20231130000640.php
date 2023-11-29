@@ -78,9 +78,6 @@
                     <div class="flex justify-center pt-8">
                         <div class="flex flex-col">
                             <div class="flex gap-x-1">
-
-
-                                
                                 <button id="btn1" class="z-40">
                                     @if ($explorer == 1)
                                         <div class="flax ">

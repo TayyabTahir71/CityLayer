@@ -431,7 +431,8 @@ class GlobalController extends Controller
                 return redirect('/');
             }
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors('error')->withInput();
+            
+            return redirect()->back()->withErrors('not unique')->withInput();
         }
     }
 

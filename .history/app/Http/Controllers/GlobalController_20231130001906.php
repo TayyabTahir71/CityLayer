@@ -27,9 +27,6 @@ use App\Models\Preference;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use Illuminate\Validation\Rule;
-
-
 class GlobalController extends Controller
 {
 
@@ -375,13 +372,15 @@ class GlobalController extends Controller
         $request->validate([
             'name' => [
                 'required',
-                Rule::unique('users')->ignore($userid),
+                Rule::unique('users')->ignore($id),
             ],
             // other validation rules...
         ]);
 
         try {
-            $infos = Infosperso::where('user_id', $userid)->first();
+
+
+        $infos = Infosperso::where('user_id', $userid)->first();
             if (backpack_auth()->user()->score > 0) {
                 backpack_auth()->user()->email = $request->email;
                 backpack_auth()
@@ -431,7 +430,8 @@ class GlobalController extends Controller
                 return redirect('/');
             }
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors('error')->withInput();
+            // Handle any exceptions that may occur during the update
+            return redirect()->back()->with('error', 'Error updating record: ' . $e->getMessage());
         }
     }
 

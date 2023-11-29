@@ -770,9 +770,9 @@
                     </div>
                 </div>
                 <div class="flex gap-4 mt-4">
-                    <div @click="viewo=!viewo" class="text-center cursor-pointer">
+                    <div class="text-center">
                         <img src="{{ asset('img/cam.PNG') }}" alt="" class="h-6 w-7">
-                        <div class="font-light text-white font-sm">view</div>
+                        <div @click="viewo=!viewo" class="font-light text-white font-sm">view</div>
                     </div>
                     <span class="text-lg italic font-extrabold text-white whitespace-nowrap ` + (observationDetail
                 .observation.id ? 'w-screen' : '') + `">` + obsrName + `</span>
@@ -959,7 +959,6 @@
                         <img src="storage/uploads/place/${place.place_image}"  class="w-full h-full" />
                     
                     </div>
-                    
                      <div x-show="viewo" class="fixed top-0 w-full height-[30vh] bg-white rounded">
                   
                         <img src="storage/uploads/observation/${place.obsevation_image}"  class="w-full h-full" />
@@ -1143,7 +1142,7 @@
                         allHtml += `
                         <div class="flex flex-col items-center cursor-pointer" @click="subactive='SPL_${place.id}'">
                                             <div data-subplaceid="${place.id}" class="SPL_${place.id} w-[76px] h-[76px] rounded-full bg-[#2d9bf0]"
-                                            :class="subactive == 'SPL_${place.id}' ? 'border-4 border-[#12CDD4] subplaceActive' : ''">
+                                            :class="subactive == 'SPL_${place.id}' ? 'border-4 border-[12CDD4] subplaceActive' : ''">
                                                 <div class="flex items-center justify-center h-full align-item-center">
                                                     <img src="{{ asset('new_img/image.png') }}" class="w-7 h-7" />
                                                 </div>
@@ -1391,12 +1390,6 @@
                                 buttons: ["Close", "Continue"],
                             }).then((userConfirmed) => {
                                 if (userConfirmed) {
-
-                                    setTimeout(() => {
-                                        var hrefValue = $('.tabNewLink').attr('href');
-                                        $('.tabNewLink').attr('href', hrefValue + '?only=true');
-                                    }, 200);
-
                                     if (reverse_tab == 'place') {
                                         $('.openPlaceModel').click();
                                     } else {

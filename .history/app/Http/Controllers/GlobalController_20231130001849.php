@@ -27,9 +27,6 @@ use App\Models\Preference;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use Illuminate\Validation\Rule;
-
-
 class GlobalController extends Controller
 {
 
@@ -375,63 +372,62 @@ class GlobalController extends Controller
         $request->validate([
             'name' => [
                 'required',
-                Rule::unique('users')->ignore($userid),
+                Rule::unique('users')->ignore($id),
             ],
             // other validation rules...
         ]);
 
         try {
-            $infos = Infosperso::where('user_id', $userid)->first();
-            if (backpack_auth()->user()->score > 0) {
-                backpack_auth()->user()->email = $request->email;
-                backpack_auth()
-                    ->user()
-                    ->save();
-                Infosperso::where('user_id', $userid)->update([
-                    'email' => $request->email,
-                    'age' => $request->age,
-                    'gender' => $request->gender,
-                    'profession' => $request->profession,
-                ]);
 
-                return redirect('/');
-            } else {
-                backpack_auth()->user()->email = $request->email;
+
+        $infos = Infosperso::where('user_id', $userid)->first();
+        if (backpack_auth()->user()->score > 0) {
+            backpack_auth()->user()->email = $request->email;
+            backpack_auth()
+                ->user()
+                ->save();
+            Infosperso::where('user_id', $userid)->update([
+                'email' => $request->email,
+                'age' => $request->age,
+                'gender' => $request->gender,
+                'profession' => $request->profession,
+            ]);
+
+            return redirect('/');
+        } else {
+            backpack_auth()->user()->email = $request->email;
+            backpack_auth()
+                ->user()
+                ->save();
+            $infos = Infosperso::where('user_id', $userid)->first();
+            $infos->user_id = $userid;
+            $infos->age = $request->age;
+            if ($request->age != null) {
+                backpack_auth()->user()->score =
+                    backpack_auth()->user()->score + 1;
                 backpack_auth()
                     ->user()
                     ->save();
-                $infos = Infosperso::where('user_id', $userid)->first();
-                $infos->user_id = $userid;
-                $infos->age = $request->age;
-                if ($request->age != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                }
-                $infos->gender = $request->gender;
-                if ($request->gender != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                }
-                $infos->profession = $request->profession;
-                if ($request->profession != null) {
-                    backpack_auth()->user()->score =
-                        backpack_auth()->user()->score + 1;
-                    backpack_auth()
-                        ->user()
-                        ->save();
-                }
-                $infos->newuser = 0;
-                $infos->save();
-                return redirect('/');
             }
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors('error')->withInput();
+            $infos->gender = $request->gender;
+            if ($request->gender != null) {
+                backpack_auth()->user()->score =
+                    backpack_auth()->user()->score + 1;
+                backpack_auth()
+                    ->user()
+                    ->save();
+            }
+            $infos->profession = $request->profession;
+            if ($request->profession != null) {
+                backpack_auth()->user()->score =
+                    backpack_auth()->user()->score + 1;
+                backpack_auth()
+                    ->user()
+                    ->save();
+            }
+            $infos->newuser = 0;
+            $infos->save();
+            return redirect('/');
         }
     }
 
