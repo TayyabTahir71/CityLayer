@@ -71,7 +71,7 @@
                         <div class="w-full pt-4 addToMap" @click="tab ='place'; modelOpen =true; searchQuery=''">
                             <span
                                 class="border-2 border-site w-full px-12 py-4 text-white bg-[#2d9bf0] rounded-3xl cursor-pointer">
-                                Add to Pin
+                                Pin to Map
                             </span>
 
                         </div>
@@ -189,7 +189,7 @@
 
                                                     <div class="text-sm font-semibold text-center "
                                                         :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
-                                                        Browse Observation
+                                                        Browse Observations
                                                     </div>
                                                 </div>
                                             </div>
@@ -545,7 +545,7 @@
                         class="flex justify-center items-center w-7 h-7 border-[3px] font-bold text-base border-black rounded-full text-center">
                         •</div>
 
-                    <div class="ltax">Term & contact</div>
+                    <div class="ltax">Team & contact</div>
                 </a>
                 <a href="/privacy-policy" class="lbox">
                     <div

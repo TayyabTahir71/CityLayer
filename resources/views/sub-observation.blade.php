@@ -51,7 +51,7 @@
 
                     <div class="pl-8 font-semibold text-justify"
                         :class="tab == 'observation' ? 'text-black' : 'text-black/50'">
-                        Browse Observation
+                        Browse Observations
                     </div>
                 </div>
             </div>
