@@ -2,58 +2,121 @@
 
 @section('main')
     <div data-barba="container" class="">
-        <div class="flex flex-col items-center h-screen p-8 mx-auto">
-            <label for="dropzone-file" class="flex flex-col justify-center w-5/6 pt-[10%]">
-                <div class="flex flex-col items-center justify-center pb-6">
-                    <h1 class="text-4xl font-bold text-center text-gray-900">{{ __('messages.welcome to') }}<br> City Layers!
-                    </h1>
-                    <p class="mt-8 text-base text-center text-gray-600">
-                        {{ __('messages.A network for people who care about their environment!') }} </p>
-                    <p class="mt-4 text-base font-extrabold text-center text-gray-900">
-                        {{ __('messages.Earn points by exploring your surroundings and share your experiences with others!') }}
+
+        <div class="flex flex-col items-center justify-center mt-8">
+
+            @include('authTop')
+
+
+            <section class="mt-8" x-data="{ tab: 'get_started' }">
+
+                <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='get_started'">
+                    <button @click="tab='login_optns'" class="cursor-pointer btn btn-primary">
+                        <div class="text-center">Get Started</div>
+
+                    </button>
+                    <a href="/login" class="cursor-pointer btn btn-secondary">
+                        <div class="text-center">Login</div>
+                    </a>
+
+                    <p class="mt-2 text-center px-7">
+                        By Confirming you agree with 'City Layer' <span class="text-blue-500">Privacy Policy</span> and
+                        <span class="text-blue-500">Terms of Service.</span>
                     </p>
                 </div>
-            </label>
+
+                <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='login_optns'">
 
 
-            <section class="flex flex-col justify-center">
-                <div class="flex justify-center">
-                    <a href="login" class="py-4">
-                        <button
-                            class="px-4 py-2 font-bold text-white bg-gray-700 rounded hover:bg-gray-800">{{ __('messages.Sign in') }}</button>
+                    <a href="/signup/username" class="cursor-pointer btn btn-primary" @click="opt='username'">
+                        <div class="text-center">Sign up with username</div>
+
+                    </a>
+                    <a href="/signup/email" class="cursor-pointer btn btn-primary" @click="opt='email'">
+                        <div class="text-center">Sign up with email</div>
+
+                    </a>
+
+
+
+
+                    <a href="/signup/later" class="cursor-pointer my-2 btn btn-secondary">
+                        <div class="text-center">Sign up later</div>
                     </a>
                 </div>
-                <div class="flex justify-center">
-                    <a href="register">
-                        <button
-                            class="px-4 py-2 font-bold text-white bg-gray-700 rounded hover:bg-gray-800">{{ __('messages. My first time here') }}</button>
-                    </a>
-                </div>
-                @php
-                    $locale = session()->get('locale');
-                    if ($locale == null) {
-                        $locale = 'en';
-                    }
-                @endphp
 
-                <div class="flex justify-center pt-8">
-                    <a class="mx-2" href="lang/en"><img src="{{ asset('img/flag/England.png') }}" width="25px"></a>
-                    <a class="mx-2" href="lang/de"><img src="{{ asset('img/flag/Germany.png') }}" width="25px"></a>
-                </div>
+                {{-- <div class="flex flex-col items-center justify-center gap-4" x-show=" opt==='username'">
+                        <form role="form" method="POST" action="{{ route('backpack.auth.login') }}">
+                            {!! csrf_field() !!}
+                            <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='username'">
+                                <input type="text" placeholder="Username" name="name" id="name"
+                                    class="form-input" required />
+                                <button type="button" class="cursor-pointer btn btn-primary" @click="tab='password'">
+                                    <div class="text-center"> Next</div>
+
+                                </button>
+                            </div>
+
+
+
+                            <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='password'">
+                                <input type="password" placeholder="Password" name="password" id="password"
+                                    class="form-input" required />
+                                <button type="submit" class="cursor-pointer btn btn-primary">
+                                    <div class="text-center"> Login</div>
+
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-4" x-show=" opt==='email'">
+
+                        <form role="form" method="POST" action="{{ route('backpack.auth.login') }}">
+                            {!! csrf_field() !!}
+                            <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='username'">
+                                <input type="text" placeholder="Username" name="name" id="name"
+                                    class="form-input" required />
+                                <button type="button" class="cursor-pointer btn btn-primary" @click="tab='password'">
+                                    <div class="text-center"> Next</div>
+
+                                </button>
+                            </div>
+
+
+
+                            <div class="flex flex-col items-center justify-center gap-4 mt-12" x-show="tab==='password'">
+                                <input type="password" placeholder="Password" name="password" id="password"
+                                    class="form-input" required />
+                                <button type="submit" class="cursor-pointer btn btn-primary">
+                                    <div class="text-center"> Login</div>
+
+                                </button>
+                            </div>
+                        </form>
+                    </div> --}}
+
+
+
+
+
 
             </section>
 
-            {{-- <div class="flex justify-between pt-4 mx-4 font-bold text-center underline">
-                <a href="award">
-                    Citizen Science Award 2023<br>participate and win!
-                </a>
-            </div> --}}
+
         </div>
 
-        <div class="fixed bottom-0 left-0 right-0 text-white bg-black">
-            <div class="flex justify-center pt-4 pb-4 mx-4 text-sm font-bold text-center">
-            <a href="aboutus"><h1 class="text-3xl text-center text-white">{{ __('messages.About') }}</h1></a>
-            </div>
-        </div>
+
     </div>
+    @push('scripts')
+        <script>
+            $('.mysilder').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+
+            });
+        </script>
+    @endpush
 @endsection

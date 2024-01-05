@@ -38,12 +38,10 @@ class UserCrudController extends CrudController
     function getFieldsData()
     {
         $this->crud->addColumn([
+            'label' => 'Image URL',
+            'type' => 'text',
             'name' => 'avatar',
-            'label' => 'Image',
-            'type' => 'image',
-            'prefix' => 'storage/uploads/avatar/',
-            'height' => '80px',
-            'width' => 'auto',
+            'prefix' => asset('storage/uploads/avatar').'/',
 
         ]);
     }
@@ -57,9 +55,25 @@ class UserCrudController extends CrudController
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
         $this->getFieldsData();
-        CRUD::column('name');
+        CRUD::column('id')->label('User ID');
+        CRUD::column('name')->label('User name');
         CRUD::column('email');
-        CRUD::column('score')->type('number');
+
+        CRUD::column('infosperso.age')->label('Age')->type('text');
+
+        CRUD::column('infosperso.gender')->label('Gender')->type('text');
+        CRUD::column('infosperso.profession')->label('Education')->type('text');
+        CRUD::column('preferences')->label('Tags')->type('text');
+        CRUD::column('TotalPlacesMapped')->label('Number of place')->type('text');
+        CRUD::column('TotalObservationMapped')->label('Number of observation')->type('text');
+        CRUD::column('score')->label('Level')->type('text');
+
+        // Badges list names
+        // Badges list url
+        // Signup Date
+
+       
+        
         //get score from infosperso class where user_id = id
 
  

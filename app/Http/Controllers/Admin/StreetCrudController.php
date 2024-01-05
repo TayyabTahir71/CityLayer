@@ -27,9 +27,9 @@ class StreetCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Street::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/street');
-        CRUD::setEntityNameStrings('street', 'streets');
+        CRUD::setModel(\App\Models\PlaceDetails::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/place');
+        CRUD::setEntityNameStrings('place', 'places');
     }
 
     function getFieldsData()
@@ -54,23 +54,74 @@ class StreetCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setOperationSetting('lineButtonsAsDropdown', true);
-        CRUD::column('name')->label('uuid');
+        CRUD::column('id')->label('Mapping ID');
         CRUD::column('user_id');
-        $this->getFieldsData();
         CRUD::column('latitude');
         CRUD::column('longitude');
-        CRUD::column('likes')->label('Like')->type('number');
-        CRUD::column('dislikes')->label('dislike')->type('number');
-        CRUD::column('stars')->label('pleasant')->type('number');
-        CRUD::column('bof')->label('indifferent')->type('number');
-        CRUD::column('weird')->label('worried')->type('number');
+       
+        
+        $this->crud->addColumn([ 
+            'label' => "Place", 
+            'type' => "model_function",
+            'limit' => 200,
+            'function_name' => 'getPlaceString',
+            'escaped' => false
+        ]);
+
+      
+
+        $this->crud->addColumn([ 
+            'label' => "Observation", 
+            'type' => "model_function",
+            'limit' => 99999,
+            'function_name' => 'getObservationString',
+            'escaped' => false
+        ]);
+
+       
+
+        $this->crud->addColumn([
+            'label' => 'Place Image URL',
+            'type' => 'text',
+            'name' => 'place_image',
+            'prefix' => asset('storage/uploads/place').'/',
+
+        ]);
+
+        $this->crud->addColumn([
+            'label' => 'Observation Image URL',
+            'type' => 'text',
+            'name' => 'obsevation_image',
+            'prefix' => asset('storage/uploads/observation').'/',
+
+        ]);
+
+        CRUD::column('place_description')->label('Place Comment');
+        CRUD::column('obsevation_description')->label('Observation Comment');
+
+
+        CRUD::addColumn([
+            'name' => 'TotalLikes',
+            'label' => 'Total Likes',
+            'type' => 'text',
+        ]);
+        
+        CRUD::addColumn([
+            'name' => 'ListplaceComments',
+            'label' => 'User Comments',
+            'type' => 'text',
+        ]);
+
+        CRUD::column('description')->label('Feedback Comments');
+       
+        
+        $this->crud->removeAllButtons();
+
+
+       
+      
         $this->crud->enableExportButtons();
 
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
     }
 
     /**

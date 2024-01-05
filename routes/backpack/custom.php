@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\MyMiddleware;
 
+
 // --------------------------
 // Custom Backpack Routes
 // --------------------------
@@ -20,7 +21,7 @@ Route::group([
     Route::crud('user', 'UserCrudController');
     Route::crud('pages', 'PagesCrudController');
 
-    Route::crud('street', 'StreetCrudController');
+    Route::crud('place', 'StreetCrudController');
     Route::crud('openspace', 'OpenspaceCrudController');
     Route::crud('building', 'BuildingCrudController');
  
