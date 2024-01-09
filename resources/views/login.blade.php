@@ -2,16 +2,16 @@
 
 @section('main')
     {{-- <div class="relative">
-        <div class="absolute top-0 right-4 z-50">
-            <div class="px-6 py-4 rounded-full border border-black text-black">
+        <div class="absolute top-0 z-50 right-4">
+            <div class="px-6 py-4 text-black border border-black rounded-full">
                 About
             </div>
         </div>
     </div> --}}
 
-    <div data-barba="container " class=" relative">
-        <div class="absolute top-0 -mt-2 right-7  z-50">
-            <a href="/about" class="px-6 py-4 rounded-full border border-black text-black">
+    <div data-barba="container " class="relative ">
+        <div class="absolute top-0 z-50 -mt-2 right-7">
+            <a href="/about" class="px-6 py-4 text-black border border-black rounded-full">
                 About
             </a>
         </div>
@@ -19,12 +19,6 @@
 
             @include('authTop')
 
-
-            <div class="md:w-[400px] px-5 text-center mt-2">
-                Create an account to keep track of your activities, or continue without signing up. If you wish to receive
-                notifications from City Layers, sign up using your email. By proceeding, you agree to participate
-                voluntarily in this study.
-            </div>
 
 
             <section class="mb-4" x-data="{ tab: 'username' }">

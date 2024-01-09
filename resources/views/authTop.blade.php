@@ -9,7 +9,7 @@
 <section class="">
     <div class="px-8 mt-8">
         <div class="max-h-full lg:w-[1400px] md:w-[900px] px-12  w-[400px]">
-            <div class="w-full mysilder flex justify-center items-center gap-2">
+            <div class="flex items-center justify-center w-full gap-2 mysilder">
                 <div class="flex flex-col">
                     <img class="object-contain saturate-120 md:w-[600px]   h-[330px] rounded"
                         src="{{ asset('images/IMAGE_1.png') }}">
@@ -37,6 +37,14 @@
                 </div>
             </div>
             <div class="swiper-pagination"></div>
+        </div>
+        <div class="flex items-center justify-center">
+            <div class="md:w-[400px] w-[350px] px-5 text-center mt-2">
+                Create an account to keep track of your activities, or continue without signing up. If you wish to
+                receive
+                notifications from City Layers, sign up using your email. By proceeding, you agree to participate
+                voluntarily in this study.
+            </div>
         </div>
     </div>
 </section>

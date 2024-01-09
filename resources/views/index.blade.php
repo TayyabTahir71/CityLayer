@@ -1,14 +1,18 @@
 @extends('layouts.app')
 
 @section('main')
-    <div data-barba="container" class="">
-
+    <div data-barba="container" class="relative">
+        <div class="absolute top-0 z-50 -mt-2 right-7">
+            <a href="/about" class="px-6 py-4 text-black border border-black rounded-full">
+                About
+            </a>
+        </div>
         <div class="flex flex-col items-center justify-center mt-8">
 
             @include('authTop')
 
 
-            <section class="mt-8" x-data="{ tab: 'get_started' }">
+            <section class="mt-8 mb-2" x-data="{ tab: 'get_started' }">
 
                 <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='get_started'">
                     <button @click="tab='login_optns'" class="cursor-pointer btn btn-primary">
@@ -19,10 +23,7 @@
                         <div class="text-center">Login</div>
                     </a>
 
-                    <p class="mt-2 text-center px-7">
-                        By Confirming you agree with 'City Layer' <span class="text-blue-500">Privacy Policy</span> and
-                        <span class="text-blue-500">Terms of Service.</span>
-                    </p>
+
                 </div>
 
                 <div class="flex flex-col items-center justify-center gap-4" x-show="tab=='login_optns'">
@@ -40,7 +41,7 @@
 
 
 
-                    <a href="/signup/later" class="cursor-pointer my-2 btn btn-secondary">
+                    <a href="/signup/later" class="my-2 cursor-pointer btn btn-secondary">
                         <div class="text-center">Sign up later</div>
                     </a>
                 </div>
