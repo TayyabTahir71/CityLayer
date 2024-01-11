@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/login.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1704969798870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1704969798870,
+            "name": "Commit-0",
+            "content": "@extends('layouts.app')\n\n@section('main')\n    {{-- <div class=\"relative\">\n        <div class=\"absolute top-0 z-50 right-4\">\n            <div class=\"px-6 py-4 text-black border border-black rounded-full\">\n                About\n            </div>\n        </div>\n    </div> --}}\n\n    <div data-barba=\"container \" class=\"relative \">\n        <div class=\"absolute top-0 z-50 right-7\">\n            <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n                About\n            </a>\n        </div>\n        <div class=\"flex flex-col items-center justify-center mt-8\">\n\n            @include('authTop')\n\n\n\n            <section class=\"mb-4\" x-data=\"{ tab: 'username' }\">\n\n\n                <form role=\"form\" method=\"POST\" action=\"{{ route('backpack.auth.login') }}\">\n                    {!! csrf_field() !!}\n                    <div class=\"flex flex-col items-center justify-center gap-4 mt-8\" x-show=\"tab==='username'\">\n                        <input type=\"text\" placeholder=\"Username\" name=\"name\" id=\"name\" class=\"form-input\"\n                            required />\n                        <button type=\"button\" class=\"cursor-pointer btn btn-primary\" @click=\"tab='password'\">\n                            <div class=\"text-center\"> Next</div>\n\n                        </button>\n                    </div>\n\n\n\n                    <div class=\"flex flex-col items-center justify-center gap-4 mt-12\" x-show=\"tab==='password'\">\n                        <input type=\"password\" placeholder=\"Password\" name=\"password\" id=\"password\" class=\"form-input\"\n                            required />\n                        <button type=\"submit\" class=\"cursor-pointer btn btn-primary\">\n                            <div class=\"text-center\"> Login</div>\n\n                        </button>\n                    </div>\n                </form>\n\n\n            </section>\n\n\n\n        </div>\n\n\n    </div>\n@endsection\n@push('scripts')\n    <script>\n        $('.mysilder').slick({\n            dots: true,\n            infinite: true,\n            speed: 300,\n            slidesToShow: 1,\n            slidesToScroll: 1,\n\n        });\n    </script>\n@endpush\n"
+        }
+    ]
+}

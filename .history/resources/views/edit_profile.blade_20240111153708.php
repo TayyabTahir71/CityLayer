@@ -1,5 +1,5 @@
-@php use \App\Http\Controllers\GlobalController;
-$info = GlobalController::myprofile();
+@php use App\Http\Controllers\GlobalController;
+                $info = GlobalController::myprofile();
 @endphp
 @extends('layouts.app')
 
@@ -16,10 +16,10 @@ $info = GlobalController::myprofile();
                     @csrf
                     <input type="file" name="image" id="image" class="hidden" accept="image/*"
                         onchange="javascript:this.form.submit();">
-                    <label for="image" class="cursor-pointer relative">
+                    <label for="image" class="relative cursor-pointer">
                         <img class="object-cover rounded-full avatar_image"
                             src="/storage/uploads/avatar/{{ backpack_auth()->user()->avatar }}" alt="">
-                        <div class="bg-black text-white  text-center plus_circle">+</div>
+                        <div class="text-center text-white bg-black plus_circle">+</div>
                     </label>
 
 
@@ -38,23 +38,38 @@ $info = GlobalController::myprofile();
 
 
                 <div class="mb-4">
-                    <div class="flex justify-between items-center" id="toggleContainer1">
+                    @if ($errors->all())
+                        <div class="relative px-4 py-3 mb-4 text-red-700 bg-red-100 border border-red-400 rounded"
+                            role="alert">
+                            <strong class="font-bold">{{ old('name') }}</strong>
+                            <span class="block sm:inline">username already exists.</span>
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                                <svg class="w-6 h-6 text-red-500 fill-current" role="button"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <title>Close</title>
+                                    <path
+                                        d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                                </svg>
+                            </span>
+                        </div>
+                    @endif
+                    <div class="flex items-center justify-between" id="toggleContainer01">
                         <div class="sbox">
-                            <div class="text">Name</div>
-                            <div class="italic font-light">change /add name</div>
+                            <div class="text">Username</div>
+                            <div class="italic font-light">change /add username</div>
                         </div>
                         <div class="plus bg-site"> + </div>
                     </div>
 
-                    <div id="name">
-                        <label for="name" class="block mb-2 text-gray-900 text">Email</label>
-                        <input id="name" name="email" type="text" value="{{ backpack_auth()->user()->name }}"
-                            class="inpW block w-full px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    <div id="name" class="hidden">
+                        <label for="name" class="block mb-2 text-gray-900 text">Username</label>
+                        <input id="name" name="name" type="text" value="{{ backpack_auth()->user()->name }}"
+                            class="block w-full px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg inpW focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <div class="flex justify-between items-center" id="toggleContainer1">
+                    <div class="flex items-center justify-between" id="toggleContainer1">
                         <div class="sbox">
                             <div class="text">Email</div>
                             <div class="italic font-light">change /add email</div>
@@ -65,12 +80,12 @@ $info = GlobalController::myprofile();
                     <div id="email1">
                         <label for="email" class="block mb-2 text-gray-900 text">Email</label>
                         <input id="email" name="email" type="email" value="{{ backpack_auth()->user()->email }}"
-                            class="inpW block w-full px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            class="block w-full px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg inpW focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <div class="flex justify-between items-center" id="toggleContainer2">
+                    <div class="flex items-center justify-between" id="toggleContainer2">
                         <div class="sbox">
                             <div class="text">Age</div>
                             <div class="italic font-light">change /add age</div>
@@ -82,14 +97,14 @@ $info = GlobalController::myprofile();
                     <div id="age1">
                         <label for="age" class="block mb-2 text-gray-900 text">Age</label>
                         <input type="number" name="age" style="-moz-appearance: textfield"
-                            class="block w-full px-4 py-3 mb-2 text-base text-gray-900 inpW placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            class="block w-full px-4 py-3 mb-2 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg inpW focus:ring-blue-500 focus:border-blue-500"
                             name="custom-input-number" min="10" value="{{ $info->age ?? '' }}">
                     </div>
                 </div>
 
                 <div class="mb-4">
 
-                    <div class="flex justify-between items-center" id="toggleContainer3">
+                    <div class="flex items-center justify-between" id="toggleContainer3">
                         <div class="sbox">
                             <div class="text">Gender</div>
                             <div class="italic font-light">change /add gender</div>
@@ -101,7 +116,7 @@ $info = GlobalController::myprofile();
                     <div id="gender1">
                         <label for="gender" class="block mb-2 text-gray-900 text">Gender</label>
                         <select id="gender" name="gender"
-                            class="block w-full px-4 py-3 inpW text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            class="block w-full px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg inpW focus:ring-blue-500 focus:border-blue-500">
                             <option selected></option>
                             <option value="male" {{ $info->gender ?? '' == 'male' ? 'selected' : '' }}>
                                 {{ __('messages.Male') }}
@@ -117,7 +132,7 @@ $info = GlobalController::myprofile();
 
                 <div class="mb-4">
 
-                    <div class="flex justify-between items-center" id="toggleContainer4">
+                    <div class="flex items-center justify-between" id="toggleContainer4">
                         <div class="sbox">
                             <div class="text">Education</div>
                             <div class="italic font-light">change /add education level</div>
@@ -129,7 +144,7 @@ $info = GlobalController::myprofile();
                     <div id="job1">
                         <label for="job" class="block mb-2 text-gray-900 text">Education</label>
                         <select id="job" name="profession"
-                            class="block w-full px-4 py-3  inpW text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            class="block w-full px-4 py-3 text-base text-gray-900 placeholder-gray-400 border border-gray-600 rounded-lg inpW focus:ring-blue-500 focus:border-blue-500">
                             <option selected></option>
                             <option value="elementary school student"
                                 {{ $info->profession ?? '' == 'elementary school student' ? 'selected' : '' }}>
@@ -161,12 +176,16 @@ $info = GlobalController::myprofile();
 
 
 
-            <div class="mt-8 flex flex-col">
-                <a href="/preferences" class="font-bold color-site border-2 border-site px-8 py-4 font-bold	font-sm rounded-3xl block mb-6 text-center">Edit city tags</a>
-            
-                <button class="font-bold bg-site text-white border-2 border-site p-1 px-8 py-4 font-bold	font-sm rounded-3xl block" type="submit">
+            <div class="flex flex-col mt-8 mb-2">
+                <a href="/preferences"
+                    class="block px-8 py-4 mb-6 font-bold text-center border-2 color-site border-site font-sm rounded-3xl">
+                    Define your areas of interest
+                </a>
+
+                <button class="block p-1 px-8 py-4 font-bold text-white border-2 bg-site border-site font-sm rounded-3xl"
+                    type="submit">
                     Save and close
-                </button> 
+                </button>
             </div>
 
         </form>
@@ -215,6 +234,13 @@ $info = GlobalController::myprofile();
         });
     </script>
     <script>
+        const toggleContainer01 = document.getElementById('toggleContainer01');
+
+        toggleContainer01.addEventListener('click', function() {
+            document.getElementById('name').style.display = "block";
+            toggleContainer01.style.display = "none";
+        });
+
         const toggleContainer1 = document.getElementById('toggleContainer1');
 
         toggleContainer1.addEventListener('click', function() {

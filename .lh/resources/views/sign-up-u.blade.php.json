@@ -1,0 +1,46 @@
+{
+    "sourceFile": "resources/views/sign-up-u.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1704969595520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1704969604530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,16 +2,16 @@\n \n @section('main')\n     <div data-barba=\"container\" class=\"\">\n \n-        <div class=\"absolute top-0 z-50 -mt-2 right-7\">\n-            <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n-                About\n-            </a>\n-        </div>\n+        \n \n         <div class=\"flex flex-col items-center justify-center mt-8\">\n-\n+            <div class=\"absolute top-0 z-50 -mt-2 right-7\">\n+                <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n+                    About\n+                </a>\n+            </div>\n             @include('authTop')\n \n \n \n"
+                },
+                {
+                    "date": 1704969609685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,21 +5,21 @@\n \n         \n \n         <div class=\"flex flex-col items-center justify-center mt-8\">\n-            <div class=\"absolute top-0 z-50 -mt-2 right-7\">\n-                <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n-                    About\n-                </a>\n-            </div>\n+\n             @include('authTop')\n \n \n \n \n             <section class=\"\">\n+                <div class=\"absolute top-0 z-50 -mt-2 right-7\">\n+                    <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n+                        About\n+                    </a>\n+                </div>\n \n-\n                 <form role=\"form\" method=\"POST\" action=\"{{ route('auth.register.username') }}\">\n                     {!! csrf_field() !!}\n                     <div class=\"flex flex-col items-center justify-center gap-4 mt-8\">\n                         <div>\n"
+                },
+                {
+                    "date": 1704969664113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,24 +2,20 @@\n \n @section('main')\n     <div data-barba=\"container\" class=\"\">\n \n+\n         \n-\n         <div class=\"flex flex-col items-center justify-center mt-8\">\n \n             @include('authTop')\n \n \n \n \n             <section class=\"\">\n-                <div class=\"absolute top-0 z-50 -mt-2 right-7\">\n-                    <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n-                        About\n-                    </a>\n-                </div>\n \n+\n                 <form role=\"form\" method=\"POST\" action=\"{{ route('auth.register.username') }}\">\n                     {!! csrf_field() !!}\n                     <div class=\"flex flex-col items-center justify-center gap-4 mt-8\">\n                         <div>\n"
+                },
+                {
+                    "date": 1704969677465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,13 @@\n @section('main')\n     <div data-barba=\"container\" class=\"\">\n \n \n+        <div class=\"absolute top-0 z-50 -mt-2 right-7\">\n+            <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n+                About\n+            </a>\n+        </div>\n         \n         <div class=\"flex flex-col items-center justify-center mt-8\">\n \n             @include('authTop')\n"
+                },
+                {
+                    "date": 1704969686023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n @section('main')\n     <div data-barba=\"container\" class=\"\">\n \n \n-        <div class=\"absolute top-0 z-50 -mt-2 right-7\">\n+        <div class=\"absolute top-0 z-50 right-7\">\n             <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n                 About\n             </a>\n         </div>\n"
+                },
+                {
+                    "date": 1704969720819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n @section('main')\n     <div data-barba=\"container\" class=\"\">\n \n \n-        <div class=\"absolute top-0 z-50 right-7\">\n+        <div class=\"absolute top-10 z-50 right-7\">\n             <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n                 About\n             </a>\n         </div>\n"
+                },
+                {
+                    "date": 1704969753693,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n @extends('layouts.app')\n \n @section('main')\n-    <div data-barba=\"container\" class=\"\">\n+    <div data-barba=\"container\" class=\"relative\">\n \n \n-        <div class=\"absolute top-10 z-50 right-7\">\n+        <div class=\"absolute top-0 z-50 right-7\">\n             <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n                 About\n             </a>\n         </div>\n"
+                }
+            ],
+            "date": 1704969595520,
+            "name": "Commit-0",
+            "content": "@extends('layouts.app')\n\n@section('main')\n    <div data-barba=\"container\" class=\"\">\n\n        <div class=\"absolute top-0 z-50 -mt-2 right-7\">\n            <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n                About\n            </a>\n        </div>\n\n        <div class=\"flex flex-col items-center justify-center mt-8\">\n\n            @include('authTop')\n\n\n\n\n            <section class=\"\">\n\n\n                <form role=\"form\" method=\"POST\" action=\"{{ route('auth.register.username') }}\">\n                    {!! csrf_field() !!}\n                    <div class=\"flex flex-col items-center justify-center gap-4 mt-8\">\n                        <div>\n                            <input type=\"text\" placeholder=\"Username\" name=\"name\" value=\"{{old('name')}}\" id=\"name\" class=\"form-input\"\n                            required />\n                            @if ($errors->has('name'))\n                                <div class=\"text-red-500\">{{ $errors->first('name') }}</div>\n                            @endif\n                        </div>\n                        \n                        <div>\n                            <input type=\"password\" placeholder=\"Password\" name=\"password\" id=\"password\" class=\"form-input\"\n                            required />\n                            @if ($errors->has('password'))\n                                <div class=\"text-red-500\">{{ $errors->first('password') }}</div>\n                            @endif\n                        </div>\n                        \n                        <div>\n                            <input type=\"password\" placeholder=\"Confirm Password\" name=\"password_confirmation\"\n                            id=\"password_confirmation\" class=\"form-input\" required />\n                            @if ($errors->has('password_confirmation'))\n                                <div class=\"text-red-500\">{{ $errors->first('password_confirmation') }}</div>\n                            @endif\n                        </div>\n\n                        <button type=\"submit\" class=\"mb-3 cursor-pointer btn btn-primary\">\n                            <div class=\"text-center\"> Signup</div>\n\n                        </button>\n                    </div>\n\n\n                </form>\n\n\n            </section>\n\n\n            {{-- <p class=\"mt-4 text-center px-7\">\n            By Confirming you agree with 'City Layer' <span class=\"text-blue-500\">Privacy Policy</span> and <span class=\"text-blue-500\">Terms of Service.</span>\n        </p> --}}\n\n        </div>\n\n\n    </div>\n@endsection\n@push('scripts')\n    <script>\n        $('.mysilder').slick({\n            dots: true,\n            infinite: true,\n            speed: 300,\n            slidesToShow: 1,\n            slidesToScroll: 1,\n\n        });\n    </script>\n@endpush\n"
+        }
+    ]
+}

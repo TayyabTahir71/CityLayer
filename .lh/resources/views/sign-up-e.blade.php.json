@@ -1,0 +1,18 @@
+{
+    "sourceFile": "resources/views/sign-up-e.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1704969780641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1704969780641,
+            "name": "Commit-0",
+            "content": "@extends('layouts.app')\n\n@section('main')\n    <div data-barba=\"container\" class=\"relative\">\n\n        <div class=\"absolute top-0 z-50 right-7\">\n            <a href=\"/about\" class=\"px-6 py-4 text-black border border-black rounded-full\">\n                About\n            </a>\n        </div>\n        <div class=\"flex flex-col items-center justify-center mt-8\">\n\n            @include('authTop')\n\n\n\n\n            <section class=\"\" x-data=\"{ tab: 'username' }\" x-cloak>\n\n\n                <form role=\"form\" method=\"POST\" action=\"{{ route('auth.register') }}\">\n                    {!! csrf_field() !!}\n\n                    <div class=\"flex flex-col items-center justify-center gap-4 mt-8\">\n                        <div>\n                            <input type=\"text\" placeholder=\"Email\" name=\"email\" value=\"{{ old('email') }}\" id=\"email\" class=\"form-input\"required />\n                            @if ($errors->has('email'))\n                                <div class=\"text-red-500\">{{ $errors->first('email') }}</div>\n                            @endif\n                        </div>\n\n                        <div>\n                            <input type=\"password\" placeholder=\"Password\" name=\"password\" id=\"password\" class=\"form-input\" required />\n                            @if ($errors->has('password'))\n                                <div class=\"text-red-500\">{{ $errors->first('password') }}</div>\n                            @endif\n                        </div>\n\n                        <div>\n                            <input type=\"password\" placeholder=\"Confirm Password\" name=\"password_confirmation\" id=\"password_confirmation\" class=\"form-input\" required />\n                            @if ($errors->has('password_confirmation'))\n                                <div class=\"text-red-500\">{{ $errors->first('password_confirmation') }}</div>\n                            @endif\n\n                        </div>\n\n                        \n\n                        <button type=\"submit\" class=\"mb-3 cursor-pointer btn btn-primary\">\n                            <div class=\"text-center\"> Signup</div>\n\n                        </button>\n                    </div>\n\n\n                </form>\n\n\n\n            </section>\n\n\n            {{-- s --}}\n\n        </div>\n\n\n    </div>\n@endsection\n@push('scripts')\n    <script>\n        $('.mysilder').slick({\n            dots: true,\n            infinite: true,\n            speed: 300,\n            slidesToShow: 1,\n            slidesToScroll: 1,\n\n        });\n    </script>\n@endpush\n"
+        }
+    ]
+}

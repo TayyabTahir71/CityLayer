@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('main')
-    <div data-barba="container" class="relative">
+    <div data-barba="container" class="">
 
 
         <div class="absolute top-0 z-50 right-7">

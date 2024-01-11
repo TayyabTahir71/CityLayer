@@ -1,4 +1,4 @@
-@phpuse App\Http\Controllers\GlobalController;
+@php use App\Http\Controllers\GlobalController;
                 $info = GlobalController::myprofile();
 @endphp
 @extends('layouts.app')
