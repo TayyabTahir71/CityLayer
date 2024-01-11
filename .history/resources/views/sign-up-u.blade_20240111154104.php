@@ -1,14 +1,9 @@
 @extends('layouts.app')
 
 @section('main')
-    <div data-barba="container" class="relative">
+    <div data-barba="container" class="">
 
 
-        <div class="absolute top-0 z-50 right-7">
-            <a href="/about" class="px-6 py-4 text-black border border-black rounded-full">
-                About
-            </a>
-        </div>
         
         <div class="flex flex-col items-center justify-center mt-8">
 
