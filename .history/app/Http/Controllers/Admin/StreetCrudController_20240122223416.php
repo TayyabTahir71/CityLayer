@@ -60,6 +60,8 @@ class StreetCrudController extends CrudController
         CRUD::column('longitude');
        
         
+
+
         $this->crud->addColumn([ 
             'label' => "Place", 
             'type' => "model_function",
@@ -118,9 +120,9 @@ class StreetCrudController extends CrudController
         $this->crud->removeAllButtons();
 
 
-        CRUD::removeButton('create');
+       
       
-        $this->crud->enableExportButtons();
+        // $this->crud->enableExportButtons();
 
     }
 

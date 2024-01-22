@@ -30,7 +30,10 @@ class StreetCrudController extends CrudController
         CRUD::setModel(\App\Models\PlaceDetails::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/place');
         CRUD::setEntityNameStrings('place', 'places');
+
+      
     }
+
 
     function getFieldsData()
     {
@@ -60,6 +63,8 @@ class StreetCrudController extends CrudController
         CRUD::column('longitude');
        
         
+        CRUD::removeButton('create');
+
         $this->crud->addColumn([ 
             'label' => "Place", 
             'type' => "model_function",
@@ -115,12 +120,10 @@ class StreetCrudController extends CrudController
         CRUD::column('description')->label('Feedback Comments');
        
         
-        $this->crud->removeAllButtons();
+        // $this->crud->removeAllButtons();
 
 
-        CRUD::removeButton('create');
-      
-        $this->crud->enableExportButtons();
+    
 
     }
 
