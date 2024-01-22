@@ -60,67 +60,69 @@ class StreetCrudController extends CrudController
         CRUD::column('longitude');
        
         
-        $this->crud->addColumn([ 
-            'label' => "Place", 
-            'type' => "model_function",
-            'limit' => 200,
-            'function_name' => 'getPlaceString',
-            'escaped' => false
-        ]);
+
+
+        // $this->crud->addColumn([ 
+        //     'label' => "Place", 
+        //     'type' => "model_function",
+        //     'limit' => 200,
+        //     'function_name' => 'getPlaceString',
+        //     'escaped' => false
+        // ]);
 
       
 
-        $this->crud->addColumn([ 
-            'label' => "Observation", 
-            'type' => "model_function",
-            'limit' => 99999,
-            'function_name' => 'getObservationString',
-            'escaped' => false
-        ]);
+        // $this->crud->addColumn([ 
+        //     'label' => "Observation", 
+        //     'type' => "model_function",
+        //     'limit' => 99999,
+        //     'function_name' => 'getObservationString',
+        //     'escaped' => false
+        // ]);
 
        
 
-        $this->crud->addColumn([
-            'label' => 'Place Image URL',
-            'type' => 'text',
-            'name' => 'place_image',
-            'prefix' => asset('storage/uploads/place').'/',
+        // $this->crud->addColumn([
+        //     'label' => 'Place Image URL',
+        //     'type' => 'text',
+        //     'name' => 'place_image',
+        //     'prefix' => asset('storage/uploads/place').'/',
 
-        ]);
+        // ]);
 
-        $this->crud->addColumn([
-            'label' => 'Observation Image URL',
-            'type' => 'text',
-            'name' => 'obsevation_image',
-            'prefix' => asset('storage/uploads/observation').'/',
+        // $this->crud->addColumn([
+        //     'label' => 'Observation Image URL',
+        //     'type' => 'text',
+        //     'name' => 'obsevation_image',
+        //     'prefix' => asset('storage/uploads/observation').'/',
 
-        ]);
+        // ]);
 
-        CRUD::column('place_description')->label('Place Comment');
-        CRUD::column('obsevation_description')->label('Observation Comment');
+        // CRUD::column('place_description')->label('Place Comment');
+        // CRUD::column('obsevation_description')->label('Observation Comment');
 
 
-        CRUD::addColumn([
-            'name' => 'TotalLikes',
-            'label' => 'Total Likes',
-            'type' => 'text',
-        ]);
+        // CRUD::addColumn([
+        //     'name' => 'TotalLikes',
+        //     'label' => 'Total Likes',
+        //     'type' => 'text',
+        // ]);
         
-        CRUD::addColumn([
-            'name' => 'ListplaceComments',
-            'label' => 'User Comments',
-            'type' => 'text',
-        ]);
+        // CRUD::addColumn([
+        //     'name' => 'ListplaceComments',
+        //     'label' => 'User Comments',
+        //     'type' => 'text',
+        // ]);
 
-        CRUD::column('description')->label('Feedback Comments');
+        // CRUD::column('description')->label('Feedback Comments');
        
         
-        $this->crud->removeAllButtons();
+        // $this->crud->removeAllButtons();
 
 
-        CRUD::removeButton('create');
+       
       
-        $this->crud->enableExportButtons();
+        // $this->crud->enableExportButtons();
 
     }
 
